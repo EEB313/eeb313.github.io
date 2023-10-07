@@ -114,18 +114,7 @@ You will find a list of recommended readings posted under "Resources". Since the
 
 ### Assessment schedule
 
-| Assignment                 | Type           | Submitted on      | Due date   | Marks |
-|----------------------------|----------------|-------------------|------------|-------|
-| Basic R and dplyr          | Individual     | Quercus           | Sep 28     | 8     |
-| Project proposal           | Group          | GitHub            | Oct 03     | 4     |
-| dplyr and tidy data        | Individual     | Quercus           | Oct 05     | 8     |
-| Data exploration           | Individual     | Quercus           | Oct 12     | 8     |
-| LM, GLM, & LMM             | Individual     | Quercus           | Oct 19     | 8     |
-| Command Line               | Individual     | GitHub            | Oct 26     | 8     |
-| Mid-project update         | Group          | GitHub            | Nov 02     | 6     |
-| Challenge assignment       | Individual     | GitHub            | Nov 17     | 20    |
-| Presentation               | Group          | In-class          | Dec 05     | 10    |
-| Final report               | Group          | GitHub            | Dec 08     | 20    |
+| Assignment                    | Type           | Submitted on      | Due date   | Marks ||-------------------------------|----------------|-------------------|------------|-------|| Basic R and dplyr             | Individual     | Quercus           | Sep 28     | 8     || Project proposal              | Group          | GitHub            | Oct 03     | 4     || dplyr and tidy data           | Individual     | Quercus           | Oct 05     | 8     || Data exploration              | Individual     | Quercus           | Oct 12     | 8     || LM, GLM, & LMM                | Individual     | Quercus           | Oct 19     | 8     || Multivariate and command line | Individual     | Quercus           | Oct 26     | 8     || Mid-project update            | Group          | GitHub            | Nov 02     | 6     || Challenge assignment          | Individual     | Quercus           | Nov 17     | 20    || Presentation                  | Group          | In-class          | Dec 05     | 10    || Final report                  | Group          | GitHub            | Dec 08     | 20    |
 
 There are 100 marks in total. Your final course mark will be the sum of your assignment scores, which will be translated to a letter grade according to the [official grading scale](https://www.artsci.utoronto.ca/faculty-staff/teaching/teaching-learning-resources/academic-handbook#FinalMarks) of the Faculty of Arts and Science.
 

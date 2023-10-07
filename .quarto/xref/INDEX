@@ -43,5 +43,26 @@
   },
   "tests-assignment-3.qmd": {
     "tests-assignment-3.html": "e93e9457"
+  },
+  "assignment-01.qmd": {
+    "assignment-01.html": "4af506ce"
+  },
+  "assignment-02.qmd": {
+    "assignment-02.html": "05d3c7b7"
+  },
+  "assignment-03.qmd": {
+    "assignment-03.html": "b062c4ab"
+  },
+  "lec09-mixed-effects-models.qmd": {
+    "lec09-mixed-effects-models.html": "855e019d"
+  },
+  "lec10-model-selection.qmd": {
+    "lec10-model-selection.html": "342050b4"
+  },
+  "lec12-command-line+git.qmd": {
+    "lec12-command-line+git.html": "22df7dd8"
+  },
+  "lec11-multivariate stats.qmd": {
+    "lec11-multivariate stats.html": "9bbf8cbd"
   }
 }

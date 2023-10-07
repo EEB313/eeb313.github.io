@@ -20,7 +20,12 @@ book:
       - lec06-exploratory-data-analysis.qmd
       - lec07-intro-to-stats.qmd
       - lec08-linear-models.qmd
+      - lec09-mixed-effects-models.qmd
     - part: "Assignments"
+      chapters:
+      - assignment-01.qmd
+      - assignment-02.qmd
+      - assignment-03.qmd
     - part: "Project"
       chapters:
       - projects.qmd
