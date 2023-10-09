@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./lec09-mixed-effects-models.html" rel="next">
+<link href="./assignment-01.html" rel="next">
 <link href="./lec07-intro-to-stats.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -218,12 +218,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./lec09-mixed-effects-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Linear mixed models</span></span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -238,19 +232,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./assignment-01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assignment 01</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Assignment 01</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./assignment-02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Assignment 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assignment 02</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./assignment-03.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Assignment 03</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Assignment 03</span></span></a>
   </div>
 </li>
       </ul>
@@ -267,13 +261,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Project description</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Project description</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./databases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Some open-access databases</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Some open-access databases</span></span></a>
   </div>
 </li>
       </ul>
@@ -290,7 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tests-assignment-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">More on hypothesis testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">More on hypothesis testing</span></span></a>
   </div>
 </li>
       </ul>
@@ -731,18 +725,18 @@ lm(formula = fitness ~ scale(trait), data = data)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.41187 -0.10491  0.02689  0.11030  0.25018 
+-0.41268 -0.08469  0.02081  0.10099  0.34019 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   1.00000    0.01505   66.46   &lt;2e-16 ***
-scale(trait)  0.32989    0.01512   21.82   &lt;2e-16 ***
+(Intercept)   1.00000    0.01482   67.47   &lt;2e-16 ***
+scale(trait)  0.35098    0.01490   23.56   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.1505 on 98 degrees of freedom
-Multiple R-squared:  0.8293,    Adjusted R-squared:  0.8275 
-F-statistic: 475.9 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.1482 on 98 degrees of freedom
+Multiple R-squared:  0.8499,    Adjusted R-squared:  0.8484 
+F-statistic: 555.1 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">### fitness changed by ~50% per sd change in trait value!</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -764,19 +758,19 @@ lm(formula = fitness ~ scale(trait) + scale(trait^2), data = data)
 
 Residuals:
       Min        1Q    Median        3Q       Max 
--0.216114 -0.054494  0.006974  0.050878  0.195246 
+-0.197354 -0.047216 -0.005713  0.052950  0.249221 
 
 Coefficients:
                 Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)     1.000000   0.007977  125.36   &lt;2e-16 ***
-scale(trait)    0.799648   0.030678   26.07   &lt;2e-16 ***
-scale(trait^2) -0.486665   0.030678  -15.86   &lt;2e-16 ***
+(Intercept)     1.000000   0.008777  113.93   &lt;2e-16 ***
+scale(trait)    0.812463   0.035282   23.03   &lt;2e-16 ***
+scale(trait^2) -0.476616   0.035282  -13.51   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.07977 on 97 degrees of freedom
-Multiple R-squared:  0.9525,    Adjusted R-squared:  0.9515 
-F-statistic: 972.5 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.08777 on 97 degrees of freedom
+Multiple R-squared:  0.9479,    Adjusted R-squared:  0.9468 
+F-statistic: 882.8 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Here, the blue (red) regression line is the linear (quadratic) individual selection surface, estimated by regressing fitness on trait value (and its square) simulated under a model of directional selection.</p>
@@ -895,21 +889,21 @@ glm(formula = disease_status ~ scale(age), family = binomial,
     data = data)
 
 Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--1.4813  -1.0268  -0.7949   1.0817   1.6232  
+     Min        1Q    Median        3Q       Max  
+-1.54712  -1.10452   0.03625   1.04671   1.63643  
 
 Coefficients:
-            Estimate Std. Error z value Pr(&gt;|z|)   
-(Intercept)  -0.1728     0.2084  -0.829  0.40693   
-scale(age)    0.5589     0.2140   2.612  0.00901 **
+             Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept) -0.003051   0.207208  -0.015   0.9883  
+scale(age)   0.547130   0.214199   2.554   0.0106 *
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 137.99  on 99  degrees of freedom
-Residual deviance: 130.75  on 98  degrees of freedom
-AIC: 134.75
+    Null deviance: 138.63  on 99  degrees of freedom
+Residual deviance: 131.68  on 98  degrees of freedom
+AIC: 135.68
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
@@ -946,43 +940,43 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">100</td>
-<td style="text-align: right;">0.867</td>
+<td style="text-align: right;">0.892</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">110</td>
-<td style="text-align: right;">0.911</td>
+<td style="text-align: right;">0.926</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">120</td>
-<td style="text-align: right;">0.944</td>
+<td style="text-align: right;">0.946</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">130</td>
-<td style="text-align: right;">0.945</td>
+<td style="text-align: right;">0.959</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">140</td>
-<td style="text-align: right;">0.972</td>
+<td style="text-align: right;">0.975</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.979</td>
+<td style="text-align: right;">0.977</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.992</td>
+<td style="text-align: right;">0.987</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.998</td>
+<td style="text-align: right;">0.991</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.994</td>
+<td style="text-align: right;">0.992</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">190</td>
-<td style="text-align: right;">0.998</td>
+<td style="text-align: right;">0.997</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">200</td>
@@ -1244,8 +1238,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lec09-mixed-effects-models.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Linear mixed models</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./assignment-01.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Assignment 01</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
