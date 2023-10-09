@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - 2&nbsp; Getting started with RStudio and R Notebook</title>
+<title>EEB313: Quantitative Methods in R for Biology - 13&nbsp; Assignment 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./lec01-markdown-workflows.html" rel="next">
-<link href="./downloadingR.html" rel="prev">
+<link href="./assignment-03.html" rel="next">
+<link href="./assignment-01.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -107,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lec00-rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="./lec00-rstudio.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with RStudio and R Notebook</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="./assignment-02.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Assignment 2</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -164,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lec00-rstudio.html" class="sidebar-item-text sidebar-link active">
+  <a href="./lec00-rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with RStudio and R Notebook</span></span></a>
   </div>
 </li>
@@ -241,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignment-02.html" class="sidebar-item-text sidebar-link">
+  <a href="./assignment-02.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Assignment 2</span></span></a>
   </div>
 </li>
@@ -299,33 +299,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#lesson-preamble" id="toc-lesson-preamble" class="nav-link active" data-scroll-target="#lesson-preamble">Lesson preamble</a></li>
-  <li><a href="#working-with-computers" id="toc-working-with-computers" class="nav-link" data-scroll-target="#working-with-computers">Working with computers</a>
-  <ul class="collapse">
-  <li><a href="#graphical-user-interfaces-vs.-text-based-user-interfaces" id="toc-graphical-user-interfaces-vs.-text-based-user-interfaces" class="nav-link" data-scroll-target="#graphical-user-interfaces-vs.-text-based-user-interfaces"><span class="header-section-number">2.0.3</span> Graphical user interfaces vs.&nbsp;text based user interfaces</a></li>
-  <li><a href="#rstudio-and-the-r-notebook" id="toc-rstudio-and-the-r-notebook" class="nav-link" data-scroll-target="#rstudio-and-the-r-notebook"><span class="header-section-number">2.0.4</span> RStudio and the R Notebook</a></li>
-  </ul></li>
-  <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link" data-scroll-target="#r-markdown"><span class="header-section-number">2.1</span> R Markdown</a>
-  <ul class="collapse">
-  <li><a href="#saving-data-and-generating-reports" id="toc-saving-data-and-generating-reports" class="nav-link" data-scroll-target="#saving-data-and-generating-reports"><span class="header-section-number">2.1.1</span> Saving data and generating reports</a></li>
-  </ul></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a>
-  <ul class="collapse">
-  <li><a href="#knitting-and-submitting-on-quercus" id="toc-knitting-and-submitting-on-quercus" class="nav-link" data-scroll-target="#knitting-and-submitting-on-quercus"><span class="header-section-number">2.1.2</span> Knitting and Submitting on Quercus</a></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="lec00r-studio" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with RStudio and R Notebook</span></span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Assignment 2</span></h1>
 </div>
 
 
@@ -340,108 +321,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="lesson-preamble" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="lesson-preamble">Lesson preamble</h2>
-<blockquote class="blockquote">
-<h3 id="lesson-objectives" data-number="2.0.1" class="anchored"><span class="header-section-number">2.0.1</span> Lesson objectives</h3>
-<ul>
-<li>Introduce students to the RStudio interface</li>
-<li>Introduce the Markdown syntax and how to use it within the R Notebook</li>
-</ul>
-<h3 id="learning-outline" data-number="2.0.2" class="anchored"><span class="header-section-number">2.0.2</span> Learning outline</h3>
-<ul>
-<li>Explore RStudio interface (20 mins)</li>
-<li>RMarkdown (20 mins)</li>
-<li>Generating reports (10 mins)</li>
-<li>Knit to PDF and submit on Quercus (10 mins)</li>
-</ul>
-</blockquote>
+<ol type="1">
+<li>Plotting (1 mark)</li>
+</ol>
+<p>Run the code below to create a categorical variable of the <code>activ</code> column. This will make dplyr recognize that there are only two levels of activity (0 and 1), rather than a continuous range 0-1, which will facilitate plotting.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.2     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>beaver1_f <span class="ot">&lt;-</span> beaver1 <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">factor_activ =</span> <span class="fu">factor</span>(activ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="a">
+<li>In the previous assignment, we saw that the beaver’s body temperature was the highest when the beaver was outside the retreat. However, we did not explore the distribution of temperatures for the active and inactive conditions. Create a histogram with the temperature on the x-axis and color the bins corresponding to the activity variable. (0.25 marks)</li>
+</ol>
+<p><em>Hint: You need to use the <code>fill</code> parameter rather than <code>color</code>.</em></p>
+<ol start="2" type="a">
+<li>We already know that the beaver’s body temperature is correlated with whether it is outside the retreat or not. However, we did not control for the time of day, maybe the beaver’s temperature is even better predicted by knowing what time of day it is. To satisfactorily answer this question, we should perform a regression analysis, but we can easily get a good overview by plotting the data. Make a scatter plot with the time of day on the x-axis and the body temperature on the y-axis. Color the scatter points according the beaver’s activity level and separate the measurements into one plot per day. (0.75 marks)</li>
+</ol>
+<p><em>Hint: To separate measurements per day, you could use <code>filter()</code> and two chunks of code, but try the more efficient way of facetting into subplots, which we talked about in the lecture.</em></p>
+<ol start="2" type="1">
+<li>Read in and pre-process data (1 mark)</li>
+</ol>
+<p>Ok, that’s enough about beaver body temperatures. Now you will apply your data wrangling skills on the yearly change in biomass of plants in the <a href="https://en.wikipedia.org/wiki/Abisko_National_Park">beautiful Abisko national park in northern Sweden</a>. We have preprocessed this data and made <a href="https://uoftcoders.github.io/rcourse/data/plant-biomass-preprocess.csv">it available as a csv-file via this link</a>. You can find the original data and a short readme on <a href="https://figshare.com/articles/Time_Series_of_plant_biomass_during_1998-2013/4149648">figshare</a> and <a href="https://datadryad.org/resource/doi:10.5061/dryad.38s21">dryad</a>. The original study<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> is available un an open access license. Reading through the readme on figshare, and the study abstract will increase your understanding for working with the data.</p>
+<ol type="a">
+<li><p>Read the data directly from the provided URL, into a variable called <code>plant_biomass</code> and display the first six rows. (0.25 mark)</p></li>
+<li><p>Convert the Latin column names into their common English names: lingonberry, bilberry, bog bilberry, dwarf birch, crowberry, and wavy hair grass. After this, display all column names. (0.25 marks)</p></li>
+</ol>
+<p><em>Hint: Search online to find out which Latin and English names pair up.</em></p>
+<ol start="3" type="a">
+<li>This is a wide data frame (species make up the column names). A long format is easier to analyze, so gather the species names into one column (<code>species</code>) and the measurement values into another column (<code>biomass</code>). Keep all other columns. Assign it to the variable <code>plant_long</code>. (0.5 marks)</li>
+</ol>
+<ol start="3" type="1">
+<li>Data exploration (5 marks)</li>
+</ol>
+<p>Now that our data is in a tidy format, we can start exploring it!</p>
+<ol type="a">
+<li><p>What is the average biomass in g/m<sup>2</sup> for all observations in the study? (0.25 marks)</p></li>
+<li><p>How does the average biomass compare between the grazed control sites and those that were protected from herbivores? (0.25 marks)</p></li>
+<li><p>Display a table of the average plant biomass for each year. (0.25 marks)</p></li>
+<li><p>What is the mean plant biomass per year for the <code>grazedcontrol</code> and <code>rodentexclosure</code> groups (spread these variables as separate columns in a table)? (0.5 marks)</p></li>
+<li><p>Compare the biomass for <code>grazedcontrol</code> with that of <code>rodentexclosure</code> graphically in a line plot. What could explain the big dip in biomass year 2012? (0.75 marks)</p></li>
+</ol>
+<p><em>Hint: The published study might be able to help with the second question…</em></p>
+<ol start="6" type="a">
+<li><p>Check whether there is an equal number of observations per species. (0.25 marks)</p></li>
+<li><p>Compare the yearly change in biomass for each species in a lineplot. (0.5 marks)</p></li>
+<li><p>From the previous two questions, we found that the biomass is higher in the sites with rodent exclosures (especially in recent years), and that the crowberry is the dominant species. Notice how the lines for <code>rodentexclosure</code> and <code>crowberry</code> are of similar shape. Coincidence? Let’s find out! Use a facetted line plot to explore whether all plant species are impacted equally by grazing. (0.75 mark)</p></li>
+<li><p>The habitat could also be affecting the biomass of different species. Explore this graphically. (0.75 marks)</p></li>
+<li><p>It looks like both habitat and treatment have an effect on most of the species! Let’s dissect the data further by visualizing the effect of both the habitat and treatment on each species by facetting the plot accordingly. (0.75 mark)</p></li>
+</ol>
+<p><em>Hint: This is a hard one! You may want to explore R’s documentation for ggplot’s <code>facet_grid</code></em></p>
+<ol start="4" type="1">
+<li>Create a new column that represents the square of the biomass. Display the three largest <code>squared_biomass</code> observations in descending order. Only include the columns <code>year</code>, <code>squared_biomass</code> and <code>species</code> and only observations between the years 2003 and 2008 from the forest habitat.</li>
+</ol>
+<p><em>Hint: Break this down into single criteria and add one at a time. You will be able to obtain the desired result with five operations</em> (1 mark)</p>
+
+
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
-</section>
-<section id="working-with-computers" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="working-with-computers">Working with computers</h2>
-<p>Before we get into more practical matters, we want to provide a brief background to the idea of working with computers. Essentially, computer work is about humans communicating with a computer by modulating flows of current in the hardware in order to get the computer to carry out advanced calculations that we are unable to efficiently compute ourselves. Early examples of human computer communication were quite primitive and included physically disconnecting a wire and connecting it again in a different spot. Luckily, we are not doing this anymore; instead we have programs with graphical user interfaces with menus and buttons that enable more efficient human to computer communication.</p>
-<section id="graphical-user-interfaces-vs.-text-based-user-interfaces" class="level3" data-number="2.0.3">
-<h3 data-number="2.0.3" class="anchored" data-anchor-id="graphical-user-interfaces-vs.-text-based-user-interfaces"><span class="header-section-number">2.0.3</span> Graphical user interfaces vs.&nbsp;text based user interfaces</h3>
-<p>An example of such a program that many of you are familiar with is spreadsheet software such as Microsoft Excel. Here, all the functionality of the program is accessible via hierarchical menus, and clicking buttons sends instructions to the computer, which then responds and sends the results back to your screen. For instance, I can click a button to send the instruction of coloring this cell yellow, and the computer interprets my instructions and then displays the results on the screen.</p>
-<p>Spreadsheet software is great for viewing and entering small data sets and creating simple visualizations fast. However, it can be tricky to design figures, create automatic reproducible analysis workflows, perform advanced calculations, and reliably clean data sets. Even when using a spreadsheet program to record data, it is often beneficial to have some some basic programming skills to facilitate the analyses of those data.</p>
-<p>Typing commands directly instead of searching for them in menus is a more efficient approach to communicate with the computer and a powerful way of doing data analysis. This is initially intimidating for almost all people, but if you compare it to learning a new language, the process becomes more intuitive: when learning a language, you would initially string together sentences by looking up individual words in the dictionary. As you improve, you will only reference the dictionary occasionally since you already know most of the words. Eventually, you will throw the dictionary out altogether because it is faster and more precise to speak directly. In contrast, graphical programs force you to look up every word in the dictionary every time, even if you already know what to say.</p>
-</section>
-<section id="rstudio-and-the-r-notebook" class="level3" data-number="2.0.4">
-<h3 data-number="2.0.4" class="anchored" data-anchor-id="rstudio-and-the-r-notebook"><span class="header-section-number">2.0.4</span> RStudio and the R Notebook</h3>
-<p>RStudio includes the R console, but also many other convenient functionalities, which makes it easier to get started and to work with R. When you launch RStudio, you will see four panels. Starting at the top left and going clockwise, these panels are:</p>
-<ul>
-<li>The <strong>text editor panel</strong>. This is where we can write scripts, i.e. putting several commands of code together and saving them as a text document so that they are accessible for later and so that we can execute them all at once by running the script instead of typing them in one by one.</li>
-<li>The <strong>environment panel</strong>, which shows us all the files and objects we currently loaded into R.</li>
-<li>The <strong>files-plots-help panel</strong>. This panel shows the files in the current directory (the folder we are working out of), any plots we make later, and also documentation for various packages and functions. Here, the documentation is formatted in a way that is easier to read and also provides links to the related sections.</li>
-<li>The <strong>console</strong> is another space we can input code, only now the code is executed immediately and doesn’t get saved at the end.</li>
-</ul>
-<p>To change the appearance of your RStudio, navigate to <code>Tools &gt; Global Options &gt; Appearance</code>. You can change the the font and size, and the editor theme. The default is “Textmate”, but if you like dark mode, I recommend “Tomorrow Night Bright”. You can also change how your panels are organized. I like to have my Console and history below my Source, and that way I can see my working environment next to my code. That way, I know if an error I am getting is because I am missing an object or I renamed something oddly. Let’s change that now. I recommend playing around with the appearance if you prefer a different layout or colour scheme. Do what makes you the most productive!</p>
-<p>Another very useful thing with RStudio is that you have access to some excellent cheat sheets in PDF format straight from the menu: <code>Help -&gt; Cheatsheets</code>!</p>
-<p>In the RStudio interface, we will be writing code in a format called the R Notebook. As the name entails, this interface works like a notebook for code, as it allows us to save notes about what the code is doing, the code itself, and any output we get, such as plots and tables, all together in the same document.</p>
-<p>When we are in the Notebook, the text we write is normal plain text, just as if we would be writing it in a text document. If we want to execute some R code, we need to insert a <em>code chunk</em>.</p>
-<p>You insert a code chunk by either clicking the “Insert” button or pressing <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>Alt</kbd> + <kbd>i</kbd> simultaneously. You could also type out the surrounding backticks, but this would take longer. To run a code chunk, you press the green arrow, or <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>.</p>
-<div class="cell" data-layout-align="center" data-hash="lec00-rstudio_cache/html/unnamed-chunk-2_ae8560509aa88c1ac23b505139dc79c4">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>As you can see, the output appears right under the code block.</p>
-<p>This is a great way to perform explore your data, since you can do your analysis and write comments and conclusions right under it all in the same document. A powerful feature of this workflow is that there is no extra time needed for code documentation and note-taking, since you’re doing your analyses and taking notes at the same time. This makes it great for both taking notes at lectures and to have as a reference when you return to your code in the future.</p>
-</section>
-</section>
-<section id="r-markdown" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="r-markdown"><span class="header-section-number">2.1</span> R Markdown</h2>
-<p>The text format we are using in the R Notebook is called R Markdown. This format allows us to combine R code with the Markdown text format, which enables the use of certain characters to specify headings, bullet points, quotations and even citations. A simple example of how to write in Markdown is to use a single asterisk or underscore to <em>emphasize</em> text (<code>*emphasis*</code>) and two asterisks or underscores to <strong>strongly emphasize</strong> text (<code>**strong emphasis**</code>). When we convert our R Markdown text to other file formats, these will show up as italics and bold typeface, respectively. If you have used WhatsApp, you might already be familiar with this style of writing. In case you haven’t seen it before, you have just learned something about WhatsApp in your quantitative methods class…</p>
-<p>To learn more about R Markdown, you can read the cheat sheets in RStudio and <a href="https://rmarkdown.rstudio.com/authoring_basics.html">RStudio Markdown reference online</a>.</p>
-<section id="saving-data-and-generating-reports" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="saving-data-and-generating-reports"><span class="header-section-number">2.1.1</span> Saving data and generating reports</h3>
-<p>To save our notes, code, and graphs, all we have to do is to save the R Notebook file, and the we can open it in RStudio next time again. However, if we want someone else to look at this, we can’t always just send them the R Notebook file, because they might not have RStudio installed. Another great feature of R Notebooks is that it is really easy to export them to HTML, MS word, or PDF documents with figures and professional typesetting. There are actually many academic papers that are written entirely in this format and it is great for assignments and reports. (You might even use it to communicate with your collaborators!) Since R Notebook files convert to HTML, it is also easy to publish <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">simple and good-looking websites</a> in it, in which code chunks are embedded nicely within the text.</p>
-<p>Let’s try to create a document in R.</p>
-<p>First, let’s set up the <a href="https://yaml.org/">YAML</a> block. This is found at the top of your document, and it is where you specify the title of your document, what kind of output you want, and a few other things such as author list and date.</p>
-<div class="cell" data-layout-align="center" data-hash="lec00-rstudio_cache/html/unnamed-chunk-3_9f291c5dd5cf11bebd0673424ba375d2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>title<span class="sc">:</span> <span class="st">"Your title here"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>author<span class="sc">:</span> <span class="st">"Your name here"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>date<span class="sc">:</span> <span class="st">"Insert date"</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Then, let’s type some notes and code together!</p>
-<div class="cell" data-layout-align="center" data-hash="lec00-rstudio_cache/html/unnamed-chunk-4_dc96e5dadcf1b973a5dc3c264de2263d">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Attempt 1</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Here goes!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-layout-align="center" data-hash="lec00-rstudio_cache/html/unnamed-chunk-5_e43820c230d72adc03468e2f007f97e8">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">2</span><span class="sc">+</span><span class="dv">3</span><span class="sc">+</span><span class="dv">4</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 10</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">1</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="at">type =</span> <span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lec00-rstudio_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:70.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Let’s see what this looks like. To create the output document, we poetically say that we will knit our R Markdown into the HTML document. Luckily, it is much simpler than actually knitting something. Simply press the <code>Knit</code> button here and the new document will be created.</p>
-<p>As you can see in the knitted document, the title showed up as we would expect, the lines with pound sign(s) in front of them were converted into headers and we can see both the code and its output! So the plots are generated directly in the report without us having to cut and paste images! If we change something in the code, we don’t have to find the new images and paste it in again, the correct one will appear right in your code.</p>
-<p>When you quit, R will ask you if you want to save the workspace (that is, all of the variables you have defined in this session); in general, you should say “no” to avoid clutter and unintentional confusion of results from different sessions. Note: When you say “yes” to saving your workspace, it is saved in a hidden file named .RData. By default, when you open a new R session in the same directory, this workspace is loaded and a message informing you so is printed: <code>[Previously saved workspace restored]</code>.</p>
-</section>
-</section>
-<section id="exercise" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="exercise">Exercise</h2>
-<section id="knitting-and-submitting-on-quercus" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="knitting-and-submitting-on-quercus"><span class="header-section-number">2.1.2</span> Knitting and Submitting on Quercus</h3>
-<p>Practice knitting and uploading your file to Quercus!</p>
-<p>Click the dropdown “Knit” button at the top of the screen, and click “PDF”.</p>
-<p>Note: for assignments, submit PDF versions. If you are having trouble rendering your knitted file, you can submit HTML formats, or your .Rmd file as a last resort. Note that, if you are unable to knit your assignment, chances are there is an error. Make sure to double-check your code!</p>
-<p>Head on over to Quercus and submit your knitted PDF to “Assignment 0”.</p>
-
-
-</section>
+<ol>
+<li id="fn1"><p>Olofsson J, te Beest M, Ericson L (2013) Complex biotic interactions drive long-term vegetation dynamics in a subarctic ecosystem. Philosophical Transactions of the Royal Society B 368(1624): 20120486. <a href="https://dx.doi.org/10.1098/rstb.2012.0486" class="uri">https://dx.doi.org/10.1098/rstb.2012.0486</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -680,13 +631,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./downloadingR.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Downloading R</span>
+      <a href="./assignment-01.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assignment 01</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lec01-markdown-workflows.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Markdown, project workflows</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./assignment-03.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Assignment 03</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
