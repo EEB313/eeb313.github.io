@@ -224,12 +224,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Linear mixed models</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./lec10-model-selection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -244,19 +238,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./assignment-01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Assignment 01</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assignment 01</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./assignment-02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Assignment 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Assignment 02</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./assignment-03.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Assignment 03</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Assignment 03</span></span></a>
   </div>
 </li>
       </ul>
@@ -273,13 +267,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Project description</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Project description</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./databases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Some open-access databases</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Some open-access databases</span></span></a>
   </div>
 </li>
       </ul>
@@ -296,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tests-assignment-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">More on hypothesis testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">More on hypothesis testing</span></span></a>
   </div>
 </li>
       </ul>
@@ -737,18 +731,18 @@ lm(formula = fitness ~ scale(trait), data = data)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.46031 -0.12486  0.02675  0.14805  0.30052 
+-0.35582 -0.09207  0.00166  0.09861  0.30782 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   1.00000    0.01806   55.37   &lt;2e-16 ***
-scale(trait)  0.40731    0.01815   22.44   &lt;2e-16 ***
+(Intercept)   1.00000    0.01412   70.84   &lt;2e-16 ***
+scale(trait)  0.35257    0.01419   24.85   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.1806 on 98 degrees of freedom
-Multiple R-squared:  0.8371,    Adjusted R-squared:  0.8354 
-F-statistic: 503.5 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.1412 on 98 degrees of freedom
+Multiple R-squared:  0.863, Adjusted R-squared:  0.8616 
+F-statistic: 617.5 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">### fitness changed by ~50% per sd change in trait value!</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -770,19 +764,19 @@ lm(formula = fitness ~ scale(trait) + scale(trait^2), data = data)
 
 Residuals:
       Min        1Q    Median        3Q       Max 
--0.213389 -0.049510 -0.000121  0.058754  0.193979 
+-0.169091 -0.052805 -0.004934  0.042690  0.196074 
 
 Coefficients:
                 Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)     1.000000   0.008105  123.39   &lt;2e-16 ***
-scale(trait)    1.006855   0.031443   32.02   &lt;2e-16 ***
-scale(trait^2) -0.620737   0.031443  -19.74   &lt;2e-16 ***
+(Intercept)     1.000000   0.007389  135.34   &lt;2e-16 ***
+scale(trait)    0.874259   0.033152   26.37   &lt;2e-16 ***
+scale(trait^2) -0.535290   0.033152  -16.15   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.08105 on 97 degrees of freedom
-Multiple R-squared:  0.9675,    Adjusted R-squared:  0.9669 
-F-statistic:  1445 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.07389 on 97 degrees of freedom
+Multiple R-squared:  0.9629,    Adjusted R-squared:  0.9621 
+F-statistic:  1257 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Here, the blue (red) regression line is the linear (quadratic) individual selection surface, estimated by regressing fitness on trait value (and its square) simulated under a model of directional selection.</p>
@@ -902,20 +896,20 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--1.6744  -0.9907   0.7284   1.0691   1.6790  
+-1.5838  -1.2276   0.8403   1.0397   1.2955  
 
 Coefficients:
-            Estimate Std. Error z value Pr(&gt;|z|)   
-(Intercept)  0.04581    0.21185   0.216  0.82881   
-scale(age)   0.70643    0.22241   3.176  0.00149 **
+            Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)   0.3765     0.2072   1.817   0.0692 .
+scale(age)    0.3754     0.2107   1.782   0.0748 .
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 138.59  on 99  degrees of freedom
-Residual deviance: 127.43  on 98  degrees of freedom
-AIC: 131.43
+    Null deviance: 135.37  on 99  degrees of freedom
+Residual deviance: 132.10  on 98  degrees of freedom
+AIC: 136.1
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
@@ -952,47 +946,47 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">100</td>
-<td style="text-align: right;">0.866</td>
+<td style="text-align: right;">0.873</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">110</td>
-<td style="text-align: right;">0.908</td>
+<td style="text-align: right;">0.920</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">120</td>
-<td style="text-align: right;">0.925</td>
+<td style="text-align: right;">0.919</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">130</td>
-<td style="text-align: right;">0.961</td>
+<td style="text-align: right;">0.953</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">140</td>
-<td style="text-align: right;">0.984</td>
+<td style="text-align: right;">0.972</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.978</td>
+<td style="text-align: right;">0.985</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.984</td>
+<td style="text-align: right;">0.987</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.991</td>
+<td style="text-align: right;">0.992</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.993</td>
+<td style="text-align: right;">0.999</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">190</td>
-<td style="text-align: right;">0.999</td>
+<td style="text-align: right;">0.993</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">200</td>
-<td style="text-align: right;">0.999</td>
+<td style="text-align: right;">0.997</td>
 </tr>
 </tbody>
 </table>

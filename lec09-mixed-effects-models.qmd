@@ -17,9 +17,9 @@ theme_set(theme_bw())
 > - Apply mixed models to data of Fitzpatrick et al.
 > 
 > ### Lesson outline
-> - Describe the structure of a linear mixed model, the form of the liklihood function, and how fixed/random effects are estimated. Discuss how varience components can be estimated.
+> - Describe the structure of a linear mixed model, the form of the likelihood function, and how fixed/random effects are estimated. Discuss how variance components can be estimated.
 > - Familiarize ourselves with the RIKZ data.
-> - Perform standard linear regression on the RIKZ data. Check the assumptions of multiple regression, including the indepndence of observations.
+> - Perform standard linear regression on the RIKZ data. Check the assumptions of multiple regression, including the independence of observations.
 > - Explore ways to overcome this violation without the use of mixed effects modeling.
 > - Apply random intercept, random intercept and slope, and random-effects only models to RIKZ data. Discuss the differences between these models.
 > - Explore to how use mixed-effects models for more deeply nested data. 
