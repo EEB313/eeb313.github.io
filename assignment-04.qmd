@@ -1,0 +1,68 @@
+---
+title: 'Assignment 4: Fixed and mixed effects models'
+output: pdf_document
+---
+
+**To submit this assignment, upload the full document to Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`.**
+
+1. Linear models (4 marks)
+
+Run the following code to load the CO2 dataset.
+
+```{r}
+library(tidyverse)
+library(car)
+library(lsmeans)
+
+co2_df <- as_tibble(as.matrix(CO2)) %>% 
+  mutate(conc = as.integer(conc),
+         uptake = as.numeric(uptake))
+```
+
+a. Look through the help documentation (?CO2) to understand what each variable means and **what units they have**; make sure you are including units in all subsequent answers (and all future assignments!). Construct a linear model to test the following null hypothesis, and state your conclusion in plain English (remember to refer to the hypothesis being tested) (1 mark)
+
+H~0~: Ambient carbon dioxide concentrations does not influence a plant's CO~2~ uptake rates.
+
+b. Check the assumptions of this model (normality and homogeneity of variance), and explain your conclusion in plain English. (1 mark)
+
+c. Predict how much CO2 plants would uptake if you observed an atmospheric concentration of 2,450 mL/L? (0.25 marks)
+
+
+d. Let's say now we want to further investigate whether this relationship (between ambient CO~2~ concentration and uptake) differ by plant origin. Construction a linear model to test this, and explain your conclusion in plain English. (0.75 mark)
+
+
+e. Explain, in your own words, how to interpret the regression coefficients from part d. Hint: there are three of them! (0.25)
+
+f. Predict how much CO2 plants would uptake if you observed an atmospheric concentration of 2,450 mL/L, and a plant origin of Mississippi? (0.25 marks)
+
+g. Visualize what you found in part (d) by plotting values estimated from the model. (0.5 marks)
+
+
+2. Linear mixed-effects models (4 marks).
+
+Santangelo _et al._ (2018) were interested in understanding how plant defenses, herbivores, and pollinators influence the expression of plant floral traits (e.g. flower size). Their experiment had 3 treatments, each with 2 levels: Plant defense (2 levels: defended vs. undefended), herbivory (2 levels: reduced vs. ambient) and pollination (2 levels: open vs. supplemental). These treatments were fully crossed for a total of 8 treatment combinations. In each treatment combination, they grew 4 individuals from each of 50 plant genotypes for a total of 800 plants (8 treatment combinations x 50 genotypes x 2 individuals per genotype). Plants were grown in a common garden at the Koffler Scientific Reserve (UofT's field research station) and 6 floral traits were measured on all plants throughout the summer. We will analyze how the treatments influenced one of these traits in this exercise. 
+    
+Run the code chunk below to download the data, which includes only a subset of the columns from the full dataset:
+    
+```{r, eval=FALSE}
+download.file("https://uoftcoders.github.io/rcourse/data/Santangelo_JEB_2018.csv", "Santangelo_JEB_2018.csv")
+```
+
+```{r}
+plant_data <- read_csv("Santangelo_JEB_2018.csv", col_names = TRUE)
+
+glimpse(plant_data)
+head(plant_data)
+```
+
+You can see that the data contain 792 observations (i.e., plants, 8 died during the experiment). There are 50 genotypes across 3 treatments: Herbivory, Pollination, and HCN (i.e., hydrogen cyanide, a plant defense). There are 6 plant floral traits: Number of days to first flower, banner petal length, banner petal width, plant biomass, number of flowers, and number of inflorescences. Finally, since plants that are closer in space in the common garden may have similar trait expression due to more similar environments, the authors included 6 spatial "blocks" to account for this environmental variation (i.e. Plant from block A "share" an environment and those from block B "share" an environment, etc.). Also keep in mind that each treatment combination contains 4 individuals of each genotype, which are likely to have similar trait expression due simply to shared genetics.
+    
+a. Use the `lme4` and `lmerTest` R packages to run a linear mixed-effects model examining how herbivores (`Herbivory`), pollinators (`Pollination`), plant defenses (`HCN`) _and all interactions_ influences the length of banner petals (`Avg.Bnr.Wdth`) produced by plants while accounting for variation due to spatial block and plant genotype. Allow the intercept for `Genotype` to vary across the levels of the herbivory treatment (Hint: are `Genotype` and `Herbivory` crossed or nested?). You only need to specify the model for this part of the question. (1 mark) 
+
+b. Summarize (i.e., get the output) the model that you ran in part (a). Did any of the treatments have a significant effect on banner petal length? If so, which ones, and how did it effect banner petal length? Make a statement for each significant **main** effects in the model (i.e. not interactions). (1 mark)
+
+c. Plot the mean banner width for the interaction between HCN, herbivory, and pollination. Include 1 standard error around the mean, and avoid overlapping points in the figure. (1 mark) 
+
+_Hint: to visualize a three-way interaction, you can either 1) plot one of the predictors on the x axis, and then differentiate the other two with different colors and shapes, 2) use facet_wrap to isolate one of the predictors._
+
+d. After accounting for the fixed effects, what percentage of the variation in banner petal width was explained by each of the random effects in the model? (1 mark)

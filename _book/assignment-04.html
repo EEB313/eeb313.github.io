@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - 18&nbsp; Some open-access databases</title>
+<title>EEB313: Quantitative Methods in R for Biology - 16&nbsp; Assignment 4: Fixed and mixed effects models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./tests-assignment-3.html" rel="next">
-<link href="./projects.html" rel="prev">
+<link href="./projects.html" rel="next">
+<link href="./assignment-03.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -73,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./projects.html">Project</a></li><li class="breadcrumb-item"><a href="./databases.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Some open-access databases</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="./assignment-04.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Assignment 4: Fixed and mixed effects models</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -225,7 +259,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignment-04.html" class="sidebar-item-text sidebar-link">
+  <a href="./assignment-04.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Assignment 4: Fixed and mixed effects models</span></span></a>
   </div>
 </li>
@@ -248,7 +282,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./databases.html" class="sidebar-item-text sidebar-link active">
+  <a href="./databases.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Some open-access databases</span></span></a>
   </div>
 </li>
@@ -284,7 +318,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Some open-access databases</span></h1>
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Assignment 4: Fixed and mixed effects models</span></h1>
 </div>
 
 
@@ -299,17 +333,153 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Below are some resources that would be a good to look at if you are in search of data for the term project, or in search of a question in ecology or evolution:</p>
-<ul>
-<li><a href="https://www.ncbi.nlm.nih.gov/genbank/">GenBank</a>: annotated collection of all publicly available DNA/protein sequences. It is possible to download sequences manually, but command line tools can help to automate the process.</li>
-<li><a href="https://esajournals.onlinelibrary.wiley.com/doi/10.1890/08-1494.1">PanTHERIA</a>: database of ecology, life history, and geography of all extant and recently extinct mammal species. Includes body size, lifespan, litter size, and other trait data at the species level.</li>
-<li><a href="https://www.ncbi.nlm.nih.gov/geo/">Gene Expression Omnibus</a>: repository of gene expression, methylation, and annotated genomic data which are (like GenBank) most readily accessible using command line tools.</li>
-<li><a href="https://www.gbif.org/dataset/67c54f85-7910-4cbf-8de4-6f0b136a0e34">Continuous Plankton Recorder Survey</a>: data (going back to 1958!) on northern hemisphere plankton species, including the location (latitude, longitude) and date of sampling.</li>
-<li><a href="https://open.canada.ca/data/en/dataset/3571474b-8d75-491d-816e-f84677b81a7c">Red-backed salamander abundance</a>: abundance of red-backed salamanders from 4 sites in the Bruce Peninsula from 2004 to 2017.</li>
-<li><a href="https://www.pwrc.usgs.gov/BBS/RawData/">North American Bird Breeding Survey</a>: repository containing information regarding the number of birds at multiple sites in North America. Many datasets of varying size that need to be linked together.</li>
-<li><a href="https://malariaatlas.org">Malaria Atlas Project</a>: publicly available and up-to-date malaria prevalence and distribution data. Vector distribution, bednet coverage, etc. data also available.</li>
-</ul>
-<p>Let Vicki or Mete know if data from any of these resources interests you, or if you would like to discuss where data to answer questions you find interesting live (…or if they exist at all!).</p>
+<p><strong>To submit this assignment, upload the full document to Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>.</strong></p>
+<ol type="1">
+<li>Linear models (4 marks)</li>
+</ol>
+<p>Run the following code to load the CO2 dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyr' was built under R version 4.1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readr' was built under R version 4.1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'stringr' was built under R version 4.1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'forcats' was built under R version 4.1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'lubridate' was built under R version 4.1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.3     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'car' was built under R version 4.1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'carData' was built under R version 4.1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'car'
+
+The following object is masked from 'package:dplyr':
+
+    recode
+
+The following object is masked from 'package:purrr':
+
+    some</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lsmeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: emmeans
+The 'lsmeans' package is now basically a front end for 'emmeans'.
+Users are encouraged to switch the rest of the way.
+See help('transition') for more information, including how to
+convert old 'lsmeans' objects and scripts to work with 'emmeans'.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>co2_df <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">as.matrix</span>(CO2)) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">conc =</span> <span class="fu">as.integer</span>(conc),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">uptake =</span> <span class="fu">as.numeric</span>(uptake))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="a">
+<li>Look through the help documentation (?CO2) to understand what each variable means and <strong>what units they have</strong>; make sure you are including units in all subsequent answers (and all future assignments!). Construct a linear model to test the following null hypothesis, and state your conclusion in plain English (remember to refer to the hypothesis being tested) (1 mark)</li>
+</ol>
+<p>H<sub>0</sub>: Ambient carbon dioxide concentrations does not influence a plant’s CO<sub>2</sub> uptake rates.</p>
+<ol start="2" type="a">
+<li><p>Check the assumptions of this model (normality and homogeneity of variance), and explain your conclusion in plain English. (1 mark)</p></li>
+<li><p>Predict how much CO2 plants would uptake if you observed an atmospheric concentration of 2,450 mL/L? (0.25 marks)</p></li>
+<li><p>Let’s say now we want to further investigate whether this relationship (between ambient CO<sub>2</sub> concentration and uptake) differ by plant origin. Construction a linear model to test this, and explain your conclusion in plain English. (0.75 mark)</p></li>
+<li><p>Explain, in your own words, how to interpret the regression coefficients from part d.&nbsp;Hint: there are three of them! (0.25)</p></li>
+<li><p>Predict how much CO2 plants would uptake if you observed an atmospheric concentration of 2,450 mL/L, and a plant origin of Mississippi? (0.25 marks)</p></li>
+<li><p>Visualize what you found in part (d) by plotting values estimated from the model. (0.5 marks)</p></li>
+</ol>
+<ol start="2" type="1">
+<li>Linear mixed-effects models (4 marks).</li>
+</ol>
+<p>Santangelo <em>et al.</em> (2018) were interested in understanding how plant defenses, herbivores, and pollinators influence the expression of plant floral traits (e.g.&nbsp;flower size). Their experiment had 3 treatments, each with 2 levels: Plant defense (2 levels: defended vs.&nbsp;undefended), herbivory (2 levels: reduced vs.&nbsp;ambient) and pollination (2 levels: open vs.&nbsp;supplemental). These treatments were fully crossed for a total of 8 treatment combinations. In each treatment combination, they grew 4 individuals from each of 50 plant genotypes for a total of 800 plants (8 treatment combinations x 50 genotypes x 2 individuals per genotype). Plants were grown in a common garden at the Koffler Scientific Reserve (UofT’s field research station) and 6 floral traits were measured on all plants throughout the summer. We will analyze how the treatments influenced one of these traits in this exercise.</p>
+<p>Run the code chunk below to download the data, which includes only a subset of the columns from the full dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://uoftcoders.github.io/rcourse/data/Santangelo_JEB_2018.csv"</span>, <span class="st">"Santangelo_JEB_2018.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plant_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Santangelo_JEB_2018.csv"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 792 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (5): Genotype, Pollination, Herbivory, HCN, Block
+dbl (6): Flower.date, Avg.Bnr.Wdth, Avg.Bnr.Ht, Biomass.plant, Num.flwrs, To...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(plant_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 792
+Columns: 11
+$ Genotype      &lt;chr&gt; "173-1", "173-1", "173-1", "173-1", "173-1", "173-1", "1…
+$ Pollination   &lt;chr&gt; "Open", "Open", "Open", "Supp", "Supp", "Supp", "Open", …
+$ Herbivory     &lt;chr&gt; "Reduced", "Ambient", "Reduced", "Ambient", "Ambient", "…
+$ HCN           &lt;chr&gt; "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", "Yes", …
+$ Flower.date   &lt;dbl&gt; 86, 23, 12, 25, 16, 38, 22, 61, 32, 25, 30, 33, 54, 23, …
+$ Avg.Bnr.Wdth  &lt;dbl&gt; 3.32, NA, 3.02, 3.14, 2.76, NA, 3.11, 3.07, 3.16, 3.16, …
+$ Avg.Bnr.Ht    &lt;dbl&gt; 6.50, NA, 7.02, 6.03, 5.20, NA, 5.69, 6.18, 6.04, 5.94, …
+$ Biomass.plant &lt;dbl&gt; 9.27, 8.34, 7.74, 15.76, 4.16, 7.75, 48.67, 10.32, 28.80…
+$ Num.flwrs     &lt;dbl&gt; 52.5, 67.0, 57.5, NA, NA, 47.5, 60.0, 58.5, 66.5, 64.5, …
+$ Total.Inf     &lt;dbl&gt; 4, 1, 21, 9, 0, 15, 41, 19, 17, 23, 129, 46, 35, 35, 22,…
+$ Block         &lt;chr&gt; "E", "A", "E", "A", "A", "A", "D", "F", "C", "C", "A", "…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plant_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 11
+  Genotype Pollination Herbivory HCN   Flower.date Avg.Bnr.Wdth Avg.Bnr.Ht
+  &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
+1 173-1    Open        Reduced   Yes            86         3.32       6.5 
+2 173-1    Open        Ambient   Yes            23        NA         NA   
+3 173-1    Open        Reduced   Yes            12         3.02       7.02
+4 173-1    Supp        Ambient   Yes            25         3.14       6.03
+5 173-1    Supp        Ambient   Yes            16         2.76       5.2 
+6 173-1    Supp        Ambient   Yes            38        NA         NA   
+# ℹ 4 more variables: Biomass.plant &lt;dbl&gt;, Num.flwrs &lt;dbl&gt;, Total.Inf &lt;dbl&gt;,
+#   Block &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>You can see that the data contain 792 observations (i.e., plants, 8 died during the experiment). There are 50 genotypes across 3 treatments: Herbivory, Pollination, and HCN (i.e., hydrogen cyanide, a plant defense). There are 6 plant floral traits: Number of days to first flower, banner petal length, banner petal width, plant biomass, number of flowers, and number of inflorescences. Finally, since plants that are closer in space in the common garden may have similar trait expression due to more similar environments, the authors included 6 spatial “blocks” to account for this environmental variation (i.e.&nbsp;Plant from block A “share” an environment and those from block B “share” an environment, etc.). Also keep in mind that each treatment combination contains 4 individuals of each genotype, which are likely to have similar trait expression due simply to shared genetics.</p>
+<ol type="a">
+<li><p>Use the <code>lme4</code> and <code>lmerTest</code> R packages to run a linear mixed-effects model examining how herbivores (<code>Herbivory</code>), pollinators (<code>Pollination</code>), plant defenses (<code>HCN</code>) <em>and all interactions</em> influences the length of banner petals (<code>Avg.Bnr.Wdth</code>) produced by plants while accounting for variation due to spatial block and plant genotype. Allow the intercept for <code>Genotype</code> to vary across the levels of the herbivory treatment (Hint: are <code>Genotype</code> and <code>Herbivory</code> crossed or nested?). You only need to specify the model for this part of the question. (1 mark)</p></li>
+<li><p>Summarize (i.e., get the output) the model that you ran in part (a). Did any of the treatments have a significant effect on banner petal length? If so, which ones, and how did it effect banner petal length? Make a statement for each significant <strong>main</strong> effects in the model (i.e.&nbsp;not interactions). (1 mark)</p></li>
+<li><p>Plot the mean banner width for the interaction between HCN, herbivory, and pollination. Include 1 standard error around the mean, and avoid overlapping points in the figure. (1 mark)</p></li>
+</ol>
+<p><em>Hint: to visualize a three-way interaction, you can either 1) plot one of the predictors on the x axis, and then differentiate the other two with different colors and shapes, 2) use facet_wrap to isolate one of the predictors.</em></p>
+<ol start="4" type="a">
+<li>After accounting for the fixed effects, what percentage of the variation in banner petal width was explained by each of the random effects in the model? (1 mark)</li>
+</ol>
 
 
 
@@ -549,13 +719,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./projects.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Project description</span></span>
+      <a href="./assignment-03.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Assignment 03</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./tests-assignment-3.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">More on hypothesis testing</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./projects.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Project description</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -21,11 +21,13 @@ book:
       - lec07-intro-to-stats.qmd
       - lec08-linear-models.qmd
       - lec09-mixed-effects-models.qmd
+      - lec10-model-selection.qmd
     - part: "Assignments"
       chapters:
       - assignment-01.qmd
       - assignment-02.qmd
       - assignment-03.qmd
+      - assignment-04.qmd
     - part: "Project"
       chapters:
       - projects.qmd

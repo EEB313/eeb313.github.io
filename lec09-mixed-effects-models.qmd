@@ -35,7 +35,7 @@ theme_set(theme_bw())
 > - `MuMIn`
 > - `sjmisc`
 
-# Why linear mixed models?
+## Why linear mixed models?
 
 Last class we discussed how to apply linear models to data (e.g., linear
 regression, ANOVA, etc.) to understand the relationship between predictor (i.e.,
@@ -47,7 +47,7 @@ independent) and response (i.e., dependent) variables. As a reminder, the usual 
 
 Although one can model the distribution of the data differently (e.g., using transformations or GLMMs), serious violations of independence and equality of error variances can pose problems and result in biased parameter estimates and $p$-values. Additionally, ecological and evolutionary data are often very messy, with a lot of noise, unequal sample sizes, and missing data. Thankfully, **linear mixed effects models provide us with an estimation and inference framework which alleviates violations of these assumptions**. Mixed effects models also allow us to better understand the sources of variation in the data; in quantitative genetics, for example, the goal of many analyses is to understand how much variation in a trait is additive, and this involves estimating what is called the _additive genetic variance_ using a mixed effects model. Like linear models of other kinds, mixed effects models can be fit via maximum likelihood.
 
-# Fitting LMMs
+## Fitting LMMs
 
 A linear mixed effects model is of the form
 
@@ -65,7 +65,7 @@ The random effect coefficients $b_{i1},\dots,b_{iq}$ for group $i$ are assumed t
 
 $$\frac{1}{2} \ln |\boldsymbol{\Sigma}| - \frac{1}{2} (\boldsymbol{y}-\boldsymbol{X} \boldsymbol{\beta})'  \boldsymbol{\Sigma}^{-1} (\boldsymbol{y}-\boldsymbol{X} \boldsymbol{\beta}).$$
 
-## Estimating fixed, random effects with $\boldsymbol{\Sigma}$ known
+### Estimating fixed, random effects with $\boldsymbol{\Sigma}$ known
 
 Maximizing the log-likelihood with respect to $\boldsymbol{\beta}$ gives $\boldsymbol{\hat{\beta}_{\text{MLE}}} = (\boldsymbol{X}' \boldsymbol{\Sigma}^{-1}\boldsymbol{X})^{-1} \boldsymbol{X}' \boldsymbol{\Sigma}^{-1} \boldsymbol{y}.$ This, as in standard regression theory, is the best linear unbiased estimator (BLUE) of the fixed effects. In addition to the estimation of fixed effects, prediction^[To emphasize the fact the random effects come from a population (distribution) of such effects, this term is used.] of random effects is often of interest. The best linear unbiased predictor (BLUP) of the random effects is $\boldsymbol{\hat{u}} = \boldsymbol{\Psi}\boldsymbol{Z}'(\boldsymbol{Z} \boldsymbol{\Psi} \boldsymbol{Z}'+\boldsymbol{\Lambda})^{-1}(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{\hat{\beta}})$.
 
@@ -73,11 +73,11 @@ Maximizing the log-likelihood with respect to $\boldsymbol{\beta}$ gives $\bolds
 
 _Note_: the ML estimator of the random effects is biased, so Restricted ML Estimation (REML) is often used. It’s generally good to use REML when you are interested in the magnitude of the random effects variances, but do not do this when comparing models with different fixed effects.
 
-## Estimation and inference when $\boldsymbol{\Sigma}$ is unknown
+### Estimation and inference when $\boldsymbol{\Sigma}$ is unknown
 
 In the preceding discussion, we have assumed the variance-covariance matrices $\boldsymbol{\Psi},\boldsymbol{\Lambda}$. This is rarely the case. Sometimes, modelers will specify variance-covariance matrices of a certain form (so that there are not so many parameters the model becomes impossible to fit). Otherwise, it is advisable to use methods that estimate the variance components from the data. In today's lecture, we will have to estimate varience components to get a sense of how much random effects matter and shape variation in the data. The math that goes into correctly estimating varience components is quite complicated, but we'll mention that an algorithm known as expectation-maximization can often be used.
 
-## On the difference between fixed and random effects
+### On the difference between fixed and random effects
 
 One of the most tricky things about mixed effects modeling is deciding what co-variates are "fixed" and which are "random" --- sometimes, a co-variate can be both! The meaning of "fixed" and "random" can, ironically, be variable depending on in what context they are used, and who they are used by. As a rule of thumb, a random effect is one which is drawn from a population of effects and can be used to _combine information from different groups_ to learn about the properties (e.g, the variance) of that distribution.
 
@@ -89,9 +89,9 @@ For more on this, see
 - [this page of linear mixed modeling questions and answers, maintained by Dr. Ben Bolker](http://bbolker.github.io/mixedmodels-misc/glmmFAQ.html#when-can-i-include-a-predictor-as-both-fixed-and-random)
 - [this paper by Bolker et al.](https://www.cell.com/trends/ecology-evolution/fulltext/S0169-5347(09)00019-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0169534709000196%3Fshowall%3Dtrue)
 
-# On to data analysis!
+## On to data analysis!
 
-## The RIKZ dataset
+### The RIKZ dataset
 
 Throughout the lecture, we will be making use of the RIKZ dataset. The data are as follow: for each of 9 intertidal areas (denoted ‘Beaches’), the researchers sampled five sites (denoted ‘Sites’) and at each site they measured abiotic variables and the diversity of macro-fauna (e.g. aquatic invertebrates). Here, species richness refers to the total number of species found at a given site while NAP (i.e. Normal Amsterdams Peil) refers to the height of the sampling location relative to the mean sea level and represents the amount of food available for birds, etc. The data are described in more detail in Zuur et al. (2009).
 
@@ -141,7 +141,7 @@ ggplot(rikz_data, aes(x = NAP, y = Richness)) + geom_point(size = 2) +
     geom_smooth(method = "lm", se = F, color = "gray")
 ```
 
-## Limitations of simple linear models
+### Limitations of simple linear models
 
 Let's go ahead and perform a linear regression to examine the relationship between species richness and NAP, pooling data across all beaches to see if it matches our expectation based on the graph.
 
@@ -162,7 +162,7 @@ The **residual plot** suggests that the homogeneity assumption is violated
 (increasing variance in the residuals with increasing fitted values). Similarly,
 the **QQ plot** suggests non-normality (points falling off of the dotted line). The **scale-location plot** shows us that the assumption of equal variance between groups (homoscedasticity) is violated, since the residuals are not spread equally along predictors, but instead the range of residuals is wider as the x-axis increases. Finally, **residuals vs. leverage** helps to identify influential data points on the model (e.g., outliers, but also non-outlier points that don't follow the trend) -- look for points with a high Cook's distance, outside the dashed line(s) on the top-right or bottom-right. Lucky for us, there are no highly-influential points; in fact, we can barely see the Cook's distance lines.
 
-### Transformations to the rescue?
+#### Transformations to the rescue?
 
 Let's try a third root transformation to see if that helps:
 
