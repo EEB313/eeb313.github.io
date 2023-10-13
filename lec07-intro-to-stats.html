@@ -423,9 +423,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">replace =</span> T)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>realizations_N_die_rolls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 1 2 2 4 2 3 3 1 3 2 3 4 2 1 2 4 1 4 3 4 2 2 1 4 2 3 3 3 1 4 1 2 4 3 2 1 1
- [38] 4 4 3 2 2 2 2 3 3 3 4 4 4 2 2 4 1 4 1 2 2 3 4 3 2 2 3 4 4 1 2 4 3 3 2 3 4
- [75] 2 3 2 4 2 1 3 2 4 2 2 1 4 3 4 2 2 1 2 2 2 4 3 4 4 3</code></pre>
+<pre><code>  [1] 1 1 3 3 3 3 2 2 3 4 4 1 1 4 4 1 3 2 3 4 2 4 1 4 1 1 1 1 2 4 2 3 2 2 4 1 4
+ [38] 2 2 2 3 2 2 3 3 4 2 3 2 2 2 4 2 4 2 3 2 2 3 4 3 2 1 2 1 4 1 4 4 2 4 2 3 4
+ [75] 4 2 2 4 2 3 4 2 1 1 4 2 4 1 3 3 1 2 3 3 3 2 4 1 1 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>realizations_N_die_rolls <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">value =</span> realizations_N_die_rolls)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(realizations_N_die_rolls, </span>
@@ -461,9 +461,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">bernouli</span>(<span class="fl">0.1</span>, <span class="dv">100</span>) <span class="do">### 100 realizations of a Bernouli(p = 0.1) RV</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
- [38] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 1 0 0 0 0 0 0 0 0 0 1 0 1 0 0
- [75] 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0</code></pre>
+<pre><code>  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+ [38] 0 0 0 0 0 1 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ [75] 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0</code></pre>
 </div>
 </div>
 <p>The distribution of a continuous random variable <span class="math inline">\(Y\)</span> is defined by a function <span class="math inline">\(f(y|\theta)\)</span> called its probability <em>density</em>. The probability of an event <span class="math inline">\(A\)</span> (for example, observing a number between 0.3 and 0.7) is</p>
@@ -492,33 +492,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] -0.55758629  0.73023501  0.98473411  0.06345833  0.32539282  0.60473929
- [7] -0.81091037 -0.41764213  0.60433290  0.62412963</code></pre>
+<pre><code> [1]  0.56666918  0.26402570 -0.22736709  0.48003270 -0.42314411  0.30134464
+ [7]  0.69904348  0.75753749  0.08387898 -0.35544334</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## simulates n = 10 realizations of a Uniform(-1,1) RV</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1]  1.680536333  1.327999030 -0.282969419 -0.527846494 -0.575164735
-  [6]  2.262581559  1.970774112  0.242083810 -0.443286596  0.684172470
- [11]  1.065384626  0.055534434  0.687022072  1.206433980  0.133280616
- [16]  0.855698539 -0.179580438 -0.562770991 -1.062833204  0.412300023
- [21]  0.128910370  0.069712844 -1.612256821 -0.194665405  1.202138732
- [26] -1.093325623 -0.825574430 -2.523433949  1.401887904 -0.135889444
- [31]  0.225283933  0.539661326 -0.006128869 -0.038291430 -1.183019593
- [36] -3.126335204 -0.675510178  0.032587106 -1.436973933 -0.549097283
- [41] -1.088290279  0.729192427 -1.061041102 -0.415856145 -0.551945514
- [46] -0.947579403 -1.510296557 -1.760292202 -0.628202360  0.611565273
- [51] -0.831514852 -0.204069983  1.142687224 -0.054825963  0.259723400
- [56] -0.054913833 -0.450152927 -0.347312362 -1.000171028 -0.051763679
- [61] -0.194386287  1.304598600 -1.755689565  0.977078456 -0.433217268
- [66] -0.322810686  2.458601246  0.120223152  1.150329201  0.337385682
- [71] -1.121772164  0.752216484 -1.542910021 -0.778560629 -0.793859259
- [76]  1.353789288 -1.426506138  0.404922144 -1.321122550 -1.214576484
- [81] -0.609749928 -0.137456159  0.715091841 -0.825587183 -1.200399463
- [86] -0.516441066 -0.516397629  1.876819879 -0.065718413 -0.992890453
- [91] -0.451215552  0.673297821 -0.020610693  0.788862697  0.970452009
- [96]  0.160322398 -0.840576383 -0.036179123  1.535851598  1.875032521</code></pre>
+<pre><code>  [1] -0.78071763 -1.29930019 -0.46436112  2.51748567  0.15041425  0.45860090
+  [7]  0.82545730  0.75614248 -1.26494052  0.43622601  0.40789128  0.81855167
+ [13]  0.28208184 -0.83164024  0.19923334  0.95547543  0.94236218  0.16139608
+ [19]  0.24302663  0.05641245  0.69485208  0.71966080 -0.43325519  0.94272313
+ [25] -1.56884388  0.02573635  0.39603807 -0.71685852  1.14186705 -0.52285454
+ [31]  0.65436151  0.18621893 -1.32336550 -0.78349170 -0.59925154 -1.63340366
+ [37]  0.15785068  0.25299473  0.31857784  0.23614786  2.02390320  0.69761807
+ [43] -0.87018503 -1.02604790 -0.45201710  0.28240325  1.15672541 -2.09651555
+ [49]  0.62019774 -0.50541445  0.20573037 -0.45454965  1.03784381  0.22666612
+ [55] -1.34280650 -0.78006462 -1.62173821  1.10484156 -0.49570916  0.48724519
+ [61] -0.04885284 -0.56437712 -0.88907277  0.92126420  1.20698235 -0.84263975
+ [67]  1.61611715  0.62260953  1.28510796 -0.18952985  1.72050039  0.30425240
+ [73]  0.29056635 -0.06561566 -0.39152007  0.29892617  1.37084505 -0.73553990
+ [79] -2.84105686  0.12024130 -0.46619551  2.04742994  0.72756264 -0.25122781
+ [85] -1.02769723  1.64220215 -0.15535985 -0.20656516  1.70036822  1.28760141
+ [91]  1.80673568  1.69862619 -0.25518025 -0.47559518 -1.83791448 -0.53253043
+ [97]  0.33306579 -0.12451144 -2.47162628  0.16175316</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## simulates n = 100 realizations of a Normal(mean = 0, variance = 1) RV</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## sd stands for standard deviation, and is the sqrt of the variance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -529,9 +526,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>X<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  8.667632  7.307682  6.020364  6.563137  8.584014  6.945812  6.196053
- [8]  8.235281  9.618702  6.111261  6.047145 12.446876  6.042658  6.225700
-[15]  6.393445  6.095201  6.560233  6.130423  6.378765  7.219661</code></pre>
+<pre><code> [1]  6.000210  6.039313  6.059071  6.001409  6.031885  7.061813  6.004919
+ [8]  7.631036  6.059407  6.003290  6.278344  6.741294  7.251190  6.002382
+[15]  6.760879 11.038482  6.016683  7.017991  6.026323  6.546623</code></pre>
 </div>
 </div>
 </section>
@@ -570,7 +567,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">exponential_MLE</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.180787</code></pre>
+<pre><code>[1] 5.002784</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>estimator <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="do">### number of n=100 exponential draws</span></span>
@@ -635,8 +632,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a><span class="do">### returns which parameters gave rise to max likelihood</span></span>
 <span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>MLE <span class="ot">&lt;-</span> log_likelihood <span class="sc">%&gt;%</span> <span class="fu">subset</span>(LL <span class="sc">==</span> <span class="fu">max</span>(LL)); MLE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             LL mean1 mean2 sd1  sd2
-21364 -3696.815   0.1    10   1 10.2</code></pre>
+<pre><code>             LL mean1 mean2 sd1 sd2
+19339 -3655.526   0.1    10   1 9.7</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>log_likelihood <span class="sc">%&gt;%</span> <span class="fu">subset</span>(mean1 <span class="sc">==</span> MLE<span class="sc">$</span>mean1 <span class="sc">&amp;</span> </span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                         mean2 <span class="sc">==</span> MLE<span class="sc">$</span>mean2 <span class="sc">&amp;</span> sd1 <span class="sc">==</span> MLE<span class="sc">$</span>sd1) <span class="sc">%&gt;%</span></span>
@@ -687,11 +684,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>test_statistic <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>(likelihood_at_null<span class="sc">$</span>LL <span class="sc">-</span> MLE<span class="sc">$</span>LL) </span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>test_statistic <span class="do">### realized value of the likelihood ratio test statistic</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7032685</code></pre>
+<pre><code>[1] 1.785289</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(test_statistic, <span class="at">df =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4016876</code></pre>
+<pre><code>[1] 0.1815012</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">### if p &lt; 0.05, then we reject H0; otherwise, we fail to reject H0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -704,11 +701,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>test_statistic <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>(likelihood_at_null<span class="sc">$</span>LL <span class="sc">-</span> MLE<span class="sc">$</span>LL) </span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>test_statistic <span class="do">### realized value of the likelihood ratio test statistic</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1504.784</code></pre>
+<pre><code>[1] 1262.129</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(test_statistic, <span class="at">df =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
+<pre><code>[1] 1.919817e-276</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="do">### if p &lt; 0.05, then we reject H0; otherwise, we fail to reject H0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -728,7 +725,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">min</span>(values_inconfidence_interval<span class="sc">$</span>sd2),</span>
 <span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">max</span>(values_inconfidence_interval<span class="sc">$</span>sd2)) <span class="do">### confidence interval!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  9.8 10.6</code></pre>
+<pre><code>[1]  9.3 10.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>LL_plot <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sd2, <span class="at">y =</span> LL)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> MLE<span class="sc">$</span>sd2, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
@@ -764,13 +761,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     One Sample t-test
 
 data:  data
-t = -2.5345, df = 99, p-value = 0.01283
+t = -3.5618, df = 99, p-value = 0.0005682
 alternative hypothesis: true mean is not equal to 0.25
 1 percent confidence interval:
- 0.004650793 0.007071527
+ -0.1240674 -0.1214374
 sample estimates:
  mean of x 
-0.00586116 </code></pre>
+-0.1227524 </code></pre>
 </div>
 </div>
 <section id="tests-of-the-equality-of-group-means" class="level3" data-number="9.8.1">
@@ -786,13 +783,13 @@ sample estimates:
     Welch Two Sample t-test
 
 data:  obs1 and obs2
-t = -8.0309, df = 115.99, p-value = 8.906e-13
+t = -7.554, df = 115.31, p-value = 1.087e-11
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -1.1368486 -0.6870323
+ -1.098513 -0.642101
 sample estimates:
- mean of x  mean of y 
-0.08095014 0.99289061 </code></pre>
+mean of x mean of y 
+0.1184493 0.9887566 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="do">### alternatively, one can use the following syntax:</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -805,13 +802,13 @@ sample estimates:
     Welch Two Sample t-test
 
 data:  obs by ID
-t = -8.0309, df = 115.99, p-value = 8.906e-13
+t = -7.554, df = 115.31, p-value = 1.087e-11
 alternative hypothesis: true difference in means between group 1 and group 2 is not equal to 0
 95 percent confidence interval:
- -1.1368486 -0.6870323
+ -1.098513 -0.642101
 sample estimates:
 mean in group 1 mean in group 2 
-     0.08095014      0.99289061 </code></pre>
+      0.1184493       0.9887566 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova(lm(obs~ID, data))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
