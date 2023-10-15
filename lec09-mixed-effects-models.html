@@ -318,33 +318,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#lesson-preamble" id="toc-lesson-preamble" class="nav-link active" data-scroll-target="#lesson-preamble"><span class="header-section-number">11.1</span> Lesson preamble</a></li>
-  <li><a href="#why-linear-mixed-models" id="toc-why-linear-mixed-models" class="nav-link" data-scroll-target="#why-linear-mixed-models"><span class="header-section-number">12</span> Why linear mixed models?</a></li>
-  <li><a href="#fitting-lmms" id="toc-fitting-lmms" class="nav-link" data-scroll-target="#fitting-lmms"><span class="header-section-number">13</span> Fitting LMMs</a>
+  <li><a href="#why-linear-mixed-models" id="toc-why-linear-mixed-models" class="nav-link" data-scroll-target="#why-linear-mixed-models"><span class="header-section-number">11.2</span> Why linear mixed models?</a></li>
+  <li><a href="#fitting-lmms" id="toc-fitting-lmms" class="nav-link" data-scroll-target="#fitting-lmms"><span class="header-section-number">11.3</span> Fitting LMMs</a>
   <ul class="collapse">
-  <li><a href="#estimating-fixed-random-effects-with-boldsymbolsigma-known" id="toc-estimating-fixed-random-effects-with-boldsymbolsigma-known" class="nav-link" data-scroll-target="#estimating-fixed-random-effects-with-boldsymbolsigma-known"><span class="header-section-number">13.1</span> Estimating fixed, random effects with <span class="math inline">\(\boldsymbol{\Sigma}\)</span> known</a></li>
-  <li><a href="#estimation-and-inference-when-boldsymbolsigma-is-unknown" id="toc-estimation-and-inference-when-boldsymbolsigma-is-unknown" class="nav-link" data-scroll-target="#estimation-and-inference-when-boldsymbolsigma-is-unknown"><span class="header-section-number">13.2</span> Estimation and inference when <span class="math inline">\(\boldsymbol{\Sigma}\)</span> is unknown</a></li>
-  <li><a href="#on-the-difference-between-fixed-and-random-effects" id="toc-on-the-difference-between-fixed-and-random-effects" class="nav-link" data-scroll-target="#on-the-difference-between-fixed-and-random-effects"><span class="header-section-number">13.3</span> On the difference between fixed and random effects</a></li>
+  <li><a href="#estimating-fixed-random-effects-with-boldsymbolsigma-known" id="toc-estimating-fixed-random-effects-with-boldsymbolsigma-known" class="nav-link" data-scroll-target="#estimating-fixed-random-effects-with-boldsymbolsigma-known"><span class="header-section-number">11.3.1</span> Estimating fixed, random effects with <span class="math inline">\(\boldsymbol{\Sigma}\)</span> known</a></li>
+  <li><a href="#estimation-and-inference-when-boldsymbolsigma-is-unknown" id="toc-estimation-and-inference-when-boldsymbolsigma-is-unknown" class="nav-link" data-scroll-target="#estimation-and-inference-when-boldsymbolsigma-is-unknown"><span class="header-section-number">11.3.2</span> Estimation and inference when <span class="math inline">\(\boldsymbol{\Sigma}\)</span> is unknown</a></li>
+  <li><a href="#on-the-difference-between-fixed-and-random-effects" id="toc-on-the-difference-between-fixed-and-random-effects" class="nav-link" data-scroll-target="#on-the-difference-between-fixed-and-random-effects"><span class="header-section-number">11.3.3</span> On the difference between fixed and random effects</a></li>
   </ul></li>
-  <li><a href="#on-to-data-analysis" id="toc-on-to-data-analysis" class="nav-link" data-scroll-target="#on-to-data-analysis"><span class="header-section-number">14</span> On to data analysis!</a>
+  <li><a href="#on-to-data-analysis" id="toc-on-to-data-analysis" class="nav-link" data-scroll-target="#on-to-data-analysis"><span class="header-section-number">11.4</span> On to data analysis!</a>
   <ul class="collapse">
-  <li><a href="#the-rikz-dataset" id="toc-the-rikz-dataset" class="nav-link" data-scroll-target="#the-rikz-dataset"><span class="header-section-number">14.1</span> The RIKZ dataset</a></li>
-  <li><a href="#limitations-of-simple-linear-models" id="toc-limitations-of-simple-linear-models" class="nav-link" data-scroll-target="#limitations-of-simple-linear-models"><span class="header-section-number">14.2</span> Limitations of simple linear models</a>
+  <li><a href="#the-rikz-dataset" id="toc-the-rikz-dataset" class="nav-link" data-scroll-target="#the-rikz-dataset"><span class="header-section-number">11.4.1</span> The RIKZ dataset</a></li>
+  <li><a href="#limitations-of-simple-linear-models" id="toc-limitations-of-simple-linear-models" class="nav-link" data-scroll-target="#limitations-of-simple-linear-models"><span class="header-section-number">11.4.2</span> Limitations of simple linear models</a></li>
+  <li><a href="#non-independence-of-observations" id="toc-non-independence-of-observations" class="nav-link" data-scroll-target="#non-independence-of-observations"><span class="header-section-number">11.4.3</span> Non-independence of observations</a></li>
+  <li><a href="#ways-to-deal-with-non-independence-in-the-data" id="toc-ways-to-deal-with-non-independence-in-the-data" class="nav-link" data-scroll-target="#ways-to-deal-with-non-independence-in-the-data"><span class="header-section-number">11.4.4</span> Ways to deal with non-independence in the data</a></li>
+  <li><a href="#random-intercept-model" id="toc-random-intercept-model" class="nav-link" data-scroll-target="#random-intercept-model"><span class="header-section-number">11.4.5</span> Random intercept model</a></li>
+  <li><a href="#random-intercept-slope-model" id="toc-random-intercept-slope-model" class="nav-link" data-scroll-target="#random-intercept-slope-model"><span class="header-section-number">11.4.6</span> Random intercept-slope model</a></li>
+  <li><a href="#random-effects-only-model" id="toc-random-effects-only-model" class="nav-link" data-scroll-target="#random-effects-only-model"><span class="header-section-number">11.4.7</span> Random effects only model</a></li>
+  <li><a href="#inspecting-model-fit" id="toc-inspecting-model-fit" class="nav-link" data-scroll-target="#inspecting-model-fit"><span class="header-section-number">11.4.8</span> Inspecting model fit</a></li>
+  </ul></li>
+  <li><a href="#deeply-nested-and-crossed-effects" id="toc-deeply-nested-and-crossed-effects" class="nav-link" data-scroll-target="#deeply-nested-and-crossed-effects"><span class="header-section-number">11.5</span> Deeply nested and crossed effects</a>
   <ul class="collapse">
-  <li><a href="#transformations-to-the-rescue" id="toc-transformations-to-the-rescue" class="nav-link" data-scroll-target="#transformations-to-the-rescue"><span class="header-section-number">14.2.1</span> Transformations to the rescue?</a></li>
-  <li><a href="#non-independence-of-observations" id="toc-non-independence-of-observations" class="nav-link" data-scroll-target="#non-independence-of-observations"><span class="header-section-number">14.2.2</span> Non-independence of observations</a></li>
-  <li><a href="#ways-to-deal-with-non-independence-in-the-data" id="toc-ways-to-deal-with-non-independence-in-the-data" class="nav-link" data-scroll-target="#ways-to-deal-with-non-independence-in-the-data"><span class="header-section-number">14.2.3</span> Ways to deal with non-independence in the data</a></li>
-  <li><a href="#random-intercept-model" id="toc-random-intercept-model" class="nav-link" data-scroll-target="#random-intercept-model"><span class="header-section-number">14.2.4</span> Random intercept model</a></li>
-  <li><a href="#random-intercept-slope-model" id="toc-random-intercept-slope-model" class="nav-link" data-scroll-target="#random-intercept-slope-model"><span class="header-section-number">14.2.5</span> Random intercept-slope model</a></li>
-  <li><a href="#random-effects-only-model" id="toc-random-effects-only-model" class="nav-link" data-scroll-target="#random-effects-only-model"><span class="header-section-number">14.2.6</span> Random effects only model</a></li>
-  <li><a href="#inspecting-model-fit" id="toc-inspecting-model-fit" class="nav-link" data-scroll-target="#inspecting-model-fit"><span class="header-section-number">14.2.7</span> Inspecting model fit</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">11.5.1</span> Example</a></li>
+  <li><a href="#checking-nested-versus-crossed-data" id="toc-checking-nested-versus-crossed-data" class="nav-link" data-scroll-target="#checking-nested-versus-crossed-data"><span class="header-section-number">11.5.2</span> Checking nested versus crossed data</a></li>
   </ul></li>
-  <li><a href="#deeply-nested-and-crossed-effects" id="toc-deeply-nested-and-crossed-effects" class="nav-link" data-scroll-target="#deeply-nested-and-crossed-effects"><span class="header-section-number">14.3</span> Deeply nested and crossed effects</a>
-  <ul class="collapse">
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">14.3.1</span> Example</a></li>
-  <li><a href="#checking-nested-versus-crossed-data" id="toc-checking-nested-versus-crossed-data" class="nav-link" data-scroll-target="#checking-nested-versus-crossed-data"><span class="header-section-number">14.3.2</span> Checking nested versus crossed data</a></li>
-  </ul></li>
-  <li><a href="#additional-readings" id="toc-additional-readings" class="nav-link" data-scroll-target="#additional-readings"><span class="header-section-number">14.4</span> Additional readings</a></li>
-  </ul></li>
+  <li><a href="#additional-readings" id="toc-additional-readings" class="nav-link" data-scroll-target="#additional-readings"><span class="header-section-number">11.6</span> Additional readings</a></li>
   </ul>
 </nav>
     </div>
@@ -401,8 +398,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </blockquote>
 </section>
-<section id="why-linear-mixed-models" class="level1" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> Why linear mixed models?</h1>
+<section id="why-linear-mixed-models" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="why-linear-mixed-models"><span class="header-section-number">11.2</span> Why linear mixed models?</h2>
 <p>Last class we discussed how to apply linear models to data (e.g., linear regression, ANOVA, etc.) to understand the relationship between predictor (i.e., independent) and response (i.e., dependent) variables. As a reminder, the usual assumptions are:</p>
 <ol type="1">
 <li>Normality of the errors</li>
@@ -411,8 +408,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Although one can model the distribution of the data differently (e.g., using transformations or GLMMs), serious violations of independence and equality of error variances can pose problems and result in biased parameter estimates and <span class="math inline">\(p\)</span>-values. Additionally, ecological and evolutionary data are often very messy, with a lot of noise, unequal sample sizes, and missing data. Thankfully, <strong>linear mixed effects models provide us with an estimation and inference framework which alleviates violations of these assumptions</strong>. Mixed effects models also allow us to better understand the sources of variation in the data; in quantitative genetics, for example, the goal of many analyses is to understand how much variation in a trait is additive, and this involves estimating what is called the <em>additive genetic variance</em> using a mixed effects model. Like linear models of other kinds, mixed effects models can be fit via maximum likelihood.</p>
 </section>
-<section id="fitting-lmms" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> Fitting LMMs</h1>
+<section id="fitting-lmms" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="fitting-lmms"><span class="header-section-number">11.3</span> Fitting LMMs</h2>
 <p>A linear mixed effects model is of the form</p>
 <p><span class="math display">\[\boldsymbol{y}_i = \boldsymbol{X}_i \boldsymbol{\beta} + \boldsymbol{Z}_i \boldsymbol{b}_i + \boldsymbol{\varepsilon}_i,\]</span></p>
 <p>where <span class="math inline">\(\boldsymbol{y}_i\)</span> is the <span class="math inline">\(n_i \times 1\)</span> response vector for observations in the <span class="math inline">\(i\)</span>th group (<span class="math inline">\(i = 1,\dots,M\)</span>). <span class="math inline">\(\boldsymbol{X}_i\)</span> is an <span class="math inline">\(n_i \times p\)</span> matrix of fixed effects for the observations in group <span class="math inline">\(i\)</span>, and <span class="math inline">\(\boldsymbol{\beta}\)</span> is a <span class="math inline">\(1 \times p\)</span> vector of fixed effects. Similarly, <span class="math inline">\(\boldsymbol{Z}\)</span> is a <span class="math inline">\(n_i \times q\)</span> matrix of <span class="math inline">\(q\)</span> random effects associated to the observations in group <span class="math inline">\(i\)</span>, and <span class="math inline">\(\boldsymbol{b}_i\)</span> is a <span class="math inline">\(q \times 1\)</span> vector of random coefficients for group <span class="math inline">\(i\)</span>. This is called the Laird-Ware form of the linear mixed model.</p>
@@ -421,18 +418,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The random effect coefficients <span class="math inline">\(b_{i1},\dots,b_{iq}\)</span> for group <span class="math inline">\(i\)</span> are assumed to be <span class="math inline">\(\text{Normal}(0,\psi_i^2)\)</span>. Furthermore, <span class="math inline">\(\text{Cov}(b_i,b_{i'}) = \psi_{ii'}\)</span> so that the random effects need not be independent of each other. In the more compact notation, <span class="math inline">\(\boldsymbol{b} \sim \text{Normal}(0,\boldsymbol{\Psi}).\)</span> Other distributions can be used to model variability in the random effects, but the choice of a Normal distribution has advantages which we will not get into here. In a similar spirit, to make estimation and inference of LMMs tractable, the errors <span class="math inline">\(\boldsymbol{\varepsilon}\)</span> are assumed to be <span class="math inline">\(\text{Normal}(0,\boldsymbol{\Lambda})\)</span>, where <span class="math inline">\(\boldsymbol{\Lambda}\)</span> is the matrix of error variances (on the diagonal) and co-variances (on the off-diagonal).</p>
 <p><strong>Importantly, we interested in random effects insofar as they can provide information and help form inferences about the distribution of response measurements at different levels. Because the random effects are unobserved, we must first estimate the fixed effects.</strong> The assumptions we have made about the random effects and error variances imply <span class="math inline">\(\boldsymbol{y}|\boldsymbol{b} \sim \text{Normal}(\boldsymbol{X} \boldsymbol{\beta}, \boldsymbol{\Sigma})\)</span>, where <span class="math inline">\(\boldsymbol{\Sigma} = \boldsymbol{Z} \boldsymbol{\Psi} \boldsymbol{Z}' + \boldsymbol{\Lambda}\)</span>. <em>Conditional on the random effects, the data are independent.</em> The log-likelihood for the data is</p>
 <p><span class="math display">\[\frac{1}{2} \ln |\boldsymbol{\Sigma}| - \frac{1}{2} (\boldsymbol{y}-\boldsymbol{X} \boldsymbol{\beta})'  \boldsymbol{\Sigma}^{-1} (\boldsymbol{y}-\boldsymbol{X} \boldsymbol{\beta}).\]</span></p>
-<section id="estimating-fixed-random-effects-with-boldsymbolsigma-known" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="estimating-fixed-random-effects-with-boldsymbolsigma-known"><span class="header-section-number">13.1</span> Estimating fixed, random effects with <span class="math inline">\(\boldsymbol{\Sigma}\)</span> known</h2>
+<section id="estimating-fixed-random-effects-with-boldsymbolsigma-known" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="estimating-fixed-random-effects-with-boldsymbolsigma-known"><span class="header-section-number">11.3.1</span> Estimating fixed, random effects with <span class="math inline">\(\boldsymbol{\Sigma}\)</span> known</h3>
 <p>Maximizing the log-likelihood with respect to <span class="math inline">\(\boldsymbol{\beta}\)</span> gives <span class="math inline">\(\boldsymbol{\hat{\beta}_{\text{MLE}}} = (\boldsymbol{X}' \boldsymbol{\Sigma}^{-1}\boldsymbol{X})^{-1} \boldsymbol{X}' \boldsymbol{\Sigma}^{-1} \boldsymbol{y}.\)</span> This, as in standard regression theory, is the best linear unbiased estimator (BLUE) of the fixed effects. In addition to the estimation of fixed effects, prediction<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> of random effects is often of interest. The best linear unbiased predictor (BLUP) of the random effects is <span class="math inline">\(\boldsymbol{\hat{u}} = \boldsymbol{\Psi}\boldsymbol{Z}'(\boldsymbol{Z} \boldsymbol{\Psi} \boldsymbol{Z}'+\boldsymbol{\Lambda})^{-1}(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{\hat{\beta}})\)</span>.</p>
 <div style="page-break-after: always;"></div>
 <p><em>Note</em>: the ML estimator of the random effects is biased, so Restricted ML Estimation (REML) is often used. It’s generally good to use REML when you are interested in the magnitude of the random effects variances, but do not do this when comparing models with different fixed effects.</p>
 </section>
-<section id="estimation-and-inference-when-boldsymbolsigma-is-unknown" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="estimation-and-inference-when-boldsymbolsigma-is-unknown"><span class="header-section-number">13.2</span> Estimation and inference when <span class="math inline">\(\boldsymbol{\Sigma}\)</span> is unknown</h2>
+<section id="estimation-and-inference-when-boldsymbolsigma-is-unknown" class="level3" data-number="11.3.2">
+<h3 data-number="11.3.2" class="anchored" data-anchor-id="estimation-and-inference-when-boldsymbolsigma-is-unknown"><span class="header-section-number">11.3.2</span> Estimation and inference when <span class="math inline">\(\boldsymbol{\Sigma}\)</span> is unknown</h3>
 <p>In the preceding discussion, we have assumed the variance-covariance matrices <span class="math inline">\(\boldsymbol{\Psi},\boldsymbol{\Lambda}\)</span>. This is rarely the case. Sometimes, modelers will specify variance-covariance matrices of a certain form (so that there are not so many parameters the model becomes impossible to fit). Otherwise, it is advisable to use methods that estimate the variance components from the data. In today’s lecture, we will have to estimate varience components to get a sense of how much random effects matter and shape variation in the data. The math that goes into correctly estimating varience components is quite complicated, but we’ll mention that an algorithm known as expectation-maximization can often be used.</p>
 </section>
-<section id="on-the-difference-between-fixed-and-random-effects" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="on-the-difference-between-fixed-and-random-effects"><span class="header-section-number">13.3</span> On the difference between fixed and random effects</h2>
+<section id="on-the-difference-between-fixed-and-random-effects" class="level3" data-number="11.3.3">
+<h3 data-number="11.3.3" class="anchored" data-anchor-id="on-the-difference-between-fixed-and-random-effects"><span class="header-section-number">11.3.3</span> On the difference between fixed and random effects</h3>
 <p>One of the most tricky things about mixed effects modeling is deciding what co-variates are “fixed” and which are “random” — sometimes, a co-variate can be both! The meaning of “fixed” and “random” can, ironically, be variable depending on in what context they are used, and who they are used by. As a rule of thumb, a random effect is one which is drawn from a population of effects and can be used to <em>combine information from different groups</em> to learn about the properties (e.g, the variance) of that distribution.</p>
 <p>For more on this, see</p>
 <ul>
@@ -442,10 +439,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="on-to-data-analysis" class="level1" data-number="14">
-<h1 data-number="14"><span class="header-section-number">14</span> On to data analysis!</h1>
-<section id="the-rikz-dataset" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="the-rikz-dataset"><span class="header-section-number">14.1</span> The RIKZ dataset</h2>
+<section id="on-to-data-analysis" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="on-to-data-analysis"><span class="header-section-number">11.4</span> On to data analysis!</h2>
+<section id="the-rikz-dataset" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="the-rikz-dataset"><span class="header-section-number">11.4.1</span> The RIKZ dataset</h3>
 <p>Throughout the lecture, we will be making use of the RIKZ dataset. The data are as follow: for each of 9 intertidal areas (denoted ‘Beaches’), the researchers sampled five sites (denoted ‘Sites’) and at each site they measured abiotic variables and the diversity of macro-fauna (e.g.&nbsp;aquatic invertebrates). Here, species richness refers to the total number of species found at a given site while NAP (i.e.&nbsp;Normal Amsterdams Peil) refers to the height of the sampling location relative to the mean sea level and represents the amount of food available for birds, etc. The data are described in more detail in Zuur et al.&nbsp;(2009).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rikz_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"rikz_data.csv"</span>)</span>
@@ -469,8 +466,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">Diagrammatic representation of the RIKZ dataset (modified from Zuur <em>et al.</em> (2009), Chapter 5)</figcaption>
 </figure>
 </div>
-<section id="challenge" class="level4" data-number="14.1.0.1">
-<h4 data-number="14.1.0.1" class="anchored" data-anchor-id="challenge"><span class="header-section-number">14.1.0.1</span> Challenge</h4>
+<section id="challenge" class="level4" data-number="11.4.1.1">
+<h4 data-number="11.4.1.1" class="anchored" data-anchor-id="challenge"><span class="header-section-number">11.4.1.1</span> Challenge</h4>
 <p>Now that you are experts at exploring data, work in groups to answer the following questions and get familiar with this dataset!</p>
 <ol type="1">
 <li><p>How many columns of data are there? How many rows of data? Are all the data columns classified correctly?</p></li>
@@ -547,8 +544,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="limitations-of-simple-linear-models" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="limitations-of-simple-linear-models"><span class="header-section-number">14.2</span> Limitations of simple linear models</h2>
+<section id="limitations-of-simple-linear-models" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="limitations-of-simple-linear-models"><span class="header-section-number">11.4.2</span> Limitations of simple linear models</h3>
 <p>Let’s go ahead and perform a linear regression to examine the relationship between species richness and NAP, pooling data across all beaches to see if it matches our expectation based on the graph.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Richness<span class="sc">~</span>NAP, <span class="at">data=</span>rikz_data)</span>
@@ -583,8 +580,8 @@ F-statistic: 20.66 on 1 and 43 DF,  p-value: 4.418e-05</code></pre>
 </div>
 </div>
 <p>The <strong>residual plot</strong> suggests that the homogeneity assumption is violated (increasing variance in the residuals with increasing fitted values). Similarly, the <strong>QQ plot</strong> suggests non-normality (points falling off of the dotted line). The <strong>scale-location plot</strong> shows us that the assumption of equal variance between groups (homoscedasticity) is violated, since the residuals are not spread equally along predictors, but instead the range of residuals is wider as the x-axis increases. Finally, <strong>residuals vs.&nbsp;leverage</strong> helps to identify influential data points on the model (e.g., outliers, but also non-outlier points that don’t follow the trend) – look for points with a high Cook’s distance, outside the dashed line(s) on the top-right or bottom-right. Lucky for us, there are no highly-influential points; in fact, we can barely see the Cook’s distance lines.</p>
-<section id="transformations-to-the-rescue" class="level3" data-number="14.2.1">
-<h3 data-number="14.2.1" class="anchored" data-anchor-id="transformations-to-the-rescue"><span class="header-section-number">14.2.1</span> Transformations to the rescue?</h3>
+<section id="transformations-to-the-rescue" class="level4" data-number="11.4.2.1">
+<h4 data-number="11.4.2.1" class="anchored" data-anchor-id="transformations-to-the-rescue"><span class="header-section-number">11.4.2.1</span> Transformations to the rescue?</h4>
 <p>Let’s try a third root transformation to see if that helps:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>model_3rd_root_transform <span class="ot">&lt;-</span> <span class="fu">lm</span>(Richness<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)<span class="sc">~</span>NAP, <span class="at">data=</span>rikz_data)</span>
@@ -596,12 +593,13 @@ F-statistic: 20.66 on 1 and 43 DF,  p-value: 4.418e-05</code></pre>
 </div>
 <p>A third-root transformation of the response variable (i.e.&nbsp;Richness) seems to alleviate our three problems. Nonetheless, for the analyses in this section, we will ignore violations of these assumptions and carry out the rest of the analysis with un-transformed data for the purpose of highlighting the fact that these data violate yet a key assumption, <em>independence of observations</em>.</p>
 </section>
-<section id="non-independence-of-observations" class="level3" data-number="14.2.2">
-<h3 data-number="14.2.2" class="anchored" data-anchor-id="non-independence-of-observations"><span class="header-section-number">14.2.2</span> Non-independence of observations</h3>
+</section>
+<section id="non-independence-of-observations" class="level3" data-number="11.4.3">
+<h3 data-number="11.4.3" class="anchored" data-anchor-id="non-independence-of-observations"><span class="header-section-number">11.4.3</span> Non-independence of observations</h3>
 <p>The species richness data come from multiple sites within multiple beaches. While each beach may be independent, sites within a beach are likely to have similar species richness due simply to their proximity within the same beach. In other words, observations among sites within a beach are <strong>not independent</strong>. Another way of saying this is that the data are <em>nested</em>. Nesting in this sense is a product of the experimental design (i.e., we chose to sample 5 sites within each beach) and not necessarily of the data itself. Other types of nested data include: sampling the same individual pre- and post-treatment or sampling them multiple times (i.e., repeated measures), or sampling multiple tissues from the same individuals.</p>
 </section>
-<section id="ways-to-deal-with-non-independence-in-the-data" class="level3" data-number="14.2.3">
-<h3 data-number="14.2.3" class="anchored" data-anchor-id="ways-to-deal-with-non-independence-in-the-data"><span class="header-section-number">14.2.3</span> Ways to deal with non-independence in the data</h3>
+<section id="ways-to-deal-with-non-independence-in-the-data" class="level3" data-number="11.4.4">
+<h3 data-number="11.4.4" class="anchored" data-anchor-id="ways-to-deal-with-non-independence-in-the-data"><span class="header-section-number">11.4.4</span> Ways to deal with non-independence in the data</h3>
 <ol type="1">
 <li>One way to account for the non-independence of observations would be to <em>run a separate analysis for each beach</em>. In this case, each analysis only has five observations to work with, and we have to run multiple tests. This means we run the risk of obtaining spuriously significant results by chance.</li>
 </ol>
@@ -675,8 +673,8 @@ F-statistic: 9.183 on 9 and 35 DF,  p-value: 5.645e-07</code></pre>
 </div>
 </div>
 </section>
-<section id="random-intercept-model" class="level3" data-number="14.2.4">
-<h3 data-number="14.2.4" class="anchored" data-anchor-id="random-intercept-model"><span class="header-section-number">14.2.4</span> Random intercept model</h3>
+<section id="random-intercept-model" class="level3" data-number="11.4.5">
+<h3 data-number="11.4.5" class="anchored" data-anchor-id="random-intercept-model"><span class="header-section-number">11.4.5</span> Random intercept model</h3>
 <p>To estimate the variance among beaches and account for the non-independence of sites within beaches, we include Beach as a <em>random effect</em> in our model. NAP remains a <em>fixed effect</em>. As such, we model a separate <span class="math inline">\(y\)</span>-intercept (i.e.&nbsp;Richness at NAP both = 0) for each beach and estimate the variance around this intercept. A small variance means that variances between beaches are small whereas a large variance means the opposite. We can run mixed-effects models using the <code>lmer</code> function from the <code>lme4</code> R package and obtain parameter estimates using the <code>lmerTest</code> package. The question we are now asking is: <em>What is the influence of NAP on species richness, accounting for the non-independence of sites within each beach?</em></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
@@ -737,8 +735,8 @@ NAP -0.164</code></pre>
 </div>
 <p>The thick black line corresponds to the fitted values associated with the fixed-effect component of the model. The thin coloured lines correspond to the fitted values estimated for each beach. As you can see, they all have separate intercepts, as expected. As the estimated variance of the random effect increases, these lines would become more spread out around the thick black line. If the variance was <span class="math inline">\(=0\)</span>, all the coloured lines would coincide with the thick black line.</p>
 </section>
-<section id="random-intercept-slope-model" class="level3" data-number="14.2.5">
-<h3 data-number="14.2.5" class="anchored" data-anchor-id="random-intercept-slope-model"><span class="header-section-number">14.2.5</span> Random intercept-slope model</h3>
+<section id="random-intercept-slope-model" class="level3" data-number="11.4.6">
+<h3 data-number="11.4.6" class="anchored" data-anchor-id="random-intercept-slope-model"><span class="header-section-number">11.4.6</span> Random intercept-slope model</h3>
 <p>The model above allows the intercept for each beach to vary around the population-level intercept. This means that each beach may differ in species richness, but how that respond to NAP remains the same across beaches. However, what if beaches don’t only vary in their mean richness, but the richness on each beach also varies in its response to NAP?</p>
 <p>In a standard regression, this would amount to including NAP, Beach and interaction effects in the model. Of course, including such fixed-effects here would consume way too many degrees of freedom and we already decided we don’t really care about differences between beaches <em>per se</em>. Thankfully, we can still allow beaches to vary in the response to NAP using a random intercept-slope model.</p>
 <p>We can fit the random intercept-slope model to these data using the code below.</p>
@@ -795,8 +793,8 @@ boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
 </div>
 </section>
-<section id="random-effects-only-model" class="level3" data-number="14.2.6">
-<h3 data-number="14.2.6" class="anchored" data-anchor-id="random-effects-only-model"><span class="header-section-number">14.2.6</span> Random effects only model</h3>
+<section id="random-effects-only-model" class="level3" data-number="11.4.7">
+<h3 data-number="11.4.7" class="anchored" data-anchor-id="random-effects-only-model"><span class="header-section-number">11.4.7</span> Random effects only model</h3>
 <p>Note that it is not always necessary to specify fixed effects, in the same way that it is not always necessary to specify random effects. For example, we could run the following model which would allow us to solely estimate the variation in species richness between beaches. Here, <code>1</code> is used as a placeholder to indicate no fixed effects are fitted.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mixed_model_NoFix <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness<span class="sc">~</span><span class="dv">1</span><span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>Beach), <span class="at">data=</span>rikz_data, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
@@ -840,8 +838,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
-<section id="inspecting-model-fit" class="level3" data-number="14.2.7">
-<h3 data-number="14.2.7" class="anchored" data-anchor-id="inspecting-model-fit"><span class="header-section-number">14.2.7</span> Inspecting model fit</h3>
+<section id="inspecting-model-fit" class="level3" data-number="11.4.8">
+<h3 data-number="11.4.8" class="anchored" data-anchor-id="inspecting-model-fit"><span class="header-section-number">11.4.8</span> Inspecting model fit</h3>
 <p>In previous lectures we emphasized how regression models seek the “best fit model” (that is: the one that maximizes the liklihood of the observed data under some parametric model, e.g., normal errors, for the generative process). But we need to be careful that the “best fit” might not be a “good fit” after all! To inspect model fit, we look to the <em>coefficient of determination</em>, or <span class="math inline">\(R^2\)</span>, which represents the percentage of variance in your data that is explained by your model. In simple linear models, the <span class="math inline">\(R^2\)</span> value is rather straightforward and included in the <code>summary</code> output. In a mixed model, this is slightly more complicated, as we now have to think about about variance explained by the fixed effects as well as random effects. Here, we introduce an extension to the concept of <span class="math inline">\(R^2\)</span>:</p>
 <ul>
 <li>Conditional <span class="math inline">\(R^2\)</span> (<span class="math inline">\(R_c^2\)</span>): Variance explained by both fixed and random effects</li>
@@ -867,8 +865,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Our model structure should be informed by our hypothesis of “reality”, and this provides one way to choose between models. But in cases where we are unsure, or trying to compete different hypotheses (e.g., trying to figure out whether the species richness and NAP relationship differ by beach), then just knowing that both models fit well isn’t good enough anymore — we need a way to determine which model is a better fit to the data, controlling for the number of parameters fitted. We will come back to this question in the next lecture when discussing model selection.</p>
 </section>
 </section>
-<section id="deeply-nested-and-crossed-effects" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="deeply-nested-and-crossed-effects"><span class="header-section-number">14.3</span> Deeply nested and crossed effects</h2>
+<section id="deeply-nested-and-crossed-effects" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="deeply-nested-and-crossed-effects"><span class="header-section-number">11.5</span> Deeply nested and crossed effects</h2>
 <p>Have a look back at the original diagram showing the layout of the RIKZ data and the dataset itself. Every site within each beach is associated with only one observation for each of the variables (e.g.&nbsp;species richness). As such, we used mixed-effects modeling to account for the variance among these five observations within each of the five beaches. But what about if each of those sites additionally included multiple samples (e.g.&nbsp;measurements of morphological traits of multiple individuals of a species), as in the diagram below?. We would the need to account for the variance both within sites and within beaches.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -885,8 +883,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <figcaption class="figure-caption">Diagrammatic representation of what the RIKZ dataset would look like if it were fully crossed (i.e., if every site occurred on every beach)</figcaption>
 </figure>
 </div>
-<section id="example" class="level3" data-number="14.3.1">
-<h3 data-number="14.3.1" class="anchored" data-anchor-id="example"><span class="header-section-number">14.3.1</span> Example</h3>
+<section id="example" class="level3" data-number="11.5.1">
+<h3 data-number="11.5.1" class="anchored" data-anchor-id="example"><span class="header-section-number">11.5.1</span> Example</h3>
 <p>We will illustrate deeply nested and crossed random effects in a single model using data from a greenhouse experiment conducted at UTM. The researchers were interested in understanding whether soil microbes collected within populations of invasive species can help a second generation of invasive plants perform better. This is called plant-soil feedbacks (PSF), in which plants influence the soil that they grow in, which in turn benefits future generations of the same species. The researchers were especially interested to see if PSF can occur even soils collected from the edge of the species’ range, at which the invader is still in the process of spreading.</p>
 <p>To do this, soil was collected from 14 sites in a subarctic region. These 14 sites were found in 3 main location: the town, the airport, and the regional studies centre, which was about 20 km away. At each site, soil was collected from within an existing population of invasive <em>Linaria vulgaris</em> (common toadflax) and about 2 meters away outside of the population. Then, soil was left live to preserve microbes, or sterilized. This produced four treatments:</p>
 <ol type="1">
@@ -1095,8 +1093,8 @@ invdd_stt:_  0.185 -0.707 -0.707  0.051</code></pre>
 <p>Notice we are now estimating 3 random-effect variance components. First, we are estimating the variance among seed sources, which explains the most residual variance among the random effects (<span class="math inline">\(=0.0001893\)</span>). We also estimate the variance between locations (<span class="math inline">\(=0.0001071\)</span>) and sites (<span class="math inline">\(=0.0001069\)</span>). Note that our random effects explained very little of the residual variance; for example, seed source only explained 2.2% of the variance after accounting for fixed effects.</p>
 <p>From the fixed effects, we see that the initial height of plants was a strong predictor of the final plant biomass. Additionally, the soil sterilization treatment (<code>sterile_status</code>) and the invasion history (<code>invasion_status</code>) had a significant effect on final biomass of the plant. In fact, the effect of invasion depended on the sterilization treatment (<code>invaded_status:sterile_status</code> interaction). While we will not go into the details of these results here<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, this example serves to illustrate how nested and crossed random effects are encoded.</p>
 </section>
-<section id="checking-nested-versus-crossed-data" class="level3" data-number="14.3.2">
-<h3 data-number="14.3.2" class="anchored" data-anchor-id="checking-nested-versus-crossed-data"><span class="header-section-number">14.3.2</span> Checking nested versus crossed data</h3>
+<section id="checking-nested-versus-crossed-data" class="level3" data-number="11.5.2">
+<h3 data-number="11.5.2" class="anchored" data-anchor-id="checking-nested-versus-crossed-data"><span class="header-section-number">11.5.2</span> Checking nested versus crossed data</h3>
 <p>You can use the <code>sjmisc</code> package to check whether groups are nested, fully crossed, or cross-classified (partially crossed). The recommendation is that you inspect your data first, and make sure you understand the nested and/or crossed design, and then check using the following functions:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjmisc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1121,8 +1119,8 @@ invdd_stt:_  0.185 -0.707 -0.707  0.051</code></pre>
 <p>It is very important to understand the experimental, study, or survey design, because this and this alone determines the random effects that should be included.</p>
 </section>
 </section>
-<section id="additional-readings" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="additional-readings"><span class="header-section-number">14.4</span> Additional readings</h2>
+<section id="additional-readings" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="additional-readings"><span class="header-section-number">11.6</span> Additional readings</h2>
 <ol type="1">
 <li>Zuur, A. <em>et al.</em> 2009. Mixed effects models and extensions in ecology with R. <em>Springer</em></li>
 <li>Douglas Bates, Martin Mächler, Ben Bolker, and Steve Walker. 2015. <a href="https://www.jstatsoft.org/article/view/v067i01">Fitting linear mixed-effects models using lme4</a>. <em>Journal of Statistical Software</em> 67: 1-48.</li>
@@ -1133,7 +1131,6 @@ invdd_stt:_  0.185 -0.707 -0.707  0.051</code></pre>
 </ol>
 
 
-</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
