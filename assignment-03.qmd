@@ -2,7 +2,7 @@
 
 For this assignment, we will be using the same `beaver1` dataset that we used in last week's assignment. Run the code below to create a categorical variable of the `activ` column, as we did for the last assignment. This will make dplyr recognize that there are only two levels of activity.
 
-```{r eval=FALSE}
+```{r eval=FALSE, message=F}
 library(tidyverse)
 beaver1_f <- beaver1 %>%
   mutate(factor_activ = factor(activ))

@@ -7,7 +7,7 @@ column. This will make dplyr recognize that there are only two
 levels of activity (0 and 1), rather than a continuous range 0-1,
 which will facilitate plotting.
 
-``` {r}
+``` {r eval=F, message=F}
 library(tidyverse)
 beaver1_f <- beaver1 %>%
   mutate(factor_activ = factor(activ))

@@ -1,7 +1,4 @@
----
-title: 'Assignment 4: Fixed and mixed effects models'
-output: pdf_document
----
+# Assignment 04
 
 **To submit this assignment, upload the full document to Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`.**
 
@@ -9,7 +6,7 @@ output: pdf_document
 
 Run the following code to load the CO2 dataset.
 
-```{r}
+```{r, message=F}
 library(tidyverse)
 library(car)
 library(lsmeans)

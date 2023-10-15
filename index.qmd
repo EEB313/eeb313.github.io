@@ -79,7 +79,7 @@ If you require accommodations for a disability, or have any accessibility concer
 
 ### Lecture schedule
 
- Week | Date   | Topic                                               | Instructor     |
+ Week  | Date   | Topic                                               | Instructor     |
 |------|--------|-----------------------------------------------------|----------------|
 | 1    | Sep 7  | Intro to course, programming, RStudio               | Vicki          | 
 | 2    | Sep 12 | R Markdown, project workflows                       | Vicki          |
@@ -91,10 +91,10 @@ If you require accommodations for a disability, or have any accessibility concer
 | 5    | Oct 03 | Introduction to statistical inference               | Mete           |
 | 5    | Oct 05 | Simple linear models and generalized linear models  | Mete           |
 | 6    | Oct 10 | Mixed models                                        | Mete           |
-| 6    | Oct 12 | Mixed models & model selection                      | Vicki/Mete     |
+| 6    | Oct 12 | Mixed models & model selection                      | Vicki          |
 | 7    | Oct 17 | Multivariate statistics                             | Jessie         |
 | 7    | Oct 19 | Intro to command line and GitHub                    | Mete/Vicki     |
-| 8    | Oct 24 | Model averaging & linear model review               | Mete           |
+| 8    | Oct 24 | More on LMs, GLMs, LMMs, and model selection!       | Mete           |
 | 8    | Oct 26 | Mathematical models in ecology and evolution I      | Mete           |
 | 9    | Oct 31 | Mathematical models in ecology and evolution II     | Mete           |
 | 9    | Nov 02 | Wrap-up, review                                     | Mete           |
@@ -114,7 +114,18 @@ You will find a list of recommended readings posted under "Resources". Since the
 
 ### Assessment schedule
 
-| Assignment                    | Type           | Submitted on      | Due date   | Marks ||-------------------------------|----------------|-------------------|------------|-------|| Basic R and dplyr             | Individual     | Quercus           | Sep 28     | 8     || Project proposal              | Group          | GitHub            | Oct 03     | 4     || dplyr and tidy data           | Individual     | Quercus           | Oct 05     | 8     || Data exploration              | Individual     | Quercus           | Oct 12     | 8     || LM, GLM, & LMM                | Individual     | Quercus           | Oct 19     | 8     || Multivariate and command line | Individual     | Quercus           | Oct 26     | 8     || Mid-project update            | Group          | GitHub            | Nov 02     | 6     || Challenge assignment          | Individual     | Quercus           | Nov 17     | 20    || Presentation                  | Group          | In-class          | Dec 05     | 10    || Final report                  | Group          | GitHub            | Dec 08     | 20    |
+| Assignment                                  | Type           | Submitted on      | Due date   | Marks |
+|---------------------------------------------|----------------|-------------------|------------|-------|
+| Basic R and dplyr                           | Individual     | Quercus           | Sep 28     | 8     |
+| Project proposal                            | Group          | GitHub            | Oct 03     | 4     |
+| dplyr and tidy data                         | Individual     | Quercus           | Oct 05     | 8     |
+| Data exploration                            | Individual     | Quercus           | Oct 12     | 8     |
+| LM, GLM, & LMM                              | Individual     | Quercus           | Oct 19     | 8     |
+| Multivariate and command line               | Individual     | Quercus           | Oct 26     | 8     |
+| Mid-project update                          | Group          | GitHub            | Nov 02     | 6     |
+| Challenge assignment                        | Individual     | Quercus           | Nov 17     | 20    |
+| Presentation                                | Group          | In-class          | Dec 05     | 10    |
+| Final report                                | Group          | GitHub            | Dec 08     | 20    |
 
 There are 100 marks in total. Your final course mark will be the sum of your assignment scores, which will be translated to a letter grade according to the [official grading scale](https://www.artsci.utoronto.ca/faculty-staff/teaching/teaching-learning-resources/academic-handbook#FinalMarks) of the Faculty of Arts and Science.
 

@@ -1,18 +1,18 @@
-# Model Selection
+# Model selection
 
 ## Lesson preamble
 
 > ### Learning objectives
 >
-> - Understand the difference between liklihood estimation/inference and model _selection_
-> - Develop familarity with common model selection approaches
-> - Understand intuion for and the use of common informatic theoretic model selection criteria
+> - Understand the difference between likelihood estimation/inference and model _selection_
+> - Develop familiarity with common model selection approaches
+> - Understand intuition for and the use of common information theoretic model selection criteria
 > - Perform model selection on the RIKZ data from last class
 > 
 > ### Lesson outline
 > 
 > - Brief intro to model selection (20 mins)
-> - Understanding informatic theoretic criteria (20 mins)
+> - Understanding information theoretic criteria (20 mins)
 > - Model selection of RIKZ dataset (40 mins)
 > - Model dredging and averaging (30 mins)
 > 
@@ -48,7 +48,7 @@ It should come as no surprise, since both estimation and inference involve decis
 
 - Suppose we regress $y$ on the 1st, 2nd, $\dots$, $p$th powers of a covariate $x$:
 
-\[ y = \beta_0 + \beta_1 x + \beta_2 x^2 + \cdots + \beta_p x^p. \]
+$$y = \beta_0 + \beta_1 x + \beta_2 x^2 + \cdots + \beta_p x^p.$$
 
 \vspace{12pt}
 
@@ -56,7 +56,7 @@ This gives rise to a sequence of models $\mathcal{M}_1,\mathcal{M}_2,\dots,\math
 
 - Suppose we would like to model the relationship between expression (i.e., the number of transcripts produced) of _each_ coding gene in the human genome and, say, height. If there are $p$ genes for which we have measurements and only $n \ll p$ observations, it is not possible to fit a linear model of the form
 
-\[ y_i = \beta_0 + \beta_1 x_{1i} + \dots + \beta_p x_{pi}. \]
+$$y_i = \beta_0 + \beta_1 x_{1i} + \dots + \beta_p x_{pi}.$$
 
 \vspace{12pt}
 
@@ -73,7 +73,7 @@ This gives rise to a sequence of models $\mathcal{M}_1,\mathcal{M}_2,\dots,\math
 
 Suppose we have data $y_1,\dots,y_n$ that are drawn from a distribution $f$ and a set of candidate models
 
-\[ \mathcal{M}_j = \{p_j(y|\theta_j)\}. \]
+$$\mathcal{M}_j = \{p_j(y|\theta_j)\}.$$
 
 \vspace{6pt}
 
@@ -81,17 +81,17 @@ It is possible under this setup to find the maximum likelihood estimators for ea
 
 The intuition and formula for the AIC is as follows. If $\hat{\theta}_{j,\text{MLE}}$ is the MLE for $\theta$ under model $\mathcal{M}_j$, then we can measure the distance between the ground truth (i.e., distribution $f$ of the data) and fitted model $\hat{p}_j = p_j(y|\hat{\theta}_{j,\text{MLE}})$ using a metric called the Kullback-Leibler divergence:
 
-\[ D_{KL}(p, \hat{p}_j) = \int p(y) \log p(y) \text{d} y - \int p(y) \log \hat{p_j}(y) \text{d} y. \]
+$$D_{KL}(p, \hat{p}_j) = \int p(y) \log p(y) \text{d} y - \int p(y) \log \hat{p_j}(y) \text{d} y.$$
 
 \vspace{6pt}
 
 **Minimizing the Kullback-Leibler divergence (distance) between the ground truth and density $j$ is a principled way to preform model selection, and forms the basis for the AIC.** Note that minimizing only involves the second integral, and we can estimate the integral with an average
 
-\[ \frac{1}{n} \log L(\hat{\theta}_{j,\text{MLE}}) = \frac{1}{n} \sum_{i=1}^n \log p(y_i|\hat{\theta}_{j,\text{MLE}}) \]
+$$\frac{1}{n} \log L(\hat{\theta}_{j,\text{MLE}}) = \frac{1}{n} \sum_{i=1}^n \log p(y_i|\hat{\theta}_{j,\text{MLE}})$$
 
 Importantly, AIC corrects for the fact this is an unbiased estimator of the divergence by adding $d_j/n$, where $d_j = \text{dim}(\mathcal{M}_j)$. This term is what penalizes models with a large number of parameters. So,
 
-\[ \text{AIC} = - 2 \log L(\hat{\theta}_{j,\text{MLE}}) + 2 d_j. \]
+$$\text{AIC} = - 2 \log L(\hat{\theta}_{j,\text{MLE}}) + 2 d_j.$$
 
 \vspace{6pt}
 
@@ -101,7 +101,7 @@ Notice we have multiplied the preceding quantities by $-2n$ to get the above exp
 
 It is sometimes convenient to, when sample sizes are small ($n < 40$ is a commonly used rule-of-thumb) use the following metric to choose between candidate models:
 
-\[ \text{AIC}_c = \text{AIC} + \frac{2d_j(d_j+1)}{n-d_j-1} \]
+$$\text{AIC}_c = \text{AIC} + \frac{2d_j(d_j+1)}{n-d_j-1}$$
 
 ### Stepwise and regularized regression
 

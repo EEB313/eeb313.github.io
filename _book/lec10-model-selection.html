@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.301">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lec00-rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="./lec10-model-selection.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Selection</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lec00-rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="./lec10-model-selection.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -227,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lec10-model-selection.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Selection</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./assignment-04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Assignment 4: Fixed and mixed effects models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Assignment 04</span></span></a>
   </div>
 </li>
       </ul>
@@ -364,15 +364,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <h3 id="learning-objectives" data-number="12.1.1" class="anchored"><span class="header-section-number">12.1.1</span> Learning objectives</h3>
 <ul>
-<li>Understand the difference between liklihood estimation/inference and model <em>selection</em></li>
-<li>Develop familarity with common model selection approaches</li>
-<li>Understand intuion for and the use of common informatic theoretic model selection criteria</li>
+<li>Understand the difference between likelihood estimation/inference and model <em>selection</em></li>
+<li>Develop familiarity with common model selection approaches</li>
+<li>Understand intuition for and the use of common informaton theoretic model selection criteria</li>
 <li>Perform model selection on the RIKZ data from last class</li>
 </ul>
 <h3 id="lesson-outline" data-number="12.1.2" class="anchored"><span class="header-section-number">12.1.2</span> Lesson outline</h3>
 <ul>
 <li>Brief intro to model selection (20 mins)</li>
-<li>Understanding informatic theoretic criteria (20 mins)</li>
+<li>Understanding information theoretic criteria (20 mins)</li>
 <li>Model selection of RIKZ dataset (40 mins)</li>
 <li>Model dredging and averaging (30 mins)</li>
 </ul>
@@ -397,12 +397,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Hypothesis testing is a kind of model selection. For example, for data <span class="math inline">\(x_1,\dots,x_n \sim f(x|\theta)\)</span>, testing <span class="math inline">\(H_0 \colon \theta = \theta_0\)</span> vs <span class="math inline">\(H_1 \colon \theta \neq \theta_0\)</span> is equivalent to choosing between models <span class="math inline">\(\mathcal{M}_0 \colon f(x|\theta)\)</span> and <span class="math inline">\(\mathcal{M}_1 \colon f(x|\theta_0)\)</span>.</p></li>
 <li><p>Suppose we regress <span class="math inline">\(y\)</span> on the 1st, 2nd, <span class="math inline">\(\dots\)</span>, <span class="math inline">\(p\)</span>th powers of a covariate <span class="math inline">\(x\)</span>:</p></li>
 </ul>
-<p>[ y = _0 + _1 x + _2 x^2 + + _p x^p.&nbsp;]</p>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x + \beta_2 x^2 + \cdots + \beta_p x^p.\]</span></p>
 <p>This gives rise to a sequence of models <span class="math inline">\(\mathcal{M}_1,\mathcal{M}_2,\dots,\mathcal{M}_p\)</span> of the data generative process. Which model is the best description of the data? Although the full model is more flexible in that it has more parameters than, say, the model in which all second and higher order terms are <span class="math inline">\(=0\)</span>, it is more prone to overfitting. Choosing between a sequence of nested linear models like this is a classic model selection problem.</p>
 <ul>
 <li>Suppose we would like to model the relationship between expression (i.e., the number of transcripts produced) of <em>each</em> coding gene in the human genome and, say, height. If there are <span class="math inline">\(p\)</span> genes for which we have measurements and only <span class="math inline">\(n \ll p\)</span> observations, it is not possible to fit a linear model of the form</li>
 </ul>
-<p>[ y_i = _0 + <em>1 x</em>{1i} + + <em>p x</em>{pi}. ]</p>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1 x_{1i} + \dots + \beta_p x_{pi}.\]</span></p>
 <p>(The reason is that there are infinitely many solutions to the likelihood maximization problem.) In this case, we might want to select a subset of the covariates which best explain the available data. Of <span class="math inline">\(x_1,\dots,x_p\)</span>, which are most informative? This too is a kind of model selection problem. We will discuss methods to do “regularized” regression and feature selection (e.g., ridge and LASSO regression) today.</p>
 </section>
 <section id="common-model-selection-techniques" class="level2" data-number="12.4">
@@ -416,19 +416,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-akaike-information-criterion-aic" class="level3" data-number="12.4.1">
 <h3 data-number="12.4.1" class="anchored" data-anchor-id="the-akaike-information-criterion-aic"><span class="header-section-number">12.4.1</span> The Akaike information criterion (AIC)</h3>
 <p>Suppose we have data <span class="math inline">\(y_1,\dots,y_n\)</span> that are drawn from a distribution <span class="math inline">\(f\)</span> and a set of candidate models</p>
-<p>[ _j = {p_j(y|_j)}. ]</p>
+<p><span class="math display">\[\mathcal{M}_j = \{p_j(y|\theta_j)\}.\]</span></p>
 <p>It is possible under this setup to find the maximum likelihood estimators for each of the candidate models; it is, however, difficult to compare these models in that the parameters underlying each model might not match (i.e., the models may not be nested). The <em>Akaike information criterion</em> overcomes this issue, and despite having a lengthy and complicated derivation, is a metric which balances two things: 1) the goodness-of-fit of the model and 2) the number of parameters fitted.</p>
 <p>The intuition and formula for the AIC is as follows. If <span class="math inline">\(\hat{\theta}_{j,\text{MLE}}\)</span> is the MLE for <span class="math inline">\(\theta\)</span> under model <span class="math inline">\(\mathcal{M}_j\)</span>, then we can measure the distance between the ground truth (i.e., distribution <span class="math inline">\(f\)</span> of the data) and fitted model <span class="math inline">\(\hat{p}_j = p_j(y|\hat{\theta}_{j,\text{MLE}})\)</span> using a metric called the Kullback-Leibler divergence:</p>
-<p>[ D_{KL}(p, _j) = p(y) p(y) y - p(y) (y) y. ]</p>
+<p><span class="math display">\[D_{KL}(p, \hat{p}_j) = \int p(y) \log p(y) \text{d} y - \int p(y) \log \hat{p_j}(y) \text{d} y.\]</span></p>
 <p><strong>Minimizing the Kullback-Leibler divergence (distance) between the ground truth and density <span class="math inline">\(j\)</span> is a principled way to preform model selection, and forms the basis for the AIC.</strong> Note that minimizing only involves the second integral, and we can estimate the integral with an average</p>
-<p>[ L(<em>{j,}) = </em>{i=1}^n p(y_i|_{j,}) ]</p>
+<p><span class="math display">\[\frac{1}{n} \log L(\hat{\theta}_{j,\text{MLE}}) = \frac{1}{n} \sum_{i=1}^n \log p(y_i|\hat{\theta}_{j,\text{MLE}})\]</span></p>
 <p>Importantly, AIC corrects for the fact this is an unbiased estimator of the divergence by adding <span class="math inline">\(d_j/n\)</span>, where <span class="math inline">\(d_j = \text{dim}(\mathcal{M}_j)\)</span>. This term is what penalizes models with a large number of parameters. So,</p>
-<p>[ = - 2 L(_{j,}) + 2 d_j. ]</p>
+<p><span class="math display">\[\text{AIC} = - 2 \log L(\hat{\theta}_{j,\text{MLE}}) + 2 d_j.\]</span></p>
 <p>Notice we have multiplied the preceding quantities by <span class="math inline">\(-2n\)</span> to get the above expression; this does not change anything, and is largely for historical reasons. Based on the AIC expression, it is clear 1) the higher the likelihood, the lower the AIC; 2) introducing more parameters into the model without changing the likelihood results in a greater value for the AIC. The balance between goodness-of-fit (likelihood) and the number of parameters (the potential to overfit) is what AIC tries to optimize in choosing between candidate models. As we have shown here, that balance is struck by minimizing the distance between candidate models and the ground truth while correcting for bias introduced by having models of different dimensions.</p>
 <section id="textaic_c-for-small-sample-sizes" class="level4" data-number="12.4.1.1">
 <h4 data-number="12.4.1.1" class="anchored" data-anchor-id="textaic_c-for-small-sample-sizes"><span class="header-section-number">12.4.1.1</span> <span class="math inline">\(\text{AIC}_c\)</span> for small sample sizes</h4>
 <p>It is sometimes convenient to, when sample sizes are small (<span class="math inline">\(n &lt; 40\)</span> is a commonly used rule-of-thumb) use the following metric to choose between candidate models:</p>
-<p>[ _c = + ]</p>
+<p><span class="math display">\[\text{AIC}_c = \text{AIC} + \frac{2d_j(d_j+1)}{n-d_j-1}\]</span></p>
 </section>
 </section>
 <section id="stepwise-and-regularized-regression" class="level3" data-number="12.4.2">
@@ -496,7 +496,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">-10.0</td>
-<td style="text-align: right;">-9.421078</td>
+<td style="text-align: right;">-9.107088</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">0.0</td>
@@ -504,23 +504,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: right;">2.5</td>
-<td style="text-align: right;">1.396804</td>
+<td style="text-align: right;">3.501951</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">5.0</td>
-<td style="text-align: right;">3.349413</td>
+<td style="text-align: right;">4.175641</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">10.0</td>
-<td style="text-align: right;">8.164676</td>
+<td style="text-align: right;">9.576833</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">25.0</td>
-<td style="text-align: right;">24.244691</td>
+<td style="text-align: right;">25.995149</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">50.0</td>
-<td style="text-align: right;">49.393215</td>
+<td style="text-align: right;">50.292848</td>
 </tr>
 </tbody>
 </table>

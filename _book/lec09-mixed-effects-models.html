@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.301">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -227,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lec10-model-selection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Selection</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./assignment-04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Assignment 4: Fixed and mixed effects models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Assignment 04</span></span></a>
   </div>
 </li>
       </ul>
@@ -463,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="RIKZ_data.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Diagrammatic representation of the RIKZ dataset (modified from Zuur <em>et al.</em> (2009), Chapter 5)</figcaption><p></p>
+<figcaption class="figure-caption">Diagrammatic representation of the RIKZ dataset (modified from Zuur <em>et al.</em> (2009), Chapter 5)</figcaption>
 </figure>
 </div>
 <section id="challenge" class="level4" data-number="11.4.1.1">
@@ -871,7 +871,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="RIKZ_data_DeepNest.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Diagrammatic representation of what the RIKZ data would look like if it were more deeply nested (i.e., if each site had multiple samples taken)</figcaption><p></p>
+<figcaption class="figure-caption">Diagrammatic representation of what the RIKZ data would look like if it were more deeply nested (i.e., if each site had multiple samples taken)</figcaption>
 </figure>
 </div>
 <p>Thankfully, <code>lmer</code> allows us to do this quite easily. To account for variation within sites <em>and</em> within beaches, we would need to modify our existing random effect term. We would write this as <code>(1|Beach/Site)</code>, which means “Site nested within beach”. This expands to — and can also be written as <code>(1|Beach) + (1|Beach:Site)</code>. Thus, we are modeling a separate intercept for every beach and for every site within every beach.</p>
@@ -880,7 +880,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="RIKZ_data_Crossed.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Diagrammatic representation of what the RIKZ dataset would look like if it were fully crossed (i.e., if every site occurred on every beach)</figcaption><p></p>
+<figcaption class="figure-caption">Diagrammatic representation of what the RIKZ dataset would look like if it were fully crossed (i.e., if every site occurred on every beach)</figcaption>
 </figure>
 </div>
 <section id="example" class="level3" data-number="11.5.1">
@@ -1383,7 +1383,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./lec10-model-selection.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model Selection</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
