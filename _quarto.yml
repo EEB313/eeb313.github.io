@@ -22,6 +22,7 @@ book:
       - lec08-linear-models.qmd
       - lec09-mixed-effects-models.qmd
       - lec10-model-selection.qmd
+      - lec11-multivariate-stats.qmd
     - part: "Assignments"
       chapters:
       - assignment-01.qmd
