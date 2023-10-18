@@ -321,21 +321,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lesson-intro" id="toc-lesson-intro" class="nav-link active" data-scroll-target="#lesson-intro"><span class="header-section-number">13.1</span> Lesson intro</a>
+  <li><a href="#multivariate-statistics" id="toc-multivariate-statistics" class="nav-link active" data-scroll-target="#multivariate-statistics"><span class="header-section-number">14</span> Multivariate Statistics</a>
   <ul class="collapse">
-  <li><a href="#lesson-outline" id="toc-lesson-outline" class="nav-link" data-scroll-target="#lesson-outline"><span class="header-section-number">13.1.1</span> Lesson outline</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives"><span class="header-section-number">13.1.2</span> Learning objectives</a></li>
-  <li><a href="#a-bit-of-theory1" id="toc-a-bit-of-theory1" class="nav-link" data-scroll-target="#a-bit-of-theory1"><span class="header-section-number">13.1.3</span> A bit of theory</a></li>
+  <li><a href="#lesson-intro" id="toc-lesson-intro" class="nav-link" data-scroll-target="#lesson-intro"><span class="header-section-number">14.1</span> Lesson intro</a>
+  <ul class="collapse">
+  <li><a href="#a-bit-of-theory1" id="toc-a-bit-of-theory1" class="nav-link" data-scroll-target="#a-bit-of-theory1"><span class="header-section-number">14.1.1</span> A bit of theory</a></li>
   </ul></li>
-  <li><a href="#lets-practice-toy-example" id="toc-lets-practice-toy-example" class="nav-link" data-scroll-target="#lets-practice-toy-example"><span class="header-section-number">13.2</span> Let’s practice: toy example</a>
+  <li><a href="#lets-practice-toy-example" id="toc-lets-practice-toy-example" class="nav-link" data-scroll-target="#lets-practice-toy-example"><span class="header-section-number">14.2</span> Let’s practice: toy example</a>
   <ul class="collapse">
-  <li><a href="#a-note-on-distance-matrices" id="toc-a-note-on-distance-matrices" class="nav-link" data-scroll-target="#a-note-on-distance-matrices"><span class="header-section-number">13.2.1</span> A note on distance matrices</a></li>
-  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">13.2.2</span> PCA</a></li>
-  <li><a href="#pcoa" id="toc-pcoa" class="nav-link" data-scroll-target="#pcoa"><span class="header-section-number">13.2.3</span> PCoA</a></li>
+  <li><a href="#a-note-on-distance-matrices" id="toc-a-note-on-distance-matrices" class="nav-link" data-scroll-target="#a-note-on-distance-matrices"><span class="header-section-number">14.2.1</span> A note on distance matrices</a></li>
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">14.2.2</span> PCA</a></li>
+  <li><a href="#pcoa" id="toc-pcoa" class="nav-link" data-scroll-target="#pcoa"><span class="header-section-number">14.2.3</span> PCoA</a></li>
   </ul></li>
-  <li><a href="#lets-practice-real-life-example" id="toc-lets-practice-real-life-example" class="nav-link" data-scroll-target="#lets-practice-real-life-example"><span class="header-section-number">13.3</span> Let’s practice: real life example</a>
+  <li><a href="#lets-practice-real-life-example" id="toc-lets-practice-real-life-example" class="nav-link" data-scroll-target="#lets-practice-real-life-example"><span class="header-section-number">14.3</span> Let’s practice: real life example</a>
   <ul class="collapse">
-  <li><a href="#multicollinearity" id="toc-multicollinearity" class="nav-link" data-scroll-target="#multicollinearity"><span class="header-section-number">13.3.1</span> Multicollinearity</a></li>
+  <li><a href="#multicollinearity" id="toc-multicollinearity" class="nav-link" data-scroll-target="#multicollinearity"><span class="header-section-number">14.3.1</span> Multicollinearity</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -360,15 +361,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car) <span class="co"># VIF </span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify) <span class="co"># fancy biplots</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wesanderson) <span class="co"># fancy colours</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan) <span class="co">#  tools for diversity analysis, ordination, calculating dissimilarity and descriptive community ecology</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="lesson-intro" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="lesson-intro"><span class="header-section-number">13.1</span> Lesson intro</h2>
+<blockquote class="blockquote">
+<h3 id="learning-objectives" data-number="13.0.1" class="anchored"><span class="header-section-number">13.0.1</span> Learning objectives</h3>
+<ul>
+<li>Learn conceptual theory behind common multivariate techniques</li>
+<li>Learn how to run and interpret the output from PCA and PCoA</li>
+<li>Learn how to assess multicollinearity</li>
+<li>Be able to apply the above techniques on real-world data</li>
+<li>Your types of data and biological questions drive your types of statistical analysis</li>
+<li><strong>Recognize that the choices required in a statistical pipeline can drastically affect your results, but there is no one right way of analyzing your data</strong></li>
+</ul>
+</blockquote>
+<blockquote class="blockquote">
+<h3 id="lesson-outline" data-number="13.0.2" class="anchored"><span class="header-section-number">13.0.2</span> Lesson outline</h3>
+<ul>
+<li>Examples of multivariate statistics using well-behaved data: PCA and PCoA</li>
+<li>Discuss caveats and analytically choices embedded in PCA and PCoA</li>
+<li>Work through multivariate analysis of soil invasion data!</li>
+</ul>
+</blockquote>
+<blockquote class="blockquote">
+<h3 id="required-packages" data-number="13.0.3" class="anchored"><span class="header-section-number">13.0.3</span> Required packages</h3>
+<ul>
+<li><code>tidyverse</code></li>
+<li><code>car</code></li>
+<li><code>ggfortify</code></li>
+<li><code>wesanderson</code></li>
+<li><code>vegan</code></li>
+</ul>
+</blockquote>
+<section id="multivariate-statistics" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Multivariate Statistics</h1>
+<section id="lesson-intro" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="lesson-intro"><span class="header-section-number">14.1</span> Lesson intro</h2>
 <p>Most things in the natural world are inter-related and correlated, where many trends and observations tend to change in a predictable way together. This is personally one of the things that I find exciting about biology–the sheer complexity of interactions in natural systems.</p>
 <p>But this also makes our lives as scientists challenging, because we then have to distill, what is sometimes called a “causal soup”, into variables of interest and then figure out a meaningful analysis that can tease apart which effects came from where.</p>
 <p>And this is where it gets complicated—how do we accurately represent the true complex and multidimensional nature of ecological systems without breaking our brains?</p>
@@ -378,34 +403,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In contrast, multivariate statistics is a family of statistical tools used to to handle situations where the predictor and/or the response variables come in sets, allowing us to distill through some of that correlated (and sometimes redundant) information and to analyze these variables simultaneously, as they should be.</p>
 <p>Unfortunately (?), it is not within the scope of this class (or even this course!) to teach all of this. Multivariate statistics area large discipline in their own right. They are a flexible tool with a lot of variations - which can make it challenging to choose the correct technique for an analysis.</p>
 <p>Today, we will focus on a couple of the most common techniques that you are likely to come across in the papers you read and/or use in your own work. This is a quick overview and we necessarily have to have to skip over some of the details—if want to know more or have a specific question related to data, we are happy provide readings or to chat during office hours.</p>
-<section id="lesson-outline" class="level3" data-number="13.1.1">
-<h3 data-number="13.1.1" class="anchored" data-anchor-id="lesson-outline"><span class="header-section-number">13.1.1</span> Lesson outline</h3>
-<ul>
-<li><p>Examples of multivariate statistics using well-behaved data</p>
-<ul>
-<li><p>PCA and PCoA</p></li>
-<li><p>Discuss caveats and analytically choices embedded in these methods</p></li>
-</ul></li>
-<li><p>Work through an analysis of real-world data</p>
-<ul>
-<li><p>Assess multicollinearity</p></li>
-<li><p>PCA</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="learning-objectives" class="level3" data-number="13.1.2">
-<h3 data-number="13.1.2" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">13.1.2</span> Learning objectives</h3>
-<ul>
-<li><p>Learn conceptual theory behind common multivariate techniques</p></li>
-<li><p>Learn how to run and interpret the output from PCA and PCoA</p></li>
-<li><p>Learn how to assess multicollinearity</p></li>
-<li><p>Be able to apply the above techniques on real-world data</p></li>
-<li><p>Your types of data and biological questions drive your types of statistical analysis</p></li>
-<li><p><strong>Recognize that the choices required in a statistical pipeline can drastically affect your results, but there is no one right way of analyzing your data</strong></p></li>
-</ul>
-</section>
-<section id="a-bit-of-theory1" class="level3" data-number="13.1.3">
-<h3 data-number="13.1.3" class="anchored" data-anchor-id="a-bit-of-theory1"><span class="header-section-number">13.1.3</span> A bit of theory<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h3>
+<section id="a-bit-of-theory1" class="level3" data-number="14.1.1">
+<h3 data-number="14.1.1" class="anchored" data-anchor-id="a-bit-of-theory1"><span class="header-section-number">14.1.1</span> A bit of theory<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h3>
 <p>Multivariate statistics roughly split into unconstrained vs constrained ordination techniques.</p>
 <p>Unconstrained ordinations have no a priori groupings or relationships in the variables or observations. Common examples include: PCA, PCoA, cluster analysis, correspondence analysis (CA), factor analysis and NMDS. We will focus on this broad category today.</p>
 <p>Constrained ordinations specify a priori groupings. Examples include discriminant analysis, canonical variate analysis, canonical correlation analysis, and redundancy analysis.</p>
@@ -416,12 +415,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>For more details see <a href="https://link.springer.com/content/pdf/10.1007/978-1-4419-7976-6.pdf">this</a> chapter in Borcard, D., Gillet, F. and Legendre, P. 2011. <em>Numerical Ecology with R.</em></p>
 </section>
 </section>
-<section id="lets-practice-toy-example" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="lets-practice-toy-example"><span class="header-section-number">13.2</span> Let’s practice: toy example</h2>
+<section id="lets-practice-toy-example" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="lets-practice-toy-example"><span class="header-section-number">14.2</span> Let’s practice: toy example</h2>
 <p>For this section we will be using soil chemistry data from the <code>vegan</code> library.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(varechem)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(varechem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(varechem)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(varechem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      N    P     K    Ca    Mg    S    Al   Fe    Mn   Zn  Mo Baresoil Humdepth
 18 19.8 42.1 139.9 519.4  90.0 32.3  39.0 40.9  58.1  4.5 0.3     43.9      2.2
@@ -438,7 +437,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 23 2.7
 19 2.7</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(varechem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(varechem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   24 obs. of  14 variables:
  $ N       : num  19.8 13.4 20.2 20.6 23.8 22.8 26.6 24.2 29.8 28.1 ...
@@ -458,17 +457,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>This data frame is composed of 24 rows that correspond to different sites and 14 columns, which correspond to the different chemicals measured at each site.</p>
-<section id="a-note-on-distance-matrices" class="level3" data-number="13.2.1">
-<h3 data-number="13.2.1" class="anchored" data-anchor-id="a-note-on-distance-matrices"><span class="header-section-number">13.2.1</span> A note on distance matrices</h3>
+<section id="a-note-on-distance-matrices" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="a-note-on-distance-matrices"><span class="header-section-number">14.2.1</span> A note on distance matrices</h3>
 <p>Many multivariate methods rely on being able to represent your observations as being more or less similar to each other (similarities or distances). This makes, because if you’re trying to group observations by variance along an axis, you need to know how far apart each observation is from other observations.</p>
 <p>This is easy to do (and visualize) with quantitative data—a distance is just the numeric difference between the observations along an axis. To deal with negative numbers and multiple dimensions, rather than subtracting one value the other, we instead compute <strong>euclidean distances</strong>.</p>
 <p>For visualization, let’s compute the euclidean distances between the first four soil chemicals. We will use the <code>vegdist</code> function in <code>vegan</code><em>.</em> <code>vegdist</code> is handy because it allows us to specify which type of distance matrix we want to use.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>?vegdist</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># let's just look at the first column</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>euclidean.distance <span class="ot">&lt;-</span> <span class="fu">vegdist</span>(varechem[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">method=</span><span class="st">"euclidean"</span>) </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lets see it </span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>euclidean.distance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>?vegdist</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># let's just look at the first column</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>euclidean.distance <span class="ot">&lt;-</span> <span class="fu">vegdist</span>(varechem[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">method=</span><span class="st">"euclidean"</span>) </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lets see it </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>euclidean.distance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          18        15        24        27        23        19        22
 15 165.14239                                                            
@@ -573,8 +572,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Another really common type of distance matrix is the Gower distance, which can handle categorical and mixed data, and so is very useful. For more detail on distance matrices read <a href="https://chrischizinski.github.io/snr_r_notebooks/distancematrices/">this</a>.</p>
 <p>Okay, now we’re ready to do some statistics!!</p>
 </section>
-<section id="pca" class="level3" data-number="13.2.2">
-<h3 data-number="13.2.2" class="anchored" data-anchor-id="pca"><span class="header-section-number">13.2.2</span> PCA</h3>
+<section id="pca" class="level3" data-number="14.2.2">
+<h3 data-number="14.2.2" class="anchored" data-anchor-id="pca"><span class="header-section-number">14.2.2</span> PCA</h3>
 <p>One of the most common (unconstrained) ordination techniques used in EEB is the <em>Principle components analysis</em> (PCA). A PCA seeks to find a new coordinate system (PC axes) that best accounts for the variation in a multivariate data space, thus reducing dimensionality in the process but still accounting for as much of the original variation as possible. Critically, a PCA assumes a linear relationship between your variables, can only take quantitative data, and requires more rows than columns in the data itself.</p>
 <p>The procedure to conduct a PCA is as follows:</p>
 <ol type="1">
@@ -583,7 +582,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Let’s visualize this (but in less dimensions because we are human). One way to do this is with a <code>pairs</code> plot in base <code>R</code>, which plots the relationships between all variables (columns) as a scatter plot.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(varechem[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]) <span class="co">#only the first 4 columns for simplicity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(varechem[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]) <span class="co">#only the first 4 columns for simplicity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="lec11-multivariate-stats_files/figure-html/visualize the correlations-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -597,11 +596,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Okay, let’s work through some of the details in an example.</p>
 <p>We will use the function <code>prcomp</code>. At its most basic, <code>prcomp</code> takes your data and then you specify if you want to <code>scale = TRUE/FALSE</code>. The scale command specifies whether you want to run the pca on a correlation matrix or a covariance matrix. This sounds complex but it boils down to a simple idea. Choosing <code>scale = TRUE</code> means you are selecting a correlation matrix which standardizes your data to have unit variance ie puts all your variables on the same scale. Choose this option if your data contains multiple types of units.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>varechem.pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(varechem, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>varechem.pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(varechem, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Phew, that wasn’t too bad. Let’s take a look at our varechem.pca object</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(varechem.pca) <span class="co"># this is ugly becuase of the linebreaks, look at in console, it's easier</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(varechem.pca) <span class="co"># this is ugly becuase of the linebreaks, look at in console, it's easier</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Importance of components:
                           PC1    PC2    PC3     PC4     PC5     PC6     PC7
@@ -617,7 +616,7 @@ Cumulative Proportion  0.96185 0.9740 0.98473 0.99082 0.99581 0.9983 1.00000</co
 <p>This gives us a table <em>summary</em> of variance explained by each axes. <code>R</code> even did the math for us and showed cumulative variance explained as we move to the higher dimensions, so convenient! We see that the first two PC axes already explained close to 60% of the variation of the data. But it doesn’t give us any information about our variables or sites!</p>
 <p>Let’s have a look at this object in another way.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(varechem.pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(varechem.pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 5
  $ sdev    : num [1:14] 2.278 1.787 1.298 1.034 0.903 ...
@@ -643,7 +642,7 @@ Cumulative Proportion  0.96185 0.9740 0.98473 0.99082 0.99581 0.9983 1.00000</co
 </ul>
 <p>To extract items from a list, use the $ notation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>varechem.pca<span class="sc">$</span>x <span class="co"># this gives us the particular location (ie the coordinates) of each of our sites in the multidimensional space formed by the PC axes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>varechem.pca<span class="sc">$</span>x <span class="co"># this gives us the particular location (ie the coordinates) of each of our sites in the multidimensional space formed by the PC axes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           PC1         PC2          PC3         PC4          PC5         PC6
 18  0.13222328  1.70101442 -0.279475522 -0.47325693  0.103821307 -0.97013110
@@ -721,7 +720,7 @@ Cumulative Proportion  0.96185 0.9740 0.98473 0.99082 0.99581 0.9983 1.00000</co
 11 -0.044201689 -0.01970105
 21 -0.320691780  0.11931958</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>varechem.pca<span class="sc">$</span>rotation <span class="co"># this tells us which of our soil chemicals are contributing most strongly to each PC axis (ie which variables are being summarized by each newly created PC axis)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>varechem.pca<span class="sc">$</span>rotation <span class="co"># this tells us which of our soil chemicals are contributing most strongly to each PC axis (ie which variables are being summarized by each newly created PC axis)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 PC1         PC2         PC3         PC4          PC5
 N         0.09462709  0.12435859 -0.16204826  0.79318367 -0.351576656
@@ -772,7 +771,7 @@ pH       -0.406958380  0.04733921 -0.12013250  0.265236656</code></pre>
 </div>
 <p>We can interpret these outputs directly, specifically the rotations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>varechem.pca<span class="sc">$</span>rotation[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="co"># let's just look examine the first 4 PC axes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>varechem.pca<span class="sc">$</span>rotation[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="co"># let's just look examine the first 4 PC axes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 PC1         PC2         PC3         PC4
 N         0.09462709  0.12435859 -0.16204826  0.79318367
@@ -795,7 +794,7 @@ pH        0.16613845 -0.32216601  0.45164891  0.06492250</code></pre>
 <p>For example, PC1 sets up an axis of increasing concentrations of P, K, Ca, Mg, S, Zn. PC2 is driven largely by Al, Baresoil, Humdepth and pH. Note that the positive and negative numbers indicate a positive and negative relationship (eg along PC1 P and Fe are negatively correlated, sites that have high P tend to have low Fe and vice versa).</p>
 <p>This is much, much easier to see visually. We can do this with the base <code>R</code> function <code>biplot</code>, which is a bit ugly.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(varechem.pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(varechem.pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="lec11-multivariate-stats_files/figure-html/biplot-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -803,20 +802,20 @@ pH        0.16613845 -0.32216601  0.45164891  0.06492250</code></pre>
 <p>On this figure, there are 2 sets of information. Each site is plotted (these are the numbers). As well, the variable loadings are represented as arrows and tell us how each variable is contributing to each axis. The clustering of sites along the axes (and rotations) tell us which sites are similar in terms of their chemical composition. Eg, we can see that sites 19, 20, 27 and 28 all have a similar chemical composition. We can also see clearly that along PC2 sites with low pH also tend to have low Al, while they have high Humdepth, Baresoil and Mn. Future analyses might relate the soil characteristics of these sites to other environmental data (history of land use, pollution etc)</p>
 <p>We can do this with the function <code>autoplot</code> in the <code>ggfortify</code> package, which takes advantage of ggplot style plotting.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(varechem.pca) <span class="sc">+</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(varechem.pca) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="lec11-multivariate-stats_files/figure-html/autoplot-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The simplest version of <code>autoplot</code> displays less information than our <code>biplot</code> function. On this figure we can see that we are plotting PC1 by PC2 and each point on the figure is each of the rows aka sites in our data. <code>autoplot</code> handily also shows us the proportion of variance explained by each of these PC axes. Now lets add the loadings.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remember to tell R where the original data is coming from! </span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Also, `autoplot` will refuse to understand you if you spell "colour" the non-Canadian way</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(varechem.pca, <span class="at">loadings=</span><span class="cn">TRUE</span>, <span class="at">loadings.label=</span><span class="cn">TRUE</span>, </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.colour=</span><span class="st">"grey30"</span>, </span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>varechem) <span class="sc">+</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remember to tell R where the original data is coming from! </span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Also, `autoplot` will refuse to understand you if you spell "colour" the non-Canadian way</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(varechem.pca, <span class="at">loadings=</span><span class="cn">TRUE</span>, <span class="at">loadings.label=</span><span class="cn">TRUE</span>, </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.colour=</span><span class="st">"grey30"</span>, </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>varechem) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="lec11-multivariate-stats_files/figure-html/add the loadings-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -825,14 +824,14 @@ pH        0.16613845 -0.32216601  0.45164891  0.06492250</code></pre>
 <p>So the next step is to pick how many axes show meaningful information.</p>
 <p>We can do this with a scree plot. This shows us the amount of variation explained by each axis. As we know, each axis explains subsequently less variation. We use scree plots to help us determine at which point the axes stop adding much new information. We can do this visually or quantitatively. We will just go over the visual method as determining which axes to keep is pretty subjective and depends on your system and question of interest.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(varechem.pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(varechem.pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="lec11-multivariate-stats_files/figure-html/scree plot-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Each bar is a PC axis, starting from PC 1. In a scree plot, what you want to look for is a big jump between subsequent axes. Its subjective, but based on this scree plot I would probably be inclined to keep the first 2 or 3 PC axes. As well, we can look at the cumulative proportion of explained variance:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(varechem.pca)<span class="sc">$</span>importance[,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(varechem.pca)<span class="sc">$</span>importance[,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                            PC1      PC2      PC3      PC4      PC5      PC6
 Standard deviation     2.278498 1.786853 1.298271 1.033922 0.903324 0.840125
@@ -849,21 +848,21 @@ Cumulative Proportion  0.370830 0.598890 0.719280 0.795640 0.853920 0.904340</co
 <li><p><a href="https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues">PCA explained using a metaphor with wine, dinner, grandmothers, and animations</a>PCoA</p></li>
 </ul>
 </section>
-<section id="pcoa" class="level3" data-number="13.2.3">
-<h3 data-number="13.2.3" class="anchored" data-anchor-id="pcoa"><span class="header-section-number">13.2.3</span> PCoA</h3>
+<section id="pcoa" class="level3" data-number="14.2.3">
+<h3 data-number="14.2.3" class="anchored" data-anchor-id="pcoa"><span class="header-section-number">14.2.3</span> PCoA</h3>
 <p>A PCoA (principal coordinates analysis) is a more flexible form of a PCA that can take any type of distance matrix. Remember that distance matrices allow you to express differences between your data points so by specifying the type of distance matrix, so this means that PCoA can handle a mix of data types—which is very handy if you have both categorical and numeric data. Note that your choice of distance matrix can have a large effect on the conclusions you draw in your analysis–make sure to read the literature and learn what best practices there are for you specific data types.</p>
 <p>You interpret the output of a PCoA the same way as a PCA. Common functions are <code>cmdscale</code> in base <code>R</code>, <code>wcmdscale</code> in <code>vegan</code>, and <code>pcoa</code> in <code>ape</code>.</p>
 <p>In sum, both PCA and PCoA preserve the distances between your data points–for this reason they are commonly called “rotations”–these methods do not change the underlying relationships in your data, they just group variation in data across many dimensions and then make a nice tidy output that our brain’s can interpret.</p>
 </section>
 </section>
-<section id="lets-practice-real-life-example" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="lets-practice-real-life-example"><span class="header-section-number">13.3</span> Let’s practice: real life example</h2>
+<section id="lets-practice-real-life-example" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="lets-practice-real-life-example"><span class="header-section-number">14.3</span> Let’s practice: real life example</h2>
 <p>For this section of the class, we will try to apply what we’ve learned above on a real world data set. We’ll be walking through the analysis and the choices we make and then at each section, I will give you a minute or so to try and either a. shout out the answer or b. write the code.</p>
 <p>We are working with a cool dataset that was collected by Vicki as part of her PhD work outside of Churchill, Manitoba. Vicki generally studies invasive species in the tundra and the data we are working with today is part of a larger project that investigates the effect of soil on plant invasions.</p>
 <p>The key question we are trying to answer today is if soil chemicals, which we expect to vary across a landscape according to human presence and land use, can predict whether or not invasive species are present.</p>
 <p>Let’s read in our data and take a look at it!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>soil.data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"soil.data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>soil.data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"soil.data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 28 Columns: 11
 ── Column specification ────────────────────────────────────────────────────────
@@ -874,7 +873,7 @@ dbl (7): site_number, latitude, longitude, P, C, N, avg_pH
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(soil.data) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(soil.data) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 11
   sample_id site_number invaded_status location latitude longitude     P     C
@@ -887,7 +886,7 @@ dbl (7): site_number, latitude, longitude, P, C, N, avg_pH
 6 7B                  3 uninvaded      town         58.8     -94.2 77.2   4.93
 # ℹ 3 more variables: N &lt;dbl&gt;, avg_pH &lt;dbl&gt;, notes &lt;chr&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(soil.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(soil.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>spc_tbl_ [28 × 11] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
  $ sample_id     : chr [1:28] "1A" "1B" "6A" "6B" ...
@@ -922,32 +921,32 @@ dbl (7): site_number, latitude, longitude, P, C, N, avg_pH
 <p>More formally then, we are testing for a relationship between location, P, C, N, and avg_pH (our explanatory variables) and invaded_status (our response variable).</p>
 <p>Before we get started, let’s do some data organization.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(soil.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(soil.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "sample_id"      "site_number"    "invaded_status" "location"      
  [5] "latitude"       "longitude"      "P"              "C"             
  [9] "N"              "avg_pH"         "notes"         </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert response into 1s and 0s</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>soil.data<span class="sc">$</span>binary.invaded_status <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(soil.data<span class="sc">$</span>invaded_status<span class="sc">==</span><span class="st">"invaded"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure that location is a factor</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>soil.data<span class="sc">$</span>location <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(soil.data<span class="sc">$</span>location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert response into 1s and 0s</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>soil.data<span class="sc">$</span>binary.invaded_status <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(soil.data<span class="sc">$</span>invaded_status<span class="sc">==</span><span class="st">"invaded"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure that location is a factor</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>soil.data<span class="sc">$</span>location <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(soil.data<span class="sc">$</span>location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="multicollinearity" class="level3" data-number="13.3.1">
-<h3 data-number="13.3.1" class="anchored" data-anchor-id="multicollinearity"><span class="header-section-number">13.3.1</span> Multicollinearity</h3>
+<section id="multicollinearity" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="multicollinearity"><span class="header-section-number">14.3.1</span> Multicollinearity</h3>
 <p>The first thing we need to do is assess the relationships between our explanatory variables (location, P, C, N, avg_pH) and check for <strong>multicollinearity</strong>.</p>
 <p>Multicollinearity refers to a situation in which <strong>two or more</strong> explanatory variables are highly linearly related (See <a href="http://web.vu.lt/mif/a.buteikis/wp-content/uploads/PE_Book/4-5-Multiple-collinearity.html">here</a> for a mathematical explanation). This can wreck havoc in an analysis because collinear predictors generate unstable and unreliable regression coefficients that have large standard errors.</p>
 <p>So the first step in this analysis is to visualize all our environmental data and assess whether any variables are highly correlated with each other (ie are collinear).</p>
-<section id="correlations" class="level4" data-number="13.3.1.1">
-<h4 data-number="13.3.1.1" class="anchored" data-anchor-id="correlations"><span class="header-section-number">13.3.1.1</span> Correlations</h4>
+<section id="correlations" class="level4" data-number="14.3.1.1">
+<h4 data-number="14.3.1.1" class="anchored" data-anchor-id="correlations"><span class="header-section-number">14.3.1.1</span> Correlations</h4>
 <p>There are a couple of ways of assessing collinearity of our predictor variables. One common way you may have heard of is to calculate the correlation between the variables. We do this using <code>cor</code> and can visualize the relationships using <code>pairs</code>. Note that this method only works for numeric data (ie it can’t handle categorical variables).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(soil.data[,<span class="dv">7</span><span class="sc">:</span><span class="dv">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(soil.data[,<span class="dv">7</span><span class="sc">:</span><span class="dv">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="lec11-multivariate-stats_files/figure-html/visualize data-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(soil.data[,<span class="dv">7</span><span class="sc">:</span><span class="dv">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(soil.data[,<span class="dv">7</span><span class="sc">:</span><span class="dv">10</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                P          C          N     avg_pH
 P       1.0000000  0.5090295  0.6482000 -0.4091076
@@ -959,8 +958,8 @@ avg_pH -0.4091076 -0.4722516 -0.5681717  1.0000000</code></pre>
 <p>We can see from this that C and N are highly related. When we look at the correlations, this linked relationship is confirmed. As a rule of thumb, ecologists generally report an r&gt;=0.70 as being collinear. Note that this threshold is a bit arbitrary and different sub-disciplines have different traditions.</p>
 <p>Based off this output, we could choose to drop either C or N from the analysis as they will explain similar variation in the data. Generally, we would choose to drop whichever variable we were less interested in scientifically.</p>
 </section>
-<section id="vif-variance-inflation-factor" class="level4" data-number="13.3.1.2">
-<h4 data-number="13.3.1.2" class="anchored" data-anchor-id="vif-variance-inflation-factor"><span class="header-section-number">13.3.1.2</span> VIF = Variance Inflation Factor</h4>
+<section id="vif-variance-inflation-factor" class="level4" data-number="14.3.1.2">
+<h4 data-number="14.3.1.2" class="anchored" data-anchor-id="vif-variance-inflation-factor"><span class="header-section-number">14.3.1.2</span> VIF = Variance Inflation Factor</h4>
 <p>The other common way of assessing collinearity is with the VIF. This method can handle both categorical and numeric data.</p>
 <p>The VIF is calculated for each predictor by doing a linear regression of that predictor on all the other predictors, and then obtaining the <em>R<sup>2</sup></em> from that regression. The VIF is just 1/(1-<em>R<sup>2</sup></em>). This is why it’s called the variance inflation factor - it estimates how much the variance of a coefficient is “inflated” due to linear dependence with other predictors.</p>
 <p>VIF’s start at 1 and have no upper limit. In general:</p>
@@ -973,10 +972,10 @@ avg_pH -0.4091076 -0.4722516 -0.5681717  1.0000000</code></pre>
 <p>VIF is used on model rather than on the raw predictors. So let’s fit our model and include location (town vs airport) and see if any of our predictors are collinear. A VIF above 3 (or also commonly 5) indicate high collinearity.</p>
 <p>Note that for 28 observations this model is also very over fit (too many predictor terms to get general model parameters), but let’s ignore that for now.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>model_collinear <span class="ot">&lt;-</span> <span class="fu">glm</span>(binary.invaded_status <span class="sc">~</span> location <span class="sc">+</span> P <span class="sc">+</span> C <span class="sc">+</span> N <span class="sc">+</span> avg_pH, </span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data=</span>soil.data, </span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">family=</span><span class="st">"binomial"</span>)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(model_collinear)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>model_collinear <span class="ot">&lt;-</span> <span class="fu">glm</span>(binary.invaded_status <span class="sc">~</span> location <span class="sc">+</span> P <span class="sc">+</span> C <span class="sc">+</span> N <span class="sc">+</span> avg_pH, </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data=</span>soil.data, </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">family=</span><span class="st">"binomial"</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(model_collinear)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             GVIF Df GVIF^(1/(2*Df))
 location 1.466368  2        1.100426
@@ -990,10 +989,10 @@ avg_pH   1.462175  1        1.209204</code></pre>
 <p><em>Which variables are collinear? Does this match our conclusion from using cor() above?</em></p>
 <p>Just as above, we can see the C and N are collinear and have a high VIF. Generally, best practice is to drop the term with the highest VIF and rerun, and keep going, dropping terms until all VIF are below the threshold for collinearity.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>model_collinear_dropN <span class="ot">&lt;-</span> <span class="fu">glm</span>(binary.invaded_status <span class="sc">~</span> location <span class="sc">+</span> P <span class="sc">+</span> C <span class="sc">+</span> avg_pH, </span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data=</span>soil.data, </span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">family=</span><span class="st">"binomial"</span>)</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(model_collinear_dropN) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>model_collinear_dropN <span class="ot">&lt;-</span> <span class="fu">glm</span>(binary.invaded_status <span class="sc">~</span> location <span class="sc">+</span> P <span class="sc">+</span> C <span class="sc">+</span> avg_pH, </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data=</span>soil.data, </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">family=</span><span class="st">"binomial"</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(model_collinear_dropN) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             GVIF Df GVIF^(1/(2*Df))
 location 1.315957  2        1.071052
@@ -1007,36 +1006,36 @@ avg_pH   1.306870  1        1.143184</code></pre>
 <p>Okay, so what happens though if N is actually our variable of interest and we’ve just gotten rid of it from the model??? Do we panic??</p>
 <p>No! Luckily we’ve just learned about multivariate techniques for grouping correlated data into common axes of variation.</p>
 </section>
-<section id="pca-1" class="level4" data-number="13.3.1.3">
-<h4 data-number="13.3.1.3" class="anchored" data-anchor-id="pca-1"><span class="header-section-number">13.3.1.3</span> PCA</h4>
+<section id="pca-1" class="level4" data-number="14.3.1.3">
+<h4 data-number="14.3.1.3" class="anchored" data-anchor-id="pca-1"><span class="header-section-number">14.3.1.3</span> PCA</h4>
 <p><em>Which method might we use on this data?</em></p>
 <p>PCA is also useful in this case for exploring how these different soil measurements are organized across sites.</p>
 <p><em>Should we use a covariance or correlation matrix?</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pca on data</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># each row is a site</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(soil.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pca on data</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># each row is a site</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(soil.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "sample_id"             "site_number"           "invaded_status"       
  [4] "location"              "latitude"              "longitude"            
  [7] "P"                     "C"                     "N"                    
 [10] "avg_pH"                "notes"                 "binary.invaded_status"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure to select columns that you want to include in the PCA!</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>pca.soil <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(soil.data[, <span class="fu">c</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">10</span>)], <span class="at">scale. =</span> <span class="cn">TRUE</span>) <span class="co"># use corr bc multiple units</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure to select columns that you want to include in the PCA!</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>pca.soil <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(soil.data[, <span class="fu">c</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">10</span>)], <span class="at">scale. =</span> <span class="cn">TRUE</span>) <span class="co"># use corr bc multiple units</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now let’s look at the output.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at importance of components</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca.soil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at importance of components</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca.soil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="lec11-multivariate-stats_files/figure-html/soil loadings and scree plot-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p><em>How many axes should we keep?</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's look at loadings</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>pca.soil<span class="sc">$</span>rotation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's look at loadings</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>pca.soil<span class="sc">$</span>rotation</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>              PC1       PC2        PC3        PC4
 P      -0.4561476 0.3487729 -0.8033374  0.1579108
@@ -1048,13 +1047,13 @@ avg_pH  0.4264314 0.8914133  0.1283571 -0.0840417</code></pre>
 <p><em>So how would we interpret this? Let’s start with PC1.</em></p>
 <p>Now let’s visualize, it’ll be much easier to interpret! We’re just going to use <code>autoplot</code> here, but remember the base plot function <code>biplot</code> also works.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pca.soil, <span class="at">loadings=</span><span class="cn">TRUE</span>, <span class="at">loadings.label=</span><span class="cn">TRUE</span>, </span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.colour =</span> <span class="st">"grey30"</span>,  <span class="co"># changes the colour of the arrows</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> soil.data, </span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">colour=</span><span class="st">"location"</span>, <span class="co"># colour obs by location</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.label.hjust =</span> <span class="fl">1.2</span>) <span class="sc">+</span> <span class="co"># moves loading labels so easier to read</span></span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span>  <span class="co"># make fancier (removes box)</span></span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span> <span class="fu">wes_palette</span>(<span class="st">"FantasticFox1"</span>, <span class="at">n =</span> <span class="dv">3</span>))  <span class="co"># pretty colours!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pca.soil, <span class="at">loadings=</span><span class="cn">TRUE</span>, <span class="at">loadings.label=</span><span class="cn">TRUE</span>, </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.colour =</span> <span class="st">"grey30"</span>,  <span class="co"># changes the colour of the arrows</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> soil.data, </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">colour=</span><span class="st">"location"</span>, <span class="co"># colour obs by location</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.label.hjust =</span> <span class="fl">1.2</span>) <span class="sc">+</span> <span class="co"># moves loading labels so easier to read</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span>  <span class="co"># make fancier (removes box)</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span> <span class="fu">wes_palette</span>(<span class="st">"FantasticFox1"</span>, <span class="at">n =</span> <span class="dv">3</span>))  <span class="co"># pretty colours!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="lec11-multivariate-stats_files/figure-html/soil biplot-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1071,8 +1070,8 @@ avg_pH  0.4264314 0.8914133  0.1283571 -0.0840417</code></pre>
 <p>Let’s run our same logistic model again to test if soil characteristics explain the relationship between if a site and invasive species or not. This time, instead of using all the soil data, we will use PC axes.</p>
 <p>But first, some (more) data organization.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># see each observation and it's location along PC axes</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>pca.soil<span class="sc">$</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># see each observation and it's location along PC axes</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>pca.soil<span class="sc">$</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>              PC1         PC2         PC3          PC4
  [1,] -0.23126104  0.77648694 -0.84121494  0.235136523
@@ -1104,10 +1103,10 @@ avg_pH  0.4264314 0.8914133  0.1283571 -0.0840417</code></pre>
 [27,]  0.75530840  0.17215662 -0.36418195 -0.039898398
 [28,]  2.08166538  0.69992209  0.74097578 -0.041722676</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bind the observations to the data, note that `R` keeps everything in the same order, so this is easy</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>soil.data<span class="sc">$</span>PC1 <span class="ot">&lt;-</span> pca.soil<span class="sc">$</span>x[ ,<span class="dv">1</span>]  <span class="co"># pull PC1</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>soil.data<span class="sc">$</span>PC2 <span class="ot">&lt;-</span> pca.soil<span class="sc">$</span>x[ ,<span class="dv">2</span>]  <span class="co"># pull PC2</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(soil.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bind the observations to the data, note that `R` keeps everything in the same order, so this is easy</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>soil.data<span class="sc">$</span>PC1 <span class="ot">&lt;-</span> pca.soil<span class="sc">$</span>x[ ,<span class="dv">1</span>]  <span class="co"># pull PC1</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>soil.data<span class="sc">$</span>PC2 <span class="ot">&lt;-</span> pca.soil<span class="sc">$</span>x[ ,<span class="dv">2</span>]  <span class="co"># pull PC2</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(soil.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 14
   sample_id site_number invaded_status location latitude longitude     P     C
@@ -1123,14 +1122,14 @@ avg_pH  0.4264314 0.8914133  0.1283571 -0.0840417</code></pre>
 </div>
 </div>
 </section>
-<section id="modelling" class="level4" data-number="13.3.1.4">
-<h4 data-number="13.3.1.4" class="anchored" data-anchor-id="modelling"><span class="header-section-number">13.3.1.4</span> Modelling</h4>
+<section id="modelling" class="level4" data-number="14.3.1.4">
+<h4 data-number="14.3.1.4" class="anchored" data-anchor-id="modelling"><span class="header-section-number">14.3.1.4</span> Modelling</h4>
 <p>Okay, now let’s run the model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>model_PCA <span class="ot">&lt;-</span> <span class="fu">glm</span>(binary.invaded_status <span class="sc">~</span> location <span class="sc">+</span> PC1, </span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> soil.data, </span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(model_PCA) <span class="co"># nice, this is what we want to see</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>model_PCA <span class="ot">&lt;-</span> <span class="fu">glm</span>(binary.invaded_status <span class="sc">~</span> location <span class="sc">+</span> PC1, </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> soil.data, </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(model_PCA) <span class="co"># nice, this is what we want to see</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             GVIF Df GVIF^(1/(2*Df))
 location 1.136794  2        1.032572
@@ -1138,7 +1137,7 @@ PC1      1.136794  1        1.066205</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_PCA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_PCA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1168,17 +1167,18 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <p>Ah well, it looks like there’s no relationship between soil characteristics and invasion.</p>
 <p>We can actually see this very clearly if we just plot our data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(soil.data, <span class="fu">aes</span>(PC1, binary.invaded_status, <span class="at">colour=</span>location)) <span class="sc">+</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>, <span class="at">alpha=</span>.<span class="dv">8</span>) <span class="sc">+</span></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span>  </span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span> <span class="fu">wes_palette</span>(<span class="st">"FantasticFox1"</span>, <span class="at">n =</span> <span class="dv">3</span>))  <span class="sc">+</span></span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Invasion success"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(soil.data, <span class="fu">aes</span>(PC1, binary.invaded_status, <span class="at">colour=</span>location)) <span class="sc">+</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>, <span class="at">alpha=</span>.<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span>  </span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values=</span> <span class="fu">wes_palette</span>(<span class="st">"FantasticFox1"</span>, <span class="at">n =</span> <span class="dv">3</span>))  <span class="sc">+</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Invasion success"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="lec11-multivariate-stats_files/figure-html/final plot-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
 
+</section>
 </section>
 </section>
 </section>

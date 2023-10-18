@@ -413,12 +413,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_body_widths)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     width  sex
-1 18.35342 male
-2 17.07277 male
-3 18.34304 male
-4 17.22497 male
-5 15.54449 male
-6 22.01327 male</code></pre>
+1 17.06311 male
+2 11.71067 male
+3 17.18230 male
+4 16.73524 male
+5 17.33708 male
+6 16.28010 male</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_body_widths <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(width), </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">fill =</span> <span class="fu">as.factor</span>(sex))) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
@@ -434,19 +434,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>diff_means_obs <span class="ot">&lt;-</span> mean_males <span class="sc">-</span> mean_females <span class="co"># test statistic w/out permutation</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>diff_means_obs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.2639673</code></pre>
+<pre><code>[1] 0.677492</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>reshuffled <span class="ot">&lt;-</span> df_body_widths</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>reshuffled<span class="sc">$</span>width <span class="ot">&lt;-</span> <span class="fu">sample</span>(reshuffled<span class="sc">$</span>width, <span class="at">size =</span> <span class="fu">nrow</span>(reshuffled), <span class="at">replace =</span> F)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(reshuffled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     width  sex
-1 16.13210 male
-2 15.54449 male
-3 22.01327 male
-4 15.73885 male
-5 13.69903 male
-6 15.00875 male</code></pre>
+1 12.27670 male
+2 15.35593 male
+3 20.85279 male
+4 11.71067 male
+5 16.64908 male
+6 15.76523 male</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>permute_and_calculate_mean_diff <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  reshuffled <span class="ot">&lt;-</span> df_body_widths</span>
@@ -463,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">permute_and_calculate_mean_diff</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6821252</code></pre>
+<pre><code>[1] 0.4592404</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of times to permute data to generated null distribution</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>test_stats <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
@@ -486,7 +486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(test_stats[(diff_means_obs <span class="sc">&lt;</span> test_stats)])<span class="sc">/</span><span class="fu">length</span>(test_stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.655</code></pre>
+<pre><code>[1] 0.127</code></pre>
 </div>
 </div>
 
