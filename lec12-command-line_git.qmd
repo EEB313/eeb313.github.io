@@ -294,6 +294,7 @@ Rscript computation.R
 
 Suppose the name for this SLURM file is `job.sh`. Running `sbatch job.sh` will execute the commands of this script line-by-line. The intermediate lines specify the account which is running the job, the memory that ought to be allocated to the job, the maximum time the job should run for, and the number of cores that should be used if computations are parallelized (i.e., are instructred to be sent to and run on separate CPUs) within the R script. This is an example of a bash script, i.e., a sequence of commands that are executed in the shell line-by-line. These scripts are a powerful way to automate complex tasks involving large files.
 
+
 ## Reproducible science and collaboration with Git and GitHub
 
 ### Intro to Version Control using Git
@@ -310,7 +311,6 @@ others, Git is often used via [GitHub](http://www.github.com), a web-based
 service that hosts Git repositories. In the spirit of "working open" and
 ensuring scientific reproducibility, it has also become increasingly common for
 scientists to upload scripts and related files to GitHub for others to use.
-
 
 ### Intro to GitHub
 
@@ -354,7 +354,7 @@ here](https://git-scm.com/download/linux).
 To test whether Git has successfully been installed, open a bash interpreter,
 type:
 
-```
+```{r, eval = F}
 git --version
 ```
 
@@ -370,14 +370,14 @@ Keep in mind that this only has to be done the first time we're using Git.
 This is done with the `git config` command. When using Git, _all_ commands
 begin with `git`, followed by more specific subcommands. 
 
-```
+```{r, eval = F}
 git config --global user.name "My Name"
 git config --global user.email "myemail@example.com"
 ```
 
 Finally, the following command can be used to review Git configurations:
 
-```
+```{r, eval = F}
 git config --list
 ```
 
@@ -394,7 +394,7 @@ to your fork. Copy this link to your clipboard.
 
 On the command line, run
 
-```
+```{r, eval = F}
 git clone [repo link]
 ```
 
@@ -414,7 +414,7 @@ will be writing your report in text editors. For today, let's use the file we cr
 
 The “untracked files” message means that there’s a file in the directory that Git isn’t keeping track of. We can tell Git to track a file using `git add`:
 
-```
+```{r, eval = F}
 git add draft-yn.txt
 ```
 
@@ -428,7 +428,7 @@ When we run `git commit`, Git takes everything we have told it to save by using 
 
 We use the `-m` flag to write a message that describes our edits specifically.
 
-![_Pictured: how add and commit saves our work_](figures/git-staging-area.png)
+![_Pictured: how add and commit saves our work_](figures/git_staging_area.png)
 
 ### Pushing changes
 
@@ -436,7 +436,7 @@ Now, let's push our changes from the local repo to the main repo.
 
 We can push our changes:
 
-```
+```{r, eval = F}
 git push origin main
 ```
 
@@ -462,19 +462,19 @@ To remain up to date, navigate to the local copy of your repo.
 
 First, you have to _fetch_ the new changes that are in the shared `origin` repo. 
 
-```
+```{r, eval = F}
 git fetch origin
 ```
 
 Once the edits have been downloaded from the origin, merge them into your local `main` repo:
 
-```
+```{r, eval = F}
 git merge origin/main
 ```
 
 Note that the `git pull` command combines two other commands, `git fetch` and `git merge`.
 
-```
+```{r, eval = F}
 git pull
 ```
 
@@ -544,7 +544,6 @@ Some famous examples of Git forks include:
 
 ![_Pictured: Git Clone verus Git Fork, from TheServerSide_.](figures/git_clone_vs_fork.png)
 
-
 If you want to create a fork to have your version of your group's repo on GitHub, navigate to the repo's page and click on the "Fork" button at the top right of the page. Following a brief load screen, GitHub will redirect you to your new, forked repo.
 
 You'll notice that on the top left of this repo page, the repo's name will be
@@ -560,7 +559,7 @@ To get your fork up to date with the main repo, you next have to add a _remote_
 linking to the main repo. Head to your group's repo and once again click
 on "Clone or download" to grab its link. Then, using the main repo link, run:
 
-```
+```{r, eval = F}
 git remote add upstream [repo link]
 ```
 
@@ -568,7 +567,7 @@ Then, we have to update our forked repo. Earlier, since we didn't have a forked 
 
 Run:
 
-```
+```{r, eval = F}
 git remote -v
 ```
 
@@ -577,19 +576,19 @@ are labelled `origin` and two of which are labelled `upstream`. At this point, t
 
 To remove our origin remote, run:
 
-```
+```{r, eval = F}
 git remote rm origin
 ```
 
 Then, let's add our fork:
 
-```
+```{r, eval = F}
 git remote add origin [repo link]
 ```
 
 Now, when you run :
 
-```
+```{r, eval = F}
 git remote -v
 ```
 
@@ -599,19 +598,19 @@ you should find two links for `origin` and two links for `upstream`. These two l
 
 Next, you have to _fetch_ the new changes that are in the shared repo. 
 
-```
+```{r, eval = F}
 git fetch upstream
 ```
 
 Once the edits have been downloaded from upstream, merge them into your local repo:
 
-```
+```{r, eval = F}
 git merge upstream/main
 ```
 
 Your local copy is now even with the main repo! Finally, push these changes to the GitHub version of your fork (`origin`) from your `main` local repo.
 
-```
+```{r, eval = F}
 git push origin main
 ```
 
@@ -625,7 +624,6 @@ Every time you make edits to your local files, first make sure you are first syn
 Then, go ahead and make your edits! After you are done your batch of editing, you can add and commit those changes, still using `git add` and `git commit`.
 
 These commits do not go to the upstream `EEB313` repo, but instead end up in your forked repo. In order to contribute your changes from your fork to upstream, you will need to make a Pull Request (PR).
-
 
 ### Pull requests
 
@@ -678,23 +676,25 @@ You always create a branch from an existing branch, typically, the default branc
 
 To create a new branch, run:
 
-```
+```{r, eval = F}
 git branch <branch-name>
 ```
 
 For example:
-```
+
+```{r, eval = F}
 git branch new-feature
 ```
 
 The repository history remains unchanged. Then, we need to record all new commits to that branch.
 
-```
+```{r, eval = F}
 git checkout new-feature
 ```
 
 Note that you can combine branch creation and checkout by using only one command:
-```
+
+```{r, eval = F}
 git checkout -b new-feature
 ```
 
@@ -702,19 +702,19 @@ You should see the confirmation: `Switched to a new branch "new-feature"`
 
 Make your edits, and commit them to your branch using `git add` and `git commit`. When you are ready to merge your new feature to your local main branch, head back to your main branch:
 
-```
+```{r, eval = F}
 git checkout main
 ```
 
 And merge your new features from the new-feature branch:
 
-```
+```{r, eval = F}
 git merge new-feature
 ```
 
 Now you can delete your branch, since it has been successfully merged:
 
-```
+```{r, eval = F}
 git branch -d new-feature
 ```
 
@@ -725,7 +725,7 @@ Note that this is all happening locally. You now push your changes from your loc
 
 However, you are also able to create a new branch and push that local branch to upstream or origin. To do this, make sure you are in your new branch:
 
-```
+```{r, eval = F}
 git checkout new-feature
 ```
 
@@ -746,11 +746,10 @@ as soon as the merge has been completed right in the PR.
 
 To list the branches that are currently being used, use this for local branches:
 
-```
+```{r, eval = F}
 git branch
 git branch --list
 ```
-
 
 The git branch command lets you create, list, rename, and delete branches. It doesn’t let you switch between branches or put a forked history back together again. For this reason, git branch is tightly integrated with the git checkout and git merge commands.
 
@@ -825,9 +824,7 @@ Additional resources:
 - A useful [Git command cheat sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf).
 - Guide to a [good Git Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows)
 
-![_Pictured: the GitHub workflow._](figures/github-workflow.png)
-
-
+![_Pictured: the GitHub workflow._](figures/github_workflow.png)
 
 
 
