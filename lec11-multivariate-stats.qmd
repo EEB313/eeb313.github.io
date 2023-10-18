@@ -1,6 +1,33 @@
 # Multivariate statistics
 
-```{r message=FALSE, warning=FALSE}
+> ### Learning objectives
+> -   Learn conceptual theory behind common multivariate techniques
+> -   Learn how to run and interpret the output from PCA and PCoA
+> -   Learn how to assess multicollinearity
+> -   Be able to apply the above techniques on real-world data
+> -   Your types of data and biological questions drive your types of statistical
+    analysis
+> - **Recognize that the choices required in a statistical pipeline can
+      drastically affect your results, but there is no one right way of analyzing
+      your data**
+    
+> ### Lesson outline
+> 
+> -   Examples of multivariate statistics using well-behaved data: PCA and PCoA
+> -   Discuss caveats and analytically choices embedded in PCA and PCoA
+> -   Work through multivariate analysis of soil invasion data!
+
+> ### Required packages
+>
+> - `tidyverse`
+> - `car`
+> - `ggfortify`
+> - `wesanderson`
+> - `vegan`
+
+# Multivariate Statistics
+
+```{r libraries, echo=F, warning=F, message=F}
 library(car) # VIF 
 library(tidyverse)
 library(ggfortify) # fancy biplots
@@ -50,37 +77,6 @@ likely to come across in the papers you read and/or use in your own work. This
 is a quick overview and we necessarily have to have to skip over some of the
 details---if want to know more or have a specific question related to data, we
 are happy provide readings or to chat during office hours.
-
-### Lesson outline
-
--   Examples of multivariate statistics using well-behaved data
-
-    -   PCA and PCoA
-
-    -   Discuss caveats and analytically choices embedded in these methods
-
--   Work through an analysis of real-world data
-
-    -   Assess multicollinearity
-
-    -   PCA
-
-### Learning objectives
-
--   Learn conceptual theory behind common multivariate techniques
-
--   Learn how to run and interpret the output from PCA and PCoA
-
--   Learn how to assess multicollinearity
-
--   Be able to apply the above techniques on real-world data
-
--   Your types of data and biological questions drive your types of statistical
-    analysis
-
--   **Recognize that the choices required in a statistical pipeline can
-    drastically affect your results, but there is no one right way of analyzing
-    your data**
 
 ### A bit of theory[^1]
 
@@ -476,7 +472,6 @@ categorical variables).
 ```{r visualize data }
 pairs(soil.data[,7:10])
 cor(soil.data[,7:10])
-
 ```
 
 We can see from this that C and N are highly related. When we look at the
@@ -526,7 +521,6 @@ model_collinear <- glm(binary.invaded_status ~ location + P + C + N + avg_pH,
                       data=soil.data, 
                       family="binomial")
 car::vif(model_collinear)
-
 ```
 
 We have multiple levels in our categorical predictor (airport/town/CNSC) and so
@@ -585,7 +579,6 @@ Now let's look at the output.
 ```{r soil loadings and scree plot}
 # look at importance of components
 plot(pca.soil)
-
 ```
 
 *How many axes should we keep?*
