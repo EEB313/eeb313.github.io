@@ -1,4 +1,4 @@
-# Intro to the command line and GitHub
+# Command line & Git(Hub)
 
 ## Lesson preamble
 

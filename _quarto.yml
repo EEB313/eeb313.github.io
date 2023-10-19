@@ -23,12 +23,14 @@ book:
       - lec09-mixed-effects-models.qmd
       - lec10-model-selection.qmd
       - lec11-multivariate-stats.qmd
+      - lec12-command-line_git.qmd
     - part: "Assignments"
       chapters:
       - assignment-01.qmd
       - assignment-02.qmd
       - assignment-03.qmd
       - assignment-04.qmd
+      - assignment-05.qmd
     - part: "Project"
       chapters:
       - projects.qmd
@@ -48,4 +50,3 @@ format:
     code-copy: true
     code-fold: false
     code-overflow: wrap
-
