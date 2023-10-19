@@ -12,7 +12,7 @@
 >   - Move files and directories via `scp`
 > - Understand how to run R code from the command line.
 > - Learn how Git(Hub) works and the logic of version control
->   - Develop proficency using basic Git commands
+>   - Develop proficiency using basic Git commands
 >   - Develop understanding of the Git workflow and recommended practices
 >   - Practice using Git commands at the command line
 >
