@@ -10,7 +10,7 @@ library(ggfortify)
 library(tidyverse)
 ```
 
-1. In this exercise, we will be analyzing floral trait data using a base R data set `iris`. (4 marks)
+**1. In this exercise, we will be analyzing floral trait data using a base R data set `iris`.** (4 marks)
 
 ```{r multivariates stats} 
 head(iris)
@@ -30,7 +30,7 @@ d. Colour the individual entities in your biplot by `species`. Explain the flora
 
 e. Based off of the cumulative proportion of variance explained by each axis or the scree plot, which axis (axes) would you retain for downstream analyses and why? (0.5 mark)
 
-2. In this exercise, you will create and clone a _new_ GitHub repo onto your machine (call it assignment5_folder), use the command line to run an R script in this directory, modify the files that are returned by the R script, and push the results to remote repo.
+**2. In this exercise, you will create and clone a _new_ GitHub repo onto your machine (call it assignment5_folder), use the command line to run an R script in this directory, modify the files that are returned by the R script, and push the results to remote repo.**
 
 a. Go to _your_ GitHub (i.e., to github.com/[yourusername]). Make a new repo called assignment5_folder. (0.25 mark)
 
@@ -38,7 +38,7 @@ b. Clone your GitHub repo onto your machine. (0.25 mark)
 
 c. Make an R script that uses a function to write a .csv file (named assignment5_file.csv) with two columns. The first column should be named x and should contain all numbers between 0 and 100. The second column should be named y and contain draws of a Normal random variable with mean 0 and _variance_ 0.001. In your call to `write.csv`, be sure to specify `row.names=FALSE`. (1 mark)
 
-d. Use the command line to modify assignment5_file.csv so that the first entry in the x column is equal to 7 instead of 1. **In your answer, specify what commands you ran (and in what order) to access and change the file.** (1 mark)
+d. Use the command line to modify assignment5_file.csv so that the first entry in the x column is equal to 7 instead of 1. In your answer, specify what commands you ran (and in what order) to access and change the file. (1 mark)
 
 e. Add, commit, and push the changes to the assignment5_folder repo to GitHub. As before, in your answer, specify what commands you ran (and in what order) to do this. (1 mark)
 
