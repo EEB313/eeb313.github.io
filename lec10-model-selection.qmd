@@ -36,13 +36,13 @@ library(glmnet)
 theme_set(theme_bw())
 ```
 
-# Model selection: theory
+## Model selection: theory
 
 Statistics is about making decisions under uncertainty. _Estimation_ involves deciding what parameter values were most likely to (under a model of the distribution of the data and, in some circumstances, any prior knowledge about the parameters) have given rise to that data. _Inference_ involves quantifying the uncertain around our estimates using confidence intervals. As we have seen, however, to any confidence interval there is an associated hypothesis test. Inference and hypothesis testing, then, involve deciding if a particular set of parameter values could have plausibly given rise to the data. 
 
 It should come as no surprise, since both estimation and inference involve decision making, that in statistics we often interested in deciding if the models we build are appropriate descriptions of how the world works (given the data we have and use to fit those models), or what among a set of candidate models is the "best". This practice is called _model selection_ and is the focus of our lecture today.
 
-## Examples
+### Examples
 
 - Hypothesis testing is a kind of model selection. For example, for data $x_1,\dots,x_n \sim f(x|\theta)$, testing $H_0 \colon \theta = \theta_0$ vs $H_1 \colon \theta \neq \theta_0$ is equivalent to choosing between models $\mathcal{M}_0 \colon f(x|\theta)$ and $\mathcal{M}_1 \colon f(x|\theta_0)$.
 
@@ -69,7 +69,7 @@ $$y_i = \beta_0 + \beta_1 x_{1i} + \dots + \beta_p x_{pi}.$$
 3. Regularized regression (ridge, LASSO, elastic net)
 4. Stepwise regression
 
-## The Akaike information criterion (AIC)
+### The Akaike information criterion (AIC)
 
 Suppose we have data $y_1,\dots,y_n$ that are drawn from a distribution $f$ and a set of candidate models
 
@@ -107,7 +107,7 @@ $$\text{AIC}_c = \text{AIC} + \frac{2d_j(d_j+1)}{n-d_j-1}$$
 
 We will return to model selection via AIC later in the lecture, but in the meantime we will discuss two kinds of feature selection techniques that can help us choose between covariates in a linear model.
 
-### Stepwise regression...and why you should not use it.
+## Stepwise regression...and why you should not use it.
 
 Stepwise selection involves iteratively adding and removing predictors according to some criterion (e.g., variance explained). The steps for forward stepwise regression are as follows:
 
@@ -122,7 +122,7 @@ Stepwise selection involves iteratively adding and removing predictors according
 
 For more on the problems with automated stepwise selection methods, see [here](https://stats.stackexchange.com/questions/20836/algorithms-for-automatic-model-selection?noredirect=1&lq=1).
 
-### Regularized regression
+## Regularized regression
 
 A more principled approach to linear model selection is so-called _regularized regression_. These approaches constrain the least squares problem (i.e., maximizing the likelihood function with respect to the regression coefficients) in some way. These constraints help "pull" the regression coefficients to zero and filter the features which are most informative about the response. The induced sparsity (i.e., many of the regression coefficients being $=0$) is ideal in that it helps improve the interpretability and predictive power of the model.
 
@@ -164,7 +164,7 @@ knitr::kable(lasso_VS_truth)
 
 It appears the value of $\lambda$ that is ideal for the problem at hand is so small that LASSO regression returns the same coefficients as un-constrained least squares, i.e., the penalty does not affect estimation of the coefficients too much! The data we have used here are cherry-picked to illustrate how the method works with relative ease. Implementation of the LASSO is a bit trickier with more features. **However, when you need to preform feature selection on a large number of covariates and have limited data ($p$ large), a combination of cross-validation and LASSO regression is the way to go.**
 
-# Model selection for LMMs
+## Model selection for LMMs
 
 Model selection for mixed models is even more complicated, due to the addition of random effects. A procedure that is commonly used to preform selection of LMMs is as follows:
 
@@ -269,11 +269,11 @@ summary(mixed_model_IntOnly_Full2)
 
 We see that increasing both NAP and Exposure results in a significant decrease in species richness ($p<0.05$). There is also a marginally insignificant interaction between NAP and Exposure which we won't read too much into ($p=0.051$!). Finally, while Beach is included in our model as a random effect, notice how little variation is attributed to differences between beaches relative to the model we ran in lecture 7 (~45% of residual variance vs. approx. 0). The only difference is that our current model includes Exposure as a fixed effect. This suggests that much of the variation between beaches in lecture 7 was likely attributable to differences in exposure, which is now being captured by the fixed effects.
 
-# Model averaging
+## Model averaging
 
 In Assignment 4, you will use data from Santangelo _et al._ (2019) who were interested in understanding how insect herbivores and plant defenses influence the expression of plant floral traits. While that was one component of the study, the main question was whether herbivores, pollinators, and plant defenses alter the shape and strength of _natural selection_ on plant floral traits. In other words, which of these 3 agents of selection (plant defenses, herbivores, or pollinators) are most important in driving the evolution of floral traits in plants?
 
-The motivation for that experiment actually came a few year prior, in 2016, when Thompson and Johnson[^ref1] published an experiment examining how plant defenses alter natural selection on plant floral traits. They found some interesting patterns but it was unclear whether these were being driven by the plant's interactions with herbivores, pollinators, or both. This was because they didn't directly manipulate these agents: pollination was not quantified in their experiment and herbivore damage was measured observationally and thus these results were correlative. However, their experimental data provides a prime use of model selection in ecology and evolution.
+The motivation for that experiment actually came a few year prior, in 2016, when Thompson and Johnson published an experiment examining how plant defenses alter natural selection on plant floral traits. They found some interesting patterns but it was unclear whether these were being driven by the plant's interactions with herbivores, pollinators, or both. This was because they didn't directly manipulate these agents: pollination was not quantified in their experiment and herbivore damage was measured observationally and thus these results were correlative. However, their experimental data provides a prime use of model selection in ecology and evolution.
 
 The data consists of 140 observations (rows). Each row in the dataset corresponds to the mean trait value of one plant genotype (they had replicates for each genotype but took the average across these replicates) grown in a common garden. They measured 8 traits and quantified the total mass of seeds produced by plants as a measure of absolute fitness. Genotypes were either "cyanogenic" (i.e., containing plant defenses) or were "acyanogenic" (i.e., lacking plant defenses). In addition, they quantified the amount of herbivore damage (i.e., percent leaf area lost) on each plant twice throughout the growing season, although here we will only focus on the effects of plant defenses and avoid their herbivore damage measurements. We are going to estimate the strength of selection on each trait (controlling for correlations between traits due to the pleiotropic action of genes) and assess whether plant defenses alter the strength or direction of natural selection imposed on these traits. We developed the tools to do this in a previous lecture, where we learned that estimating different kinds of selection can be done by regressing fitness on standardized trait values (i.e., mean of 0 and standard deviation of 1).
 
@@ -380,7 +380,7 @@ as.data.frame(predictions_all) %>%
 # note: all other trait values are =0 for the purpose of visualization
 ```
 
-# Summary...and some words of caution
+## Summary...and some words of caution
 
 - As we have seen, many problems can be formulated in terms of choosing between candidate models or deciding if a given model is an appropriate description of the data. Model selection is important and active area of statistics, and is complementary to the statistics we have so far discussed in the course.
 - The tools to preform model selection will depend on the application. It is often difficult (or impossible) to fit linear models to high dimensional data, so tools like ridge and LASSO regression are very useful in that they 1) get the job done and 2) can be used to preform feature selection.
@@ -393,7 +393,7 @@ as.data.frame(predictions_all) %>%
 
 [^sleazy]: These AIC~c~ score are _close_! It barely made our predetermined cut off of 2 units. This is a very good example of why it is important to decide on a "recipe" for model selection before we do anything. Let's pretend we are very attached to the random slope. We see that the AIC~c~ scores are really close! We might think to ourselves "you know what, maybe 2 units is too stringent, let's set the cut off at 3 instead" and then proceed to happily not-reject the intercept-slope model because it's indistinguishable from the intercept-only model. Of course, there is nothing stopping anybody from just swapping out the recipe under the table half way through without telling anyone and just pretending it was like that all along.
 
-# References and additional reading
+## References and additional reading
 
   1. [Johnson & Omland 2004. Model selection in ecology and evolution. _Trends in Ecology and Evolution_.](https://www.sciencedirect.com/science/article/abs/pii/S0169534703003458)
   2. Burnham & Anderson 2002. _Model Selection and Multimodel Inference_ (2nd ed.).

@@ -336,30 +336,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#lesson-preamble" id="toc-lesson-preamble" class="nav-link active" data-scroll-target="#lesson-preamble"><span class="header-section-number">12.1</span> Lesson preamble</a></li>
-  <li><a href="#model-selection-theory" id="toc-model-selection-theory" class="nav-link" data-scroll-target="#model-selection-theory"><span class="header-section-number">13</span> Model selection: theory</a>
+  <li><a href="#model-selection-theory" id="toc-model-selection-theory" class="nav-link" data-scroll-target="#model-selection-theory"><span class="header-section-number">12.2</span> Model selection: theory</a>
   <ul class="collapse">
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">13.1</span> Examples</a></li>
-  <li><a href="#common-model-selection-techniques" id="toc-common-model-selection-techniques" class="nav-link" data-scroll-target="#common-model-selection-techniques"><span class="header-section-number">13.2</span> Common model selection techniques</a></li>
-  <li><a href="#the-akaike-information-criterion-aic" id="toc-the-akaike-information-criterion-aic" class="nav-link" data-scroll-target="#the-akaike-information-criterion-aic"><span class="header-section-number">13.3</span> The Akaike information criterion (AIC)</a>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">12.2.1</span> Examples</a></li>
+  </ul></li>
+  <li><a href="#common-model-selection-techniques" id="toc-common-model-selection-techniques" class="nav-link" data-scroll-target="#common-model-selection-techniques"><span class="header-section-number">12.3</span> Common model selection techniques</a>
   <ul class="collapse">
-  <li><a href="#textaic_c-for-small-sample-sizes" id="toc-textaic_c-for-small-sample-sizes" class="nav-link" data-scroll-target="#textaic_c-for-small-sample-sizes"><span class="header-section-number">13.3.1</span> <span class="math inline">\(\text{AIC}_c\)</span> for small sample sizes</a></li>
+  <li><a href="#the-akaike-information-criterion-aic" id="toc-the-akaike-information-criterion-aic" class="nav-link" data-scroll-target="#the-akaike-information-criterion-aic"><span class="header-section-number">12.3.1</span> The Akaike information criterion (AIC)</a></li>
+  <li><a href="#textaic_c-for-small-sample-sizes" id="toc-textaic_c-for-small-sample-sizes" class="nav-link" data-scroll-target="#textaic_c-for-small-sample-sizes"><span class="header-section-number">12.3.2</span> <span class="math inline">\(\text{AIC}_c\)</span> for small sample sizes</a></li>
   </ul></li>
-  <li><a href="#stepwise-and-regularized-regression" id="toc-stepwise-and-regularized-regression" class="nav-link" data-scroll-target="#stepwise-and-regularized-regression"><span class="header-section-number">13.4</span> Stepwise and regularized regression</a>
+  <li><a href="#stepwise-and-regularized-regression" id="toc-stepwise-and-regularized-regression" class="nav-link" data-scroll-target="#stepwise-and-regularized-regression"><span class="header-section-number">12.4</span> Stepwise and regularized regression</a></li>
+  <li><a href="#stepwise-regressionand-why-you-should-not-use-it." id="toc-stepwise-regressionand-why-you-should-not-use-it." class="nav-link" data-scroll-target="#stepwise-regressionand-why-you-should-not-use-it."><span class="header-section-number">12.5</span> Stepwise regression…and why you should not use it.</a></li>
+  <li><a href="#regularized-regression" id="toc-regularized-regression" class="nav-link" data-scroll-target="#regularized-regression"><span class="header-section-number">12.6</span> Regularized regression</a></li>
+  <li><a href="#model-selection-for-lmms" id="toc-model-selection-for-lmms" class="nav-link" data-scroll-target="#model-selection-for-lmms"><span class="header-section-number">12.7</span> Model selection for LMMs</a>
   <ul class="collapse">
-  <li><a href="#stepwise-regressionand-why-you-should-not-use-it." id="toc-stepwise-regressionand-why-you-should-not-use-it." class="nav-link" data-scroll-target="#stepwise-regressionand-why-you-should-not-use-it."><span class="header-section-number">13.4.1</span> Stepwise regression…and why you should not use it.</a></li>
-  <li><a href="#regularized-regression" id="toc-regularized-regression" class="nav-link" data-scroll-target="#regularized-regression"><span class="header-section-number">13.4.2</span> Regularized regression</a></li>
+  <li><a href="#step-1-create-saturated-model" id="toc-step-1-create-saturated-model" class="nav-link" data-scroll-target="#step-1-create-saturated-model"><span class="header-section-number">12.7.1</span> Step 1: Create saturated model</a></li>
+  <li><a href="#step-2-optimize-random-effect-structure" id="toc-step-2-optimize-random-effect-structure" class="nav-link" data-scroll-target="#step-2-optimize-random-effect-structure"><span class="header-section-number">12.7.2</span> Step 2: Optimize random-effect structure</a></li>
+  <li><a href="#step-3-optimize-the-fixed-effect-structure" id="toc-step-3-optimize-the-fixed-effect-structure" class="nav-link" data-scroll-target="#step-3-optimize-the-fixed-effect-structure"><span class="header-section-number">12.7.3</span> Step 3: Optimize the fixed effect structure</a></li>
+  <li><a href="#step-4-interpret-model-output" id="toc-step-4-interpret-model-output" class="nav-link" data-scroll-target="#step-4-interpret-model-output"><span class="header-section-number">12.7.4</span> Step 4: Interpret model output</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#model-selection-for-lmms" id="toc-model-selection-for-lmms" class="nav-link" data-scroll-target="#model-selection-for-lmms"><span class="header-section-number">14</span> Model selection for LMMs</a>
-  <ul class="collapse">
-  <li><a href="#step-1-create-saturated-model" id="toc-step-1-create-saturated-model" class="nav-link" data-scroll-target="#step-1-create-saturated-model"><span class="header-section-number">14.0.1</span> Step 1: Create saturated model</a></li>
-  <li><a href="#step-2-optimize-random-effect-structure" id="toc-step-2-optimize-random-effect-structure" class="nav-link" data-scroll-target="#step-2-optimize-random-effect-structure"><span class="header-section-number">14.0.2</span> Step 2: Optimize random-effect structure</a></li>
-  <li><a href="#step-3-optimize-the-fixed-effect-structure" id="toc-step-3-optimize-the-fixed-effect-structure" class="nav-link" data-scroll-target="#step-3-optimize-the-fixed-effect-structure"><span class="header-section-number">14.0.3</span> Step 3: Optimize the fixed effect structure</a></li>
-  <li><a href="#step-4-interpret-model-output" id="toc-step-4-interpret-model-output" class="nav-link" data-scroll-target="#step-4-interpret-model-output"><span class="header-section-number">14.0.4</span> Step 4: Interpret model output</a></li>
-  </ul></li>
-  <li><a href="#model-averaging" id="toc-model-averaging" class="nav-link" data-scroll-target="#model-averaging"><span class="header-section-number">15</span> Model averaging</a></li>
-  <li><a href="#summaryand-some-words-of-caution" id="toc-summaryand-some-words-of-caution" class="nav-link" data-scroll-target="#summaryand-some-words-of-caution"><span class="header-section-number">16</span> Summary…and some words of caution</a></li>
-  <li><a href="#references-and-additional-reading" id="toc-references-and-additional-reading" class="nav-link" data-scroll-target="#references-and-additional-reading"><span class="header-section-number">17</span> References and additional reading</a></li>
+  <li><a href="#model-averaging" id="toc-model-averaging" class="nav-link" data-scroll-target="#model-averaging"><span class="header-section-number">12.8</span> Model averaging</a></li>
+  <li><a href="#summaryand-some-words-of-caution" id="toc-summaryand-some-words-of-caution" class="nav-link" data-scroll-target="#summaryand-some-words-of-caution"><span class="header-section-number">12.9</span> Summary…and some words of caution</a></li>
+  <li><a href="#references-and-additional-reading" id="toc-references-and-additional-reading" class="nav-link" data-scroll-target="#references-and-additional-reading"><span class="header-section-number">12.10</span> References and additional reading</a></li>
   </ul>
 </nav>
     </div>
@@ -410,12 +408,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </blockquote>
 </section>
-<section id="model-selection-theory" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> Model selection: theory</h1>
+<section id="model-selection-theory" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="model-selection-theory"><span class="header-section-number">12.2</span> Model selection: theory</h2>
 <p>Statistics is about making decisions under uncertainty. <em>Estimation</em> involves deciding what parameter values were most likely to (under a model of the distribution of the data and, in some circumstances, any prior knowledge about the parameters) have given rise to that data. <em>Inference</em> involves quantifying the uncertain around our estimates using confidence intervals. As we have seen, however, to any confidence interval there is an associated hypothesis test. Inference and hypothesis testing, then, involve deciding if a particular set of parameter values could have plausibly given rise to the data.</p>
 <p>It should come as no surprise, since both estimation and inference involve decision making, that in statistics we often interested in deciding if the models we build are appropriate descriptions of how the world works (given the data we have and use to fit those models), or what among a set of candidate models is the “best”. This practice is called <em>model selection</em> and is the focus of our lecture today.</p>
-<section id="examples" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="examples"><span class="header-section-number">13.1</span> Examples</h2>
+<section id="examples" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="examples"><span class="header-section-number">12.2.1</span> Examples</h3>
 <ul>
 <li><p>Hypothesis testing is a kind of model selection. For example, for data <span class="math inline">\(x_1,\dots,x_n \sim f(x|\theta)\)</span>, testing <span class="math inline">\(H_0 \colon \theta = \theta_0\)</span> vs <span class="math inline">\(H_1 \colon \theta \neq \theta_0\)</span> is equivalent to choosing between models <span class="math inline">\(\mathcal{M}_0 \colon f(x|\theta)\)</span> and <span class="math inline">\(\mathcal{M}_1 \colon f(x|\theta_0)\)</span>.</p></li>
 <li><p>Suppose we regress <span class="math inline">\(y\)</span> on the 1st, 2nd, <span class="math inline">\(\dots\)</span>, <span class="math inline">\(p\)</span>th powers of a covariate <span class="math inline">\(x\)</span>:</p></li>
@@ -428,17 +426,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[y_i = \beta_0 + \beta_1 x_{1i} + \dots + \beta_p x_{pi}.\]</span></p>
 <p>(The reason is that there are infinitely many solutions to the likelihood maximization problem.) In this case, we might want to select a subset of the covariates which best explain the available data. Of <span class="math inline">\(x_1,\dots,x_p\)</span>, which are most informative? This too is a kind of model selection problem. We will discuss methods to do “regularized” regression and feature selection (e.g., ridge and LASSO regression) today.</p>
 </section>
-<section id="common-model-selection-techniques" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="common-model-selection-techniques"><span class="header-section-number">13.2</span> Common model selection techniques</h2>
+</section>
+<section id="common-model-selection-techniques" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="common-model-selection-techniques"><span class="header-section-number">12.3</span> Common model selection techniques</h2>
 <ol type="1">
 <li>AIC and related methods (BIC, <span class="math inline">\(C_p\)</span>)</li>
 <li>Cross validation</li>
 <li>Regularized regression (ridge, LASSO, elastic net)</li>
 <li>Stepwise regression</li>
 </ol>
-</section>
-<section id="the-akaike-information-criterion-aic" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="the-akaike-information-criterion-aic"><span class="header-section-number">13.3</span> The Akaike information criterion (AIC)</h2>
+<section id="the-akaike-information-criterion-aic" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="the-akaike-information-criterion-aic"><span class="header-section-number">12.3.1</span> The Akaike information criterion (AIC)</h3>
 <p>Suppose we have data <span class="math inline">\(y_1,\dots,y_n\)</span> that are drawn from a distribution <span class="math inline">\(f\)</span> and a set of candidate models</p>
 <p><span class="math display">\[\mathcal{M}_j = \{p_j(y|\theta_j)\}.\]</span></p>
 <p>It is possible under this setup to find the maximum likelihood estimators for each of the candidate models; it is, however, difficult to compare these models in that the parameters underlying each model might not match (i.e., the models may not be nested). The <em>Akaike information criterion</em> overcomes this issue, and despite having a lengthy and complicated derivation, is a metric which balances two things: 1) the goodness-of-fit of the model and 2) the number of parameters fitted.</p>
@@ -449,17 +447,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Importantly, AIC corrects for the fact this is an unbiased estimator of the divergence by adding <span class="math inline">\(d_j/n\)</span>, where <span class="math inline">\(d_j = \text{dim}(\mathcal{M}_j)\)</span>. This term is what penalizes models with a large number of parameters. So,</p>
 <p><span class="math display">\[\text{AIC} = - 2 \log L(\hat{\theta}_{j,\text{MLE}}) + 2 d_j.\]</span></p>
 <p>Notice we have multiplied the preceding quantities by <span class="math inline">\(-2n\)</span> to get the above expression; this does not change anything, and is largely for historical reasons. Based on the AIC expression, it is clear 1) the higher the likelihood, the lower the AIC; 2) introducing more parameters into the model without changing the likelihood results in a greater value for the AIC. The balance between goodness-of-fit (likelihood) and the number of parameters (the potential to overfit) is what AIC tries to optimize in choosing between candidate models. As we have shown here, that balance is struck by minimizing the distance between candidate models and the ground truth while correcting for bias introduced by having models of different dimensions.</p>
-<section id="textaic_c-for-small-sample-sizes" class="level3" data-number="13.3.1">
-<h3 data-number="13.3.1" class="anchored" data-anchor-id="textaic_c-for-small-sample-sizes"><span class="header-section-number">13.3.1</span> <span class="math inline">\(\text{AIC}_c\)</span> for small sample sizes</h3>
+</section>
+<section id="textaic_c-for-small-sample-sizes" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="textaic_c-for-small-sample-sizes"><span class="header-section-number">12.3.2</span> <span class="math inline">\(\text{AIC}_c\)</span> for small sample sizes</h3>
 <p>It is sometimes convenient to, when sample sizes are small (<span class="math inline">\(n &lt; 40\)</span> is a commonly used rule-of-thumb) use the following metric to choose between candidate models:</p>
 <p><span class="math display">\[\text{AIC}_c = \text{AIC} + \frac{2d_j(d_j+1)}{n-d_j-1}\]</span></p>
 </section>
 </section>
-<section id="stepwise-and-regularized-regression" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="stepwise-and-regularized-regression"><span class="header-section-number">13.4</span> Stepwise and regularized regression</h2>
+<section id="stepwise-and-regularized-regression" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="stepwise-and-regularized-regression"><span class="header-section-number">12.4</span> Stepwise and regularized regression</h2>
 <p>We will return to model selection via AIC later in the lecture, but in the meantime we will discuss two kinds of feature selection techniques that can help us choose between covariates in a linear model.</p>
-<section id="stepwise-regressionand-why-you-should-not-use-it." class="level3" data-number="13.4.1">
-<h3 data-number="13.4.1" class="anchored" data-anchor-id="stepwise-regressionand-why-you-should-not-use-it."><span class="header-section-number">13.4.1</span> Stepwise regression…and why you should not use it.</h3>
+</section>
+<section id="stepwise-regressionand-why-you-should-not-use-it." class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="stepwise-regressionand-why-you-should-not-use-it."><span class="header-section-number">12.5</span> Stepwise regression…and why you should not use it.</h2>
 <p>Stepwise selection involves iteratively adding and removing predictors according to some criterion (e.g., variance explained). The steps for forward stepwise regression are as follows:</p>
 <ol type="1">
 <li>Let <span class="math inline">\(\mathcal{M}_0\)</span> be a null model, i.e., one with no predictors.</li>
@@ -470,8 +470,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>We, however, urge you to AVOID stepwise selection and to be critical of analyses which use it. No statistics can be a substitute for good theory which is informative about the predictors which have predictive power <em>because</em> they are biologically meaningful. When choosing between models, careful consideration of the what predictors are informative and <em>why</em> is key.</strong></p>
 <p>For more on the problems with automated stepwise selection methods, see <a href="https://stats.stackexchange.com/questions/20836/algorithms-for-automatic-model-selection?noredirect=1&amp;lq=1">here</a>.</p>
 </section>
-<section id="regularized-regression" class="level3" data-number="13.4.2">
-<h3 data-number="13.4.2" class="anchored" data-anchor-id="regularized-regression"><span class="header-section-number">13.4.2</span> Regularized regression</h3>
+<section id="regularized-regression" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="regularized-regression"><span class="header-section-number">12.6</span> Regularized regression</h2>
 <p>A more principled approach to linear model selection is so-called <em>regularized regression</em>. These approaches constrain the least squares problem (i.e., maximizing the likelihood function with respect to the regression coefficients) in some way. These constraints help “pull” the regression coefficients to zero and filter the features which are most informative about the response. The induced sparsity (i.e., many of the regression coefficients being <span class="math inline">\(=0\)</span>) is ideal in that it helps improve the interpretability and predictive power of the model.</p>
 <p>Different types of constraint “regularize” the regression coefficients in different ways. Ridge regression fits the coefficients of a linear model <span class="math inline">\(\boldsymbol{y} = \boldsymbol{X} \boldsymbol{\beta} + \boldsymbol{\varepsilon}\)</span> subject to <span class="math inline">\(||\boldsymbol{\beta}||_2^2 = \beta_0^2 + \beta_2^2 + \cdots + \beta_p^2 \leqslant t.\)</span> The LASSO fits the same model, but subject to <span class="math inline">\(||\boldsymbol{\beta}||_1 = |\beta_0| + |\beta_2| + \cdots + |\beta_p| \leqslant t.\)</span> While ridge regression pulls coefficients close to zero, LASSO forces the fitted model to be sparse (i.e., most coefficients are exactly zero).</p>
 <p>There are several packages which fit models subject to the ridge and LASSO constraints in R. The below example shows how to implement LASSO regression for simulated data using the function <code>glmnet</code>. (The syntax is similar for ridge and other forms of regularized regression.)</p>
@@ -519,31 +519,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">-10.0</td>
-<td style="text-align: right;">-10.0888176</td>
+<td style="text-align: right;">-9.7832213</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">0.0</td>
-<td style="text-align: right;">0.4418103</td>
+<td style="text-align: right;">0.5840153</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">2.5</td>
-<td style="text-align: right;">2.0592238</td>
+<td style="text-align: right;">2.7708277</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">5.0</td>
-<td style="text-align: right;">5.6884304</td>
+<td style="text-align: right;">4.3652436</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">10.0</td>
-<td style="text-align: right;">9.2832905</td>
+<td style="text-align: right;">8.9191702</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">25.0</td>
-<td style="text-align: right;">25.4455372</td>
+<td style="text-align: right;">25.1922119</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">50.0</td>
-<td style="text-align: right;">49.4097793</td>
+<td style="text-align: right;">48.9912049</td>
 </tr>
 </tbody>
 </table>
@@ -551,10 +551,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>It appears the value of <span class="math inline">\(\lambda\)</span> that is ideal for the problem at hand is so small that LASSO regression returns the same coefficients as un-constrained least squares, i.e., the penalty does not affect estimation of the coefficients too much! The data we have used here are cherry-picked to illustrate how the method works with relative ease. Implementation of the LASSO is a bit trickier with more features. <strong>However, when you need to preform feature selection on a large number of covariates and have limited data (<span class="math inline">\(p\)</span> large), a combination of cross-validation and LASSO regression is the way to go.</strong></p>
 </section>
-</section>
-</section>
-<section id="model-selection-for-lmms" class="level1" data-number="14">
-<h1 data-number="14"><span class="header-section-number">14</span> Model selection for LMMs</h1>
+<section id="model-selection-for-lmms" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="model-selection-for-lmms"><span class="header-section-number">12.7</span> Model selection for LMMs</h2>
 <p>Model selection for mixed models is even more complicated, due to the addition of random effects. A procedure that is commonly used to preform selection of LMMs is as follows:</p>
 <ol type="1">
 <li><p>Create a <em>saturated model</em> that includes all fixed effects (and their interactions<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>) and random effects you wish to test.</p></li>
@@ -566,8 +564,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rikz_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"rikz_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="step-1-create-saturated-model" class="level3" data-number="14.0.1">
-<h3 data-number="14.0.1" class="anchored" data-anchor-id="step-1-create-saturated-model"><span class="header-section-number">14.0.1</span> Step 1: Create saturated model</h3>
+<section id="step-1-create-saturated-model" class="level3" data-number="12.7.1">
+<h3 data-number="12.7.1" class="anchored" data-anchor-id="step-1-create-saturated-model"><span class="header-section-number">12.7.1</span> Step 1: Create saturated model</h3>
 <p>Let’s recreate the random intercept and random intercept-slope models we created last class, and add in Exposure and the interaction between NAP and Exposure as additional fixed effects.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set `REML=TRUE` in anticipation of step 2 </span></span>
@@ -576,8 +574,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>mixed_model_IntSlope <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness<span class="sc">~</span>NAP<span class="sc">*</span>Exposure<span class="sc">+</span>(<span class="dv">1</span><span class="sc">+</span>NAP<span class="sc">|</span>Beach), <span class="at">REML=</span><span class="cn">TRUE</span>, <span class="at">data=</span>rikz_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="step-2-optimize-random-effect-structure" class="level3" data-number="14.0.2">
-<h3 data-number="14.0.2" class="anchored" data-anchor-id="step-2-optimize-random-effect-structure"><span class="header-section-number">14.0.2</span> Step 2: Optimize random-effect structure</h3>
+<section id="step-2-optimize-random-effect-structure" class="level3" data-number="12.7.2">
+<h3 data-number="12.7.2" class="anchored" data-anchor-id="step-2-optimize-random-effect-structure"><span class="header-section-number">12.7.2</span> Step 2: Optimize random-effect structure</h3>
 <p>To optimize the random effects, we compare <code>mixed_model_IntSlope</code> with <code>mixed_model_IntOnly</code>. This will determine whether including a random slope for each beach improves the fit of the model to the observed data, and we couldn’t decide otherwise because there isn’t any prior research on whether we should expect the species richness and NAP relationship to differ by beach. We are <strong>NOT</strong> testing the <code>mixed_model_IntOnly</code> model against one in which there are no random effects since including a random intercept for each beach is required to account for the non-independence in the data.</p>
 <p>Let’s get the <span class="math inline">\(\text{AIC}_c\)</span> for our two models are given by:</p>
 <div class="cell">
@@ -590,8 +588,8 @@ mixed_model_IntSlope  8 237.2527</code></pre>
 </div>
 <p>Based on the above, the random intercept only model is a better fit to the data (<span class="math inline">\(\text{AIC}_c\)</span> is lower by 2.0157 units<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>). The optimal random-effect structure is thus one that includes only a random intercept for each beach but not a random slope.</p>
 </section>
-<section id="step-3-optimize-the-fixed-effect-structure" class="level3" data-number="14.0.3">
-<h3 data-number="14.0.3" class="anchored" data-anchor-id="step-3-optimize-the-fixed-effect-structure"><span class="header-section-number">14.0.3</span> Step 3: Optimize the fixed effect structure</h3>
+<section id="step-3-optimize-the-fixed-effect-structure" class="level3" data-number="12.7.3">
+<h3 data-number="12.7.3" class="anchored" data-anchor-id="step-3-optimize-the-fixed-effect-structure"><span class="header-section-number">12.7.3</span> Step 3: Optimize the fixed effect structure</h3>
 <p>We now need to refit the model with the optimal random-effect structure using ML and compare different fixed effect structures. We will construct a series of models that captures all possible combinations of fixed effects terms in our saturated model in order to find the best one. Let’s fit these models below and check their <span class="math inline">\(\text{AIC}_c\)</span>s. Don’t forget to include a model that doesn’t have any fixed effects!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Full model with both fixed effects and their interaction</span></span>
@@ -669,8 +667,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Ah-Ha! With <span class="math inline">\(p\)</span>-value of 0.040, we reject the null hypothesis (i.e., the simpler model is a better description of the data) in favor of alternative hypothesis (the more complex model!).</p>
 </section>
-<section id="step-4-interpret-model-output" class="level3" data-number="14.0.4">
-<h3 data-number="14.0.4" class="anchored" data-anchor-id="step-4-interpret-model-output"><span class="header-section-number">14.0.4</span> Step 4: Interpret model output</h3>
+<section id="step-4-interpret-model-output" class="level3" data-number="12.7.4">
+<h3 data-number="12.7.4" class="anchored" data-anchor-id="step-4-interpret-model-output"><span class="header-section-number">12.7.4</span> Step 4: Interpret model output</h3>
 <p>Finally, let’s re-fit the best-fitting model via REML:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mixed_model_IntOnly_Full2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness<span class="sc">~</span>NAP<span class="sc">*</span>Exposure<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>Beach), </span>
@@ -713,10 +711,10 @@ NAP:Exposur  0.302 -0.997 -0.306</code></pre>
 <p>We see that increasing both NAP and Exposure results in a significant decrease in species richness (<span class="math inline">\(p&lt;0.05\)</span>). There is also a marginally insignificant interaction between NAP and Exposure which we won’t read too much into (<span class="math inline">\(p=0.051\)</span>!). Finally, while Beach is included in our model as a random effect, notice how little variation is attributed to differences between beaches relative to the model we ran in lecture 7 (~45% of residual variance vs.&nbsp;approx. 0). The only difference is that our current model includes Exposure as a fixed effect. This suggests that much of the variation between beaches in lecture 7 was likely attributable to differences in exposure, which is now being captured by the fixed effects.</p>
 </section>
 </section>
-<section id="model-averaging" class="level1" data-number="15">
-<h1 data-number="15"><span class="header-section-number">15</span> Model averaging</h1>
+<section id="model-averaging" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="model-averaging"><span class="header-section-number">12.8</span> Model averaging</h2>
 <p>In Assignment 4, you will use data from Santangelo <em>et al.</em> (2019) who were interested in understanding how insect herbivores and plant defenses influence the expression of plant floral traits. While that was one component of the study, the main question was whether herbivores, pollinators, and plant defenses alter the shape and strength of <em>natural selection</em> on plant floral traits. In other words, which of these 3 agents of selection (plant defenses, herbivores, or pollinators) are most important in driving the evolution of floral traits in plants?</p>
-<p>The motivation for that experiment actually came a few year prior, in 2016, when Thompson and Johnson[^ref1] published an experiment examining how plant defenses alter natural selection on plant floral traits. They found some interesting patterns but it was unclear whether these were being driven by the plant’s interactions with herbivores, pollinators, or both. This was because they didn’t directly manipulate these agents: pollination was not quantified in their experiment and herbivore damage was measured observationally and thus these results were correlative. However, their experimental data provides a prime use of model selection in ecology and evolution.</p>
+<p>The motivation for that experiment actually came a few year prior, in 2016, when Thompson and Johnson published an experiment examining how plant defenses alter natural selection on plant floral traits. They found some interesting patterns but it was unclear whether these were being driven by the plant’s interactions with herbivores, pollinators, or both. This was because they didn’t directly manipulate these agents: pollination was not quantified in their experiment and herbivore damage was measured observationally and thus these results were correlative. However, their experimental data provides a prime use of model selection in ecology and evolution.</p>
 <p>The data consists of 140 observations (rows). Each row in the dataset corresponds to the mean trait value of one plant genotype (they had replicates for each genotype but took the average across these replicates) grown in a common garden. They measured 8 traits and quantified the total mass of seeds produced by plants as a measure of absolute fitness. Genotypes were either “cyanogenic” (i.e., containing plant defenses) or were “acyanogenic” (i.e., lacking plant defenses). In addition, they quantified the amount of herbivore damage (i.e., percent leaf area lost) on each plant twice throughout the growing season, although here we will only focus on the effects of plant defenses and avoid their herbivore damage measurements. We are going to estimate the strength of selection on each trait (controlling for correlations between traits due to the pleiotropic action of genes) and assess whether plant defenses alter the strength or direction of natural selection imposed on these traits. We developed the tools to do this in a previous lecture, where we learned that estimating different kinds of selection can be done by regressing fitness on standardized trait values (i.e., mean of 0 and standard deviation of 1).</p>
 <p>Let’s start by loading in the data.</p>
 <div class="cell">
@@ -958,8 +956,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note: all other trait values are =0 for the purpose of visualization</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="summaryand-some-words-of-caution" class="level1" data-number="16">
-<h1 data-number="16"><span class="header-section-number">16</span> Summary…and some words of caution</h1>
+<section id="summaryand-some-words-of-caution" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="summaryand-some-words-of-caution"><span class="header-section-number">12.9</span> Summary…and some words of caution</h2>
 <ul>
 <li>As we have seen, many problems can be formulated in terms of choosing between candidate models or deciding if a given model is an appropriate description of the data. Model selection is important and active area of statistics, and is complementary to the statistics we have so far discussed in the course.</li>
 <li>The tools to preform model selection will depend on the application. It is often difficult (or impossible) to fit linear models to high dimensional data, so tools like ridge and LASSO regression are very useful in that they 1) get the job done and 2) can be used to preform feature selection.</li>
@@ -969,8 +967,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>DO *clap* NOT *clap* USE *clap* <code>dredge</code> *clap* TO *clap* <span class="math inline">\(p\)</span> *clap* HACK *clap*.</li>
 </ul>
 </section>
-<section id="references-and-additional-reading" class="level1" data-number="17">
-<h1 data-number="17"><span class="header-section-number">17</span> References and additional reading</h1>
+<section id="references-and-additional-reading" class="level2" data-number="12.10">
+<h2 data-number="12.10" class="anchored" data-anchor-id="references-and-additional-reading"><span class="header-section-number">12.10</span> References and additional reading</h2>
 <ol type="1">
 <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0169534703003458">Johnson &amp; Omland 2004. Model selection in ecology and evolution. <em>Trends in Ecology and Evolution</em>.</a></li>
 <li>Burnham &amp; Anderson 2002. <em>Model Selection and Multimodel Inference</em> (2nd ed.).</li>
