@@ -519,31 +519,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">-10.0</td>
-<td style="text-align: right;">-11.9902987</td>
+<td style="text-align: right;">-9.7832213</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">0.0</td>
-<td style="text-align: right;">-0.6864149</td>
+<td style="text-align: right;">0.5840153</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">2.5</td>
-<td style="text-align: right;">2.9432265</td>
+<td style="text-align: right;">2.7708277</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">5.0</td>
-<td style="text-align: right;">5.9484085</td>
+<td style="text-align: right;">4.3652436</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">10.0</td>
-<td style="text-align: right;">10.5237587</td>
+<td style="text-align: right;">8.9191702</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">25.0</td>
-<td style="text-align: right;">25.0713273</td>
+<td style="text-align: right;">25.1922119</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">50.0</td>
-<td style="text-align: right;">50.7655196</td>
+<td style="text-align: right;">48.9912049</td>
 </tr>
 </tbody>
 </table>
@@ -714,7 +714,7 @@ NAP:Exposur  0.302 -0.997 -0.306</code></pre>
 <section id="model-averaging" class="level2" data-number="12.8">
 <h2 data-number="12.8" class="anchored" data-anchor-id="model-averaging"><span class="header-section-number">12.8</span> Model averaging</h2>
 <p>In Assignment 4, you will use data from Santangelo <em>et al.</em> (2019) who were interested in understanding how insect herbivores and plant defenses influence the expression of plant floral traits. While that was one component of the study, the main question was whether herbivores, pollinators, and plant defenses alter the shape and strength of <em>natural selection</em> on plant floral traits. In other words, which of these 3 agents of selection (plant defenses, herbivores, or pollinators) are most important in driving the evolution of floral traits in plants?</p>
-<p>The motivation for that experiment actually came a few year prior, in 2016, when Thompson and Johnson[^ref1] published an experiment examining how plant defenses alter natural selection on plant floral traits. They found some interesting patterns but it was unclear whether these were being driven by the plant’s interactions with herbivores, pollinators, or both. This was because they didn’t directly manipulate these agents: pollination was not quantified in their experiment and herbivore damage was measured observationally and thus these results were correlative. However, their experimental data provides a prime use of model selection in ecology and evolution.</p>
+<p>The motivation for that experiment actually came a few year prior, in 2016, when Thompson and Johnson published an experiment examining how plant defenses alter natural selection on plant floral traits. They found some interesting patterns but it was unclear whether these were being driven by the plant’s interactions with herbivores, pollinators, or both. This was because they didn’t directly manipulate these agents: pollination was not quantified in their experiment and herbivore damage was measured observationally and thus these results were correlative. However, their experimental data provides a prime use of model selection in ecology and evolution.</p>
 <p>The data consists of 140 observations (rows). Each row in the dataset corresponds to the mean trait value of one plant genotype (they had replicates for each genotype but took the average across these replicates) grown in a common garden. They measured 8 traits and quantified the total mass of seeds produced by plants as a measure of absolute fitness. Genotypes were either “cyanogenic” (i.e., containing plant defenses) or were “acyanogenic” (i.e., lacking plant defenses). In addition, they quantified the amount of herbivore damage (i.e., percent leaf area lost) on each plant twice throughout the growing season, although here we will only focus on the effects of plant defenses and avoid their herbivore damage measurements. We are going to estimate the strength of selection on each trait (controlling for correlations between traits due to the pleiotropic action of genes) and assess whether plant defenses alter the strength or direction of natural selection imposed on these traits. We developed the tools to do this in a previous lecture, where we learned that estimating different kinds of selection can be done by regressing fitness on standardized trait values (i.e., mean of 0 and standard deviation of 1).</p>
 <p>Let’s start by loading in the data.</p>
 <div class="cell">
