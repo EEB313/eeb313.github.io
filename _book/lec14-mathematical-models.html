@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>EEB313: Quantitative Methods in R for Biology - 15&nbsp; Mathematical modeling I</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./assignment-01.html" rel="next">
+<link href="./lec12-command-line_git.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lec00-rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="./lec14-mathematical-models.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mathematical modeling I</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">EEB313: Quantitative Methods in R for Biology</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/EEB313/eeb313.github.io" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Syllabus</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./about-us.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The 2023 teaching team</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./downloadingR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Downloading R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Lectures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec00-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with RStudio and R Notebook</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec01-markdown-workflows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Markdown, project workflows</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec02-base-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Base R: assignment, vectors, functions, and loops</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec03-dataframes-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data frames, intro to dplyr</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec04-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data wrangling in dplyr</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec05-data-visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data visualization in ggplot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec06-exploratory-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exploratory data analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec07-intro-to-stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec08-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec09-mixed-effects-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Linear mixed models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec10-model-selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec11-multivariate-stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Multivariate statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec12-command-line_git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Command line &amp; Git(Hub)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lec14-mathematical-models.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mathematical modeling I</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignment-01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Assignment 01</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignment-02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Assignment 02</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignment-03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Assignment 03</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignment-04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Assignment 04</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignment-05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Assignment 05</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Project</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Project description</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Some open-access databases</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Miscellaneous notes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tests-assignment-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">More on hypothesis testing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lesson-preamble" id="toc-lesson-preamble" class="nav-link active" data-scroll-target="#lesson-preamble"><span class="header-section-number">15.1</span> Lesson preamble</a></li>
+  <li><a href="#why-model" id="toc-why-model" class="nav-link" data-scroll-target="#why-model"><span class="header-section-number">15.2</span> Why model?</a></li>
+  <li><a href="#geometric-growth" id="toc-geometric-growth" class="nav-link" data-scroll-target="#geometric-growth"><span class="header-section-number">15.3</span> Geometric growth</a></li>
+  <li><a href="#exponential-growth" id="toc-exponential-growth" class="nav-link" data-scroll-target="#exponential-growth"><span class="header-section-number">15.4</span> Exponential growth</a></li>
+  <li><a href="#fitting-simple-models-to-data" id="toc-fitting-simple-models-to-data" class="nav-link" data-scroll-target="#fitting-simple-models-to-data"><span class="header-section-number">15.5</span> Fitting (simple) models to data</a></li>
+  <li><a href="#the-sir-model" id="toc-the-sir-model" class="nav-link" data-scroll-target="#the-sir-model"><span class="header-section-number">15.6</span> The SIR model</a>
+  <ul class="collapse">
+  <li><a href="#challenge" id="toc-challenge" class="nav-link" data-scroll-target="#challenge"><span class="header-section-number">15.6.1</span> Challenge</a></li>
+  </ul></li>
+  <li><a href="#when-will-the-epidemic-grow" id="toc-when-will-the-epidemic-grow" class="nav-link" data-scroll-target="#when-will-the-epidemic-grow"><span class="header-section-number">15.7</span> When will the epidemic grow?</a></li>
+  <li><a href="#what-happens-in-the-long-run" id="toc-what-happens-in-the-long-run" class="nav-link" data-scroll-target="#what-happens-in-the-long-run"><span class="header-section-number">15.8</span> What happens in the long run?</a>
+  <ul class="collapse">
+  <li><a href="#a-stability-analysis-of-the-disease-free-equilibrium" id="toc-a-stability-analysis-of-the-disease-free-equilibrium" class="nav-link" data-scroll-target="#a-stability-analysis-of-the-disease-free-equilibrium"><span class="header-section-number">15.8.1</span> A stability analysis of the disease-free equilibrium</a></li>
+  </ul></li>
+  <li><a href="#competition-competitive-exclusion-and-mutation-to-maintain-diversity" id="toc-competition-competitive-exclusion-and-mutation-to-maintain-diversity" class="nav-link" data-scroll-target="#competition-competitive-exclusion-and-mutation-to-maintain-diversity"><span class="header-section-number">15.9</span> Competition, competitive exclusion, and mutation to maintain diversity!</a></li>
+  <li><a href="#the-wright-fisher-model-evolution-under-genetic-drift" id="toc-the-wright-fisher-model-evolution-under-genetic-drift" class="nav-link" data-scroll-target="#the-wright-fisher-model-evolution-under-genetic-drift"><span class="header-section-number">15.10</span> The Wright-Fisher model: evolution under genetic drift</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">15.11</span> Summary</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">15.12</span> Resources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mathematical modeling I</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="lesson-preamble" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="lesson-preamble"><span class="header-section-number">15.1</span> Lesson preamble</h2>
+<blockquote class="blockquote">
+<h3 id="lesson-objectives" data-number="15.1.1" class="anchored"><span class="header-section-number">15.1.1</span> Lesson objectives</h3>
+<ul>
+<li>Develop familiarity with mathematical models and why and where they are used in EEB.</li>
+<li>Develop understanding of important models in EEB, including
+<ul>
+<li>The (geometric) growth of a population with constant birth and death rates</li>
+<li>Exponential growth of a population</li>
+<li>The spread of an infectious disease in a susceptible population</li>
+<li>Competition between types, competitive exclusion</li>
+<li>The Wright-Fisher model of allele frequency change at a single, non-recombining locus</li>
+</ul></li>
+<li>Conceptually understand equilibria and their stability</li>
+<li>Become familiar with the ways approximation is used in modeling complex systems</li>
+<li>Become familiar with how mathematical models can be fit to data</li>
+</ul>
+</blockquote>
+<blockquote class="blockquote">
+<h3 id="lesson-outline" data-number="15.1.2" class="anchored"><span class="header-section-number">15.1.2</span> Lesson outline</h3>
+<ul>
+<li>Why model?</li>
+<li>Geometric and exponential growth</li>
+<li>Fitting models to the data</li>
+<li>SIR model: when does an epidemic grow?</li>
+<li>Equilibria and stability</li>
+<li>Back to the SIR model</li>
+<li>Competition and competitive exclusion</li>
+<li>Mutation-selection balance</li>
+<li>The Wright-Fisher model: predictions for evolution via drift</li>
+</ul>
+</blockquote>
+</section>
+<section id="why-model" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="why-model"><span class="header-section-number">15.2</span> Why model?</h2>
+<p>Mathematical models are descriptions of biological processes which describe idealized situations and can help us build intuition and understanding for how those processes may unfold in nature. they help us</p>
+<ul>
+<li>clarify assumptions we may have about how complex systems work</li>
+<li>build understanding of how processes in complex systems interact</li>
+<li><em>generate</em> predictions and hypothesis</li>
+<li><em>test</em> predictions and hypothesis based on analysis of the model of fitting to data</li>
+<li>determine what data is needed to learn about something (of if it is possible to, given the data that is available, reliably infer parameters of interest)</li>
+<li>determine in what ways certain kinds of data may be problematic or biased</li>
+</ul>
+<p>In this lecture, we will discuss six models: (1) a deterministic, discrete-time model of <strong>geometric growth</strong> of a population with constant per-capita rates of birth and death. (2) A model of <strong>exponential growth</strong>, the continuous-time equivalent of the geometric growth model. (3) A <strong>Susceptible-Infected-Recovered (SIR) model</strong> in which <em>interactions</em> between variables shape the transient and long-run the dynamics of the system. (4) A deterministic, continuous-time model of <strong>competitive exclusion between individuals of two types</strong> (e.g., different species, individuals of the same species carrying different alleles, etc.). (5) An extension of the previous model which maintains diversity via recurrent mutation between types. (6) The <strong>Wright-Fisher model</strong>, a discrete-time, stochastic model allele frequency change at a single, non-recombining locus. The Wright-Fisher model captures how genetic drift (without mutation, selection, migration, etc.) alone shapes patterns of genetic diversity through time and in the long-run.</p>
+</section>
+<section id="geometric-growth" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="geometric-growth"><span class="header-section-number">15.3</span> Geometric growth</h2>
+<p>Let <span class="math inline">\(N_t\)</span> be the number of individuals at times <span class="math inline">\(t=0,1,2,3,\dots\)</span>. Suppose we know <span class="math inline">\(N_0\)</span>, the initial number of individuals in the population. Assume</p>
+<ol type="1">
+<li>From one time to the next, every individual reproduces at per-captia rate <span class="math inline">\(b\)</span></li>
+<li>From one time to the next, every individual dies at per-catpia rate <span class="math inline">\(d\)</span></li>
+<li>The population is closed: there is no immigration and no emigration</li>
+<li>There is no stochasticity: individuals do not, by chance, give birth to more/fewer offspring</li>
+</ol>
+<p>In this case, we can write describe the population size at generation <span class="math inline">\(t+1\)</span> in terms of the <em>population size at the previous generation</em> by keeping track of everything that could unfold: the birth of new individuals. The governing equation would be</p>
+<p><span class="math display">\[N_{t+1} = N_t + b N_t - d N_t = (1+b-d)N_t, \]</span></p>
+<p>where <span class="math inline">\(b N_t\)</span> is the number of individuals born into the population and <span class="math inline">\(d N_t\)</span> is the number of individuals who leave the population because they die. Births and deaths modify the previous population size such that, if <span class="math inline">\(b &gt; d\)</span>, then the population will grow. If <span class="math inline">\(b &lt; d\)</span>, the population will decline in size. If <span class="math inline">\(b = d\)</span>, then the population will stay constant in size. This model is unique insofar as it has a closed form solution, i.e., we know the state of the system at any time in the future given knowledge of its state at time zero:</p>
+<p><span class="math display">\[N_1 = (1+b-d) N_0\]</span> <span class="math display">\[N_2 = (1+b-d) N_1 = (1+b-d)(1+b-d) N_0\]</span> <span class="math display">\[N_3 = (1+b-d) N_2 = (1+b-d) (1+b-d)^2 N_0 = (1+b-d)^3 N_0\]</span></p>
+<p>In general, <span class="math inline">\(N_t = (1+b-d)^t N_0\)</span> for all <span class="math inline">\(t\)</span>.</p>
+<p>When <span class="math inline">\(b&gt;d\)</span>, the population is said to <em>grow geometrically</em>, in that the growth rate <span class="math inline">\(1+b+d\)</span> is being raised to a power equal to the number of timesteps (e.g., generations) that have passed. Moreover, it is sometimes convenient in discrete time models like this to describe the dynamics in terms of how variables change from one time to the next. In the case of the geometric growth model, we can express the dynamics in terms of change in absolute population size</p>
+<p><span class="math display">\[\Delta N_t = N_{t+1} - N_t = (1+b-d) N_t - N_t = (b-d) N_t.\]</span></p>
+<p>In population ecology, <span class="math inline">\((b-d)\)</span> is called the <em>intrinsic rate of increase or decrease</em>, and often denoted <span class="math inline">\(r\)</span>. If positive, the population grows in a given generation. If not, it becomes smaller.</p>
+</section>
+<section id="exponential-growth" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="exponential-growth"><span class="header-section-number">15.4</span> Exponential growth</h2>
+<p>Continuous time analogues of discrete time equations are often written as differential equations. If we assume the times <span class="math inline">\(t=0,1,2,3,\dots\)</span>, we can replace the difference in the previous equation with a derivative to describe the dynamics of a population changing in continuous time:</p>
+<p><span class="math display">\[\frac{d N}{dt} = (b-d) N = r N\]</span></p>
+<p>subject to <span class="math inline">\(N(0) = N_0\)</span>. Like the geometric growth equation, we can solve this equation exactly. Diving through by <span class="math inline">\(N\)</span> and using properties of derivatives from calculus, one has</p>
+<p><span class="math display">\[\frac{1}{N} \frac{d N}{d t} = \frac{d \ln N}{d t} = r.\]</span></p>
+<p>This equation tells us that, in the continuous time version of the growth model above, the per-capita (i.e., <em>logarithmic</em>) rate of increase in the population size is constant. Integrating and applying the initial condition, one can show <span class="math inline">\(N(t) = N_0 e^{r t}\)</span>. If <span class="math inline">\(r &gt; 0\)</span>, i.e., <span class="math inline">\(b &gt; d\)</span>, then the population grows exponentially; if <span class="math inline">\(r &lt; 0\)</span>, the population will decay exponentially in size to zero. The trajectory of the population is completely determined in a deterministic model like this one by the parameters (i.e., the intrinsic growth rate) and initial conditions.</p>
+</section>
+<section id="fitting-simple-models-to-data" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="fitting-simple-models-to-data"><span class="header-section-number">15.5</span> Fitting (simple) models to data</h2>
+<p>Suppose we measure the size of a population through time, and believe that the assumptions we have made (i.e., constant birth and death rates) are reasonable for the system.</p>
+<p>The steps to fit a mathematical model to the data are as follow:</p>
+<ol type="1">
+<li>Determine the distribution of data around the solution of the model (difference or differential equation). A common convention is that the data are normally distributed around the solution to the model for a given initial condition and set of parameter values. If <span class="math inline">\(Y_i\)</span> is the measurement at time <span class="math inline">\(t_i\)</span> and <span class="math inline">\(X_i\)</span> is the state of the system (e.g., the real population size or the true values of more variables, which influence each other and the dynamics), then this amounts to specifying the distribution of <span class="math inline">\(Y_i\)</span> given <span class="math inline">\(X_i\)</span>:</li>
+</ol>
+<p><span class="math display">\[f_{Y_i|X_i}(y_i|\text{parameters})\]</span></p>
+<ol start="2" type="1">
+<li>Write down and (numerically) maximize the log-likelihood function:</li>
+</ol>
+<p><span class="math display">\[\ln L(\text{parameters}|\text{data } y_1,\dots,y_n) = \sum_{i=1}^n \ln f_{Y_i|X_i}(y_i|\text{parameters}).\]</span></p>
+<p>When the distribution of the measurements around the solution to the system (model) is normal with some variance (and mean equal to the model solution), maximizing the likelihood is equivalent to minimizing the sum of squared departures of the solution from the data.</p>
+<p>We will return to fitting mathematical models to data next lecture.</p>
+</section>
+<section id="the-sir-model" class="level2" data-number="15.6">
+<h2 data-number="15.6" class="anchored" data-anchor-id="the-sir-model"><span class="header-section-number">15.6</span> The SIR model</h2>
+<p>The Susceptible-Infected-Recovered (SIR) model describes how different processes (e.g., transmission, recovery, virulence, loss of immunity, demography) shape how a pathogen spreads in a population through time and if it is able to persist in the long-run. The model tracks the number of susceptible <span class="math inline">\(S\)</span>, infected <span class="math inline">\(I\)</span>, and recovered <span class="math inline">\(R\)</span> individuals in continuous time.</p>
+<p>Assuming that the population size is constant (<span class="math inline">\(N = S + I + R\)</span> does not change), susceptible individuals acquire the infection at rate <span class="math inline">\(\beta\)</span>, and infected individuals recover at rate <span class="math inline">\(\gamma\)</span>, the model equations are given by:</p>
+<p><span class="math display">\[\frac{dS}{dt} = - \beta SI\]</span> <span class="math display">\[\frac{dI}{dt} = \beta SI - \gamma I\]</span> <span class="math display">\[\frac{dR}{dt} = \gamma I\]</span></p>
+<p>Since the population size is constant, one of these is not actually needed. Focusing in on the <span class="math inline">\(I\)</span> equation, however, we notice that is of the same form as the geometric and exponential growth models: we simply track the flux in and out of the compartment due to, in the case of <span class="math inline">\(I\)</span>, infection and recovery.</p>
+<section id="challenge" class="level3" data-number="15.6.1">
+<h3 data-number="15.6.1" class="anchored" data-anchor-id="challenge"><span class="header-section-number">15.6.1</span> Challenge</h3>
+<ul>
+<li>What are the assumptions of the model?</li>
+<li>What terms are missing?</li>
+<li>What is the model trying to capture?</li>
+<li>What dynamics and long run behavior might we expect of a disease that has been introduced to a largely susceptible population?</li>
+</ul>
+</section>
+</section>
+<section id="when-will-the-epidemic-grow" class="level2" data-number="15.7">
+<h2 data-number="15.7" class="anchored" data-anchor-id="when-will-the-epidemic-grow"><span class="header-section-number">15.7</span> When will the epidemic grow?</h2>
+<p>To determine if an epidemic that begins from the rare introduction of a pathogen into a closed population will spread, we can use the SIR equations together with a somewhat sneaky approximation. For the epidemic to grow, we need</p>
+<p><span class="math display">\[\frac{d I}{dt} = \beta S I - \gamma I &gt; 0\]</span></p>
+<p>At the beginning of the outbreak, <span class="math inline">\(I \approx 1\)</span> and so <span class="math inline">\(S \approx N\)</span> because no individuals have immunity to the disease under investigation. So the condition for the disease to spread is</p>
+<p><span class="math display">\[\frac{d I}{dt} = \beta N - \gamma &gt; 0 \iff R_0 = \frac{\beta N}{\gamma} &gt; 1.\]</span></p>
+<p>The quantity <span class="math inline">\(R_0\)</span> measures the <em>average number of secondary infections from a single infectious individual in an otherwise susceptible population</em>. This measure of reproductive success or fitness is also common in population ecology. Intuitively, if the pathogen is unable to infect <span class="math inline">\(&gt;1\)</span> individual on average when the susceptible pool has not yet been depleted (i.e., all individuals are susceptible), it will fail to spread. If <span class="math inline">\(R_0 &gt; 1\)</span>, then the disease will spread. Importantly, <span class="math inline">\(R_0\)</span> does not provide a quantitative measure of how quickly this happens, and researchers in the field have proposed using other metrics (like the intrinsic growth rate of the pathogen) to measure the speed of pathogen invasion in a susceptible population.</p>
+</section>
+<section id="what-happens-in-the-long-run" class="level2" data-number="15.8">
+<h2 data-number="15.8" class="anchored" data-anchor-id="what-happens-in-the-long-run"><span class="header-section-number">15.8</span> What happens in the long run?</h2>
+<p>To understand the long-run behavior of a dynamical system (i.e., where key variables will go after enough time has passed), modelers will typically search for <em>equilibria</em> and characterize their stability properties. Intuitively, an equilibrium (or steady-state) is a point such that if the system starts there, it stays there. The <em>stability</em> of an equilibrium is determined by the behavior of the system (model) if perturbed.</p>
+<p>What are the equilibria of the SIR model above? They are exactly the points such that</p>
+<p><span class="math display">\[\frac{d S}{dt} = \frac{d I}{d t} = \frac{d R}{d t} = 0,\]</span> </p>
+<p>i.e., the variables of interest (number susceptible, infected, recovered) do not change. There are two such equillirbia, which we can find by solving for <span class="math inline">\(S,I\)</span> in</p>
+<p><span class="math display">\[\frac{d S}{dt} = - \beta S I = 0\]</span> <span class="math display">\[\frac{d I}{dt} = \beta S I - \gamma I = 0.\]</span> </p>
+<p>The two equilibria are <span class="math inline">\((S^*,I^*,R^*) = (N,0,0)\)</span>, which corresponds to the situation in which the disease is absent from the population (i.e., the <em>disease-free equilibrium</em>) and</p>
+<p><span class="math display">\[ S^* = \frac{\gamma}{\beta} = \frac{N}{R_0}, \hspace{12pt} I^* = 0, \hspace{12pt} R^* = N - S^* = N (1- \frac{1}{R_0}).\]</span> </p>
+<p>The second equilibrium corresponds to the situation in which the disease has taken hold, but depleted the susceptible pool: although a fraction of individuals have experienced infection and recovered, a positive fraction of individuals did not acquire the disease. In other words, the disease burned itself out by depleting the resource pool (i.e., the number of susceptibles) such that some “resources” are still left.</p>
+<p><strong>But there are there are <em>two</em> equilibria — where will the system go?</strong> One way to answer this question is to determine the stability of each equilibrium point. Intuitively, a <em>stable</em> equilibrium is one such small perturbations from the equilibrium shrink the system returns to the equilibrium in question. An <em>unstable</em> equilibrium is one such small perturbations grow, leaving the system to go somewhere else. (There is, in fact, a third case that can arise. If the perturbation does not shrink or grow, the equilibrium is said to be <em>neutrally stable</em>.) The details are beyond the scope of this course but it turns out that it is enough to look at the linear behavior of the system about the equilibrium to characterize stability. To gauge local stability of an equilibrium <span class="math inline">\(x^* = (x_1^*,\dots,x_n^*)\)</span> for a system of differential equations</p>
+<p><span class="math display">\[\frac{d x_i}{dt} = f_i(x_1,\dots,x_n)\]</span></p>
+<ol type="1">
+<li>Take derivatives of of <span class="math inline">\(f_i\)</span> with respect to all <span class="math inline">\(x_j\)</span>s.</li>
+<li>Put these derivatives into a matrix called the Jacobian, whose columns correspond to the derivatives <span class="math inline">\(\partial f_i/\partial x_1, \dots, \partial f_n/\partial x_1\)</span>.</li>
+<li>Evaluate the Jacobian at <span class="math inline">\(x^*\)</span>.</li>
+<li>Determine the eigenvalues of the Jacobian at <span class="math inline">\(x^*\)</span>.</li>
+<li>If the eigenvalues have strictly negative real part, then <span class="math inline">\(x^*\)</span> is stable.</li>
+</ol>
+<section id="a-stability-analysis-of-the-disease-free-equilibrium" class="level3" data-number="15.8.1">
+<h3 data-number="15.8.1" class="anchored" data-anchor-id="a-stability-analysis-of-the-disease-free-equilibrium"><span class="header-section-number">15.8.1</span> A stability analysis of the disease-free equilibrium</h3>
+<p>Here is how the local stability analysis would work in the case of the SIR model with <span class="math inline">\((S^*,I^*) = (N,0)\)</span>. Remember we only need two equations to describe the dynamics of the population, since the population is of constant size. Using the notation above,</p>
+<p><span class="math display">\[\frac{dS}{dt} = -\beta S I = f_1(S,I)\]</span> <span class="math display">\[\frac{dI}{dt} = \beta S I - \gamma I = f_2(S,I).\]</span> </p>
+<p>The Jacobian <span class="math inline">\(J\)</span> is formed by taking partial derivatives of <span class="math inline">\(f_1,f_2\)</span> with respect to the state variables. (One follows the same procedure for systems with more variables.)</p>
+<p><span class="math display">\[J = \begin{pmatrix} \partial f_1/\partial S &amp; \partial f_1/\partial I \\
+\partial f_2/\partial S &amp; \partial f_2/\partial I \end{pmatrix}
+= \begin{pmatrix} - \beta I &amp; - \beta S \\
+\beta I &amp; \beta S - \gamma \end{pmatrix}\]</span></p>
+<p>Evaluating <span class="math inline">\(J\)</span> at the disease-free equilibrium and solving for the eigenvalues, one can show that a sufficient condition for the disease-free equilibrium to be stable is that</p>
+<p><span class="math display">\[\beta N - \gamma &lt; 0 \iff R_0 &lt; 1.\]</span> </p>
+<p>This should make sense as, in our previous analysis, we showed that for an epidemic to grow from a small introduction (perturbation), we need <span class="math inline">\(R_0 &gt; 1\)</span>. Fewer than one secondary infection from a single infectious individual in an otherwise susceptible population will ensure the stability of the disease-free steady-state since the pathogen will be unable to sustain transmission!</p>
+</section>
+</section>
+<section id="competition-competitive-exclusion-and-mutation-to-maintain-diversity" class="level2" data-number="15.9">
+<h2 data-number="15.9" class="anchored" data-anchor-id="competition-competitive-exclusion-and-mutation-to-maintain-diversity"><span class="header-section-number">15.9</span> Competition, competitive exclusion, and mutation to maintain diversity!</h2>
+<p>Now, we go about deriving from a set of ecological equations a model for the evolution of a population which consists of individuals carrying one of two alleles at a locus. <span class="math inline">\(n_i\)</span> will denote the number of individuals carrying allele <span class="math inline">\(i=1,2\)</span>. If individuals of both types are exponentially growing at rates <span class="math inline">\(r_1,r_2\)</span>, a model of the population dynamics is given by</p>
+<p><span class="math display">\[\frac{d n_i}{dt} = r_i n_i.\]</span></p>
+<p>Suppose there is also mutation which converts allele <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span> at rate <span class="math inline">\(\mu_{ij}\)</span>. The model equations would then include a second term to account for changes in each type due to mutation:</p>
+<p><span class="math display">\[\frac{d n_i}{dt} = r_i n_i - \mu_{ij} n_i + \mu_{ji} n_j.\]</span> </p>
+<p>Consider the <em>fraction</em> of individuals carrying allele 1, i.e., <span class="math inline">\(p = n_1/(n_1+n_2)\)</span>. An equation for this new variable can be found by using the quotient rule, substituting, and simplifying so that the equation is in terms of <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[\begin{align*}
+\frac{dp}{dt} &amp;= \frac{d (\frac{n_1}{n_1+n_2})}{dt} \\
+&amp;= \frac{(n_1+n_2) \frac{d n_1}{dt} - n_1 \frac{d(n_1+n_2)}{dt}}{(n_1+n_2)^2} \\
+&amp;= \frac{1}{n_1+n_2} (r_1 n_1 - \mu_{12} n_1 + \mu_{21} n_2) - \frac{n_1(r_1 n_1 + r_2 n_2)}{(n_1+n_2)^2} \\
+&amp;= r_1 p - \mu_{12} p + \mu_{21} (1-p) - p(r_1 p + r_2 (1-p)) \\
+&amp;= (r_1-r_2) p(1-p) - \mu_{12} p + \mu_{21} (1-p) \\
+\end{align*}\]</span></p>
+<p>The terms in the equation can be interpreted as follow. (1) The first term describes the change in allele 1 frequency due to selection imposed by differences in intrinsic growth. If <span class="math inline">\(r_1 &gt; r_2\)</span>, then allele 1 grows in frequency due to its competitive advantage. If <span class="math inline">\(r_1 &lt; r_2\)</span>, then allele 1 is purged from the population by purifying selection. In this case, and without mutation, individuals carrying allele 2 take over the population in a process called <em>competitive exclusion</em>. (2) The second and third terms describe mutation from type 1 to type 2 and type 2 to 1, respectively. With mutation rates that are both <span class="math inline">\(&gt;0\)</span>, competitive exclusion cannot happen because individuals change type at rates <span class="math inline">\(\mu_{12},\mu_{21}\)</span>. The behavior of the system and the long-run predictions will depend on the relative balance between selection and mutation.</p>
+<p>To understand where selection and mutation take the system, we can preform an approximation. This is common in modeling: either by assuming certain parameters are small, or that certain processes unfold faster than others (e.g., a separation of ecological and evolutionary) timescales, we can learn what complex systems do and disentangle the reasons why. The key takeaway is that <strong>problems that would otherwise be difficult to solve can be addressed via approximation.</strong></p>
+<p>Here, we will assume <span class="math inline">\(s = r_1 - r_2 &lt; 0\)</span> and preform an approximation when strong selection and weak mutation. (A similar approximation can be applied in the case mutation is strong and selection is weak.) If selection is much stronger than selection, i.e., <span class="math inline">\(s \gg \mu_{12}, \mu_{21}\)</span>, then we expect allele 1 to be rare. Ignoring terms like the allele frequency squared, allele frequency times mutation rate, etc. (which are expected to be smaller still!), we arrive at an approximate equation for allele frequency change:</p>
+<p><span class="math display">\[\frac{d p}{dt} = s p - \mu_{21} + \text{small stuff}.\]</span> </p>
+<p>The approximate equilibrium allele frequency is <span class="math inline">\(p^* = \mu_{21}/s\)</span>. Indeed, one can solve the model equations numerically (as we will do next class!) to see that this approximation is very good when the assumptions are met, and is decent still when the assumptions begin to break down.</p>
+</section>
+<section id="the-wright-fisher-model-evolution-under-genetic-drift" class="level2" data-number="15.10">
+<h2 data-number="15.10" class="anchored" data-anchor-id="the-wright-fisher-model-evolution-under-genetic-drift"><span class="header-section-number">15.10</span> The Wright-Fisher model: evolution under genetic drift</h2>
+<p>To conclude this modeling lecture, we will talk about one of the most important models in evolutionary genetics: the Wright-Fisher model, which in its simplest form describes evolution under genetic drift at a neutral, non-recombining locus in a haploid population of constant size <span class="math inline">\(N\)</span>. The model makes many assumptions, including the above, that there is no mutation, no migration, and generations are discrete and non-overlapping. Even with these assumptions, the Wright Fisher model is surprisingly general in the predictions is makes in its backward-time properties (i.e., the ways in which it or its approximations can be used to make inferences from present-day patterns of variation).</p>
+<p>Simply put, in the Wright Fisher model, individuals carry one of two alleles at a locus under consideration: <span class="math inline">\(A_1\)</span> or <span class="math inline">\(A_2\)</span>. Each generation, the number of individuals (children) that carry each allele is determined by the number of individuals (parents) in the previous generations with the allele. In the WF model, if we use <span class="math inline">\(X_n\)</span> to denote the number of <span class="math inline">\(A_1\)</span> individuals at generation <span class="math inline">\(n\)</span>, then <span class="math inline">\(X_{n+1}|X_n \sim \text{Binomial}(N,X_n/N)\)</span>. With this setup, the number of individuals with allele <span class="math inline">\(A_1\)</span> is a draw from a Binomial distribution with <span class="math inline">\(N\)</span> “trials” (children) and success probability equal to the frequency of the allele among the parents. In other words, children choose their parents at random uniformly at random!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/WF_model.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Realization of the Wright Fisher model in which one type fixes after a few generations.</figcaption>
+</figure>
+</div>
+<p>The WF model can be used to make predictions about the probability that a given allele fixes (i.e., that all individuals have it at some point in the future, and stuff of the sort), but it most importantly formalizes how we expect genetic drift to operate in populations that are not subject to other evolutionary forces. It, for example, is used to justify the otherwise verbal and imprecise model that drift is stronger in smaller populations. We will see more on this model and how it is simulated in the next lecture.</p>
+</section>
+<section id="summary" class="level2" data-number="15.11">
+<h2 data-number="15.11" class="anchored" data-anchor-id="summary"><span class="header-section-number">15.11</span> Summary</h2>
+<p>Modeling is an indispensable tool in EEB, and a very creative endeavor! Here we have covered <em>a lot</em> of ground: geometric and exponential growth models in population ecology, an eco-evolutionary model of the balance between mutation and selection, the SIR model for the spread of an infectious disease, and the WF model of allele frequency change under drift. <strong>Next class will focus on simulating these models in R, and trying to use them to learn about biological processes unfolding across scales!</strong></p>
+</section>
+<section id="resources" class="level2" data-number="15.12">
+<h2 data-number="15.12" class="anchored" data-anchor-id="resources"><span class="header-section-number">15.12</span> Resources</h2>
+<ol type="1">
+<li>Otto, S. &amp; Day, T. (2007). <em>A Biologist’s Guide to Mathematical Modeling in Ecology and Evolution</em>.</li>
+<li>Nuismer, S. (2017) <em>Introduction to Coevolutionary Theory</em>.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./lec12-command-line_git.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Command line &amp; Git(Hub)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./assignment-01.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Assignment 01</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

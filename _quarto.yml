@@ -24,6 +24,7 @@ book:
       - lec10-model-selection.qmd
       - lec11-multivariate-stats.qmd
       - lec12-command-line_git.qmd
+      - lec14-mathematical-models.qmd
     - part: "Assignments"
       chapters:
       - assignment-01.qmd
