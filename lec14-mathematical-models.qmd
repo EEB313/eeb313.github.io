@@ -3,7 +3,7 @@
 ## Lesson preamble
 
 > ### Lesson objectives
-> - Develop familiarity with mathematical models and why and where they are used in EEB.
+> - Develop familiarity with mathematical models and why/where they are used in EEB
 > - Develop understanding of important models in EEB, including
 >   - The (geometric) growth of a population with constant birth and death rates
 >   - Exponential growth of a population

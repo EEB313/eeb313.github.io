@@ -656,7 +656,7 @@ data?
 
 Is there a way to weight the gene density by window size?
 
-# So what does this mean for our predictions?
+## So what does this mean for our predictions?
 
 Right. The reason we collected this data in the first place!
 
@@ -669,7 +669,7 @@ part of any project. Establishing what you need to do with your data in
 order to test your hypotheses & thoroughly exploring your data and its
 properties are *extremely* useful steps in this process.
 
-## How do we explore these questions?
+### How do we explore these questions?
 
 We need to relate gene density, LTR density, and LTR age. Do we have
 this data?
@@ -700,7 +700,7 @@ This data was prepared differently, so it doesn't have the same 'window'
 units. It does contain chromosomal position information, however, which
 we can use to make some preliminary comparisons.
 
-### Actual wrangling
+#### Actual wrangling
 
 We're also going to pull out only the variables we now know we'll need
 (what's shared among the data sets and what will be used to try and test
@@ -722,7 +722,7 @@ head(simpleLTRdensity)
 
 At this point, are these data "long" or "wide"? #throwback
 
-### ? Knowledge Check Challenge
+#### ? Knowledge Check Challenge
 
 Join the two data sets (simpleLTRdensity and simpleGeneDensity) into one
 data frame called "densities". As a bonus, try mutating the *start*
@@ -753,7 +753,7 @@ What variables do we want to plot?
 -   Element density
 -   
 
-### Challenge
+#### Challenge
 
 Of the plot types we've used so far, what would you use to try and
 compare gene densities along the chromosomal positions on each
@@ -812,7 +812,7 @@ ggplot(densities, aes(x = start,y = density,colour = elementType)) +
 Broadly, we can see that when the LTR density plummets, gene density
 smudges upward.
 
-## Is gene density high when LTR age is high? (hyp #2)
+### Is gene density high when LTR age is high? (hyp #2)
 
 Let's take a look at the LTR age data.
 
@@ -887,7 +887,7 @@ That was cool. Definitely **not** a statistical test of correlations
 between LTR age and gene density, but the fact that sub-sections of this
 data behave quite differently is really interesting to see!
 
-## Missing values in gene density comparison
+### Missing values in gene density comparison
 
 You might remember that in last lecture, when you encountered missing
 values in your data, you could replace them with 0. If we want to put
@@ -1024,7 +1024,7 @@ with 0 in some contexts.
 We want to compare LTR densities across chromosomes. How would you do
 this?
 
-### Challenge!
+#### Challenge!
 
 Box plot is a good base line. Ask for types of improvements that could
 be made to a basic box plot.
