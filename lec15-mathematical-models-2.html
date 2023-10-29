@@ -423,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[(S^*,I^*) = (\frac{\mu+\gamma+v}{\beta}, \frac{\mu N}{\mu+\gamma + v}-\frac{\mu}{\beta}).\]</span> </p>
 <p>The endemic equilibrium is stable (and the disease-free equilibrium) is unstable whenever the basic reproductive number of the disease agent</p>
 <p><span class="math display">\[R_0 = \frac{\beta N}{\mu+\gamma+v}\]</span></p>
-<p>is <span class="math inline">\(&gt;1\)</span>, i.e., in an otherwise susceptible population a single infectious individual infects more than one individual on average. Notice how demography, recovery, and virulence all reduce the reproductive value of the pathogen; intuitively, this is because an infected individual can die or recover become transmitting.</p>
+<p>is <span class="math inline">\(&gt;1\)</span>, i.e., in an otherwise susceptible population a single infectious individual infects more than one individual on average. Notice how demography, recovery, and virulence all reduce the reproductive value of the pathogen; intuitively, this is because an infected individual can die or recover before transmitting.</p>
 <p>Below we solve the system and plot the dynamics for a specific set of parameter values.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># population size</span></span>
@@ -621,10 +621,10 @@ dbl (2): time, reports
 <pre><code>  replicate  N gen   p0    p
 1         1 50   1 0.01 0.04
 2         2 50   1 0.01 0.00
-3         3 50   1 0.01 0.00
-4         4 50   1 0.01 0.02
-5         5 50   1 0.01 0.02
-6         6 50   1 0.01 0.02</code></pre>
+3         3 50   1 0.01 0.04
+4         4 50   1 0.01 0.00
+5         5 50   1 0.01 0.00
+6         6 50   1 0.01 0.00</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot!</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
