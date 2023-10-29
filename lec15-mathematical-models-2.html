@@ -593,7 +593,7 @@ dbl (2): time, reports
 </section>
 <section id="simulation-of-the-wright-fisher-model" class="level2" data-number="16.4">
 <h2 data-number="16.4" class="anchored" data-anchor-id="simulation-of-the-wright-fisher-model"><span class="header-section-number">16.4</span> Simulation of the Wright-Fisher model</h2>
-<p>Recall that the Wright-Fisher model describes how a the frequency of an allele at a single, non-recombining locus changes due to genetic drift. To <em>simulate</em> realizations from the neutral WF model, we need to specify 1) the population size, 2) the initial frequency of the <span class="math inline">\(A_1\)</span> allele, 3) the number of generations over which evolution will unfold, and 4) the number of replicate simulations. The below chunk does this using the fact <span class="math inline">\(X_{n+1}|X_n \sim \text{Binomial}(N,X_n/N)\)</span>, i.e., <strong>the number of <span class="math inline">\(A_1\)</span> individuals in a given generation is a draw of a Binomial random variable with <span class="math inline">\(N\)</span> trials and success probability <span class="math inline">\(X_n/N\)</span>.</strong> The function <code>rbinom()</code> is used in the simulation to randomly sample alleles to form generation <span class="math inline">\(n+1\)</span>.</p>
+<p>Recall that the Wright-Fisher model describes how a the frequency of an allele at a single, non-recombining locus changes due to genetic drift. To <em>simulate</em> realizations from the neutral WF model, we need to specify 1) the population size, 2) the initial frequency of the <span class="math inline">\(A_1\)</span> allele, 3) the number of generations over which evolution will unfold, and 4) the number of replicate simulations. The below chunk does this using the fact <span class="math inline">\(X_{n+1}|X_n \sim \text{Binomial}(N,X_n/N)\)</span>, i.e., <strong>the number of <span class="math inline">\(A_1\)</span> individuals in a given generation is a draw of a Binomial random variable with <span class="math inline">\(N\)</span> trials and success probability <span class="math inline">\(X_n/N\)</span>.</strong> The function <code>rbinom()</code> is used in the simulation to randomly sample alleles.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data.frame to be filled</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>wf_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
@@ -619,12 +619,12 @@ dbl (2): time, reports
 <span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wf_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  replicate  N gen   p0    p
-1         1 50   1 0.01 0.00
+1         1 50   1 0.01 0.04
 2         2 50   1 0.01 0.00
 3         3 50   1 0.01 0.00
-4         4 50   1 0.01 0.00
-5         5 50   1 0.01 0.00
-6         6 50   1 0.01 0.04</code></pre>
+4         4 50   1 0.01 0.02
+5         5 50   1 0.01 0.02
+6         6 50   1 0.01 0.02</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot!</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
