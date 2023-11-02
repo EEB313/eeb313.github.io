@@ -189,7 +189,7 @@ $$J = \begin{pmatrix} \partial f_1/\partial S & \partial f_1/\partial I \\
 
 \vspace{6pt}
 
-Evaluating $J$ at the disease-free equilibrium and solving for the eigenvalues, one can show that a sufficient condition for the disease-free equilibrium to be stable is that
+Evaluating $J$ at the disease-free equilibrium and solving for the eigenvalues, one can show that a necessary and sufficient condition for the disease-free equilibrium to be stable is that
 
 $$\beta N - \gamma < 0 \iff R_0 < 1.$$
 \vspace{3pt}

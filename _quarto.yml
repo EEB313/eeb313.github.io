@@ -40,6 +40,7 @@ book:
     - part: "Miscellaneous notes"
       chapters:
       - tests-assignment-3.qmd
+      - power-analysis-practice.qmd
   repo-url: https://github.com/EEB313/eeb313.github.io
   sidebar:
     search: true

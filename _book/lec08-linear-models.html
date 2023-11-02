@@ -336,6 +336,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">More on hypothesis testing</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./power-analysis-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Power analysis practice</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -774,18 +780,18 @@ lm(formula = fitness ~ scale(trait), data = data)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.42218 -0.11592  0.01884  0.12206  0.29760 
+-0.30598 -0.09614  0.02461  0.09875  0.28368 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   1.00000    0.01709   58.51   &lt;2e-16 ***
-scale(trait)  0.38457    0.01718   22.39   &lt;2e-16 ***
+(Intercept)   1.00000    0.01345   74.35   &lt;2e-16 ***
+scale(trait)  0.33245    0.01352   24.59   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.1709 on 98 degrees of freedom
-Multiple R-squared:  0.8365,    Adjusted R-squared:  0.8348 
-F-statistic: 501.3 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.1345 on 98 degrees of freedom
+Multiple R-squared:  0.8606,    Adjusted R-squared:  0.8591 
+F-statistic: 604.8 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">### fitness changed by ~50% per sd change in trait value!</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -807,19 +813,19 @@ lm(formula = fitness ~ scale(trait) + scale(trait^2), data = data)
 
 Residuals:
       Min        1Q    Median        3Q       Max 
--0.182126 -0.055448 -0.002307  0.056423  0.264755 
+-0.192046 -0.058651 -0.003076  0.050935  0.164557 
 
 Coefficients:
                 Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)     1.000000   0.008337  119.95   &lt;2e-16 ***
-scale(trait)    0.935980   0.032187   29.08   &lt;2e-16 ***
-scale(trait^2) -0.571103   0.032187  -17.74   &lt;2e-16 ***
+(Intercept)     1.000000   0.007515  133.06   &lt;2e-16 ***
+scale(trait)    0.787256   0.031791   24.76   &lt;2e-16 ***
+scale(trait^2) -0.468210   0.031791  -14.73   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.08337 on 97 degrees of freedom
-Multiple R-squared:  0.9615,    Adjusted R-squared:  0.9607 
-F-statistic:  1211 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.07515 on 97 degrees of freedom
+Multiple R-squared:  0.9569,    Adjusted R-squared:  0.956 
+F-statistic:  1077 on 2 and 97 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Here, the blue (red) regression line is the linear (quadratic) individual selection surface, estimated by regressing fitness on trait value (and its square) simulated under a model of directional selection.</p>
@@ -939,22 +945,22 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--2.0508  -0.8426   0.4534   0.8262   2.0073  
+-1.6288  -1.0108  -0.7964   1.0491   1.6060  
 
 Coefficients:
-            Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   0.1107     0.2338   0.473    0.636    
-scale(age)    1.2495     0.2686   4.652  3.3e-06 ***
+            Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept) -0.03898    0.21011  -0.186  0.85283   
+scale(age)   0.64941    0.21870   2.969  0.00298 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 138.47  on 99  degrees of freedom
-Residual deviance: 109.63  on 98  degrees of freedom
-AIC: 113.63
+    Null deviance: 138.59  on 99  degrees of freedom
+Residual deviance: 129.00  on 98  degrees of freedom
+AIC: 133
 
-Number of Fisher Scoring iterations: 3</code></pre>
+Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>power_analysis_function <span class="ot">&lt;-</span> <span class="cf">function</span>(sample_size){</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -989,47 +995,47 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">100</td>
-<td style="text-align: right;">0.885</td>
+<td style="text-align: right;">0.875</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">110</td>
-<td style="text-align: right;">0.912</td>
+<td style="text-align: right;">0.905</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">120</td>
-<td style="text-align: right;">0.939</td>
+<td style="text-align: right;">0.941</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">130</td>
-<td style="text-align: right;">0.950</td>
+<td style="text-align: right;">0.956</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">140</td>
-<td style="text-align: right;">0.978</td>
+<td style="text-align: right;">0.973</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.976</td>
+<td style="text-align: right;">0.979</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.993</td>
+<td style="text-align: right;">0.990</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.992</td>
+<td style="text-align: right;">0.988</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.989</td>
+<td style="text-align: right;">0.994</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">190</td>
-<td style="text-align: right;">0.996</td>
+<td style="text-align: right;">0.997</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">200</td>
-<td style="text-align: right;">0.998</td>
+<td style="text-align: right;">1.000</td>
 </tr>
 </tbody>
 </table>

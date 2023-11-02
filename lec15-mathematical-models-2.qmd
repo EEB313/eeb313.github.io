@@ -53,7 +53,7 @@ $$R_0 = \frac{\beta N}{\mu+\gamma+v}$$
 
 \vspace{3pt}
 
-is $>1$, i.e., in an otherwise susceptible population a single infectious individual infects more than one individual on average. Notice how demography, recovery, and virulence all reduce the reproductive value of the pathogen; intuitively, this is because an infected individual can die or recover become transmitting.
+is $>1$, i.e., in an otherwise susceptible population a single infectious individual infects more than one individual on average. Notice how demography, recovery, and virulence all reduce the reproductive value of the pathogen; intuitively, this is because an infected individual can die or recover before transmitting.
 
 Below we solve the system and plot the dynamics for a specific set of parameter values.
 
