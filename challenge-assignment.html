@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - 25&nbsp; More on hypothesis testing</title>
+<title>EEB313: Quantitative Methods in R for Biology - 22&nbsp; Challenge assignment</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./power-analysis-practice.html" rel="next">
-<link href="./databases.html" rel="prev">
+<link href="./projects.html" rel="next">
+<link href="./assignment-05.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tests-assignment-3.html">Miscellaneous notes</a></li><li class="breadcrumb-item"><a href="./tests-assignment-3.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">More on hypothesis testing</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="./challenge-assignment.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Challenge assignment</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -298,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./challenge-assignment.html" class="sidebar-item-text sidebar-link">
+  <a href="./challenge-assignment.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Challenge assignment</span></span></a>
   </div>
 </li>
@@ -338,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tests-assignment-3.html" class="sidebar-item-text sidebar-link active">
+  <a href="./tests-assignment-3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">More on hypothesis testing</span></span></a>
   </div>
 </li>
@@ -360,9 +360,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#a-quick-review" id="toc-a-quick-review" class="nav-link active" data-scroll-target="#a-quick-review"><span class="header-section-number">25.1</span> A quick review</a></li>
-  <li><a href="#the-chi-square-test" id="toc-the-chi-square-test" class="nav-link" data-scroll-target="#the-chi-square-test"><span class="header-section-number">25.2</span> The chi square test</a></li>
-  <li><a href="#permutation-tests" id="toc-permutation-tests" class="nav-link" data-scroll-target="#permutation-tests"><span class="header-section-number">25.3</span> Permutation tests</a></li>
+  <li><a href="#estimation-of-the-population-mutation-rate-4.5-marks" id="toc-estimation-of-the-population-mutation-rate-4.5-marks" class="nav-link active" data-scroll-target="#estimation-of-the-population-mutation-rate-4.5-marks"><span class="header-section-number">22.1</span> 1. Estimation of the population mutation rate [4.5 marks]</a></li>
+  <li><a href="#a-mathematical-model-of-the-evolution-of-sex-5-marks" id="toc-a-mathematical-model-of-the-evolution-of-sex-5-marks" class="nav-link" data-scroll-target="#a-mathematical-model-of-the-evolution-of-sex-5-marks"><span class="header-section-number">22.2</span> 2. A mathematical model of the evolution of sex [5 marks]</a></li>
+  <li><a href="#take-a-break-1-mark" id="toc-take-a-break-1-mark" class="nav-link" data-scroll-target="#take-a-break-1-mark"><span class="header-section-number">22.3</span> 3. Take a break [1 mark]</a></li>
+  <li><a href="#glms-power-analysis-and-fitting-9.5-marks" id="toc-glms-power-analysis-and-fitting-9.5-marks" class="nav-link" data-scroll-target="#glms-power-analysis-and-fitting-9.5-marks"><span class="header-section-number">22.4</span> 4. GLMs: power analysis and fitting [9.5 marks]</a></li>
   </ul>
 </nav>
     </div>
@@ -371,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="tests-assignment-3" class="quarto-section-identifier"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">More on hypothesis testing</span></span></h1>
+<h1 class="title"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Challenge assignment</span></h1>
 </div>
 
 
@@ -386,154 +387,140 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><a href="https://eeb313.github.io/lec07-intro-to-stats.html#hypothesis-testing-theory">In the introduction to inference lecture</a>, we discussed the steps researchers take to make decisions about competing hypothesis from data. This field of statistics is called <em>hypothesis testing</em>.</p>
-<section id="a-quick-review" class="level2" data-number="25.1">
-<h2 data-number="25.1" class="anchored" data-anchor-id="a-quick-review"><span class="header-section-number">25.1</span> A quick review</h2>
-<p>To conduct a hypothesis test at significance level <span class="math inline">\(\alpha\)</span>, one does the following:</p>
-<ol start="0" type="1">
-<li>State the null and alternative hypothesis (<span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span>, respectively) and significance level <span class="math inline">\(\alpha\)</span>. The significance level is the probability of a false positive (rejecting the null hypothesis) given the null hypothesis holds. <span class="math inline">\(\alpha = 0.05\)</span> is the most common choice of significance level.</li>
-<li>Collect data <span class="math inline">\(X_1,\dots,X_n\)</span>, possibly with knowledge of the sample size <span class="math inline">\(n\)</span> required to achieve a certain power. Power is the probability of a true positive, given the null hypothesis is false.</li>
-<li>Calculate the realized value <span class="math inline">\(s\)</span> of a test statistic <span class="math inline">\(S\)</span> from the data. The test statistic must have a known distribution under the null hypothesis.</li>
-<li>Compute the probability of observing the realized value of the test statistic or something more extreme, given the null hypothesis is true, i.e., <span class="math inline">\(p = \Pr(S &gt; s | H_0)\)</span>. This probability is called a <span class="math inline">\(p\)</span> value. If <span class="math inline">\(p &lt; \alpha\)</span>, we reject the null hypothesis at significance level <span class="math inline">\(\alpha\)</span> and, if not, we fail to reject <span class="math inline">\(H_0\)</span>.</li>
-</ol>
-<p>In the intro to inference lecture, we applied the likelihood ratio test to simulated data. We also discussed <span class="math inline">\(t\)</span> tests (a special case of the LRT). In Assignment 3, you were asked to preform a <span class="math inline">\(t\)</span>-test to examine whether beaver’s body temperature differ by activity level. These are not the only tests you will see in ecology and evolution papers. <strong>In these notes, we describe two tests you may see in the literature.</strong></p>
-</section>
-<section id="the-chi-square-test" class="level2" data-number="25.2">
-<h2 data-number="25.2" class="anchored" data-anchor-id="the-chi-square-test"><span class="header-section-number">25.2</span> The chi square test</h2>
-<p>Suppose we count the number of individuals in a population that carry an allele at a specific locus. The number of individuals with this allele could be modeled as a realization of Binomial distribution with <span class="math inline">\(n\)</span> trials and success probability <span class="math inline">\(p\)</span>, i.e., <span class="math inline">\(Y \sim \text{Binomial}(n,p)\)</span>. (Binomial random variables count the number of successes in some number of trials; in the context of the example above, if any individual carries the allele of interest, we count that as a success.) A <span class="math inline">\(\chi^2\)</span> test determines which of the following hypothesis is consistent with the data: <span class="math inline">\(H_0 \colon p = p_0\)</span> vs <span class="math inline">\(H_1 \colon p \neq p_0\)</span>. In words, the null hypothesis is that the probability of carrying the allele of interest is <span class="math inline">\(p_0\)</span> and the alternative hypothesis is that is <em>not</em> <span class="math inline">\(p_0\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> To conduct a test of these hypotheses, one must calculate the value of the test statistic</p>
-<p><span class="math display">\[S = \frac{(Y-E(Y))^2}{\text{Var}(Y)} = \frac{(Y-np_0)^2}{np_0(1-p_0)}\]</span> </p>
-<p>using the observed number of individuals that carry the allele of interest. Under the null hypothesis, <span class="math inline">\(S\)</span> has an approximate <span class="math inline">\(\chi^2\)</span> distribution one degree of freedom. Simplifying this expression, one can write the test statistic in another way that is commonly used:</p>
-<p><span class="math display">\[S = \frac{(Y-np_0)^2}{np_0} + \frac{((n-Y)-n(1-p_0))^2}{n(1-p_0)},\]</span> </p>
-<p>where the numerator in the first term corresponds to the <span class="math inline">\(\#\)</span> of individuals carrying the allele (<span class="math inline">\(=Y\)</span>) minus the number of individuals that are expected to carry the allele under the null hypothesis (<span class="math inline">\(=np_0)\)</span>. The denominator is the number expected to carry the allele. Similarly, in the second term, we have the number of individuals sampled that <em>do not</em> carry the allele (<span class="math inline">\(=n-Y\)</span>) minus the number of individuals that are expected to not carry the allele (<span class="math inline">\(n(1-p_0)\)</span>).</p>
-<p>If the probability of observing a test statistic more extreme than</p>
-<p><span class="math display">\[s = \frac{(y-np_0)^2}{np_0} + \frac{((n-y)-n(1-p_0))^2}{n(1-p_0)},\]</span></p>
-<p>is <span class="math inline">\(&lt; \alpha\)</span>, then we reject the null hypothesis. (The reason being that we are unlikely to live in a world where the null hypothesis is true if the test statistic does not line up with what is expected under the null hypothesis.) Tables of <span class="math inline">\(\chi^2\)</span> cutoff values are sometimes used to determine the <span class="math inline">\(p\)</span>-value (i.e., the probability of observing something more extreme than the test statistic that was calculated), but is more convenient to do the calculation in R.</p>
-<p>In the following code chunk, we test <span class="math inline">\(H_0 \colon p = 0.4\)</span> vs <span class="math inline">\(H_1 \colon p \neq 0.4\)</span> by calculating the test statistic and <span class="math inline">\(p\)</span> value. Data is simulated.</p>
+<p><strong>To submit this assignment, upload the full document to Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>.</strong></p>
+<p>Part of being an effective scientist involves being able to solve problems you have not encountered before. This is certainly true of programming as well, where problems are typically solved by furious bouts of Googling, reading documentation, and trial-and-error of proposed solutions. In this assignment, like previous ones, you will be evaluated on your ability to solve data manipulation and analysis tasks. However, unlike previous assignments, some of the solutions to the problems will require more research and effort on your part. It may require the use of packages and techniques not explored in class, but all problems are solvable, often with only a few lines of code. By now, you should all have the terminology required to work through and search for solutions to the problems below. Good luck, and let us know if you have any questions!</p>
+<section id="estimation-of-the-population-mutation-rate-4.5-marks" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="estimation-of-the-population-mutation-rate-4.5-marks"><span class="header-section-number">22.1</span> 1. Estimation of the population mutation rate [4.5 marks]</h2>
+<p>As we discussed in class, the <a href="https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html">Wright-Fisher model</a> describes how, in a diploid population of constant size <span class="math inline">\(2N\)</span>, the number of genes of type <span class="math inline">\(A_i\)</span> (<span class="math inline">\(i=1,2\)</span>) change due to random sampling of gametes (i.e., genetic drift) and mutation between alleles at the locus under consideration.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The model is widely used in population genetics, and can be used to make inferences about the population mutation rate <span class="math inline">\(\mu = 4 N u\)</span> from present-day allele frequency data.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> The population mutation rate measures the number of mutants that enter the population per generation, which means it has units of individuals per time. <strong>In this problem, you will use maximum likelihood to make inferences about this parameter!</strong></p>
+<p><strong>1a.</strong> Read in the data. The observations are frequencies of the <span class="math inline">\(A_1\)</span> allele in 52 replicate populations. For the purpose of this exercise, we will treat the allele frequencies as independent. This is reasonable if there is no gene flow between populations sampled; otherwise, we may need to re-think this assumption.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># this is the population (and sample) size</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> n, <span class="at">prob =</span> <span class="fl">0.45</span>) <span class="co"># prob is the true value of p in this case!</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Y <span class="co"># this is the number individuals in the pop with the allele</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>WF_inference_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"WF_inference_data.csv"</span>, <span class="at">row.names =</span> <span class="cn">NULL</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(WF_inference_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 46</code></pre>
+<pre><code>  frequencies
+1      0.3873
+2      0.5433
+3      0.5186
+4      0.5653
+5      0.6270
+6      0.5463</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>expected_carrying_allele <span class="ot">&lt;-</span> <span class="dv">100</span><span class="sc">*</span><span class="fl">0.4</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># number individuals expected to carry the allele under H0: p = 0.4</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>expected_NOT_carrying_allele <span class="ot">&lt;-</span> <span class="dv">100</span><span class="sc">*</span>(<span class="dv">1</span><span class="fl">-0.4</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># number individuals expected to NOT carry the allele under H0: p = 0.4</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> (Y<span class="sc">-</span>expected_carrying_allele)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>expected_carrying_allele <span class="sc">+</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  ((n<span class="sc">-</span>Y)<span class="sc">-</span>expected_NOT_carrying_allele)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>expected_NOT_carrying_allele</span>
+</div>
+<p>It is well-known that, when the WF model has been run out for a long enough time and with a large enough population size, the allele frequencies follow a <em>Dirichlet distribution</em>:</p>
+<p><span class="math display">\[f(p|\mu) = \frac{\Gamma(2\mu)}{(\Gamma(\mu))^2} (p(1-p))^\mu,\]</span> </p>
+<p>where <span class="math inline">\(\Gamma(\cdot)\)</span> is the Gamma function (a generalization of the factorial). One can evaluate this probability density at a <em>particular</em> set of allele frequencies and value of <span class="math inline">\(\mu\)</span> by calling the following function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>eval_dirichlet <span class="ot">&lt;-</span> <span class="cf">function</span>(p, mu){ </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># p = vector of allele frequencies, mu = single value of mutation rate</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">gamma</span>(<span class="dv">2</span><span class="sc">*</span>mu)<span class="sc">*</span>(p<span class="sc">^</span>mu)<span class="sc">*</span>((<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">^</span>mu))<span class="sc">/</span>(<span class="fu">gamma</span>(mu)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># returns probability density of each allele frequency observation in vector p</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for the value of mu specified</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(S, <span class="at">df =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> F) <span class="co"># since p &gt; 0.05, we fail to reject the null hypothesis</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">eval_dirichlet</span>(<span class="fu">c</span>(<span class="fl">0.81</span>,<span class="fl">0.9</span>),<span class="fl">0.0001</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2206714</code></pre>
+<pre><code>[1] 4.999064e-05 4.998796e-05</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for example, this is the value of the density at p=0.81,0.9 and mu = 0.0001</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Play around with this code to see when, depending on <span class="math inline">\(p_0\)</span>, the true value of <span class="math inline">\(p\)</span> used to simulate the data, and the sample size, the <span class="math inline">\(p\)</span>-value is <span class="math inline">\(&lt; \alpha = 0.05\)</span>.</p>
+<p>Importantly, and as in many other applications, the data are non-normal and we must make parametric assumptions that reasonably describe the processes by which the data may have been generated and sampled. Because theory predicts the allele frequencies are Dirichlet distributed for large enough populations and long enough times, we will make this assumption and proceed with maximum likelihood. Because the data are independent and all follow this distribution, the log-likelihood function is</p>
+<p><span class="math display">\[\sum_{i=1}^{52} \ln f(p_i|\mu),\]</span> </p>
+<p>where <span class="math inline">\(p_i\)</span> is the allele frequency in the <span class="math inline">\(i\)</span>th population and <span class="math inline">\(\mu\)</span> is a specific value of the mutation rate. The <code>eval_dirichlet</code> function evaluates <span class="math inline">\(f(p|\mu)\)</span> for allele frequencies that are supplied as a vector in its first arguement and a specific value of the mutation rate which is specified in its second.</p>
+<p><strong>1b.</strong> Using <code>eval_dirichlet</code>, write a function that calculates the log-likelihood of the allele frequency data from the 52 populations. The function should have an argument corresponding to the value of the population mutation rate <span class="math inline">\(\mu\)</span>, which is called <code>mu</code> in the function which evaluates the Dirichlet density. [1 marks]</p>
+<p><strong>1c.</strong> Using the function from 1b, evaluate the log-likelihood across a range of values for the parameter. A suitable range to use is from 10 to 30. Plot the likelihood as a function of <span class="math inline">\(\mu\)</span> over this range. What is the maximum likelihood estimator for <span class="math inline">\(\mu\)</span>? [2 marks]</p>
+<p><strong>1d.</strong> Build a <span class="math inline">\(95\%\)</span> confidence interval for <span class="math inline">\(\mu\)</span> by determining what values of <span class="math inline">\(\mu\)</span> are such that the log-likelihood is within 1.92 units of its maximum value, i.e., the value assumed when the estimator for <span class="math inline">\(\mu\)</span> is equal to its MLE. (The 1.92 quantity is the cutoff based on the approximate <span class="math inline">\(\chi^2\)</span> distribution of the likelihood ratio test statistic, which we have previously used to build confidence intervals and perform hypothesis tests.) [1 mark]</p>
+<p><strong>1e.</strong> Based on the confidence interval constructed in the previous question, test the hypotheses <span class="math inline">\(H_0 \colon \mu = 10\)</span> vs <span class="math inline">\(H_1 \colon \mu \neq 10\)</span> at significance level <span class="math inline">\(\alpha = 0.05\)</span>. [0.5 marks]</p>
 </section>
-<section id="permutation-tests" class="level2" data-number="25.3">
-<h2 data-number="25.3" class="anchored" data-anchor-id="permutation-tests"><span class="header-section-number">25.3</span> Permutation tests</h2>
-<p>Many ecological and evolutionary questions ask: is the observed pattern different than what we would expect by random chance? <strong>Permutation tests (sometimes called randomization tests) allow us to test whether the observed data are different from a random distribution generated by reordering our observed data.</strong> If the pattern is random, then it should be just as likely as any other pattern generated by reordering the data. If it is not random, then it should occur more or less frequently than we expect under this distribution. <em>The key step of a permutation test is to generate a null distribution by shuffling the data.</em> In the following example of a permutation test, we shuffle observations between groups to test if the group means are different.</p>
-<p>The steps for a permutation test of the difference between group means is as follows:</p>
-<ol type="1">
-<li>Calculate the value of a test statistic (e.g., the difference in means, <span class="math inline">\(t\)</span> statistic) given data <span class="math inline">\(X_1,\dots,X_n\)</span> for the first group and <span class="math inline">\(Y_1,\dots,Y_n\)</span> for the second group.</li>
-<li>Randomly reshuffle observations among the treatment groups, each time calculating a test statistic.</li>
-<li>Repeat step (2) multiple times, generating a distribution of test-statistics.</li>
-<li>Calculate the proportion of times the actual test statistic is outside the distribution of test-statistics.</li>
-</ol>
-<p>We will perform the above steps on simulated data. Imagine we venture to South America and collect 30 male and 30 female Hercules beetles. We brought the beetles back to the lab and measured the width of their bodies at the largest point. The question we are interested in is: <em>Do male and female Hercules beetles differ in body width?</em> We will simulate body width data that is normally distributed. Our test statistic will be the difference in group means.</p>
+<section id="a-mathematical-model-of-the-evolution-of-sex-5-marks" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="a-mathematical-model-of-the-evolution-of-sex-5-marks"><span class="header-section-number">22.2</span> 2. A mathematical model of the evolution of sex [5 marks]</h2>
+<p>Approximately <span class="math inline">\(99.9\%\)</span>$ of all of eukaryotes have the ability to reproduce sexually (i.e., are facultatively sexual). Why this is the case remains an important question in evolutionary genetics. <strong>Here we will use a mathematical model of one hypothesis for the ubiquity of sex across eukaryotes: differences in extinction rates between sexual and asexual linages.</strong></p>
+<p>Let <span class="math inline">\(S(t)\)</span> be the number of sexual species and <span class="math inline">\(A(t)\)</span> be the number of asexual species at time <span class="math inline">\(t\)</span>. Both types of species spectate at per-capita rate <span class="math inline">\(b\)</span>, sexual species go extinct at rate <span class="math inline">\(d\)</span>, and asexual species go extinct at an <em>elevated</em> rate <span class="math inline">\(d+\delta\)</span>. Sexual species give rise to asexual species a fraction <span class="math inline">\(p\)</span> of the time, but asexual species never give rise to sexual species. Time is measured in thousands of years.</p>
+<p>Under these assumptions, equations we could use to model the number of sexual and asexual species are</p>
+<p><span class="math display">\[\frac{\text{d} S}{\text{d} t} = b (1-p) S - d S.\]</span> <span class="math display">\[\frac{\text{d} A}{\text{d} t} = b A + b p S - (d+\delta) A\]</span></p>
+<p><strong>2a.</strong> Starting from ten sexual and ten asexual species, solve the model equations out to time <span class="math inline">\(t=100\)</span> and plot the fraction of species that are sexual through time. Use the following parameter values: <span class="math inline">\(b=1, d = 0.7, \delta = 0.5, p = 0.1.\)</span> What fraction of species are sexual in the long run given these parameters? [2 marks]</p>
+<p><strong>2b.</strong> Suppose <span class="math inline">\(p=0.01\)</span> and <span class="math inline">\(b = d = 1\)</span>. Write a function to numerically solve the model equations for a specific value of <span class="math inline">\(\delta\)</span> and return the fraction of asexual species. Then loop over values of <span class="math inline">\(\delta\)</span> to determine the value of <span class="math inline">\(\delta\)</span> so that the long-runs fraction of sexual species is <span class="math inline">\(=0.999\)</span>. In other words, determine the value of <span class="math inline">\(\delta\)</span> so that the fraction of sexual species is equal to what has been estimated empirically. [1.5 marks]</p>
+<p><strong>2c.</strong> Explain the findings of 2b. For the chosen parameters, how much larger does the extinction rate of asexual lineages have to be to explain the fact <span class="math inline">\(99.9\%\)</span> of all eukaryotes are able to reproduce sexually? [1 mark]</p>
+<p><strong>2d.</strong> What do you think of the assumption some of speciation events in sexual species result in the formation of asexual species? Does it make sense, given the biological question at hand? Explain why or why not. [0.5 marks]</p>
+</section>
+<section id="take-a-break-1-mark" class="level2" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="take-a-break-1-mark"><span class="header-section-number">22.3</span> 3. Take a break [1 mark]</h2>
+<p>Execute the follow code chunk:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_males <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">width =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean=</span><span class="dv">17</span>, <span class="at">sd=</span><span class="dv">3</span>), <span class="at">sex =</span> <span class="st">"male"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_females <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">width =</span> <span class="fu">rnorm</span>(<span class="at">n=</span><span class="dv">30</span>, <span class="at">mean=</span><span class="dv">16</span>, <span class="at">sd=</span><span class="dv">2</span>), <span class="at">sex =</span> <span class="st">"female"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df_body_widths <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df_males, df_females) <span class="co"># combine data!</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_body_widths)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      width  sex
-1  9.998612 male
-2 15.736547 male
-3 17.085979 male
-4 17.819833 male
-5 18.756989 male
-6 18.187444 male</code></pre>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(praise)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">replicate</span>(<span class="dv">100</span>, <span class="fu">praise</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_body_widths <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(width), </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">fill =</span> <span class="fu">as.factor</span>(sex))) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"width"</span>, <span class="at">y =</span> <span class="st">"count"</span>, <span class="at">fill =</span> <span class="st">"sex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="tests-assignment-3_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mean_males <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_males<span class="sc">$</span>width)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mean_females <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_females<span class="sc">$</span>width)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>diff_means_obs <span class="ot">&lt;-</span> mean_males <span class="sc">-</span> mean_females <span class="co"># test statistic w/out permutation</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>diff_means_obs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.041863</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>reshuffled <span class="ot">&lt;-</span> df_body_widths</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>reshuffled<span class="sc">$</span>width <span class="ot">&lt;-</span> <span class="fu">sample</span>(reshuffled<span class="sc">$</span>width, <span class="at">size =</span> <span class="fu">nrow</span>(reshuffled), <span class="at">replace =</span> F)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(reshuffled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      width  sex
-1 22.498625 male
-2 18.071927 male
-3  9.703109 male
-4 15.706106 male
-5  9.998612 male
-6 20.935049 male</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>permute_and_calculate_mean_diff <span class="ot">&lt;-</span> <span class="cf">function</span>(){</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  reshuffled <span class="ot">&lt;-</span> df_body_widths</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  reshuffled<span class="sc">$</span>width <span class="ot">&lt;-</span> <span class="fu">sample</span>(reshuffled<span class="sc">$</span>width, <span class="at">size =</span> <span class="fu">nrow</span>(reshuffled), <span class="at">replace =</span> F)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  mean_males_permuted <span class="ot">&lt;-</span> <span class="fu">mean</span>(reshuffled <span class="sc">%&gt;%</span> <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"male"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(width))</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  mean_females_permuted <span class="ot">&lt;-</span> <span class="fu">mean</span>(reshuffled <span class="sc">%&gt;%</span> <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">"female"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(width))</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  mean_diff_permuted <span class="ot">&lt;-</span> mean_males_permuted <span class="sc">-</span> mean_females_permuted</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># test statistic after permutation</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(mean_diff_permuted)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">permute_and_calculate_mean_diff</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.228276</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co"># number of times to permute data to generated null distribution</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>test_stats <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sims){</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  test_stats[i] <span class="ot">&lt;-</span> <span class="fu">permute_and_calculate_mean_diff</span>()</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> test_stats), <span class="at">fill =</span> <span class="st">"gray"</span>) <span class="sc">+</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> diff_means_obs, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="tests-assignment-3_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## red line corresponds to value of test statistic from the un-permuted data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Finally, to get our <span class="math inline">\(p\)</span>-value, we calculate the number of times the simulated mean difference exceeded the observed mean difference from our data. Because we are performing a two-tailed test, this amounts to determining the number of times the simulated mean difference is either greater or lesser than the observed difference. We can do this by asking how many times the absolute value of the simulated mean difference is greater or equal to the absolute value of the observed mean difference.</p>
+</section>
+<section id="glms-power-analysis-and-fitting-9.5-marks" class="level2" data-number="22.4">
+<h2 data-number="22.4" class="anchored" data-anchor-id="glms-power-analysis-and-fitting-9.5-marks"><span class="header-section-number">22.4</span> 4. GLMs: power analysis and fitting [9.5 marks]</h2>
+<p>The horseshoe crab <em>Limulus polyphemus</em> has two male reproductive morphs; the smaller males have a a special appendage known, which are used to attach to female crabs. When female crabs dig a nest and lay eggs on the beach, the attached male can then fertilize the eggs. Alternatively, “satellite” males can crowd around nesting pairs and then fertilize eggs laid. In this question, you will</p>
+<ul>
+<li><p>do a <em>power analysis</em> to determine the effect size, under a Poisson regression model<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, is determined to be significant at least 99% of the time</p></li>
+<li><p>fit a Poisson regression model to satellite crab count data to determine if female traits are associated with more satellite crabs</p></li>
+<li><p>interpret the Poisson regression coefficients (be sure to make note of the units!)</p></li>
+<li><p>perform model selection!</p></li>
+</ul>
+<p>The data are retrieved below. Variables include female color, spine condition, carapace width (cm), mass (kg), and number of satellite males.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(test_stats[(diff_means_obs <span class="sc">&lt;</span> test_stats)])<span class="sc">/</span><span class="fu">length</span>(test_stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>satellites_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"satellites.csv"</span>, <span class="at">row.names =</span> <span class="cn">NULL</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(satellites_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.002</code></pre>
+<pre><code>         color    spine width.cm nsatellites mass.kg
+1       medium both.bad     28.3           8    3.05
+2  dark-medium both.bad     22.5           0    1.55
+3 light-medium     good     26.0           9    2.30
+4  dark-medium both.bad     24.8           0    2.10
+5  dark-medium both.bad     26.0           4    2.60
+6       medium both.bad     23.8           0    2.10</code></pre>
 </div>
 </div>
+<p><strong>Before</strong> we analyze the data, we will determine the effect size we can reliably estimate from the data at hand at a given significance level. This is typically done before collecting data, but for the purposes of demonstration we will have you do it right before diving into fitting a GLM to the data.</p>
+<p><strong>4a.</strong> Define statistical power in the context of regression (i.e., where the null hypothesis is that an effect size is zero and the alternative hypothesis is that it is non-zero) in your own words. [0.5 marks]</p>
+<p><strong>4b.</strong> The following function draws observations from a Poisson regression model <span class="math inline">\(Y \sim \text{Poisson}(\lambda)\)</span>, where <span class="math inline">\(\log \lambda = \beta_1 x\)</span>. The parameter <span class="math inline">\(\lambda\)</span> is the expected number of satellite males, and <span class="math inline">\(\beta_1\)</span> is the size of the effect of increasing female carapace width <span class="math inline">\(x\)</span> on <span class="math inline">\(\log \lambda\)</span>. The function has one <em>scalar</em> argument, <code>beta</code>. (This means <code>beta</code> = 3 is a reasonable input but <code>beta</code> = c(3,4) is not.) The function returns a data frame of trait values <code>x</code> in the first column and associated number of satellite crabs <code>y</code> in the second.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">173</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>data_generator <span class="ot">&lt;-</span> <span class="cf">function</span>(beta){</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">size =</span> n, <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">35</span>, <span class="at">by =</span> <span class="fl">0.001</span>), <span class="at">replace =</span> T)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  obs <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    obs[i] <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="fu">exp</span>(beta<span class="sc">*</span>x[i]))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(x, <span class="at">y =</span> obs))</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use this function to simulate draws from the statistical model when <span class="math inline">\(\beta=0.0001,0.001,0.01,0.1\)</span>. Bind these observations into a data frame with a column that specifies the effect size associated to a given observation. Display the head of this data frame, and make a scatter plot of <span class="math inline">\(y\)</span> against <span class="math inline">\(x\)</span>, i.e., the number of satellite crabs against carapace width, <em>faceted by effect size</em>. Allow the <span class="math inline">\(y\)</span> axis on each plot to be free. [2 marks]</p>
+<p><strong>4c.</strong> Write a function to determine, for a given effect size, the power of a Poisson regression of number of satellite males on carapace width. To do this, you will have to</p>
+<ul>
+<li>write a for loop to simulate <code>sims</code> = 1000 draws of the Poisson regression model via <code>data_generator()</code></li>
+<li>fit a Poisson regression of number of satellite males on carapace width using each simulated dataset</li>
+<li>extract the <span class="math inline">\(p\)</span>-values associated to each model.</li>
+<li>calculate outside of the for loop what proportion of the <span class="math inline">\(p\)</span>-values which are <span class="math inline">\(&lt; 0.05\)</span></li>
+</ul>
+<p>The proportion of <span class="math inline">\(p\)</span> values which are <span class="math inline">\(&lt; 0.05\)</span> is your estimate of power at the effect size, sample size, and significance level specified. This is because it gives, for a large number of draws from the Poisson regression model at a given effect and for <span class="math inline">\(x\)</span> distributed according to our expectations for carapace width, the fraction of fitted models for which the effect was determined to be <span class="math inline">\(\neq 0\)</span>. [1.5 marks]</p>
+<p><strong>4d.</strong> Using the function from the previous question, estimate the power of the Poisson regression model for <span class="math inline">\(\beta = 0,0.025,0.05,0.075,0.1\)</span>. Display the effect sizes and associated power estimates. At what effect size is the power for a Poisson regression with <span class="math inline">\(n = 173\)</span> observations &gt;99%? [1 mark]</p>
+<p><strong>4e.</strong> Using the satellites data, fit a Poisson regression of the number of satellite males on carapace width. Report the intercept and slope coefficients, associated <span class="math inline">\(p\)</span> values, and AIC. [1 mark]</p>
+<p><strong>4f.</strong> Recall the description of the Poisson regression model in question 4b. How should we interpret the regression coefficient associated to carapace width? [1 mark]</p>
+<p><strong>4g.</strong> Plot the data and the fitted model from 4e. The regression line should be curvilinear on the data scale. [1 mark]</p>
+<p><strong>4h.</strong> Using the satellites data, fit the following Poisson regressions:</p>
+<ul>
+<li>the number of satellite males on female mass</li>
+<li>the number of satellite males on carapace width and female mass</li>
+<li>the number of satellite males on carapace width, female mass, and their interaction</li>
+</ul>
+<p>Perform model selection: report which of these models (including the one from 4e) is the best fit to the data. <strong>Report the model that is the best fit to the data and its AIC. Are there any models with AICs that are close? What does this mean?</strong> [2 marks]</p>
 
 
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>In population genetics, so-called Hardy-Weinberg equilibrium is the null hypothesis we wish to test. This is a model of evolution in which there is no mutation, selection, migration, recombination — really, there is nothing interesting happening. In this case, we have an expectation for the frequency of any allele at a given locus. Given count data, the <span class="math inline">\(\chi^2\)</span> test allows us to determine if the Hardy-Weinberg equilibrium is a reasonable description of the population and its evolution.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Recall that the rules of the WF model are very simple. The population size is constant, generations are discrete and non-overlapping, and children choose their parents (regardless of type) at random. This means that the number of <span class="math inline">\(A_1\)</span> individuals in generation <span class="math inline">\(n+1\)</span> is Binomial(<span class="math inline">\(N\)</span>,<span class="math inline">\(p_{n}\)</span>) where <span class="math inline">\(p_n\)</span> is the frequency of <span class="math inline">\(A_1\)</span>s in the previous generation.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>To make inference under the model tractable, it is actually an <em>approximation</em> to the discrete WF model is used, in which it is assumed the <span class="math inline">\(N\)</span> is large and the per-individual mutation rate is small.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This is a special kind of generalized linear model! The Poisson distribution models count data, like the number of satellite males at a beach.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -773,13 +760,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./databases.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Some open-access databases</span></span>
+      <a href="./assignment-05.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Assignment 05</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./power-analysis-practice.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Power analysis practice</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./projects.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Project description</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
