@@ -149,4 +149,4 @@ The proportion of $p$ values which are $< 0.05$ is your estimate of power at the
 - the number of satellite males on carapace width and female mass
 - the number of satellite males on carapace width, female mass, and their interaction
 
-Perform model selection: report which of these models (including the one from 4e) is the best fit to the data. **Report the model that is the best fit to the data and its AIC. Are there any models with AICs that are close? What does this mean?** [2 marks]
+Perform model selection: report which of these models (including the one from 4e) is the best fit to the data. **Report the model that is the best fit to the data and its AIC. Are there any models with AICs that are close? What does this mean?** [1.5 marks]

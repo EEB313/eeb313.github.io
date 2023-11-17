@@ -389,6 +389,7 @@ good, 2 == acceptable, 1 == needs improvement.
 5.  Coding style and reproducibility
     -   Data and code are well-organized and well-documented.
     -   The analysis is easily reproducible.
+    -   All team members have pushed to a common GitHub repo _via the command line_.
 
 *Note:* marks for the 3rd criterion (Analysis) depend on if groups did a
 modeling or data-driven project:
