@@ -33,6 +33,7 @@ book:
       - assignment-03.qmd
       - assignment-04.qmd
       - assignment-05.qmd
+      - challenge-assignment.qmd
     - part: "Project"
       chapters:
       - projects.qmd

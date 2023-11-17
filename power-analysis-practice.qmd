@@ -30,7 +30,7 @@ data %>% pivot_longer(! genome_size) %>%
 summary(lm(mutation_rate~genome_size, data))
 ```
 
-# Exercise
+## Exercise
 
 **Write a function to estimate, for a given sample size, the power at level $\alpha = 0.06$. That is, from a large number of simulations (generated using the `data_generator()` function), determine the fraction of simulations for which fitting a linear model (of mutation rate on genome size) the coefficient associated to genome size has a $p$ value which is $< \alpha$.**
 

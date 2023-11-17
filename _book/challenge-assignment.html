@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - 21&nbsp; Assignment 05</title>
+<title>EEB313: Quantitative Methods in R for Biology - 22&nbsp; Challenge assignment</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./challenge-assignment.html" rel="next">
-<link href="./assignment-04.html" rel="prev">
+<link href="./projects.html" rel="next">
+<link href="./assignment-05.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,6 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -108,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="./assignment-05.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Assignment 05</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="./challenge-assignment.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Challenge assignment</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -290,13 +292,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignment-05.html" class="sidebar-item-text sidebar-link active">
+  <a href="./assignment-05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Assignment 05</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./challenge-assignment.html" class="sidebar-item-text sidebar-link">
+  <a href="./challenge-assignment.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Challenge assignment</span></span></a>
   </div>
 </li>
@@ -361,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Assignment 05</span></h1>
+<h1 class="title"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Challenge assignment</span></h1>
 </div>
 
 
@@ -377,47 +379,133 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p><strong>To submit this assignment, upload the full document to Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>.</strong></p>
-<p>Load these packages before you start:</p>
+<p>Part of being an effective scientist involves being able to solve problems you have not encountered before. This is certainly true of programming as well, where problems are typically solved by furious bouts of Googling, reading documentation, and trial-and-error of proposed solutions. In this assignment, like previous ones, you will be evaluated on your ability to solve data manipulation and analysis tasks. However, unlike previous assignments, some of the solutions to the problems will require more research and effort on your part. It may require the use of packages and techniques not explored in class, but all problems are solvable, often with only a few lines of code. By now, you should all have the terminology required to work through and search for solutions to the problems below. Good luck, and let us know if you have any questions!</p>
+<p><strong>1. Estimation of the population mutation rate [4.5 marks]</strong></p>
+<p>As we discussed in class, the <a href="https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html">Wright-Fisher model</a> describes how, in a diploid population of constant size <span class="math inline">\(2N\)</span>, the number of genes of type <span class="math inline">\(A_i\)</span> (<span class="math inline">\(i=1,2\)</span>) change due to random sampling of gametes (i.e., genetic drift) and mutation between alleles at the locus under consideration.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The model is widely used in population genetics, and can be used to make inferences about the population mutation rate <span class="math inline">\(\mu = 4 N u\)</span> from present-day allele frequency data.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> The population mutation rate measures the number of mutants that enter the population per generation, which means it has units of individuals per time. <strong>In this problem, you will use maximum likelihood to make inferences about this parameter!</strong></p>
+<p><strong>1a.</strong> Read in the data. The observations are frequencies of the <span class="math inline">\(A_1\)</span> allele in 52 replicate populations. For the purpose of this exercise, we will treat the allele frequencies as independent. This is reasonable if there is no gene flow between populations sampled; otherwise, we may need to re-think this assumption.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>1. In this exercise, we will be analyzing floral trait data using a base R data set <code>iris</code>.</strong> (4 marks)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>WF_inference_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"WF_inference_data.csv"</span>, <span class="at">row.names =</span> <span class="cn">NULL</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(WF_inference_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          5.1         3.5          1.4         0.2  setosa
-2          4.9         3.0          1.4         0.2  setosa
-3          4.7         3.2          1.3         0.2  setosa
-4          4.6         3.1          1.5         0.2  setosa
-5          5.0         3.6          1.4         0.2  setosa
-6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<pre><code>  frequencies
+1      0.3873
+2      0.5433
+3      0.5186
+4      0.5653
+5      0.6270
+6      0.5463</code></pre>
 </div>
 </div>
-<p>This data set consists of 4 floral trait measurements (sepal length and width, and petal length and width) for 3 species of iris.</p>
-<ol type="a">
-<li><p>Calculate the correlations between each variable and produce the pairs plot showing the relationships. Which pairs of variables show high collinearity? (0.75 mark)</p></li>
-<li><p>Perform a principle components analysis on the floral traits in the <code>iris</code> data set (use a correlation matrix). Visualize your result in a biplot. (1 mark)</p></li>
-</ol>
-<p><strong>NOTE: the <code>select</code> function in <code>dplyr</code> clashes with a function with the same name in the <code>raster</code> package. Be sure to specify to <code>R</code> which package you are calling the function from in your answer.</strong></p>
-<ol start="3" type="a">
-<li><p>Take a look at the trait loadings (<code>rotation</code>), and explain the loadings for PC1 and PC2 in plain English. (0.75 mark)</p></li>
-<li><p>Colour the individual entities in your biplot by <code>species</code>. Explain the floral characteristics of the species “virginica” based on this plot. (1 mark)</p></li>
-<li><p>Based off of the cumulative proportion of variance explained by each axis or the scree plot, which axis (axes) would you retain for downstream analyses and why? (0.5 mark)</p></li>
-</ol>
-<p><strong>2. In this exercise, you will create and clone a <em>new</em> GitHub repo onto your machine (call it assignment5_folder), use the command line to run an R script in this directory, modify the files that are returned by the R script, and push the results to remote repo.</strong></p>
-<ol type="a">
-<li><p>Go to <em>your</em> GitHub (i.e., to github.com/[yourusername]). Make a new repo called assignment5_folder. (0.25 mark)</p></li>
-<li><p>Clone your GitHub repo onto your machine. (0.25 mark)</p></li>
-<li><p>Make an R script that uses a function to write a .csv file (named assignment5_file.csv) with two columns. The first column should be named x and should contain all numbers between 0 and 100. The second column should be named y and contain draws of a Normal random variable with mean 0 and <em>variance</em> 0.001. In your call to <code>write.csv</code>, be sure to specify <code>row.names=FALSE</code>. (1 mark)</p></li>
-<li><p>Use the command line to modify assignment5_file.csv so that the first entry in the x column is equal to 7 instead of 1. In your answer, specify what commands you ran (and in what order) to access and change the file. (1 mark)</p></li>
-<li><p>Add, commit, and push the changes to the assignment5_folder repo to GitHub. As before, in your answer, specify what commands you ran (and in what order) to do this. (1 mark)</p></li>
-<li><p>Provide one reason we use the command line, and one reason we use GitHub. (0.25 marks each)</p></li>
-</ol>
+<p>It is well-known that, when the WF model has been run out for a long enough time and with a large enough population size, the allele frequencies follow a <em>Dirichlet distribution</em>:</p>
+<p><span class="math display">\[f(p|\mu) = \frac{\Gamma(2\mu)}{(\Gamma(\mu))^2} (p(1-p))^\mu,\]</span> </p>
+<p>where <span class="math inline">\(\Gamma(\cdot)\)</span> is the Gamma function (a generalization of the factorial). One can evaluate this probability density at a <em>particular</em> set of allele frequencies and value of <span class="math inline">\(\mu\)</span> by calling the following function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>eval_dirichlet <span class="ot">&lt;-</span> <span class="cf">function</span>(p, mu){ </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># p = vector of allele frequencies, mu = single value of mutation rate</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">gamma</span>(<span class="dv">2</span><span class="sc">*</span>mu)<span class="sc">*</span>(p<span class="sc">^</span>mu)<span class="sc">*</span>((<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">^</span>mu))<span class="sc">/</span>(<span class="fu">gamma</span>(mu)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># returns probability density of each allele frequency observation in vector p</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for the value of mu specified</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">eval_dirichlet</span>(<span class="fu">c</span>(<span class="fl">0.81</span>,<span class="fl">0.9</span>),<span class="fl">0.0001</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.999064e-05 4.998796e-05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for example, this is the value of the density at p=0.81,0.9 and mu = 0.0001</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Importantly, and as in many other applications, the data are non-normal and we must make parametric assumptions that reasonably describe the processes by which the data may have been generated and sampled. Because theory predicts the allele frequencies are Dirichlet distributed for large enough populations and long enough times, we will make this assumption and proceed with maximum likelihood. Because the data are independent and all follow this distribution, the log-likelihood function is</p>
+<p><span class="math display">\[\sum_{i=1}^{52} \ln f(p_i|\mu),\]</span> </p>
+<p>where <span class="math inline">\(p_i\)</span> is the allele frequency in the <span class="math inline">\(i\)</span>th population and <span class="math inline">\(\mu\)</span> is a specific value of the mutation rate. The <code>eval_dirichlet</code> function evaluates <span class="math inline">\(f(p|\mu)\)</span> for allele frequencies that are supplied as a vector in its first arguement and a specific value of the mutation rate which is specified in its second.</p>
+<p><strong>1b.</strong> Using <code>eval_dirichlet</code>, write a function that calculates the log-likelihood of the allele frequency data from the 52 populations. The function should have an argument corresponding to the value of the population mutation rate <span class="math inline">\(\mu\)</span>, which is called <code>mu</code> in the function which evaluates the Dirichlet density. [1 marks]</p>
+<p><strong>1c.</strong> Using the function from 1b, evaluate the log-likelihood across a range of values for the parameter. A suitable range to use is from 10 to 30. Plot the likelihood as a function of <span class="math inline">\(\mu\)</span> over this range. What is the maximum likelihood estimator for <span class="math inline">\(\mu\)</span>? [2 marks]</p>
+<p><strong>1d.</strong> Build a <span class="math inline">\(95\%\)</span> confidence interval for <span class="math inline">\(\mu\)</span> by determining what values of <span class="math inline">\(\mu\)</span> are such that the log-likelihood is within 1.92 units of its maximum value, i.e., the value assumed when the estimator for <span class="math inline">\(\mu\)</span> is equal to its MLE. (The 1.92 quantity is the cutoff based on the approximate <span class="math inline">\(\chi^2\)</span> distribution of the likelihood ratio test statistic, which we have previously used to build confidence intervals and perform hypothesis tests.) [1 mark]</p>
+<p><strong>1e.</strong> Based on the confidence interval constructed in the previous question, test the hypotheses <span class="math inline">\(H_0 \colon \mu = 10\)</span> vs <span class="math inline">\(H_1 \colon \mu \neq 10\)</span> at significance level <span class="math inline">\(\alpha = 0.05\)</span>. [0.5 marks]</p>
+<p><strong>2. A mathematical model of the evolution of sex [5 marks]</strong></p>
+<p>Approximately <span class="math inline">\(99.9\%\)</span>$ of all of eukaryotes have the ability to reproduce sexually (i.e., are facultatively sexual). Why this is the case remains an important question in evolutionary genetics. <strong>Here we will use a mathematical model of one hypothesis for the ubiquity of sex across eukaryotes: differences in extinction rates between sexual and asexual linages.</strong></p>
+<p>Let <span class="math inline">\(S(t)\)</span> be the number of sexual species and <span class="math inline">\(A(t)\)</span> be the number of asexual species at time <span class="math inline">\(t\)</span>. Both types of species spectate at per-capita rate <span class="math inline">\(b\)</span>, sexual species go extinct at rate <span class="math inline">\(d\)</span>, and asexual species go extinct at an <em>elevated</em> rate <span class="math inline">\(d+\delta\)</span>. Sexual species give rise to asexual species a fraction <span class="math inline">\(p\)</span> of the time, but asexual species never give rise to sexual species. Time is measured in thousands of years.</p>
+<p>Under these assumptions, equations we could use to model the number of sexual and asexual species are</p>
+<p><span class="math display">\[\frac{\text{d} S}{\text{d} t} = b (1-p) S - d S.\]</span> <span class="math display">\[\frac{\text{d} A}{\text{d} t} = b A + b p S - (d+\delta) A\]</span></p>
+<p><strong>2a.</strong> Starting from ten sexual and ten asexual species, solve the model equations out to time <span class="math inline">\(t=100\)</span> and plot the fraction of species that are sexual through time. Use the following parameter values: <span class="math inline">\(b=1, d = 0.7, \delta = 0.5, p = 0.1.\)</span> What fraction of species are sexual in the long run given these parameters? [2 marks]</p>
+<p><strong>2b.</strong> Suppose <span class="math inline">\(p=0.01\)</span> and <span class="math inline">\(b = d = 1\)</span>. Write a function to numerically solve the model equations for a specific value of <span class="math inline">\(\delta\)</span> and return the fraction of asexual species. Then loop over values of <span class="math inline">\(\delta\)</span> to determine the value of <span class="math inline">\(\delta\)</span> so that the long-runs fraction of sexual species is <span class="math inline">\(=0.999\)</span>. In other words, determine the value of <span class="math inline">\(\delta\)</span> so that the fraction of sexual species is equal to what has been estimated empirically. [1.5 marks]</p>
+<p><strong>2c.</strong> Explain the findings of 2b. For the chosen parameters, how much larger does the extinction rate of asexual lineages have to be to explain the fact <span class="math inline">\(99.9\%\)</span> of all eukaryotes are able to reproduce sexually? [1 mark]</p>
+<p><strong>2d.</strong> What do you think of the assumption some of speciation events in sexual species result in the formation of asexual species? Does it make sense, given the biological question at hand? Explain why or why not. [0.5 marks]</p>
+<p><strong>3. Take a break [1 mark]</strong></p>
+<p>Execute the follow code chunk:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(praise)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">replicate</span>(<span class="dv">100</span>, <span class="fu">praise</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>4. GLMs: power analysis and fitting [9.5 marks]</strong></p>
+<p>The horseshoe crab <em>Limulus polyphemus</em> has two male reproductive morphs; the smaller males have a a special appendage known, which are used to attach to female crabs. When female crabs dig a nest and lay eggs on the beach, the attached male can then fertilize the eggs. Alternatively, “satellite” males can crowd around nesting pairs and then fertilize eggs laid. In this question, you will</p>
+<ul>
+<li><p>do a <em>power analysis</em> to determine the effect size, under a Poisson regression model<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, is determined to be significant at least 99% of the time</p></li>
+<li><p>fit a Poisson regression model to satellite crab count data to determine if female traits are associated with more satellite crabs</p></li>
+<li><p>interpret the Poisson regression coefficients (be sure to make note of the units!)</p></li>
+<li><p>perform model selection!</p></li>
+</ul>
+<p>The data are retrieved below. Variables include female color, spine condition, carapace width (cm), mass (kg), and number of satellite males.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>satellites_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"satellites.csv"</span>, <span class="at">row.names =</span> <span class="cn">NULL</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(satellites_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         color    spine width.cm nsatellites mass.kg
+1       medium both.bad     28.3           8    3.05
+2  dark-medium both.bad     22.5           0    1.55
+3 light-medium     good     26.0           9    2.30
+4  dark-medium both.bad     24.8           0    2.10
+5  dark-medium both.bad     26.0           4    2.60
+6       medium both.bad     23.8           0    2.10</code></pre>
+</div>
+</div>
+<p><strong>Before</strong> we analyze the data, we will determine the effect size we can reliably estimate from the data at hand at a given significance level. This is typically done before collecting data, but for the purposes of demonstration we will have you do it right before diving into fitting a GLM to the data.</p>
+<p><strong>4a.</strong> Define statistical power in the context of regression (i.e., where the null hypothesis is that an effect size is zero and the alternative hypothesis is that it is non-zero) in your own words. [0.5 marks]</p>
+<p><strong>4b.</strong> The following function draws observations from a Poisson regression model <span class="math inline">\(Y \sim \text{Poisson}(\lambda)\)</span>, where <span class="math inline">\(\log \lambda = \beta_1 x\)</span>. The parameter <span class="math inline">\(\lambda\)</span> is the expected number of satellite males, and <span class="math inline">\(\beta_1\)</span> is the size of the effect of increasing female carapace width <span class="math inline">\(x\)</span> on <span class="math inline">\(\log \lambda\)</span>. The function has one <em>scalar</em> argument, <code>beta</code>. (This means <code>beta</code> = 3 is a reasonable input but <code>beta</code> = c(3,4) is not.) The function returns a data frame of trait values <code>x</code> in the first column and associated number of satellite crabs <code>y</code> in the second.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">173</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>data_generator <span class="ot">&lt;-</span> <span class="cf">function</span>(beta){</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">size =</span> n, <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">35</span>, <span class="at">by =</span> <span class="fl">0.001</span>), <span class="at">replace =</span> T)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  obs <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    obs[i] <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="fu">exp</span>(beta<span class="sc">*</span>x[i]))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(x, <span class="at">y =</span> obs))</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use this function to simulate draws from the statistical model when <span class="math inline">\(\beta=0.0001,0.001,0.01,0.1\)</span>. Bind these observations into a data frame with a column that specifies the effect size associated to a given observation. Display the head of this data frame, and make a scatter plot of <span class="math inline">\(y\)</span> against <span class="math inline">\(x\)</span>, i.e., the number of satellite crabs against carapace width, <em>faceted by effect size</em>. Allow the <span class="math inline">\(y\)</span> axis on each plot to be free. [2 marks]</p>
+<p><strong>4c.</strong> Write a function to determine, for a given effect size, the power of a Poisson regression of number of satellite males on carapace width. To do this, you will have to</p>
+<ul>
+<li>write a for loop to simulate <code>sims</code> = 1000 draws of the Poisson regression model via <code>data_generator()</code></li>
+<li>fit a Poisson regression of number of satellite males on carapace width using each simulated dataset</li>
+<li>extract the <span class="math inline">\(p\)</span>-values associated to each model.</li>
+<li>calculate outside of the for loop what proportion of the <span class="math inline">\(p\)</span>-values which are <span class="math inline">\(&lt; 0.05\)</span></li>
+</ul>
+<p>The proportion of <span class="math inline">\(p\)</span> values which are <span class="math inline">\(&lt; 0.05\)</span> is your estimate of power at the effect size, sample size, and significance level specified. This is because it gives, for a large number of draws from the Poisson regression model at a given effect and for <span class="math inline">\(x\)</span> distributed according to our expectations for carapace width, the fraction of fitted models for which the effect was determined to be <span class="math inline">\(\neq 0\)</span>. [1.5 marks]</p>
+<p><strong>4d.</strong> Using the function from the previous question, estimate the power of the Poisson regression model for <span class="math inline">\(\beta = 0,0.025,0.05,0.075,0.1\)</span>. Display the effect sizes and associated power estimates. At what effect size is the power for a Poisson regression with <span class="math inline">\(n = 173\)</span> observations &gt;99%? [1 mark]</p>
+<p><strong>4e.</strong> Using the satellites data, fit a Poisson regression of the number of satellite males on carapace width. Report the intercept and slope coefficients, associated <span class="math inline">\(p\)</span> values, and AIC. [1 mark]</p>
+<p><strong>4f.</strong> Recall the description of the Poisson regression model in question 4b. How should we interpret the regression coefficient associated to carapace width? [1 mark]</p>
+<p><strong>4g.</strong> Plot the data and the fitted model from 4e. The regression line should be curvilinear on the data scale. [1 mark]</p>
+<p><strong>4h.</strong> Using the satellites data, fit the following Poisson regressions:</p>
+<ul>
+<li>the number of satellite males on female mass</li>
+<li>the number of satellite males on carapace width and female mass</li>
+<li>the number of satellite males on carapace width, female mass, and their interaction</li>
+</ul>
+<p>Perform model selection: report which of these models (including the one from 4e) is the best fit to the data. <strong>Report the model that is the best fit to the data and its AIC. Are there any models with AICs that are close? What does this mean?</strong> [2 marks]</p>
 
 
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Recall that the rules of the WF model are very simple. The population size is constant, generations are discrete and non-overlapping, and children choose their parents (regardless of type) at random. This means that the number of <span class="math inline">\(A_1\)</span> individuals in generation <span class="math inline">\(n+1\)</span> is Binomial(<span class="math inline">\(N\)</span>,<span class="math inline">\(p_{n}\)</span>) where <span class="math inline">\(p_n\)</span> is the frequency of <span class="math inline">\(A_1\)</span>s in the previous generation.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>To make inference under the model tractable, it is actually an <em>approximation</em> to the discrete WF model is used, in which it is assumed the <span class="math inline">\(N\)</span> is large and the per-individual mutation rate is small.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This is a special kind of generalized linear model! The Poisson distribution models count data, like the number of satellite males at a beach.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -655,13 +743,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./assignment-04.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Assignment 04</span></span>
+      <a href="./assignment-05.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Assignment 05</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./challenge-assignment.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Challenge assignment</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./projects.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Project description</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
