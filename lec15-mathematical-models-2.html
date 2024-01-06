@@ -433,7 +433,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[\frac{dS}{dt} = \mu N - \beta S I - \mu S\]</span> <span class="math display">\[\frac{dI}{dt} = \beta S I - (\mu+\gamma+v) I\]</span> <span class="math display">\[\frac{dR}{dt} = \gamma I - \mu R\]</span></p>
 <p>Since <span class="math inline">\(dN/dt = 0\)</span>, the population size is constant and we can (as we did last class) ignore the <span class="math inline">\(R\)</span> equation (since <span class="math inline">\(R = N - S - I\)</span>). Setting the previous equations to zero and solving, one has that there are two equilibria: the <em>disease-free</em> equilibrium <span class="math inline">\((S^*, I^*) = (N,0)\)</span>, and the <em>endemic</em> equilibrium</p>
 <p><span class="math display">\[(S^*,I^*) = (\frac{\mu+\gamma+v}{\beta}, \frac{\mu N}{\mu+\gamma + v}-\frac{\mu}{\beta}).\]</span> </p>
-<p>The endemic equilibrium is stable (and the disease-free equilibrium) is unstable whenever the basic reproductive number of the disease agent</p>
+<p>The endemic equilibrium is stable (and the disease-free equilibrium is unstable) whenever the basic reproductive number of the disease agent</p>
 <p><span class="math display">\[R_0 = \frac{\beta N}{\mu+\gamma+v}\]</span></p>
 <p>is <span class="math inline">\(&gt;1\)</span>, i.e., in an otherwise susceptible population a single infectious individual infects more than one individual on average. Notice how demography, recovery, and virulence all reduce the reproductive value of the pathogen; intuitively, this is because an infected individual can die or recover before transmitting.</p>
 <p>Below we solve the system and plot the dynamics for a specific set of parameter values.</p>
@@ -524,7 +524,7 @@ dbl (2): time, reports
 <p>To fit the model to the data using ML, we will follow the steps outlined in the previous lecture.</p>
 <section id="step-1-determine-the-distribution-of-the-data" class="level3" data-number="16.3.1">
 <h3 data-number="16.3.1" class="anchored" data-anchor-id="step-1-determine-the-distribution-of-the-data"><span class="header-section-number">16.3.1</span> Step 1: determine the distribution of the data</h3>
-<p>We will assume the case count data are an imperfect and random sample of the true incidence. There are a couple ways to do this, but we will suppose the cases have a binomial distribution: <span class="math inline">\(\text{reports}_i \sim \text{Binomial}(\kappa I(t_i),p)\)</span>. In other words, a fraction <span class="math inline">\(\kappa\)</span> of infected individuals at an observation time are tested and the test comes up positive with probability <span class="math inline">\(p\)</span>. (Keep in mind there are other ways to specify the distribution of the data around the solution to the model, which can allow for more flexibility in modeling!)</p>
+<p>We will assume the case count data are an imperfect and random sample of the true incidence. There are a couple ways to do this, but we will suppose the cases have a binomial distribution: <span class="math inline">\(\text{reports}_i \sim \text{Binomial}(\kappa I(t_i),p)\)</span>. In other words, a fraction <span class="math inline">\(\kappa\)</span> of infected individuals at an observation time are tested and the test comes up positive with probability <span class="math inline">\(p\)</span>. (Keep in mind there are other ways to specify the distribution of the data around the solution of the model!)</p>
 </section>
 <section id="step-2-maximize-the-likelihood-function" class="level3" data-number="16.3.2">
 <h3 data-number="16.3.2" class="anchored" data-anchor-id="step-2-maximize-the-likelihood-function"><span class="header-section-number">16.3.2</span> Step 2: maximize the likelihood function</h3>
@@ -631,11 +631,11 @@ dbl (2): time, reports
 <span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wf_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  replicate  N gen   p0    p
-1         1 50   1 0.01 0.00
+1         1 50   1 0.01 0.02
 2         2 50   1 0.01 0.00
 3         3 50   1 0.01 0.00
 4         4 50   1 0.01 0.00
-5         5 50   1 0.01 0.02
+5         5 50   1 0.01 0.00
 6         6 50   1 0.01 0.00</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot!</span></span>
@@ -661,7 +661,7 @@ dbl (2): time, reports
 <p>The first term describes the situation where an <span class="math inline">\(A_1\)</span> parent gives rise to an <span class="math inline">\(A_1\)</span> child (no mutation). The second term describes the situation where an <span class="math inline">\(A_2\)</span> parent gives rise to an <span class="math inline">\(A_1\)</span> offspring (i.e., there is mutation). In this case, the Wright-Fisher model is similar to the neutral case, except in that <span class="math inline">\(X_{n+1}|X_n \sim \text{Binomial}(N,p_i)\)</span>. To form the next generation, we sample from the parents and with probability <span class="math inline">\(p_i\)</span> a given child has allele <span class="math inline">\(A_1\)</span>.</p>
 <p>With selection <em>and</em> mutation, the form of the model is similar except in that we need another parameter. Assuming <span class="math inline">\(A_1\)</span> has selective advantage <span class="math inline">\(s\)</span> (i.e., produces <span class="math inline">\(s\)</span> more copies than the alternative allele), then the probability that an individual in given generation has an <span class="math inline">\(A_1\)</span> parent is</p>
 <p><span class="math display">\[p_i = (1-u_{12}) \frac{(1+s) i}{N+is} + u_{21} \bigg( 1 - \frac{(1+s) i}{N+is} \bigg).\]</span> </p>
-<p>The first term corresponds to the situation where an <span class="math inline">\(A_1\)</span> parent is chosen and no mutation occurs, and the second term to the case an <span class="math inline">\(A_2\)</span> parent is chosen and mutation does occur. Below we simulate from the model across a range of mutation rates, effective population sizes, and selective coefficients, using the function <code>pbmclappy()</code> to efficiently <em>parallelize</em> the simulations. Since the replicates are independent of each other, we can send simulations to different cores to reduce the run time of a program. This is fairly common in scientific computing. Going to the Terminal on Mete’s computer, we can also run this script via the command line!</p>
+<p>The first term corresponds to the situation where an <span class="math inline">\(A_1\)</span> parent is chosen and no mutation occurs, and the second term to the case an <span class="math inline">\(A_2\)</span> parent is chosen and mutation does occur. Below we simulate from the model across a range of mutation rates, effective population sizes, and selective coefficients, using the function <code>pbmclappy()</code> to efficiently <em>parallelize</em> the simulations. Since the replicates are independent of each other, we can send simulations to different cores to reduce the run time of a program.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>WF_model_mutation_and_selection <span class="ot">&lt;-</span> <span class="cf">function</span>(k){</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  </span>
