@@ -109,7 +109,7 @@ permute_and_calculate_mean_diff <- function(){
 
 permute_and_calculate_mean_diff()
 
-n_sims <- 1000 # number of times to permute data to generated null distribution
+n_sims <- 5000 # number of times to permute data to generated null distribution
 test_stats <- c()
 
 for (i in 1:n_sims){
@@ -125,5 +125,10 @@ ggplot() + geom_histogram(aes(x = test_stats), fill = "gray") +
 Finally, to get our $p$-value, we calculate the number of times the simulated mean difference exceeded the observed mean difference from our data. Because we are performing a two-tailed test, this amounts to determining the number of times the simulated mean difference is either greater or lesser than the observed difference. We can do this by asking how many times the absolute value of the simulated mean difference is greater or equal to the absolute value of the observed mean difference.
 
 ```{r}
-length(test_stats[(diff_means_obs < test_stats)])/length(test_stats)
+abs_simulated_means <- abs(test_stats)
+abs_diff_means_obs <- abs(diff_means_obs)
+exceed_count <- length(abs_simulated_means[abs_simulated_means >= 
+                                               abs_diff_means_obs])
+p_val <- exceed_count/n_sims
+p_val
 ```

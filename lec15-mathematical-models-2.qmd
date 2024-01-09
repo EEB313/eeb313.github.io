@@ -47,7 +47,7 @@ Since $dN/dt = 0$, the population size is constant and we can (as we did last cl
 $$(S^*,I^*) = (\frac{\mu+\gamma+v}{\beta}, \frac{\mu N}{\mu+\gamma + v}-\frac{\mu}{\beta}).$$
 \vspace{3pt}
 
-The endemic equilibrium is stable (and the disease-free equilibrium) is unstable whenever the basic reproductive number of the disease agent
+The endemic equilibrium is stable (and the disease-free equilibrium is unstable) whenever the basic reproductive number of the disease agent
 
 $$R_0 = \frac{\beta N}{\mu+\gamma+v}$$
 
@@ -126,7 +126,7 @@ To fit the model to the data using ML, we will follow the steps outlined in the 
 
 ### Step 1: determine the distribution of the data
 
-We will assume the case count data are an imperfect and random sample of the true incidence. There are a couple ways to do this, but we will suppose the cases have a binomial distribution: $\text{reports}_i \sim \text{Binomial}(\kappa I(t_i),p)$. In other words, a fraction $\kappa$ of infected individuals at an observation time are tested and  the test comes up positive with probability $p$. (Keep in mind there are other ways to specify the distribution of the data around the solution to the model, which can allow for more flexibility in modeling!)
+We will assume the case count data are an imperfect and random sample of the true incidence. There are a couple ways to do this, but we will suppose the cases have a binomial distribution: $\text{reports}_i \sim \text{Binomial}(\kappa I(t_i),p)$. In other words, a fraction $\kappa$ of infected individuals at an observation time are tested and  the test comes up positive with probability $p$. (Keep in mind there are other ways to specify the distribution of the data around the solution of the model!)
 
 ### Step 2: maximize the likelihood function
 
@@ -257,7 +257,7 @@ With selection _and_ mutation, the form of the model is similar except in that w
 $$p_i = (1-u_{12}) \frac{(1+s) i}{N+is} + u_{21} \bigg( 1 - \frac{(1+s) i}{N+is} \bigg).$$
 \vspace{3pt}
 
-The first term corresponds to the situation where an $A_1$ parent is chosen and no mutation occurs, and the second term to the case an $A_2$ parent is chosen and mutation does occur. Below we simulate from the model across a range of mutation rates, effective population sizes, and selective coefficients, using the function `pbmclappy()` to efficiently _parallelize_ the simulations. Since the replicates are independent of each other, we can send simulations to different cores to reduce the run time of a program. This is fairly common in scientific computing. Going to the Terminal on Mete's computer, we can also run this script via the command line!
+The first term corresponds to the situation where an $A_1$ parent is chosen and no mutation occurs, and the second term to the case an $A_2$ parent is chosen and mutation does occur. Below we simulate from the model across a range of mutation rates, effective population sizes, and selective coefficients, using the function `pbmclappy()` to efficiently _parallelize_ the simulations. Since the replicates are independent of each other, we can send simulations to different cores to reduce the run time of a program.
 
 ```{r, warning=F, message=F}
 WF_model_mutation_and_selection <- function(k){

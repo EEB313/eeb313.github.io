@@ -27,12 +27,12 @@
 
 ## Why model?
 
-Mathematical models are descriptions of biological processes which describe idealized situations and can help us build intuition and understanding for how those processes may unfold in nature. they help us 
+Mathematical models are descriptions of biological processes which describe idealized situations and can help us build intuition and understanding for how those processes may unfold in nature. They help us 
 
 - clarify assumptions we may have about how complex systems work
-- build understanding of how processes in complex systems interact
+- build understanding of how complex systems behave and why
 - _generate_ predictions and hypothesis
-- _test_ predictions and hypothesis based on analysis of the model of fitting to data
+- _test_ predictions and hypothesis based on analysis of the model (or fitting the model to data)
 - determine what data is needed to learn about something (of if it is possible to, given the data that is available, reliably infer parameters of interest)
 - determine in what ways certain kinds of data may be problematic or biased
 
@@ -223,18 +223,18 @@ The terms in the equation can be interpreted as follow. (1) The first term descr
 
 To understand where selection and mutation take the system, we can preform an approximation. This is common in modeling: either by assuming certain parameters are small, or that certain processes unfold faster than others (e.g., a separation of ecological and evolutionary timescales), we can learn what complex systems do and disentangle the reasons why. The key takeaway is that **problems that would otherwise be difficult to solve can be addressed via approximation.**
 
-Here, we will assume $s = r_1 - r_2 < 0$ and preform an approximation when strong selection and weak mutation. (A similar approximation can be applied in the case mutation is strong and selection is weak.) If selection is much stronger than selection, i.e., $s \gg \mu_{12}, \mu_{21}$, then we expect allele 1 to be rare. Ignoring terms like the allele frequency squared, allele frequency times mutation rate, etc. (which are expected to be smaller still!), we arrive at an approximate equation for allele frequency change:
+Here, we will assume $s = r_1 - r_2 < 0$ and preform an approximation when strong selection and weak mutation. (A similar approximation can be applied in the case mutation is strong and selection is weak.) If selection is much stronger than selection, i.e., $|s| \gg \mu_{12}, \mu_{21}$, then we expect allele 1 to be rare. Ignoring terms like the allele frequency squared, allele frequency times mutation rate, etc. (which are expected to be smaller still!), we arrive at an approximate equation for allele frequency change:
 
 $$\frac{d p}{dt} = s p - \mu_{21} + \text{small stuff}.$$
 \vspace{3pt}
 
 The approximate equilibrium allele frequency is $p^* = \mu_{21}/s$. Indeed, one can solve the model equations numerically (as we will do next class!) to see that this approximation is very good when the assumptions are met, and is decent still when the assumptions begin to break down.
 
-## The Wright-Fisher model: evolution under genetic drift
+## The Wright-Fisher model: evolution under drift
 
 To conclude this modeling lecture, we will talk about one of the most important models in evolutionary genetics: the Wright-Fisher model, which in its simplest form describes evolution under genetic drift at a neutral, non-recombining locus in a haploid population of constant size $N$. The model makes many assumptions, including the above, that there is no mutation, no migration, and generations are discrete and non-overlapping. Even with these assumptions, the Wright Fisher model is surprisingly general in the predictions is makes in its backward-time properties (i.e., the ways in which it or its approximations can be used to make inferences from present-day patterns of variation).
 
-Simply put, in the Wright Fisher model, individuals carry one of two alleles at a locus under consideration: $A_1$ or $A_2$. Each generation, the number of individuals (children) that carry each allele is determined by the number of individuals (parents) in the previous generations with the allele. In the WF model, if we use $X_n$ to denote the number of $A_1$ individuals at generation $n$, then $X_{n+1}|X_n \sim \text{Binomial}(N,X_n/N)$. With this setup, the number of individuals with allele $A_1$ is a draw from a Binomial distribution with $N$ "trials" (children) and success probability equal to the frequency of the allele among the parents. In other words, children choose their parents at random uniformly at random!
+Simply put, in the Wright Fisher model, individuals carry one of two alleles at a locus under consideration: $A_1$ or $A_2$. Each generation, the number of individuals (children) that carry each allele is determined by the number of individuals (parents) in the previous generations with the allele. In the WF model, if we use $X_n$ to denote the number of $A_1$ individuals at generation $n$, then $X_{n+1}|X_n \sim \text{Binomial}(N,X_n/N)$. With this setup, the number of individuals with allele $A_1$ is a draw from a Binomial distribution with $N$ "trials" (children) and success probability equal to the frequency of the allele among the parents. In other words, children choose their parents uniformly at random!
 
 ![Realization of the Wright Fisher model in which one type fixes after a few generations.](figures/WF_model.png)
 
