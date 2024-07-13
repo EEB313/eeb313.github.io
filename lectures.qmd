@@ -1,6 +1,0 @@
-# (PART) Lectures {-}
-
-```{r, include = FALSE}
-source("common.R")
-```
-

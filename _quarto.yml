@@ -3,45 +3,14 @@ project:
 
 book:
   title: "EEB313: Quantitative Methods in R for Biology"
-  author: "Vicki M. Zheng & Mete K. Yuksel"
+  author: "Mete Yuksel & Zoë Humphries"
   date: today
   chapters:
     - index.qmd
-    - about-us.qmd
-    - downloadingR.qmd
     - part: "Lectures"
-      chapters:
-      - lec00-rstudio.qmd
-      - lec01-markdown-workflows.qmd
-      - lec02-base-r.qmd
-      - lec03-dataframes-dplyr.qmd
-      - lec04-data-wrangling.qmd
-      - lec05-data-visualization.qmd
-      - lec06-exploratory-data-analysis.qmd
-      - lec07-intro-to-stats.qmd
-      - lec08-linear-models.qmd
-      - lec09-mixed-effects-models.qmd
-      - lec10-model-selection.qmd
-      - lec11-multivariate-stats.qmd
-      - lec12-command-line_git.qmd
-      - lec14-mathematical-models.qmd
-      - lec15-mathematical-models-2.qmd
     - part: "Assignments"
-      chapters:
-      - assignment-01.qmd
-      - assignment-02.qmd
-      - assignment-03.qmd
-      - assignment-04.qmd
-      - assignment-05.qmd
-      - challenge-assignment.qmd
     - part: "Project"
-      chapters:
-      - projects.qmd
-      - databases.qmd
     - part: "Miscellaneous notes"
-      chapters:
-      - tests-assignment-3.qmd
-      - power-analysis-practice.qmd
   repo-url: https://github.com/EEB313/eeb313.github.io
   sidebar:
     search: true

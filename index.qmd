@@ -1,6 +1,6 @@
 ---
 subtitle: "Welcome! This website hosts all course contents for EEB313."
-author: "Vicki M. Zhang and Mete K. Yuksel"
+author: "Mete Yuksel & Zoë Humphries"
 url: https://eeb313.github.io/
 suppress-bibliography: true
 ---
