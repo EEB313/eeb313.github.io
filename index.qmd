@@ -7,7 +7,7 @@ author: "Mete Yuksel and Zoë Humphries"
 
 ## Land Acknowledgement
 
-Although our students come from many locations around the world, we wish to recognize the land on which the University of Toronto was built. This land has historically been and still is the the home of the Huron-Wendat, the Seneca, and the Mississaugas of the Credit River.  
+Although our students come from many locations around the world, we wish to recognize the land on which the University of Toronto was built. This land has historically been and still is the home of the Huron-Wendat, the Seneca, and the Mississaugas of the Credit River.  
 
 There is a [First Nations House](https://studentlife.utoronto.ca/department/first-nations-house/) for Indigenous Student Services on campus. Please refer to their web page for more resources and information about honouring our land and their services for students.  
 
@@ -17,20 +17,20 @@ This course covers statistical and data analysis, reproducible quantitative meth
 
 Prerequisites: BIO220H1 and one of EEB225H1, STA288H1, or STA220H1
 
-### Time
+## Time
 
-Tue and Thu 2:10 - 4:00 PM EST.
+Tuesdays and Thursdays 2:10 - 4:00 PM EST.
 
-### Class Locations
+## Class Locations
 
-RW109 (Ramsay Wright first floor computer lab), St. George Campus.
+All classes will be on the St. George campus. On Tuesdays, we will be in 371 Bloor, Room 36. On Thursdays, we will be in Sidney Smith Hall, Room 561.
 
 | Office hours (in EST)                 |
 |----------|----------------|-----------|
-| Mete     | TBD    |  ESC3044  |
-| Zoë      | TBD    |  ESC3044  |
-| TBD      | Tu/Th 4-5pm    |  RW109    |
-| TBD     | Tu/Th 4-5pm    |  RW109    |
+| Mete     | TBD    |  ESC3044          |
+| Zoë      | TBD    |  ESC3044          |
+| Jessie   | Tu/Th 4-5pm       | TBD    |
+| Gavia    | Tu/Th 4-5pm       | TBD    |
 
 ### Contact protocol
 
@@ -73,9 +73,37 @@ If you require accommodations for a disability, or have any accessibility concer
 5. Learn and use techniques and best practices for reproducible, high-quality science.
 6. Learn how to work as part of a research team to produce a scientific product.
 
-### Lecture schedule
+## Lecture schedule
 
-### Assessment schedule
+ Week  | Date   | Topic                                               | Instructor     |
+|------|--------|-----------------------------------------------------|----------------|
+| 1    | Sep 3  | Intro to course                                     | Everyone       | 
+| 1    | Sep 5  | Base R: assignment, vectors, functions, strings, loops, etc.        | Zoë            |
+| 2    | Sep 10 | Intro to command line and GitHub                    | Zoë            |
+| 2    | Sep 12 | Data wrangling I                                    | Zoë            |
+| 3    | Sep 17 | Data wrangling II                                   | Zoë            |
+| 3    | Sep 19 | Data visualization in ggplot                        | Jessie         |
+| 4    | Sep 24 | Exploratory data analysis                           | Zoë            |
+| 4    | Sep 26 | Project work                                        |                |
+| 5    | Oct 01 | Introduction to statistical inference I             | Mete           |
+| 5    | Oct 03 | Introduction to statistical inference II            | Mete           |
+| 6    | Oct 08 | Linear models I                                     | Mete           |
+| 6    | Oct 10 | Linear models II                                    | Mete           |
+| 7    | Oct 15 | Model selection                                     | Zoë            |
+| 7    | Oct 17 | Multivariate statistics                             | Gavia          |
+| 8    | Oct 22 | Mathematical models in ecology and evolution I      | Mete           |
+| 8    | Oct 24 | Mathematical models in ecology and evolution II     | Mete           |
+| 9    | Nov 05 | Reading break                                       | -              |
+| 9    | Nov 07 | Reading break                                       | -              |
+| 10   | Nov 12 | Project work                                        |                |
+| 10   | Nov 14 | Project work                                        |                |
+| 11   | Nov 19 | Project work                                        |                |
+| 11   | Nov 21 | Project work                                        |                |
+| 12   | Nov 26 | Project work                                        |                |
+| 12   | Nov 28 | Project work                                        |                |
+| 13   | Dec 03 | Group presentations                                 | Everyone       |
+
+## Assessment schedule
 
 | Assignment                                  | Type           | Submitted on      | Due date   | Marks |
 |---------------------------------------------|----------------|-------------------|------------|-------|

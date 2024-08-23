@@ -3,7 +3,7 @@ project:
 
 book:
   title: "EEB313: Quantitative Methods in R for Biology"
-  author: "Mete Yuksel & Zoë Humphries"
+  author: "Mete K. Yuksel & Zoë Humphries"
   date: today
   chapters:
     - index.qmd
