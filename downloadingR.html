@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - 2&nbsp; The 2024 teaching team</title>
+<title>EEB313: Quantitative Methods in R for Biology - 3&nbsp; Downloading R, RStudio, &amp; Ubuntu</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./downloadingR.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./about-us.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./about-us.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The 2024 teaching team</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./downloadingR.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Downloading R, RStudio, &amp; Ubuntu</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -117,13 +150,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about-us.html" class="sidebar-item-text sidebar-link active">
+  <a href="./about-us.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The 2024 teaching team</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./downloadingR.html" class="sidebar-item-text sidebar-link">
+  <a href="./downloadingR.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Downloading R, RStudio, &amp; Ubuntu</span></span></a>
   </div>
 </li>
@@ -153,8 +186,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#course-instructors" id="toc-course-instructors" class="nav-link active" data-scroll-target="#course-instructors"><span class="header-section-number">2.1</span> Course instructors</a></li>
-  <li><a href="#teaching-assistants" id="toc-teaching-assistants" class="nav-link" data-scroll-target="#teaching-assistants"><span class="header-section-number">2.2</span> Teaching assistants</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">3.1</span> Introduction</a></li>
+  <li><a href="#download-r-and-rstudio" id="toc-download-r-and-rstudio" class="nav-link" data-scroll-target="#download-r-and-rstudio"><span class="header-section-number">3.2</span> Download R and RStudio</a></li>
+  <li><a href="#download-packages" id="toc-download-packages" class="nav-link" data-scroll-target="#download-packages">Download Packages</a>
+  <ul class="collapse">
+  <li><a href="#tinytex" id="toc-tinytex" class="nav-link" data-scroll-target="#tinytex"><span class="header-section-number">3.2.1</span> TinyTex</a></li>
+  <li><a href="#tidyverse" id="toc-tidyverse" class="nav-link" data-scroll-target="#tidyverse"><span class="header-section-number">3.2.2</span> Tidyverse</a></li>
+  </ul></li>
+  <li><a href="#downloading-ubuntu" id="toc-downloading-ubuntu" class="nav-link" data-scroll-target="#downloading-ubuntu"><span class="header-section-number">3.3</span> Downloading Ubuntu</a></li>
   </ul>
 </nav>
     </div>
@@ -163,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The 2024 teaching team</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Downloading R, RStudio, &amp; Ubuntu</span></h1>
 </div>
 
 
@@ -180,19 +219,58 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="course-instructors" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="course-instructors"><span class="header-section-number">2.1</span> Course instructors</h2>
-<p><strong>Mete Yuksel</strong> (mete.yuksel@mail.utoronto.ca)</p>
-<p>Mete is a 3rd year PhD student in the Dept. Ecology and Evolutionary Biology at UTSG, and is co-advised by Matt Osmond &amp; Nicole Mideo. He uses mathematical models to address questions in evolutionary genetics and ecology. He is currently developing theory to understand patterns, causes, and consequences of recombination rate variation. Mete was an undergraduate math &amp; statistics student at the University of Idaho. There, he worked on the ecology of gene drive interventions against vectored diseases, understanding how continuous spatial structure can affect species coexistence, and forecasting the dynamics of Chinook salmon in the Willamette River system. He loves R - and teaching this course! Outside of science, Mete enjoys listening to podcasts, cooking, and cycling between Toronto neighborhoods in search of coffee.</p>
-<p><strong>Zoe Humphries</strong> (zoe.humphries@mail.utoronto.ca)</p>
-<p>Zoë is a PhD student in the Wright and Barrett labs at UTSG. She studies the genome of a weedy plant to better understand how transposable elements affect sex chromosome evolution. She taught herself how to use R during her honours thesis and fell in love because it was much kinder than Lisp or C++ and, most importantly, because aesthetics. Zoë makes plots from aggressively large genomic data sets and spends a lot of time literally bash-ing her data into a file small enough for her computer to load into RStudio. For Zoë, the best way to work in R is while patting her puppies.</p>
+<section id="introduction" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">3.1</span> Introduction</h2>
+<p>This course makes use of R and RStudio, as well as the command line. The goal of these notes is to help you install R and Rstudio and, if you use a Windows machine, to install Ubuntu. If you have any issues, let’s resolve them in advance so that you can make the most of our time together! The goal here is to ensure that your computer is set up for the rest of the course. <strong>If you can’t complete these steps, please email Mete and Zoë as soon as possible.</strong></p>
 </section>
-<section id="teaching-assistants" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="teaching-assistants"><span class="header-section-number">2.2</span> Teaching assistants</h2>
-<p><strong>Gavia Lertzman-Lepofsky</strong></p>
-<p>Gavia is a PhD candidate in the Mahler lab on the StG campus. She works with the tropical Anolis lizards to understand how macroevolution shapes local patterns of community diversity and structure. When she’s not wandering around Caribbean islands catching lizards or spraying them with paint, she is happily ensconced on her couch working in R or exploring the many bakeries and bookstores of Toronto.</p>
-<p><strong>Jessie Wang</strong></p>
-<p>Jessie is a PhD student in the Frederickson lab at UTSG. She studies plant-microbe interactions using high- throughput experimentation in duckweeds. She fell in love with R during her time as an undergraduate and took EEB313 in 2020, simultaneously sharpening her coding skills while conducting research alone in the lab. Jessie loves to spend too much money on fancy coffee as she types away, making sure her code is well-annotated and her figures look beautiful. Outside of work, she enjoys caring for her many houseplants and aquariums, finding new delicious eats, and admiring other people’s pets.</p>
+<section id="download-r-and-rstudio" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="download-r-and-rstudio"><span class="header-section-number">3.2</span> Download R and RStudio</h2>
+<ol type="1">
+<li><strong>Download R</strong>, a free software environment for statistical computing and graphics from <a href="https://cloud.r-project.org/">CRAN</a>, the Comprehensive R Archive Network. We recommend you install a precompiled binary distribution for your operating system – use the links up at the top of the CRAN page!</li>
+</ol>
+<p>Note: MacBook users with an Apple Silicon chip (e.g., M1 or M2) should install the “arm64” version of R, while MacBook users with an Intel chip should install the regular (64-bit) version of R. You can check your laptop’s hardware specifications by clicking the Apple icon (top left corner) <code>\&gt; About This Mac</code>.</p>
+<ol start="2" type="1">
+<li><strong>Install <a href="https://posit.co/download/rstudio-desktop/">RStudio</a></strong>, a graphical user interface (GUI) for R. Click the link under “2: Install RStudio”. RStudio comes with a text editor, so there is no immediate need to install a separate stand-alone editor.</li>
+</ol>
+<p>If R is already installed, <strong>ensure that the R version is 4.0 or higher.</strong> You can do this by opening RStudio, where you should see a multi-section window like below. Locate the quadrant named “Console”, and put your cursor at the start of the prompt indicated by the <code>&gt;</code> symbol. Type <code>sessionInfo()</code> - make sure that only the I at the start of Info is capitalized and you are including the round brackets. Press enter to run this command and R should return an output to you. The first line shows what version of R is installed. Ensure that the R version installed is at least 4.0.</p>
+</section>
+<section id="download-packages" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="download-packages">Download Packages</h2>
+<section id="tinytex" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="tinytex"><span class="header-section-number">3.2.1</span> TinyTex</h3>
+<p>There is one package we have to install first before we can create PDF reports, which will be necessary for assignments and the project. Copy and paste into the console (where the <code>\&gt;</code> symbol is) the two lines of code below to install a package called <code>tinytex</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tinytex"</span>) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tidyverse" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="tidyverse"><span class="header-section-number">3.2.2</span> Tidyverse</h3>
+<ol type="1">
+<li>Copy and paste the below code into your console.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.package</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"data.table"</span>), <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>During installation, if you ever get the below message, click “No”.</p>
+<p><img src="figures/restartr.png" class="img-fluid" style="width:30.0%"></p>
+<p>If you get the message “Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” in the Console, type “Yes” and press enter.</p>
+<ol start="2" type="1">
+<li><strong>Check that the tinytex and tidyverse packages have been installed correctly</strong>. To do this, go to the bottom right pane and click the tab for “Packages”. If you can search for and find the below packages, then they have been installed! They do not need to be checked off. Alternatively, go to the Console and type <code>library(tidyverse)</code> to verify that the <code>tidyverse</code> package is installed. An error along the lines “there is no package called tidyverse” will be returned if the package is not installed.</li>
+</ol>
+</section>
+</section>
+<section id="downloading-ubuntu" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="downloading-ubuntu"><span class="header-section-number">3.3</span> Downloading Ubuntu</h2>
+<p>If you are a Windows user, you will need to install Ubuntu before the command line and GitHub lecture in a couple of weeks. (If you are a Mac user, it is safe to stop here.) The steps to install Unbuntu are as follows. Do not attempt to do these steps while your computer is plugged into an electrical outlet.</p>
+<ol type="1">
+<li>Search for “Turn Windows features on or off” in the Windows search bar and ensure that “Windows Subsystem for Linux” is turned on. This will force your machine to restart.</li>
+<li>Download Ubuntu from <a href="https://apps.microsoft.com/detail/9PDXGNCFSCZV?hl=en-ca&amp;gl=CA">this link</a>.</li>
+<li>Open the app once installed. The app will say it is installing and, once finished, will prompt you to make a username and password. (The password won’t show up, but the keystrokes are being recognized. You will be asked to confirm the password, too.)</li>
+</ol>
+<p>Importantly, you can open Ubuntu via Command Prompt by typing ubuntu. Here is a picture illustrating how to do this:</p>
+<p><img src="figures/command_promt.png" class="img-fluid" style="width:70.0%"></p>
+<p>After following these steps, you can check everything has been installed correctly by going to File Explorer and verifying that there is a Linux tab – scroll all the way down and look for a penguin!</p>
 
 
 </section>
@@ -609,14 +687,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="EEB313: Quantitative Methods in R for Biology">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">EEB313: Quantitative Methods in R for Biology</span></span>
+      <a href="./about-us.html" class="pagination-link" aria-label="The 2024 teaching team">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The 2024 teaching team</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./downloadingR.html" class="pagination-link" aria-label="Downloading R, RStudio, &amp; Ubuntu">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Downloading R, RStudio, &amp; Ubuntu</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
