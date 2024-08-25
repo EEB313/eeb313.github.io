@@ -162,61 +162,61 @@
   {
     "objectID": "about-us.html",
     "href": "about-us.html",
-    "title": "2  The 2024 teaching team",
+    "title": "The 2024 teaching team",
     "section": "",
-    "text": "2.1 Course instructors\nMete Yuksel (mete.yuksel@mail.utoronto.ca)\nMete is a 3rd year PhD student in the Dept. Ecology and Evolutionary Biology at UTSG, and is co-advised by Matt Osmond & Nicole Mideo. He uses mathematical models to address questions in evolutionary genetics and ecology. He is currently developing theory to understand patterns, causes, and consequences of recombination rate variation. Mete was an undergraduate math & statistics student at the University of Idaho. There, he worked on the ecology of gene drive interventions against vectored diseases, understanding how continuous spatial structure can affect species coexistence, and forecasting the dynamics of Chinook salmon in the Willamette River system. He loves R - and teaching this course! Outside of science, Mete enjoys listening to podcasts, cooking, and cycling between Toronto neighborhoods in search of coffee.\nZoe Humphries (zoe.humphries@mail.utoronto.ca)\nZoë is a PhD student in the Wright and Barrett labs at UTSG. She studies the genome of a weedy plant to better understand how transposable elements affect sex chromosome evolution. She taught herself how to use R during her honours thesis and fell in love because it was much kinder than Lisp or C++ and, most importantly, because aesthetics. Zoë makes plots from aggressively large genomic data sets and spends a lot of time literally bash-ing her data into a file small enough for her computer to load into RStudio. For Zoë, the best way to work in R is while patting her puppies.",
+    "text": "Course instructors\nMete Yuksel (mete.yuksel@mail.utoronto.ca)\nMete is a 3rd year PhD student in the Dept. Ecology and Evolutionary Biology at UTSG, and is co-advised by Matt Osmond & Nicole Mideo. He uses mathematical models to address questions in evolutionary genetics and ecology. He is currently developing theory to understand patterns, causes, and consequences of recombination rate variation. Mete was an undergraduate math & statistics student at the University of Idaho. There, he worked on the ecology of gene drive interventions against vectored diseases, understanding how continuous spatial structure can affect species coexistence, and forecasting the dynamics of Chinook salmon in the Willamette River system. He loves R - and teaching this course! Outside of science, Mete enjoys listening to podcasts, cooking, and cycling between Toronto neighborhoods in search of coffee.\nZoe Humphries (zoe.humphries@mail.utoronto.ca)\nZoë is a PhD student in the Wright and Barrett labs at UTSG. She studies the genome of a weedy plant to better understand how transposable elements affect sex chromosome evolution. She taught herself how to use R during her honours thesis and fell in love because it was much kinder than Lisp or C++ and, most importantly, because aesthetics. Zoë makes plots from aggressively large genomic data sets and spends a lot of time literally bash-ing her data into a file small enough for her computer to load into RStudio. For Zoë, the best way to work in R is while patting her puppies.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>The 2024 teaching team</span>"
+      "The 2024 teaching team"
     ]
   },
   {
     "objectID": "about-us.html#teaching-assistants",
     "href": "about-us.html#teaching-assistants",
-    "title": "2  The 2024 teaching team",
-    "section": "2.2 Teaching assistants",
-    "text": "2.2 Teaching assistants\nGavia Lertzman-Lepofsky\nGavia is a PhD candidate in the Mahler lab on the StG campus. She works with the tropical Anolis lizards to understand how macroevolution shapes local patterns of community diversity and structure. When she’s not wandering around Caribbean islands catching lizards or spraying them with paint, she is happily ensconced on her couch working in R or exploring the many bakeries and bookstores of Toronto.\nJessie Wang\nJessie is a PhD student in the Frederickson lab at UTSG. She studies plant-microbe interactions using high- throughput experimentation in duckweeds. She fell in love with R during her time as an undergraduate and took EEB313 in 2020, simultaneously sharpening her coding skills while conducting research alone in the lab. Jessie loves to spend too much money on fancy coffee as she types away, making sure her code is well-annotated and her figures look beautiful. Outside of work, she enjoys caring for her many houseplants and aquariums, finding new delicious eats, and admiring other people’s pets.",
+    "title": "The 2024 teaching team",
+    "section": "Teaching assistants",
+    "text": "Teaching assistants\nGavia Lertzman-Lepofsky\nGavia is a PhD candidate in the Mahler lab on the StG campus. She works with the tropical Anolis lizards to understand how macroevolution shapes local patterns of community diversity and structure. When she’s not wandering around Caribbean islands catching lizards or spraying them with paint, she is happily ensconced on her couch working in R or exploring the many bakeries and bookstores of Toronto.\nJessie Wang\nJessie is a PhD student in the Frederickson lab at UTSG. She studies plant-microbe interactions using high- throughput experimentation in duckweeds. She fell in love with R during her time as an undergraduate and took EEB313 in 2020, simultaneously sharpening her coding skills while conducting research alone in the lab. Jessie loves to spend too much money on fancy coffee as she types away, making sure her code is well-annotated and her figures look beautiful. Outside of work, she enjoys caring for her many houseplants and aquariums, finding new delicious eats, and admiring other people’s pets.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>The 2024 teaching team</span>"
+      "The 2024 teaching team"
     ]
   },
   {
     "objectID": "downloadingR.html",
     "href": "downloadingR.html",
-    "title": "3  Downloading software",
+    "title": "Installing R & Ubuntu",
     "section": "",
-    "text": "3.1 Introduction\nThis course makes use of R and RStudio, as well as the command line. The goal of these notes is to help you install R and Rstudio and, if you use a Windows machine, to install Ubuntu. If you have any issues, let’s resolve them in advance so that you can make the most of our time together! The goal here is to ensure that your computer is set up for the rest of the course. If you can’t complete these steps, please email Mete and Zoë as soon as possible.",
+    "text": "Introduction\nThis course makes use of R and RStudio, as well as the command line. The goal of these notes is to help you install R and Rstudio and, if you use a Windows machine, to install Ubuntu. If you have any issues, let’s resolve them in advance so that you can make the most of our time together! The goal here is to ensure that your computer is set up for the rest of the course. If you can’t complete these steps, please email Mete and Zoë as soon as possible.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Downloading software</span>"
+      "Installing R & Ubuntu"
     ]
   },
   {
-    "objectID": "downloadingR.html#download-r-and-rstudio",
-    "href": "downloadingR.html#download-r-and-rstudio",
-    "title": "3  Downloading software",
-    "section": "3.2 Download R and RStudio",
-    "text": "3.2 Download R and RStudio\n\nDownload R, a free software environment for statistical computing and graphics from CRAN, the Comprehensive R Archive Network. We recommend you install a precompiled binary distribution for your operating system – use the links up at the top of the CRAN page!\n\nNote: MacBook users with an Apple Silicon chip (e.g., M1 or M2) should install the “arm64” version of R, while MacBook users with an Intel chip should install the regular (64-bit) version of R. You can check your laptop’s hardware specifications by clicking the Apple icon (top left corner) \\&gt; About This Mac.\n\nInstall RStudio, a graphical user interface (GUI) for R. Click the link under “2: Install RStudio”. RStudio comes with a text editor, so there is no immediate need to install a separate stand-alone editor.\n\nIf R is already installed, ensure that the R version is 4.0 or higher. You can do this by opening RStudio, where you should see a multi-section window like below. Locate the quadrant named “Console”, and put your cursor at the start of the prompt indicated by the &gt; symbol. Type sessionInfo() - make sure that only the I at the start of Info is capitalized and you are including the round brackets. Press enter to run this command and R should return an output to you. The first line shows what version of R is installed. Ensure that the R version installed is at least 4.0.",
+    "objectID": "downloadingR.html#installing-r-rstudio",
+    "href": "downloadingR.html#installing-r-rstudio",
+    "title": "Installing R & Ubuntu",
+    "section": "Installing R & RStudio",
+    "text": "Installing R & RStudio\n\nDownload R, a free software environment for statistical computing and graphics from CRAN, the Comprehensive R Archive Network. We recommend you install a precompiled binary distribution for your operating system – use the links up at the top of the CRAN page!\n\nNote: MacBook users with an Apple Silicon chip (e.g., M1 or M2) should install the “arm64” version of R, while MacBook users with an Intel chip should install the regular (64-bit) version of R. You can check your laptop’s hardware specifications by clicking the Apple icon (top left corner) \\&gt; About This Mac.\n\nInstall RStudio, a graphical user interface (GUI) for R. Click the link under “2: Install RStudio”. RStudio comes with a text editor, so there is no immediate need to install a separate stand-alone editor.\n\nIf R is already installed, ensure that the R version is 4.0 or higher. You can do this by opening RStudio, where you should see a multi-section window like below. Locate the quadrant named “Console”, and put your cursor at the start of the prompt indicated by the &gt; symbol. Type sessionInfo() - make sure that only the I at the start of Info is capitalized and you are including the round brackets. Press enter to run this command and R should return an output to you. The first line shows what version of R is installed. Ensure that the R version installed is at least 4.0.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Downloading software</span>"
+      "Installing R & Ubuntu"
     ]
   },
   {
-    "objectID": "downloadingR.html#download-packages",
-    "href": "downloadingR.html#download-packages",
-    "title": "3  Downloading software",
-    "section": "Download Packages",
-    "text": "Download Packages\n\n3.2.1 TinyTex\nThere is one package we have to install first before we can create PDF reports, which will be necessary for assignments and the project. Copy and paste into the console (where the \\&gt; symbol is) the two lines of code below to install a package called tinytex.\n\ninstall.packages(\"tinytex\") \ntinytex::install_tinytex()\n\n\n\n3.2.2 Tidyverse\n\nCopy and paste the below code into your console.\n\n\ninstall.package(c(\"tidyverse\", \"data.table\"), dependencies = TRUE)\n\nDuring installation, if you ever get the below message, click “No”.\n\nIf you get the message “Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” in the Console, type “Yes” and press enter.\n\nCheck that the tinytex and tidyverse packages have been installed correctly. To do this, go to the bottom right pane and click the tab for “Packages”. If you can search for and find the below packages, then they have been installed! They do not need to be checked off. Alternatively, go to the Console and type library(tidyverse) to verify that the tidyverse package is installed. An error along the lines “there is no package called tidyverse” will be returned if the package is not installed.",
+    "objectID": "downloadingR.html#installing-r-packages",
+    "href": "downloadingR.html#installing-r-packages",
+    "title": "Installing R & Ubuntu",
+    "section": "Installing R packages",
+    "text": "Installing R packages\n\nTinyTex\nThere is one package we have to install first before we can create PDF reports, which will be necessary for assignments and the project. Copy and paste into the console (where the \\&gt; symbol is) the two lines of code below to install a package called tinytex.\n\ninstall.packages(\"tinytex\") \ntinytex::install_tinytex()\n\n\n\nTidyverse\n\nCopy and paste the below code into your console.\n\n\ninstall.package(c(\"tidyverse\", \"data.table\"), dependencies = TRUE)\n\nDuring installation, if you ever get the below message, click “No”.\n\nIf you get the message “Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” in the Console, type “Yes” and press enter.\n\nCheck that the tinytex and tidyverse packages have been installed correctly. To do this, go to the bottom right pane and click the tab for “Packages”. If you can search for and find the below packages, then they have been installed! They do not need to be checked off. Alternatively, go to the Console and type library(tidyverse) to verify that the tidyverse package is installed. An error along the lines “there is no package called tidyverse” will be returned if the package is not installed.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Downloading software</span>"
+      "Installing R & Ubuntu"
     ]
   },
   {
-    "objectID": "downloadingR.html#downloading-ubuntu",
-    "href": "downloadingR.html#downloading-ubuntu",
-    "title": "3  Downloading software",
-    "section": "3.3 Downloading Ubuntu",
-    "text": "3.3 Downloading Ubuntu\nIf you are a Windows user, you will need to install Ubuntu before the command line and GitHub lecture in a couple of weeks. (If you are a Mac user, it is safe to stop here.) The steps to install Unbuntu are as follows. Do not attempt to do these steps while your computer is plugged into an electrical outlet.\n\nSearch for “Turn Windows features on or off” in the Windows search bar and ensure that “Windows Subsystem for Linux” is turned on. This will force your machine to restart.\nDownload Ubuntu from this link.\nOpen the app once installed. The app will say it is installing and, once finished, will prompt you to make a username and password. (The password won’t show up, but the keystrokes are being recognized. You will be asked to confirm the password, too.)\n\nImportantly, you can open Ubuntu via Command Prompt by typing ubuntu. Here is a picture illustrating how to do this:\n\nAfter following these steps, you can check everything has been installed correctly by going to File Explorer and verifying that there is a Linux tab – scroll all the way down and look for a penguin!",
+    "objectID": "downloadingR.html#installing-ubuntu",
+    "href": "downloadingR.html#installing-ubuntu",
+    "title": "Installing R & Ubuntu",
+    "section": "Installing Ubuntu",
+    "text": "Installing Ubuntu\nIf you are a Windows user, you will need to install Ubuntu before the command line and GitHub lecture in a couple of weeks. (If you are a Mac user, it is safe to stop here.) The steps to install Unbuntu are as follows. Do not attempt to do these steps while your computer is plugged into an electrical outlet.\n\nSearch for “Turn Windows features on or off” in the Windows search bar and ensure that “Windows Subsystem for Linux” is turned on. This will force your machine to restart.\nDownload Ubuntu from this link.\nOpen the app once installed. The app will say it is installing and, once finished, will prompt you to make a username and password. (The password won’t show up, but the keystrokes are being recognized. You will be asked to confirm the password, too.)\n\nImportantly, you can open Ubuntu via Command Prompt by typing ubuntu. Here is a picture illustrating how to do this:\n\nAfter following these steps, you can check everything has been installed correctly by going to File Explorer and verifying that there is a Linux tab – scroll all the way down and look for a penguin!",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Downloading software</span>"
+      "Installing R & Ubuntu"
     ]
   }
 ]
