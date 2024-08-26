@@ -19,7 +19,7 @@ Prerequisites: BIO220H1 and one of EEB225H1, STA288H1, or STA220H1
 
 ## Time
 
-Tuesdays and Thursdays 2:10 - 4:00 PM EST.
+Tuesdays 2:10 - 4:00 PM and Thursdays 12:10 - 2:00 PM EST.
 
 ## Class Locations
 
@@ -27,14 +27,14 @@ All classes will be on the St. George campus. On Tuesdays, we will be in 371 Blo
 
 | Office hours (in EST)                 |
 |----------|----------------|-----------|
-| Mete     | TBD    |  ESC3044          |
-| Zoë      | TBD    |  ESC3044          |
-| Jessie   | Tu/Th 4-5pm       | TBD    |
-| Gavia    | Tu/Th 4-5pm       | TBD    |
+| Mete     | Mon 1-2pm    |  ESC3044          |
+| Zoë      | Wed 2-3pm    |  ESC3044          |
+| Jessie   | Tu 4-5pm       | 371 Bloor, Room 36   |
+| Gavia    | Th 12-2pm       |  Sidney Smith, Room 561    |
 
-### Contact protocol
+## Contact protocol
 
-Please address all course-related, assignment-related, and project-related matters to both Zoë and Mete. Include "EEB313" in the subject line. If you do not receive a reply within 48 hours (excluding weekends), please send us a reminder. **Do not email the TAs.**
+Please address all course-related, assignment-related, and project-related matters to both Zoë and Mete. Include "EEB313" in the subject line. If you do not receive a reply within 48 hours (excluding weekends), please send us a reminder. **If you have assignment-related questions, please email Gavia and Jessie. If you have course-related or lecture-related questions, please email Mete and Zoë.**
 
 ## Diversity and inclusion statement
 
@@ -52,11 +52,11 @@ Please let us know if something said or done in this class, by either a member o
 
 We acknowledge our imperfections while we also fully commit to the work, inside and outside of our classrooms, of building and sustaining a community that increasingly embraces these core values. Your suggestions and feedback are encouraged and appreciated. Please let us know ways to improve the effectiveness of the course for you personally or for other students or student groups. 
 
-## Wellness statement {-}
+## Wellness statement
 
 We on the teaching team value your health and wellness. In order to succeed in this class, in university, and beyond, you must balance your work with rest, exercise, and attention to your mental and physical health. **Working until exhaustion is NOT a badge of honor**. If you are finding it difficult to balance your health and well-being with your work in this class, please do not hesitate to let us know. We are happy to help connect you with resources and services on campus and also to make accommodations to our course plan as needed. Our inboxes are always open, and we are also available for virtual chats by appointment. You have our support, and we believe in you.
 
-## Absence policy {-}
+## Absence policy
 
 If you are feeling unwell, please do not come to class. Instead, take the time to recover fully. Please let us know if you are feeling sick - you will not be penalized for missing a lecture, and we will do our best to ensure that you are up-to-date with class materials when you return.
 
@@ -82,38 +82,40 @@ If you require accommodations for a disability, or have any accessibility concer
 | 2    | Sep 10 | Intro to command line and GitHub                    | Zoë            |
 | 2    | Sep 12 | Data wrangling I                                    | Zoë            |
 | 3    | Sep 17 | Data wrangling II                                   | Zoë            |
-| 3    | Sep 19 | Data visualization in ggplot                        | Jessie         |
+| 3    | Sep 19 | Data visualization in ggplot                        | Zoë            |
 | 4    | Sep 24 | Exploratory data analysis                           | Zoë            |
 | 4    | Sep 26 | Project work                                        |                |
 | 5    | Oct 01 | Introduction to statistical inference I             | Mete           |
 | 5    | Oct 03 | Introduction to statistical inference II            | Mete           |
 | 6    | Oct 08 | Linear models I                                     | Mete           |
 | 6    | Oct 10 | Linear models II                                    | Mete           |
-| 7    | Oct 15 | Model selection                                     | Zoë            |
+| 7    | Oct 15 | Model selection                                     | Jessie         |
 | 7    | Oct 17 | Multivariate statistics                             | Gavia          |
 | 8    | Oct 22 | Mathematical models in ecology and evolution I      | Mete           |
 | 8    | Oct 24 | Mathematical models in ecology and evolution II     | Mete           |
-| 9    | Nov 05 | Reading break                                       | -              |
-| 9    | Nov 07 | Reading break                                       | -              |
-| 10   | Nov 12 | Project work                                        |                |
-| 10   | Nov 14 | Project work                                        |                |
-| 11   | Nov 19 | Project work                                        |                |
-| 11   | Nov 21 | Project work                                        |                |
-| 12   | Nov 26 | Project work                                        |                |
-| 12   | Nov 28 | Project work                                        |                |
-| 13   | Dec 03 | Group presentations                                 | Everyone       |
+| 9    | Oct 29 | Reading break                                       | -              |
+| 9    | Oct 31 | Reading break                                       | -              |
+| 10   | Nov 05 | Project work                                        |                |
+| 10   | Nov 07 | Project work                                        |                |
+| 11   | Nov 12 | Project work                                        |                |
+| 11   | Nov 14 | Project work                                        |                |
+| 12   | Nov 19 | Project work                                        |                |
+| 12   | Nov 21 | Project work                                        |                |
+| 13   | Nov 26 | Project work                                        |                |
+| 13   | Nov 28 | Project work                                        |                |
+| 14   | Dec 03 | Group presentations                                 | Everyone       |
 
 ## Assessment schedule
 
 | Assignment                                  | Type           | Submitted on      | Due date   | Marks |
 |---------------------------------------------|----------------|-------------------|------------|-------|
-| Individual interest description             | Individual     | Quercus           | Sep 17     | 1     |
+| Individual interest description             | Individual     | Quercus           | Sep 12     | 1     |
 | Basic R, command line, & Git                | Individual     | Quercus           | Sep 19     | 8     |
-| Data wrangling                              | Individual     | Quercus           | Sep 24     | 8     |
-| Data visualization and exploration          | Individual     | Quercus           | Oct 3      | 8     |
-| Intro inference and LMs I                   | Individual     | Quercus           | Oct 10     | 8     |
+| Data wrangling                              | Individual     | Quercus           | Sep 26     | 8     |
+| Data visualization and exploration          | Individual     | Quercus           | Oct 03     | 8     |
+| Intro inference and LMs                     | Individual     | Quercus           | Oct 10     | 8     |
 | Project proposal                            | Group          | GitHub            | Oct 17     | 3     |
-| LMs I, model selection, and multivariate    | Individual     | Quercus           | Oct 24     | 8     |
+| LMs, model selection, and multivariate      | Individual     | Quercus           | Oct 24     | 8     |
 | Challenge assignment                        | Individual     | Quercus           | Nov 15     | 20    |
 | Mid-project update                          | Group          | GitHub            | Nov 21     | 6     |
 | Presentation                                | Group          | In-class          | Dec 03     | 10    |
@@ -126,6 +128,8 @@ Assignments will be distributed and submitted in the R Markdown format via Querc
 The Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Nov 11, and it will be due 11:59 PM on Nov 15. Students are welcome to work in a group on this assignment, but each student must submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!
 
 _Per our stance on supporting student's mental health, we are happy to accommodate a 72-hour extension for *one* of the assignments, no questions asked. Otherwise, except under extenuating circumstances, there will be a penalty of 5% per day (including weekends) for all late submissions. If you foresee needing an extension, please email Zoë AND Mete as soon as possible. This policy does not apply to the Challenge Assignment, Presentation, or Final Report._
+
+**All submissions to Quercus/GitHub must be submitted as PDFs (i.e., knitted).**
 
 ## Improving your writing skills
 

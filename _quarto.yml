@@ -7,6 +7,8 @@ book:
   date: today
   chapters:
     - index.qmd
+    - about-us.qmd
+    - downloadingR.qmd
     - part: "Lectures"
     - part: "Assignments"
     - part: "Project"

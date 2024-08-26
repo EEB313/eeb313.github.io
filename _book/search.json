@@ -14,7 +14,7 @@
     "href": "index.html#land-acknowledgement",
     "title": "EEB313: Quantitative Methods in R for Biology",
     "section": "1.1 Land Acknowledgement",
-    "text": "1.1 Land Acknowledgement\nAlthough our students come from many locations around the world, we wish to recognize the land on which the University of Toronto was built. This land has historically been and still is the the home of the Huron-Wendat, the Seneca, and the Mississaugas of the Credit River.\nThere is a First Nations House for Indigenous Student Services on campus. Please refer to their web page for more resources and information about honouring our land and their services for students.",
+    "text": "1.1 Land Acknowledgement\nAlthough our students come from many locations around the world, we wish to recognize the land on which the University of Toronto was built. This land has historically been and still is the home of the Huron-Wendat, the Seneca, and the Mississaugas of the Credit River.\nThere is a First Nations House for Indigenous Student Services on campus. Please refer to their web page for more resources and information about honouring our land and their services for students.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
     ]
@@ -24,7 +24,37 @@
     "href": "index.html#course-overview",
     "title": "EEB313: Quantitative Methods in R for Biology",
     "section": "1.2 Course Overview",
-    "text": "1.2 Course Overview\nThis course covers statistical and data analysis, reproducible quantitative methods, and scientific computing in R to answer questions in ecology and evolutionary biology. Statistical and data analysis, modeling, and computing are essential skills for all biologists. This course is designed to meet a growing demand for reproducible, openly accessible, analytically thorough, and well-documented science. Students will learn to analyze and visualize data, develop mathematical models, and document their research using the R programming language. No programming experience is required.\nPrerequisites: BIO220H1 and one of EEB225H1, STA288H1, or STA220H1\n\n1.2.1 Time\nTue and Thu 2:10 - 4:00 PM EST.\n\n\n1.2.2 Class Locations\nRW109 (Ramsay Wright first floor computer lab), St. George Campus.\n\n\n\nOffice hours (in EST)\n\n\n\n\n\n\nMete\nTBD\nESC3044\n\n\nZoë\nTBD\nESC3044\n\n\nTBD\nTu/Th 4-5pm\nRW109\n\n\nTBD\nTu/Th 4-5pm\nRW109\n\n\n\n\n\n1.2.3 Contact protocol\nPlease address all course-related, assignment-related, and project-related matters to both Zoë and Mete. Include “EEB313” in the subject line. If you do not receive a reply within 48 hours (excluding weekends), please send us a reminder. Do not email the TAs.",
+    "text": "1.2 Course Overview\nThis course covers statistical and data analysis, reproducible quantitative methods, and scientific computing in R to answer questions in ecology and evolutionary biology. Statistical and data analysis, modeling, and computing are essential skills for all biologists. This course is designed to meet a growing demand for reproducible, openly accessible, analytically thorough, and well-documented science. Students will learn to analyze and visualize data, develop mathematical models, and document their research using the R programming language. No programming experience is required.\nPrerequisites: BIO220H1 and one of EEB225H1, STA288H1, or STA220H1",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#time",
+    "href": "index.html#time",
+    "title": "EEB313: Quantitative Methods in R for Biology",
+    "section": "1.3 Time",
+    "text": "1.3 Time\nTuesdays 2:10 - 4:00 PM and Thursdays 12:10 - 2:00 PM EST.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#class-locations",
+    "href": "index.html#class-locations",
+    "title": "EEB313: Quantitative Methods in R for Biology",
+    "section": "1.4 Class Locations",
+    "text": "1.4 Class Locations\nAll classes will be on the St. George campus. On Tuesdays, we will be in 371 Bloor, Room 36. On Thursdays, we will be in Sidney Smith Hall, Room 561.\n\n\n\nOffice hours (in EST)\n\n\n\n\n\n\nMete\nMon 1-2pm\nESC3044\n\n\nZoë\nWed 2-3pm\nESC3044\n\n\nJessie\nTu 4-5pm\n371 Bloor, Room 36\n\n\nGavia\nTh 12-2pm\nSidney Smith, Room 561",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#contact-protocol",
+    "href": "index.html#contact-protocol",
+    "title": "EEB313: Quantitative Methods in R for Biology",
+    "section": "1.5 Contact protocol",
+    "text": "1.5 Contact protocol\nPlease address all course-related, assignment-related, and project-related matters to both Zoë and Mete. Include “EEB313” in the subject line. If you do not receive a reply within 48 hours (excluding weekends), please send us a reminder. If you have assignment-related questions, please email Gavia and Jessie. If you have course-related or lecture-related questions, please email Mete and Zoë.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
     ]
@@ -33,8 +63,8 @@
     "objectID": "index.html#diversity-and-inclusion-statement",
     "href": "index.html#diversity-and-inclusion-statement",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.3 Diversity and inclusion statement",
-    "text": "1.3 Diversity and inclusion statement\nAs students, you all have something unique and special to offer to science. It is our intent that students from all backgrounds and perspectives be well served by this course, that students’ learning needs be addressed both in and out of class, and that the diversity that students bring to this class be recognized as a resource, strength, and benefit.\nDiversity can refer to multiple ways that we identify ourselves, including but not limited to race, national origin, language, cultural heritage, physical ability, neurodiversity, age, sexual orientation, gender identity, religion, and socio-economic class. Each of these varied, and often intersecting, identities, along with many others not mentioned here, shape the perspectives we bring to this class, to this department, and to the greater EEB community. We will work to promote diversity, equity, and inclusion not only because diversity fuels excellence and innovation, but because we want to pursue justice.\nWe expect that everybody in this class will respect each other, and demonstrate diligence in understanding how other people’s perspectives, behaviors, and worldviews may be different from their own. Racist, sexist, colonialist, homophobic, transphobic, and other abusive and discriminatory behavior and language will not be tolerated in this class and will result in disciplinary action, such as removal from class session or revocation of group working privileges. Please consult the University of Toronto Code of Student Conduct for details on unacceptable conduct and possible sanctions.\nPlease let us know if something said or done in this class, by either a member of the teaching team or other students, is particularly troubling or causes discomfort or offense. While our intention may not be to cause discomfort or offense, the impact of what happens throughout the course is not to be ignored and is something that we consider to be very important and deserving of attention. If and when this occurs, there are several ways to alleviate some of the discomfort or hurt you may experience:\n\nDiscuss the situation privately with a member of the teaching team. We are always open to listening to students’ experiences, and want to work with students to find acceptable ways to process and address the issue.\nNotify us of the issue through another source such as a trusted faculty member or a peer. If for any reason you do not feel comfortable discussing the issue directly with us, we encourage you to seek out another, more comfortable avenue to address the issue.\nContact the Anti-Racism and Cultural Diversity Office to report an incident and receive complaint resolution support, which may include consultations and referrals.\n\nWe acknowledge our imperfections while we also fully commit to the work, inside and outside of our classrooms, of building and sustaining a community that increasingly embraces these core values. Your suggestions and feedback are encouraged and appreciated. Please let us know ways to improve the effectiveness of the course for you personally or for other students or student groups.",
+    "section": "1.6 Diversity and inclusion statement",
+    "text": "1.6 Diversity and inclusion statement\nAs students, you all have something unique and special to offer to science. It is our intent that students from all backgrounds and perspectives be well served by this course, that students’ learning needs be addressed both in and out of class, and that the diversity that students bring to this class be recognized as a resource, strength, and benefit.\nDiversity can refer to multiple ways that we identify ourselves, including but not limited to race, national origin, language, cultural heritage, physical ability, neurodiversity, age, sexual orientation, gender identity, religion, and socio-economic class. Each of these varied, and often intersecting, identities, along with many others not mentioned here, shape the perspectives we bring to this class, to this department, and to the greater EEB community. We will work to promote diversity, equity, and inclusion not only because diversity fuels excellence and innovation, but because we want to pursue justice.\nWe expect that everybody in this class will respect each other, and demonstrate diligence in understanding how other people’s perspectives, behaviors, and worldviews may be different from their own. Racist, sexist, colonialist, homophobic, transphobic, and other abusive and discriminatory behavior and language will not be tolerated in this class and will result in disciplinary action, such as removal from class session or revocation of group working privileges. Please consult the University of Toronto Code of Student Conduct for details on unacceptable conduct and possible sanctions.\nPlease let us know if something said or done in this class, by either a member of the teaching team or other students, is particularly troubling or causes discomfort or offense. While our intention may not be to cause discomfort or offense, the impact of what happens throughout the course is not to be ignored and is something that we consider to be very important and deserving of attention. If and when this occurs, there are several ways to alleviate some of the discomfort or hurt you may experience:\n\nDiscuss the situation privately with a member of the teaching team. We are always open to listening to students’ experiences, and want to work with students to find acceptable ways to process and address the issue.\nNotify us of the issue through another source such as a trusted faculty member or a peer. If for any reason you do not feel comfortable discussing the issue directly with us, we encourage you to seek out another, more comfortable avenue to address the issue.\nContact the Anti-Racism and Cultural Diversity Office to report an incident and receive complaint resolution support, which may include consultations and referrals.\n\nWe acknowledge our imperfections while we also fully commit to the work, inside and outside of our classrooms, of building and sustaining a community that increasingly embraces these core values. Your suggestions and feedback are encouraged and appreciated. Please let us know ways to improve the effectiveness of the course for you personally or for other students or student groups.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
     ]
@@ -43,8 +73,8 @@
     "objectID": "index.html#wellness-statement",
     "href": "index.html#wellness-statement",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "Wellness statement",
-    "text": "Wellness statement\nWe on the teaching team value your health and wellness. In order to succeed in this class, in university, and beyond, you must balance your work with rest, exercise, and attention to your mental and physical health. Working until exhaustion is NOT a badge of honor. If you are finding it difficult to balance your health and well-being with your work in this class, please do not hesitate to let us know. We are happy to help connect you with resources and services on campus and also to make accommodations to our course plan as needed. Our inboxes are always open, and we are also available for virtual chats by appointment. You have our support, and we believe in you.",
+    "section": "1.7 Wellness statement",
+    "text": "1.7 Wellness statement\nWe on the teaching team value your health and wellness. In order to succeed in this class, in university, and beyond, you must balance your work with rest, exercise, and attention to your mental and physical health. Working until exhaustion is NOT a badge of honor. If you are finding it difficult to balance your health and well-being with your work in this class, please do not hesitate to let us know. We are happy to help connect you with resources and services on campus and also to make accommodations to our course plan as needed. Our inboxes are always open, and we are also available for virtual chats by appointment. You have our support, and we believe in you.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
     ]
@@ -53,8 +83,8 @@
     "objectID": "index.html#absence-policy",
     "href": "index.html#absence-policy",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "Absence policy",
-    "text": "Absence policy\nIf you are feeling unwell, please do not come to class. Instead, take the time to recover fully. Please let us know if you are feeling sick - you will not be penalized for missing a lecture, and we will do our best to ensure that you are up-to-date with class materials when you return.",
+    "section": "1.8 Absence policy",
+    "text": "1.8 Absence policy\nIf you are feeling unwell, please do not come to class. Instead, take the time to recover fully. Please let us know if you are feeling sick - you will not be penalized for missing a lecture, and we will do our best to ensure that you are up-to-date with class materials when you return.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
     ]
@@ -63,8 +93,8 @@
     "objectID": "index.html#accessibility-needs",
     "href": "index.html#accessibility-needs",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.4 Accessibility needs",
-    "text": "1.4 Accessibility needs\nIf you require accommodations for a disability, or have any accessibility concerns about the course or course materials, please notify your course instructors (Mete and Zoë), or contact Accessibility Services, as soon as possible regarding accommodations.",
+    "section": "1.9 Accessibility needs",
+    "text": "1.9 Accessibility needs\nIf you require accommodations for a disability, or have any accessibility concerns about the course or course materials, please notify your course instructors (Mete and Zoë), or contact Accessibility Services, as soon as possible regarding accommodations.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
     ]
@@ -73,8 +103,28 @@
     "objectID": "index.html#course-learning-outcomes",
     "href": "index.html#course-learning-outcomes",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.5 Course learning outcomes",
-    "text": "1.5 Course learning outcomes\n\nDevelop proficiency in the programming language R.\nUse R to apply appropriate statistical tools to analyze and interpret data.\nDevelop familiarity with mathematical models used in EEB.\nDevelop familiarity with the command line and Git.\nLearn and use techniques and best practices for reproducible, high-quality science.\nLearn how to work as part of a research team to produce a scientific product.\n\n\n1.5.1 Lecture schedule\n\n\n1.5.2 Assessment schedule\n\n\n\n\n\n\n\n\n\n\nAssignment\nType\nSubmitted on\nDue date\nMarks\n\n\n\n\nIndividual interest description\nIndividual\nQuercus\nSep 17\n1\n\n\nBasic R, command line, & Git\nIndividual\nQuercus\nSep 19\n8\n\n\nData wrangling\nIndividual\nQuercus\nSep 24\n8\n\n\nData visualization and exploration\nIndividual\nQuercus\nOct 3\n8\n\n\nIntro inference and LMs I\nIndividual\nQuercus\nOct 10\n8\n\n\nProject proposal\nGroup\nGitHub\nOct 17\n3\n\n\nLMs I, model selection, and multivariate\nIndividual\nQuercus\nOct 24\n8\n\n\nChallenge assignment\nIndividual\nQuercus\nNov 15\n20\n\n\nMid-project update\nGroup\nGitHub\nNov 21\n6\n\n\nPresentation\nGroup\nIn-class\nDec 03\n10\n\n\nFinal report\nGroup\nGitHub\nDec 10\n20\n\n\n\nThere are 100 marks in total. Your final course mark will be the sum of your assignment scores, which will be translated to a letter grade according to the official grading scale of the Faculty of Arts and Science.\nAssignments will be distributed and submitted in the R Markdown format via Quercus. Assignments will be handed out on Thursdays after class and are due at 8:00 PM on the following Thursday.\nThe Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Nov 11, and it will be due 11:59 PM on Nov 15. Students are welcome to work in a group on this assignment, but each student must submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!\nPer our stance on supporting student’s mental health, we are happy to accommodate a 72-hour extension for one of the assignments, no questions asked. Otherwise, except under extenuating circumstances, there will be a penalty of 5% per day (including weekends) for all late submissions. If you foresee needing an extension, please email Zoë AND Mete as soon as possible. This policy does not apply to the Challenge Assignment, Presentation, or Final Report.",
+    "section": "1.10 Course learning outcomes",
+    "text": "1.10 Course learning outcomes\n\nDevelop proficiency in the programming language R.\nUse R to apply appropriate statistical tools to analyze and interpret data.\nDevelop familiarity with mathematical models used in EEB.\nDevelop familiarity with the command line and Git.\nLearn and use techniques and best practices for reproducible, high-quality science.\nLearn how to work as part of a research team to produce a scientific product.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#lecture-schedule",
+    "href": "index.html#lecture-schedule",
+    "title": "EEB313: Quantitative Methods in R for Biology",
+    "section": "1.11 Lecture schedule",
+    "text": "1.11 Lecture schedule\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nInstructor\n\n\n\n\n1\nSep 3\nIntro to course\nEveryone\n\n\n1\nSep 5\nBase R: assignment, vectors, functions, strings, loops, etc.\nZoë\n\n\n2\nSep 10\nIntro to command line and GitHub\nZoë\n\n\n2\nSep 12\nData wrangling I\nZoë\n\n\n3\nSep 17\nData wrangling II\nZoë\n\n\n3\nSep 19\nData visualization in ggplot\nZoë\n\n\n4\nSep 24\nExploratory data analysis\nZoë\n\n\n4\nSep 26\nProject work\n\n\n\n5\nOct 01\nIntroduction to statistical inference I\nMete\n\n\n5\nOct 03\nIntroduction to statistical inference II\nMete\n\n\n6\nOct 08\nLinear models I\nMete\n\n\n6\nOct 10\nLinear models II\nMete\n\n\n7\nOct 15\nModel selection\nJessie\n\n\n7\nOct 17\nMultivariate statistics\nGavia\n\n\n8\nOct 22\nMathematical models in ecology and evolution I\nMete\n\n\n8\nOct 24\nMathematical models in ecology and evolution II\nMete\n\n\n9\nOct 29\nReading break\n-\n\n\n9\nOct 31\nReading break\n-\n\n\n10\nNov 05\nProject work\n\n\n\n10\nNov 07\nProject work\n\n\n\n11\nNov 12\nProject work\n\n\n\n11\nNov 14\nProject work\n\n\n\n12\nNov 19\nProject work\n\n\n\n12\nNov 21\nProject work\n\n\n\n13\nNov 26\nProject work\n\n\n\n13\nNov 28\nProject work\n\n\n\n14\nDec 03\nGroup presentations\nEveryone",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#assessment-schedule",
+    "href": "index.html#assessment-schedule",
+    "title": "EEB313: Quantitative Methods in R for Biology",
+    "section": "1.12 Assessment schedule",
+    "text": "1.12 Assessment schedule\n\n\n\n\n\n\n\n\n\n\nAssignment\nType\nSubmitted on\nDue date\nMarks\n\n\n\n\nIndividual interest description\nIndividual\nQuercus\nSep 12\n1\n\n\nBasic R, command line, & Git\nIndividual\nQuercus\nSep 19\n8\n\n\nData wrangling\nIndividual\nQuercus\nSep 26\n8\n\n\nData visualization and exploration\nIndividual\nQuercus\nOct 03\n8\n\n\nIntro inference and LMs\nIndividual\nQuercus\nOct 10\n8\n\n\nProject proposal\nGroup\nGitHub\nOct 17\n3\n\n\nLMs, model selection, and multivariate\nIndividual\nQuercus\nOct 24\n8\n\n\nChallenge assignment\nIndividual\nQuercus\nNov 15\n20\n\n\nMid-project update\nGroup\nGitHub\nNov 21\n6\n\n\nPresentation\nGroup\nIn-class\nDec 03\n10\n\n\nFinal report\nGroup\nGitHub\nDec 10\n20\n\n\n\nThere are 100 marks in total. Your final course mark will be the sum of your assignment scores, which will be translated to a letter grade according to the official grading scale of the Faculty of Arts and Science.\nAssignments will be distributed and submitted in the R Markdown format via Quercus. Assignments will be handed out on Thursdays after class and are due at 8:00 PM on the following Thursday.\nThe Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Nov 11, and it will be due 11:59 PM on Nov 15. Students are welcome to work in a group on this assignment, but each student must submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!\nPer our stance on supporting student’s mental health, we are happy to accommodate a 72-hour extension for one of the assignments, no questions asked. Otherwise, except under extenuating circumstances, there will be a penalty of 5% per day (including weekends) for all late submissions. If you foresee needing an extension, please email Zoë AND Mete as soon as possible. This policy does not apply to the Challenge Assignment, Presentation, or Final Report.\nAll submissions to Quercus/GitHub must be submitted as PDFs (i.e., knitted).",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
     ]
@@ -83,8 +133,8 @@
     "objectID": "index.html#improving-your-writing-skills",
     "href": "index.html#improving-your-writing-skills",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.6 Improving your writing skills",
-    "text": "1.6 Improving your writing skills\nEffective communication is crucial in science. The University of Toronto provides services to help you improve your writing, from general advices on effective writing to writing centers and writing courses. The Faculty of Arts & Science also offers an English Language Learning (ELL) program, which provides free individualized instruction in English skills. Take advantage of these!",
+    "section": "1.13 Improving your writing skills",
+    "text": "1.13 Improving your writing skills\nEffective communication is crucial in science. The University of Toronto provides services to help you improve your writing, from general advices on effective writing to writing centers and writing courses. The Faculty of Arts & Science also offers an English Language Learning (ELL) program, which provides free individualized instruction in English skills. Take advantage of these!",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
     ]
@@ -93,8 +143,8 @@
     "objectID": "index.html#academic-integrity",
     "href": "index.html#academic-integrity",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.7 Academic integrity",
-    "text": "1.7 Academic integrity\nYou should be aware of the University of Toronto Code of Behaviour on Academic Matters. Also see How Not to Plagiarize. Notably, it is NOT appropriate to use large sections from internet sources, and inserting a few words here and there does not make it an original piece of writing. Be careful in using internet sources – most online material are not reviewed and there are many errors out there. Make sure you read material from many sources (published, peer-reviewed, trusted internet sources) and that you write an original text using this information. Always cite your sources. In case of doubt about plagiarism, talk to your instructors and TAs. Please make sure that what you submit for the final project does not overlap with what you submit for other classes, such as the 4th-year research project.",
+    "section": "1.14 Academic integrity",
+    "text": "1.14 Academic integrity\nYou should be aware of the University of Toronto Code of Behaviour on Academic Matters. Also see How Not to Plagiarize. Notably, it is NOT appropriate to use large sections from internet sources, and inserting a few words here and there does not make it an original piece of writing. Be careful in using internet sources – most online material are not reviewed and there are many errors out there. Make sure you read material from many sources (published, peer-reviewed, trusted internet sources) and that you write an original text using this information. Always cite your sources. In case of doubt about plagiarism, talk to your instructors and TAs. Please make sure that what you submit for the final project does not overlap with what you submit for other classes, such as the 4th-year research project.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
     ]
@@ -103,10 +153,70 @@
     "objectID": "index.html#fas-student-engagement-programs",
     "href": "index.html#fas-student-engagement-programs",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.8 FAS student engagement programs",
-    "text": "1.8 FAS student engagement programs\nThere are a few programs on campus aimed at increasing student engagement with their coursework and keeping them socially connected. Recognized Study Groups are voluntary, peer-led study groups of up to 8 students enrolled in the same course. Meet to Complete are online drop-in study sessions for A&S undergrads. These are worth checking out if you are interested in participating in a study group.",
+    "section": "1.15 FAS student engagement programs",
+    "text": "1.15 FAS student engagement programs\nThere are a few programs on campus aimed at increasing student engagement with their coursework and keeping them socially connected. Recognized Study Groups are voluntary, peer-led study groups of up to 8 students enrolled in the same course. Meet to Complete are online drop-in study sessions for A&S undergrads. These are worth checking out if you are interested in participating in a study group.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+    ]
+  },
+  {
+    "objectID": "about-us.html",
+    "href": "about-us.html",
+    "title": "The 2024 teaching team",
+    "section": "",
+    "text": "Course instructors\nMete Yuksel (mete.yuksel@mail.utoronto.ca)\nMete is a 3rd year PhD student in the Dept. Ecology and Evolutionary Biology at UTSG, and is co-advised by Matt Osmond & Nicole Mideo. He uses mathematical models to address questions in evolutionary genetics and ecology. He is currently developing theory to understand patterns, causes, and consequences of recombination rate variation. Mete was an undergraduate math & statistics student at the University of Idaho. There, he worked on the ecology of gene drive interventions against vectored diseases, understanding how continuous spatial structure can affect species coexistence, and forecasting the dynamics of Chinook salmon in the Willamette River system. He loves R - and teaching this course! Outside of science, Mete enjoys listening to podcasts, cooking, and cycling between Toronto neighborhoods in search of coffee.\nZoe Humphries (zoe.humphries@mail.utoronto.ca)\nZoë is a PhD student in the Wright and Barrett labs at UTSG. She studies the genome of a weedy plant to better understand how transposable elements affect sex chromosome evolution. She taught herself how to use R during her honours thesis and fell in love because it was much kinder than Lisp or C++ and, most importantly, because aesthetics. Zoë makes plots from aggressively large genomic data sets and spends a lot of time literally bash-ing her data into a file small enough for her computer to load into RStudio. For Zoë, the best way to work in R is while patting her puppies.",
+    "crumbs": [
+      "The 2024 teaching team"
+    ]
+  },
+  {
+    "objectID": "about-us.html#teaching-assistants",
+    "href": "about-us.html#teaching-assistants",
+    "title": "The 2024 teaching team",
+    "section": "Teaching assistants",
+    "text": "Teaching assistants\nGavia Lertzman-Lepofsky\nGavia is a PhD candidate in the Mahler lab on the StG campus. She works with the tropical Anolis lizards to understand how macroevolution shapes local patterns of community diversity and structure. When she’s not wandering around Caribbean islands catching lizards or spraying them with paint, she is happily ensconced on her couch working in R or exploring the many bakeries and bookstores of Toronto.\nJessie Wang\nJessie is a PhD student in the Frederickson lab at UTSG. She studies plant-microbe interactions using high- throughput experimentation in duckweeds. She fell in love with R during her time as an undergraduate and took EEB313 in 2020, simultaneously sharpening her coding skills while conducting research alone in the lab. Jessie loves to spend too much money on fancy coffee as she types away, making sure her code is well-annotated and her figures look beautiful. Outside of work, she enjoys caring for her many houseplants and aquariums, finding new delicious eats, and admiring other people’s pets.",
+    "crumbs": [
+      "The 2024 teaching team"
+    ]
+  },
+  {
+    "objectID": "downloadingR.html",
+    "href": "downloadingR.html",
+    "title": "Installing R & Ubuntu",
+    "section": "",
+    "text": "Introduction\nThis course makes use of R and RStudio, as well as the command line. The goal of these notes is to help you install R and Rstudio and, if you use a Windows machine, to install Ubuntu. If you have any issues, let’s resolve them in advance so that you can make the most of our time together! The goal here is to ensure that your computer is set up for the rest of the course. If you can’t complete these steps, please email Mete and Zoë as soon as possible.",
+    "crumbs": [
+      "Installing R & Ubuntu"
+    ]
+  },
+  {
+    "objectID": "downloadingR.html#installing-r-rstudio",
+    "href": "downloadingR.html#installing-r-rstudio",
+    "title": "Installing R & Ubuntu",
+    "section": "Installing R & RStudio",
+    "text": "Installing R & RStudio\n\nDownload R, a free software environment for statistical computing and graphics from CRAN, the Comprehensive R Archive Network. We recommend you install a precompiled binary distribution for your operating system – use the links up at the top of the CRAN page!\n\nNote: MacBook users with an Apple Silicon chip (e.g., M1 or M2) should install the “arm64” version of R, while MacBook users with an Intel chip should install the regular (64-bit) version of R. You can check your laptop’s hardware specifications by clicking the Apple icon (top left corner) \\&gt; About This Mac.\n\nInstall RStudio, a graphical user interface (GUI) for R. Click the link under “2: Install RStudio”. RStudio comes with a text editor, so there is no immediate need to install a stand-alone editor.\n\nIf R is already installed, ensure that the R version is 4.0 or higher. You can do this by opening RStudio, where you should see a multi-section window like below. Locate the quadrant named “Console”, and put your cursor at the start of the prompt indicated by the &gt; symbol. Type sessionInfo() - make sure that only the I at the start of Info is capitalized and you are including the round brackets. Press enter to run this command and R should return an output to you. The first line shows what version of R is installed. Ensure that the R version installed is at least 4.0.",
+    "crumbs": [
+      "Installing R & Ubuntu"
+    ]
+  },
+  {
+    "objectID": "downloadingR.html#installing-r-packages",
+    "href": "downloadingR.html#installing-r-packages",
+    "title": "Installing R & Ubuntu",
+    "section": "Installing R packages",
+    "text": "Installing R packages\n\nTinyTex\nThere is one package we have to install first before we can create PDF reports, which will be necessary for assignments and the project. Copy and paste into the console (where the \\&gt; symbol is) the two lines of code below to install a package called tinytex.\n\ninstall.packages(\"tinytex\") \ntinytex::install_tinytex()\n\n\n\nTidyverse\n\nCopy and paste the below code into your console.\n\n\ninstall.package(c(\"tidyverse\", \"data.table\"), dependencies = TRUE)\n\nDuring installation, if you ever get the below message, click “No”.\n\nIf you get the message “Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” in the Console, type “Yes” and press enter.\n\nCheck that the tinytex and tidyverse packages have been installed correctly. To do this, go to the bottom right pane and click the tab for “Packages”. If you can search for and find the below packages, then they have been installed! They do not need to be checked off. Alternatively, go to the Console and type library(tidyverse) to verify that the package is installed. An error along the lines “there is no package called tidyverse” will be returned if the package is not installed.",
+    "crumbs": [
+      "Installing R & Ubuntu"
+    ]
+  },
+  {
+    "objectID": "downloadingR.html#installing-ubuntu",
+    "href": "downloadingR.html#installing-ubuntu",
+    "title": "Installing R & Ubuntu",
+    "section": "Installing Ubuntu",
+    "text": "Installing Ubuntu\nIf you are a Windows user, you will need to install Ubuntu before the command line and GitHub lecture. (If you are a Mac user, it is safe to stop here.) The steps to install Unbuntu are as follows. Do not attempt to follow these instructions while your computer is plugged into an electrical outlet.\n\nSearch for “Turn Windows features on or off” in the Windows search bar and ensure that “Windows Subsystem for Linux” is turned on. This will force your machine to restart.\nDownload Ubuntu from this link.\nOpen the app once installed. The app will say it is installing and, once finished, will prompt you to make a username and password. (The password won’t show up, but the keystrokes are being recognized. You will be asked to confirm the password, too.)\n\nImportantly, you can open Ubuntu via Command Prompt by typing ubuntu. Here is a picture illustrating how to do this:\n\nAfter following these steps, you can check everything has been installed correctly by going to File Explorer and verifying that there is a Linux tab – scroll all the way down and look for a penguin!",
+    "crumbs": [
+      "Installing R & Ubuntu"
     ]
   }
 ]
