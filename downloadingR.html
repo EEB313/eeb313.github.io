@@ -230,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>Note: MacBook users with an Apple Silicon chip (e.g., M1 or M2) should install the “arm64” version of R, while MacBook users with an Intel chip should install the regular (64-bit) version of R. You can check your laptop’s hardware specifications by clicking the Apple icon (top left corner) <code>\&gt; About This Mac</code>.</p>
 <ol start="2" type="1">
-<li><strong>Install <a href="https://posit.co/download/rstudio-desktop/">RStudio</a></strong>, a graphical user interface (GUI) for R. Click the link under “2: Install RStudio”. RStudio comes with a text editor, so there is no immediate need to install a separate stand-alone editor.</li>
+<li><strong>Install <a href="https://posit.co/download/rstudio-desktop/">RStudio</a></strong>, a graphical user interface (GUI) for R. Click the link under “2: Install RStudio”. RStudio comes with a text editor, so there is no immediate need to install a stand-alone editor.</li>
 </ol>
 <p>If R is already installed, <strong>ensure that the R version is 4.0 or higher.</strong> You can do this by opening RStudio, where you should see a multi-section window like below. Locate the quadrant named “Console”, and put your cursor at the start of the prompt indicated by the <code>&gt;</code> symbol. Type <code>sessionInfo()</code> - make sure that only the I at the start of Info is capitalized and you are including the round brackets. Press enter to run this command and R should return an output to you. The first line shows what version of R is installed. Ensure that the R version installed is at least 4.0.</p>
 </section>
@@ -256,13 +256,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="figures/restartr.png" class="img-fluid" style="width:30.0%"></p>
 <p>If you get the message “Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” in the Console, type “Yes” and press enter.</p>
 <ol start="2" type="1">
-<li><strong>Check that the tinytex and tidyverse packages have been installed correctly</strong>. To do this, go to the bottom right pane and click the tab for “Packages”. If you can search for and find the below packages, then they have been installed! They do not need to be checked off. Alternatively, go to the Console and type <code>library(tidyverse)</code> to verify that the <code>tidyverse</code> package is installed. An error along the lines “there is no package called tidyverse” will be returned if the package is not installed.</li>
+<li><strong>Check that the tinytex and tidyverse packages have been installed correctly</strong>. To do this, go to the bottom right pane and click the tab for “Packages”. If you can search for and find the below packages, then they have been installed! They do not need to be checked off. Alternatively, go to the Console and type <code>library(tidyverse)</code> to verify that the package is installed. An error along the lines “there is no package called tidyverse” will be returned if the package is not installed.</li>
 </ol>
 </section>
 </section>
 <section id="installing-ubuntu" class="level2">
 <h2 class="anchored" data-anchor-id="installing-ubuntu">Installing Ubuntu</h2>
-<p>If you are a Windows user, you will need to install Ubuntu before the command line and GitHub lecture in a couple of weeks. (If you are a Mac user, it is safe to stop here.) The steps to install Unbuntu are as follows. Do not attempt to do these steps while your computer is plugged into an electrical outlet.</p>
+<p>If you are a Windows user, you will need to install Ubuntu before the command line and GitHub lecture. (If you are a Mac user, it is safe to stop here.) The steps to install Unbuntu are as follows. Do not attempt to follow these instructions while your computer is plugged into an electrical outlet.</p>
 <ol type="1">
 <li>Search for “Turn Windows features on or off” in the Windows search bar and ensure that “Windows Subsystem for Linux” is turned on. This will force your machine to restart.</li>
 <li>Download Ubuntu from <a href="https://apps.microsoft.com/detail/9PDXGNCFSCZV?hl=en-ca&amp;gl=CA">this link</a>.</li>
