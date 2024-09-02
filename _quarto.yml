@@ -10,8 +10,13 @@ book:
     - about-us.qmd
     - downloadingR.qmd
     - part: "Lectures"
+      chapters:
+      - lectures/lec00-r_and_rstudio.qmd
     - part: "Assignments"
     - part: "Project"
+      chapters:
+      - projects.qmd
+      - projects_databases.qmd
     - part: "Miscellaneous notes"
   repo-url: https://github.com/EEB313/eeb313.github.io
   sidebar:
