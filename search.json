@@ -4,179 +4,189 @@
     "href": "index.html",
     "title": "EEB313: Quantitative Methods in R for Biology",
     "section": "",
-    "text": "1 Syllabus",
+    "text": "Syllabus",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#land-acknowledgement",
     "href": "index.html#land-acknowledgement",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.1 Land Acknowledgement",
-    "text": "1.1 Land Acknowledgement\nAlthough our students come from many locations around the world, we wish to recognize the land on which the University of Toronto was built. This land has historically been and still is the home of the Huron-Wendat, the Seneca, and the Mississaugas of the Credit River.\nThere is a First Nations House for Indigenous Student Services on campus. Please refer to their web page for more resources and information about honouring our land and their services for students.",
+    "section": "Land Acknowledgement",
+    "text": "Land Acknowledgement\nAlthough our students come from many locations around the world, we wish to recognize the land on which the University of Toronto was built. This land has historically been and still is the home of the Huron-Wendat, the Seneca, and the Mississaugas of the Credit River.\nThere is a First Nations House for Indigenous Student Services on campus. Please refer to their web page for more resources and information about honouring our land and their services for students.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#course-overview",
     "href": "index.html#course-overview",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.2 Course Overview",
-    "text": "1.2 Course Overview\nThis course covers statistical and data analysis, reproducible quantitative methods, and scientific computing in R to answer questions in ecology and evolutionary biology. Statistical and data analysis, modeling, and computing are essential skills for all biologists. This course is designed to meet a growing demand for reproducible, openly accessible, analytically thorough, and well-documented science. Students will learn to analyze and visualize data, develop mathematical models, and document their research using the R programming language. No programming experience is required.\nPrerequisites: BIO220H1 and one of EEB225H1, STA288H1, or STA220H1",
+    "section": "Course Overview",
+    "text": "Course Overview\nThis course covers statistical and data analysis, reproducible quantitative methods, and scientific computing in R to answer questions in ecology and evolutionary biology. Statistical and data analysis, modeling, and computing are essential skills for all biologists. This course is designed to meet a growing demand for reproducible, openly accessible, analytically thorough, and well-documented science. Students will learn to analyze and visualize data, develop mathematical models, and document their research using the R programming language. No programming experience is required.\nPrerequisites: BIO220H1 and one of EEB225H1, STA288H1, or STA220H1",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#time",
     "href": "index.html#time",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.3 Time",
-    "text": "1.3 Time\nTuesdays 2:10 - 4:00 PM and Thursdays 12:10 - 2:00 PM EST.",
+    "section": "Time",
+    "text": "Time\nTuesdays 2:10 - 4:00 PM and Thursdays 12:10 - 2:00 PM EST.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#class-locations",
     "href": "index.html#class-locations",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.4 Class Locations",
-    "text": "1.4 Class Locations\nAll classes will be on the St. George campus. On Tuesdays, we will be in 371 Bloor, Room 36. On Thursdays, we will be in Sidney Smith Hall, Room 561.\n\n\n\nOffice hours (in EST)\n\n\n\n\n\n\nMete\nMon 1-2pm\nESC3044\n\n\nZoë\nWed 2-3pm\nESC3044\n\n\nJessie\nTu 4-5pm\n371 Bloor, Room 36\n\n\nGavia\nTh 12-2pm\nSidney Smith, Room 561",
+    "section": "Class Locations",
+    "text": "Class Locations\nAll classes will be on the St. George campus. On Tuesdays, we will be in 371 Bloor, Room 36. On Thursdays, we will be in Sidney Smith Hall, Room 561.\n\n\n\nOffice hours (in EST)\n\n\n\n\n\n\nMete\nMon 1-2pm\nESC3044\n\n\nZoë\nWed 2-3pm\nESC3044\n\n\nJessie\nTu 4-5pm\n371 Bloor, Room 36\n\n\nGavia\nTh 12-2pm\nSidney Smith, Room 561",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#contact-protocol",
     "href": "index.html#contact-protocol",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.5 Contact protocol",
-    "text": "1.5 Contact protocol\nPlease address all course-related, assignment-related, and project-related matters to both Zoë and Mete. Include “EEB313” in the subject line. If you do not receive a reply within 48 hours (excluding weekends), please send us a reminder. If you have assignment-related questions, please email Gavia and Jessie. If you have course-related or lecture-related questions, please email Mete and Zoë.",
+    "section": "Contact protocol",
+    "text": "Contact protocol\nPlease address all course-related, assignment-related, and project-related matters to both Zoë and Mete. Include “EEB313” in the subject line. If you do not receive a reply within 48 hours (excluding weekends), please send us a reminder. If you have assignment-related questions, please email Gavia and Jessie. If you have course-related or lecture-related questions, please email Mete and Zoë.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#diversity-and-inclusion-statement",
     "href": "index.html#diversity-and-inclusion-statement",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.6 Diversity and inclusion statement",
-    "text": "1.6 Diversity and inclusion statement\nAs students, you all have something unique and special to offer to science. It is our intent that students from all backgrounds and perspectives be well served by this course, that students’ learning needs be addressed both in and out of class, and that the diversity that students bring to this class be recognized as a resource, strength, and benefit.\nDiversity can refer to multiple ways that we identify ourselves, including but not limited to race, national origin, language, cultural heritage, physical ability, neurodiversity, age, sexual orientation, gender identity, religion, and socio-economic class. Each of these varied, and often intersecting, identities, along with many others not mentioned here, shape the perspectives we bring to this class, to this department, and to the greater EEB community. We will work to promote diversity, equity, and inclusion not only because diversity fuels excellence and innovation, but because we want to pursue justice.\nWe expect that everybody in this class will respect each other, and demonstrate diligence in understanding how other people’s perspectives, behaviors, and worldviews may be different from their own. Racist, sexist, colonialist, homophobic, transphobic, and other abusive and discriminatory behavior and language will not be tolerated in this class and will result in disciplinary action, such as removal from class session or revocation of group working privileges. Please consult the University of Toronto Code of Student Conduct for details on unacceptable conduct and possible sanctions.\nPlease let us know if something said or done in this class, by either a member of the teaching team or other students, is particularly troubling or causes discomfort or offense. While our intention may not be to cause discomfort or offense, the impact of what happens throughout the course is not to be ignored and is something that we consider to be very important and deserving of attention. If and when this occurs, there are several ways to alleviate some of the discomfort or hurt you may experience:\n\nDiscuss the situation privately with a member of the teaching team. We are always open to listening to students’ experiences, and want to work with students to find acceptable ways to process and address the issue.\nNotify us of the issue through another source such as a trusted faculty member or a peer. If for any reason you do not feel comfortable discussing the issue directly with us, we encourage you to seek out another, more comfortable avenue to address the issue.\nContact the Anti-Racism and Cultural Diversity Office to report an incident and receive complaint resolution support, which may include consultations and referrals.\n\nWe acknowledge our imperfections while we also fully commit to the work, inside and outside of our classrooms, of building and sustaining a community that increasingly embraces these core values. Your suggestions and feedback are encouraged and appreciated. Please let us know ways to improve the effectiveness of the course for you personally or for other students or student groups.",
+    "section": "Diversity and inclusion statement",
+    "text": "Diversity and inclusion statement\nAs students, you all have something unique and special to offer to science. It is our intent that students from all backgrounds and perspectives be well served by this course, that students’ learning needs be addressed both in and out of class, and that the diversity that students bring to this class be recognized as a resource, strength, and benefit.\nDiversity can refer to multiple ways that we identify ourselves, including but not limited to race, national origin, language, cultural heritage, physical ability, neurodiversity, age, sexual orientation, gender identity, religion, and socio-economic class. Each of these varied, and often intersecting, identities, along with many others not mentioned here, shape the perspectives we bring to this class, to this department, and to the greater EEB community. We will work to promote diversity, equity, and inclusion not only because diversity fuels excellence and innovation, but because we want to pursue justice.\nWe expect that everybody in this class will respect each other, and demonstrate diligence in understanding how other people’s perspectives, behaviors, and worldviews may be different from their own. Racist, sexist, colonialist, homophobic, transphobic, and other abusive and discriminatory behavior and language will not be tolerated in this class and will result in disciplinary action, such as removal from class session or revocation of group working privileges. Please consult the University of Toronto Code of Student Conduct for details on unacceptable conduct and possible sanctions.\nPlease let us know if something said or done in this class, by either a member of the teaching team or other students, is particularly troubling or causes discomfort or offense. While our intention may not be to cause discomfort or offense, the impact of what happens throughout the course is not to be ignored and is something that we consider to be very important and deserving of attention. If and when this occurs, there are several ways to alleviate some of the discomfort or hurt you may experience:\n\nDiscuss the situation privately with a member of the teaching team. We are always open to listening to students’ experiences, and want to work with students to find acceptable ways to process and address the issue.\nNotify us of the issue through another source such as a trusted faculty member or a peer. If for any reason you do not feel comfortable discussing the issue directly with us, we encourage you to seek out another, more comfortable avenue to address the issue.\nContact the Anti-Racism and Cultural Diversity Office to report an incident and receive complaint resolution support, which may include consultations and referrals.\n\nWe acknowledge our imperfections while we also fully commit to the work, inside and outside of our classrooms, of building and sustaining a community that increasingly embraces these core values. Your suggestions and feedback are encouraged and appreciated. Please let us know ways to improve the effectiveness of the course for you personally or for other students or student groups.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#wellness-statement",
     "href": "index.html#wellness-statement",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.7 Wellness statement",
-    "text": "1.7 Wellness statement\nWe on the teaching team value your health and wellness. In order to succeed in this class, in university, and beyond, you must balance your work with rest, exercise, and attention to your mental and physical health. Working until exhaustion is NOT a badge of honor. If you are finding it difficult to balance your health and well-being with your work in this class, please do not hesitate to let us know. We are happy to help connect you with resources and services on campus and also to make accommodations to our course plan as needed. Our inboxes are always open, and we are also available for virtual chats by appointment. You have our support, and we believe in you.",
+    "section": "Wellness statement",
+    "text": "Wellness statement\nWe on the teaching team value your health and wellness. In order to succeed in this class, in university, and beyond, you must balance your work with rest, exercise, and attention to your mental and physical health. Working until exhaustion is NOT a badge of honor. If you are finding it difficult to balance your health and well-being with your work in this class, please do not hesitate to let us know. We are happy to help connect you with resources and services on campus and also to make accommodations to our course plan as needed. Our inboxes are always open, and we are also available for virtual chats by appointment. You have our support, and we believe in you.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#absence-policy",
     "href": "index.html#absence-policy",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.8 Absence policy",
-    "text": "1.8 Absence policy\nIf you are feeling unwell, please do not come to class. Instead, take the time to recover fully. Please let us know if you are feeling sick - you will not be penalized for missing a lecture, and we will do our best to ensure that you are up-to-date with class materials when you return.",
+    "section": "Absence policy",
+    "text": "Absence policy\nIf you are feeling unwell, please do not come to class. Instead, take the time to recover fully. Please let us know if you are feeling sick - you will not be penalized for missing a lecture, and we will do our best to ensure that you are up-to-date with class materials when you return.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#accessibility-needs",
     "href": "index.html#accessibility-needs",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.9 Accessibility needs",
-    "text": "1.9 Accessibility needs\nIf you require accommodations for a disability, or have any accessibility concerns about the course or course materials, please notify your course instructors (Mete and Zoë), or contact Accessibility Services, as soon as possible regarding accommodations.",
+    "section": "Accessibility needs",
+    "text": "Accessibility needs\nIf you require accommodations for a disability, or have any accessibility concerns about the course or course materials, please notify your course instructors (Mete and Zoë), or contact Accessibility Services, as soon as possible regarding accommodations.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#course-learning-outcomes",
     "href": "index.html#course-learning-outcomes",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.10 Course learning outcomes",
-    "text": "1.10 Course learning outcomes\n\nDevelop proficiency in the programming language R.\nUse R to apply appropriate statistical tools to analyze and interpret data.\nDevelop familiarity with mathematical models used in EEB.\nDevelop familiarity with the command line and Git.\nLearn and use techniques and best practices for reproducible, high-quality science.\nLearn how to work as part of a research team to produce a scientific product.",
+    "section": "Course learning outcomes",
+    "text": "Course learning outcomes\n\nDevelop proficiency in the programming language R.\nUse R to apply appropriate statistical tools to analyze and interpret data.\nDevelop familiarity with mathematical models used in EEB.\nDevelop familiarity with the command line and Git.\nLearn and use techniques and best practices for reproducible, high-quality science.\nLearn how to work as part of a research team to produce a scientific product.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#lecture-schedule",
     "href": "index.html#lecture-schedule",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.11 Lecture schedule",
-    "text": "1.11 Lecture schedule\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nInstructor\n\n\n\n\n1\nSep 3\nIntro to course\nEveryone\n\n\n1\nSep 5\nBase R: assignment, vectors, functions, strings, loops, etc.\nZoë\n\n\n2\nSep 10\nIntro to command line and GitHub\nZoë\n\n\n2\nSep 12\nData wrangling I\nZoë\n\n\n3\nSep 17\nData wrangling II\nZoë\n\n\n3\nSep 19\nData visualization in ggplot\nZoë\n\n\n4\nSep 24\nExploratory data analysis\nZoë\n\n\n4\nSep 26\nProject work\n\n\n\n5\nOct 01\nIntroduction to statistical inference I\nMete\n\n\n5\nOct 03\nIntroduction to statistical inference II\nMete\n\n\n6\nOct 08\nLinear models I\nMete\n\n\n6\nOct 10\nLinear models II\nMete\n\n\n7\nOct 15\nModel selection\nJessie\n\n\n7\nOct 17\nMultivariate statistics\nGavia\n\n\n8\nOct 22\nMathematical models in ecology and evolution I\nMete\n\n\n8\nOct 24\nMathematical models in ecology and evolution II\nMete\n\n\n9\nOct 29\nReading break\n-\n\n\n9\nOct 31\nReading break\n-\n\n\n10\nNov 05\nProject work\n\n\n\n10\nNov 07\nProject work\n\n\n\n11\nNov 12\nProject work\n\n\n\n11\nNov 14\nProject work\n\n\n\n12\nNov 19\nProject work\n\n\n\n12\nNov 21\nProject work\n\n\n\n13\nNov 26\nProject work\n\n\n\n13\nNov 28\nProject work\n\n\n\n14\nDec 03\nGroup presentations\nEveryone",
+    "section": "Lecture schedule",
+    "text": "Lecture schedule\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nInstructor\n\n\n\n\n1\nSep 3\nIntro to course\nEveryone\n\n\n1\nSep 5\nBase R: assignment, vectors, functions, strings, loops, etc.\nZoë\n\n\n2\nSep 10\nIntro to command line and GitHub\nZoë\n\n\n2\nSep 12\nData wrangling I\nZoë\n\n\n3\nSep 17\nData wrangling II\nZoë\n\n\n3\nSep 19\nData visualization in ggplot\nZoë\n\n\n4\nSep 24\nExploratory data analysis\nZoë\n\n\n4\nSep 26\nProject work\n\n\n\n5\nOct 01\nIntroduction to statistical inference I\nMete\n\n\n5\nOct 03\nIntroduction to statistical inference II\nMete\n\n\n6\nOct 08\nLinear models I\nMete\n\n\n6\nOct 10\nLinear models II\nMete\n\n\n7\nOct 15\nModel selection\nJessie\n\n\n7\nOct 17\nMultivariate statistics\nGavia\n\n\n8\nOct 22\nMathematical models in ecology and evolution I\nMete\n\n\n8\nOct 24\nMathematical models in ecology and evolution II\nMete\n\n\n9\nOct 29\nReading break\n-\n\n\n9\nOct 31\nReading break\n-\n\n\n10\nNov 05\nProject work\n\n\n\n10\nNov 07\nProject work\n\n\n\n11\nNov 12\nProject work\n\n\n\n11\nNov 14\nProject work\n\n\n\n12\nNov 19\nProject work\n\n\n\n12\nNov 21\nProject work\n\n\n\n13\nNov 26\nProject work\n\n\n\n13\nNov 28\nProject work\n\n\n\n14\nDec 03\nGroup presentations\nEveryone",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#assessment-schedule",
     "href": "index.html#assessment-schedule",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.12 Assessment schedule",
-    "text": "1.12 Assessment schedule\n\n\n\n\n\n\n\n\n\n\nAssignment\nType\nSubmitted on\nDue date\nMarks\n\n\n\n\nIndividual interest description\nIndividual\nQuercus\nSep 12\n1\n\n\nBasic R, command line, & Git\nIndividual\nQuercus\nSep 19\n8\n\n\nData wrangling\nIndividual\nQuercus\nSep 26\n8\n\n\nData visualization and exploration\nIndividual\nQuercus\nOct 03\n8\n\n\nIntro inference and LMs\nIndividual\nQuercus\nOct 10\n8\n\n\nProject proposal\nGroup\nGitHub\nOct 17\n3\n\n\nLMs, model selection, and multivariate\nIndividual\nQuercus\nOct 24\n8\n\n\nChallenge assignment\nIndividual\nQuercus\nNov 15\n20\n\n\nMid-project update\nGroup\nGitHub\nNov 21\n6\n\n\nPresentation\nGroup\nIn-class\nDec 03\n10\n\n\nFinal report\nGroup\nGitHub\nDec 10\n20\n\n\n\nThere are 100 marks in total. Your final course mark will be the sum of your assignment scores, which will be translated to a letter grade according to the official grading scale of the Faculty of Arts and Science.\nAssignments will be distributed and submitted in the R Markdown format via Quercus. Assignments will be handed out on Thursdays after class and are due at 8:00 PM on the following Thursday.\nThe Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Nov 11, and it will be due 11:59 PM on Nov 15. Students are welcome to work in a group on this assignment, but each student must submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!\nPer our stance on supporting student’s mental health, we are happy to accommodate a 72-hour extension for one of the assignments, no questions asked. Otherwise, except under extenuating circumstances, there will be a penalty of 5% per day (including weekends) for all late submissions. If you foresee needing an extension, please email Zoë AND Mete as soon as possible. This policy does not apply to the Challenge Assignment, Presentation, or Final Report.\nAll submissions to Quercus/GitHub must be submitted as PDFs (i.e., knitted).",
+    "section": "Assessment schedule",
+    "text": "Assessment schedule\n\n\n\n\n\n\n\n\n\n\nAssignment\nType\nSubmitted on\nDue date\nMarks\n\n\n\n\nIndividual interest description\nIndividual\nQuercus\nSep 12\n1\n\n\nBasic R, command line, & Git\nIndividual\nQuercus\nSep 19\n8\n\n\nData wrangling\nIndividual\nQuercus\nSep 26\n8\n\n\nData visualization and exploration\nIndividual\nQuercus\nOct 03\n8\n\n\nIntro inference and LMs\nIndividual\nQuercus\nOct 10\n8\n\n\nProject proposal\nGroup\nGitHub\nOct 17\n3\n\n\nLMs, model selection, and multivariate\nIndividual\nQuercus\nOct 24\n8\n\n\nChallenge assignment\nIndividual\nQuercus\nNov 15\n20\n\n\nMid-project update\nGroup\nGitHub\nNov 21\n6\n\n\nPresentation\nGroup\nIn-class\nDec 03\n10\n\n\nFinal report\nGroup\nGitHub\nDec 10\n20\n\n\n\nThere are 100 marks in total. Your final course mark will be the sum of your assignment scores, which will be translated to a letter grade according to the official grading scale of the Faculty of Arts and Science.\nAssignments will be distributed and submitted in the R Markdown format via Quercus. Assignments will be handed out on Thursdays after class and are due at 8:00 PM on the following Thursday.\nThe Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Nov 11, and it will be due 11:59 PM on Nov 15. Students are welcome to work in a group on this assignment, but each student must submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!\nPer our stance on supporting student’s mental health, we are happy to accommodate a 72-hour extension for one of the assignments, no questions asked. Otherwise, except under extenuating circumstances, there will be a penalty of 5% per day (including weekends) for all late submissions. If you foresee needing an extension, please email Zoë AND Mete as soon as possible. This policy does not apply to the Challenge Assignment, Presentation, or Final Report.\nAll submissions to Quercus/GitHub must be submitted as PDFs (i.e., knitted).",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#improving-your-writing-skills",
     "href": "index.html#improving-your-writing-skills",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.13 Improving your writing skills",
-    "text": "1.13 Improving your writing skills\nEffective communication is crucial in science. The University of Toronto provides services to help you improve your writing, from general advices on effective writing to writing centers and writing courses. The Faculty of Arts & Science also offers an English Language Learning (ELL) program, which provides free individualized instruction in English skills. Take advantage of these!",
+    "section": "Improving your writing skills",
+    "text": "Improving your writing skills\nEffective communication is crucial in science. The University of Toronto provides services to help you improve your writing, from general advices on effective writing to writing centers and writing courses. The Faculty of Arts & Science also offers an English Language Learning (ELL) program, which provides free individualized instruction in English skills. Take advantage of these!",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#academic-integrity",
     "href": "index.html#academic-integrity",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.14 Academic integrity",
-    "text": "1.14 Academic integrity\nYou should be aware of the University of Toronto Code of Behaviour on Academic Matters. Also see How Not to Plagiarize. Notably, it is NOT appropriate to use large sections from internet sources, and inserting a few words here and there does not make it an original piece of writing. Be careful in using internet sources – most online material are not reviewed and there are many errors out there. Make sure you read material from many sources (published, peer-reviewed, trusted internet sources) and that you write an original text using this information. Always cite your sources. In case of doubt about plagiarism, talk to your instructors and TAs. Please make sure that what you submit for the final project does not overlap with what you submit for other classes, such as the 4th-year research project.\n\n1.14.1 On the use of generative AI\nWe recognize that students use generative artificial intelligence tools such as ChatGPT. If you use such tools in this course, we ask that you let us know. Given the limitations of these tools, and the fact we will be available to support your learning without the use of AI, we would recommend that you be very cautious when using generative AI. On any submissions where, e.g., ChatGPT, is used please indicate in the answer to the question how the tool was used.",
+    "section": "Academic integrity",
+    "text": "Academic integrity\nYou should be aware of the University of Toronto Code of Behaviour on Academic Matters. Also see How Not to Plagiarize. Notably, it is NOT appropriate to use large sections from internet sources, and inserting a few words here and there does not make it an original piece of writing. Be careful in using internet sources – most online material are not reviewed and there are many errors out there. Make sure you read material from many sources (published, peer-reviewed, trusted internet sources) and that you write an original text using this information. Always cite your sources. In case of doubt about plagiarism, talk to your instructors and TAs. Please make sure that what you submit for the final project does not overlap with what you submit for other classes, such as the 4th-year research project.\n\nOn the use of generative AI\nWe recognize that students use generative artificial intelligence tools such as ChatGPT. If you use such tools in this course, we ask that you let us know. Given the limitations of these tools, and the fact we will be available to support your learning without the use of AI, we would recommend that you be very cautious when using generative AI. On any submissions where, e.g., ChatGPT, is used please indicate in the answer to the question how the tool was used.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "index.html#fas-student-engagement-programs",
     "href": "index.html#fas-student-engagement-programs",
     "title": "EEB313: Quantitative Methods in R for Biology",
-    "section": "1.15 FAS student engagement programs",
-    "text": "1.15 FAS student engagement programs\nThere are a few programs on campus aimed at increasing student engagement with their coursework and keeping them socially connected. Recognized Study Groups are voluntary, peer-led study groups of up to 8 students enrolled in the same course. Meet to Complete are online drop-in study sessions for A&S undergrads. These are worth checking out if you are interested in participating in a study group.",
+    "section": "FAS student engagement programs",
+    "text": "FAS student engagement programs\nThere are a few programs on campus aimed at increasing student engagement with their coursework and keeping them socially connected. Recognized Study Groups are voluntary, peer-led study groups of up to 8 students enrolled in the same course. Meet to Complete are online drop-in study sessions for A&S undergrads. These are worth checking out if you are interested in participating in a study group.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>EEB313: Quantitative Methods in R for Biology</span>"
+      "Syllabus"
     ]
   },
   {
     "objectID": "about-us.html",
     "href": "about-us.html",
-    "title": "The 2024 teaching team",
+    "title": "2024 teaching team",
     "section": "",
-    "text": "Course instructors\nMete Yuksel (mete.yuksel@mail.utoronto.ca)\nMete is a 3rd year PhD student in the Dept. Ecology and Evolutionary Biology at UTSG, and is co-advised by Matt Osmond & Nicole Mideo. He uses mathematical models to address questions in evolutionary genetics and ecology. He is currently developing theory to understand patterns, causes, and consequences of recombination rate variation. Mete was an undergraduate math & statistics student at the University of Idaho. There, he worked on the ecology of gene drive interventions against vectored diseases, understanding how continuous spatial structure can affect species coexistence, and forecasting the dynamics of Chinook salmon in the Willamette River system. He loves R - and teaching this course! Outside of science, Mete enjoys listening to podcasts, cooking, and cycling between Toronto neighborhoods in search of coffee.\nZoe Humphries (zoe.humphries@mail.utoronto.ca)\nZoë is a PhD student in the Wright and Barrett labs at UTSG. She studies the genome of a weedy plant to better understand how transposable elements affect sex chromosome evolution. She taught herself how to use R during her honours thesis and fell in love because it was much kinder than Lisp or C++ and, most importantly, because aesthetics. Zoë makes plots from aggressively large genomic data sets and spends a lot of time literally bash-ing her data into a file small enough for her computer to load into RStudio. For Zoë, the best way to work in R is while patting her puppies.",
+    "text": "Course instructors\nMete is a 3rd year PhD student in the Dept. Ecology and Evolutionary Biology at UTSG, and is co-advised by Matt Osmond & Nicole Mideo. He uses mathematical models to address questions in evolutionary genetics and ecology. He is currently developing theory to understand patterns, causes, and consequences of recombination rate variation. Mete was an undergraduate math & statistics student at the University of Idaho. There, he worked on the ecology of gene drive interventions against vectored diseases, understanding how continuous spatial structure can affect species coexistence, and forecasting the dynamics of Chinook salmon in the Willamette River system. He loves R - and teaching this course! Outside of science, Mete enjoys listening to podcasts, cooking, and cycling between Toronto neighborhoods in search of coffee.\nZoë is a PhD student in the Wright and Barrett labs at UTSG. She studies the genome of a weedy plant to better understand how transposable elements affect sex chromosome evolution. She taught herself how to use R during her honours thesis and fell in love because it was much kinder than Lisp or C++ and, most importantly, because aesthetics. Zoë makes plots from aggressively large genomic data sets and spends a lot of time literally bash-ing her data into a file small enough for her computer to load into RStudio. For Zoë, the best way to work in R is while patting her puppies.",
     "crumbs": [
-      "The 2024 teaching team"
+      "2024 teaching team"
+    ]
+  },
+  {
+    "objectID": "about-us.html#course-instructors",
+    "href": "about-us.html#course-instructors",
+    "title": "2024 teaching team",
+    "section": "",
+    "text": "Mete Yuksel (mete.yuksel@mail.utoronto.ca)\n\n\n\n\n\n\nZoe Humphries (zoe.humphries@mail.utoronto.ca)",
+    "crumbs": [
+      "2024 teaching team"
     ]
   },
   {
     "objectID": "about-us.html#teaching-assistants",
     "href": "about-us.html#teaching-assistants",
-    "title": "The 2024 teaching team",
+    "title": "2024 teaching team",
     "section": "Teaching assistants",
-    "text": "Teaching assistants\nGavia Lertzman-Lepofsky (gavia.lertzmanlepofsky@mail.utoronto.ca)\nGavia is a PhD candidate in the Mahler lab on the StG campus. She works with the tropical Anolis lizards to understand how macroevolution shapes local patterns of community diversity and structure. When she’s not wandering around Caribbean islands catching lizards or spraying them with paint, she is happily ensconced on her couch working in R or exploring the many bakeries and bookstores of Toronto.\nJessie Wang (jae.wang@mail.utoronto.ca)\nJessie is a PhD student in the Frederickson lab at UTSG. She studies plant-microbe interactions using high- throughput experimentation in duckweeds. She fell in love with R during her time as an undergraduate and took EEB313 in 2020, simultaneously sharpening her coding skills while conducting research alone in the lab. Jessie loves to spend too much money on fancy coffee as she types away, making sure her code is well-annotated and her figures look beautiful. Outside of work, she enjoys caring for her many houseplants and aquariums, finding new delicious eats, and admiring other people’s pets.",
+    "text": "Teaching assistants\n\n\n\nGavia Lertzman-Lepofsky (gavia.lertzmanlepofsky@mail.utoronto.ca)\n\n\nGavia is a PhD candidate in the Mahler lab on the StG campus. She works with the tropical Anolis lizards to understand how macroevolution shapes local patterns of community diversity and structure. When she’s not wandering around Caribbean islands catching lizards or spraying them with paint, she is happily ensconced on her couch working in R or exploring the many bakeries and bookstores of Toronto.\n\n\n\nJessie Wang (jae.wang@mail.utoronto.ca)\n\n\nJessie is a PhD student in the Frederickson lab at UTSG. She studies plant-microbe interactions using high- throughput experimentation in duckweeds. She fell in love with R during her time as an undergraduate and took EEB313 in 2020, simultaneously sharpening her coding skills while conducting research alone in the lab. Jessie loves to spend too much money on fancy coffee as she types away, making sure her code is well-annotated and her figures look beautiful. Outside of work, she enjoys caring for her many houseplants and aquariums, finding new delicious eats, and admiring other people’s pets.",
     "crumbs": [
-      "The 2024 teaching team"
+      "2024 teaching team"
     ]
   },
   {
@@ -217,6 +227,61 @@
     "text": "Installing Ubuntu\nIf you are a Windows user, you will need to install Ubuntu before the command line and GitHub lecture. (If you are a Mac user, it is safe to stop here.) The steps to install Unbuntu are as follows. Do not attempt to follow these instructions while your computer is plugged into an electrical outlet.\n\nSearch for “Turn Windows features on or off” in the Windows search bar and ensure that “Windows Subsystem for Linux” is turned on. This will force your machine to restart.\nDownload Ubuntu from this link.\nOpen the app once installed. The app will say it is installing and, once finished, will prompt you to make a username and password. (The password won’t show up, but the keystrokes are being recognized. You will be asked to confirm the password, too.)\n\nImportantly, you can open Ubuntu via Command Prompt by typing ubuntu. Here is a picture illustrating how to do this:\n\nAfter following these steps, you can check everything has been installed correctly by going to File Explorer and verifying that there is a Linux tab – scroll all the way down and look for a penguin!",
     "crumbs": [
       "Installing R & Ubuntu"
+    ]
+  },
+  {
+    "objectID": "lectures/lec00-r_and_rstudio.html",
+    "href": "lectures/lec00-r_and_rstudio.html",
+    "title": "Introduction to the course",
+    "section": "",
+    "text": "Introduction to R\nR is a computing environment that combines numerical analysis tools for linear algebra; functions for classical and modern statistical analysis; and functions for graphics and data visualization. It is based on the programming language S, developed by John Chambers in the 1970s.\nThere are two ways to start R:\nWe will use the graphical user interface RStudio throughout this course. Although the GUI makes certain things easier, it is not necessary to use it when running an R script. For example, running the following code in R returns the sum of the numbers 1 and 2.\n1+2\n\n[1] 3\nRunning the code with a # at the beginning of the line results in the line being read as a comment. This means that the calculation which is specified in the line is not processed and the output not returned. Comments are a useful way to keep track of what line(s) of code do, multiple versions of the same code, etc.",
+    "crumbs": [
+      "Lectures",
+      "Introduction to the course"
+    ]
+  },
+  {
+    "objectID": "lectures/lec00-r_and_rstudio.html#introduction-to-r",
+    "href": "lectures/lec00-r_and_rstudio.html#introduction-to-r",
+    "title": "Introduction to the course",
+    "section": "",
+    "text": "Run R on the command line. On a Mac, you would do this in the Terminal application. On a Windows machine, you would do this using, e.g., Ubuntu. We will discuss how to use the command line next week.\nClick the `R’ icon on your desktop, assuming the software has already been installed.",
+    "crumbs": [
+      "Lectures",
+      "Introduction to the course"
+    ]
+  },
+  {
+    "objectID": "lectures/lec00-r_and_rstudio.html#rstudio-and-the-r-notebook",
+    "href": "lectures/lec00-r_and_rstudio.html#rstudio-and-the-r-notebook",
+    "title": "Introduction to the course",
+    "section": "RStudio and the R Notebook",
+    "text": "RStudio and the R Notebook\nRStudio includes the R console, but also many other convenient functionalities, which makes it easier to get started and to work with R. When you launch RStudio, you will see four panels. Starting at the top left and going clockwise, these panels are:\n\nThe text editor panel. This is where we can write scripts, i.e. putting several commands of code together and saving them as a text document so that they are accessible for later and so that we can execute them all at once by running the script instead of typing them in one by one.\nThe environment panel, which shows us all the files and objects we currently loaded into R.\nThe files-plots-help panel. This panel shows the files in the current directory (the folder we are working out of), any plots we make later, and also documentation for various packages and functions. Here, the documentation is formatted in a way that is easier to read and also provides links to the related sections.\nThe console is another space we can input code, only now the code is executed immediately and doesn’t get saved at the end.\n\nTo change the appearance of your RStudio, navigate to Tools &gt; Global Options &gt; Appearance. You can change the font and size, and the editor theme. The default is “Textmate”, but if you like dark mode, a good option is “Tomorrow Night Bright”. You can also change how your panels are organized.\nIn the RStudio interface, we will be writing code in a format called the R Notebook. As the name entails, this interface works like a notebook for code, as it allows us to save notes about what the code is doing, the code itself, and any output we get, such as plots and tables, all together in the same document.\nWhen we are in the Notebook, the text we write is normal plain text, just as if we would be writing it in a text document. If we want to execute some R code, we need to insert a code chunk.\nYou insert a code chunk by either clicking the “Insert” button or pressing Ctrl/Command + Alt + i simultaneously. You could also type out the surrounding backticks, but this would take longer. To run a code chunk, you press the green arrow, or Ctrl/Command + Shift + Enter.\n\n1+2\n\n[1] 3\n\n\nAs you can see, the output appears right under the code block.\nThis is a great way to perform explore your data, since you can do your analysis and write comments and conclusions right under it all in the same document. A powerful feature of this workflow is that there is no extra time needed for code documentation and note-taking, since you’re doing your analyses and taking notes at the same time. This makes it great for both taking notes at lectures and to have as a reference when you return to your code in the future.",
+    "crumbs": [
+      "Lectures",
+      "Introduction to the course"
+    ]
+  },
+  {
+    "objectID": "lectures/lec00-r_and_rstudio.html#r-markdown",
+    "href": "lectures/lec00-r_and_rstudio.html#r-markdown",
+    "title": "Introduction to the course",
+    "section": "R Markdown",
+    "text": "R Markdown\nThe text format we are using in the R Notebook is called R Markdown. This format allows us to combine R code with the Markdown text format, which enables the use of certain characters to specify headings, bullet points, quotations and even citations. A simple example of how to write in Markdown is to use a single asterisk or underscore to emphasize text (*emphasis*) and two asterisks or underscores to strongly emphasize text (**strong emphasis**). When we convert our R Markdown text to other file formats, these will show up as italics and bold typeface, respectively. If you have used WhatsApp, you might already be familiar with this style of writing. In case you haven’t seen it before, you have just learned something about WhatsApp in your quantitative methods class…\nTo learn more about R Markdown, check out this reference.\n\nSaving data and generating reports\nTo save our notes, code, and graphs, all we have to do is to save the R Notebook file, and the we can open it in RStudio next time again. However, if we want someone else to look at this, we can’t always just send them the R Notebook file, because they might not have RStudio installed. Another great feature of R Notebooks is that it is really easy to export them to HTML, Microsoft Word, or PDF documents with figures and professional typesetting. There are actually many academic papers that are written entirely in this format and it is great for assignments and reports. (You might even use it to communicate with your collaborators!) Since R Notebook files convert to HTML, it is also easy to publish simple and good-looking websites in it, in which code chunks are embedded nicely within the text.\nLet’s try to create a document in R.\nFirst, let’s set up the YAML block. This is found at the top of your document, and it is where you specify the title of your document, what kind of output you want, etc.\n\n---\ntitle: \"Your title here\"\nauthor: \"Your name here\"\ndate: \"Insert date\"\noutput:\n  pdf_document: default\n---\n\nNext, let’s type code to perform the calculation we did above:\n\n1+2\n\n[1] 3\n\n\nTo create the output document, we say that we “knit” our R Markdown file into, e.g., a PDF. Simply press the Knit button here and the new document will be created.\nAs you can see in the knitted document, the title showed up as we would expect, and lines with pound sign(s) in front of them were converted into headers. Most importantly, we can see both the code and its output! Plots are generated directly in the report without us having to cut and paste images! If we change something in the code, we don’t have to find the new images and paste it in again, the correct one will appear right in your code.\nWhen you quit, R will ask you if you want to save the workspace (that is, all of the variables you have defined in this session); in general, you should say “no” to avoid clutter and unintentional confusion of results from different sessions. Note: When you say “yes” to saving your workspace, it is saved in a hidden file named .RData. By default, when you open a new R session in the same directory, this workspace is loaded and a message informing you so is printed: [Previously saved workspace restored]. It is often best practice to turn this feature off completely.",
+    "crumbs": [
+      "Lectures",
+      "Introduction to the course"
+    ]
+  },
+  {
+    "objectID": "lectures/lec00-r_and_rstudio.html#practice-knitting",
+    "href": "lectures/lec00-r_and_rstudio.html#practice-knitting",
+    "title": "Introduction to the course",
+    "section": "Practice knitting!",
+    "text": "Practice knitting!\nFor your first assignment, you will need to write a short description of your interests in EEB and submitted the knitted document on Quercus. This assignment is due September 17. If you are having trouble knitting, which you will have to do throughout the course, come find us and we will help you troubleshoot.",
+    "crumbs": [
+      "Lectures",
+      "Introduction to the course"
     ]
   },
   {
@@ -382,6 +447,17 @@
     "crumbs": [
       "Project",
       "Project description"
+    ]
+  },
+  {
+    "objectID": "projects_databases.html",
+    "href": "projects_databases.html",
+    "title": "Some open-access databases",
+    "section": "",
+    "text": "Below are some resources that would be a good to look at if you are in search of data for the term project, or in search of a question in ecology or evolution:\n\nGenBank: annotated collection of all publicly available DNA/protein sequences. It is possible to download sequences manually, but command line tools can help to automate the process.\nPanTHERIA: database of ecology, life history, and geography of all extant and recently extinct mammal species. Includes body size, lifespan, litter size, and other trait data at the species level.\nThe Open Traits Network has information about trait datasets for other taxa – including spiders, nematodes, amphibians, and birds!\nGene Expression Omnibus: repository of gene expression, methylation, and annotated genomic data which are (like GenBank) most readily accessible using command line tools.\nContinuous Plankton Recorder Survey: data (going back to 1958!) on northern hemisphere plankton species, including the location (latitude, longitude) and date of sampling.\nRed-backed salamander abundance: abundance of red-backed salamanders from 4 sites in the Bruce Peninsula from 2004 to 2017.\nNorth American Bird Breeding Survey: repository containing information regarding the number of birds at multiple sites in North America. Many datasets of varying size that need to be linked together.\nMalaria Atlas Project: publicly available and up-to-date malaria prevalence and distribution data. Vector distribution, bednet coverage, etc. data also available.\nGISAID hosts much of the available sequence data for rapidly-evolving RNA viruses such as influenza, SARS-CoV-2, monkeypox, and RSV as well as relevant meta-data (e.g., host species).\n\nLet Mete and Zoe know if data from any of these resources interests you, or if you would like to discuss where data to answer questions you find interesting might be found…",
+    "crumbs": [
+      "Project",
+      "Some open-access databases"
     ]
   }
 ]
