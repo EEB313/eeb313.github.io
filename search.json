@@ -245,7 +245,7 @@
     "href": "lectures/lec00-r_and_rstudio.html#introduction-to-r",
     "title": "Introduction to the course",
     "section": "",
-    "text": "Run R on the command line. On a Mac, you would do this in the Terminal application. On a Windows machine, you would do this using, e.g., Ubuntu. We will discuss how to use the command line next week.\nClick the `R’ icon on your desktop, assuming the software has already been installed.",
+    "text": "Run R on the command line. On a Mac, you would do this in the Terminal application. On a Windows machine, you would do this using, e.g., Ubuntu. We will cover the command line next week.\nClick the R icon on your desktop, assuming the software has already been installed.",
     "crumbs": [
       "Lectures",
       "Introduction to the course"
