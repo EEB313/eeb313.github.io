@@ -88,5 +88,11 @@
   },
   "challenge-assignment.qmd": {
     "challenge-assignment.html": "ee2aebbc"
+  },
+  "lectures/lec00-r_and_rstudio.qmd": {
+    "lec00-r_and_rstudio.html": "26627795"
+  },
+  "projects_databases.qmd": {
+    "projects_databases.html": "44c5e303"
   }
 }

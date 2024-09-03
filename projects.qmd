@@ -1,5 +1,7 @@
 # Project description {-}
 
+-----------------------------
+
 The course project is a self-directed group project that may take a couple forms (data analysis, modelling, or simulation study), but will make use of technical and scientific tools that we have learned in class. Aside from a couple constraints, groups are free to do their projects on any subject within ecology and evolution that they find interesting. The forms the project may take are:
 
 1.  A hypothesis-driven analysis of existing ecological or evolutionary data.

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - 2024 teaching team</title>
+<title>EEB313: Quantitative Methods in R for Biology - Introduction to the course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./downloadingR.html" rel="next">
-<link href="./index.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../projects.html" rel="next">
+<link href="../downloadingR.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -81,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./about-us.html">2024 teaching team</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Introduction to the course</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -96,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">EEB313: Quantitative Methods in R for Biology</a> 
+      <a href="../">EEB313: Quantitative Methods in R for Biology</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/EEB313/eeb313.github.io" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
@@ -111,19 +145,19 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about-us.html" class="sidebar-item-text sidebar-link active">
+  <a href="../about-us.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2024 teaching team</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./downloadingR.html" class="sidebar-item-text sidebar-link">
+  <a href="../downloadingR.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Installing R &amp; Ubuntu</span></a>
   </div>
 </li>
@@ -138,7 +172,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec00-r_and_rstudio.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec00-r_and_rstudio.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Introduction to the course</span></a>
   </div>
 </li>
@@ -159,13 +193,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./projects.html" class="sidebar-item-text sidebar-link">
+  <a href="../projects.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Project description</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./projects_databases.html" class="sidebar-item-text sidebar-link">
+  <a href="../projects_databases.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Some open-access databases</span></a>
   </div>
 </li>
@@ -185,17 +219,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#course-instructors" id="toc-course-instructors" class="nav-link active" data-scroll-target="#course-instructors">Course instructors</a></li>
-  <li><a href="#teaching-assistants" id="toc-teaching-assistants" class="nav-link" data-scroll-target="#teaching-assistants">Teaching assistants</a></li>
+  <li><a href="#introduction-to-r" id="toc-introduction-to-r" class="nav-link active" data-scroll-target="#introduction-to-r">Introduction to R</a></li>
+  <li><a href="#rstudio-and-the-r-notebook" id="toc-rstudio-and-the-r-notebook" class="nav-link" data-scroll-target="#rstudio-and-the-r-notebook">RStudio and the R Notebook</a></li>
+  <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link" data-scroll-target="#r-markdown">R Markdown</a>
+  <ul class="collapse">
+  <li><a href="#saving-data-and-generating-reports" id="toc-saving-data-and-generating-reports" class="nav-link" data-scroll-target="#saving-data-and-generating-reports">Saving data and generating reports</a></li>
+  </ul></li>
+  <li><a href="#practice-knitting" id="toc-practice-knitting" class="nav-link" data-scroll-target="#practice-knitting">Practice knitting!</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Introduction to the course</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">2024 teaching team</h1>
+<h1 class="title">Introduction to the course</h1>
 </div>
 
 
@@ -212,39 +251,78 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="course-instructors" class="level2">
-<h2 class="anchored" data-anchor-id="course-instructors">Course instructors</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/mete.jpeg" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption><strong>Mete Yuksel</strong> (mete.yuksel@mail.utoronto.ca)</figcaption>
-</figure>
+<section id="introduction-to-r" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-r">Introduction to R</h2>
+<p>R is a computing environment that combines numerical analysis tools for linear algebra; functions for classical and modern statistical analysis; and functions for graphics and data visualization. It is based on the programming language S, developed by John Chambers in the 1970s.</p>
+<p>There are two ways to start R:</p>
+<ol type="1">
+<li>Run <code>R</code> on the command line. On a Mac, you would do this in the Terminal application. On a Windows machine, you would do this using, e.g., Ubuntu. We will discuss how to use the command line next week.</li>
+<li>Click the `R’ icon on your desktop, assuming the software has already been installed.</li>
+</ol>
+<p>We will use the <em>graphical user interface</em> RStudio throughout this course. Although the GUI makes certain things easier, it is not necessary to use it when running an R script. For example, running the following code in R returns the sum of the numbers 1 and 2.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
 </div>
-<p>Mete is a 3rd year PhD student in the Dept. Ecology and Evolutionary Biology at UTSG, and is co-advised by Matt Osmond &amp; Nicole Mideo. He uses mathematical models to address questions in evolutionary genetics and ecology. He is currently developing theory to understand patterns, causes, and consequences of recombination rate variation. Mete was an undergraduate math &amp; statistics student at the University of Idaho. There, he worked on the ecology of gene drive interventions against vectored diseases, understanding how continuous spatial structure can affect species coexistence, and forecasting the dynamics of Chinook salmon in the Willamette River system. He loves R - and teaching this course! Outside of science, Mete enjoys listening to podcasts, cooking, and cycling between Toronto neighborhoods in search of coffee.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/zoe.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption><strong>Zoe Humphries</strong> (zoe.humphries@mail.utoronto.ca)</figcaption>
-</figure>
 </div>
-<p>Zoë is a PhD student in the Wright and Barrett labs at UTSG. She studies the genome of a weedy plant to better understand how transposable elements affect sex chromosome evolution. She taught herself how to use R during her honours thesis and fell in love because it was much kinder than Lisp or C++ and, most importantly, because aesthetics. Zoë makes plots from aggressively large genomic data sets and spends a lot of time literally bash-ing her data into a file small enough for her computer to load into RStudio. For Zoë, the best way to work in R is while patting her puppies.</p>
+<p>Running the code with a <code>#</code> at the beginning of the line results in the line being read as a comment. This means that the calculation which is specified in the line is not processed and the output not returned. Comments are a useful way to keep track of what line(s) of code do, multiple versions of the same code, etc.</p>
 </section>
-<section id="teaching-assistants" class="level2">
-<h2 class="anchored" data-anchor-id="teaching-assistants">Teaching assistants</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/gavia.JPG" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption><strong>Gavia Lertzman-Lepofsky</strong> (gavia.lertzmanlepofsky@mail.utoronto.ca)</figcaption>
-</figure>
+<section id="rstudio-and-the-r-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="rstudio-and-the-r-notebook">RStudio and the R Notebook</h2>
+<p>RStudio includes the R console, but also many other convenient functionalities, which makes it easier to get started and to work with R. When you launch RStudio, you will see four panels. Starting at the top left and going clockwise, these panels are:</p>
+<ul>
+<li>The <strong>text editor panel</strong>. This is where we can write scripts, i.e.&nbsp;putting several commands of code together and saving them as a text document so that they are accessible for later and so that we can execute them all at once by running the script instead of typing them in one by one.</li>
+<li>The <strong>environment panel</strong>, which shows us all the files and objects we currently loaded into R.</li>
+<li>The <strong>files-plots-help panel</strong>. This panel shows the files in the current directory (the folder we are working out of), any plots we make later, and also documentation for various packages and functions. Here, the documentation is formatted in a way that is easier to read and also provides links to the related sections.</li>
+<li>The <strong>console</strong> is another space we can input code, only now the code is executed immediately and doesn’t get saved at the end.</li>
+</ul>
+<p>To change the appearance of your RStudio, navigate to <code>Tools &gt; Global Options &gt; Appearance</code>. You can change the font and size, and the editor theme. The default is “Textmate”, but if you like dark mode, a good option is “Tomorrow Night Bright”. You can also change how your panels are organized.</p>
+<p>In the RStudio interface, we will be writing code in a format called the R Notebook. As the name entails, this interface works like a notebook for code, as it allows us to save notes about what the code is doing, the code itself, and any output we get, such as plots and tables, all together in the same document.</p>
+<p>When we are in the Notebook, the text we write is normal plain text, just as if we would be writing it in a text document. If we want to execute some R code, we need to insert a <em>code chunk</em>.</p>
+<p>You insert a code chunk by either clicking the “Insert” button or pressing <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>Alt</kbd> + <kbd>i</kbd> simultaneously. You could also type out the surrounding backticks, but this would take longer. To run a code chunk, you press the green arrow, or <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
 </div>
-<p>Gavia is a PhD candidate in the Mahler lab on the StG campus. She works with the tropical Anolis lizards to understand how macroevolution shapes local patterns of community diversity and structure. When she’s not wandering around Caribbean islands catching lizards or spraying them with paint, she is happily ensconced on her couch working in R or exploring the many bakeries and bookstores of Toronto.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/jessie.jpg" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption><strong>Jessie Wang</strong> (jae.wang@mail.utoronto.ca)</figcaption>
-</figure>
 </div>
-<p>Jessie is a PhD student in the Frederickson lab at UTSG. She studies plant-microbe interactions using high- throughput experimentation in duckweeds. She fell in love with R during her time as an undergraduate and took EEB313 in 2020, simultaneously sharpening her coding skills while conducting research alone in the lab. Jessie loves to spend too much money on fancy coffee as she types away, making sure her code is well-annotated and her figures look beautiful. Outside of work, she enjoys caring for her many houseplants and aquariums, finding new delicious eats, and admiring other people’s pets.</p>
+<p>As you can see, the output appears right under the code block.</p>
+<p>This is a great way to perform explore your data, since you can do your analysis and write comments and conclusions right under it all in the same document. A powerful feature of this workflow is that there is no extra time needed for code documentation and note-taking, since you’re doing your analyses and taking notes at the same time. This makes it great for both taking notes at lectures and to have as a reference when you return to your code in the future.</p>
+</section>
+<section id="r-markdown" class="level2">
+<h2 class="anchored" data-anchor-id="r-markdown">R Markdown</h2>
+<p>The text format we are using in the R Notebook is called R Markdown. This format allows us to combine R code with the Markdown text format, which enables the use of certain characters to specify headings, bullet points, quotations and even citations. A simple example of how to write in Markdown is to use a single asterisk or underscore to <em>emphasize</em> text (<code>*emphasis*</code>) and two asterisks or underscores to <strong>strongly emphasize</strong> text (<code>**strong emphasis**</code>). When we convert our R Markdown text to other file formats, these will show up as italics and bold typeface, respectively. If you have used WhatsApp, you might already be familiar with this style of writing. In case you haven’t seen it before, you have just learned something about WhatsApp in your quantitative methods class…</p>
+<p>To learn more about R Markdown, check out <a href="https://rmarkdown.rstudio.com/authoring_basics.html">this reference</a>.</p>
+<section id="saving-data-and-generating-reports" class="level3">
+<h3 class="anchored" data-anchor-id="saving-data-and-generating-reports">Saving data and generating reports</h3>
+<p>To save our notes, code, and graphs, all we have to do is to save the R Notebook file, and the we can open it in RStudio next time again. However, if we want someone else to look at this, we can’t always just send them the R Notebook file, because they might not have RStudio installed. Another great feature of R Notebooks is that it is really easy to export them to HTML, Microsoft Word, or PDF documents with figures and professional typesetting. There are actually many academic papers that are written entirely in this format and it is great for assignments and reports. (You might even use it to communicate with your collaborators!) Since R Notebook files convert to HTML, it is also easy to publish <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">simple and good-looking websites</a> in it, in which code chunks are embedded nicely within the text.</p>
+<p>Let’s try to create a document in R.</p>
+<p>First, let’s set up the <a href="https://yaml.org/">YAML</a> block. This is found at the top of your document, and it is where you specify the title of your document, what kind of output you want, etc.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>title<span class="sc">:</span> <span class="st">"Your title here"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>author<span class="sc">:</span> <span class="st">"Your name here"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>date<span class="sc">:</span> <span class="st">"Insert date"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>output<span class="sc">:</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  pdf_document<span class="sc">:</span> default</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, let’s type code to perform the calculation we did above:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>To create the output document, we say that we “knit” our R Markdown file into, e.g., a PDF. Simply press the <code>Knit</code> button here and the new document will be created.</p>
+<p>As you can see in the knitted document, the title showed up as we would expect, and lines with pound sign(s) in front of them were converted into headers. Most importantly, we can see both the code and its output! Plots are generated directly in the report without us having to cut and paste images! If we change something in the code, we don’t have to find the new images and paste it in again, the correct one will appear right in your code.</p>
+<p>When you quit, R will ask you if you want to save the workspace (that is, all of the variables you have defined in this session); in general, you should say “no” to avoid clutter and unintentional confusion of results from different sessions. Note: When you say “yes” to saving your workspace, it is saved in a hidden file named .RData. By default, when you open a new R session in the same directory, this workspace is loaded and a message informing you so is printed: <code>[Previously saved workspace restored]</code>. It is often best practice to turn this feature off completely.</p>
+</section>
+</section>
+<section id="practice-knitting" class="level2">
+<h2 class="anchored" data-anchor-id="practice-knitting">Practice knitting!</h2>
+<p>For your first assignment, you will need to write a short description of your interests in EEB and submitted the <em>knitted</em> document on Quercus. This assignment is due September 17. If you are having trouble knitting, which you will have to do throughout the course, come find us and we will help you troubleshoot.</p>
 
 
 </section>
@@ -661,13 +739,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Syllabus">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Syllabus</span>
+      <a href="../downloadingR.html" class="pagination-link" aria-label="Installing R &amp; Ubuntu">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Installing R &amp; Ubuntu</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./downloadingR.html" class="pagination-link" aria-label="Installing R &amp; Ubuntu">
-        <span class="nav-page-text">Installing R &amp; Ubuntu</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../projects.html" class="pagination-link" aria-label="Project description">
+        <span class="nav-page-text">Project description</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

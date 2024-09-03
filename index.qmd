@@ -1,9 +1,4 @@
----
-title: "EEB313: Quantitative Methods in R for Biology"
-author: "Mete Yuksel and Zoë Humphries"
----
-
-# Syllabus
+# Syllabus {.unnumbered}
 
 ## Land Acknowledgement
 

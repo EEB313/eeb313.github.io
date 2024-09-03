@@ -1,12 +1,4 @@
-# Getting started with RStudio and R Notebook
-
-## Lesson preamble {-}
-
-> ### Lesson objectives
-> -   Introduce students to the R and RStudio interfaces
-> -   Introduce students to RMarkdown
-
-------------------------------------------------------------------------
+# Introduction to the course {.unnumbered}
 
 ## Introduction to R
 
