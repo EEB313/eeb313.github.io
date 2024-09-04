@@ -214,7 +214,7 @@
     "href": "downloadingR.html#installing-r-packages",
     "title": "Installing R & Ubuntu",
     "section": "Installing R packages",
-    "text": "Installing R packages\n\nTinyTex\nThere is one package we have to install first before we can create PDF reports, which will be necessary for assignments and the project. Copy and paste into the console (where the \\&gt; symbol is) the two lines of code below to install a package called tinytex.\n\ninstall.packages(\"tinytex\") \ntinytex::install_tinytex()\n\n\n\nTidyverse\n\nCopy and paste the below code into your console.\n\n\ninstall.package(c(\"tidyverse\", \"data.table\"), dependencies = TRUE)\n\nDuring installation, if you ever get the below message, click “No”.\n\nIf you get the message “Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” in the Console, type “Yes” and press enter.\n\nCheck that the tinytex and tidyverse packages have been installed correctly. To do this, go to the bottom right pane and click the tab for “Packages”. If you can search for and find the below packages, then they have been installed! They do not need to be checked off. Alternatively, go to the Console and type library(tidyverse) to verify that the package is installed. An error along the lines “there is no package called tidyverse” will be returned if the package is not installed.",
+    "text": "Installing R packages\n\nTinyTex\nThere is one package we have to install first before we can create PDF reports, which will be necessary for assignments and the project. Copy and paste into the console (where the \\&gt; symbol is) the two lines of code below to install a package called tinytex.\n\ninstall.packages(\"tinytex\") \ntinytex::install_tinytex()\n\n\n\nTidyverse\n\nCopy and paste the below code into your console.\n\n\ninstall.packages(c(\"tidyverse\", \"data.table\"), dependencies = TRUE)\n\nDuring installation, if you ever get the below message, click “No”.\n\nIf you get the message “Do you want to install from sources the packages which need compilation? (Yes/no/cancel)” in the Console, type “Yes” and press enter.\n\nCheck that the tinytex and tidyverse packages have been installed correctly. To do this, go to the bottom right pane and click the tab for “Packages”. If you can search for and find the below packages, then they have been installed! They do not need to be checked off. Alternatively, go to the Console and type library(tidyverse) to verify that the package is installed. An error along the lines “there is no package called tidyverse” will be returned if the package is not installed.",
     "crumbs": [
       "Installing R & Ubuntu"
     ]
@@ -245,7 +245,7 @@
     "href": "lectures/lec00-r_and_rstudio.html#introduction-to-r",
     "title": "Introduction to the course",
     "section": "",
-    "text": "Run R on the command line. On a Mac, you would do this in the Terminal application. On a Windows machine, you would do this using, e.g., Ubuntu. We will discuss how to use the command line next week.\nClick the `R’ icon on your desktop, assuming the software has already been installed.",
+    "text": "Run R on the command line. On a Mac, you would do this in the Terminal application. On a Windows machine, you would do this using, e.g., Ubuntu. We will cover the command line next week.\nClick the R icon on your desktop, assuming the software has already been installed.",
     "crumbs": [
       "Lectures",
       "Introduction to the course"

@@ -30,7 +30,7 @@ tinytex::install_tinytex()
 1.  Copy and paste the below code into your console.
 
 ```{r eval = FALSE}
-install.package(c("tidyverse", "data.table"), dependencies = TRUE)
+install.packages(c("tidyverse", "data.table"), dependencies = TRUE)
 ```
 
 During installation, if you ever get the below message, click "No". 

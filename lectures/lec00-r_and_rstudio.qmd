@@ -6,8 +6,8 @@ R is a computing environment that combines numerical analysis tools for linear a
 
 There are two ways to start R:
 
-1. Run `R` on the command line. On a Mac, you would do this in the Terminal application. On a Windows machine, you would do this using, e.g., Ubuntu. We will discuss how to use the command line next week.
-2. Click the `R' icon on your desktop, assuming the software has already been installed.
+1. Run `R` on the command line. On a Mac, you would do this in the Terminal application. On a Windows machine, you would do this using, e.g., Ubuntu. We will cover the command line next week.
+2. Click the `R` icon on your desktop, assuming the software has already been installed.
 
 We will use the _graphical user interface_ RStudio throughout this course. Although the GUI makes certain things easier, it is not necessary to use it when running an R script. For example, running the following code in R returns the sum of the numbers 1 and 2.
 

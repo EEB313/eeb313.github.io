@@ -24,8 +24,7 @@ All classes will be on the St. George campus. On Tuesdays, we will be in 371 Blo
 |----------|----------------|-----------|
 | Mete     | Mon 1-2pm    |  ESC3044          |
 | Zoë      | Wed 2-3pm    |  ESC3044          |
-| Jessie   | Tu 4-5pm       | 371 Bloor, Room 36   |
-| Gavia    | Th 12-2pm       |  Sidney Smith, Room 561    |
+| Jessie   | Tu 4-5pm       | 371 Bloor, Room 36   || Gavia    | Th 2-3pm       |  Sidney Smith, Room 561    |
 
 ## Contact protocol
 
