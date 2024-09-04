@@ -226,6 +226,25 @@ ul.task-list li input[type="checkbox"] {
 
 <p><em>To submit this assignment, upload the full document on Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>.</em></p>
 <ol type="1">
+<li>Get set up at home (or on a lab computer after hours)
+<ul>
+<li>If you have not already done so, install <a href="https://cran.rstudio.com/">R</a> and <a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a> (already installed on the lab computers).</li>
+<li>Open a new R Notebook and read the instructions about how to use the R Markdown syntax.</li>
+<li>Open this assignment file in RStudio or copy its content into an empty R Notebook.</li>
+<li>Insert a code chunk below, above Question 2. Set <code>eval=FALSE</code></li>
+<li>In the code chunk, use <code>install.packages("&lt;package_name&gt;")</code> to install <code>tidyverse</code> and <code>rmarkdown</code>. Remember to run the code chunk to execute the commands.</li>
+<li>Load the two libraries you just installed into your environment with <code>library(&lt;package_name&gt;)</code> (no surrounding quotation marks). Add this to the same code chunk you created previously and execute it again.
+<ul>
+<li>Don’t worry that the <code>install.packages()</code> commands have already been executed once, R is smart and checks if you already have those installed.</li>
+</ul></li>
+<li>Run <code>sessionInfo()</code> to list all the loaded packages.
+<ul>
+<li>You should see the following packages under “other attached packages”: <code>rmarkdown</code>, <code>dplyr</code>, <code>purrr</code>, <code>readr</code>, <code>tidyr</code>, <code>tibble</code>, <code>ggplot</code>, and <code>tidyverse</code>.</li>
+</ul></li>
+<li>Since this is your first assignment, we have already completed most of this question below. You still need to run the code chunk on your computer to confirm that the packages installed and to get the <code>sessionInfo()</code> output for your computer. You might receive warnings that functions from other packages are masked when you load <code>tidyverse</code>, but this is fine.</li>
+</ul></li>
+</ol>
+<ol start="2" type="1">
 <li>In 4-5 sentences, what are some of the topics/questions in ecology and evolutionary biology that you are interested in for the group project?</li>
 </ol>
 
