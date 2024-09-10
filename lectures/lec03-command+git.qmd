@@ -1,0 +1,709 @@
+# Introduction to command line and Git(Hub)
+
+## Lesson preamble
+
+> ### Lesson objectives
+> - Develop familiarity with the logic of the command line, including how to
+>   - Navigate between directories
+>   - Create, copy, move, delete and compare files and directories
+>   - Search, edit, and read content from files
+>   - Change file permissions
+>   - Install, update and remove packages
+>   - Use NCBI's BLAST!
+> - Learn how Git(Hub) works and the logic of version control
+>   - Develop proficiency using basic Git commands
+>   - Develop understanding of the Git workflow and recommended practices
+>   - Practice using Git commands at the command line
+>
+> ### Lesson outline
+> - Introduction to the command line and where/why/when we use it (10 mins)
+> - A tour through different command line tools (25 mins)
+> - Running software tools: BLAST (25 mins) 
+> - Collaborating with GitHub using the command line (30 min)
+> - Workflows and recommended practices (10 mins)
+
+## Intro to the command line
+
+### Why use the command line?
+
+Increasing amounts of data in biology (especially genomic data stored in databases like the UK Biobank and GenBank) are transforming the field. These data have allowed us to ask and answer questions that would otherwise be impossible to address, and have motivated extensive cross-talk between biology, computer science, mathematics, and statistics. **To analyze large-scale datasets in a way that is efficient, robust, reproducible, and scale-able, researchers turn to the command line. The command line interface allows researches to pass commands to the _shell_.** 
+
+Some advantages of working are the commend line are:
+
+1. Efficient **parallelization**: where it would not be possible to preform certain calculations due to time and memory limitations, the command line allows us to interface with computing clusters which can run many calculations or processes simultaneously. For example, efficient parallelization can allow a user to run many simulations of a model (each run corresponding to a different combination of parameter values)  simultaneously. This can cut run times from months to seconds.
+
+2. **Control over data**: the command line allows users to view, parse, transform, and transfer large files (such as genome sequences) efficiently. Such control is simply not possible with a GUI like RStudio.
+
+3. **Automation, reproducibility, and computational ease**: shell commands automate tasks which would otherwise be 1) computationally expensive, 2) error-prone, and 3) emotionally taxing.^[Trust us on this!] Shell commands can be scripted, shared, version-controlled, and made to run at certain times. (For example, shell scripts designed to scrape the web for data are often made to run during off-peak hours.) Because the command line makes automating complex tasks possible, software used to analyze large data is often written for use on the command line.
+
+All that said, shell commands appear quite scary. **Indeed, the command line is unforgiving--cryptic error messages abound when incorrect commands are entered. One can do serious damage without understanding the basis of the shell. The goal of this lecture is to provide you all with knowledge of 1) the logic of the command line, 2) important shell commands, 3) how to run R scripts from the command line, and 4) how to use the command line to interface with GitHub.** The first half of the lecture will focus on the shell, and the second half on Git.
+
+### Logic of the command line
+
+The command line interface takes commands of the following form:
+
+```{r, eval=FALSE}
+command param1 param2 param3 … paramN
+```
+
+where `param1`, `param2`, $\dots,$ and `paramN` are parameters provided by the user. This is a simplification, but one can get by thinking of commands as having this form, with the command line interpreter providing an interface between what is entered and the machine. Commands can range in what they do (navigation between directories, editing of files and of file permissions, etc.) but will not do what they are intended to if the relevant parameters are not specified, or if files which are called by the command are not accessible.
+
+### Where are we?
+
+For this portion of the lecture, we will move to the terminal on Mete's machine. The commands that we execute there are given and described below:
+
+```{r, eval = F}
+cal # returns this month's calender
+date # returns today's date
+pwd # print working directory
+ls # returns contents of the working directory
+ls -l # returns contents of wd and information about those contents
+```
+
+```{r, eval = F}
+mkdir newdirectory # makes new directory called newdirectory
+cd newdirectory # change directory to newdirectory
+touch emptytextfile.txt # make new .txt file with name emptytextfile
+less emptytextfile.txt # view emptytextfile.txt
+q # stop viewing emptytextfile.txt
+touch emptytextfile2.txt
+nano emptytextfile2.txt # edit emptytextfile2.txt
+mv emptytextfile2.txt file_nolongerempty.txt 
+# make new file called file_nolongerempty.txt from emptytextfile2.txt
+less file_nolongerempty.txt
+cp file_nolongerempty.txt file_nolongerempty_todelete.txt
+# copy file_nolongerempty.txt and make new file called file_nolongerempty_todelete.txt
+rm file_nolongerempty_todelete.txt # delete file_nolongerempty_todelete.txt
+```
+
+```{r, eval = F}
+cd .. # go back to preview working directory
+mkdir newdirectory2
+cp -r newdirectory2 newdirectory3 # copy directory
+rm -r newdirectory3 # remove directory that was just made
+```
+
+```{r, eval = F}
+diff -qr newdirectory/ newdirectory2/ 
+# assess and return differences between directories specified
+# r recursively searches subdirectories, q reports 'briefly', when files differ
+# -arq is also valid, treats all files as text
+  
+cd newdirectory
+diff file_nolongerempty.txt emptytextfile.txt 
+# assess and return differences between files specified
+# -w ignores white space
+```
+
+### All about file permissions
+
+To see what the permissions of a specific file are, one can use the command `ls` followed by `-l` (for all files within a directory) or `-la` for specific files within that directory.
+
+```{r, eval = F}
+ls -la file_nolongerempty.txt
+# multiple instances of r, w, and x reflect different levels of ownership
+# r = can read the file, can ls the directory
+# w = can write the file, can modify the directory's contents
+# x = can execute the file, can cd to the directory
+```
+
+For example, the `rw` that appears first in `-rw-r--r--` indicates the owner (user) can can read and write to the file but can't execute it as a program. The `r` that appears next indicates group members can read the file. `drwxr-xr-x` indicates group members can view as well as enter the directory.
+
+The command `cmod` for "change mode" allows one to modify file permissions.
+
+```{r, eval=FALSE}
+chmod a+r file_nolongerempty.txt
+# a stands for all (default, so can be omitted), +r = add read permission
+# g = group, o = other, u = user
+# - = remove access, = sets exact access
+chmod go-rw file_nolongerempty.txt # removes group read and write permissions
+```
+
+`chmod` also acts on directories but requires -R argument. `chmod -R o+x` would grant execution permissions for other users to a directory and its subdirectories.
+
+For more about the `chmod` command (e.g., specifying the entire state of a file or directories permissions by providing the command _numbers_ rather than combinations of r,x,w), one can run the command `man chmod`. The `man` command displays the manual page for a particular command. 
+
+**To see what a shell command does, we also reccomend you check out [https://explainshell.com](https://explainshell.com/#).**
+
+#### Challenge
+
+What steps, in order, would you perform in order to create a file called "test.txt" with the text "Hello World!" in a new folder called "challenge" and make it executable for all users?
+
+```{r eval=F, include=FALSE}
+mkdir challenge
+cd challenge
+nano test.txt
+chmod +x "test.txt"
+```
+
+### apt, sudo, get, and all that jazz
+
+An important but unfortunately tricky part of using the command line is using the utility `apt` (or one of its cousins) to install, update, remove, or otherwise manage packages on a Linux distribution. More information how `apt` works and can be used can be found at [https://ubuntu.com/server/docs/package-management](https://ubuntu.com/server/docs/package-management). Since there are some steps to get `apt` to work on a Mac, Mete will illustrate how to do package installation using the free and open source package manager [`Homebrew`](https://brew.sh).
+
+One can install Homebrew by running
+
+```{r, eval=FALSE}
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# If you're on Linux or Windows (with Ubuntu installed with WSL 2)
+# you can update your installation of apt
+apt update && apt upgrade
+```
+
+`brew` can be used to install packages the machine does not have. For example, running
+
+```{r, eval=FALSE}
+brew install wget
+```
+
+installs the package `wget`, a free package for retrieving files using HTTP, HTTPS, FTP and FTPS. Homebrew does this by running Ruby and Git, which you can see for yourseld by entering the following command:
+
+```{r, eval=FALSE}
+brew edit wget
+```
+
+Homebrew also allows users to create their own packages, has very through [documentation](https://docs.brew.sh/Manpage), and even facilitates the installation of new _fonts_ and non-open source software.
+
+```{r, eval=FALSE}
+brew install --cask firefox
+```
+
+A list of packages that are installed can be found by running
+
+```{r, eval=FALSE}
+brew list
+brew deps --tree --installed # illustrates dependencies
+```
+
+A particular piece of software can be found by using `brew search`:
+
+```{r, eval=FALSE}
+brew search google
+
+apt-cache search google
+```
+
+`brew install` will install software such as the highly useful Basic Local Alignment Search Tool (BLAST):
+
+```{r, eval=FALSE}
+brew install blast
+
+apt-get install ncbi-blast+
+```
+
+Along these lines, it is important to mention that one sometimes will run into issues installing packages using `brew` or `apt`. To get around this, a very handy (but at times dangerous) command to have ready is `sudo`. For example, trying to run `shutdown`, Mete gets an error. But if we run
+
+```{r, eval=FALSE}
+sudo shutdown
+```
+
+one can run ... just about anything. `sudo` stands for superuser do.
+
+### Running software tools
+
+#### Examples of software tools
+
+There's a lot of software available for biological research, but much of it can only be used from the command line. For example, if you wanted to identify all of the transposable elements ("selfish genes" that make copies of themselves in their host genomes) in a genome, you'd want to run something like [EDTA](https://github.com/oushujun/EDTA) but it does not offer a graphical interface. If you had a sequence that you knew was associated with herbicide resistance, you could use [NCBI's BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi) (Basic Local Alignment Search Tool) to compare your nucleotide or protein sequence against a large database to find regions of similarity in order to determine the potential functional role of the region or if the region is shared among similar species. The has an online graphical interface but is also available to use via the command line. The command line provides some additional functionality, such as the time-saving option of performing searches in parallel.
+
+#### Step 1: Understand the software
+
+Your first step to running something is always going to be reading documentation. You need to understand what the software tool is actually doing and whether that methods it uses is appropriate for your data. 
+
+The *inputs* and *outputs* of a programme are an important starting place. [BLAST's](https://www.ncbi.nlm.nih.gov/books/NBK569856/) required inputs are `-query`, a "query sequence" (what you're looking for), and `-db`, a "database" (where you're hoping to find a match). 
+Ideally, you've read the paper associated with the software's creation, you've understood all of the arguments that can be passed to the software, and, most importantly, you understand the software's weaknesses and strengths with regards to your particular type of data.
+
+This is the most important step for analysing your data. Getting the software running can be tricky and often more time-consuming than this step, but understanding what's happening to your data is the most important thing you're going to do. 
+
+One way to interact with help documentation is to use `-h` or `-help`. Many software tools will display their documentation after such an argument.
+
+```{r eval=FALSE}
+bash --help
+```
+
+#### Installing and running the software
+
+Package managers like `conda` are really useful for more complex software tools that have dependencies. Luckily, tools like BLAST can be simply installed with apt-get and/or brew (as outlined earlier).
+
+```{r, eval=FALSE}
+brew install blast
+# earlier code for reference
+
+apt-get install ncbi-blast+
+```
+
+In the below code chunk, we use `curl` to download a mouse amino acid sequences that have been compressed (notice the file extension!) into our current working directory, and check it downloaded with `ls`.
+
+```{r, eval=FALSE}
+curl -o mouse.protein.faa.gz -L https://osf.io/v6j9x/download
+
+ls
+```
+
+Filenames that end in `.gz` have been compressed with *gzip* (similar in theory to compressing with zip). We can de-compress the files to be able to view them.
+
+```{r eval=FALSE}
+gunzip mouse.protein.faa.gz
+
+head -n 6 mouse.protein.faa #head works the same in R as the command line
+less mouse.protein.faa #less will show the whole file. You can quit with `q`.
+
+# Let's take the first two sequences and save them to a different file
+head -n 11 mouse.protein.faa > mm.first.faa
+
+# You can check this worked with `less mm.first.faa`
+```
+
+We can search this mouse sequence against a protein data set with BLAST. First, we need to make a protein sequence database for searching with `makeblastdb`.
+
+```{r, eval=FALSE}
+makeblastdb -in mouse.protein.faa -dbtype prot
+```
+
+Then we can call BLAST to do a protein search:
+
+```{r eval=FALSE}
+# Note that the outfile specified references the query and db names
+blastp -query mm.first.fa -db mouse.protein.faa -out mm.first.mouse.txt
+
+# Check the output with head or less
+less mm.first.mouse.txt
+```
+
+You can use `spacebar` to move down a page. `q` exits less.
+
+#### Challenge
+
+Create a new query file from the first 498 lines of the file `mouse.protein.faa`, name it `mm.second.faa`, and use that to search `mouse.protein.faa` with blastp. Did BLAST take longer? 
+
+```{r, eval=FALSE, include=FALSE}
+head -n 498 mouse.protein.faa > mm.second.faa
+blastp -query mm.second.faa -db mouse.protein.faa -out.mm.second.mouse.txt
+
+#optional
+less mm.second.mouse.txt
+```
+
+## Reproducible science and collaboration with Git and GitHub
+
+### Intro to Version Control using Git
+
+Git is a version control system that tracks changes in files. Although it is primarily used for software development, Git can be used to track changes in any files, and is an indispensable tool for collaborative projects. Using Git, we effectively create different versions of our files and track who has made what changes. The complete history of the changes for a particular project and their metadata make up a repository. 
+
+To sync the repository across different computers and to collaborate with others, Git is often used via [GitHub](http://www.github.com), a web-based service that hosts Git repositories. In the spirit of "working open" and ensuring scientific reproducibility, it has also become increasingly common for scientists to upload scripts and related files to GitHub for others to use.
+
+### Intro to GitHub
+
+GitHub allows for easy use of Git for collaborative purposes using a primarily point-and-click interface, in addition to providing a web-based hosting service for Git repositories (or "repos").  If you have not already made a GitHub account, do so now [here](www.github.com).
+
+A new repository can be made by clicking on the `+` in the top right of the page and selecting "New repository". For now, however, navigate to your provided group repo. All members of the group have been given admin access to a pre-made repository in the `2023-GroupX` projects repo. All groups have been provided with existing repositories, but a new repository can be made by clicking on the `+` in the top right of the page and selecting "New repository". For now, however, navigate to your provided group repo.
+
+## Version Control with Git
+
+### Setup and Installation
+
+Git is primarily used on the command line. The implementation of the command line that we'll be using is known as a "bash interpreter", or "shell". While bash interpreters are natively available on Mac and Linux operating systems, Windows users may have to externally install a bash shell.
+
+To install Git on a **Mac**, you will have to install [Xcode](https://itunes.apple.com/ca/app/xcode/id497799835?mt=12), which can be downloaded from the Mac App Store. Be warned: Xcode is a very large download (approximately 6 GB)! Install Xcode and Git should be ready for use. (_Note: most students will have already installed Xcode already for some R packages we used earlier in the course. If you're not sure whether this is the case, run the `git --version` command described below_)
+
+To install Git (and Bash) on **Windows**, download [Git for Windows](https://gitforwindows.org/) from its [website](https://github.com/git-for-windows/git/releases/tag/v2.19.1.windows.1). At the time of writing, 2.19.1 is the most recent version. Download the `exe` file to get started. Git for Windows provides a program called Git Bash, which provides a bash interpreter that can also run Git commands. 
+
+To install Git for **Linux**, use the preferred package manager for your distribution and follow the instructions [listed here](https://git-scm.com/download/linux). 
+
+To test whether Git has successfully been installed, open a bash interpreter, type:
+
+```{r, eval = F}
+git --version
+```
+
+and hit Enter. If the interpreter returns a version number, Git has been installed.
+
+### Getting started with Git
+
+First, we have to tell Git who we are. This is especially important when collaborating with Git and keeping track of who did what! Keep in mind that this only has to be done the first time we're using Git.
+
+This is done with the `git config` command. When using Git, _all_ commands begin with `git`, followed by more specific subcommands. 
+
+```{r, eval = F}
+git config --global user.name "My Name"
+git config --global user.email "myemail@example.com"
+```
+
+Finally, the following command can be used to review Git configurations:
+
+```{r, eval = F}
+git config --list
+```
+
+### Cloning local from main
+
+After configuring our name and email, we are ready for version control!
+
+First, we need to initialize our local repository, so we need to tell Git where to store our files on our computer. At the same time, we can also connect the two repositories: the local one on your computer, and the remote one on GitHub. We do both by making the GitHub repository a *remote* for the local repository. 
+
+First, head to your group's repo on GitHub, and click on the green "Clone or  download" button on the right side of the page. This yields a link  to your fork. Copy this link to your clipboard.
+
+On the command line, run
+
+```{r, eval = F}
+git clone [repo link]
+```
+
+with the link in place of `[repo link]`. This process, known as _cloning_, will create a new folder in your current working directory that contains the contents of your GitHub folder. This also initializes your local repo.
+
+Enter this new folder with `cd` and type `git status` to make sure the repo has been cloned properly. `git status` should output that the branch is even with `origin/main`, indicating that it is currently the same as the current state of your fork. 
+
+### Adding and commiting files
+
+For your projects, you will be making edits to your .Rmd file in RStudio, or you will be writing your report in text editors. For today, let's use the file we created earlier and commit it.
+
+The “untracked files” message means that there’s a file in the directory that Git isn’t keeping track of. We can tell Git to track a file using `git add`:
+
+```{r, eval = F}
+git add draft-yn.txt
+```
+
+Git now knows that it’s supposed to keep track of mars.txt, but it hasn’t recorded these changes as a commit yet. To get it to do that, we need to run one more command:
+
+```{r, eval = F}
+git commit -m "intro about my project"
+```
+
+When we run `git commit`, Git takes everything we have told it to save by using `git add` and stores a copy permanently inside the special `.git` directory. This permanent copy is called a commit (or revision) and its short identifier is a series of letters and numbers. Each commit has a unique identifier.
+
+We use the `-m` flag to write a message that describes our edits specifically.
+
+### Pushing changes
+
+Now, let's push our changes from the local repo to the main repo.
+
+We can push our changes:
+
+```{r, eval = F}
+git push origin main
+```
+
+The first time you run the `push` subcommand, you may get a prompt asking you to enter your GitHub username and password. If you are entering your password and nothing pops up, don't worry! Your keystrokes are being recognized, although there is no visual cue for it.
+
+Now, running `git status` shows us that our local repo is up-to-
+date with origin/main.
+
+If we navigate to GitHub, we now see that we have our updates in the main repo, and there is a comment "intro about my project" associated with the commit.
+
+Git commit history is a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (or DAG), which
+means that every single commit always has at least one "parent" commit (the previous commit(s) in the history), and any individual commit can have multiple "children". This history can be traced back through the "lineage" or "ancestry".
+
+### Pulling changes
+
+When other group members add to the shared repo, you have to make sure those edits have been incorporated into your repo before making new changes of your own. This ensures that there aren't any conflicts within files, wherein your edits clash with someone else's if one of you is working with an earlier version of the file.
+
+To remain up to date, navigate to the local copy of your repo.
+
+First, you have to _fetch_ the new changes that are in the shared `origin` repo. 
+
+```{r, eval = F}
+git fetch origin
+```
+
+Once the edits have been downloaded from the origin, merge them into your local `main` repo:
+
+```{r, eval = F}
+git merge origin/main
+```
+
+Note that the `git pull` command combines two other commands, `git fetch` and `git merge`.
+
+```{r, eval = F}
+git pull
+```
+
+This will download any changes your group members may have made and update your local versions of your fork accordingly.
+
+Your local copy is now even with the shared repo!
+
+Before starting any edits of your own, it's usually a good idea to start off
+by checking to see whether anything's been added to the main repo and, if needed,
+pulling those changes 
+
+### Summary
+
+Basic Git commands:
+
+- `git init` (or `git clone`)
+- `git status`
+- `git add`
+- `git commit`
+- `git push`
+- `git log`
+- `git checkout`
+- `git help`
+
+The "GitHub flow" (so far):
+
+1. Make sure your local is up to date using `git pull`
+2. Make your edits
+3. Add your edits with `git add`
+4. Commit your edits with an informative commit message
+5. Push your edits
+6. Repeat
+
+#### GitHub Issues
+
+Finally, each repo on GitHub also has an Issues tab at the top of the page. Here, you and your group can create posts regarding the content of the repo that highlight issues with code or serve as to-do lists to  manage outstanding tasks with.
+
+Although issues aren't needed for any of the steps we discussed above, it can be useful to create a roadmap of your project with them and   assign group members to specific tasks if need be. 
+
+## EXTRA MATERIAL: best practices for collaboration
+
+Usually, there are several other steps involved during collaboration. At this point, we are able to push our edits from our local machine straight to the final version on the GitHub repo. This can be dangerous if no one else is checking over your code, especially if every team member has direct access to change the contents of the main repo, and all of your project files. These additional steps include using forks and branches.
+
+### Creating a Fork
+
+The repos that have already been created can be thought of as "main repos",
+which will contain the "primary" version of the repo at any given point in
+time. However, instead of directly uploading and editing files right within
+this main repo itself, usually collaborators will be begin by _forking_ the repo. When a given user forks a repo, GitHub creates a user-specific copy of the repo and all its
+files in a remote location.
+
+Having a forked copy means that the developer who performs the fork will have complete control over the newly copied codebase. Developers who contributed to the Git repository that was forked will have no knowledge of the newly forked repo. Previous contributors will have no means with which they can contribute to or synchronize with the Git fork unless the developer who performed the fork operation provides access to them.
+
+Some famous examples of Git forks include:
+
+* Fire OS for Kindle Fire, which is a fork of Android
+* LibreOffice, which is a fork of OpenOffice
+* Ubuntu, which is a fork of Debian
+* MariaDB, from MySQL
+
+You'll notice that on the top left of this repo page, the repo's name will be
+"[your username] / 2023-GroupX", as opposed to "EEB313 / 2023-GroupX".
+Furthermore, GitHub will indicate that this is a fork right underneath said
+repo name ("forked from eeb313-[year]/ [repo name]").
+
+### Setting up your remotes
+
+Now we connect the three repositories: the local repo on your computer, the forked repo on GitHub, and the main group remote repo on GitHub. We do this by making the GitHub repository a *remote* for the local repository. 
+
+To get your fork up to date with the main repo, you next have to add a _remote_ 
+linking to the main repo. Head to your group's repo and once again click
+on "Clone or download" to grab its link. Then, using the main repo link, run:
+
+```{r, eval = F}
+git remote add upstream [repo link]
+```
+
+Then, we have to update our forked repo. Earlier, since we didn't have a forked repo, we only had a link between our local computer version of the folder and the shared version. When we cloned the shared version, we created that remote link. Now, we have changed that shared repo as the `upstream` remote, and we have a fork that acts as an intermediate step. Let's change our fork to become the `main` remote.
+
+Run:
+
+```{r, eval = F}
+git remote -v
+```
+
+to get a list of existing remotes. This should return four links, two of which are labelled `origin` and two of which are labelled `upstream`. At this point, they should be the same link. We need to update our main remote by removing it and adding our fork link.
+
+To remove our origin remote, run:
+
+```{r, eval = F}
+git remote rm origin
+```
+
+Then, let's add our fork:
+
+```{r, eval = F}
+git remote add origin [repo link]
+```
+
+Now, when you run :
+
+```{r, eval = F}
+git remote -v
+```
+
+you should find two links for `origin` and two links for `upstream`. These two links are used to `fetch` from upstream, and one to `push` from main to upstream. The links for `origin` are your main forked repo on your own GitHub, while the links for `upstream` are the `EEB313-2023-GroupX` repo.
+
+### Syncing your fork
+
+Next, you have to _fetch_ the new changes that are in the shared repo. 
+
+```{r, eval = F}
+git fetch upstream
+```
+
+Once the edits have been downloaded from upstream, merge them into your local repo:
+
+```{r, eval = F}
+git merge upstream/main
+```
+
+Your local copy is now even with the main repo! Finally, push these changes to the GitHub version of your fork (`origin`) from your `main` local repo.
+
+```{r, eval = F}
+git push origin main
+```
+
+Now the GitHub version of the fork is all synced up, ready for your next batch of edits, and eventually another pull request!
+
+### Making edits
+
+Every time you make edits to your local files, first make sure you are first syncing any changes from `upstream` to your local to your `origin` (fork).
+
+Then, go ahead and make your edits! After you are done your batch of editing, you can add and commit those changes, still using `git add` and `git commit`.
+
+These commits do not go to the upstream `EEB313` repo, but instead end up in your forked repo. In order to contribute your changes from your fork to upstream, you will need to make a Pull Request (PR).
+
+### Pull requests
+
+After a commit has been made, head to your fork. GitHub will have noticed that there are new edits that you can contribute. Click "Contribute" and "Open Pull Request". A PR is GitHub's way of neatly packaging one or more commits that have been made into a single request, and then you can merge said commits into `upstream`. In our case, a PR is essentially you saying: "Here are all the edits I've made. Have a look, and add them to `main` if you think they're ready to go."
+
+Following a pull request pending, GitHub takes you to the "Pull Requests" tab of the repo and prompts you to write about your pull
+request (i.e., describe the changes you're attempting to merge). Here, you can (and should) explain the changes you've made for your collaborators, so that they know what to look for and review. Be specific and detailed to save your group members' time -- it's a good idea to start off your pull request message with an overall summary ("adding `dplyr` code to clean dataset") followed by a point-form list of what changes have been made, if necessary. 
+
+Once the pull request has been made, GitHub will list both your message and
+your commit messages below. Clicking on any of these commits opens up a new
+page highlighting the changes made in that specific commit. You also have the
+option of merging the pull request yourself -- but _don't do this_! When
+collaborating, always have someone else review and merge your pull request. 
+
+If all does _not_ look good, your team members can add messages below, and tag
+others using the @ symbol, similarly to most social networks. If more changes
+are needed before the pull request is ready to merge, any new commits you make
+to the `main` branch on your fork will automatically be added on to the pull request.  This way, you can incorporate any changes or fixes suggested by your team members simply by continuing to work in your fork until your changes are ready to merge. For line-specific
+edits, if a file is opened up (i.e., by clicking on one of the commits),
+clicking on the `+` button that appears when hovering over a line number will
+allow you or a group member to add a comment specifically attached to that
+line. This can be useful when pointing out typos, for instance, among other
+things. 
+
+### Creating a branch
+
+A branch is used to isolate development work without affecting other branches in the repository. Each repository has one default branch, and can have multiple other branches. Branches allow you to develop features, fix bugs, or safely experiment with new ideas in a contained area of your repository.
+
+The `main` branch should be thought of as the actual current state of your project -- branches
+are meant, by design, to be temporary, and exist only to facilitate edits and
+experimental work while avoiding any risk of breaking the original codebase. Branches can keep experimental work separate; for example, you can create a separate branch from your main branch so any trials or bugs only exist in your branch.
+
+Branches are simply a *named pointer* to a commit in the DAG, which automatically *move forward* as commits are made. Divergent commits (two commits with the same parent) could be considered "virtual" branches. Since they are simply pointers, branches in Git are very lightweight.
+
+You always create a branch from an existing branch, typically, the default branch of your repository. You can then work on this new branch in isolation from changes that other people are making to the repository. A branch you create to build a feature is commonly referred to as a feature branch or topic branch.
+
+To create a new branch, run:
+
+```{r, eval = F}
+git branch <branch-name>
+```
+
+For example:
+
+```{r, eval = F}
+git branch new-feature
+```
+
+The repository history remains unchanged. Then, we need to record all new commits to that branch.
+
+```{r, eval = F}
+git checkout new-feature
+```
+
+Note that you can combine branch creation and checkout by using only one command:
+
+```{r, eval = F}
+git checkout -b new-feature
+```
+
+You should see the confirmation: `Switched to a new branch "new-feature"`
+
+Make your edits, and commit them to your branch using `git add` and `git commit`. When you are ready to merge your new feature to your local main branch, head back to your main branch:
+
+```{r, eval = F}
+git checkout main
+```
+
+And merge your new features from the new-feature branch:
+
+```{r, eval = F}
+git merge new-feature
+```
+
+Now you can delete your branch, since it has been successfully merged:
+
+```{r, eval = F}
+git branch -d new-feature
+```
+
+This is a common workflow for short-lived topic branches that are used more as an isolated development than an organizational tool for longer-running features.
+
+
+Note that this is all happening locally. You now push your changes from your local main to upstream or origin. Don't forget to create a pull request from your fork to the upstream `EEB313` repo if you are using forks!
+
+However, you are also able to create a new branch and push that local branch to upstream or origin. To do this, make sure you are in your new branch:
+
+```{r, eval = F}
+git checkout new-feature
+```
+
+Then, `git add` and `git commit` as you normally would. This time, instead of merging your new branch to your local main, `git push` to push them to your forked repo or upstream.
+
+Now, running `git status` shows us that our `new-feature` branch on our local repo is up-to-
+date with origin/main.
+
+If we navigate to GitHub, we now see that we have a new branch in our forked 
+repo (and remember that there should a comment associated with the commit)/
+
+Now, you can submit a pull request for the rest of your team to check on the repo. Once they review the changes, they can merge the PR, and the final version will show up on the upstream repo!
+
+Once a pull request has been merged into the main repo, the `new-feature` branch (or whatever you have named your branch) isn't needed anymore. Because of this, GitHub will immediately prompt you to delete the this branch as soon as the merge has been completed right in the PR. 
+
+To list the branches that are currently being used, use this for local branches:
+
+```{r, eval = F}
+git branch
+git branch --list
+```
+
+The git branch command lets you create, list, rename, and delete branches. It doesn’t let you switch between branches or put a forked history back together again. For this reason, git branch is tightly integrated with the git checkout and git merge commands.
+
+## TL;DR (refer back to this!)
+
+The general collaborative workflow is as follows:
+
+1. First, create a _branch_ of the main repo. 
+
+2. Make edits in the branch. These could involve adding/deleting lines of code
+   or even adding/removing entire files. Keep in mind that the branch is
+   separate from the main codebase, so don't worry too much about deleting things or making large changes.
+
+3. Once you have made your changes in this branch, submit what's known as a
+   _pull request_ (PR) from this edited branch to `main`. A PR neatly
+   packages all the edits that have been made in your branch for review by other
+   members of your group.
+
+4. Once your changes have been approved, merge the PR. It's good practice to
+   have group members merge your PRs instead of doing it yourself. 
+
+Although this process may seem a bit laborious, using this method (also known
+as the "GitHub flow") minimizes chances of error and ensures that all code is
+reviewed by at least one other person. Understanding how and why this process
+works is key to collaborative work in software development and the like, and is
+used by all sorts of open source projects on GitHub ([including `dplyr`
+itself](https://github.com/tidyverse/dplyr)!)
+
+### Git Terminology
+
+- **repository** (short form: repo):  a storage area for a project containing all the files for the project and the history of all the changes made to those files
+- **local copy**: the version of file stored on your own computer
+- **remote copy**: the version of a file stored outside of your own computer, for example stored on an external server, perhaps at GitHub. Remotes are referenced by nicknames, e.g., origin or upstream.
+- **branch**: a named series of commits. The default branch that you download is usually called gh-pages or main. Creating a new branch makes a parallel version of a repository where changes can be made that affect the new branch only and not the original (base) version of the repository. New branches are often used to test changes or new ideas, which can later be merged with the base branch. Moving from one branch to another is called checking out a new branch.
+- **fork** (GitHub-specific term): to copy a repository from another user and store it under your own GitHub account. Can also refer to the copied repo itself.
+- **gh-pages** (GitHub-specific term): stands for "GitHub Pages". This is often the default branch in repositories. Branches called gh-pages can be published as webpages hosted by GitHub.
+- **origin**: the main remote repository you want to download files from or compare local changes you have made to. When you've forked a repository, your origin is your new copy of the repository in your account.
+- **upstream**: the original repository you made your fork from. Both origin and upstream are remote repositories.
+- **commit**: to save changes in your working directory to your local repository
+- **push**: send committed changes you have made on your local computer to a remote repository. For a change to show up on GitHub, the committed changes must be pushed from your computer to the remote repository.
+- **pull**: download changes from a remote repository to your local version of the same repository. This is useful when other people have made changes to a shared project, and you want to download (pull) the changes from the shared remote repository to your own computer.
+- **pull request** (GitHub-specific term, abbreviated as "PR"): send proposed changes from a specific version of a repository back to the main version of a repository to be considered for incorporation by the people maintaining the repository (the maintainers). You are requesting that the maintainers pull your changes into their repository.
+
+## Additional resources:
+
+- [A visual demonstration](https://guides.github.com/introduction/flow/) of the GitHub flow.
+- A useful [Git command cheat sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf).
+- Guide to a [good Git Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows)
+- This [textbook](https://happygitwithr.com)

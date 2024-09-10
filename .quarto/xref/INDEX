@@ -94,5 +94,14 @@
   },
   "projects_databases.qmd": {
     "projects_databases.html": "44c5e303"
+  },
+  "assignments/assignment-00.qmd": {
+    "assignment-00.html": "cecac867"
+  },
+  "lectures/lec02-basic-r.qmd": {
+    "lec02-basic-r.html": "a5526d74"
+  },
+  "lectures/lec03-command+git.qmd": {
+    "lec03-command+git.html": "d8897ab4"
   }
 }

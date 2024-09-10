@@ -6,30 +6,6 @@ Although our students come from many locations around the world, we wish to reco
 
 There is a [First Nations House](https://studentlife.utoronto.ca/department/first-nations-house/) for Indigenous Student Services on campus. Please refer to their web page for more resources and information about honouring our land and their services for students.  
 
-## Course Overview
-
-This course covers statistical and data analysis, reproducible quantitative methods, and scientific computing in R to answer questions in ecology and evolutionary biology. Statistical and data analysis, modeling, and computing are essential skills for all biologists. This course is designed to meet a growing demand for reproducible, openly accessible, analytically thorough, and well-documented science. Students will learn to analyze and visualize data, develop mathematical models, and document their research using the R programming language. No programming experience is required.
-
-Prerequisites: BIO220H1 and one of EEB225H1, STA288H1, or STA220H1
-
-## Time
-
-Tuesdays 2:10 - 4:00 PM and Thursdays 12:10 - 2:00 PM EST.
-
-## Class Locations
-
-All classes will be on the St. George campus. On Tuesdays, we will be in 371 Bloor, Room 36. On Thursdays, we will be in Sidney Smith Hall, Room 561.
-
-| Office hours (in EST)                 |
-|----------|----------------|-----------|
-| Mete     | Mon 1-2pm    |  ESC3044          |
-| Zoë      | Wed 2-3pm    |  ESC3044          |
-| Jessie   | Tu 4-5pm       | 371 Bloor, Room 36   || Gavia    | Th 2-3pm       |  Sidney Smith, Room 561    |
-
-## Contact protocol
-
-Please address all course-related, assignment-related, and project-related matters to both Zoë and Mete. Include "EEB313" in the subject line. If you do not receive a reply within 48 hours (excluding weekends), please send us a reminder. **If you have assignment-related questions, please email Gavia and Jessie. If you have course-related or lecture-related questions, please email Mete and Zoë.**
-
 ## Diversity and inclusion statement
 
 As students, you all have something unique and special to offer to science. It is our intent that students from all backgrounds and perspectives be well served by this course, that students’ learning needs be addressed both in and out of class, and that the diversity that students bring to this class be recognized as a resource, strength, and benefit. 
@@ -49,6 +25,31 @@ We acknowledge our imperfections while we also fully commit to the work, inside 
 ## Wellness statement
 
 We on the teaching team value your health and wellness. In order to succeed in this class, in university, and beyond, you must balance your work with rest, exercise, and attention to your mental and physical health. **Working until exhaustion is NOT a badge of honor**. If you are finding it difficult to balance your health and well-being with your work in this class, please do not hesitate to let us know. We are happy to help connect you with resources and services on campus and also to make accommodations to our course plan as needed. Our inboxes are always open, and we are also available for virtual chats by appointment. You have our support, and we believe in you.
+
+## Course Overview
+
+This course covers statistical and data analysis, reproducible quantitative methods, and scientific computing in R to answer questions in ecology and evolutionary biology. Statistical and data analysis, modeling, and computing are essential skills for all biologists. This course is designed to meet a growing demand for reproducible, openly accessible, analytically thorough, and well-documented science. Students will learn to analyze and visualize data, develop mathematical models, and document their research using the R programming language. No programming experience is required.
+
+Prerequisites: BIO220H1 and one of EEB225H1, STA288H1, or STA220H1
+
+## Time
+
+Tuesdays 2:10 - 4:00 PM and Thursdays 12:10 - 2:00 PM EST.
+
+## Class Locations
+
+All classes will be on the St. George campus. On Tuesdays, we will be in 371 Bloor, Room 36. On Thursdays, we will be in Sidney Smith Hall, Room 561.
+
+| Office hours (in EST)                 |
+|----------|----------------|-----------|
+| Mete     | Mon 1-2pm    |  ESC3044          |
+| Zoë      | Wed 2-3pm    |  ESC3044          |
+| Jessie   | Tu 4-5pm     | 371 Bloor, Room 36   |
+| Gavia    | Th 2-3pm     |  Sidney Smith, Room 561    |
+
+## Contact protocol
+
+Please address all course-related, assignment-related, and project-related matters to both Zoë and Mete. Include "EEB313" in the subject line. If you do not receive a reply within 48 hours (excluding weekends), please send us a reminder. **If you have assignment-related questions, please email Gavia and Jessie. If you have course-related or lecture-related questions, please email Mete and Zoë.**
 
 ## Absence policy
 
@@ -73,7 +74,7 @@ If you require accommodations for a disability, or have any accessibility concer
 |------|--------|-----------------------------------------------------|----------------|
 | 1    | Sep 3  | Intro to course                                     | Everyone       | 
 | 1    | Sep 5  | Base R: assignment, vectors, functions, strings, loops, etc.        | Zoë            |
-| 2    | Sep 10 | Intro to command line and GitHub                    | Zoë            |
+| 2    | Sep 10 | Intro to command line and GitHub                    | Mete           |
 | 2    | Sep 12 | Data wrangling I                                    | Zoë            |
 | 3    | Sep 17 | Data wrangling II                                   | Zoë            |
 | 3    | Sep 19 | Data visualization in ggplot                        | Zoë            |

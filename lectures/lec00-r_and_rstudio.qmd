@@ -80,4 +80,4 @@ When you quit, R will ask you if you want to save the workspace (that is, all of
 
 ## Practice knitting!
 
-For your first assignment, you will need to write a short description of your interests in EEB and submitted the _knitted_ document on Quercus. This assignment is due September 17. If you are having trouble knitting, which you will have to do throughout the course, come find us and we will help you troubleshoot.
+For your first assignment, you will need to write a short description of your interests in EEB and submitted the _knitted_ document on Quercus. This assignment is due September 12. If you are having trouble knitting, which you will have to do throughout the course, come find us and we will help you troubleshoot.

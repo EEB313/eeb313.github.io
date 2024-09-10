@@ -12,7 +12,11 @@ book:
     - part: "Lectures"
       chapters:
       - lectures/lec00-r_and_rstudio.qmd
+      - lectures/lec02-basic-r.qmd
+      - lectures/lec03-command+git.qmd
     - part: "Assignments"
+      chapters:
+      - assignments/assignment-00.qmd
     - part: "Project"
       chapters:
       - projects.qmd
