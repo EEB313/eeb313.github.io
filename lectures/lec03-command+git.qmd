@@ -1,4 +1,4 @@
-# Introduction to command line and Git(Hub)
+# Command line & Git(Hub)
 
 ## Lesson preamble
 
@@ -244,8 +244,8 @@ Filenames that end in `.gz` have been compressed with *gzip* (similar in theory 
 ```{r eval=FALSE}
 gunzip mouse.protein.faa.gz
 
-head -n 6 mouse.protein.faa #head works the same in R as the command line
-less mouse.protein.faa #less will show the whole file. You can quit with `q`.
+head -n 6 mouse.protein.faa # head works the same in R as the command line
+less mouse.protein.faa # less will show the whole file. You can quit with `q`.
 
 # Let's take the first two sequences and save them to a different file
 head -n 11 mouse.protein.faa > mm.first.faa
@@ -263,7 +263,7 @@ Then we can call BLAST to do a protein search:
 
 ```{r eval=FALSE}
 # Note that the outfile specified references the query and db names
-blastp -query mm.first.fa -db mouse.protein.faa -out mm.first.mouse.txt
+blastp -query mm.first.faa -db mouse.protein.faa -out mm.first.mouse.txt
 
 # Check the output with head or less
 less mm.first.mouse.txt
@@ -283,9 +283,9 @@ blastp -query mm.second.faa -db mouse.protein.faa -out.mm.second.mouse.txt
 less mm.second.mouse.txt
 ```
 
-## Reproducible science and collaboration with Git and GitHub
+## Reproducible science and collaboration with Git(Hub)
 
-### Intro to Version Control using Git
+### Introduction to version control using Git
 
 Git is a version control system that tracks changes in files. Although it is primarily used for software development, Git can be used to track changes in any files, and is an indispensable tool for collaborative projects. Using Git, we effectively create different versions of our files and track who has made what changes. The complete history of the changes for a particular project and their metadata make up a repository. 
 
