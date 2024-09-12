@@ -145,9 +145,9 @@ One can install Homebrew by running
 ```{r, eval=FALSE}
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# If you're on Linux or Windows (with Ubuntu installed with WSL 2)
-# you can update your installation of apt
-apt update && apt upgrade
+# if you're on Linux or Windows (with Ubuntu installed with WSL 2):
+apt update
+apt upgrade
 ```
 
 `brew` can be used to install packages the machine does not have. For example, running

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Mete K. Yuksel &amp; Zoë Humphries">
-<meta name="dcterms.date" content="2024-09-10">
+<meta name="dcterms.date" content="2024-09-12">
 
 <title>EEB313: Quantitative Methods in R for Biology</title>
 <style>
@@ -145,14 +145,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec02-basic-r.html" class="sidebar-item-text sidebar-link">
+  <a href="./lectures/lec01-basic-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec03-command+git.html" class="sidebar-item-text sidebar-link">
+  <a href="./lectures/lec02-command+git.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Command line &amp; Git(Hub)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectures/lec03-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling!</span></span></a>
   </div>
 </li>
       </ul>
@@ -200,6 +206,10 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
  <span class="menu-text">Miscellaneous notes</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Datasets</span></span>
   </li>
     </ul>
     </div>
@@ -257,7 +267,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 10, 2024</p>
+      <p class="date">September 12, 2024</p>
     </div>
   </div>
   
@@ -385,156 +395,114 @@ ul.task-list li input[type="checkbox"] {
 <td>Everyone</td>
 </tr>
 <tr class="even">
-<td>1</td>
-<td>Sep 5</td>
-<td>Base R: assignment, vectors, functions, strings, loops, etc.</td>
-<td>Zoë</td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td>Sep 10</td>
-<td>Intro to command line and GitHub</td>
-<td>Mete</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Sep 12</td>
-<td>Data wrangling I</td>
-<td>Zoë</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Sep 17</td>
-<td>Data wrangling II</td>
-<td>Zoë</td>
-</tr>
-<tr class="even">
-<td>3</td>
-<td>Sep 19</td>
-<td>Data visualization in ggplot</td>
-<td>Zoë</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>Sep 24</td>
-<td>Exploratory data analysis</td>
-<td>Zoë</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Sep 26</td>
-<td>Project work</td>
-<td></td>
-</tr>
-<tr class="odd">
 <td>5</td>
 <td>Oct 01</td>
 <td>Introduction to statistical inference I</td>
 <td>Mete</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>5</td>
 <td>Oct 03</td>
 <td>Introduction to statistical inference II</td>
 <td>Mete</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>6</td>
 <td>Oct 08</td>
 <td>Linear models I</td>
 <td>Mete</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>6</td>
 <td>Oct 10</td>
 <td>Linear models II</td>
 <td>Mete</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>7</td>
 <td>Oct 15</td>
 <td>Model selection</td>
 <td>Jessie</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>7</td>
 <td>Oct 17</td>
 <td>Multivariate statistics</td>
 <td>Gavia</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>8</td>
 <td>Oct 22</td>
 <td>Mathematical models in ecology and evolution I</td>
 <td>Mete</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>8</td>
 <td>Oct 24</td>
 <td>Mathematical models in ecology and evolution II</td>
 <td>Mete</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>9</td>
 <td>Oct 29</td>
 <td>Reading break</td>
 <td>-</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>9</td>
 <td>Oct 31</td>
 <td>Reading break</td>
 <td>-</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>10</td>
 <td>Nov 05</td>
 <td>Project work</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>10</td>
 <td>Nov 07</td>
 <td>Project work</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>11</td>
 <td>Nov 12</td>
 <td>Project work</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>11</td>
 <td>Nov 14</td>
 <td>Project work</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>12</td>
 <td>Nov 19</td>
 <td>Project work</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>12</td>
 <td>Nov 21</td>
 <td>Project work</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>13</td>
 <td>Nov 26</td>
 <td>Project work</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>13</td>
 <td>Nov 28</td>
 <td>Project work</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>14</td>
 <td>Dec 03</td>
 <td>Group presentations</td>

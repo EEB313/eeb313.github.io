@@ -72,14 +72,7 @@ If you require accommodations for a disability, or have any accessibility concer
 
  Week  | Date   | Topic                                               | Instructor     |
 |------|--------|-----------------------------------------------------|----------------|
-| 1    | Sep 3  | Intro to course                                     | Everyone       | 
-| 1    | Sep 5  | Base R: assignment, vectors, functions, strings, loops, etc.        | Zoë            |
-| 2    | Sep 10 | Intro to command line and GitHub                    | Mete           |
-| 2    | Sep 12 | Data wrangling I                                    | Zoë            |
-| 3    | Sep 17 | Data wrangling II                                   | Zoë            |
-| 3    | Sep 19 | Data visualization in ggplot                        | Zoë            |
-| 4    | Sep 24 | Exploratory data analysis                           | Zoë            |
-| 4    | Sep 26 | Project work                                        |                |
+| 1    | Sep 3  | Intro to course                                     | Everyone       | | 1    | Sep 5  | Base R: assignment, vectors, functions, strings, loops, etc.        | Zoë            || 2    | Sep 10 | Intro to command line and GitHub                    | Mete          || 2    | Sep 12 | Data wrangling I                                    | Zoë            || 3    | Sep 17 | Data visualization in ggplot                        | Zoë            || 4    | Sep 19 | Exploratory data analysis                           | Zoë            || 4    | Sep 24 | Review using Farrell & Davies (2019) dataset        |                || 4    | Sep 26 | Project work                                        |                |
 | 5    | Oct 01 | Introduction to statistical inference I             | Mete           |
 | 5    | Oct 03 | Introduction to statistical inference II            | Mete           |
 | 6    | Oct 08 | Linear models I                                     | Mete           |

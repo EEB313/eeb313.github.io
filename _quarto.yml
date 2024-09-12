@@ -12,8 +12,9 @@ book:
     - part: "Lectures"
       chapters:
       - lectures/lec00-r_and_rstudio.qmd
-      - lectures/lec02-basic-r.qmd
-      - lectures/lec03-command+git.qmd
+      - lectures/lec01-basic-r.qmd
+      - lectures/lec02-command+git.qmd
+      - lectures/lec03-data-wrangling.qmd
     - part: "Assignments"
       chapters:
       - assignments/assignment-00.qmd
@@ -22,6 +23,7 @@ book:
       - projects.qmd
       - projects_databases.qmd
     - part: "Miscellaneous notes"
+    - part: "Datasets"
   repo-url: https://github.com/EEB313/eeb313.github.io
   sidebar:
     search: true

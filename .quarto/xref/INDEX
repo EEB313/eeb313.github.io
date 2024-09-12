@@ -103,5 +103,17 @@
   },
   "lectures/lec03-command+git.qmd": {
     "lec03-command+git.html": "d8897ab4"
+  },
+  "lectures/lec04-data-wrangling.qmd": {
+    "lec04-data-wrangling.html": "709c21ab"
+  },
+  "lectures/lec01-basic-r.qmd": {
+    "lec01-basic-r.html": "838ee138"
+  },
+  "lectures/lec02-command+git.qmd": {
+    "lec02-command+git.html": "d4f17309"
+  },
+  "lectures/lec03-data-wrangling.qmd": {
+    "lec03-data-wrangling.html": "d671e124"
   }
 }
