@@ -268,7 +268,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#summary-of-long-vs-wide-formats" id="toc-summary-of-long-vs-wide-formats" class="nav-link" data-scroll-target="#summary-of-long-vs-wide-formats"><span class="header-section-number">3.5.2</span> Summary of long vs wide formats</a></li>
   <li><a href="#long-to-wide-with-pivot_wider" id="toc-long-to-wide-with-pivot_wider" class="nav-link" data-scroll-target="#long-to-wide-with-pivot_wider"><span class="header-section-number">3.5.3</span> Long to Wide with <code>pivot_wider</code></a></li>
   <li><a href="#wide-to-long-with-gather-and-pivot_longer" id="toc-wide-to-long-with-gather-and-pivot_longer" class="nav-link" data-scroll-target="#wide-to-long-with-gather-and-pivot_longer"><span class="header-section-number">3.5.4</span> Wide to long with <code>gather</code> and <code>pivot_longer</code></a></li>
-  <li><a href="#challenge-4" id="toc-challenge-4" class="nav-link" data-scroll-target="#challenge-4"><span class="header-section-number">3.5.5</span> Challenge</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1111,33 +1110,12 @@ $ dist  &lt;dbl&gt; 2, 10, 4, 22, 16, 10, 18, 26, 34, 17, 28, 14, 20, 24, 28, 26
 6       6 Baiomys       NA   </code></pre>
 </div>
 </div>
-</section>
-<section id="challenge-4" class="level3" data-number="3.5.5">
-<h3 data-number="3.5.5" class="anchored" data-anchor-id="challenge-4"><span class="header-section-number">3.5.5</span> Challenge</h3>
+<section id="challenge-4" class="level4" data-number="3.5.4.1">
+<h4 data-number="3.5.4.1" class="anchored" data-anchor-id="challenge-4"><span class="header-section-number">3.5.4.1</span> Challenge</h4>
 <p>Starting with the <code>surveys_gw_wide</code> dataset, how would you display a new dataset that gathers the mean weight of all the genera (excluding NAs) except for the genus <code>Perognathus</code>?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>surveys_gw_wide <span class="sc">%&gt;%</span></span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"genus"</span>, <span class="at">values_to =</span> <span class="st">"mean_weight"</span>,</span>
-<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> <span class="fu">c</span>(<span class="sc">-</span>plot_id, <span class="sc">-</span>Perognathus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 216 × 4
-   plot_id Perognathus genus           mean_weight
-     &lt;int&gt;       &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;
- 1       1        9.62 Baiomys                 7  
- 2       1        9.62 Chaetodipus            22.2
- 3       1        9.62 Dipodomys              60.2
- 4       1        9.62 Neotoma               156. 
- 5       1        9.62 Onychomys              27.7
- 6       1        9.62 Peromyscus             22.2
- 7       1        9.62 Reithrodontomys        11.4
- 8       1        9.62 Sigmodon               NA  
- 9       1        9.62 Spermophilus           NA  
-10       2        6.95 Baiomys                 6  
-# ℹ 206 more rows</code></pre>
-</div>
-</div>
 
 
+</section>
 </section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
