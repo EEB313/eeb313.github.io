@@ -18,12 +18,20 @@ book:
     - part: "Assignments"
       chapters:
       - assignments/assignment-00.qmd
+      - assignments/assignment-01.qmd
     - part: "Project"
       chapters:
       - projects.qmd
       - projects_databases.qmd
     - part: "Miscellaneous notes"
     - part: "Datasets"
+      chapters:
+        - text: "portal_data.csv"
+          href: lectures/data/portal_data.csv
+        - text: "disease_distance.csv"
+          href: lectures/data/disease_distance.csv
+        - text: "meas.csv"
+          href: lectures/data/meas.csv
   repo-url: https://github.com/EEB313/eeb313.github.io
   sidebar:
     search: true

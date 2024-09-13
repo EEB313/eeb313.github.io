@@ -115,5 +115,8 @@
   },
   "lectures/lec03-data-wrangling.qmd": {
     "lec03-data-wrangling.html": "d671e124"
+  },
+  "assignments/assignment-01.qmd": {
+    "assignment-01.html": "35ab6e07"
   }
 }

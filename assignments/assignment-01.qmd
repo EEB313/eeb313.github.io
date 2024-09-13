@@ -1,0 +1,111 @@
+# Assignment 01: base R, command line, & Git(Hub) {-}
+
+Download the .Rmd file <a href="assignments/assignment-01.Rmd" download> here</a>.
+
+*To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`. Please ensure the text on your .pdf does not continue past the end of the page. If you use code chunks to write your answers to the command line questions, check that the code chunk headers say "eval=FALSE" so RStudio doesn't try to run them when knitting (the example code chunks provided for questions 4 and 5 include this).*
+
+## 1.  Variable assignment (1 mark)
+
+a.  Assign the value `5` to the variable/object `a`. Display `a`. (0.25 marks)
+        
+```{r 1a}
+```
+
+b.  Assign the result of `10/3` to the variable `b`. Display `b`. (0.25 marks)
+
+```{r 1b}
+```
+
+c.  Write a function that adds two numbers and returns their sum. Use it to assign the sum of `a` and `b` to `result`. Display `result`. (In practice, there is already a more sophisticated built-in function for this: `result <- sum(a, b)`) (0.25 marks)
+
+```{r 1c}
+```
+
+d.  Write a function that multiplies two numbers and returns their product. Use it to assign the product of `a` and `b` to `product`. Display `product`. (In practice, there is already a more sophisticated built-in function for this: `product <- prod(a, b)`) (0.25 marks)
+
+```{r 1d}
+```
+
+## 2.  Vectors (2.5 marks)
+
+a.  Create a vector `v` with all integers 0-30, and a vector `w` with every third integer in the same range. (0.25 marks)
+        
+```{r 2a}
+```
+
+b.  What is the difference in lengths of the vectors `v` and `w`? (0.25 marks)
+
+```{r 2b}
+```
+
+c.  Create a new vector, `v_square`, with the square of elements at indices 3, 6, 7, 10, 15, 22, 23, 24, and 30 from the variable `v`. *Hint: Use indexing rather than a for loop.* (0.25 marks)
+
+```{r 2c}
+```
+
+d.  Calculate the mean and median of the first five values from `v_square`. (0.25 marks)
+
+```{r 2d}
+```
+
+e.  Create a boolean vector `v_bool`, indicating which vector `v` elements are bigger than 20. How many values are over 20? *Hint: In R, TRUE = 1, and FALSE = 0, so you can use simple arithmetic to find this out.* (0.5 marks)
+
+```{r 2e}
+```
+
+f.  Write a function that calculates the median of the last two elements of any numeric vector. Test this function with the `v` and `v_square` vectors. (1 marks)
+
+```{r 2f}
+```
+
+## 3.  Data frames (1.5 marks)
+
+a.  There are many built-in data frames in R, which you can find [more details about online](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html). What are the column names of the built-in dataframe `beaver1`? How many observations (rows) and variables (columns) are there? (0.5 marks)
+
+```{r 3a}
+```
+
+
+b.  Display both the first 6 and last 6 rows of this data frame. Show how to do so with both indexing as well as specialized functions. (0.5 marks)
+
+```{r 3b}
+# With indexing
+
+
+# With functions
+
+```
+
+
+c.  What is the min, mean, and max body temperature for beavers inside and outside of the retreat? *Hint: You can use `?` on the beaver1 data set to get more information about it. Remember that each column in a data frame is a vector and you can use the same functions.* (0.5 marks)
+
+```{r 3c}
+```
+
+
+## 4.  Command line (1 mark)
+
+What commands would you run to create a directory named "mydir", check mydir's permissions, add *w*rite permissions for *u*sers, copy mydir to "mydir2" , and then remove mydir? *Hint: try running each step in your terminal to check if the output is what you expect* (1 mark)
+
+```{bash 4, eval=FALSE}
+```
+
+## 5. Understanding command line software (1 mark)
+
+Open the documentation for [Earl Grey](https://github.com/TobyBaril/EarlGrey), a software programme that identifies transposable elements in genomes. There may be a lot of unfamilliar terms on this web page, but we'll just be skimming this page to practice identifying the kind of information command line software might require and how to provide that.
+
+a. What three arguments (files/information) are required input for this software? (0.3 marks)
+
+b. What would you type into the command line to provide Earl Grey with those minimum command options? You don't need to make up example text for this, just ensure you have the three `-` arguments written out. *Hint: search for "minimum command options" on the GitHub page and use the next line* (0.3 marks)
+
+```{bash 5b, eval=FALSE}
+earlGrey
+```
+
+c. Based on the visual overview of the software (or the "Example Outputs" section) on the GitHub page, what does this software output? (0.2 marks)
+
+d. What optional parameter (i.e. the `-` argument) does Earl Grey offer to display help information? Is this kind of help parameter common? *Hint: you can search for "help documentation" in your lecture notes* (0.2 marks)
+
+## 6.  GitHub (1 mark)
+
+a. Make a Github account. You can do this at [github.com](github.com). What is your GitHub username? (1 mark)
