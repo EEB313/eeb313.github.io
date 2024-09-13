@@ -114,7 +114,7 @@
     "href": "index.html#lecture-schedule",
     "title": "EEB313: Quantitative Methods in R for Biology",
     "section": "Lecture schedule",
-    "text": "Lecture schedule\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nInstructor\n\n\n\n\n1\nSep 3\nIntro to course\nEveryone\n\n\n1\nSep 5\nBase R: assignment, vectors, functions, strings, loops, etc.\nZoë\n\n\n2\nSep 10\nIntro to command line and GitHub\nMete\n\n\n2\nSep 12\nData wrangling!\nZoë\n\n\n3\nSep 17\nData visualization in ggplot\nZoë\n\n\n4\nSep 19\nExploratory data analysis\nZoë\n\n\n4\nSep 24\nReview using Farrell & Davies (2019) dataset\n\n\n\n4\nSep 26\nProject work\n\n\n\n5\nOct 01\nIntroduction to statistical inference I\nMete\n\n\n5\nOct 03\nIntroduction to statistical inference II\nMete\n\n\n6\nOct 08\nLinear models I\nMete\n\n\n6\nOct 10\nLinear models II\nMete\n\n\n7\nOct 15\nModel selection\nJessie\n\n\n7\nOct 17\nMultivariate statistics\nGavia\n\n\n8\nOct 22\nMathematical models in ecology and evolution I\nMete\n\n\n8\nOct 24\nMathematical models in ecology and evolution II\nMete\n\n\n9\nOct 29\nReading break\n-\n\n\n9\nOct 31\nReading break\n-\n\n\n10\nNov 05\nProject work\n\n\n\n10\nNov 07\nProject work\n\n\n\n11\nNov 12\nProject work\n\n\n\n11\nNov 14\nProject work\n\n\n\n12\nNov 19\nProject work\n\n\n\n12\nNov 21\nProject work\n\n\n\n13\nNov 26\nProject work\n\n\n\n13\nNov 28\nProject work\n\n\n\n14\nDec 03\nGroup presentations\nEveryone",
+    "text": "Lecture schedule\n\n\n\nWeek\nDate\nTopic\nInstructor\n\n\n\n\n1\nSep 3\nIntro to course\nEveryone\n\n\n1\nSep 5\nBase R: assignment, vectors, functions, strings, loops, etc.\nZoë\n\n\n2\nSep 10\nIntro to command line and GitHub\nMete\n\n\n2\nSep 12\nData wrangling!\nZoë\n\n\n3\nSep 17\nData visualization in ggplot\nZoë\n\n\n4\nSep 19\nExploratory data analysis\nZoë\n\n\n4\nSep 24\nReview using Farrell & Davies (2019) dataset\n\n\n\n4\nSep 26\nProject work\n\n\n\n5\nOct 01\nIntroduction to statistical inference I\nMete\n\n\n5\nOct 03\nIntroduction to statistical inference II\nMete\n\n\n6\nOct 08\nLinear models I\nMete\n\n\n6\nOct 10\nLinear models II\nMete\n\n\n7\nOct 15\nModel selection\nJessie\n\n\n7\nOct 17\nMultivariate statistics\nGavia\n\n\n8\nOct 22\nMathematical models in ecology and evolution I\nMete\n\n\n8\nOct 24\nMathematical models in ecology and evolution II\nMete\n\n\n9\nOct 29\nReading break\n-\n\n\n9\nOct 31\nReading break\n-\n\n\n10\nNov 05\nProject work\n\n\n\n10\nNov 07\nProject work\n\n\n\n11\nNov 12\nProject work\n\n\n\n11\nNov 14\nProject work\n\n\n\n12\nNov 19\nProject work\n\n\n\n12\nNov 21\nProject work\n\n\n\n13\nNov 26\nProject work\n\n\n\n13\nNov 28\nProject work\n\n\n\n14\nDec 03\nGroup presentations\nEveryone",
     "crumbs": [
       "Syllabus"
     ]
@@ -617,12 +617,89 @@
   {
     "objectID": "assignments/assignment-00.html",
     "href": "assignments/assignment-00.html",
-    "title": "Individual interest description",
+    "title": "Assignment00: individual interest description",
     "section": "",
-    "text": "To submit this assignment, upload the full document on Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted .pdf.\n\nGet set up at home (or on a lab computer after hours)\n\nIf you have not already done so, install R and RStudio (already installed on the lab computers).\nOpen a new R Notebook and read the instructions about how to use the R Markdown syntax.\nOpen this assignment file in RStudio or copy its content into an empty R Notebook.\nInsert a code chunk below, above Question 2. Set eval=FALSE\nIn the code chunk, use install.packages(\"&lt;package_name&gt;\") to install tidyverse and rmarkdown. Remember to run the code chunk to execute the commands.\nLoad the two libraries you just installed into your environment with library(&lt;package_name&gt;) (no surrounding quotation marks). Add this to the same code chunk you created previously and execute it again.\n\nDon’t worry that the install.packages() commands have already been executed once, R is smart and checks if you already have those installed.\n\nRun sessionInfo() to list all the loaded packages.\n\nYou should see the following packages under “other attached packages”: rmarkdown, dplyr, purrr, readr, tidyr, tibble, ggplot, and tidyverse.\n\nSince this is your first assignment, we have already completed most of this question below. You still need to run the code chunk on your computer to confirm that the packages installed and to get the sessionInfo() output for your computer. You might receive warnings that functions from other packages are masked when you load tidyverse, but this is fine.\n\n\n\nIn 4-5 sentences, what are some of the topics/questions in ecology and evolutionary biology that you are interested in for the group project?",
+    "text": "Download the .Rmd file  here.\nTo submit this assignment, upload the full document on Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted .pdf.\n\nGet set up at home (or on a lab computer after hours)\n\nIf you have not already done so, install R and RStudio (already installed on the lab computers).\nOpen a new R Notebook and read the instructions about how to use the R Markdown syntax.\nOpen this assignment file in RStudio or copy its content into an empty R Notebook.\nInsert a code chunk below, above Question 2. Set eval=FALSE\nIn the code chunk, use install.packages(\"&lt;package_name&gt;\") to install tidyverse and rmarkdown. Remember to run the code chunk to execute the commands.\nLoad the two libraries you just installed into your environment with library(&lt;package_name&gt;) (no surrounding quotation marks). Add this to the same code chunk you created previously and execute it again.\n\nDon’t worry that the install.packages() commands have already been executed once, R is smart and checks if you already have those installed.\n\nRun sessionInfo() to list all the loaded packages.\n\nYou should see the following packages under “other attached packages”: rmarkdown, dplyr, purrr, readr, tidyr, tibble, ggplot, and tidyverse.\n\nSince this is your first assignment, we have already completed most of this question below. You still need to run the code chunk on your computer to confirm that the packages installed and to get the sessionInfo() output for your computer. You might receive warnings that functions from other packages are masked when you load tidyverse, but this is fine.\n\n\n\nIn 4-5 sentences, what are some of the topics/questions in ecology and evolutionary biology that you are interested in for the group project?",
     "crumbs": [
       "Assignments",
-      "Individual interest description"
+      "Assignment00: individual interest description"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-01.html",
+    "href": "assignments/assignment-01.html",
+    "title": "Assignment 01: base R, command line, & Git(Hub)",
+    "section": "",
+    "text": "1. Variable assignment (1 mark)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 01: base R, command line, & Git(Hub)"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-01.html#variable-assignment-1-mark",
+    "href": "assignments/assignment-01.html#variable-assignment-1-mark",
+    "title": "Assignment 01: base R, command line, & Git(Hub)",
+    "section": "",
+    "text": "Assign the value 5 to the variable/object a. Display a. (0.25 marks)\n\n\nAssign the result of 10/3 to the variable b. Display b. (0.25 marks)\n\n\nWrite a function that adds two numbers and returns their sum. Use it to assign the sum of a and b to result. Display result. (In practice, there is already a more sophisticated built-in function for this: result &lt;- sum(a, b)) (0.25 marks)\n\n\nWrite a function that multiplies two numbers and returns their product. Use it to assign the product of a and b to product. Display product. (In practice, there is already a more sophisticated built-in function for this: product &lt;- prod(a, b)) (0.25 marks)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 01: base R, command line, & Git(Hub)"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-01.html#vectors-2.5-marks",
+    "href": "assignments/assignment-01.html#vectors-2.5-marks",
+    "title": "Assignment 01: base R, command line, & Git(Hub)",
+    "section": "2. Vectors (2.5 marks)",
+    "text": "2. Vectors (2.5 marks)\n\nCreate a vector v with all integers 0-30, and a vector w with every third integer in the same range. (0.25 marks)\n\n\nWhat is the difference in lengths of the vectors v and w? (0.25 marks)\n\n\nCreate a new vector, v_square, with the square of elements at indices 3, 6, 7, 10, 15, 22, 23, 24, and 30 from the variable v. Hint: Use indexing rather than a for loop. (0.25 marks)\n\n\nCalculate the mean and median of the first five values from v_square. (0.25 marks)\n\n\nCreate a boolean vector v_bool, indicating which vector v elements are bigger than 20. How many values are over 20? Hint: In R, TRUE = 1, and FALSE = 0, so you can use simple arithmetic to find this out. (0.5 marks)\n\n\nWrite a function that calculates the median of the last two elements of any numeric vector. Test this function with the v and v_square vectors. (1 marks)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 01: base R, command line, & Git(Hub)"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-01.html#data-frames-1.5-marks",
+    "href": "assignments/assignment-01.html#data-frames-1.5-marks",
+    "title": "Assignment 01: base R, command line, & Git(Hub)",
+    "section": "3. Data frames (1.5 marks)",
+    "text": "3. Data frames (1.5 marks)\n\nThere are many built-in data frames in R, which you can find more details about online. What are the column names of the built-in dataframe beaver1? How many observations (rows) and variables (columns) are there? (0.5 marks)\n\n\nDisplay both the first 6 and last 6 rows of this data frame. Show how to do so with both indexing as well as specialized functions. (0.5 marks)\n\n\n# With indexing\n\n\n# With functions\n\n\nWhat is the min, mean, and max body temperature for beavers inside and outside of the retreat? Hint: You can use ? on the beaver1 data set to get more information about it. Remember that each column in a data frame is a vector and you can use the same functions. (0.5 marks)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 01: base R, command line, & Git(Hub)"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-01.html#command-line-1-mark",
+    "href": "assignments/assignment-01.html#command-line-1-mark",
+    "title": "Assignment 01: base R, command line, & Git(Hub)",
+    "section": "4. Command line (1 mark)",
+    "text": "4. Command line (1 mark)\nWhat commands would you run to create a directory named “mydir”, check mydir’s permissions, add write permissions for users, copy mydir to “mydir2” , and then remove mydir? Hint: try running each step in your terminal to check if the output is what you expect (1 mark)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 01: base R, command line, & Git(Hub)"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-01.html#understanding-command-line-software-1-mark",
+    "href": "assignments/assignment-01.html#understanding-command-line-software-1-mark",
+    "title": "Assignment 01: base R, command line, & Git(Hub)",
+    "section": "5. Understanding command line software (1 mark)",
+    "text": "5. Understanding command line software (1 mark)\nOpen the documentation for Earl Grey, a software programme that identifies transposable elements in genomes. There may be a lot of unfamilliar terms on this web page, but we’ll just be skimming this page to practice identifying the kind of information command line software might require and how to provide that.\n\nWhat three arguments (files/information) are required input for this software? (0.3 marks)\nWhat would you type into the command line to provide Earl Grey with those minimum command options? You don’t need to make up example text for this, just ensure you have the three - arguments written out. Hint: search for “minimum command options” on the GitHub page and use the next line (0.3 marks)\n\n\nearlGrey\n\n\nBased on the visual overview of the software (or the “Example Outputs” section) on the GitHub page, what does this software output? (0.2 marks)\nWhat optional parameter (i.e. the - argument) does Earl Grey offer to display help information? Is this kind of help parameter common? Hint: you can search for “help documentation” in your lecture notes (0.2 marks)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 01: base R, command line, & Git(Hub)"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-01.html#github-1-mark",
+    "href": "assignments/assignment-01.html#github-1-mark",
+    "title": "Assignment 01: base R, command line, & Git(Hub)",
+    "section": "6. GitHub (1 mark)",
+    "text": "6. GitHub (1 mark)\n\nMake a Github account. You can do this at github.com. What is your GitHub username? (1 mark)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 01: base R, command line, & Git(Hub)"
     ]
   },
   {

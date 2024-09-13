@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - Introduction to the course</title>
+<title>EEB313: Quantitative Methods in R for Biology - Assignment 01: base R, command line, &amp; Git(Hub)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../lectures/lec01-basic-r.html" rel="next">
-<link href="../downloadingR.html" rel="prev">
+<link href="../projects.html" rel="next">
+<link href="../assignments/assignment-00.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Introduction to the course</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignment 01: base R, command line, &amp; Git(Hub)</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -172,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec00-r_and_rstudio.html" class="sidebar-item-text sidebar-link active">
+  <a href="../lectures/lec00-r_and_rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to the course</span></a>
   </div>
 </li>
@@ -213,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Assignment 01: base R, command line, &amp; Git(Hub)</span></a>
   </div>
 </li>
@@ -285,22 +285,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction-to-r" id="toc-introduction-to-r" class="nav-link active" data-scroll-target="#introduction-to-r">Introduction to R</a></li>
-  <li><a href="#rstudio-and-the-r-notebook" id="toc-rstudio-and-the-r-notebook" class="nav-link" data-scroll-target="#rstudio-and-the-r-notebook">RStudio and the R Notebook</a></li>
-  <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link" data-scroll-target="#r-markdown">R Markdown</a>
-  <ul class="collapse">
-  <li><a href="#saving-data-and-generating-reports" id="toc-saving-data-and-generating-reports" class="nav-link" data-scroll-target="#saving-data-and-generating-reports">Saving data and generating reports</a></li>
-  </ul></li>
-  <li><a href="#practice-knitting" id="toc-practice-knitting" class="nav-link" data-scroll-target="#practice-knitting">Practice knitting!</a></li>
+  <li><a href="#variable-assignment-1-mark" id="toc-variable-assignment-1-mark" class="nav-link active" data-scroll-target="#variable-assignment-1-mark">1. Variable assignment (1 mark)</a></li>
+  <li><a href="#vectors-2.5-marks" id="toc-vectors-2.5-marks" class="nav-link" data-scroll-target="#vectors-2.5-marks">2. Vectors (2.5 marks)</a></li>
+  <li><a href="#data-frames-1.5-marks" id="toc-data-frames-1.5-marks" class="nav-link" data-scroll-target="#data-frames-1.5-marks">3. Data frames (1.5 marks)</a></li>
+  <li><a href="#command-line-1-mark" id="toc-command-line-1-mark" class="nav-link" data-scroll-target="#command-line-1-mark">4. Command line (1 mark)</a></li>
+  <li><a href="#understanding-command-line-software-1-mark" id="toc-understanding-command-line-software-1-mark" class="nav-link" data-scroll-target="#understanding-command-line-software-1-mark">5. Understanding command line software (1 mark)</a></li>
+  <li><a href="#github-1-mark" id="toc-github-1-mark" class="nav-link" data-scroll-target="#github-1-mark">6. GitHub (1 mark)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Introduction to the course</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignment 01: base R, command line, &amp; Git(Hub)</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introduction to the course</h1>
+<h1 class="title">Assignment 01: base R, command line, &amp; Git(Hub)</h1>
 </div>
 
 
@@ -317,78 +316,89 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction-to-r" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-to-r">Introduction to R</h2>
-<p>R is a computing environment that combines numerical analysis tools for linear algebra; functions for classical and modern statistical analysis; and functions for graphics and data visualization. It is based on the programming language S, developed by John Chambers in the 1970s.</p>
-<p>There are two ways to start R:</p>
-<ol type="1">
-<li>Run <code>R</code> on the command line. On a Mac, you would do this in the Terminal application. On a Windows machine, you would do this using, e.g., Ubuntu. We will cover the command line next week.</li>
-<li>Click the <code>R</code> icon on your desktop, assuming the software has already been installed.</li>
+<p>Download the .Rmd file <a href="assignments/assignment-01.Rmd" download=""> here</a>.</p>
+<p><em>To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>. Please ensure the text on your .pdf does not continue past the end of the page. If you use code chunks to write your answers to the command line questions, check that the code chunk headers say “eval=FALSE” so RStudio doesn’t try to run them when knitting (the example code chunks provided for questions 4 and 5 include this).</em></p>
+<section id="variable-assignment-1-mark" class="level2">
+<h2 class="anchored" data-anchor-id="variable-assignment-1-mark">1. Variable assignment (1 mark)</h2>
+<ol type="a">
+<li>Assign the value <code>5</code> to the variable/object <code>a</code>. Display <code>a</code>. (0.25 marks)</li>
 </ol>
-<p>We will use the <em>graphical user interface</em> RStudio throughout this course. Although the GUI makes certain things easier, it is not necessary to use it when running an R script. For example, running the following code in R returns the sum of the numbers 1 and 2.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
-</div>
-</div>
-<p>Running the code with a <code>#</code> at the beginning of the line results in the line being read as a comment. This means that the calculation which is specified in the line is not processed and the output not returned. Comments are a useful way to keep track of what line(s) of code do, multiple versions of the same code, etc.</p>
+<ol start="2" type="a">
+<li>Assign the result of <code>10/3</code> to the variable <code>b</code>. Display <code>b</code>. (0.25 marks)</li>
+</ol>
+<ol start="3" type="a">
+<li>Write a function that adds two numbers and returns their sum. Use it to assign the sum of <code>a</code> and <code>b</code> to <code>result</code>. Display <code>result</code>. (In practice, there is already a more sophisticated built-in function for this: <code>result &lt;- sum(a, b)</code>) (0.25 marks)</li>
+</ol>
+<ol start="4" type="a">
+<li>Write a function that multiplies two numbers and returns their product. Use it to assign the product of <code>a</code> and <code>b</code> to <code>product</code>. Display <code>product</code>. (In practice, there is already a more sophisticated built-in function for this: <code>product &lt;- prod(a, b)</code>) (0.25 marks)</li>
+</ol>
 </section>
-<section id="rstudio-and-the-r-notebook" class="level2">
-<h2 class="anchored" data-anchor-id="rstudio-and-the-r-notebook">RStudio and the R Notebook</h2>
-<p>RStudio includes the R console, but also many other convenient functionalities, which makes it easier to get started and to work with R. When you launch RStudio, you will see four panels. Starting at the top left and going clockwise, these panels are:</p>
-<ul>
-<li>The <strong>text editor panel</strong>. This is where we can write scripts, i.e.&nbsp;putting several commands of code together and saving them as a text document so that they are accessible for later and so that we can execute them all at once by running the script instead of typing them in one by one.</li>
-<li>The <strong>environment panel</strong>, which shows us all the files and objects we currently loaded into R.</li>
-<li>The <strong>files-plots-help panel</strong>. This panel shows the files in the current directory (the folder we are working out of), any plots we make later, and also documentation for various packages and functions. Here, the documentation is formatted in a way that is easier to read and also provides links to the related sections.</li>
-<li>The <strong>console</strong> is another space we can input code, only now the code is executed immediately and doesn’t get saved at the end.</li>
-</ul>
-<p>To change the appearance of your RStudio, navigate to <code>Tools &gt; Global Options &gt; Appearance</code>. You can change the font and size, and the editor theme. The default is “Textmate”, but if you like dark mode, a good option is “Tomorrow Night Bright”. You can also change how your panels are organized.</p>
-<p>In the RStudio interface, we will be writing code in a format called the R Notebook. As the name entails, this interface works like a notebook for code, as it allows us to save notes about what the code is doing, the code itself, and any output we get, such as plots and tables, all together in the same document.</p>
-<p>When we are in the Notebook, the text we write is normal plain text, just as if we would be writing it in a text document. If we want to execute some R code, we need to insert a <em>code chunk</em>.</p>
-<p>You insert a code chunk by either clicking the “Insert” button or pressing <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>Alt</kbd> + <kbd>i</kbd> simultaneously. You could also type out the surrounding backticks, but this would take longer. To run a code chunk, you press the green arrow, or <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
-</div>
-</div>
-<p>As you can see, the output appears right under the code block.</p>
-<p>This is a great way to perform explore your data, since you can do your analysis and write comments and conclusions right under it all in the same document. A powerful feature of this workflow is that there is no extra time needed for code documentation and note-taking, since you’re doing your analyses and taking notes at the same time. This makes it great for both taking notes at lectures and to have as a reference when you return to your code in the future.</p>
+<section id="vectors-2.5-marks" class="level2">
+<h2 class="anchored" data-anchor-id="vectors-2.5-marks">2. Vectors (2.5 marks)</h2>
+<ol type="a">
+<li>Create a vector <code>v</code> with all integers 0-30, and a vector <code>w</code> with every third integer in the same range. (0.25 marks)</li>
+</ol>
+<ol start="2" type="a">
+<li>What is the difference in lengths of the vectors <code>v</code> and <code>w</code>? (0.25 marks)</li>
+</ol>
+<ol start="3" type="a">
+<li>Create a new vector, <code>v_square</code>, with the square of elements at indices 3, 6, 7, 10, 15, 22, 23, 24, and 30 from the variable <code>v</code>. <em>Hint: Use indexing rather than a for loop.</em> (0.25 marks)</li>
+</ol>
+<ol start="4" type="a">
+<li>Calculate the mean and median of the first five values from <code>v_square</code>. (0.25 marks)</li>
+</ol>
+<ol start="5" type="a">
+<li>Create a boolean vector <code>v_bool</code>, indicating which vector <code>v</code> elements are bigger than 20. How many values are over 20? <em>Hint: In R, TRUE = 1, and FALSE = 0, so you can use simple arithmetic to find this out.</em> (0.5 marks)</li>
+</ol>
+<ol start="6" type="a">
+<li>Write a function that calculates the median of the last two elements of any numeric vector. Test this function with the <code>v</code> and <code>v_square</code> vectors. (1 marks)</li>
+</ol>
 </section>
-<section id="r-markdown" class="level2">
-<h2 class="anchored" data-anchor-id="r-markdown">R Markdown</h2>
-<p>The text format we are using in the R Notebook is called R Markdown. This format allows us to combine R code with the Markdown text format, which enables the use of certain characters to specify headings, bullet points, quotations and even citations. A simple example of how to write in Markdown is to use a single asterisk or underscore to <em>emphasize</em> text (<code>*emphasis*</code>) and two asterisks or underscores to <strong>strongly emphasize</strong> text (<code>**strong emphasis**</code>). When we convert our R Markdown text to other file formats, these will show up as italics and bold typeface, respectively. If you have used WhatsApp, you might already be familiar with this style of writing. In case you haven’t seen it before, you have just learned something about WhatsApp in your quantitative methods class…</p>
-<p>To learn more about R Markdown, check out <a href="https://rmarkdown.rstudio.com/authoring_basics.html">this reference</a>.</p>
-<section id="saving-data-and-generating-reports" class="level3">
-<h3 class="anchored" data-anchor-id="saving-data-and-generating-reports">Saving data and generating reports</h3>
-<p>To save our notes, code, and graphs, all we have to do is to save the R Notebook file, and the we can open it in RStudio next time again. However, if we want someone else to look at this, we can’t always just send them the R Notebook file, because they might not have RStudio installed. Another great feature of R Notebooks is that it is really easy to export them to HTML, Microsoft Word, or PDF documents with figures and professional typesetting. There are actually many academic papers that are written entirely in this format and it is great for assignments and reports. (You might even use it to communicate with your collaborators!) Since R Notebook files convert to HTML, it is also easy to publish <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">simple and good-looking websites</a> in it, in which code chunks are embedded nicely within the text.</p>
-<p>Let’s try to create a document in R.</p>
-<p>First, let’s set up the <a href="https://yaml.org/">YAML</a> block. This is found at the top of your document, and it is where you specify the title of your document, what kind of output you want, etc.</p>
+<section id="data-frames-1.5-marks" class="level2">
+<h2 class="anchored" data-anchor-id="data-frames-1.5-marks">3. Data frames (1.5 marks)</h2>
+<ol type="a">
+<li>There are many built-in data frames in R, which you can find <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html">more details about online</a>. What are the column names of the built-in dataframe <code>beaver1</code>? How many observations (rows) and variables (columns) are there? (0.5 marks)</li>
+</ol>
+<ol start="2" type="a">
+<li>Display both the first 6 and last 6 rows of this data frame. Show how to do so with both indexing as well as specialized functions. (0.5 marks)</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>title<span class="sc">:</span> <span class="st">"Your title here"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>author<span class="sc">:</span> <span class="st">"Your name here"</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>date<span class="sc">:</span> <span class="st">"Insert date"</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>output<span class="sc">:</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  pdf_document<span class="sc">:</span> default</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With indexing</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># With functions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Next, let’s type code to perform the calculation we did above:</p>
+<ol start="3" type="a">
+<li>What is the min, mean, and max body temperature for beavers inside and outside of the retreat? <em>Hint: You can use <code>?</code> on the beaver1 data set to get more information about it. Remember that each column in a data frame is a vector and you can use the same functions.</em> (0.5 marks)</li>
+</ol>
+</section>
+<section id="command-line-1-mark" class="level2">
+<h2 class="anchored" data-anchor-id="command-line-1-mark">4. Command line (1 mark)</h2>
+<p>What commands would you run to create a directory named “mydir”, check mydir’s permissions, add <em>w</em>rite permissions for <em>u</em>sers, copy mydir to “mydir2” , and then remove mydir? <em>Hint: try running each step in your terminal to check if the output is what you expect</em> (1 mark)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="understanding-command-line-software-1-mark" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-command-line-software-1-mark">5. Understanding command line software (1 mark)</h2>
+<p>Open the documentation for <a href="https://github.com/TobyBaril/EarlGrey">Earl Grey</a>, a software programme that identifies transposable elements in genomes. There may be a lot of unfamilliar terms on this web page, but we’ll just be skimming this page to practice identifying the kind of information command line software might require and how to provide that.</p>
+<ol type="a">
+<li><p>What three arguments (files/information) are required input for this software? (0.3 marks)</p></li>
+<li><p>What would you type into the command line to provide Earl Grey with those minimum command options? You don’t need to make up example text for this, just ensure you have the three <code>-</code> arguments written out. <em>Hint: search for “minimum command options” on the GitHub page and use the next line</em> (0.3 marks)</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">earlGrey</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To create the output document, we say that we “knit” our R Markdown file into, e.g., a PDF. Simply press the <code>Knit</code> button here and the new document will be created.</p>
-<p>As you can see in the knitted document, the title showed up as we would expect, and lines with pound sign(s) in front of them were converted into headers. Most importantly, we can see both the code and its output! Plots are generated directly in the report without us having to cut and paste images! If we change something in the code, we don’t have to find the new images and paste it in again, the correct one will appear right in your code.</p>
-<p>When you quit, R will ask you if you want to save the workspace (that is, all of the variables you have defined in this session); in general, you should say “no” to avoid clutter and unintentional confusion of results from different sessions. Note: When you say “yes” to saving your workspace, it is saved in a hidden file named .RData. By default, when you open a new R session in the same directory, this workspace is loaded and a message informing you so is printed: <code>[Previously saved workspace restored]</code>. It is often best practice to turn this feature off completely.</p>
+<ol start="3" type="a">
+<li><p>Based on the visual overview of the software (or the “Example Outputs” section) on the GitHub page, what does this software output? (0.2 marks)</p></li>
+<li><p>What optional parameter (i.e.&nbsp;the <code>-</code> argument) does Earl Grey offer to display help information? Is this kind of help parameter common? <em>Hint: you can search for “help documentation” in your lecture notes</em> (0.2 marks)</p></li>
+</ol>
 </section>
-</section>
-<section id="practice-knitting" class="level2">
-<h2 class="anchored" data-anchor-id="practice-knitting">Practice knitting!</h2>
-<p>For your first assignment, you will need to write a short description of your interests in EEB and submitted the <em>knitted</em> document on Quercus. This assignment is due September 12. If you are having trouble knitting, which you will have to do throughout the course, come find us and we will help you troubleshoot.</p>
+<section id="github-1-mark" class="level2">
+<h2 class="anchored" data-anchor-id="github-1-mark">6. GitHub (1 mark)</h2>
+<ol type="a">
+<li>Make a Github account. You can do this at <a href="github.com">github.com</a>. What is your GitHub username? (1 mark)</li>
+</ol>
 
 
 </section>
@@ -805,13 +815,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../downloadingR.html" class="pagination-link" aria-label="Installing R &amp; Ubuntu">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Installing R &amp; Ubuntu</span>
+      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment00: individual interest description</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lectures/lec01-basic-r.html" class="pagination-link" aria-label="Introduction to R: assignment, vectors, functions, strings, loops">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../projects.html" class="pagination-link" aria-label="Project description">
+        <span class="nav-page-text">Project description</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
