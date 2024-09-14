@@ -5,7 +5,7 @@
 the aims of EEB313. Data Carpentry is an organization focused on data literacy,
 with the objective of teaching skills to researchers to enable them to retrieve,
 view, manipulate, analyze, and store their and other’s data in an open and
-reproducible way in order to extract knowledge from data.*
+reproducible way.*
 
 The above paragraph is made explicit since it is one of the core features of
 working with an open language like R. Many smart people willingly and actively

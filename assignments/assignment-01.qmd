@@ -87,9 +87,6 @@ c.  What is the min, mean, and max body temperature for beavers inside and outsi
 
 What commands would you run to create a directory named "mydir", check mydir's permissions, add *w*rite permissions for *u*sers, copy mydir to "mydir2" , and then remove mydir? *Hint: try running each step in your terminal to check if the output is what you expect* (1 mark)
 
-```{bash 4, eval=FALSE}
-```
-
 ## 5. Understanding command line software (1 mark)
 
 Open the documentation for [Earl Grey](https://github.com/TobyBaril/EarlGrey), a software programme that identifies transposable elements in genomes. There may be a lot of unfamilliar terms on this web page, but we'll just be skimming this page to practice identifying the kind of information command line software might require and how to provide that.
@@ -97,10 +94,6 @@ Open the documentation for [Earl Grey](https://github.com/TobyBaril/EarlGrey), a
 a. What three arguments (files/information) are required input for this software? (0.3 marks)
 
 b. What would you type into the command line to provide Earl Grey with those minimum command options? You don't need to make up example text for this, just ensure you have the three `-` arguments written out. *Hint: search for "minimum command options" on the GitHub page and use the next line* (0.3 marks)
-
-```{bash 5b, eval=FALSE}
-earlGrey
-```
 
 c. Based on the visual overview of the software (or the "Example Outputs" section) on the GitHub page, what does this software output? (0.2 marks)
 
