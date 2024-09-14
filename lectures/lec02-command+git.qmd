@@ -36,7 +36,7 @@ Some advantages of working are the commend line are:
 
 3. **Automation, reproducibility, and computational ease**: shell commands automate tasks which would otherwise be 1) computationally expensive, 2) error-prone, and 3) emotionally taxing.^[Trust us on this!] Shell commands can be scripted, shared, version-controlled, and made to run at certain times. (For example, shell scripts designed to scrape the web for data are often made to run during off-peak hours.) Because the command line makes automating complex tasks possible, software used to analyze large data is often written for use on the command line.
 
-All that said, shell commands appear quite scary. **Indeed, the command line is unforgiving--cryptic error messages abound when incorrect commands are entered. One can do serious damage without understanding the basis of the shell. The goal of this lecture is to provide you all with knowledge of 1) the logic of the command line, 2) important shell commands, 3) how to run R scripts from the command line, and 4) how to use the command line to interface with GitHub.** The first half of the lecture will focus on the shell, and the second half on Git.
+All that said, shell commands appear quite scary. **Indeed, the command line is unforgiving--cryptic error messages abound when incorrect commands are entered. One can do serious damage without understanding the basis of the shell. The goal of this lecture is to provide you all with knowledge of 1) the logic of the command line, 2) important shell commands, 3) how to use NCBI's BLAST on the command line, and 4) how to use the command line to interface with GitHub.** The first half of the lecture will focus on the shell, and the second half on Git.
 
 ### Logic of the command line
 
