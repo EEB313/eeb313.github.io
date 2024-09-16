@@ -2,7 +2,7 @@
 
 Download the .Rmd file <a href="assignments/assignment-01.Rmd" download> here</a>.
 
-*To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`. Please ensure the text on your .pdf does not continue past the end of the page. If you use code chunks to write your answers to the command line questions, check that the code chunk headers say "eval=FALSE" so RStudio doesn't try to run them when knitting (the example code chunks provided for questions 4 and 5 include this).*
+*To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`. Please ensure the text on your .pdf does not continue past the end of the page. If you use code chunks to write your answers to the command line questions, check that the code chunk headers say `eval=FALSE` so RStudio doesn't try to run them when knitting (the example code chunks provided for questions 4 and 5 include this).*
 
 ## 1.  Variable assignment (1 mark)
 

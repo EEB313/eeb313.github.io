@@ -13,8 +13,9 @@ book:
       chapters:
       - lectures/lec00-r_and_rstudio.qmd
       - lectures/lec01-basic-r.qmd
-      - lectures/lec02-command+git.qmd
+      - lectures/lec02-command_git.qmd
       - lectures/lec03-data-wrangling.qmd
+      - lectures/lec04-data-visualization.qmd
     - part: "Assignments"
       chapters:
       - assignments/assignment-00.qmd
@@ -28,6 +29,8 @@ book:
       chapters:
         - text: "portal_data.csv"
           href: lectures/data/portal_data.csv
+        - text: "survey_subset.csv"
+          href: lectures/data/survey_subset.csv
         - text: "disease_distance.csv"
           href: lectures/data/disease_distance.csv
         - text: "meas.csv"

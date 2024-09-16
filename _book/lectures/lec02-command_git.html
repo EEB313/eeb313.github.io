@@ -144,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec02-command+git.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Command line &amp; Git(Hub)</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec02-command_git.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Command line &amp; Git(Hub)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -213,7 +213,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec02-command+git.html" class="sidebar-item-text sidebar-link active">
+  <a href="../lectures/lec02-command_git.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Command line &amp; Git(Hub)</span></span></a>
   </div>
 </li>
@@ -221,6 +221,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec03-data-wrangling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling!</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec04-data-visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data visualization with ggplot2</span></span></a>
   </div>
 </li>
       </ul>
@@ -292,6 +298,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lectures/data/survey_subset.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">survey_subset.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lectures/data/disease_distance.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">disease_distance.csv</span></a>
   </div>
@@ -359,7 +371,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec02-command+git.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Command line &amp; Git(Hub)</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec02-command_git.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Command line &amp; Git(Hub)</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Command line &amp; Git(Hub)</span></h1>
 </div>
@@ -420,7 +432,7 @@ window.Quarto = {
 <li><p><strong>Control over data</strong>: the command line allows users to view, parse, transform, and transfer large files (such as genome sequences) efficiently. Such control is simply not possible with a GUI like RStudio.</p></li>
 <li><p><strong>Automation, reproducibility, and computational ease</strong>: shell commands automate tasks which would otherwise be 1) computationally expensive, 2) error-prone, and 3) emotionally taxing.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Shell commands can be scripted, shared, version-controlled, and made to run at certain times. (For example, shell scripts designed to scrape the web for data are often made to run during off-peak hours.) Because the command line makes automating complex tasks possible, software used to analyze large data is often written for use on the command line.</p></li>
 </ol>
-<p>All that said, shell commands appear quite scary. <strong>Indeed, the command line is unforgiving–cryptic error messages abound when incorrect commands are entered. One can do serious damage without understanding the basis of the shell. The goal of this lecture is to provide you all with knowledge of 1) the logic of the command line, 2) important shell commands, 3) how to use NCBI’s BLAST on the command line, and 4) how to use the command line to interface with GitHub.</strong> The first half of the lecture will focus on the shell, and the second half on Git.</p>
+<p>All that said, shell commands appear quite scary. <strong>Indeed, the command line is unforgiving–cryptic error messages abound when incorrect commands are entered. One can do serious damage without understanding the basis of the shell. The goal of this lecture is to provide you all with knowledge of 1) the logic of the command line, 2) important shell commands, 3) how to run NCBI’s BLAST from the command line, and 4) how to use the command line to interface with GitHub.</strong> The first half of the lecture will focus on the shell, and the second half on Git.</p>
 </section>
 <section id="logic-of-the-command-line" class="level3" data-number="2.2.2">
 <h3 data-number="2.2.2" class="anchored" data-anchor-id="logic-of-the-command-line"><span class="header-section-number">2.2.2</span> Logic of the command line</h3>

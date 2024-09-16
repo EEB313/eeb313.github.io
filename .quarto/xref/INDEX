@@ -118,5 +118,11 @@
   },
   "assignments/assignment-01.qmd": {
     "assignment-01.html": "35ab6e07"
+  },
+  "lectures/lec02-command_git.qmd": {
+    "lec02-command_git.html": "c92dc284"
+  },
+  "lectures/lec04-data-visualization.qmd": {
+    "lec04-data-visualization.html": "401f0f51"
   }
 }
