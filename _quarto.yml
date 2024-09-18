@@ -11,11 +11,11 @@ book:
     - downloadingR.qmd
     - part: "Lectures"
       chapters:
-      - lectures/lec00-r_and_rstudio.qmd
-      - lectures/lec01-basic-r.qmd
-      - lectures/lec02-command_git.qmd
-      - lectures/lec03-data-wrangling.qmd
-      - lectures/lec04-data-visualization.qmd
+      - lectures/lec01-r_and_rstudio.qmd
+      - lectures/lec02-basic-r.qmd
+      - lectures/lec03-command_git.qmd
+      - lectures/lec04-data-wrangling.qmd
+      - lectures/lec05-data-visualization.qmd
     - part: "Assignments"
       chapters:
       - assignments/assignment-00.qmd
@@ -45,3 +45,10 @@ format:
     code-copy: true
     code-fold: false
     code-overflow: wrap
+
+extra_files:
+  - assignment-00.qmd
+  - assignment-01.qmd
+  - portal_data.csv
+  - disease_distance.csv
+  - meas.csv

@@ -124,5 +124,14 @@
   },
   "lectures/lec04-data-visualization.qmd": {
     "lec04-data-visualization.html": "401f0f51"
+  },
+  "lectures/lec01-r_and_rstudio.qmd": {
+    "lec01-r_and_rstudio.html": "2afc63be"
+  },
+  "lectures/lec03-command_git.qmd": {
+    "lec03-command_git.html": "a7db5b67"
+  },
+  "lectures/lec05-data-visualization.qmd": {
+    "lec05-data-visualization.html": "d3fe27ff"
   }
 }

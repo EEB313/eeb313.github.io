@@ -1,6 +1,6 @@
 # Assignment00: individual interest description {-}
 
-Download the .Rmd file <a href="assignments/assignment-00.Rmd" download> here</a>.
+Download the .Rmd file [here](assignment-01.Rmd).
 
 *To submit this assignment, upload the full document on Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`.*
 

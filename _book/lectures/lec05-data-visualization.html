@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - 4&nbsp; Data visualization with ggplot2</title>
+<title>EEB313: Quantitative Methods in R for Biology - 5&nbsp; Data visualization with ggplot2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../assignments/assignment-00.html" rel="next">
-<link href="../lectures/lec03-data-wrangling.html" rel="prev">
+<link href="../lectures/lec04-data-wrangling.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec04-data-visualization.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data visualization with ggplot2</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec05-data-visualization.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data visualization with ggplot2</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -172,32 +172,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec00-r_and_rstudio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to the course</span></a>
+  <a href="../lectures/lec01-r_and_rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the coursex</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec01-basic-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></span></a>
+  <a href="../lectures/lec02-basic-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec02-command_git.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Command line &amp; Git(Hub)</span></span></a>
+  <a href="../lectures/lec03-command_git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Command line &amp; Git(Hub)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec03-data-wrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling!</span></span></a>
+  <a href="../lectures/lec04-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling!</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec04-data-visualization.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data visualization with ggplot2</span></span></a>
+  <a href="../lectures/lec05-data-visualization.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data visualization with ggplot2</span></span></a>
   </div>
 </li>
       </ul>
@@ -291,24 +291,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lesson-preamble" id="toc-lesson-preamble" class="nav-link active" data-scroll-target="#lesson-preamble"><span class="header-section-number">4.1</span> Lesson preamble</a>
+  <li><a href="#lesson-preamble" id="toc-lesson-preamble" class="nav-link active" data-scroll-target="#lesson-preamble"><span class="header-section-number">5.1</span> Lesson preamble</a>
   <ul class="collapse">
-  <li><a href="#loading-data-using-relative-file-pathways" id="toc-loading-data-using-relative-file-pathways" class="nav-link" data-scroll-target="#loading-data-using-relative-file-pathways"><span class="header-section-number">4.1.3</span> Loading data using relative file pathways</a></li>
-  <li><a href="#challenge" id="toc-challenge" class="nav-link" data-scroll-target="#challenge"><span class="header-section-number">4.1.4</span> Challenge</a></li>
+  <li><a href="#loading-data-using-relative-file-pathways" id="toc-loading-data-using-relative-file-pathways" class="nav-link" data-scroll-target="#loading-data-using-relative-file-pathways"><span class="header-section-number">5.1.3</span> Loading data using relative file pathways</a></li>
+  <li><a href="#challenge" id="toc-challenge" class="nav-link" data-scroll-target="#challenge"><span class="header-section-number">5.1.4</span> Challenge</a></li>
   </ul></li>
-  <li><a href="#plotting-with-ggplot2" id="toc-plotting-with-ggplot2" class="nav-link" data-scroll-target="#plotting-with-ggplot2"><span class="header-section-number">4.2</span> Plotting with ggplot2</a>
+  <li><a href="#plotting-with-ggplot2" id="toc-plotting-with-ggplot2" class="nav-link" data-scroll-target="#plotting-with-ggplot2"><span class="header-section-number">5.2</span> Plotting with ggplot2</a>
   <ul class="collapse">
-  <li><a href="#building-plots-iteratively" id="toc-building-plots-iteratively" class="nav-link" data-scroll-target="#building-plots-iteratively"><span class="header-section-number">4.2.1</span> Building plots iteratively</a></li>
-  <li><a href="#challenge-1" id="toc-challenge-1" class="nav-link" data-scroll-target="#challenge-1"><span class="header-section-number">4.2.2</span> Challenge</a></li>
+  <li><a href="#building-plots-iteratively" id="toc-building-plots-iteratively" class="nav-link" data-scroll-target="#building-plots-iteratively"><span class="header-section-number">5.2.1</span> Building plots iteratively</a></li>
+  <li><a href="#challenge-1" id="toc-challenge-1" class="nav-link" data-scroll-target="#challenge-1"><span class="header-section-number">5.2.2</span> Challenge</a></li>
   </ul></li>
-  <li><a href="#split-apply-combine-plot" id="toc-split-apply-combine-plot" class="nav-link" data-scroll-target="#split-apply-combine-plot"><span class="header-section-number">4.3</span> Split-apply-combine… plot!</a></li>
-  <li><a href="#faceting" id="toc-faceting" class="nav-link" data-scroll-target="#faceting"><span class="header-section-number">4.4</span> Faceting</a>
+  <li><a href="#split-apply-combine-plot" id="toc-split-apply-combine-plot" class="nav-link" data-scroll-target="#split-apply-combine-plot"><span class="header-section-number">5.3</span> Split-apply-combine… plot!</a></li>
+  <li><a href="#faceting" id="toc-faceting" class="nav-link" data-scroll-target="#faceting"><span class="header-section-number">5.4</span> Faceting</a>
   <ul class="collapse">
-  <li><a href="#challenge-2" id="toc-challenge-2" class="nav-link" data-scroll-target="#challenge-2"><span class="header-section-number">4.4.1</span> Challenge</a></li>
+  <li><a href="#challenge-2" id="toc-challenge-2" class="nav-link" data-scroll-target="#challenge-2"><span class="header-section-number">5.4.1</span> Challenge</a></li>
   </ul></li>
-  <li><a href="#export-plots" id="toc-export-plots" class="nav-link" data-scroll-target="#export-plots"><span class="header-section-number">4.5</span> Export plots</a>
+  <li><a href="#export-plots" id="toc-export-plots" class="nav-link" data-scroll-target="#export-plots"><span class="header-section-number">5.5</span> Export plots</a>
   <ul class="collapse">
-  <li><a href="#challenge-3" id="toc-challenge-3" class="nav-link" data-scroll-target="#challenge-3"><span class="header-section-number">4.5.1</span> Challenge</a></li>
+  <li><a href="#challenge-3" id="toc-challenge-3" class="nav-link" data-scroll-target="#challenge-3"><span class="header-section-number">5.5.1</span> Challenge</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -316,9 +316,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec00-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec04-data-visualization.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data visualization with ggplot2</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec05-data-visualization.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data visualization with ggplot2</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data visualization with ggplot2</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data visualization with ggplot2</span></h1>
 </div>
 
 
@@ -336,17 +336,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><em>Parts of this lesson material were taken and modified from <a href="https://datacarpentry.org">Data Carpentry</a> under their CC-BY copyright license. See their <a href="https://datacarpentry.org/R-ecology-lesson/03-dplyr.html">lesson page</a> for the original source.</em></p>
-<section id="lesson-preamble" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="lesson-preamble"><span class="header-section-number">4.1</span> Lesson preamble</h2>
+<section id="lesson-preamble" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="lesson-preamble"><span class="header-section-number">5.1</span> Lesson preamble</h2>
 <blockquote class="blockquote">
-<h3 id="learning-objectives" data-number="4.1.1" class="anchored"><span class="header-section-number">4.1.1</span> Learning Objectives</h3>
+<h3 id="learning-objectives" data-number="5.1.1" class="anchored"><span class="header-section-number">5.1.1</span> Learning Objectives</h3>
 <ul>
 <li>Produce scatter plots, line plots, and histograms using ggplot.</li>
 <li>Set universal plot settings.</li>
 <li>Understand how to combine dplyr and ggplot.</li>
 <li>Understand and apply faceting in ggplot.</li>
 </ul>
-<h3 id="lesson-outline" data-number="4.1.2" class="anchored"><span class="header-section-number">4.1.2</span> Lesson outline</h3>
+<h3 id="lesson-outline" data-number="5.1.2" class="anchored"><span class="header-section-number">5.1.2</span> Lesson outline</h3>
 <ul>
 <li>Loading our data (10 min)</li>
 <li>Plotting with <code>ggplot2</code> (15 mins)</li>
@@ -361,8 +361,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="loading-data-using-relative-file-pathways" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="loading-data-using-relative-file-pathways"><span class="header-section-number">4.1.3</span> Loading data using relative file pathways</h3>
+<section id="loading-data-using-relative-file-pathways" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="loading-data-using-relative-file-pathways"><span class="header-section-number">5.1.3</span> Loading data using relative file pathways</h3>
 <p>We’re going to install one new package today to help with loading and saving files. There are built-in functions, <code>setwd()</code> and <code>getwd()</code>, for <em>set</em>ting and <em>get</em>ting your <em>w</em>orking <em>d</em>irectory, but they’re fragile and depend on the way you organise your files. Setting the working directory for one code chunk in your Rmd file may not carry through to the next chunk.</p>
 <p>The <code>here</code> package enables easy file referencing. It uses the top-level directory of a project to build paths to files.</p>
 <div class="cell">
@@ -378,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "/Users/meteyuksel/eeb313website"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">i_am</span>(<span class="st">"lectures/lec04-data-visualization.qmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">i_am</span>(<span class="st">"lectures/lec05-data-visualization.qmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>here() starts at /Users/meteyuksel/eeb313website</code></pre>
 </div>
@@ -456,14 +456,14 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 <p>This can help you check why your call to <code>read_csv()</code> can’t find the data file you’re looking for.</p>
 </section>
-<section id="challenge" class="level3" data-number="4.1.4">
-<h3 data-number="4.1.4" class="anchored" data-anchor-id="challenge"><span class="header-section-number">4.1.4</span> Challenge</h3>
+<section id="challenge" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="challenge"><span class="header-section-number">5.1.4</span> Challenge</h3>
 <p>How would you establish the root directory in a file “data_tidying.Rmd” in a new project directory “Group_Project” using the <code>here</code> package? How would you then load your data file “raw_data.csv” if it was contained in the same “Group_Project” directory along with “data_tidying.Rmd”?</p>
 <p><strong>Note: You may want to set “eval=FALSE” in the code chunk header for your notes so that this code chunk doesn’t run and mess up your root directory for this lecture.</strong></p>
 </section>
 </section>
-<section id="plotting-with-ggplot2" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="plotting-with-ggplot2"><span class="header-section-number">4.2</span> Plotting with ggplot2</h2>
+<section id="plotting-with-ggplot2" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="plotting-with-ggplot2"><span class="header-section-number">5.2</span> Plotting with ggplot2</h2>
 <p><code>ggplot2</code> is a plotting package that makes it simple to create complex plots from data frames. The name <code>ggplot2</code> comes from its inspiration, the book <a href="https://www.springer.com/gp/book/9780387245447"><em>A Grammar of Graphics</em></a>, and the main goal is to allow coders to distill complex data structure and express their desired graphical outcome in a concise manner instead of telling the computer every detail about what should happen. For example, you would say “colour my data by species” instead of “go through this data frame and plot any observations of species1 in blue, any observations of species2 in red, etc”. Thanks to this functional way of interfacing with data, only minimal changes are required if the underlying data change or if you want to try a different type of visualization. Publication-quality plots can be created with minimal amounts of adjustment and tweaking.</p>
 <p><code>ggplot2</code> graphics are built step by step by adding new elements, or layers. Adding layers in this fashion allows for extensive flexibility and customization of plots. To build a ggplot, we need to:</p>
 <p><strong>1.</strong> Use the <code>ggplot()</code> function and bind the plot to a specific data frame using the <em>data</em> argument</p>
@@ -472,7 +472,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -483,7 +483,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -493,7 +493,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -504,7 +504,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -520,7 +520,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -539,7 +539,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/first-ggplot-with-plus-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/first-ggplot-with-plus-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -550,8 +550,8 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <li><p>You can specify <em>aes</em>thetics for a geom independently of the aesthetics defined by <code>ggplot()</code>, which is particularly handy when you’re layering data from different data frames</p></li>
 <li><p>The <code>+</code> sign used to add layers must be placed <em>at the end</em> of each line containing a layer. If it’s used at the start of line, <strong><code>ggplot2</code></strong> will not add the new layer and R will return an error message.</p></li>
 </ul>
-<section id="building-plots-iteratively" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="building-plots-iteratively"><span class="header-section-number">4.2.1</span> Building plots iteratively</h3>
+<section id="building-plots-iteratively" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="building-plots-iteratively"><span class="header-section-number">5.2.1</span> Building plots iteratively</h3>
 <p>Building plots with ggplot is typically an iterative process. Start simply. We will define the dataset to use, lay the axes, and choose one geom, as we just did:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(surveys, <span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> hindfoot_length)) <span class="sc">+</span></span>
@@ -562,7 +562,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -577,7 +577,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -592,7 +592,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -634,7 +634,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -690,7 +690,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -702,7 +702,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -768,22 +768,22 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The plot is now cleaner; there are fewer species and so fewer colours and the clusters are more distinct.</p>
 </section>
-<section id="challenge-1" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="challenge-1"><span class="header-section-number">4.2.2</span> Challenge</h3>
+<section id="challenge-1" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="challenge-1"><span class="header-section-number">5.2.2</span> Challenge</h3>
 <p>Create a scatter plot of <em>hindfoot_length</em> against <em>species</em> with the <em>weight</em> data displayed using colours. If you’re unsure of which variable to put on which axis, Y variables are generally “against” X variables. Also, continuous variables are generally plotted on the Y axis.</p>
 <p>Do you notice any potential issues with this plot given the sheer number of observations we know exist in the data?</p>
 <p>(This is further illustrating the <strong>iterative</strong> nature of constructing plots)</p>
 </section>
 </section>
-<section id="split-apply-combine-plot" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="split-apply-combine-plot"><span class="header-section-number">4.3</span> Split-apply-combine… plot!</h2>
+<section id="split-apply-combine-plot" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="split-apply-combine-plot"><span class="header-section-number">5.3</span> Split-apply-combine… plot!</h2>
 <p>In this section, we will learn how to work with <code>dplyr</code> and <code>ggplot</code> together. Aided by the pipes (<code>%&gt;%</code>), we can create a powerful data exploration workflow using these two packages.</p>
 <p>Let’s calculate number of counts per year for each species. First, we need to group the data and count records within each group:</p>
 <div class="cell">
@@ -821,7 +821,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -833,7 +833,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -849,7 +849,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -865,7 +865,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -881,7 +881,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -896,7 +896,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -912,14 +912,14 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="faceting" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="faceting"><span class="header-section-number">4.4</span> Faceting</h2>
+<section id="faceting" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="faceting"><span class="header-section-number">5.4</span> Faceting</h2>
 <p><code>ggplot</code> has a special technique called <em>faceting</em> that allows the user to split one plot into multiple subplots based on a variable included in the dataset. This allows us to examine the trends associated with each grouping variable more closely. We will use it to make a time series plot for each species:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
@@ -931,7 +931,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -970,7 +970,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -987,7 +987,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1009,7 +1009,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1031,7 +1031,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1057,21 +1057,21 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/polished-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec05-data-visualization_files/figure-html/polished-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="challenge-2" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="challenge-2"><span class="header-section-number">4.4.1</span> Challenge</h3>
+<section id="challenge-2" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="challenge-2"><span class="header-section-number">5.4.1</span> Challenge</h3>
 <p>Use the filtered data frame (<code>surveys_abun_species</code>) for part 2.</p>
 <p><strong>1.</strong> Remember the histogram coloured according to each species? Starting from that code, how could we separate each species into its own subplot? <em>Hint: look in the aplit-apply-comine section</em></p>
 <p><strong>2.a.</strong> Create a plot that shows the average weight over years. Which year was the average weight of all animals the highest?</p>
 <p><strong>2.b.</strong> Iterate on the plot so it shows differences among species of their average weight over time. Is the yearly trend the same for all species?</p>
 </section>
 </section>
-<section id="export-plots" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="export-plots"><span class="header-section-number">4.5</span> Export plots</h2>
+<section id="export-plots" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="export-plots"><span class="header-section-number">5.5</span> Export plots</h2>
 <p>Let’s save our polished faceted plot. We will assign the entire plot to a new object.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>polished_plot <span class="ot">&lt;-</span> surveys_abun_species <span class="sc">%&gt;%</span></span>
@@ -1120,8 +1120,8 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>( <span class="fu">here</span>(<span class="st">"lectures/figures/survey_yearly_abundance.png"</span>), </span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>        polished_plot, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">units =</span> <span class="st">"in"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="challenge-3" class="level3" data-number="4.5.1">
-<h3 data-number="4.5.1" class="anchored" data-anchor-id="challenge-3"><span class="header-section-number">4.5.1</span> Challenge</h3>
+<section id="challenge-3" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="challenge-3"><span class="header-section-number">5.5.1</span> Challenge</h3>
 <p>Save the polished plot as a .jpg that’s 300 by 250 pixels inside a directory called “figures”.</p>
 
 
@@ -1547,8 +1547,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../lectures/lec03-data-wrangling.html" class="pagination-link" aria-label="Data wrangling!">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling!</span></span>
+      <a href="../lectures/lec04-data-wrangling.html" class="pagination-link" aria-label="Data wrangling!">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling!</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

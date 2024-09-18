@@ -47,7 +47,7 @@ Use `here::i_am('path/to/this/file')` at the top of your R scripts to establish 
 library(here)
 here()
 
-here::i_am("lectures/lec04-data-visualization.qmd")
+here::i_am("lectures/lec05-data-visualization.qmd")
 ```
 
 This established path remains stable even if the working directory is changed.
@@ -604,6 +604,10 @@ ggsave( here("lectures/figures/survey_yearly_abundance.png"),
 Save the polished plot as a .jpg that's 300 by 250 pixels inside a directory called "figures".
 
 ```{r include=FALSE, exec=FALSE}
+if( !dir.exists("lectures/figures")) {
+  dir.create("lectures/figures")
+}
+
 ggsave( here("lectures/figures/survey_yearly_abundance.jpg"), 
         polished_plot, width = 300, height = 250, units = "px" )
 ```

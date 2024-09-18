@@ -1,4 +1,4 @@
-# Introduction to the course {.unnumbered}
+# Introduction to the coursex
 
 ## Introduction to R
 
