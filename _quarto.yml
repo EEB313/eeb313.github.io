@@ -33,8 +33,6 @@ book:
           href: lectures/data/pseudo.ara.busco
         - text: "pseudo.LTRs"
           href: lectures/data/pseudo.LTRs
-        - text: "pseudoMol_Kdist.txt"
-          href: lectures/data/pseudoMol_Kdist.txt
         - text: "disease_distance.csv"
           href: lectures/data/disease_distance.csv
         - text: "meas.csv"

@@ -15,8 +15,6 @@
 >
 > ### Lesson outline:
 >
-> Total lesson time: 2 hours
->
 > -   Data properties, initial predictions (15 min)
 > -   Plotting and exploring data (45 min)
 > -   Dealing with unusual values (15 min)
@@ -27,11 +25,7 @@
 
 ## Introduction
 
-Exploratory data analysis is your exciting first look at your data! It's
-a chance to develop a better understanding of the variables in your data
-set and the relationships between them. You can check your assumptions,
-find outliers, and possible errors. But THEN you'll get to ask your
-questions! Yay!!
+Exploratory data analysis is your exciting first look at your data! It's a chance to develop a better understanding of the variables in your data set and the relationships between them. You can check your assumptions, find outliers, and possible errors. But THEN you'll get to ask your questions! Yay!!
 
 You *need* to understand your data you before you analyze it.
 
@@ -44,13 +38,11 @@ You *need* to understand your data you before you analyze it.
 
 4.  Do you notice any patterns?
 
-The patterns you see can lead you to exciting new questions you may not
-have anticipated!
+The patterns you see can lead you to exciting new questions you may not have anticipated!
 
 ## Setup
 
-We'll use what you've learned in past lectures about summarizing and
-visualizing data with dplyr and ggplot to get to know some data!
+We'll use what you've learned in past lectures about summarizing and visualizing data with dplyr and ggplot to get to know some data!
 
 ```{r library, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -61,15 +53,9 @@ download.file("https://uoftcoders.github.io/rcourse/data/pseudo.ara.busco",
               "data/pseudo.ara.busco")
 download.file("https://uoftcoders.github.io/rcourse/data/pseudo.LTRs", 
               "data/pseudo.LTRs")
-download.file("https://uoftcoders.github.io/rcourse/data/pseudoMol_Kdist.txt",
-              "data/pseudoMol_Kdist.txt")
 ```
 
-We're going to load the genomic data we have on the frequency of genes,
-the frequency of a type of repetitive element (LTRs stands for Long
-Terminal Repeat - there's some more info on them coming up in the
-'predictions' section), and the approximate evolutionary age of those
-repetitive elements.
+We're going to load the genomic data we have on the frequency of highly conserved genes and the frequency of a type of repetitive element (LTRs stands for Long Terminal Repeat - there's some more info on them coming up in the 'predictions' section).
 
 ```{r import}
 geneDensity <- read_tsv("data/pseudo.ara.busco", 
@@ -81,69 +67,45 @@ ltrDensity <- read_tsv("data/pseudo.LTRs",
                        col_names = c("chromosome", "start", "end", "winNum", 
                                      "numElements", "numBases", "winSize", 
                                      "density"))
-
-ltrAge <- read_tsv("data/pseudoMol_Kdist.txt", col_names = TRUE)
 ```
 
-We're using "read_tsv" because the columns in this file are separated by
-tabs instead of commas or white space. The LTR age data
-(pseudoMol_Kdist.txt) already has column names, but the other two data
-sets need some more information
+We're using "read_tsv" because the columns in this file are separated by tabs instead of commas or white space. Our two data sets need some column information to make it more interpretable
 
 ## What is my data, actually?
 
-Before we do anything else, we have to think about where this came from
-& whether the data is appropriate for the kinds of questions we might
-have.
+Before we do anything else, we have to think about where this came from & whether the data is appropriate for the kinds of questions we might have.
 
-This data describes a two of the genetic units (we'll call them
-"elements") that live in one plant genome: a set of highly conserved
-genes and one type of transposon (a "selfish" gene that makes copies of
-itself at the expense of its host genome). The chromosomes have been
-broken down into 1Mb pieces ("windows") that overlap each other. In each
-window, we know the number and size (base pairs occupied) of the
-conserved genes and transposons.
+This data describes a two of the genetic units (we'll call them "elements") that live in one plant genome: a set of highly conserved genes and one type of transposon (a "selfish" gene that makes copies of itself at the expense of its host genome). The chromosomes have been broken down into 1Mb pieces ("windows") that overlap each other. In each window, we know the number and size (base pairs occupied) of the conserved genes and transposons.
 
 ### Predictions
 
-It's always good to lay out your hypotheses first. It can help you
-figure out how you need to assemble your data in order to test those
-predictions effectively.
+It's always good to lay out your hypotheses first. It can help you figure out how you need to assemble your data in order to test those predictions effectively.
 
 1.  In areas where gene density is high, LTR density is low
     -   LTRs are a type of **transposable element**, aka "genomic parasite"
-        -   They make copies of themselves at the expense of their host genome
-        -   They make up a large portion of plant genomes (can be \>40%!)
-        -   The host genome wants to prevent them from replicating
+        +   They make copies of themselves at the expense of their host genome
+        +   They make up a large portion of plant genomes (can be >40%!)
+        +   The host genome wants to prevent them from replicating
     -   Certain regions of a chromosome are more tightly wound up with histones
-        -   This makes them less accessible to molecular machinery
-        -   If polymerases aren't likely to access a region, the region can't be expressed
-        -   If a region is unexpressed, you don't want genes there!!
-        -   LTRs tend to accumulate in these regions
+        +   This makes them less accessible to molecular machinery
+        +   If polymerases aren't likely to access a region, the region can't be expressed
+        +   If a region is unexpressed, you don't want genes there!!
+        +   LTRs tend to accumulate in these regions
     -   More accessible, active regions of a chromosome have higher gene content
-        -   These regions can be expressed effectively!
-        -   LTRs that insert into these regions have a worse impact on the host
+        +   These regions can be expressed effectively!
+        +   LTRs that insert into these regions have a worse impact on the host
     -   Other factors like recombination rate and methylation also support this pattern
-2.  In areas where gene density is high, LTR age will be high (old, not transposing anymore)
-    -   There won't be many new deleterious LTR insertions
-        -   Few young LTRs
-    -   The LTRs that are present in those regions can't have lethal effects
-        -   If they're there, their effects are unlikely to have terrible effects on fitness
-        -   Some transposable elements have been "domesticated" by their hosts
-        -   This all contributes to the likelihood that LTRs present can/have persisted
-        -   LTRs present are more likely to be older
-3.  The sex chromosome (LG_X) will have higher LTR density
+
+2.  The sex chromosome (LG_X) will have higher LTR density
     -   Larger proportions of sex chromosomes are less accessible
     -   Sex chromosomes experience lower rates of recombination relative to autosomes
-        -   Also correlated with higher transposon density and lower gene density
+        +   Also correlated with higher transposon density and lower gene density
     -   These trends are more true for non-recombining Y chromosomes than X chromosomes
-        -   Recombination can occur between the two X chromosomes in females
+        +   Recombination can occur between the two X chromosomes in females
 
 ### First Peek
 
-First, let's just take a quick look at the gene density data set and ask
-ourselves what we're dealing with. On a very basic level, what kind of
-variables do we have?
+First, let's just take a quick look at the gene density data set and ask ourselves what we're dealing with. On a very basic level, what kind of variables do we have?
 
 What is one way to view a data frame?
 
@@ -157,8 +119,6 @@ What are your first impressions of the data?
 
 Which variables will be relevant for testing our predictions?
 
-**Something to note here: in this data set, there are a number of things
-that will be clearly**
 
 ### Basic Variable Categories
 
@@ -169,8 +129,7 @@ Common variable types:
 -   Qualitative: categorical/nominal, ranked/ordinal, dichotomous
 -   Quantitative: interval, ratio
 
-This matters because the type of data tells us the appropriate way to
-visualize it:
+This matters because the type of data tells us the appropriate way to visualize it:
 
 -   Qualitative data: pie charts or bar charts
 -   Quantitative data: histograms, box plots
@@ -179,37 +138,25 @@ visualize it:
 
 ### Describing Patterns in Histograms
 
-For a given variable, you're generally looking at the range of values
-and where the majority of the data lies. This gives you an idea of the
-**distribution** of your data. As you're aware, many statistical tests
-make assumptions about the distribution of your input data - it's very
-important to make note of the shapely properties of your data.
+For a given variable, you're generally looking at the range of values and where the majority of the data lies. This gives you an idea of the **distribution** of your data. As you're aware, many statistical tests make assumptions about the distribution of your input data - it's very important to make note of the shapely properties of your data.
 
 -   Average (mean, median, mode)
 -   Range (max, min)
 -   Skewness: how symmetrical is your data around the average?
     -   Classic bell curve has a skew of zero
-    -   If your data isn't symmetrical, that can give you important
-        info!
+    -   If your data isn't symmetrical, that can give you important info!
     -   Skewed distributions aren't likely to be normally distributed
 -   Kurtosis: how sharp is your central peak?
     -   If your distribution is basically flat, its kurtosis is negative
-    -   If your distribution has a huge spike, its kurtosis will be
-        positive
+    -   If your distribution has a huge spike, its kurtosis will be positive
 
 ### Qualitative Data with Histograms
 
-Histograms are great for qualitative data because they visualize the
-number of times a given value appears in your data.
+Histograms are great for qualitative data because they visualize the number of times a given value appears in your data.
 
 ### Quantitative Data with Histograms
 
-Histograms provide an important view into continuous data, providing
-that you tell ggplot how to group your data into discrete bins. Here, we
-can look at our data's values for gene density. This density is a
-measurement of the number of base pairs in a 1Mb window that are part of
-a gene divided by the total number of base pairs in the window (1 000
-000).
+Histograms can provide a useful view into continuous data, providing that you tell ggplot how to group your data into discrete bins. Here, we can look at our data's values for gene density. This density is a measurement of the number of base pairs in a 1Mb window that are part of a gene divided by the total number of base pairs in the window (1 000 000).
 
 ```{r}
 ggplot(geneDensity, aes(density)) +
@@ -220,13 +167,9 @@ ggplot(geneDensity, aes(density)) +
 
 What are some words you'd use to describe this distribution?
 
-Does this change
-
 ### Binning Quantitative Data
 
-When you're subsetting continuous data into discrete bin widths, it's
-important to try out different values because different bin sizes can
-give *vastly* different impressions of your data's distribution.
+When you're subsetting continuous data into discrete bin widths, it's important to try out different values because different bin sizes can give *vastly* different impressions of your data's distribution.
 
 ```{r}
 ggplot(geneDensity, aes(density)) +
@@ -240,23 +183,15 @@ ggplot(geneDensity, aes(density)) +
        x = "Gene density", y = "Count (bin size = 0.1)")
 ```
 
-It's also interesting to see whether your data's distribution is
-different for any of the categories you're looking at. Is there greater
-variation in height among women vs humans as a whole? (Do be careful
-with this, because looking for patterns by poking your data into a bunch
-of different subsets will basically guarantee you'll find *a* pattern,
-whether or not it's biologically relevant.)
+It's also interesting to see whether your data's distribution is different among the categories you're looking at. Is there variation in the species diversity in Canadian tundra environments different when compared to all areas sampled in Canada? (Do be careful with this, because looking for patterns by poking your data into a bunch of different subsets will basically guarantee you'll find *a* pattern, whether or not it's biologically relevant.)
 
 #### Histogram for One Chromosome
 
-Let's see whether the gene density on one of the autosomes (how about
-LG_2) fits the general pattern.
+Let's see whether the gene density on one of the autosomes (how about LG_2) fits the general pattern.
 
 (Based on our initial hypotheses, would you predict that it would?)
 
-It is important to consider how your predictions may affect the way you
-filter your data, so be mindful about tweaking parameters (like bin
-width) to fit the output you expect!
+It is important to consider how your predictions may affect the way you filter your data, so be mindful about tweaking parameters (like bin width) to fit the output you expect!
 
 ```{r}
 geneDensity %>%
@@ -267,30 +202,21 @@ geneDensity %>%
        x = "Gene density", y = "Count")
 ```
 
-The range for the x axis is much smaller! The maximum gene density here
-(\~12%) is much smaller than the highest value in the full genome data
-set (\~40/50%).
+The range for the x axis is much smaller! The maximum gene density here (\~12%) is much smaller than the highest value in the full genome data set (\~40/50%).
 
 (Why might this be?)
 
-One of the aspects of your data that you can't visualize well with a
-histogram is whether there are any values that exceed the limits you
-expected for your data.
+One of the aspects of your data that you can't visualize well with a histogram is whether there are any values that exceed the limits you expected for your data.
 
 ### Scatterplots & Box plots
 
 #### More info! Less bias!
 
-With quantitative data, we can get more information by looking at
-scatterplots and box plots. Not only are they immune to bin size bias,
-they can help us find outliers and let us make initial visual
-comparisons of averages across categories.
+With quantitative data, we can get more information by looking at scatterplots and box plots. Not only are they immune to bin size bias, they can help us find outliers and let us make initial visual comparisons of averages across categories.
 
 #### Visualize raw data as a scatterplot
 
-We know that "chromosome" is a categorical, independent variable
-appropriate for our X axis and that "density" is a continuous, dependent
-variable that will be appropriate for the Y.
+We know that "chromosome" is a categorical, independent variable appropriate for our X axis and that "density" is a continuous, dependent variable that will be appropriate for the Y.
 
 ```{r}
 ggplot(geneDensity, aes(x = chromosome, y = density)) +
@@ -299,15 +225,11 @@ ggplot(geneDensity, aes(x = chromosome, y = density)) +
        x = "Chromosome", y = "Gene density")
 ```
 
-Already, we can see that there different maximum gene density values on
-each chromosome. Because the points are overlapping, it's hard to
-evaluate what the average or skewness might be for any of the
-categories.
+Already, we can see that there different maximum gene density values on each chromosome. Because the points are overlapping, it's hard to evaluate what the average or skewness might be for any of the categories.
 
 #### Boxplots for better comparisons
 
-Because boxplots display the median and quartile limits, it's much
-easier to evaluate the properties of the distribution.
+Because boxplots display the median and quartile limits, it's much easier to evaluate the properties of the distribution.
 
 ```{r}
 ggplot(geneDensity, aes(x = chromosome, y = density)) +
@@ -316,13 +238,9 @@ ggplot(geneDensity, aes(x = chromosome, y = density)) +
        x = "Chromosome", y = "Gene density")
 ```
 
-There's definitely a value that jumps out immediately. It's stretching
-the scale of the Y axis so that it's hard to effectively compare the
-medians of each of the chromosomes.
+There's definitely a value that jumps out immediately. It's stretching the scale of the Y axis so that it's hard to effectively compare the medians of each of the chromosomes.
 
-Before we officially decide what to do with this outlier, we'll visually
-set it aside for now by re-scaling our Y axis, which we've already
-learned how to do!
+Before we officially decide what to do with this outlier, we'll visually set it aside for now by re-scaling our Y axis, which we've already learned how to do!
 
 ```{r}
 ggplot(geneDensity, aes(x = chromosome, y = density)) +
@@ -332,15 +250,9 @@ ggplot(geneDensity, aes(x = chromosome, y = density)) +
        x = "Chromosome", y = "Gene density")
 ```
 
-Look at that handy warning! It lets us know that one value was thrown
-out: "removed 1 rows". This view helps us to get a better general
-understanding of how this categorical "chromosome" value might relate to
-gene density. However! It's important not to throw out data unless you
-have good reason to believe it doesn't belong in the data set.
+Look at that handy warning! It lets us know that one value was thrown out: "removed 1 rows". This view helps us to get a better general understanding of how this categorical "chromosome" value might relate to gene density. However! It's important not to throw out data unless you have good reason to believe it doesn't belong in the data set.
 
-Bonus note: you can use the coord_cartesian function instead of ylim. It
-won't warn you if any of your data points are beyond the limits of the
-axes, though.
+Bonus note: you can use the coord_cartesian function instead of ylim. It won't warn you if any of your data points are beyond the limits of the axes, though.
 
 #### What about the other variables?
 
@@ -349,8 +261,7 @@ axes, though.
 > broken down into 1Mb pieces ("windows") that overlap each other and
 > the contents of each window have been averaged. We've got information
 > on the density of conserved genes and one type of transposon for each
-> window. Additionally, we have the evolutionary age for those
-> transposons.
+> window.
 
 Average number of genes in bins along chromosomes.
 
@@ -514,8 +425,7 @@ Consider error *carefully*.
 -   Common sources
     -   This (exploratory data analysis) is a great time to look for
         issues!
-    -   Error in previous analysis steps (code that produced LTR age
-        estimates)
+    -   Error in previous analysis steps (code that produced LTR density)
     -   Erroneous assumptions about your sample sites or methods
 -   Don't just throw out a point because you *can* ascribe it to error
 
@@ -644,8 +554,7 @@ Is there a way to weight the gene density by window size?
 Right. The reason we collected this data in the first place!
 
 1.  In areas where gene density is high, LTR density is low
-2.  In areas where gene density is high, LTR age will be high
-3.  The sex chromosome (LG_X) will have higher LTR density
+2.  The sex chromosome (LG_X) will have higher LTR density
 
 Note: *preparing* data for analysis is generally the most time-consuming
 part of any project. Establishing what you need to do with your data in
@@ -654,8 +563,7 @@ properties are *extremely* useful steps in this process.
 
 ### How do we explore these questions?
 
-We need to relate gene density, LTR density, and LTR age. Do we have
-this data?
+We need to relate gene density with LTR density. Do we have this data?
 
 Is it currently in a form where we can make comparisons?
 
@@ -673,23 +581,9 @@ The basic "unit" in this data is the 1Mb window. Because this is shared
 across the two data sets, we can use it to join them together.
 Excellent!
 
-What about the LTR age data set?
-
-```{r}
-as_tibble(ltrAge)
-```
-
-This data was prepared differently, so it doesn't have the same 'window'
-units. It does contain chromosomal position information, however, which
-we can use to make some preliminary comparisons.
-
 #### Actual wrangling
 
-We're also going to pull out only the variables we now know we'll need
-(what's shared among the data sets and what will be used to try and test
-our predictions), just because of how large this data frame will be.
-It's *not* a good idea to do this before looking at all the variables
-together.
+We're also going to pull out only the variables we now know we'll need (what's shared among the data sets and what will be used to try and test our predictions), just because of how large this data frame will be. It's *not* a good idea to do this before looking at all the variables together.
 
 ```{r}
 simpleGeneDensity <- geneDensity %>%
@@ -795,207 +689,8 @@ ggplot(densities, aes(x = start,y = density,colour = elementType)) +
 Broadly, we can see that when the LTR density plummets, gene density
 smudges upward.
 
-### Is gene density high when LTR age is high? (hyp #2)
 
-Let's take a look at the LTR age data.
-
-```{r}
-head(ltrAge)
-```
-
-Some of the variable names are different (K2P is our measure of age) but
-are really familiar to the other data we've been analyzing (chrom
-instead of chromosome). Let's see if the LTR age data looks anything
-like our gene and LTR density data.
-
-```{r}
-ggplot(ltrAge, aes(x = start,y = K2P)) +
-  geom_point(alpha = 0.1) +
-  facet_wrap( vars(chrom), scales = "free_x" ) +
-  labs(title = "LTR age along chromosomes",
-       x = "Chromosomal position", y = "LTR age (K2P)")
-```
-
-These clouds of points are really hard to understand. We can try using
-geom_smooth to see if it can reveal what's going on in these clouds. The
-one argument we'll make note of right now is *n*, which tells
-geom_smooth how many points along the x it should be using to make its
-average. Because of how big our data is, we'll give it a smaller value
-so it doesn't take forever to plot.
-
-```{r}
-ggplot(ltrAge, aes(x = start,y = K2P)) +
-  geom_point(alpha = 0.1) +
-  geom_smooth(n = 50) + # try different values (think histogram bin widths)
-  facet_wrap( vars(chrom), scales = "free_x" ) +
-  labs(title = "LTR age along chromosomes",
-       x = "Chromosomal position", y = "LTR age (K2P)")
-```
-
-Well, what can we take away from this visualization? Not much. It seems pretty clear that the average LTR is young (darkness at the bottom of the clouds). The few older LTRs near the top of the plots might have useful information for us..
-
-### Discretizing our ages
-
-We can try binning LTRs based on their age, to see if the oldest LTRs were retained in gene-dense regions. Note: don't categorize numerical data like this without considering what information you're losing! 
-
-```{r}
-ggplot(ltrAge, aes( x = start / 10000,
-                    y = K2P,
-                    colour = cut(K2P, 4,
-                               labels = c("youngest", "young",
-                                          "old", "oldest")) 
-                    )) +
-  geom_point(alpha = 0.5) +
-  #geom_smooth() + #just aren't enough points in the younger categories
-  facet_wrap( vars(chrom), scales = "free_x" ) +
-  labs(title = "LTR age along chromosomes",
-       x = "Chromosomal position (10Mb)", y = "LTR age (K2P)",
-       colour = "Age Class")
-```
-
-There are few young LTRs, but their positions match with the pattern of
-our overall TE density plot. The positions of the young LTRs aren't
-close to gene-dense regions on the autosomes, though interestingly there
-are a few on the right-hand side of LG_X, which was the most gene-dense
-region of our sex chormosome!
-
-That was cool. Definitely **not** a statistical test of correlations
-between LTR age and gene density, but the fact that sub-sections of this
-data behave quite differently is really interesting to see!
-
-### Missing values in gene density comparison
-
-You might remember that in last lecture, when you encountered missing
-values in your data, you could replace them with 0. If we want to put
-our LTR age data into the same kind of windows that the gene density
-data is in, we're going to have *some windows without any age data*. Do
-you think that setting LTR age to 0 would be a good way to handle the
-windows with missing age data?
-
-```{r}
-windowedAges <- ltrAge %>%
-  mutate(chromosome = chrom,            # get the "chromosome" col name to match
-         age = K2P,                     # might as well give a better name
-         winNum = floor(start/20000)) %>% # bin the start (20Mb) & round 
-  select(chromosome, winNum, age)
-  
-genesPlusAges <- geneDensity %>%
-  select("chromosome", "winNum", "density") %>%
-  full_join(windowedAges, by = c("chromosome", "winNum") )
-
-as_tibble(genesPlusAges)
-```
-
-Just for the record, this is not a great way to window data.
-
-But! Look what happens when you change the join method! Got more missing
-data... Maybe it'll be easier to understand if we plot it.
-
-```{r}
-findMissing <- genesPlusAges %>%
-  mutate(noDense = is.na(density),
-         noAges = is.na(age))
-
-ggplot(findMissing) +
-  geom_point( aes(x = winNum, y = density, colour = noAges) ) +
-  coord_cartesian( ylim = c(0,0.15) ) +
-  facet_wrap( vars(chromosome), scales = "free_x" ) +
-  labs(title = "Missing gene density data",
-       x = "Window number", y = "Gene density", colour = "Missing ages!")
-
-ggplot(findMissing) +
-  geom_point( aes(x = winNum, y = age, colour = noDense) ) +
-  facet_wrap( vars(chromosome), scales = "free_x" ) +
-  labs(title = "Missing LTR age data",
-       x = "Window number", y = "LTR age", colour = "Missing densitiy!")
-```
-
-Ooph. We're only missing gene density data for 3 windows, but we're
-missing out on LTR age data for around 15k windows... Is there anything
-we can do about it?
-
-Assigning a value of 0 to our LTR ages is asserting we have different
-data than we actually have: that we know there's an LTR in that position
-and that it's an incredibly recent insertion. But what if we replace the
-missing age points with the mean LTR age?
-
-```{r}
-findMissing <- genesPlusAges %>%
-  mutate(noDense = is.na(density),
-         noAges = is.na(age),
-         rplAge = replace_na( age,mean(age,na.rm=TRUE) ),
-         rplDensity = replace_na( density,mean(density,na.rm=TRUE) ))
-
-sum( is.na(findMissing$rplDensity) )
-sum( is.na(findMissing$rplAge) )
-
-ggplot(findMissing) +
-  geom_point(alpha = 0.5,
-             aes(x = winNum, y = rplAge,
-                 colour = cut(rplAge, 3, labels = c("youngest", "middle", "oldest")))) +
-  geom_col(aes(x = winNum, y = rplDensity)) +
-  ylim(c(0,0.2)) +
-  facet_wrap(vars(chromosome), scales = "free_x" ) +
-  labs(title = "Gene density and LTR age along chromosomes",
-       x = "Chromosomal position (window number)", y = "Altered ages",
-       colour = "Age Class")
-```
-
-No more warnings about missing data! Woo! We can feel whole again! On
-the other hand, replacing these values didn't actually help us improve
-our understanding of our age-density prediction...
-
-We should actually plot a window's LTR age against its gene density!
-First, let's look at the general pattern with the adjusted ages (when we
-replaced NA with the mean value for the variable).
-
-```{r}
-ggplot(findMissing) +
-  geom_point(alpha = 0.5,
-             aes(x = rplDensity, y = rplAge,
-                 colour = cut(rplAge, 3, labels = c("youngest", "middle", "oldest")))) +
-  coord_cartesian( xlim = c(0, 0.13) ) +    # being mindful of our outlier
-  facet_wrap( vars(chromosome), scales="free_x" ) +
-  labs(title="Gene density vs LTR age post-adjustment",
-       x="Gene density (adjusted)", y="LTR age (adjusted)",
-       colour="Age Class")
-```
-
-That's pretty dang cool! We do see a general downward trend - as gene
-density increases (going right along the X axis), LTR age tends to
-decrease! We can even see some interesting differences among the
-chromosomes.
-
-LG_7 is our biggest chromosome and it seems to have a lot of the young
-(blue) LTRs. Why do you think that might be? *Generally*, as chromosome
-length increases, recombination rate decreases. Recombination rate is
-one of the properties we know correlates with the accessibility of
-genomic regions. So, we might predict that longer chromosomes have a
-larger proportion of 'inactive' regions and a greater number of TEs.
-
-Moving on!
-
-Let's judge our past selves! Let's see the effects of our decision to
-replace the missing age data with an average. Was it foolish or as wise
-as the time we joined a dragon boat team?
-
-```{r}
-ggplot(findMissing) +
-  # This time, we'll colour the points based on whether the age should be NA
-  geom_point(alpha=0.5, aes(x=rplDensity,y=rplAge, colour=noAges)) +
-  coord_cartesian( xlim=c(0,0.13) ) +    # being mindful of our outlier
-  facet_wrap( vars(chromosome), scales="free_x" ) +
-  labs(title="Gene density vs LTR age post-adjustment",
-       x="Gene density (adjusted)", y="LTR age (adjusted)",
-       colour="Agelessss")
-```
-
-Not too bad! Not mechanistically motivated, but it does show that
-replacing missing data with the value we would expect (basically the
-definition of the mean) can have fewer consequences than replacing it
-with 0 in some contexts.
-
-### Does the sex chromosome (LG_X) have higher LTR density? (hyp #3)
+### Does the sex chromosome (LG_X) have higher LTR density? (hyp #2)
 
 We want to compare LTR densities across chromosomes. How would you do
 this?
@@ -1034,3 +729,7 @@ ltrDensity %>%
 
 There are fewer outliers, but the pattern remains the same. GOOD SIGN!
 :)
+
+## References
+
+Zuur, A. F., Ieno, E. N., Elphick, C. S. 2010. A protocol for data exploration to avoid common statistical problems. Methods in Ecology and Evolution 1: 3-14.
