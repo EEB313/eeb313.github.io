@@ -35,6 +35,8 @@ book:
           href: lectures/data/pseudo.LTRs
         - text: "disease_distance.csv"
           href: lectures/data/disease_distance.csv
+        - text: "Tombak_etal_SSDinMammals_FullDataSet.csv"
+          href: lectures/data/Tombak_etal_SSDinMammals_FullDataSet.csv
         - text: "meas.csv"
           href: lectures/data/meas.csv
     - part: "Miscellaneous notes"
@@ -58,5 +60,6 @@ extra_files:
   - pseudo.ara.busco
   - pseudo.LTRs
   - pseudoMol_Kdist.txt
+  - Tombak_etal_SSDinMammals_FullDataSet.csv
   - disease_distance.csv
   - meas.csv
