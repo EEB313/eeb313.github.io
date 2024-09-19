@@ -16,6 +16,7 @@ book:
       - lectures/lec03-command_git.qmd
       - lectures/lec04-data-wrangling.qmd
       - lectures/lec05-data-visualization.qmd
+      - lectures/lec06-exploratory-data-analysis.qmd
     - part: "Assignments"
       chapters:
       - assignments/assignment-00.qmd
@@ -28,6 +29,12 @@ book:
       chapters:
         - text: "portal_data.csv"
           href: lectures/data/portal_data.csv
+        - text: "pseudo.ara.busco"
+          href: lectures/data/pseudo.ara.busco
+        - text: "pseudo.LTRs"
+          href: lectures/data/pseudo.LTRs
+        - text: "pseudoMol_Kdist.txt"
+          href: lectures/data/pseudoMol_Kdist.txt
         - text: "disease_distance.csv"
           href: lectures/data/disease_distance.csv
         - text: "meas.csv"
@@ -50,5 +57,8 @@ extra_files:
   - assignment-00.qmd
   - assignment-01.qmd
   - portal_data.csv
+  - pseudo.ara.busco
+  - pseudo.LTRs
+  - pseudoMol_Kdist.txt
   - disease_distance.csv
   - meas.csv
