@@ -23,6 +23,10 @@
 
 ------------------------------------------------------------------------
 
+
+
+
+
 ## Introduction
 
 Exploratory data analysis is your exciting first look at your data! It's a chance to develop a better understanding of the variables in your data set and the relationships between them. You can check your assumptions, find outliers, and possible errors. But THEN you'll get to ask your questions! Yay!!
@@ -53,6 +57,8 @@ download.file("https://uoftcoders.github.io/rcourse/data/pseudo.ara.busco",
               "data/pseudo.ara.busco")
 download.file("https://uoftcoders.github.io/rcourse/data/pseudo.LTRs", 
               "data/pseudo.LTRs")
+
+# note: data/ provides a relative path to file; same below
 ```
 
 We're going to load the genomic data we have on the frequency of highly conserved genes and the frequency of a type of repetitive element (LTRs stands for Long Terminal Repeat - there's some more info on them coming up in the 'predictions' section).
@@ -254,6 +260,32 @@ Look at that handy warning! It lets us know that one value was thrown out: "remo
 
 Bonus note: you can use the coord_cartesian function instead of ylim. It won't warn you if any of your data points are beyond the limits of the axes, though.
 
+#### Boxplot augmentations
+
+There are a few additional things we can do that might make boxplots
+even more informative for our data.
+
+-   **Violin** plots - boxplots but with curves instead of boxes
+-   Adding a **scatterplot** behind the boxplot
+-   Adding "**jitter**" to scatterplots so the points are offset
+    -   Additionally, you can make the points more transparent (change
+        the **alpha** value)
+-   You can also add a **trend line** to help you visualize potential
+    relationships
+
+```{r}
+ggplot(geneDensity, aes(x = chromosome, y = density)) +
+  geom_jitter(alpha = 0.1, width = 0.3) +
+  geom_violin() + 
+  labs(title = "Comparison of gene density across chromosomes",
+       x = "Chromosome", y = "Gene density")
+```
+
+Making the points more transparent gives us a better idea of what
+density values are most common. You can see this at the bottom of the
+graph, where the points don't look transparent at all - *so* many data
+points!!
+
 #### What about the other variables?
 
 > This data describes a few of the genetic "bits" (we generally call
@@ -332,47 +364,15 @@ What are some reasons for gene density to change along a chromosome?
 
 -   Centromeres are mostly made up of repeats - very low gene content
     -   Centromeres can be in the middle or near one end of a chromosome
-
     -   Where do you think the centromeres are in these chromosomes?
--   Certain regions of a chromosome are more tightly wound up with
-    histones
+-   Certain regions of a chromosome are more tightly wound up with histones
     -   Makes them less accessible to molecular machinery
-
-    -   If polymerases don't reach a region, that region can't be
-        expressed
-
+    -   If polymerases don't reach a region, that region can't be expressed
     -   If a region is unexpressed, you don't want genes there!
-
     -   Centromeres are generally one of these 'inactive' regions
--   More accessible, active regions of a chromosome have higher gene
-    content
+-   More accessible, active regions of a chromosome have higher gene content
     -   These regions are generally along chromosome arms
 
-#### Boxplot augmentations
-
-There are a few additional things we can do that might make boxplots
-even more informative for our data.
-
--   **Violin** plots - boxplots but with curves instead of boxes
--   Adding a **scatterplot** behind the boxplot
--   Adding "**jitter**" to scatterplots so the points are offset
-    -   Additionally, you can make the points more transparent (change
-        the **alpha** value)
--   You can also add a **trend line** to help you visualize potential
-    relationships
-
-```{r}
-ggplot(geneDensity, aes(x = chromosome, y = density)) +
-  geom_point(alpha = 0.1, position = "jitter") +
-  geom_violin() + 
-  labs(title = "Comparison of gene density across chromosomes",
-       x = "Chromosome", y = "Gene density")
-```
-
-Making the points more transparent gives us a better idea of what
-density values are most common. You can see this at the bottom of the
-graph, where the points don't look transparent at all - *so* many data
-points!!
 
 ### Challenge!
 
@@ -396,6 +396,9 @@ ltrDensity %>%
 
 Now it's time to start thinking about what to do with rebellious
 outliers!
+
+
+
 
 ## Outliers
 
@@ -484,13 +487,17 @@ It looks like *all* of the chromosomes get this trail-off in window size
 near their ends. This is not what we expected!! All of the squish at the
 end is basically just error from a previous analysis.
 
-### Challenge!
+## Compare density with and without outliers
 
-Create a category based on window size: density as either belonging in a
-"small window" or a "normal window". We can create a new "winCategory"
-variable using mutate() and assign the value of "small" to windows with
-winSize less than 1Mb and "normal" to all the other windows (which we
-expect will have a value of 1Mb).
+How does this winSize variable impact gene density? What do we predict based on
+what we know thus far?
+
+It's much esier to compare when everything is in the same plot. This will be
+somewhat tricky with the data the way it is. We will need to label each density
+as either belonging in a "small window" or a "normal window". We can create a
+new "winCategory" variable using mutate() and assign the value of "small" to
+windows with winSize less than 1Mb and "normal" to all the other windows (which
+we expect will have a value of 1Mb). We can use the function `case_when()` within mutate() to provide different values depending on conditional statements (much like "if" statements).
 
 ```{r}
 geneDensity2 <- geneDensity %>%
@@ -597,7 +604,7 @@ simpleLTRdensity <- ltrDensity %>%
 head(simpleLTRdensity)
 ```
 
-At this point, are these data "long" or "wide"? #throwback
+At this point, are these data "long" or "wide"? 
 
 #### ? Knowledge Check Challenge
 
@@ -695,10 +702,7 @@ smudges upward.
 We want to compare LTR densities across chromosomes. How would you do
 this?
 
-#### Challenge!
-
-Box plot is a good base line. Ask for types of improvements that could
-be made to a basic box plot.
+Let's make a box plot of the LTR densities among chromosomes
 
 ```{r}
 ggplot(ltrDensity, aes(x = chromosome, y = density)) +
@@ -715,20 +719,20 @@ with its reduced rate of recombination, has accumulated more LTRs?
 Based on what we know about the gene density data, what would you
 suggest we might need to do with this LTR density data?
 
-There is one extreme outlier again - let's see what happens if we colour
-the data based on window size.
+There is one extreme outlier again - let's see what happens if we colour the data based on window size. You may notice that this offers a simpler method for quickly visualizing given our outliers. Good eye!
 
 ```{r}
 ltrDensity %>%
   ggplot( aes(x = chromosome, y = density, colour = winSize==1000000) ) +
   geom_boxplot() +
-  ylim(c(0,0.6)) +
   labs(title = "LTR densities among chromosomes",
        x = "Chromosome", y = "LTR density", colour = "Normal\nWindow\nSize")
 ```
 
-There are fewer outliers, but the pattern remains the same. GOOD SIGN!
-:)
+There are fewer outliers for the windows that are the expected size, but the pattern remains the same. GOOD SIGN! :)
+
+The LTR density does not appear to differ much between the sex chromosome (LG_X) relative to the autosomes.
+
 
 ## References
 

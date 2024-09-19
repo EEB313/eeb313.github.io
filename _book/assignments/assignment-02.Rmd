@@ -1,0 +1,66 @@
+---
+title: 'Assignment 2: data wrangling (8 marks)'
+output: pdf_document
+urlcolor: blue
+---
+
+
+*To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`. Please ensure the text on your .pdf does not continue past the end of the page.*
+
+
+
+## 1.  Read in and pre-process plant biomass data (1.5 mark)
+
+You will apply your data wrangling skills on the yearly change in biomass of plants in the [beautiful Abisko national park in northern Sweden](https://en.wikipedia.org/wiki/Abisko_National_Park). We have preprocessed this data and made [it available as a csv-file via this link](https://uoftcoders.github.io/rcourse/data/plant-biomass-preprocess.csv). You can find the original data and a short readme on [figshare](https://figshare.com/articles/Time_Series_of_plant_biomass_during_1998-2013/4149648) and [dryad](https://datadryad.org/resource/doi:10.5061/dryad.38s21). The original study[^1] is available on an open access license. Reading through the readme on figshare, and the study abstract will increase your understanding for working with the data.
+
+a.  Read the data directly from the provided URL, into a variable called `plant_biomass` and display the first six rows. (0.25 mark)
+
+b.  Convert the Latin column names into their common English names: lingonberry, bilberry, bog bilberry, dwarf birch, crowberry, and wavy hair grass. After this, display all column names. (0.25 marks)
+  _Hint: Search online to find out which Latin and English names pair up._ 
+
+c.  This is a wide data frame (species make up the column names). A long format is easier to analyze, so pivot the species names into one column (`species`) and the measurement values into another column (`biomass`). Assign it to the variable `plant_long`. (0.5 marks)
+
+d.  Recreate the wide data frame (species names as columns again) by pivoting it from your `plant_long` data frame.  (0.5 marks) 
+
+
+
+
+## 2.  Wrangling plant biomass with dplyr (3.5 marks)
+
+Now that our data is in a tidy format, we can start exploring it!
+
+a.  What is the average biomass in g/m^2^ for all observations in the study? (0.25 marks)
+
+b.  How does the average biomass compare between the grazed control sites and those that were protected from herbivores? (0.5 marks)
+
+c.  Display a table of the average plant biomass for each year. (0.25 marks)
+
+d.  What is the mean plant biomass per year for the `grazedcontrol` and `rodentexclosure` groups? Present the answer in a table that has these variables as column headers (use pivoting). (0.75 marks)
+
+e.  Check whether there is an equal number of observations per site. (0.25 marks)
+
+f.  How many biomass measurements were 0? Which species had the most measurements of 0 biomass? (0.5 marks)
+
+g.  Create a new column that represents the square of the biomass. Display the three largest `squared_biomass` observations in descending order. Only include the columns `year`, `squared_biomass` and `species` and only observations between the years 2003 and 2008 from the forest habitat. (1 mark)
+
+_Hint: Break this down into single criteria and add one at a time. It is possible to obtain the desired result with five operations_ (1 mark)
+
+## 3.  Read in and wrangle mammal size data (3 marks)
+
+Download the "SSDinMammals.csv" file from Quercus, the course website, or [Dryad](https://datadryad.org/stash/downloads/file_stream/2921720). The original study[^2] is quite interesting! 
+
+a.  Download the file to your computer and read it into a variable called `mammal_sizes` and provide a glimpse into the data. (0.25 mark)
+
+b.  Pull out the columns for "Scientific_Name", "massM', and "massF". Then pivot the mass columns into long format, using "sex" and "mass" as the new column names. To clean up the text values for the "sex" column, you can pass `names_pattern = "mass(.)"` as an argument in your call to the pivot function. Save this data frame as as `mammal_mass`. Please glimpse `mammal_mass` or print the first six rows. (0.25 marks)
+
+c.  Pull out the columns for "Scientific_Name", "lengthM', and "lengthF". Then, as in the last question, pivot the length columns into long format, using "sex" and "length" as the new column names. To clean up the text values for the "sex" column, you can pass `names_pattern = "length(.)"` as an argument in your call to the pivot function. Save this data frame as as `mammal_length`. Please glimpse `mammal_length` or print the first six rows. (0.25 marks)
+
+d.  Were any species included more than once in `mammal_mass` and `mammal_length`? If so, please remove any rows that have duplicated sex and species combinations and save the result in two new data frames, called `mass_nodup` and `length_nodup`. Please do not include any columns besides "Scientific_Name", "sex", "mass", and "length" in your final data set. Report the number of rows in your final data sets and glimpse/head your final data sets. *Hint: for each named species and sex combination, how many rows exist in the data frame? The n() function will be useful here.* (1 mark)
+
+e.  There is a tidyverse function called `full_join()` that enables the joining of data sets by a set of shared variables. Please read its [documentation](https://dplyr.tidyverse.org/reference/mutate-joins.html). Use `full_join()` to combine the deduplicated long mass and length data into one data frame called `mammal_long`. Please glimpse `mammal_long` or print the first six rows. *Hint: the two shared columns to join by have the same name in each data set.*  (0.5 marks)
+
+f.  How many `NA` values are present in the length column? For the sex-species combos with and without recorded length values, what is the mean mass, grouped by sex? (0.75 marks)
+
+
+[^1]: Olofsson J, te Beest M, Ericson L (2013) Complex biotic interactions drive long-term vegetation dynamics in a subarctic ecosystem. Philosophical Transactions of the Royal Society B 368(1624): 20120486. <https://dx.doi.org/10.1098/rstb.2012.0486>
+[^2]: Tombak, K.J., Hex, S.B.S.W. & Rubenstein, D.I. New estimates indicate that males are not larger than females in most mammal species. Nat Commun 15, 1872 (2024). <https://doi.org/10.1038/s41467-024-45739-5> 

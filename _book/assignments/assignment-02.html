@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - Assignment 01: base R, command line, &amp; Git(Hub)</title>
+<title>EEB313: Quantitative Methods in R for Biology - Assignment 02: data wrangling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -64,8 +30,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-02.html" rel="next">
-<link href="../assignments/assignment-00.html" rel="prev">
+<link href="../projects.html" rel="next">
+<link href="../assignments/assignment-01.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignment 01: base R, command line, &amp; Git(Hub)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-02.html">Assignment 02: data wrangling</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -225,13 +191,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link active">
+  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 01: base R, command line, &amp; Git(Hub)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/assignment-02.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/assignment-02.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Assignment 02: data wrangling</span></a>
   </div>
 </li>
@@ -321,21 +287,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#variable-assignment-1-mark" id="toc-variable-assignment-1-mark" class="nav-link active" data-scroll-target="#variable-assignment-1-mark">1. Variable assignment (1 mark)</a></li>
-  <li><a href="#vectors-2.5-marks" id="toc-vectors-2.5-marks" class="nav-link" data-scroll-target="#vectors-2.5-marks">2. Vectors (2.5 marks)</a></li>
-  <li><a href="#data-frames-1.5-marks" id="toc-data-frames-1.5-marks" class="nav-link" data-scroll-target="#data-frames-1.5-marks">3. Data frames (1.5 marks)</a></li>
-  <li><a href="#command-line-1-mark" id="toc-command-line-1-mark" class="nav-link" data-scroll-target="#command-line-1-mark">4. Command line (1 mark)</a></li>
-  <li><a href="#understanding-command-line-software-1-mark" id="toc-understanding-command-line-software-1-mark" class="nav-link" data-scroll-target="#understanding-command-line-software-1-mark">5. Understanding command line software (1 mark)</a></li>
-  <li><a href="#github-1-mark" id="toc-github-1-mark" class="nav-link" data-scroll-target="#github-1-mark">6. GitHub (1 mark)</a></li>
+  <li><a href="#read-in-and-pre-process-plant-biomass-data-1.5-mark" id="toc-read-in-and-pre-process-plant-biomass-data-1.5-mark" class="nav-link active" data-scroll-target="#read-in-and-pre-process-plant-biomass-data-1.5-mark">1. Read in and pre-process plant biomass data (1.5 mark)</a></li>
+  <li><a href="#wrangling-plant-biomass-with-dplyr-3.5-marks" id="toc-wrangling-plant-biomass-with-dplyr-3.5-marks" class="nav-link" data-scroll-target="#wrangling-plant-biomass-with-dplyr-3.5-marks">2. Wrangling plant biomass with dplyr (3.5 marks)</a></li>
+  <li><a href="#read-in-and-wrangle-mammal-size-data-3-marks" id="toc-read-in-and-wrangle-mammal-size-data-3-marks" class="nav-link" data-scroll-target="#read-in-and-wrangle-mammal-size-data-3-marks">3. Read in and wrangle mammal size data (3 marks)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignment 01: base R, command line, &amp; Git(Hub)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-02.html">Assignment 02: data wrangling</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignment 01: base R, command line, &amp; Git(Hub)</h1>
+<h1 class="title">Assignment 02: data wrangling</h1>
 </div>
 
 
@@ -352,83 +315,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Download the .Rmd file <a href="assignment-01.Rmd">here</a>.</p>
-<p><em>To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>. Please ensure the text on your .pdf does not continue past the end of the page. If you use code chunks to write your answers to the command line questions, check that the code chunk headers say <code>eval=FALSE</code> so RStudio doesn’t try to run them when knitting (the example code chunks provided for questions 4 and 5 include this).</em></p>
-<section id="variable-assignment-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="variable-assignment-1-mark">1. Variable assignment (1 mark)</h2>
+<p>Download the .Rmd file <a href="assignment-02.Rmd">here</a>.</p>
+<p><em>To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>. Please ensure the text on your .pdf does not continue past the end of the page.</em></p>
+<section id="read-in-and-pre-process-plant-biomass-data-1.5-mark" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-and-pre-process-plant-biomass-data-1.5-mark">1. Read in and pre-process plant biomass data (1.5 mark)</h2>
+<p>You will apply your data wrangling skills on the yearly change in biomass of plants in the <a href="https://en.wikipedia.org/wiki/Abisko_National_Park">beautiful Abisko national park in northern Sweden</a>. We have preprocessed this data and made <a href="https://uoftcoders.github.io/rcourse/data/plant-biomass-preprocess.csv">it available as a csv-file via this link</a>. You can find the original data and a short readme on <a href="https://figshare.com/articles/Time_Series_of_plant_biomass_during_1998-2013/4149648">figshare</a> and <a href="https://datadryad.org/resource/doi:10.5061/dryad.38s21">dryad</a>. The original study<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> is available on an open access license. Reading through the readme on figshare, and the study abstract will increase your understanding for working with the data.</p>
 <ol type="a">
-<li>Assign the value <code>5</code> to the variable/object <code>a</code>. Display <code>a</code>. (0.25 marks)</li>
-</ol>
-<ol start="2" type="a">
-<li>Assign the result of <code>10/3</code> to the variable <code>b</code>. Display <code>b</code>. (0.25 marks)</li>
-</ol>
-<ol start="3" type="a">
-<li>Write a function that adds two numbers and returns their sum. Use it to assign the sum of <code>a</code> and <code>b</code> to <code>result</code>. Display <code>result</code>. (In practice, there is already a more sophisticated built-in function for this: <code>result &lt;- sum(a, b)</code>) (0.25 marks)</li>
-</ol>
-<ol start="4" type="a">
-<li>Write a function that multiplies two numbers and returns their product. Use it to assign the product of <code>a</code> and <code>b</code> to <code>product</code>. Display <code>product</code>. (In practice, there is already a more sophisticated built-in function for this: <code>product &lt;- prod(a, b)</code>) (0.25 marks)</li>
+<li><p>Read the data directly from the provided URL, into a variable called <code>plant_biomass</code> and display the first six rows. (0.25 mark)</p></li>
+<li><p>Convert the Latin column names into their common English names: lingonberry, bilberry, bog bilberry, dwarf birch, crowberry, and wavy hair grass. After this, display all column names. (0.25 marks) <em>Hint: Search online to find out which Latin and English names pair up.</em></p></li>
+<li><p>This is a wide data frame (species make up the column names). A long format is easier to analyze, so pivot the species names into one column (<code>species</code>) and the measurement values into another column (<code>biomass</code>). Assign it to the variable <code>plant_long</code>. (0.5 marks)</p></li>
+<li><p>Recreate the wide data frame (species names as columns again) by pivoting it from your <code>plant_long</code> data frame. (0.5 marks)</p></li>
 </ol>
 </section>
-<section id="vectors-2.5-marks" class="level2">
-<h2 class="anchored" data-anchor-id="vectors-2.5-marks">2. Vectors (2.5 marks)</h2>
+<section id="wrangling-plant-biomass-with-dplyr-3.5-marks" class="level2">
+<h2 class="anchored" data-anchor-id="wrangling-plant-biomass-with-dplyr-3.5-marks">2. Wrangling plant biomass with dplyr (3.5 marks)</h2>
+<p>Now that our data is in a tidy format, we can start exploring it!</p>
 <ol type="a">
-<li>Create a vector <code>v</code> with all integers 0-30, and a vector <code>w</code> with every third integer in the same range. (0.25 marks)</li>
+<li><p>What is the average biomass in g/m<sup>2</sup> for all observations in the study? (0.25 marks)</p></li>
+<li><p>How does the average biomass compare between the grazed control sites and those that were protected from herbivores? (0.5 marks)</p></li>
+<li><p>Display a table of the average plant biomass for each year. (0.25 marks)</p></li>
+<li><p>What is the mean plant biomass per year for the <code>grazedcontrol</code> and <code>rodentexclosure</code> groups? Present the answer in a table that has these variables as column headers (use pivoting). (0.75 marks)</p></li>
+<li><p>Check whether there is an equal number of observations per site. (0.25 marks)</p></li>
+<li><p>How many biomass measurements were 0? Which species had the most measurements of 0 biomass? (0.5 marks)</p></li>
+<li><p>Create a new column that represents the square of the biomass. Display the three largest <code>squared_biomass</code> observations in descending order. Only include the columns <code>year</code>, <code>squared_biomass</code> and <code>species</code> and only observations between the years 2003 and 2008 from the forest habitat. (1 mark)</p></li>
 </ol>
-<ol start="2" type="a">
-<li>What is the difference in lengths of the vectors <code>v</code> and <code>w</code>? (0.25 marks)</li>
-</ol>
-<ol start="3" type="a">
-<li>Create a new vector, <code>v_square</code>, with the square of elements at indices 3, 6, 7, 10, 15, 22, 23, 24, and 30 from the variable <code>v</code>. <em>Hint: Use indexing rather than a for loop.</em> (0.25 marks)</li>
-</ol>
-<ol start="4" type="a">
-<li>Calculate the mean and median of the first five values from <code>v_square</code>. (0.25 marks)</li>
-</ol>
-<ol start="5" type="a">
-<li>Create a boolean vector <code>v_bool</code>, indicating which vector <code>v</code> elements are bigger than 20. How many values are over 20? <em>Hint: In R, TRUE = 1, and FALSE = 0, so you can use simple arithmetic to find this out.</em> (0.5 marks)</li>
-</ol>
-<ol start="6" type="a">
-<li>Write a function that calculates the median of the last two elements of any numeric vector. Test this function with the <code>v</code> and <code>v_square</code> vectors. (1 marks)</li>
-</ol>
+<p><em>Hint: Break this down into single criteria and add one at a time. It is possible to obtain the desired result with five operations</em> (1 mark)</p>
 </section>
-<section id="data-frames-1.5-marks" class="level2">
-<h2 class="anchored" data-anchor-id="data-frames-1.5-marks">3. Data frames (1.5 marks)</h2>
+<section id="read-in-and-wrangle-mammal-size-data-3-marks" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-and-wrangle-mammal-size-data-3-marks">3. Read in and wrangle mammal size data (3 marks)</h2>
+<p>Download the “SSDinMammals.csv” file from Quercus, the course website, or <a href="https://datadryad.org/stash/downloads/file_stream/2921720">Dryad</a>. The original study<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> is quite interesting!</p>
 <ol type="a">
-<li>There are many built-in data frames in R, which you can find <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html">more details about online</a>. What are the column names of the built-in dataframe <code>beaver1</code>? How many observations (rows) and variables (columns) are there? (0.5 marks)</li>
-</ol>
-<ol start="2" type="a">
-<li>Display both the first 6 and last 6 rows of this data frame. Show how to do so with both indexing as well as specialized functions. (0.5 marks)</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With indexing</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># With functions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="3" type="a">
-<li>What is the min, mean, and max body temperature for beavers inside and outside of the retreat? <em>Hint: You can use <code>?</code> on the beaver1 data set to get more information about it. Remember that each column in a data frame is a vector and you can use the same functions.</em> (0.5 marks)</li>
-</ol>
-</section>
-<section id="command-line-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="command-line-1-mark">4. Command line (1 mark)</h2>
-<p>What commands would you run to create a directory named “mydir”, check mydir’s permissions, add <em>w</em>rite permissions for <em>u</em>sers, copy mydir to “mydir2” , and then remove mydir? <em>Hint: try running each step in your terminal to check if the output is what you expect</em> (1 mark)</p>
-</section>
-<section id="understanding-command-line-software-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-command-line-software-1-mark">5. Understanding command line software (1 mark)</h2>
-<p>Open the documentation for <a href="https://github.com/TobyBaril/EarlGrey">Earl Grey</a>, a software programme that identifies transposable elements in genomes. There may be a lot of unfamilliar terms on this web page, but we’ll just be skimming this page to practice identifying the kind of information command line software might require and how to provide that.</p>
-<ol type="a">
-<li><p>What three arguments (files/information) are required input for this software? (0.3 marks)</p></li>
-<li><p>What would you type into the command line to provide Earl Grey with those minimum command options? You don’t need to make up example text for this, just ensure you have the three <code>-</code> arguments written out. <em>Hint: search for “minimum command options” on the GitHub page and use the next line</em> (0.3 marks)</p></li>
-<li><p>Based on the visual overview of the software (or the “Example Outputs” section) on the GitHub page, what does this software output? (0.2 marks)</p></li>
-<li><p>What optional parameter (i.e.&nbsp;the <code>-</code> argument) does Earl Grey offer to display help information? Is this kind of help parameter common? <em>Hint: you can search for “help documentation” in your lecture notes</em> (0.2 marks)</p></li>
-</ol>
-</section>
-<section id="github-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="github-1-mark">6. GitHub (1 mark)</h2>
-<ol type="a">
-<li>Make a Github account. You can do this at <a href="github.com">github.com</a>. What is your GitHub username? (1 mark)</li>
+<li><p>Download the file to your computer and read it into a variable called <code>mammal_sizes</code> and provide a glimpse into the data. (0.25 mark)</p></li>
+<li><p>Pull out the columns for “Scientific_Name”, “massM’, and”massF”. Then pivot the mass columns into long format, using “sex” and “mass” as the new column names. To clean up the text values for the “sex” column, you can pass <code>names_pattern = "mass(.)"</code> as an argument in your call to the pivot function. Save this data frame as as <code>mammal_mass</code>. Please glimpse <code>mammal_mass</code> or print the first six rows. (0.25 marks)</p></li>
+<li><p>Pull out the columns for “Scientific_Name”, “lengthM’, and”lengthF”. Then, as in the last question, pivot the length columns into long format, using “sex” and “length” as the new column names. To clean up the text values for the “sex” column, you can pass <code>names_pattern = "length(.)"</code> as an argument in your call to the pivot function. Save this data frame as as <code>mammal_length</code>. Please glimpse <code>mammal_length</code> or print the first six rows. (0.25 marks)</p></li>
+<li><p>Were any species included more than once in <code>mammal_mass</code> and <code>mammal_length</code>? If so, please remove any rows that have duplicated sex and species combinations and save the result in two new data frames, called <code>mass_nodup</code> and <code>length_nodup</code>. Please do not include any columns besides “Scientific_Name”, “sex”, “mass”, and “length” in your final data set. Report the number of rows in your final data sets and glimpse/head your final data sets. <em>Hint: for each named species and sex combination, how many rows exist in the data frame? The n() function will be useful here.</em> (1 mark)</p></li>
+<li><p>There is a tidyverse function called <code>full_join()</code> that enables the joining of data sets by a set of shared variables. Please read its <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">documentation</a>. Use <code>full_join()</code> to combine the deduplicated long mass and length data into one data frame called <code>mammal_long</code>. Please glimpse <code>mammal_long</code> or print the first six rows. <em>Hint: the two shared columns to join by have the same name in each data set.</em> (0.5 marks)</p></li>
+<li><p>How many <code>NA</code> values are present in the length column? For the sex-species combos with and without recorded length values, what is the mean mass, grouped by sex? (0.75 marks)</p></li>
 </ol>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Olofsson J, te Beest M, Ericson L (2013) Complex biotic interactions drive long-term vegetation dynamics in a subarctic ecosystem. Philosophical Transactions of the Royal Society B 368(1624): 20120486. <a href="https://dx.doi.org/10.1098/rstb.2012.0486" class="uri">https://dx.doi.org/10.1098/rstb.2012.0486</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Tombak, K.J., Hex, S.B.S.W. &amp; Rubenstein, D.I. New estimates indicate that males are not larger than females in most mammal species. Nat Commun 15, 1872 (2024). <a href="https://doi.org/10.1038/s41467-024-45739-5" class="uri">https://doi.org/10.1038/s41467-024-45739-5</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -843,13 +775,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment00: individual interest description</span>
+      <a href="../assignments/assignment-01.html" class="pagination-link" aria-label="Assignment 01: base R, command line, &amp; Git(Hub)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment 01: base R, command line, &amp; Git(Hub)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-02.html" class="pagination-link" aria-label="Assignment 02: data wrangling">
-        <span class="nav-page-text">Assignment 02: data wrangling</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../projects.html" class="pagination-link" aria-label="Project description">
+        <span class="nav-page-text">Project description</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
