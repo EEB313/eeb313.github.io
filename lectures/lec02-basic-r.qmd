@@ -969,7 +969,7 @@ write_csv(surveys_complete_naomit, "surveys_complete_naomit.csv")
 
 # To save to newly created directory
 write_csv(surveys_complete_naomit, 
-          file.path("/Users/abuga/Dropbox/313_course/2022/Lec01 R Basics/Development/Processed data", "surveys_complete_naomit.csv"))
+          file.path("~/Processed data", "surveys_complete_naomit.csv"))
 ```
 
 Next lecture, we're going to discuss collaboration with GitHub and go over

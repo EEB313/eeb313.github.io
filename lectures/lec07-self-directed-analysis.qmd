@@ -95,7 +95,7 @@ What would you search?
 
 ## The dataset
 
-Information regarding the columns of the dataset are below. Each row corresponds to a particular host-parasite combination, and includes information about the order of the host, type of parasite, number of documented host species per parasite, the number of reported cases and deaths in the focal host, if transmission of the parasite is vector-borne, the mean phylogenetic distance from all documented host species to the infected species, and information regarding the times and locations of case and fatality count data.
+Information regarding the columns of the dataset are below. Each row corresponds to a particular host-parasite combination, and includes information about the order of the host, type of parasite, number of documented host species per parasite, the number of reported cases and deaths in the focal host, if transmission of the parasite is vector-borne, the mean phylogenetic distance of the focal host species from all species known to host the parasite, and information regarding the times and locations of case and fatality count data.
 
 - _Year_ – Year of report
 - _Country_ – Country name
