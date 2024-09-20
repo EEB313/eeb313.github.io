@@ -17,6 +17,7 @@ book:
       - lectures/lec04-data-wrangling.qmd
       - lectures/lec05-data-visualization.qmd
       - lectures/lec06-exploratory-data-analysis.qmd
+      - lectures/lec07-self-directed-analysis.qmd
     - part: "Assignments"
       chapters:
       - assignments/assignment-00.qmd
@@ -61,6 +62,7 @@ extra_files:
   - assignment-00.qmd
   - assignment-01.qmd
   - assignment-01.qmd
+  - lec07-eself-directed-analysis.Rmd
   - portal_data.csv
   - pseudo.ara.busco
   - pseudo.LTRs

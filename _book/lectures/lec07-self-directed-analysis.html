@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - Assignment00: individual interest description</title>
+<title>EEB313: Quantitative Methods in R for Biology - 7&nbsp; Review using Farrell and Davies (2019) dataset</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-01.html" rel="next">
-<link href="../lectures/lec07-self-directed-analysis.html" rel="prev">
+<link href="../assignments/assignment-00.html" rel="next">
+<link href="../lectures/lec06-exploratory-data-analysis.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignment00: individual interest description</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec07-self-directed-analysis.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Review using Farrell and Davies (2019) dataset</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -174,7 +208,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec07-self-directed-analysis.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec07-self-directed-analysis.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Review using Farrell and Davies (2019) dataset</span></span></a>
   </div>
 </li>
@@ -191,7 +225,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/assignment-00.html" class="sidebar-item-text sidebar-link active">
+  <a href="../assignments/assignment-00.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment00: individual interest description</span></a>
   </div>
 </li>
@@ -289,14 +323,32 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">7.1</span> Introduction</a></li>
+  <li><a href="#learning-preamble" id="toc-learning-preamble" class="nav-link" data-scroll-target="#learning-preamble"><span class="header-section-number">7.2</span> Learning preamble</a></li>
+  <li><a href="#best-practices-for-troubleshooting-code" id="toc-best-practices-for-troubleshooting-code" class="nav-link" data-scroll-target="#best-practices-for-troubleshooting-code"><span class="header-section-number">7.3</span> Best practices for troubleshooting code</a>
+  <ul class="collapse">
+  <li><a href="#tips" id="toc-tips" class="nav-link" data-scroll-target="#tips"><span class="header-section-number">7.3.1</span> Tips</a></li>
+  <li><a href="#quick-examples" id="toc-quick-examples" class="nav-link" data-scroll-target="#quick-examples"><span class="header-section-number">7.3.2</span> Quick Examples</a></li>
+  </ul></li>
+  <li><a href="#the-dataset" id="toc-the-dataset" class="nav-link" data-scroll-target="#the-dataset"><span class="header-section-number">7.4</span> The dataset</a></li>
+  <li><a href="#exercise-1-20-min" id="toc-exercise-1-20-min" class="nav-link" data-scroll-target="#exercise-1-20-min"><span class="header-section-number">7.5</span> Exercise 1 (20 min)</a></li>
+  <li><a href="#exercise-2-15-min" id="toc-exercise-2-15-min" class="nav-link" data-scroll-target="#exercise-2-15-min"><span class="header-section-number">7.6</span> Exercise 2 (15 min)</a></li>
+  <li><a href="#exercise-3-35-min" id="toc-exercise-3-35-min" class="nav-link" data-scroll-target="#exercise-3-35-min"><span class="header-section-number">7.7</span> Exercise 3 (35 min)</a></li>
+  <li><a href="#exercise-4-15-min" id="toc-exercise-4-15-min" class="nav-link" data-scroll-target="#exercise-4-15-min"><span class="header-section-number">7.8</span> Exercise 4 (15 min)</a></li>
+  <li><a href="#exercise-5-15-min" id="toc-exercise-5-15-min" class="nav-link" data-scroll-target="#exercise-5-15-min"><span class="header-section-number">7.9</span> Exercise 5 (15 min)</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignment00: individual interest description</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec07-self-directed-analysis.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Review using Farrell and Davies (2019) dataset</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignment00: individual interest description</h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Review using Farrell and Davies (2019) dataset</span></h1>
 </div>
 
 
@@ -313,32 +365,196 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Download the .Rmd file <a href="assignment-01.Rmd">here</a>.</p>
-<p><em>To submit this assignment, upload the full document on Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>.</em></p>
-<ol type="1">
-<li>Get set up at home (or on a lab computer after hours)
+<p>You can download the .Rmd file for this class <a href="lec07-self-directed-analysis.Rmd">here</a>.</p>
+<section id="introduction" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">7.1</span> Introduction</h2>
+<p>The goal of this class is to review concepts from the first half of the course, and to become comfortable writing <em>your own</em> code to wrangle and explore data. It also provides an opportunity to discuss project ideas with your class-mates. (We would like you to form groups before the class on Thursday Sept.&nbsp;26, which will be devoted to project work, or by the end of that class at the latest.) Since the 2nd half of the course requires familiarity with the basics of R, this is a good point to assess if there are programming principles or specific concepts which you need to brush up on.</p>
+<p><strong>Here is how the class will work: you will split up into groups for <em>each</em> of the questions below, briefly discuss your interests for the group project, and work on the questions collaboratively.</strong> The questions will guide you through an exploratory analysis of a nice dataset generated by <a href="https://www.pnas.org/doi/full/10.1073/pnas.1817323116">Farrell and Davies</a>. In their paper, Farrell and Davies seek to test the hypothesis that disease-induced mortality (or <em>virulence</em> of a pathogen) increases with the degree to which an infected host species is diverged from other mammalian hosts. <strong>Your answers will NOT be marked, but Mete and Zoë are happy to check your answers and to provide guidance if you become stuck.</strong> We have also provided some tips and tricks regarding best practices for troubleshooting your code, and encourage you to try to solve the problems by applying some of those practices.</p>
+</section>
+<section id="learning-preamble" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="learning-preamble"><span class="header-section-number">7.2</span> Learning preamble</h2>
+<blockquote class="blockquote">
+<h3 id="learning-objectives" data-number="7.2.1" class="anchored"><span class="header-section-number">7.2.1</span> Learning objectives</h3>
 <ul>
-<li>If you have not already done so, install <a href="https://cran.rstudio.com/">R</a> and <a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a> (already installed on the lab computers).</li>
-<li>Open a new R Notebook and read the instructions about how to use the R Markdown syntax.</li>
-<li>Open this assignment file in RStudio or copy its content into an empty R Notebook.</li>
-<li>Insert a code chunk below, above Question 2. Set <code>eval=FALSE</code></li>
-<li>In the code chunk, use <code>install.packages("&lt;package_name&gt;")</code> to install <code>tidyverse</code> and <code>rmarkdown</code>. Remember to run the code chunk to execute the commands.</li>
-<li>Load the two libraries you just installed into your environment with <code>library(&lt;package_name&gt;)</code> (no surrounding quotation marks). Add this to the same code chunk you created previously and execute it again.
+<li>Become more confortable writing code on your own</li>
+<li>Review concepts from the first half of the course, including
 <ul>
-<li>Don’t worry that the <code>install.packages()</code> commands have already been executed once, R is smart and checks if you already have those installed.</li>
+<li>Reading datasets into R</li>
+<li>Navigating between directories, including absolute and relative file paths</li>
+<li>Summarizing information about the structure of data</li>
+<li>Using ggplot to visualize data</li>
+<li>Common uses of <code>dplyr</code> functions: <code>mutate</code>, <code>select</code>, <code>subset</code>, <code>summarize</code>, <code>group_by</code>, <code>pivot_longer</code>, etc.</li>
+<li>Exporting plots</li>
 </ul></li>
-<li>Run <code>sessionInfo()</code> to list all the loaded packages.
+<li><strong>Become more comfortable with troubleshooting code</strong></li>
+<li>Discuss project ideas with your class-mates!</li>
+</ul>
+<h3 id="lesson-outline" data-number="7.2.2" class="anchored"><span class="header-section-number">7.2.2</span> Lesson outline:</h3>
 <ul>
-<li>You should see the following packages under “other attached packages”: <code>rmarkdown</code>, <code>dplyr</code>, <code>purrr</code>, <code>readr</code>, <code>tidyr</code>, <code>tibble</code>, <code>ggplot</code>, and <code>tidyverse</code>.</li>
+<li>Troubleshooting (5 min)</li>
+<li>Intro to the data (5 min)</li>
+<li>Exercise 1 (20 min)</li>
+<li>Exercise 2 (15 min)</li>
+<li>Exercise 3 (35 min)</li>
+<li>Exercise 4 (15 min)</li>
+<li>Exercise 5 (15 min)</li>
+</ul>
+</blockquote>
+</section>
+<section id="best-practices-for-troubleshooting-code" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="best-practices-for-troubleshooting-code"><span class="header-section-number">7.3</span> Best practices for troubleshooting code</h2>
+<section id="tips" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="tips"><span class="header-section-number">7.3.1</span> Tips</h3>
+<p>If you have an <strong>error message</strong>, look for the FIRST occurrence of an error in the output and Google that line.</p>
+<p><strong>Tips for Googling:</strong></p>
+<ul>
+<li>Include the name of the function that failed in your query
+<ul>
+<li>If you’re not sure what failed, look for function names in that first error line (names with <code>()</code> after them) or the line above it</li>
 </ul></li>
-<li>Since this is your first assignment, we have already completed most of this question below. You still need to run the code chunk on your computer to confirm that the packages installed and to get the <code>sessionInfo()</code> output for your computer. You might receive warnings that functions from other packages are masked when you load <code>tidyverse</code>, but this is fine.</li>
+<li>Remove any variable names or values from your query</li>
+<li>If you’re given line numbers, use them to double-check your script at that line location for syntax mistakes
+<ul>
+<li>If you got the error after running a whole code chunk, you can also try running your code line by line (with cmd+enter on Mac or ctrl+enter on PC) to pinpoint the source of the problem</li>
 </ul></li>
-</ol>
-<ol start="2" type="1">
-<li>In 4-5 sentences, what are some of the topics/questions in ecology and evolutionary biology that you are interested in for the group project?</li>
-</ol>
+</ul>
+<p>If you’re <strong>not getting output you expect</strong>, test what you’re trying to do with toy data (make a tiny data frame or vector) and/or use your actual data but perform the operations one at a time.</p>
+<p>Generally, ensure you understand any warning messages that printed by your code. You may decide to change your script to eliminate the message, but make that decision carefully. This could be affecting analyses you’re performing later in your script. Google is your friend here as well.</p>
+<p><strong>It is absolutely disheartening</strong> to spend a lot of time trying to fix something. We’re not here to dismiss that feeling. It’ll take a while to get good at recognizing what <strong>keywords</strong> will be important for your Google searches &amp; being able to fully understand the Stack Overflow posts. Troubleshooting and debugging are <em>very</em> valuable skills, though, and it’s worth the effort!</p>
+</section>
+<section id="quick-examples" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="quick-examples"><span class="header-section-number">7.3.2</span> Quick Examples</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tdyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>output: <code>Error in library(tdyverse) : there is no package called ‘tdyverse’</code></p>
+<p>What would you search?</p>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">7</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">&lt;</span> <span class="dv">5</span>) {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"x is less than 5"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"x is greater than 5"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>output: <code>Error: unexpected 'else' in:"  print("x is less than 5") else"</code></p>
+<p>What would you search?</p>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(iris<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>output: <code>Warning: argument is not numeric or logical: returning NA</code></p>
+<p>What would you search?</p>
+</section>
+</section>
+<section id="the-dataset" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="the-dataset"><span class="header-section-number">7.4</span> The dataset</h2>
+<p>Information regarding the columns of the dataset are below. Each row corresponds to a particular host-parasite combination, and includes information about the order of the host, type of parasite, number of documented host species per parasite, the number of reported cases and deaths in the focal host, if transmission of the parasite is vector-borne, the mean phylogenetic distance from all documented host species to the infected species, and information regarding the times and locations of case and fatality count data.</p>
+<ul>
+<li><em>Year</em> – Year of report</li>
+<li><em>Country</em> – Country name</li>
+<li><em>Disease</em> – OIE reported disease name</li>
+<li><em>Parasite</em> – Parasite Latin binomial</li>
+<li><em>Host</em> – Latin binomial of host reported by World Organisation for Animal Health</li>
+<li><em>Cases</em> – Number of reported cases</li>
+<li><em>Deaths</em> – Number of reported deaths due to disease</li>
+<li><em>Destroyed</em> – Number of animals reported to have been destroyed</li>
+<li><em>Slaughtered</em> – Number of animals reported to have been slaughtered</li>
+<li><em>HostOrder</em> – Taxonomic order of host species</li>
+<li><em>SR</em> – The number of documented host species per parasite, also referred to as “host species richness”</li>
+<li><em>EvoIso</em> – Host evolutionary isolation (in millions of years); see Figure 1 and SI 1.3 for details.</li>
+<li><em>Taxonomic Range</em> – The largest taxonomic range among documented host species (1-6 representing parasites restricted to a single species, genus, family, order, class, or multiple classes, respectively)</li>
+<li><em>ParaType</em> – Gross parasite taxonomic group (arthropod, bacteria, fungi, helminth, protozoa, virus)</li>
+<li><em>ParaFamily</em> – Parasite taxonomic family</li>
+<li><em>Vector</em> – Binary variable (0/1) indicating whether parasite can be transmitted by an arthropod vector</li>
+<li><em>EnviroRestingStage</em> – Binary variable (0/1) indicating whether parasite has a resting stage capable of persisting for long periods of time in the environment (typically months to years)</li>
+<li><em>AvianReservoir</em> –Binary variable (0/1) indicating whether parasite has been documented to use avian species as reservoir hosts</li>
+<li><em>Reproduction</em> – Binary variable (0/1) indicating whether parasite can be vertically transmitted as a function of reproduction (either vertically transmitted, sexually transmitted, or passed from mother to offspring via ingestion of milk or colostrum</li>
+<li><em>WOK_citations</em> – number of Web of Knowledge citations per parasite</li>
+<li><em>WOK_citations_noHuman</em> – number of Web of Knowledge citations per parasite excluding those that reference humans</li>
+<li><em>latitude</em> – latitude of country in degrees</li>
+<li><em>gdp</em> – Gross Domestic Product of country (current US$); WDI code “NY.GDP.MKTP.CD”</li>
+<li><em>gdp_pcap</em> – Gross Domestic Product of country per capita (current US$); WDI code “NY.GDP.PCAP.CD”</li>
+</ul>
+</section>
+<section id="exercise-1-20-min" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="exercise-1-20-min"><span class="header-section-number">7.5</span> Exercise 1 (20 min)</h2>
+<p><strong>a.</strong> Use <code>download.file()</code> to download the <code>disease_distance.csv</code> dataset from the EEB313 website. Call the computer on your file <code>disease_distance.csv</code>.</p>
+<p><strong>b.</strong> Clear your environment and console.</p>
+<p><strong>c.</strong> Read the <code>disease_distance.csv</code> dataset into R in two ways. Name the data object <code>disease_data</code>.</p>
+<ul>
+<li>Change your working directory to the location where the file is saved using <code>setwd()</code>, and provide <code>read_csv()</code> with the <em>relative</em> path to the data.</li>
+<li>Provide the <em>absolute</em> file path to the Farrell and Davies data when you call <code>read_csv()</code>.</li>
+</ul>
+<p><strong>d.</strong> View aspects of the data in the console.</p>
+<ul>
+<li>Run <code>str()</code> on the data and interpret the output.</li>
+<li>Print the first 100 rows of the data. Print the last 100 rows.</li>
+<li>Assign to an object <code>new_df</code> a data frame with 1000 randomly selected rows. Do this using the tidy function <code>slice_sample()</code>. <em>Hint: use the documentation for the <code>slice()</code> function found <a href="https://dplyr.tidyverse.org/reference/slice.html">here</a></em>.</li>
+<li>Assign to an object <code>new_df2</code> a data frame with every 10th row of the data. Do this using base R. <em>Hint: use <code>seq()</code> to create a vector whose entries are 10, 20, 30, … and use this vector to extract the rows of interest.</em></li>
+<li>Select columns <code>Reproduction</code>, <code>Host</code>, <code>Cases</code>, <code>Country</code>, and <code>Deaths</code> from the <code>new_df2</code> data frame you just made.</li>
+<li>Run <code>class()</code> on the following columns: <code>Reproduction</code>, <code>Deaths</code>, and <code>Country</code>. Which of these columns can be effectively treated — or, in other words, <em>coerced</em> — into a logical vector (i.e., a vector whose entries are either <code>TRUE</code> or <code>FALSE</code>)?</li>
+</ul>
+<p><strong>From here on out, use the FULL data frame (i.e., <code>disease_data</code>, where all columns and rows present).</strong> To ensure that you do not call <code>new_df</code>, run <code>new_df &lt;- NULL</code>. Try to think of a few reasons why, in writing a program for a research project, one would write over an intermediate data frame or file.</p>
+</section>
+<section id="exercise-2-15-min" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="exercise-2-15-min"><span class="header-section-number">7.6</span> Exercise 2 (15 min)</h2>
+<p><strong>a.</strong> Remove any rows with missing data using the tidy function <code>drop_na()</code>. Documentation can be found <a href="https://tidyr.tidyverse.org/reference/drop_na.html">here</a>. Are there any missing rows? Why or why not?</p>
+<p><strong>b.</strong> A calculation and some coersion!</p>
+<ul>
+<li>Use the function <code>mutate</code> to estimate the <em>case fatality rate</em> by dividing number of individuals that die of a disease by the number of confirmed cases. Return a data frame with one column, corresponding to the case fatality rates that were just calculated.</li>
+<li>Coerce the case fatality rate data <em>column</em> into a numeric vector using <code>as.numeric()</code>. What function might you use to coerce something into a character vector? (R is nice in that the naming conventions are very natural…when you get the hang of them!)</li>
+<li>What do you notice about the distribution of case fatality rates?</li>
+<li>Try to identify conditions under which the case fatality rate would be a problematic measure of parasite virulence?</li>
+</ul>
+<p><strong>c.</strong> Use tidyverse to count the number of observations associated to each parasite. Do the same thing for each host, and then for each host-country combination.</p>
+<p><strong>d.</strong> Compute mean, median, max, and min of <code>Cases</code> for each host in each country. Then, filter the resulting data frame so that rows where the mean number is &gt;5000 are kept. What countries are such that the mean number is &gt;5000? Think about why some countries may have fewer reported cases (key word: reported).</p>
+</section>
+<section id="exercise-3-35-min" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="exercise-3-35-min"><span class="header-section-number">7.7</span> Exercise 3 (35 min)</h2>
+<p><strong>a.</strong> Histograms, histograms, histograms!</p>
+<ul>
+<li>Make a histogram of the number of cases, and another for the number of deaths. What do you notice?</li>
+<li>Make histograms of the numbers of the log-transformed cases and deaths. What do you notice? By log transformed, we mean the logarithm (base 10) of the variable. Are there any warnings which appear and, if so, why?</li>
+<li>Use the function <code>unique()</code> to determine the unique host species represented in the dataset. How many are there?</li>
+<li>Make a histogram of the log-transformed number of deaths, faceted by host. Play with the parameter <code>bins</code>. The default for this parameter is <code>bins = 30</code>. What happens if you set <code>bins = 1</code> and <code>bins = 100</code>?</li>
+<li>Make a histogram of the number of deaths over the number of cases by host order and parasite type. <em>Hint: look at the documentation for <code>facet_grid()</code>.</em></li>
+<li>Interpret the histograms you just made. Do you notice anything interesting? (For example, think about what parasite types hosts that die in large proportions relative to the number of reported cases…)</li>
+</ul>
+<p><strong>b.</strong> Boxplots (and a bunch of other geoms…)</p>
+<ul>
+<li>Explore the documentation for ggplot “geoms”, which can be found here <a href="https://ggplot2.tidyverse.org/reference/">here</a>.</li>
+<li>Make a boxplot with host on the x axis and the log-transformed number of deaths on the y axis. Call this plot <code>p</code>.</li>
+<li>Explore the structure of the plot object <code>p</code> using the global environment and, after this, the <code>str()</code> function?</li>
+<li>Try changing the theme. Classics include <code>bw()</code>, <code>classic()</code>, <code>light()</code>, and <code>void()</code>. Which ones do you like? (More on ggplot themes can be found <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">here</a>.) Also, check out the GitHub repo for the newly-developed Barbie and Oppenheimer themes <a href="https://github.com/MatthewBJane/ThemePark">here</a>! You can use these themes by first installing the package <code>ThemePark</code>.</li>
+<li>Use Google to detemrine what to add to the ggplot so the text on the x axis is rotated by 90 degrees (i.e., is readable).</li>
+<li>Export the plot as a .png and then as a .pdf.</li>
+</ul>
+</section>
+<section id="exercise-4-15-min" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="exercise-4-15-min"><span class="header-section-number">7.8</span> Exercise 4 (15 min)</h2>
+<p><strong>a.</strong> Visualize the data to see if there is relationship between the case fatality rate, the number of deaths over the number of cases, for a host and evolutionary isolation from the other hosts?</p>
+<p><strong>Based on your visualization of the data, what you predict the relationship between these variables is? How would you test your understand and/or visualize the relationship in a different way? If constructing a <em>statistical</em> model to determine if there is relationship, are there variables in the dataset that you think would be important to control for?</strong></p>
+<p>After thinking about these questions, read the abstract and significance statement for <a href="https://www.pnas.org/doi/full/10.1073/pnas.1817323116">the paper from which this dataset is from</a>. Discuss with your group what what exploratory analysis of data can and <em>cannot</em> do, based on the information in the paper and what you noticed about your visualization.</p>
+</section>
+<section id="exercise-5-15-min" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="exercise-5-15-min"><span class="header-section-number">7.9</span> Exercise 5 (15 min)</h2>
+<p><strong>a.</strong> Check out <a href="https://wilkelab.org/ggridges/index.html">this documentation</a> for the package <code>ggridges</code>.</p>
+<p><strong>b.</strong> Install <code>ggridges</code> and make sure to load it using <code>library()</code> or <code>require()</code>.</p>
+<p><strong>c.</strong> Play around with <code>ggridges</code>! Using the <code>disease_distance</code> dataset which you have been exploring this lecture, make a ridgeline plot with a continuous variable on the x axis and discrete variable on the y. If you like, try to customize it (e.g., with fun colors)!</p>
+<p><strong>d.</strong> Run the following code chunk :)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"praise"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(praise)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) { <span class="fu">print</span>(<span class="fu">praise</span>()) }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -752,13 +968,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../lectures/lec07-self-directed-analysis.html" class="pagination-link" aria-label="Review using Farrell and Davies (2019) dataset">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Review using Farrell and Davies (2019) dataset</span></span>
+      <a href="../lectures/lec06-exploratory-data-analysis.html" class="pagination-link" aria-label="Exploratory data analysis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exploratory data analysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-01.html" class="pagination-link" aria-label="Assignment 01: base R, command line, &amp; Git(Hub)">
-        <span class="nav-page-text">Assignment 01: base R, command line, &amp; Git(Hub)</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
+        <span class="nav-page-text">Assignment00: individual interest description</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
