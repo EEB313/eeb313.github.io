@@ -1044,6 +1044,61 @@
     ]
   },
   {
+    "objectID": "assignments/assignment-03.html",
+    "href": "assignments/assignment-03.html",
+    "title": "Assignment 03: data visualisation and exploration",
+    "section": "",
+    "text": "1. Visualising plant biomass (3.5 marks)\nTo start this assignment, you will once again be looking at the yearly change in biomass of plants in the beautiful Abisko national park in northern Sweden. We have pre-processed this data and made it available as a csv-file via this link. You can find the original data and a short abstract on dryad. The original study1 is available on an open access license.\nplant_biomass &lt;- \n  read_csv('https://uoftcoders.github.io/rcourse/data/plant-biomass-preprocess.csv',\n           show_col_types = FALSE) %&gt;%\n  rename(dwarf_birch = betula_nana, \n         wavy_hair_grass = deschampsia_flexuosa,\n         crowberry = empetrum_nigrum,\n         bilberry = vaccinium_myrtillus,\n         bog_bilberry = vaccinium_uliginosum,\n         lingonberry = vaccinium_vitis_idaea) %&gt;%\n  pivot_longer(cols = dwarf_birch:lingonberry, names_to = \"species\",\n               values_to = \"biomass\")\n\nprint(plant_biomass)\n\n# A tibble: 1,080 × 6\n    year  site habitat treatment       species         biomass\n   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;           &lt;chr&gt;             &lt;dbl&gt;\n 1  1998     1 Forest  grazedcontrol   dwarf_birch        0   \n 2  1998     1 Forest  grazedcontrol   wavy_hair_grass    7.47\n 3  1998     1 Forest  grazedcontrol   crowberry         22.6 \n 4  1998     1 Forest  grazedcontrol   bilberry         118.  \n 5  1998     1 Forest  grazedcontrol   bog_bilberry      11.9 \n 6  1998     1 Forest  grazedcontrol   lingonberry        8.46\n 7  1998     1 Forest  rodentexclosure dwarf_birch        4.74\n 8  1998     1 Forest  rodentexclosure wavy_hair_grass    3.32\n 9  1998     1 Forest  rodentexclosure crowberry         24.4 \n10  1998     1 Forest  rodentexclosure bilberry          57.0 \n# ℹ 1,070 more rows",
+    "crumbs": [
+      "Assignments",
+      "Assignment 03: data visualisation and exploration"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-03.html#visualising-plant-biomass-3.5-marks",
+    "href": "assignments/assignment-03.html#visualising-plant-biomass-3.5-marks",
+    "title": "Assignment 03: data visualisation and exploration",
+    "section": "",
+    "text": "Compare the mean biomass for grazedcontrol with that of rodentexclosure graphically in a line plot. What could explain the big dip in biomass year 2012? (0.75 marks) Hint: The published study might be able to help with the second question\nCompare the mean yearly change in biomass for each species in a lineplot. (0.5 marks)\nWe’ve found that the biomass is higher in the sites with rodent exclosures (especially in recent years), and that the crowberry is the dominant species. Notice how the lines for rodentexclosure and crowberry are of similar shape. Coincidence? Let’s find out! Use a facetted line plot to explore whether all plant species are impacted equally by grazing. (0.75 mark)\nThe habitat could also be affecting the biomass of different species. Explore this in a line plot of the mean biomass over time. (0.75 marks)\nExplore the relationship between species, habitat, and biomass in a box plot. (0.5 marks)\nIt looks like both habitat and treatment have an effect on most of the species! Let’s dissect the data further by visualizing the effect of both the habitat and treatment on each species by faceting the plot accordingly. (0.75 mark)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 03: data visualisation and exploration"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-03.html#customising-plots-1-mark",
+    "href": "assignments/assignment-03.html#customising-plots-1-mark",
+    "title": "Assignment 03: data visualisation and exploration",
+    "section": "2. Customising plots (1 mark)",
+    "text": "2. Customising plots (1 mark)\n\nCreate a ggplot theme object that makes five modifications to plot appearance. Save it this way so you can use it in other plots (including outside of this course). You can use the vignettes at the bottom of ggplot’s theme documentation to find arguments you might like to modify. Some components you might like to alter: panel.background to change the colour of the plot body (remember, colour alters plot element outlines and fill alters the body of plot elements), panel.grid to alter the plot grid, strip.text for facet box text, and legend.title to change the size of the text of the legend’s title. (0.5 mark)\nApply this theme to your plot from 1f and add labels (a title, colour legend title, x axis lable, and y axis label). (0.5 marks)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 03: data visualisation and exploration"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-03.html#visualising-mammal-size-dimorphism-3-marks",
+    "href": "assignments/assignment-03.html#visualising-mammal-size-dimorphism-3-marks",
+    "title": "Assignment 03: data visualisation and exploration",
+    "section": "3. Visualising mammal size dimorphism (3 marks)",
+    "text": "3. Visualising mammal size dimorphism (3 marks)\nDownload the “SSDinMammals.csv” file from Quercus, the course website, or Data Dryad. The original study2 is quite interesting!\n\nmammal_sizes &lt;- read_csv(\"/Users/meteyuksel/eeb313website/lectures/data/SSDinMammals.csv\",\n                         show_col_types = FALSE)\nprint(mammal_sizes)\n\n# A tibble: 691 × 18\n   Order      Family Species Scientific_Name massM SDmassM massF SDmassF lengthM\n   &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n 1 Afrosoric… Chrys… Hotten… Amblysomus hot…  80.6    1.24  66      8.64      NA\n 2 Afrosoric… Chrys… Namib … Eremitalpa gra…  28      6.7   23.1    3.6       NA\n 3 Afrosoric… Tenre… Lesser… Echinops telfa… 102.    19.3   99.9   17.8       NA\n 4 Afrosoric… Tenre… Large-… Geogale aurita    7.3    1.02   7      1.34      NA\n 5 Afrosoric… Tenre… Highla… Hemicentetes n… 111     15.6   98      6.56      NA\n 6 Afrosoric… Tenre… Lowlan… Hemicentetes s… 110.    16.7  108.    16.0       NA\n 7 Afrosoric… Tenre… Short-… Microgale brev…   9.4    1.52   9.7    1.16      NA\n 8 Afrosoric… Tenre… Cowan'… Microgale cowa…  12.4    1.71  12.7    1.83      NA\n 9 Afrosoric… Tenre… Dobson… Microgale dobs…  26.9    4.38  28.9    5.39      NA\n10 Afrosoric… Tenre… Drouha… Microgale drou…  10.1    1.26  12.5    1.79      NA\n# ℹ 681 more rows\n# ℹ 9 more variables: SDlengthM &lt;dbl&gt;, lengthF &lt;dbl&gt;, SDlengthF &lt;dbl&gt;,\n#   n_M &lt;dbl&gt;, n_F &lt;dbl&gt;, n_Mlength &lt;dbl&gt;, n_Flength &lt;dbl&gt;, Comments &lt;chr&gt;,\n#   Source &lt;chr&gt;\n\n\n\nMake a scatterplot with female mass on the x-axis and male mass on the y-axis. Plot a straight line with slope y = x (can use the abline geom) behind the mass data points. Make subplots according to Order, allowing free scaling of the axes. Apply the theme you made in question 2. (1 mark)\nCalculate the proportional mass difference ([massM - massF] / massM) for all the rows in the data set. Separating the data by Order, create a boxplot of these proportional mass differences. Plot a horizontal line behind the data, with a y-intercept that would reflect no mass difference between sexes. Apply your theme from question 2. Finally, ensure the Order text is legible. (1 mark)\nImprove your plot from 3b. Include points behind the boxplot that reflect the number of observations for each point (i.e. sizing by n_M or n_F). You should ensure these points are reasonably visible by using a variant of the point geom (look to the data exploration lecture’s section on boxplot augmentation) and specifying opacity. Visually differentiate the horizontal reference line from the data (using colour, for example). Label your axes and legend. (1 mark)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 03: data visualisation and exploration"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-03.html#footnotes",
+    "href": "assignments/assignment-03.html#footnotes",
+    "title": "Assignment 03: data visualisation and exploration",
+    "section": "",
+    "text": "Olofsson J, te Beest M, Ericson L (2013) Complex biotic interactions drive long-term vegetation dynamics in a subarctic ecosystem. Philosophical Transactions of the Royal Society B 368(1624): 20120486. https://dx.doi.org/10.1098/rstb.2012.0486↩︎\nTombak, K.J., Hex, S.B.S.W. & Rubenstein, D.I. New estimates indicate that males are not larger than females in most mammal species. Nat Commun 15, 1872 (2024). https://doi.org/10.1038/s41467-024-45739-5↩︎",
+    "crumbs": [
+      "Assignments",
+      "Assignment 03: data visualisation and exploration"
+    ]
+  },
+  {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "Project description",
