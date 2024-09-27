@@ -13,5 +13,6 @@ Below are some resources that would be a good to look at if you are in search of
 - [North American Bird Breeding Survey](https://www.pwrc.usgs.gov/BBS/RawData/): repository containing information regarding the number of birds at multiple sites in North America. Many datasets of varying size that need to be linked together.
 - [Malaria Atlas Project](https://malariaatlas.org): publicly available and up-to-date malaria prevalence and distribution data. Vector distribution, bednet coverage, etc. data also available.
 - [GISAID](https://gisaid.org) hosts much of the available sequence data for rapidly-evolving RNA viruses such as influenza, SARS-CoV-2, monkeypox, and RSV as well as relevant meta-data (e.g., host species).
+- [The Verena Institute](https://www.viralemergence.org/data) has developed a large collection of datasets on the interaction between pathogens, especially viruses, and their hosts. These datasets include information about surveillance/sampling, as well as more biological details.
 
 Let Mete and Zoe know if data from any of these resources interests you, or if you would like to discuss where data to answer questions you find interesting might be found...
