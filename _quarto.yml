@@ -23,6 +23,7 @@ book:
       - assignments/assignment-00.qmd
       - assignments/assignment-01.qmd
       - assignments/assignment-02.qmd
+      - assignments/assignment-03.qmd
     - part: "Project"
       chapters:
       - projects.qmd
@@ -58,10 +59,12 @@ format:
 extra_files:
   - assignment-00.Rmd
   - assignment-01.Rmd
-  - assignment-01.Rmd
+  - assignment-02.Rmd
+  - assignment-03.Rmd
   - assignment-00.qmd
   - assignment-01.qmd
-  - assignment-01.qmd
+  - assignment-02.qmd
+  - assignment-03.qmd
   - lec07-eself-directed-analysis.Rmd
   - portal_data.csv
   - pseudo.ara.busco

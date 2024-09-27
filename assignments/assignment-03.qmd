@@ -1,0 +1,68 @@
+# Assignment 03: data visualisation and exploration {-}
+
+Download the .Rmd file [here](assignment-03.Rmd).
+
+*To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`. Please ensure the text on your .pdf does not continue past the end of the page.*
+
+```{r a3setup, include=FALSE}
+library(tidyverse)
+```
+
+## 1. Visualising plant biomass (3.5 marks)
+
+To start this assignment, you will once again be looking at the yearly change in biomass of plants in the [beautiful Abisko national park in northern Sweden](https://en.wikipedia.org/wiki/Abisko_National_Park). We have pre-processed this data and made [it available as a csv-file via this link](https://uoftcoders.github.io/rcourse/data/plant-biomass-preprocess.csv). You can find the original data and a short abstract on [dryad](https://datadryad.org/resource/doi:10.5061/dryad.38s21). The original study[^1] is available on an open access license.
+
+```{r q1setup}
+plant_biomass <- 
+  read_csv('https://uoftcoders.github.io/rcourse/data/plant-biomass-preprocess.csv',
+           show_col_types = FALSE) %>%
+  rename(dwarf_birch = betula_nana, 
+         wavy_hair_grass = deschampsia_flexuosa,
+         crowberry = empetrum_nigrum,
+         bilberry = vaccinium_myrtillus,
+         bog_bilberry = vaccinium_uliginosum,
+         lingonberry = vaccinium_vitis_idaea) %>%
+  pivot_longer(cols = dwarf_birch:lingonberry, names_to = "species",
+               values_to = "biomass")
+
+print(plant_biomass)
+```
+
+
+a.  Compare the mean biomass for `grazedcontrol` with that of `rodentexclosure` graphically in a line plot. What could explain the big dip in biomass year 2012? (0.75 marks) *Hint: The published study might be able to help with the second question*
+
+b.  Compare the mean yearly change in biomass for each species in a lineplot. (0.5 marks)
+
+c.  We've found that the biomass is higher in the sites with rodent exclosures (especially in recent years), and that the crowberry is the dominant species. Notice how the lines for `rodentexclosure` and `crowberry` are of similar shape. Coincidence? Let's find out! Use a facetted line plot to explore whether all plant species are impacted equally by grazing. (0.75 mark)
+
+d.  The habitat could also be affecting the biomass of different species. Explore this in a line plot of the mean biomass over time. (0.75 marks)
+
+e.  Explore the relationship between species, habitat, and biomass in a box plot. (0.5 marks)
+
+f.  It looks like both habitat and treatment have an effect on most of the species! Let's dissect the data further by visualizing the effect of both the habitat and treatment on each species by faceting the plot accordingly. (0.75 mark)
+
+## 2. Customising plots (1 mark)
+
+a. Create a ggplot theme object that makes five modifications to plot appearance. Save it this way so you can use it in other plots (including outside of this course). You can use the vignettes at the bottom of ggplot's [theme documentation](https://ggplot2.tidyverse.org/reference/theme.html) to find arguments you might like to modify. Some components you might like to alter: `panel.background` to change the colour of the plot body (remember, colour alters plot element outlines and fill alters the body of plot elements), `panel.grid` to alter the plot grid, `strip.text` for facet box text, and `legend.title` to change the size of the text of the legend's title. (0.5 mark)
+
+b. Apply this theme to your plot from 1f and add labels (a title, colour legend title, x axis lable, and y axis label). (0.5 marks)
+
+## 3. Visualising mammal size dimorphism (3 marks)
+
+Download the "SSDinMammals.csv" file from Quercus, the course website, or [Data Dryad](https://datadryad.org/stash/downloads/file_stream/2921720). The original study[^2] is quite interesting!
+
+```{r 3setup}
+mammal_sizes <- read_csv("/Users/meteyuksel/eeb313website/lectures/data/SSDinMammals.csv",
+                         show_col_types = FALSE)
+print(mammal_sizes)
+```
+
+a. Make a scatterplot with female mass on the x-axis and male mass on the y-axis. Plot a straight line with slope y = x (can use the `abline` geom) *behind* the mass data points. Make subplots according to Order, allowing free scaling of the axes. Apply the theme you made in question 2. (1 mark)
+
+b. Calculate the proportional mass difference ([massM - massF] / massM) for all the rows in the data set. Separating the data by Order, create a boxplot of these proportional mass differences. Plot a horizontal line *behind* the data, with a y-intercept that would reflect no mass difference between sexes. Apply your theme from question 2. Finally, ensure the Order text is legible. (1 mark)
+
+c. Improve your plot from 3b. Include points behind the boxplot that reflect the number of observations for each point (i.e. sizing by `n_M` or `n_F`). You should ensure these points are reasonably visible by using a variant of the point geom (look to the data exploration lecture's section on boxplot augmentation) and specifying opacity. Visually differentiate the horizontal reference line from the data (using colour, for example). Label your axes and legend. (1 mark)
+
+
+[^1]: Olofsson J, te Beest M, Ericson L (2013) Complex biotic interactions drive long-term vegetation dynamics in a subarctic ecosystem. Philosophical Transactions of the Royal Society B 368(1624): 20120486. <https://dx.doi.org/10.1098/rstb.2012.0486>
+[^2]: Tombak, K.J., Hex, S.B.S.W. & Rubenstein, D.I. New estimates indicate that males are not larger than females in most mammal species. Nat Commun 15, 1872 (2024). <https://doi.org/10.1038/s41467-024-45739-5> 
