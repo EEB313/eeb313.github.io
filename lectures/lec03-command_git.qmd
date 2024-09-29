@@ -456,7 +456,7 @@ Although issues aren't needed for any of the steps we discussed above, it can be
 
 Usually, there are several other steps involved during collaboration. At this point, we are able to push our edits from our local machine straight to the final version on the GitHub repo. This can be dangerous if no one else is checking over your code, especially if every team member has direct access to change the contents of the main repo, and all of your project files. These additional steps include using forks and branches.
 
-### Creating a Fork
+### Creating a fork
 
 The repos that have already been created can be thought of as "main repos",
 which will contain the "primary" version of the repo at any given point in

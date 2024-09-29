@@ -161,9 +161,9 @@ These components will be graded mostly on completion. The purpose of this assign
 
 *6 marks total*
 
-Options 1 and 3: Two marks are given to clearly stating hypotheses and predictions. In the case that these are different from those in the proposal, the rationale for refinement needs to be clearly explained.
+Options 1 and 3: Three marks are given to clearly stating hypotheses and predictions. In the case that these are different from those in the proposal, the rationale for refinement needs to be clearly explained.
 
-Each of the following criteria are scored out of 2: 2 == excellent, 1.5 == good, 1 == acceptable, but needs improvement.
+Each of the following criteria are scored out of 3: 3 == excellent, 2 == good, 1 == acceptable, but needs improvement.
 
 1.  Data description
     -   The data source(s) are sufficiently described, specifically, where was the obtained and how it was originally collected.
