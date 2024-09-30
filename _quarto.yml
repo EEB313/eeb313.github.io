@@ -18,6 +18,7 @@ book:
       - lectures/lec05-data-visualization.qmd
       - lectures/lec06-exploratory-data-analysis.qmd
       - lectures/lec07-self-directed-analysis.qmd
+      - lectures/lec08-intro-inference-1.qmd
     - part: "Assignments"
       chapters:
       - assignments/assignment-00.qmd
