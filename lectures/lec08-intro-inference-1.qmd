@@ -83,6 +83,8 @@ What are the other events that can happen, if the outcomes are 1, 2, 3, and 4? D
 # 1,2,3,4
 ```
 
+### Axioms of probability
+
 Probability allows us to assign to each event ($\{2,3\}, \{\}, \{1,2,3,4\}$, etc.) a value between zero and one capturing how likely that event is to occur under the experiment we have preformed. We also need certain conditions on this function to be met:
 
 - The probability of any event must be $\geqslant 0$. Negative probabilities make no sense!

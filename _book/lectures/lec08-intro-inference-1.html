@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-00.html" rel="next">
+<link href="../lectures/lec09-intro-inference-2.html" rel="next">
 <link href="../lectures/lec07-self-directed-analysis.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -247,6 +247,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction to inference I</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec09-intro-inference-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to inference II</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -376,8 +382,9 @@ window.Quarto = {
   <li><a href="#review-of-probability" id="toc-review-of-probability" class="nav-link" data-scroll-target="#review-of-probability"><span class="header-section-number">8.3</span> Review of probability!</a>
   <ul class="collapse">
   <li><a href="#challenge-question" id="toc-challenge-question" class="nav-link" data-scroll-target="#challenge-question"><span class="header-section-number">8.3.1</span> Challenge question</a></li>
-  <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example"><span class="header-section-number">8.3.2</span> An example</a></li>
-  <li><a href="#challenge-question-1" id="toc-challenge-question-1" class="nav-link" data-scroll-target="#challenge-question-1"><span class="header-section-number">8.3.3</span> Challenge question</a></li>
+  <li><a href="#axioms-of-probability" id="toc-axioms-of-probability" class="nav-link" data-scroll-target="#axioms-of-probability"><span class="header-section-number">8.3.2</span> Axioms of probability</a></li>
+  <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example"><span class="header-section-number">8.3.3</span> An example</a></li>
+  <li><a href="#challenge-question-1" id="toc-challenge-question-1" class="nav-link" data-scroll-target="#challenge-question-1"><span class="header-section-number">8.3.4</span> Challenge question</a></li>
   </ul></li>
   <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables"><span class="header-section-number">8.4</span> Random variables!</a>
   <ul class="collapse">
@@ -485,6 +492,9 @@ window.Quarto = {
 <section id="challenge-question" class="level3" data-number="8.3.1">
 <h3 data-number="8.3.1" class="anchored" data-anchor-id="challenge-question"><span class="header-section-number">8.3.1</span> Challenge question</h3>
 <p>What are the other events that can happen, if the outcomes are 1, 2, 3, and 4? Don’t forget the event where <em>nothing</em> happens!</p>
+</section>
+<section id="axioms-of-probability" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="axioms-of-probability"><span class="header-section-number">8.3.2</span> Axioms of probability</h3>
 <p>Probability allows us to assign to each event (<span class="math inline">\(\{2,3\}, \{\}, \{1,2,3,4\}\)</span>, etc.) a value between zero and one capturing how likely that event is to occur under the experiment we have preformed. We also need certain conditions on this function to be met:</p>
 <ul>
 <li>The probability of any event must be <span class="math inline">\(\geqslant 0\)</span>. Negative probabilities make no sense!</li>
@@ -495,14 +505,14 @@ window.Quarto = {
 <p><span class="math inline">\(A_1,\dots,A_n,\dots\)</span> are mutually exclusive if <span class="math inline">\(A_i, A_j\)</span> do not share outcomes for all <span class="math inline">\(i \neq j\)</span>. (The events <span class="math inline">\(A_1 = \{1,2\}\)</span> and <span class="math inline">\(A_2 = \{3,4\}\)</span> are distinct, while the events <span class="math inline">\(A_1 = \{1,3\}\)</span> and <span class="math inline">\(A_2 = \{3,4\}\)</span> are not..)</p>
 <p><strong>A sample space, set of events formed from individual outcomes in the sample space, and a function on those events which satisfies the conditions above are the ingredients we need to define probability. Moreover, this mathematical definition is comparable with all of the interpretations above. Differences between interpretations are primarily philosophical in nature.</strong></p>
 </section>
-<section id="an-example" class="level3" data-number="8.3.2">
-<h3 data-number="8.3.2" class="anchored" data-anchor-id="an-example"><span class="header-section-number">8.3.2</span> An example</h3>
+<section id="an-example" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="an-example"><span class="header-section-number">8.3.3</span> An example</h3>
 <p>In the case of rolling a four-sided die, the probability of all events can be calculated (due to third condition) by specifying what the probability of each outcome is. When there are countably many outcomes (i.e., we can count them even if there are infinitely many), the probabilities of individual outcomes tell us about probabilities of events. For example,</p>
 <p><span class="math display">\[\Pr(\{1,2,3,4\}) = \Pr(1 \text{ or } 2 \text{ or } 3 \text{ or } 4) = \Pr(\{1\}) + \Pr(\{2\}) + \Pr(\{3\}) + \Pr(\{4\}) = 1\]</span> <span class="math display">\[\Pr(\{1,2,3\}) = \Pr(1 \text{ or } 2 \text{ or } 3) = \Pr(\{1\}) + \Pr(\{2\}) + \Pr(\{3\}) = 0.75\]</span></p>
 <p><span class="math display">\[\Pr(\{1,3\}) = \Pr(1 \text{ or } 3) = \Pr(\{1\}) + \Pr(\{3\}) = 0.5\]</span></p>
 </section>
-<section id="challenge-question-1" class="level3" data-number="8.3.3">
-<h3 data-number="8.3.3" class="anchored" data-anchor-id="challenge-question-1"><span class="header-section-number">8.3.3</span> Challenge question</h3>
+<section id="challenge-question-1" class="level3" data-number="8.3.4">
+<h3 data-number="8.3.4" class="anchored" data-anchor-id="challenge-question-1"><span class="header-section-number">8.3.4</span> Challenge question</h3>
 <p>Suppose <span class="math inline">\(\Pr(\{1\}) = 0.2, \Pr(\{2\}) = 0.3, \Pr(\{3\}) = 0.25,\)</span> and <span class="math inline">\(\Pr(\{4\}) = 0.25\)</span>, i.e., the die is not fair but not horribly biased to one side. What is the probability of getting a 2 or 3 if we were to roll a die with these properties?</p>
 </section>
 </section>
@@ -1063,8 +1073,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
-        <span class="nav-page-text">Assignment00: individual interest description</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/lec09-intro-inference-2.html" class="pagination-link" aria-label="Introduction to inference II">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to inference II</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
