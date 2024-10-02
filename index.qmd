@@ -108,7 +108,7 @@ If you require accommodations for a disability, or have any accessibility concer
 | Basic R, command line, & Git                | Individual     | Quercus           | Sep 19     | 8     |
 | Data wrangling                              | Individual     | Quercus           | Sep 26     | 8     |
 | Data visualization and exploration          | Individual     | Quercus           | Oct 03     | 8     |
-| Intro inference and LMs                     | Individual     | Quercus           | Oct 10     | 8     |
+| Introduction to inference                   | Individual     | Quercus           | Oct 15     | 8     |
 | Project proposal                            | Group          | GitHub            | Oct 17     | 3     |
 | LMs, model selection, and multivariate      | Individual     | Quercus           | Oct 24     | 8     |
 | Challenge assignment                        | Individual     | Quercus           | Nov 15     | 20    |

@@ -276,7 +276,7 @@ It has a maximum where the regular likelihood does, because the logarithm is an 
 
 Write down the likelihood function for $x_1 = 12, x_2 = 14, x_3 = 14$, assuming that the data are independent and identically distributed according to a $\text{Binomial}(N,p)$. Then, write the log-likelihood function for these data.
 
-The probability distribution for the Binomial is
+The probability mass function for the Binomial distribution is
 
 $$\Pr(X=x) = f(x|N,p) = {N \choose x} (1-p)^{N-x} p^x.$$
 
@@ -284,6 +284,6 @@ $$\Pr(X=x) = f(x|N,p) = {N \choose x} (1-p)^{N-x} p^x.$$
 
 Write down the likelihood function for $x_1 = -1.23, x_2 = 0.2$, assuming that the data are independent and identically distributed according to a $\text{Normal}(\mu,\sigma^2)$. Then, write the log-likelihood function for these data.
 
-The probability distribution for the Binomial is
+The probability density function for the Normal distribution is
 
 $$f(x|\mu,\sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \text{exp} \bigg(-\frac{(x-\mu)^2}{2\sigma^2} \bigg)$$

@@ -249,7 +249,7 @@ c(min(values_inconfidence_interval$p),
 
 Now, let's display our point estimate for $p$ as well as the confidence interval we have just constructed.
 
-```{r}
+```{r, warning=F}
 LLs %>% ggplot(aes(x = p, y = LogLik)) + geom_line() +
   geom_vline(xintercept = MLE$p, color = "red") +
   geom_vline(xintercept = min(values_inconfidence_interval$p), 
