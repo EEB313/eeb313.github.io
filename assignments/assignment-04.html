@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - Assignment 4: Inference!</title>
+<title>EEB313: Quantitative Methods in R for Biology - Assignment 4: inference!</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -144,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-04.html">Assignment 4: Inference!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-04.html">Assignment 4: inference!</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -291,7 +291,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../assignments/assignment-04.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Assignment 4: Inference!</span></a>
+ <span class="menu-text">Assignment 4: inference!</span></a>
   </div>
 </li>
       </ul>
@@ -380,19 +380,19 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#conceptual-understanding-of-probability-random-variables-likelihood-2-mark-total" id="toc-conceptual-understanding-of-probability-random-variables-likelihood-2-mark-total" class="nav-link active" data-scroll-target="#conceptual-understanding-of-probability-random-variables-likelihood-2-mark-total">1. Conceptual understanding of probability, random variables, &amp; likelihood (2 mark total)</a></li>
-  <li><a href="#simulating-random-variables-2-marks" id="toc-simulating-random-variables-2-marks" class="nav-link" data-scroll-target="#simulating-random-variables-2-marks">2. Simulating random variables (2 marks)</a></li>
-  <li><a href="#maximum-liklihood-for-binomial-probabilities-3-marks" id="toc-maximum-liklihood-for-binomial-probabilities-3-marks" class="nav-link" data-scroll-target="#maximum-liklihood-for-binomial-probabilities-3-marks">3. Maximum liklihood for Binomial probabilities (3 marks)</a></li>
-  <li><a href="#more-on-likelihood-confidence-intervals-and-hypothesis-testing-1.5-mark" id="toc-more-on-likelihood-confidence-intervals-and-hypothesis-testing-1.5-mark" class="nav-link" data-scroll-target="#more-on-likelihood-confidence-intervals-and-hypothesis-testing-1.5-mark">5. More on likelihood, confidence intervals, and hypothesis testing (1.5 mark)</a></li>
+  <li><a href="#conceptual-understanding-of-probability-random-variables-likelihood-2-marks" id="toc-conceptual-understanding-of-probability-random-variables-likelihood-2-marks" class="nav-link active" data-scroll-target="#conceptual-understanding-of-probability-random-variables-likelihood-2-marks">1. Conceptual understanding of probability, random variables, &amp; likelihood (2 marks)</a></li>
+  <li><a href="#simulating-random-variables-1-marks" id="toc-simulating-random-variables-1-marks" class="nav-link" data-scroll-target="#simulating-random-variables-1-marks">2. Simulating random variables (1 marks)</a></li>
+  <li><a href="#maximum-likelihood-for-binomial-probabilities-3-marks" id="toc-maximum-likelihood-for-binomial-probabilities-3-marks" class="nav-link" data-scroll-target="#maximum-likelihood-for-binomial-probabilities-3-marks">3. Maximum likelihood for Binomial probabilities (3 marks)</a></li>
+  <li><a href="#more-on-likelihood-confidence-intervals-and-hypothesis-testing-2-marks" id="toc-more-on-likelihood-confidence-intervals-and-hypothesis-testing-2-marks" class="nav-link" data-scroll-target="#more-on-likelihood-confidence-intervals-and-hypothesis-testing-2-marks">4. More on likelihood, confidence intervals, and hypothesis testing (2 marks)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-04.html">Assignment 4: Inference!</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-04.html">Assignment 4: inference!</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignment 4: Inference!</h1>
+<h1 class="title">Assignment 4: inference!</h1>
 </div>
 
 
@@ -414,8 +414,8 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="conceptual-understanding-of-probability-random-variables-likelihood-2-mark-total" class="level1">
-<h1>1. Conceptual understanding of probability, random variables, &amp; likelihood (2 mark total)</h1>
+<section id="conceptual-understanding-of-probability-random-variables-likelihood-2-marks" class="level2">
+<h2 class="anchored" data-anchor-id="conceptual-understanding-of-probability-random-variables-likelihood-2-marks">1. Conceptual understanding of probability, random variables, &amp; likelihood (2 marks)</h2>
 <ol type="a">
 <li><p>Suppose you do a random experiment with six outcomes: A, B, C, D, E, F. There are <span class="math inline">\(2^6 = 64\)</span> events (i.e., combinations of outcomes, including the one where nothing happens) that can be formed from these outcomes. List 12 of these events below.</p></li>
 <li><p>Suppose the following probabilities measure how likely the six outcomes (A,B,C,D,E,F) are to occur:</p></li>
@@ -433,8 +433,8 @@ window.Quarto = {
 <p><span class="math display">\[f(x|\lambda) = \lambda e^{-\lambda x}.\]</span></p>
 <p>Write down the likelihood function for the data <span class="math inline">\(x_1 = 0.2, x_2 = 1\)</span>, using the density function above. Plug in <span class="math inline">\(\lambda = 1\)</span> and <span class="math inline">\(\lambda = 2\)</span> into your expression. Of these values for the rate parameter, which is more likely to explain the data?</p>
 </section>
-<section id="simulating-random-variables-2-marks" class="level1">
-<h1>2. Simulating random variables (2 marks)</h1>
+<section id="simulating-random-variables-1-marks" class="level2">
+<h2 class="anchored" data-anchor-id="simulating-random-variables-1-marks">2. Simulating random variables (1 marks)</h2>
 <ol type="a">
 <li>When working with random numbers, it is often a good idea to use the function <code>set.seed()</code>. This function ensures that the random numbers that are generated are reproducible, including on other machines. Please read the documentation for this function and <a href="https://stackoverflow.com/questions/13605271/reasons-for-using-the-set-seed-function">this blog post</a> to learn more.</li>
 </ol>
@@ -447,8 +447,8 @@ window.Quarto = {
 <li><p>What is the probability that <em>each</em> element of <code>x</code> arose due to a Geometric distribution with <span class="math inline">\(p = 0.9\)</span>? Store these probabilities in a vector, apply <code>log</code> to each element of the vector, and print the sum the elements of the vector of log-transformed probabilities. This is the log-likelihood of the data — i.e., the realizations of the Geometric distribution you simulated in (a) — at <span class="math inline">\(p=0.1\)</span>.</p></li>
 </ol>
 </section>
-<section id="maximum-liklihood-for-binomial-probabilities-3-marks" class="level1">
-<h1>3. Maximum liklihood for Binomial probabilities (3 marks)</h1>
+<section id="maximum-likelihood-for-binomial-probabilities-3-marks" class="level2">
+<h2 class="anchored" data-anchor-id="maximum-likelihood-for-binomial-probabilities-3-marks">3. Maximum likelihood for Binomial probabilities (3 marks)</h2>
 <p>For this problem, it will be useful to carefully review the likelihood calculation we did in the <a href="https://eeb313.github.io/lectures/lec09-intro-inference-2.html">2nd inference lecture</a>.</p>
 <ol type="a">
 <li><p>Download the Farrell and Davies dataset which we analyzed in class from Quercus or the website. Read the data into R as <code>disease_distance</code>.</p></li>
@@ -524,8 +524,8 @@ window.Quarto = {
 </ol>
 <p>What do you notice about the distribution(s) of death probabilities?</p>
 </section>
-<section id="more-on-likelihood-confidence-intervals-and-hypothesis-testing-1.5-mark" class="level1">
-<h1>5. More on likelihood, confidence intervals, and hypothesis testing (1.5 mark)</h1>
+<section id="more-on-likelihood-confidence-intervals-and-hypothesis-testing-2-marks" class="level2">
+<h2 class="anchored" data-anchor-id="more-on-likelihood-confidence-intervals-and-hypothesis-testing-2-marks">4. More on likelihood, confidence intervals, and hypothesis testing (2 marks)</h2>
 <ol type="a">
 <li><p>Read the lecture notes for hypothesis testing and confidence interval construction again. They can be found <a href="https://eeb313.github.io/lectures/lec09-intro-inference-2.html#review-of-hypothesis-testing">here</a>.</p></li>
 <li><p>Consider the following data, and suppose we model the number of <em>Bos taurus</em> deaths due to <em>Dermatophilus congolensis</em> as <strong>Poisson(<span class="math inline">\(\lambda\)</span>)</strong>. Assume that observations from different years and countries are independent. (This is similar to what we did in class but notice that we have changed from what distribution we use to model the data generative process. The rate parameter <span class="math inline">\(\lambda\)</span> cannot be interpreted as a probability of death. Instead, <span class="math inline">\(\lambda\)</span> is the expected <em>number</em> of individuals that die of the disease.)</p></li>
