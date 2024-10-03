@@ -118,7 +118,7 @@ If you require accommodations for a disability, or have any accessibility concer
 
 There are 100 marks in total. Your final course mark will be the sum of your assignment scores, which will be translated to a letter grade according to the [official grading scale](https://www.artsci.utoronto.ca/faculty-staff/teaching/teaching-learning-resources/academic-handbook#FinalMarks) of the Faculty of Arts and Science.
 
-Assignments will be distributed and submitted in the R Markdown format via Quercus. Assignments will be handed out on Thursdays after class and are due at 8:00 PM on the following Thursday. 
+Assignments will be distributed and submitted in the R Markdown format via Quercus. Assignments will typically be handed out on Thursdays after class and are due at 8:00 PM on the following Thursday. 
 
 The Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Nov 11, and it will be due 11:59 PM on Nov 15. Students are welcome to work in a group on this assignment, but each student must submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!
 

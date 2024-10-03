@@ -1,0 +1,149 @@
+# Assignment 4: Inference! {-}
+
+Download the .Rmd file [here](assignment-04.Rmd).
+
+*To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`. Please ensure the text on your .pdf does not continue past the end of the page.*
+
+```{r a4setup, message=FALSE}
+library(tidyverse)
+```
+
+# 1. Conceptual understanding of probability, random variables, & likelihood (2 mark total)
+
+a. Suppose you do a random experiment with six outcomes: A, B, C, D, E, F. There are $2^6 = 64$ events (i.e., combinations of outcomes, including the one where nothing happens) that can be formed from these outcomes. List 12 of these events below.
+
+b. Suppose the following probabilities measure how likely the six outcomes (A,B,C,D,E,F) are to occur:
+
+$\Pr(A) = 0.6, \Pr(B) = 0, \Pr(C) = \Pr(D) = \Pr(E) = \Pr(F) = 0.1.$
+
+What is the probability of seeing A, B, C, _or_ D in this case? Explain how you got your answer.
+
+c. Suppose you did the experiment in (a) 11 times (independently, under identical conditions), where the outcomes occur with the probabilities in (b), and you observed the sequence ACCFCAAAAAC. That is, you saw 6 As, 4 Cs, and 1 F.
+
+What probability distribution would you use to model the random number that counts how many As occurred in the $N = 11$ trials?
+
+Assuming that we could do keep doing the experiment, what probability distribution would you use to model the random number that counts the number of trials until the 1st C?
+
+d. Suppose we measure the times between earthquakes in Toronto and want to estimate the _rate_ at which such events occur. We model the inter-arrival times using an Exponential distribution with rate $\lambda$. The time between the first earthquake and the second is $x_1 = 0.2$ decades. The time between the second earthquake and the third is $x_2 = 1$ decades. The probability density function for the Exponential is
+
+$$f(x|\lambda) = \lambda e^{-\lambda x}.$$
+
+Write down the likelihood function for the data $x_1 = 0.2, x_2 = 1$, using the density function above. Plug in $\lambda = 1$ and $\lambda = 2$ into your expression. Of these values for the rate parameter, which is more likely to explain the data?
+
+# 2. Simulating random variables (2 marks)
+
+a. When working with random numbers, it is often a good idea to use the function `set.seed()`. This function ensures that the random numbers that are generated are reproducible, including on other machines. Please read the documentation for this function and [this blog post](https://stackoverflow.com/questions/13605271/reasons-for-using-the-set-seed-function) to learn more.
+
+```{r setseed, eval=F}
+set.seed(313)
+```
+
+b. Simulate $n = 1000$ realizations (i.e., draws) of a Geometric random variable with success probability $p = 0.01$. Put these realizations in a vector `x`. Make a histogram of these realizations, using the default number of bins.
+
+c. Extract the first element of `x`, i.e., the first realization of the Geometric($p = 0.01$) distribution. How likely is it that this observation arose from a Geometric distribution with probability $p = 0.9$? How likely is it that the observation arose from a Geometric distribution with probability $p = 0.1$? _Hint: evaluate the Geometric(p) probability mass function at these values of the parameter._
+
+d. What is the probability that _each_ element of `x` arose due to a Geometric distribution with $p = 0.9$? Store these probabilities in a vector, apply `log` to each element of the vector, and print the sum the elements of the vector of log-transformed probabilities. This is the log-likelihood of the data --- i.e., the realizations of the Geometric distribution you simulated in (a) --- at $p=0.1$.
+
+# 3. Maximum liklihood for Binomial probabilities (3 marks)
+
+For this problem, it will be useful to carefully review the likelihood calculation we did in the [2nd inference lecture](https://eeb313.github.io/lectures/lec09-intro-inference-2.html).
+
+a. Download the Farrell and Davies dataset which we analyzed in class from Quercus or the website. Read the data into R as `disease_distance`.
+
+b. Use the `unique()` function to determine all unique elements of the Host and ParaFamily columns. Then, use the `expand.grid()` function to generate a data frame with all combinations of hosts and parasite families. Store the data frame of host and parasite family combinations in an object called `Combinations`. _Hint: look at the documentation for `expand.grid()`._
+
+```{r, eval=F}
+Combinations <- 
+  expand.grid(host = unique(disease_distance$Host),
+              para_family = unique(disease_distance$ParaFamily))
+```
+
+d. **Write a function that returns, for a host and parasite family (i.e., a specific row of the `Combination` data frame you have just made), the maximum likelihood estimate for the probability of death, given infection, of that host with members of the parasite family.** Like we did in class, assume deaths are Binomial with a host-specific number of cases and probability of death, and those in different countries and years are independent. If there are no observations for a specific host and parasite family combination, your function should return `NA`; else, the function should return the value of $p$ which maximizes the likelihood function formed from the data specific to the host and parasite family supplied as arguments to the function. You may also run into issues where the log-likelihood is negative infinity at all $p$; in this case, the function should return `NA`. 
+
+The skeleton of the function is provided below. The arguments that specify the host species and the parasite family. The cases where an `NA` should be returned are addressed using nested `if {} else {}` statements.
+
+```{r, eval=F}
+## binomial probability evaluate from class
+
+binomial_evaluator <- function(d, N, p){
+  return(dbinom(x = d, size = N, prob = p)) # log=T returns the log-likelihood of the observation
+}
+
+## skeleton of function
+
+ProbDeathEstimator <- function(host = "Capra_hircus", para_family = "Bacillaceae"){
+  
+  data <- disease_distance |> subset(ParaFamily == paste(para_family) & Host == paste(host))
+  # this subsets the data to the parasite family and host supplied to the function
+  
+  if (nrow(data) == 0){
+    
+    return(NA) # return NA if there are no observations for the specific host and parasite family combination
+    
+  } else{
+    
+    
+    
+    
+    # likelihood calculation (based on data after subsetting to the specific host and family) should go here...
+    
+    
+    
+    
+    if (all(LogLik == -Inf)){
+      
+      ## NOTE: may need to change "LogLik" depending on how likelihoods for different values of p are stored/named...
+      ## this naming is consistent with what was done in class
+      
+      
+      
+      
+      return(NA) # if the log-likelihood is -Inf everywhere, return NA
+      
+      
+    } else{
+      
+      
+      
+      return() # return the maximum likelihood estimator for prob of death, given function
+      
+      
+      
+      
+    }
+    
+  }
+  
+}
+```
+
+e. Test the function on the host and parasite family from class. Does it return the same maximum likelihood estimate for $p$? If not, the function needs to be de-bugged. If so, excellent -- you are probably in a good position to finish the problem!
+
+f. Loop over all rows of the `Combinations` data frame you made in (b). For each row, apply the function you made in (d) to the host and parasite family in that row. Store the values returned by the function, for each row, in a vector `ProbabilitiesDeath`. At the end of the loop, this vector should have length equal to the number of rows in `Combinations` (i.e., one estimate for host-parasite family pair).
+
+g. View `data.frame(p = ProbabilitiesDeath, Combinations)`. Each row includes a host, parasite family, and the estimate probability of death for the host when infected with a member of the parasite family. Using this data frame, visualize the distribution of estimates using a histogram. Then, visualize the distribution for each host (i.e., faceted by host).
+
+What do you notice about the distribution(s) of death probabilities?
+
+# 5. More on likelihood, confidence intervals, and hypothesis testing (1.5 mark)
+
+a. Read the lecture notes for hypothesis testing and confidence interval construction again. They can be found [here](https://eeb313.github.io/lectures/lec09-intro-inference-2.html#review-of-hypothesis-testing).
+
+b. Consider the following data, and suppose we model the number of _Bos taurus_ deaths due to _Dermatophilus congolensis_ as **Poisson($\lambda$)**. Assume that observations from different years and countries are independent. (This is similar to what we did in class but notice that we have changed from what distribution we use to model the data generative process. The rate parameter $\lambda$ cannot be interpreted as a probability of death. Instead, $\lambda$ is the expected _number_ of individuals that die of the disease.)
+
+```{r, eval=F}
+dataNEW <- disease_distance |> 
+  subset(Parasite == "Dermatophilus_congolensis" & Host == "Bos_taurus")
+```
+
+Write code that returns a plot of the log-likelihood of these data as a function of $\lambda$. The values of $\lambda$ on the $x$ axis should range from 0 to 100 (in increments of 0.01).
+
+c. What is the most likely value of $\lambda$ to explain the data? That is, based on what you saw in the (b), what value of $\lambda$ is where the log-likelihood reaches its maximum value?
+
+d. Suppose we have prior knowledge which indicates the expected number of deaths of this host with this parasite is around 5. We want to test $H_0: \lambda = 5$ vs $H_1: \lambda \neq 5$ at significance level $\alpha = 0.05$. 
+
+Calculate the log-likelihood ratio test statistic for $\lambda_0 = 5$. Then, using the value you calculated and the fact the LR test statistic has a approximate chi-square distribution with one degree of freedom, determine the probability of observing a test statistic more extreme than the one we saw (i.e., the $p$-value). 
+
+Report the value of your test statistic, $p$ value, and if you reject the null hypothesis at level $\alpha = 0.05$.
+
+e. Construct a $99\%$ confidence interval for $\lambda$ using the log-likelihood ratio test statistic. Based on this confidence interval, would you reject the hypothesis $\lambda = 3.7$ at level $\alpha = 0.01$?
