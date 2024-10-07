@@ -10,7 +10,7 @@ output: pdf_document
 library(tidyverse)
 ```
 
-# 1. Conceptual understanding of probability, random variables, & likelihood (2 mark total)
+## 1. Conceptual understanding of probability, random variables, & likelihood (2 marks)
 
 a. Suppose you do a random experiment with six outcomes: A, B, C, D, E, F. There are $2^6 = 64$ events (i.e., combinations of outcomes, including the one where nothing happens) that can be formed from these outcomes. List 12 of these events below.
 
@@ -32,7 +32,7 @@ $$f(x|\lambda) = \lambda e^{-\lambda x}.$$
 
 Write down the likelihood function for the data $x_1 = 0.2, x_2 = 1$, using the density function above. Plug in $\lambda = 1$ and $\lambda = 2$ into your expression. Of these values for the rate parameter, which is more likely to explain the data?
 
-# 2. Simulating random variables (2 marks)
+## 2. Simulating random variables (1 mark)
 
 a. When working with random numbers, it is often a good idea to use the function `set.seed()`. This function ensures that the random numbers that are generated are reproducible, including on other machines. Please read the documentation for this function and [this blog post](https://stackoverflow.com/questions/13605271/reasons-for-using-the-set-seed-function) to learn more.
 
@@ -46,7 +46,7 @@ c. Extract the first element of `x`, i.e., the first realization of the Geometri
 
 d. What is the probability that _each_ element of `x` arose due to a Geometric distribution with $p = 0.9$? Store these probabilities in a vector, apply `log` to each element of the vector, and print the sum the elements of the vector of log-transformed probabilities. This is the log-likelihood of the data --- i.e., the realizations of the Geometric distribution you simulated in (a) --- at $p=0.1$.
 
-# 3. Maximum liklihood for Binomial probabilities (3 marks)
+## 3. Maximum liklihood for Binomial probabilities (3 marks)
 
 For this problem, it will be useful to carefully review the likelihood calculation we did in the [2nd inference lecture](https://eeb313.github.io/lectures/lec09-intro-inference-2.html).
 
@@ -127,7 +127,7 @@ g. View `data.frame(p = ProbabilitiesDeath, Combinations)`. Each row includes a 
 
 What do you notice about the distribution(s) of death probabilities?
 
-# 5. More on likelihood, confidence intervals, and hypothesis testing (1.5 mark)
+## 4. More on likelihood, confidence intervals, and hypothesis testing (2 marks)
 
 a. Read the lecture notes for hypothesis testing and confidence interval construction again. They can be found [here](https://eeb313.github.io/lectures/lec09-intro-inference-2.html#review-of-hypothesis-testing).
 

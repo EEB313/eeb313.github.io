@@ -1,0 +1,322 @@
+# Linear models I
+
+## Lesson preamble:
+
+> ### Lesson objectives
+>
+> -   Understand the logic of the general linear model, including the assumptions that are placed on the data, parameters, and errors.
+> -   Understand the meaning of regression coefficients and how they are estimated.
+> -   Understand how to implement linear models in R.
+> -   Learn how to respond when data violate assumptions, visualize fitted models, etc.
+>
+> ### Lesson outline
+>
+> -   Theory
+>     - Structure and assumptions, including interpretation of the effects
+>     - Likelihood-based estimation and inference
+>     - Transformations of the response, dummy variables, and interactions between covariates
+> -   Practice
+>     - Implement multivariate linear model using sexual size dimorphism dataset
+>     - Develop intuition for model diagnostics
+>     - Visualizing fitted models
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+```{r}
+SSDdata <- read_csv("data/SSDinMammals.csv")
+```
+
+## Linear models: why we care
+
+Linear models are at the heart of statistical practice in the physical, life, and social sciences! Linear regression actually refers to a *family* of modeling approaches that attempt to learn how the mean and/or variance of a response variable $\boldsymbol{y} = (y_1,\dots,y_n)$ depend on (linear) combinations of variables $\boldsymbol{x}_i = (x_{i1},\dots,x_{in})$ called predictors. In this lecture, we will discuss various forms of the linear model and assumptions placed on the data to make estimation and inference of the relationships between variables tractable. Our goal will be to become familiar with how these models work -- namely, how their parameters are inferred using maximum likelihood --- and practice fitting them in R.
+
+## The simple linear model
+
+The simple linear models describes how a response $Y$ depends on a contentious explanatory variable, $x$, which is fixed. The model is
+
+$$Y \sim \text{Normal}(\beta_0 + \beta_1 x, \sigma^2).$$
+
+In turn, this specifies what the likelihood function have data $(y_1,x_1),\dots,(y_n,x_n)$. (As usual, we assume the $y$s are independent.)
+
+Below is a _visual_ representation of how the data generative process for $Y$ is modeled. At each $x$, $Y$ is Normal with a mean that depends on the explanatory variable and fixed variance (i.e., changing $x$ does not change the variance in the observed response).
+
+![](figures/regression.jpg)
+
+### Challenge
+
+Form the likelihood $L(\beta_0,\beta_1,\sigma^2|\boldsymbol{x}_i,\boldsymbol{y}_i)$. Recall that the probability distribution of the $Normal(\mu,\sigma^2)$ distribution is
+
+$$\frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(y-\mu)^2/2\sigma^2}.$$
+
+_Hint: notice how, in the regression model, the mean value of the response is $\beta_0 + \beta_1 x.$_
+
+```{r, include=F}
+# \prod_i \frac{1}{\sqrt{2 \pi \sigma^2}} e^{- (y-beta0-beta1*x)^2 / 2\sigma^2}
+```
+
+### Challenge
+
+What assumptions are we making about the data when we fit simple linear model? What must be true of the data? Discuss.
+
+```{r, include=F}
+# normality of Y
+# Y is continuous, cannot be discrete in this framework!
+# The predictor, x, is a number
+# The variance of Y at each x is constant/homogenous
+# Y depends **linearly** on x
+# the predictors are known with certainty (i.e., are not random)
+# coefficients for the predictors are not random
+# independence of observations...
+```
+
+### Challenge
+
+Suppose we think $Y$ is not normally distributed (and constant variance $\sigma^2$), but that it's logarithm (or, say, square root) is. How might we adjust the model to account for this?
+
+```{r, include=F}
+# Y ~ LogNormal(beta0 + beta1 x, sigma^2) and then use maximum liklihood OR
+# log or sqrt Y ~ Normal(beta0 + beta1 x, sigma^2)
+```
+
+## Multiple regression
+
+It is straightforward to extend the simple regression model to include multiple covariates/predictors. Suppose, for each realization of $Y$, we have associated measurements $x_1,\dots,x_p$. We can model how $Y$ changes with these predictors as follows:
+
+$$Y \sim \text{Normal}(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p, \sigma^2).$$
+The likelihood that arises from data $(y_i,x_{1i},\dots,x_{pi})$ where $i=1,\dots,n$ is
+
+$$L(\beta_0,\dots,\beta_p,\sigma^2) = \prod_{i=1}^n \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(y_i-\beta_0-\beta_1 x_{1i}-\cdots-\beta_p x_{pi})^2/2\sigma^2}.$$
+
+Again, assumptions of this model include
+
+1. The data, i.e., observations of the response $Y$, are independent and Normally distributed.
+2. The _mean_ response is a linear function of the predictors.
+3. The error variance $\sigma^2$ is constant and, thus, does not depend on the predictors.
+4. The parameters $\beta_0,\dots,\beta_p$ (called regression coefficients or effect sizes) are non-random.
+5. The predictors are known with certainty.
+
+Maximum likelihood estimation gives rise to point and interval estimates for $\beta_1,\dots,\beta_p,\sigma^2$.[^1]
+
+### Interpreting the regression coefficients
+
+We must be careful how we interpret the parameters of _any_ statistic model after we fit the model to data. This is definitely true of the regression coefficients $\beta_1,\dots,\beta_p$. The estimates are not the same as the "true" values the parameters assume; they are our best guess of the "true" regression coefficients, given the (limited, imperfect, incomplete, noisy) data that we have. Moreover, $\beta_j$ must be understood as the amount the average value of the response variable changes when the predictor $x_j$ increases by one unit, _assuming all else is constant_.
+
+That is, $\beta_j$ is a measure of the sensitivity of $E(Y)$ to $x_j$ --- how much does $Y$ change, on average, if we increase $x_j$ by one unit.
+
+### Transformations
+
+If you suspect the raw data are not normally distributed, but transformed versions of the data are, you can replace $Y$ with $f(Y)$ where $f(\cdot)$ is the transformation and proceed with the analysis. The only thing to keep in mind is how to interpret the regression coefficients.
+
+If $\beta_1 = 0.1$ when regression $f(Y)$ on $x_1,\dots,x_p$, then that means _per unit change in $x_1$, all else constant, $f(Y)$ increases, on average, by unit 0.1. This does NOT mean that $Y$, on the raw scale, increases by that amount.
+
+### Categorical predictors
+
+We can regress $Y$ on discrete, as well as continuous, predictor variables. To see how this is done, and how to interpret the resulting regression coefficients, suppose a predictor has $K$ levels. To estimate the effect of one of these levels on the response variable (say, of sampling individuals in a particular country), one of the levels of the discrete variable is treated as a "reference" and effects are estimated for all other levels. That is,  we define the model in terms of a _baseline_ and to interpret the regression coefficients _relative_ to this baseline. This involves coding "dummy variables" for all but one the $K$ values the predictor can take assume and estimating regression coefficients for each of these variables.
+
+**The regression coefficient for a "dummy variable" (associated to one of the values a categorical predictor) measures the expected change in the response, all else constant, if we were to change from the baseline to the level of interest.**
+
+### Interactions, higher order terms
+
+Finally, linear models can accommodate non-linear interactions between explanatory variables. If $x_2 = x_1^2$, one can estimate an effect for $x_2$. This effect has to be interpreted carefully -- it is the expected change in the response, all else constant, if $x_2 = x_1^2$ increases by one unit -- but does not pose a difficulty to forming the likelihood nor maximizing it.
+
+Other interactions can also be modeled. For example, suppose we were interested in the combined effects of changing salinity and temperature on the number of species in an ecosystem because we suspect that changing salinity has little effect on the effect on the number of species if temperature in high (e.g., there are no species left). Then, letting $x_1$ be salinity and $x_2$ temperature, their interaction would be included as a covariate $x_3 = x_1 x_2$ and the associated effect estimated from the data.
+
+**When there are interactions, coefficients of must be interpreted very carefully. We can say that $\beta_1$ is the expected change in the response, all else constant, if we increase $x_1$ by one unit and set all covariates with which it interacts equal to zero.** For example, if $\beta_3$ is the effect of a salinity-temperature interaction, the coefficient for temperature is the expected change in the response, all else constant, if temperature increases by one unit and salinity is equal to zero. Likewise, $\beta_3$ is the expected change in the response upon increasing $x_1$ and $x_2$ by one unit each _in addition to the effects of each variable in isolation_.
+
+## Using `lm` to fit a multivariate regression model
+
+One can use the likelihood above to derive estimates of $\beta_0,\dots,\beta_p,\sigma^2$ and confidence intervals for those parameters. (In fact, one can use calculus to maximize the likelihood and derive expressions for the estimates which maximize the probability of the observed data.) 
+
+**Maximization of the likelihood, assuming the data are independent draws of a normal distribution with the mean and varience specified above, is _exactly_ what happens when one fits a regression model in R using the function `lm()`.** 
+
+For example, using the sexual size dimorphism data set, one to estimate the effects of Order (a variable) on the logarithm mean male mass as follows.
+
+```{r}
+model <- lm(log(massM) ~ Order, data = SSDdata)
+summary(model)
+```
+
+After a call to `lm()`, R returns _a lot_ of information. Here is what is in the table above:
+
+- **Descriptive statistics for the "residuals"** $\varepsilon_i = y_i - \widehat{\beta_0} - \widehat{\beta_1} x_i$, which tell us about how much variability there is in the data relative to the linear model specified and fitted.
+- The **regression coefficients minimizing the likelihood of the data and $95\%$ confidence intervals for each**. The CIs are expressed as standard errors, since the estimators have an approximate Normal distribution. A *joint* confidence region for the coefficients can also be found using the LLR statistic which have been using to construct confidence intervals.
+- A **suite of test statistics**! The $t$ statistics and their $p$ values are associated to the test $H_0: \beta_i = 0$ vs $H_1: \beta_i \neq 0$. Significance codes specify the level $\alpha$ at which we have evidence to reject the null hypothesis for each coefficient.
+- Measures of goodness-of-fit: **the multiple $R^2$ and the adjusted $R^2$**. These explain the _proportion of variance_ that are explained by the model. The latter measures the proportion of variance explained by the linear model upon adjusting for sample size and $\#$ of predictors.
+
+#### Challenge
+
+How would we interpret the coefficient associated to the Order Dasyuromorphia?
+
+#### Challenge
+
+Why did we log-transform the mean mass of males in the previous call to `lm()`? _Hint: think about the assumptions of the linear model._
+
+```{r, include=F}
+ggplot(SSDdata, aes(x = massM)) + geom_histogram()
+ggplot(SSDdata, aes(x = massF)) + geom_histogram()
+
+### these are NOT normal
+
+ggplot(SSDdata, aes(x = log(massM))) + geom_histogram()
+ggplot(SSDdata, aes(x = log(massF))) + geom_histogram()
+
+### these look a bit more normal
+```
+
+## Checking assumptions of the model are satified
+
+One can do a quick check to see if the assumptions of the regression model --- e.g., that the data are normal --- by calling the function `plot()` on the model fitted using `lm`.
+
+```{r Diagnostics}
+plot(model) # returns diagnostics (are the data normal, are there points with high leverage...)
+```
+
+More on how to read diagnostic plots can be found [here](https://ademos.people.uic.edu/Chapter12.html#3_regression_diagnostics).
+
+## An example!
+
+### In mammals, is there an effect of sex on body size?
+
+Recall how you cleaned the sexual size dimorphism dataset in the second homework. We will use the cleaned dataset to do a very crude test of the hypothesis that males and females differ in size. In particular, we will determine the _quantitative_ effect of sex is on the size of a typical individual, regardless of their species, sampling effort, etc. Much more complicated models can be constructed, but it turns out [these models give rise to qualitatively-similar conclusions](https://www.nature.com/articles/s41467-024-45739-5).
+
+```{r}
+mammal_length <- SSDdata %>%
+  select(c("Order", "Scientific_Name", "lengthM", "lengthF")) %>%
+  pivot_longer(c(lengthM, lengthF), names_to = "sex", values_to = "length",
+               names_pattern = "length(.)")
+
+mammal_mass <- SSDdata %>%
+  select(c("Order", "Scientific_Name", "massM", "massF")) %>%
+  pivot_longer(c(massM, massF), names_to = "sex", values_to = "mass",
+               names_pattern = "mass(.)")
+
+mass_nodup <- mammal_mass %>% 
+  group_by(Scientific_Name, sex) %>%
+  distinct(Scientific_Name, sex, .keep_all = TRUE)
+
+length_nodup <- mammal_length %>% 
+  group_by(Scientific_Name, sex) %>%
+  distinct(Scientific_Name, sex, .keep_all = TRUE)
+
+mammal_long <- full_join(mass_nodup, length_nodup, 
+                         by = join_by("Scientific_Name", "sex", "Order"))
+
+glimpse(mammal_long)
+
+model <- lm(log(mass) ~ sex, data = mammal_long)
+summary(model)
+```
+
+Remarkably, no effect! Males are not larger than females. The $p$ value is not only $>\alpha = 0.05$, the size of the estimated effect is quite small. This is pretty suprising, given the large number of papers that _claim_, despite the lack of evidence, that there are stark differences in size between male and female individuals.
+
+### Adding interactions...
+
+To include multiple variables in a regression, without their interaction, one writes `y ~ x + z`. To include their interaction, the syntax is `y ~ x*z`. (This is equivalent to `y ~ x + z + x:z` where the color indicates to fit an interaction-only model. **In general, it is best to avoid fitting interaction-only models. As [this](https://stats.stackexchange.com/questions/11009/including-the-interaction-but-not-the-main-effects-in-a-model) post explains, interactions can be due to dependence of the response on the covariates in the interaction, or non-linear functions of those covariates. Plus, interpreting the estimated coefficients is really difficult.**) 
+
+How would you fit a model in which there is an effect of sex and, separately, effects of belonging to a given Order on mean body size? How would you fit a model where, in addition to these effects, an interaction between sex and Order?
+
+```{r}
+OrderSpecificModel <- lm(log(mass) ~ sex+Order, data = mammal_long)
+summary(OrderSpecificModel)
+
+OrderSexInteractionModel <- lm(log(mass) ~ Order*sex, data = mammal_long)
+summary(OrderSexInteractionModel)
+```
+
+Notice that in the `OrderSexInteractionModel` model, there are significant effects of the Order on body size but the effect of sex, even when order-specific, on size is not significant. That is, the associated regression coefficients have confidence intervals overlapping zero, so that we fail to reject the null hypothesis $H_0: \beta_j = 0$.
+
+### Challenge
+
+Use a for loop to regress log body size on sex for _each_ Order? Print the coefficients from inside the loop.
+
+```{r, include=F}
+for (SpecificOrder in unique(mammal_long$Order)){
+  
+  mammal_long_specific_order <- mammal_long %>% subset(Order == SpecificOrder)
+  model <- lm(log(mass) ~ sex, data = mammal_long_specific_order)
+  
+  print(paste0("The effect of sex on mass for individuals in ", SpecificOrder, " is ", as.numeric(model$coefficients[2])))
+  
+}
+```
+
+### Visualizing fitted models
+
+For the first model we fit, it is straightforward to visualize the (lack of an) effect of sex on size:
+
+```{r, warning=F}
+model <- lm(log(mass) ~ sex, data = mammal_long)
+
+mammal_long |> ggplot(aes(x = sex, y = log(mass))) + 
+  geom_violin() +
+  geom_jitter(alpha = 0.5, width = 0.1) + 
+  geom_smooth(aes(group = 1), method = "lm")
+```
+
+For the model fitted for _each_ Order, we can visualize the effects as follows:
+
+```{r, warning=F}
+mammal_long |> 
+  ggplot(aes(x = sex, group = Order, y = log(mass))) + 
+  geom_jitter(alpha = 0.5, width = 0.1) + 
+  geom_smooth(method = "lm") +
+  facet_wrap(~Order)
+```
+
+Notice differences in sample size (i.e., number of sampled species per order).
+
+### Challenge
+
+Regress log male body size on log length, visualize the effect, and interpret the coefficient for length. Then do the same but including sex and its interaction with length as an effect.
+
+_Hint: when interpreting the coefficient for length, recall that it has been log-transformed and, in the interaction, everything is measured relative to a baseline (in this example, males relative or the other way around). A per unit increase in the covariate does not imply a per unit increase in length._
+
+```{r, include=F}
+MassOnLength <- lm(log(mass) ~ log(length), data = mammal_long)
+summary(MassOnLength)
+
+# per unit increase in log length, one gets a 1.6405 increase in log size
+
+mammal_long |> 
+  ggplot(aes(x = log(length), y = log(mass))) + 
+  geom_point() +
+  geom_smooth(method = "lm")
+
+MassOnLengthInteractSex <- lm(log(mass) ~ log(length) * sex, data = mammal_long)
+summary(MassOnLengthInteractSex)
+
+# per unit increase in log length, one gets a 1.61060 increase in log size in FEMALES.
+
+mammal_long |> 
+  ggplot(aes(x = log(length), color = sex, y = log(mass))) + 
+  geom_point() +
+  geom_smooth(method = "lm", se=F)
+```
+
+**CAUTION: do not fit your models using ggplot. Use `lm()`. Visualizing the model should be, well, a visualization exercise. It is quite dangerous to draw conclusions when you are not 100 percent sure what model (with or without interaction, by factor, etc.) was fit and then plotted. To avoid these issues, many folks visualize models fitted in `lm()` using base R.**
+
+[^1]: It is worth noting that what is often used in theory and practice is a _matrix_ formulation of the model we have written down:
+$$\boldsymbol{y} = \begin{bmatrix}
+     y_{1} \\
+     y_{2} \\
+     \vdots \\
+     y_{n}
+     \end{bmatrix} = \begin{bmatrix}
+     1 & x_{11} & x_{21} & \cdots & x_{p1} \\
+     1 & x_{12} & x_{22} & \cdots & x_{p2} \\
+     \vdots & \vdots & \vdots & & \vdots \\
+     1 & x_{1n} & x_{2n} & \cdots & x_{pn}
+     \end{bmatrix} \begin{bmatrix}
+     \beta_{1} \\
+     \beta_{2} \\
+     \vdots \\
+     \beta_{p}
+     \end{bmatrix} + \begin{bmatrix}
+     \varepsilon_{1} \\
+     \varepsilon_{2} \\
+     \vdots \\
+     \varepsilon_{n}
+     \end{bmatrix} = \boldsymbol{X} \boldsymbol{\beta} + \boldsymbol{\varepsilon}.$$
+Here, $\boldsymbol{y} = (y_1,\dots,y_n)'$ is a vector of measurements for the response, $\boldsymbol{x_i} = (x_{i1},\dots,x_{in})'$ is a vector of measurements for the $k$th predictor, and $\boldsymbol{\varepsilon} = (\varepsilon_1,\dots,\varepsilon_n)'$ is a vector of measurement errors. The $'$ symbol denotes transposition, the operation where the rows and columns of a vector or matrix are interchanged. In R, the function `t()` can be used to transpose a vector or matrix.

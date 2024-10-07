@@ -20,6 +20,7 @@ book:
       - lectures/lec07-self-directed-analysis.qmd
       - lectures/lec08-intro-inference-1.qmd
       - lectures/lec09-intro-inference-2.qmd
+      - lectures/lec10-linear-models-1.qmd
     - part: "Assignments"
       chapters:
       - assignments/assignment-00.qmd
