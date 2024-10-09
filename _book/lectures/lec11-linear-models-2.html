@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.554">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>EEB313: Quantitative Methods in R for Biology - 11&nbsp; Linear models II</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assignments/assignment-00.html" rel="next">
+<link href="../lectures/lec10-linear-models-1.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec11-linear-models-2.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Linear models II</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">EEB313: Quantitative Methods in R for Biology</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/EEB313/eeb313.github.io" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about-us.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2024 teaching team</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../downloadingR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installing R &amp; Ubuntu</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Lectures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec01-r_and_rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the course</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec02-basic-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec03-command_git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Command line &amp; Git(Hub)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec04-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling!</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec05-data-visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data visualization with ggplot2</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec06-exploratory-data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exploratory data analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec07-self-directed-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Review using Farrell and Davies (2019) dataset</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec08-intro-inference-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction to inference I</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec09-intro-inference-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to inference II</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec10-linear-models-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear models I</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec11-linear-models-2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Linear models II</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-00.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment00: individual interest description</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 01: base R, command line, &amp; Git(Hub)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 02: data wrangling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 03: data visualisation and exploration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 04: inference!</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Project</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project description</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../projects_databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Some open-access databases</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Datasets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/portal_data.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">portal_data.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/pseudo.ara.busco" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">pseudo.ara.busco</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/pseudo.LTRs" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">pseudo.LTRs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/disease_distance.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">disease_distance.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/SSDinMammals.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SSDinMammals.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/meas.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">meas.csv</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Miscellaneous notes</span></span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lesson-preamble" id="toc-lesson-preamble" class="nav-link active" data-scroll-target="#lesson-preamble"><span class="header-section-number">11.1</span> Lesson preamble</a></li>
+  <li><a href="#generalized-linear-models-theory-and-examples" id="toc-generalized-linear-models-theory-and-examples" class="nav-link" data-scroll-target="#generalized-linear-models-theory-and-examples"><span class="header-section-number">11.2</span> Generalized linear models: theory and examples</a>
+  <ul class="collapse">
+  <li><a href="#glms-structure-and-assumptions" id="toc-glms-structure-and-assumptions" class="nav-link" data-scroll-target="#glms-structure-and-assumptions"><span class="header-section-number">11.2.1</span> GLMs: structure and assumptions</a></li>
+  <li><a href="#interpretation-of-the-effects" id="toc-interpretation-of-the-effects" class="nav-link" data-scroll-target="#interpretation-of-the-effects"><span class="header-section-number">11.2.2</span> Interpretation of the effects</a></li>
+  <li><a href="#example-logistic-regression" id="toc-example-logistic-regression" class="nav-link" data-scroll-target="#example-logistic-regression"><span class="header-section-number">11.2.3</span> Example: logistic regression</a></li>
+  <li><a href="#other-glms" id="toc-other-glms" class="nav-link" data-scroll-target="#other-glms"><span class="header-section-number">11.2.4</span> Other GLMs</a></li>
+  </ul></li>
+  <li><a href="#power-analysis" id="toc-power-analysis" class="nav-link" data-scroll-target="#power-analysis"><span class="header-section-number">11.3</span> Power analysis</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">11.3.1</span> Example</a></li>
+  </ul></li>
+  <li><a href="#dealing-with-dependent-data" id="toc-dealing-with-dependent-data" class="nav-link" data-scroll-target="#dealing-with-dependent-data"><span class="header-section-number">11.4</span> Dealing with dependent data!</a>
+  <ul class="collapse">
+  <li><a href="#group-by-group-analyses" id="toc-group-by-group-analyses" class="nav-link" data-scroll-target="#group-by-group-analyses"><span class="header-section-number">11.4.1</span> Group-by-group analyses</a></li>
+  <li><a href="#controlling-for-phylogeny" id="toc-controlling-for-phylogeny" class="nav-link" data-scroll-target="#controlling-for-phylogeny"><span class="header-section-number">11.4.2</span> Controlling for phylogeny</a></li>
+  <li><a href="#random-effects" id="toc-random-effects" class="nav-link" data-scroll-target="#random-effects"><span class="header-section-number">11.4.3</span> Random effects!</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec11-linear-models-2.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Linear models II</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Linear models II</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="lesson-preamble" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="lesson-preamble"><span class="header-section-number">11.1</span> Lesson preamble</h2>
+<blockquote class="blockquote">
+<h3 id="learning-objectives" data-number="11.1.1" class="anchored"><span class="header-section-number">11.1.1</span> Learning objectives</h3>
+<ul>
+<li>Learn how dependent data can be modeled, and the sitations in which one may encounter such data.</li>
+<li>Understand the structure, assumptions, and implementation of GLMs.</li>
+<li>Understand the structure, assumptions, and implementation of LLMs.</li>
+<li>Learn how to use simulation to inform what data that should be collected, and how.</li>
+</ul>
+<h3 id="lesson-outline" data-number="11.1.2" class="anchored"><span class="header-section-number">11.1.2</span> Lesson outline</h3>
+<ul>
+<li>Generalized linear models
+<ul>
+<li>Structure and assumptions, including interpretation of the effects</li>
+<li>Implement logistic regression using dataset of Farrell and Davies (2019)</li>
+<li>Other types of GLMs (Poisson, negative binomial, etc.)</li>
+</ul></li>
+<li>Power analysis!</li>
+<li>Dealing with dependent data
+<ul>
+<li>Splitting the data into groups…</li>
+<li>Controlling for phylogeny</li>
+<li>Linear mixed models: structure and assumptions
+<ul>
+<li>Difference between fixed, random effects; examples</li>
+<li>Implement mixed models using sexual size dimorphism data</li>
+</ul></li>
+</ul></li>
+</ul>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="generalized-linear-models-theory-and-examples" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="generalized-linear-models-theory-and-examples"><span class="header-section-number">11.2</span> Generalized linear models: theory and examples</h2>
+<p>So far we have seen how linear models can be used to describe relationships between a response variable and predictors when the data is normally distributed or can be transformed so that this assumption is not violated. What if we were, say, interested in a <em>binary</em> response (e.g., infection status of a host with a particular parasite) and how it changes with a continuous predictor (e.g., age of the host)? In this case, one can use a special kind of linear model called <em>logistic regression</em> to estimate the additive effect of predictor(s) on the binary response. Logistic regression is a special kind of <strong>generalized linear model</strong>.</p>
+<section id="glms-structure-and-assumptions" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="glms-structure-and-assumptions"><span class="header-section-number">11.2.1</span> GLMs: structure and assumptions</h3>
+<p>Generalized linear models describe how the mean of a response variable changes as a function of the predictors when important assumptions of the linear modeling framework (normality, constant error variance, etc.) are violated. In particular, <strong>GLMs allow us to work with data that are not normal, whose range is restricted, or whose variance depends on the mean.</strong> The latter might be important if, say, larger values of the response were also more variable.</p>
+<p>A GLM models the transformed mean of a response variable <span class="math inline">\(Y_i\)</span> as a linear combination of the predictors <span class="math inline">\(x_1,\dots,x_p\)</span>. The goal of using a GLM is often to estimate how the predictors (e.g., sex and previous exposure to the disease) affect the response (e.g., infection status). sThe transformation of the response is done using a “link” function <span class="math inline">\(g(\cdot)\)</span> that is specific to the distribution which used to model the data. Written out, a GLM is of the form</p>
+<p><span class="math display">\[g(\mu_i) = \beta_0 + \beta_1 x_{1i} + \cdots \beta_p x_{pi}.\]</span></p>
+<p>The link functions for the Normal, Gamma, Exponential, Poisson, and Multinomial distributions are known. In general, GLMs apply when the data are modeled using a member of the <a href="https://en.wikipedia.org/wiki/Exponential_family">exponential family</a>. The distributions will have a mean parameter <span class="math inline">\(\mu\)</span> and, sometimes, a parameter <span class="math inline">\(\tau\)</span> which characterizes the dispersion around the mean. <em>GLMs are fitted using by maximizing the likelihood function that results from assuming the data arise from a distribution in the exponential family (with a mean and dispersion that depend on the predictors), using using numerical optimization methods.</em></p>
+</section>
+<section id="interpretation-of-the-effects" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="interpretation-of-the-effects"><span class="header-section-number">11.2.2</span> Interpretation of the effects</h3>
+<p>Notice that, in a GLM, because the mean of the response been transformed in a particular way, the coefficients must be interpreted carefully. In particular, <span class="math inline">\(\beta_{j}\)</span> is how a per-unit change in <span class="math inline">\(x_{j}\)</span> increases or decreases the <em>transformed</em> mean <span class="math inline">\(g(\mu_i)\)</span>.</p>
+</section>
+<section id="example-logistic-regression" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="example-logistic-regression"><span class="header-section-number">11.2.3</span> Example: logistic regression</h3>
+<p>In a previous class, we estimated the probability of death given infection for the wild boar when infected with viruses in the family <em>Coronaviridae</em>. In your current homework, you have been tasked with extending that model to all host and parasite family combinations. Excitingly, the dataset which have used includes information about the mean evolutionary isolation of all hosts that are infected with a parasite from all other hosts which are known to be infected.</p>
+<p>Farrell and Davies tested if the mean evolutionary isolation affected the probability of death. They used a complex model to control for sampling bias and other confounding aspects of the data. We will ignore those complexities and see if, using a GLM, we can recapitulate their findings. To get started, load the <code>disease_distance.csv</code> dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>disease_distance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/disease_distance.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 4157 Columns: 24
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (7): Country, Disease, Parasite, Host, HostOrder, ParaType, ParaFamily
+dbl (17): Year, Cases, Deaths, Destroyed, Slaughtered, SR, EvoIso, Taxonomic...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>disease_distance <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AnyDeaths =</span> <span class="fu">case_when</span>(Deaths <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                               Deaths <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">0</span>)) <span class="ot">-&gt;</span> DataBern</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>DataBern <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> EvoIso, <span class="at">y =</span> AnyDeaths)) <span class="sc">+</span> </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-linear-models-2_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These are binary data. We CANNOT use a linear model, as this assumes the data are Normal. In fact, these data are distributed according to a Bernoulli(<span class="math inline">\(p\)</span>) distribution. This is a member of the exponential family and the type of generalized linear model when the data are distributed in this way (i.e., are binary) is called <strong>logistic regression</strong>.</p>
+<p>The mean of Bernoulli(<span class="math inline">\(p\)</span>) data is just <span class="math inline">\(p\)</span>, and the link function for <span class="math inline">\(p\)</span> is</p>
+<p><span class="math display">\[ \text{logit}(p) = \log\frac{p}{1-p}.\]</span></p>
+<p><span class="math inline">\(\text{logit}(p)\)</span> is called the <em>log-odds</em>, which can be thought of as a likelihood the response takes on the value one. In logistic regression, the log-odds ratio is modeled as a linear combination in the predictors:</p>
+<p><span class="math display">\[ \text{logit}(p_i) =  \beta_0 + \beta_1 x_{1i} + \cdots + \beta_p x_{pi}.\]</span></p>
+<p>Notice that increasing <span class="math inline">\(x_j\)</span> by one unit results in change <span class="math inline">\(\beta_j\)</span> to the link-transformed response.This is how the effect sizes are interpreted for GLMs such as this one.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glm</span>(AnyDeaths <span class="sc">~</span> EvoIso, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> DataBern)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = AnyDeaths ~ EvoIso, family = "binomial", data = DataBern)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0874  -1.2607   0.6072   0.8802   1.4703  
+
+Coefficients:
+              Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -0.6665277  0.0805302  -8.277   &lt;2e-16 ***
+EvoIso       0.0141947  0.0007802  18.193   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 5257.1  on 4156  degrees of freedom
+Residual deviance: 4890.5  on 4155  degrees of freedom
+AIC: 4894.5
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+<section id="challenge" class="level4" data-number="11.2.3.1">
+<h4 data-number="11.2.3.1" class="anchored" data-anchor-id="challenge"><span class="header-section-number">11.2.3.1</span> Challenge</h4>
+<p>How do we interpret the regression coefficient above?</p>
+</section>
+<section id="challenge-1" class="level4" data-number="11.2.3.2">
+<h4 data-number="11.2.3.2" class="anchored" data-anchor-id="challenge-1"><span class="header-section-number">11.2.3.2</span> Challenge</h4>
+<p>What are the log-odds of death if the evolutionary isolation of hosts is <span class="math inline">\(EI = 200\)</span>? How much does this quantity change if the evolutionary isolation were to increase by 20 million years?</p>
+</section>
+<section id="visualizing-the-fitted-model" class="level4" data-number="11.2.3.3">
+<h4 data-number="11.2.3.3" class="anchored" data-anchor-id="visualizing-the-fitted-model"><span class="header-section-number">11.2.3.3</span> Visualizing the fitted model</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>DataBern <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> EvoIso, <span class="at">y =</span> AnyDeaths)) <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"glm"</span>, </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>              )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-linear-models-2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">### base R implementation</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>EvoIso <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="fl">0.1</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>predicted_prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="fu">list</span>(<span class="at">EvoIso =</span> EvoIso), <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(DataBern<span class="sc">$</span>EvoIso, DataBern<span class="sc">$</span>AnyDeaths)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(EvoIso, predicted_prob)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-linear-models-2_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="other-glms" class="level3" data-number="11.2.4">
+<h3 data-number="11.2.4" class="anchored" data-anchor-id="other-glms"><span class="header-section-number">11.2.4</span> Other GLMs</h3>
+<p>Here are some common types of response variables and their corresponding distributions:</p>
+<ul>
+<li><strong>Count data</strong>: the <strong>Poisson</strong> distribution</li>
+<li><strong>Over-dispersed count data</strong> (when the count data is more spread out than “expected”): the <strong>negative binomial</strong> distribution</li>
+<li><strong>Binary data</strong> (two discrete categories): the <strong>binomial</strong> distribution</li>
+<li>Counts of occurrences of <span class="math inline">\(K\)</span> different types: the <strong>multinomial</strong> distribution</li>
+<li><strong>Times</strong> between <span class="math inline">\(r\)</span> events: the <strong>gamma</strong> distribution, which is equivilent to the exponential when <span class="math inline">\(r=1\)</span></li>
+</ul>
+<p>You will have the opportunity to implement such models in your homework and on the challenge assignment!</p>
+</section>
+</section>
+<section id="power-analysis" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="power-analysis"><span class="header-section-number">11.3</span> Power analysis</h2>
+<p>When designing experiments or how best to collect data, it is best to think about the model you will fit and the kind of experiment you need to design in order to have sufficient power to detect an effect of interest. For example, if we thought that age affected the likelihood that a host dies of a disease, then we would likely fit a logistic regression-type model. By <em>simulating</em> data from such a model, we can determine</p>
+<ul>
+<li>the minimum sample size required to reliably estimate an effect of a certain size</li>
+<li>the minimum sample size required to detect an effect of a certain size at a fixed significance level</li>
+<li>the minimum effect size that can be detected at a fixed significance level and sample size</li>
+</ul>
+<section id="example" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="example"><span class="header-section-number">11.3.1</span> Example</h3>
+<p>Below is an example of a simulation in which binary disease data (death/no death; 0/1) are simulated hosts of various ages, assuming the the log-odds of disease is a linear function of age. (Notice that we assume that host lifetimes are exponentially distributed with rate parameter <span class="math inline">\(\lambda = 1/10\)</span> years. This means that hosts, in this simulation, live for an average of 10 years.) We then fit a logistic regression to this data to determine the effect of age on disease risk.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data_generator <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">sample_size =</span> <span class="dv">100</span>, <span class="at">effect =</span> <span class="fl">0.1</span>){</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  age <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="at">n =</span> sample_size, <span class="at">rate =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  linear_predictor <span class="ot">&lt;-</span> effect<span class="sc">*</span>age</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  prob <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>linear_predictor))</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  disease_status <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(prob)){</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  disease_status[i] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> prob[i])</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">age =</span> age, <span class="at">disease_status =</span> disease_status))</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data_generator</span>()</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="sc">!</span> age) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> value)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"glm"</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>              ) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"prob. of disease (i.e., disease status =1)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-linear-models-2_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glm</span>(disease_status<span class="sc">~</span><span class="fu">scale</span>(age), <span class="at">family =</span> binomial, <span class="at">data =</span> data)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = disease_status ~ scale(age), family = binomial, 
+    data = data)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.9514  -1.2674   0.6095   1.0025   1.1793  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)   0.9131     0.2518   3.626 0.000288 ***
+scale(age)    0.9096     0.3438   2.646 0.008148 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 125.37  on 99  degrees of freedom
+Residual deviance: 115.04  on 98  degrees of freedom
+AIC: 119.04
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
+<p>Next, we will write a function that performs a <strong>power analysis</strong>. We will use this function determine the sample size that is required so that simulating the age-disease data repeatedly we identify a significant effect of age on disease status (i.e., reject the null hypothesis) at level <span class="math inline">\(\alpha = 0.01\)</span> <em>at least <span class="math inline">\(95\%\)</span> of the time</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>power_analysis_function <span class="ot">&lt;-</span> <span class="cf">function</span>(sample_size){</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  sims <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  pvalues <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>sims){</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">data_generator</span>(sample_size)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">glm</span>(disease_status<span class="sc">~</span><span class="fu">scale</span>(age), <span class="at">family =</span> binomial, <span class="at">data =</span> data)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  pvalues[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>]</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  power_estimate <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.01</span>))<span class="sc">/</span><span class="fu">length</span>(pvalues)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(power_estimate)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>sample_sizes <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">150</span>,<span class="dv">200</span>,<span class="dv">10</span>); power_estimates <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(sample_sizes)){</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  power_estimates[i] <span class="ot">&lt;-</span> <span class="fu">power_analysis_function</span>(<span class="at">sample_size =</span> sample_sizes[i])</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cbind</span>(<span class="at">n =</span> sample_sizes, <span class="at">power =</span> power_estimates))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">power</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">0.888</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">0.906</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">0.950</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">0.955</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">190</td>
+<td style="text-align: right;">0.966</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">0.983</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="dealing-with-dependent-data" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="dealing-with-dependent-data"><span class="header-section-number">11.4</span> Dealing with dependent data!</h2>
+<p>To illustrate how mixed models work and what kinds of questions we can answer using them, we will use the sexual size dimorphism data which we analyzed last class. Recall that we did NOT find a significant effect of sex on the average body size. There was no effect of the interaction between Order and sex on body size. Indeed, this matches what you saw in the homework questions where you had to visualize the data — most of the variation in body size was <em>between</em> orders.</p>
+<p>In the models we built, we ignored a pretty important fact about the data: species have a common history (i.e., phylogeny). Thus, observations are not independent! This can make drawing inferences from comparative data difficult. <strong>We will address how to deal with the non-independence of data (due to a common history of species, replication in blocks, etc.) using three approaches.</strong></p>
+<p>But, first, let’s download the data we will use in this section!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>SSDdata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/SSDinMammals.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 691 Columns: 18
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (6): Order, Family, Species, Scientific_Name, Comments, Source
+dbl (12): massM, SDmassM, massF, SDmassF, lengthM, SDlengthM, lengthF, SDlen...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mammal_length <span class="ot">&lt;-</span> SSDdata <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"Order"</span>, <span class="st">"Scientific_Name"</span>, <span class="st">"lengthM"</span>, <span class="st">"lengthF"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(lengthM, lengthF), <span class="at">names_to =</span> <span class="st">"sex"</span>, <span class="at">values_to =</span> <span class="st">"length"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span> <span class="st">"length(.)"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>mammal_mass <span class="ot">&lt;-</span> SSDdata <span class="sc">%&gt;%</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"Order"</span>, <span class="st">"Scientific_Name"</span>, <span class="st">"massM"</span>, <span class="st">"massF"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(massM, massF), <span class="at">names_to =</span> <span class="st">"sex"</span>, <span class="at">values_to =</span> <span class="st">"mass"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span> <span class="st">"mass(.)"</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>mass_nodup <span class="ot">&lt;-</span> mammal_mass <span class="sc">%&gt;%</span> </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Scientific_Name, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Scientific_Name, sex, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>length_nodup <span class="ot">&lt;-</span> mammal_length <span class="sc">%&gt;%</span> </span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Scientific_Name, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Scientific_Name, sex, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="ot">&lt;-</span> <span class="fu">full_join</span>(mass_nodup, length_nodup, </span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>                         <span class="at">by =</span> <span class="fu">join_by</span>(<span class="st">"Scientific_Name"</span>, <span class="st">"sex"</span>, <span class="st">"Order"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mammal_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 528
+Columns: 5
+Groups: Scientific_Name, sex [528]
+$ Order           &lt;chr&gt; "Artiodactyla", "Artiodactyla", "Artiodactyla", "Artio…
+$ Scientific_Name &lt;chr&gt; "Aepyceros melampus", "Aepyceros melampus", "Gazella r…
+$ sex             &lt;chr&gt; "M", "F", "M", "F", "M", "F", "M", "F", "M", "F", "M",…
+$ mass            &lt;dbl&gt; 44180.00, 40480.00, 30700.00, 28100.00, 70280.00, 5206…
+$ length          &lt;dbl&gt; 93.400, 100.000, 89.200, 92.300, 159.450, 149.190, 181…</code></pre>
+</div>
+</div>
+<section id="group-by-group-analyses" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="group-by-group-analyses"><span class="header-section-number">11.4.1</span> Group-by-group analyses</h3>
+<p><strong>One first way we can handle dependent data is to split observations into groups such that, within each group, observations are independent (or approximately so).</strong> This is what we did last class when we fit order-specific regression coefficients of sex on body size. We saw that ALL order-specific effects had confidence intervals which overlapped zero!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run linear model of size on sex for EACH Order</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>Order_specific_models <span class="ot">&lt;-</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  mammal_long <span class="sc">|&gt;</span> </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Order) <span class="sc">|&gt;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do</span>(<span class="at">model =</span> <span class="fu">tidy</span>(<span class="fu">lm</span>(<span class="fu">log</span>(mass) <span class="sc">~</span> sex, <span class="at">data =</span> .), <span class="at">conf.int =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in qt(a, object$df.residual): NaNs produced
+
+Warning in qt(a, object$df.residual): NaNs produced
+
+Warning in qt(a, object$df.residual): NaNs produced</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get coefficients for each Order</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>Order_specific_models <span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `cols` is now required when using `unnest()`.
+ℹ Please use `cols = c(model)`.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 8
+   Order        term  estimate std.error statistic    p.value conf.low conf.high
+   &lt;chr&gt;        &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Artiodactyla (Int…  11.5       0.965    11.9      3.06e- 7    9.37     13.7  
+ 2 Artiodactyla sexM    0.0327    1.37      0.0239   9.81e- 1   -3.01      3.07 
+ 3 Carnivora    (Int…   7.68      0.428    17.9      1.27e-14    6.79      8.57 
+ 4 Carnivora    sexM    0.320     0.606     0.529    6.02e- 1   -0.936     1.58 
+ 5 Chiroptera   (Int…   2.76      0.0993   27.8      1.07e-72    2.57      2.96 
+ 6 Chiroptera   sexM   -0.0484    0.140    -0.345    7.30e- 1   -0.325     0.228
+ 7 Cingulata    (Int…  10.4     NaN       NaN      NaN         NaN       NaN    
+ 8 Cingulata    sexM    0.0908  NaN       NaN      NaN         NaN       NaN    
+ 9 Dasyuromorp… (Int…   7.44    NaN       NaN      NaN         NaN       NaN    
+10 Dasyuromorp… sexM    0.499   NaN       NaN      NaN         NaN       NaN    
+# ℹ 20 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualize effects, CIs, and p values</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>Order_specific_models <span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>() <span class="sc">|&gt;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(term <span class="sc">==</span> <span class="st">"sexM"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Order) <span class="sc">|&gt;</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> Order, <span class="at">x =</span> estimate, </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">xmin =</span> conf.low,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">xmax =</span> conf.high</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>             )</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">+</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>() <span class="sc">+</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `cols` is now required when using `unnest()`.
+ℹ Please use `cols = c(model)`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 3 rows containing missing values or values outside the scale range
+(`geom_segment()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-linear-models-2_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>No effect of sex on body size, for any of the orders!</p>
+<section id="challenge-2" class="level4" data-number="11.4.1.1">
+<h4 data-number="11.4.1.1" class="anchored" data-anchor-id="challenge-2"><span class="header-section-number">11.4.1.1</span> Challenge</h4>
+<p>How would you adjust the previous plot to show the estimated intercepts AND the effects of sex?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Order_specific_models <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>() <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># subset(term == "sexM") |&gt;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Order) <span class="sc">|&gt;</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> Order, <span class="at">x =</span> estimate, </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">xmin =</span> conf.low,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">xmax =</span> conf.high,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> term</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>             )</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">+</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>() <span class="sc">+</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `cols` is now required when using `unnest()`.
+ℹ Please use `cols = c(model)`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 6 rows containing missing values or values outside the scale range
+(`geom_segment()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-linear-models-2_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="challenge-3" class="level4" data-number="11.4.1.2">
+<h4 data-number="11.4.1.2" class="anchored" data-anchor-id="challenge-3"><span class="header-section-number">11.4.1.2</span> Challenge</h4>
+<p>How would you retrieve model fits for each Order in base R?</p>
+</section>
+<section id="challenge-4" class="level4" data-number="11.4.1.3">
+<h4 data-number="11.4.1.3" class="anchored" data-anchor-id="challenge-4"><span class="header-section-number">11.4.1.3</span> Challenge</h4>
+<p>Adjust the plot above so that it the size of the estimates depend on the number of observations in an Order? <em>Hint: determine the number of observations per Order and then use the <code>merge()</code> function with the <code>Order_specific_models</code> tibble. To adjust the range of point sizes, use <code>scale_size()</code>.</em></p>
+</section>
+<section id="pros-and-cons" class="level4" data-number="11.4.1.4">
+<h4 data-number="11.4.1.4" class="anchored" data-anchor-id="pros-and-cons"><span class="header-section-number">11.4.1.4</span> Pros and cons</h4>
+<p>There are several advantages to preforming a group-by-group analysis:</p>
+<ul>
+<li><strong>Fitting more complex models (e.g., those with random effects) can be difficult.</strong> There may be convergence issues, and interpretation of effects and <span class="math inline">\(p\)</span>-values can be tricky.</li>
+<li>The group-by-group analysis is <strong>robust in the face of unbalanced data</strong> (i.e., when there are more observations for some groups than others).</li>
+<li><strong>The conclusions from a group-by-group analysis are <em>conservative</em>.</strong></li>
+<li>The group-by-group analysis is <strong>fairly easy to implement</strong>.</li>
+</ul>
+<p>Among the disparages to this approach are the following:</p>
+<ul>
+<li>With fewer samples per group, the analysis <strong>may be under-powered</strong>.</li>
+<li>Splitting the data into groups means there are more coefficients to estimate, and thus confidence intervals to be estimated and hypothesis tests to be performed. This means there is a greater chance that we obtain a <strong>spurious association</strong>.*</li>
+<li>It is <strong>difficult to draw conclusions about the variance between groups.</strong> In some applications, this is of interest. In others, it is not.</li>
+</ul>
+<p>*One solution is to adjust the significant level based on the number of tests conducted. If <span class="math inline">\(k\)</span> hypotheses are tested, an <a href="https://en.wikipedia.org/wiki/Bonferroni_correction">common adjustment</a> is to set <span class="math inline">\(\alpha = 0.05/k\)</span>.</p>
+</section>
+</section>
+<section id="controlling-for-phylogeny" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="controlling-for-phylogeny"><span class="header-section-number">11.4.2</span> Controlling for phylogeny</h3>
+<p>A common reason data are dependent in biology is that <strong>species share a common history of descent with modification.</strong> When we assume that the observations are independent, we make implicit assumptions about the degree to which the characters at the tips of a phylogeny have underwent independent evolution. Sometimes, when species are diverged by many millions of years and traits evolve quickly, it is reasonable to ignore the phylogenetic constraints on the data. In other cases, it is essential to consider the role of phylogeny.</p>
+<p>Several methods can control for phylogeny (if known). In fact, such methods can <em>use</em> information in the branching pattern of species to draw inferences about the evolution of ecologically-important traits (such as body and brain size, dispersal rate, etc.). We will not discuss how to implement phylogenetic comparative methods, but it is good to know they exist and how, at a surface level, they work.</p>
+<p>Intuition for how PCMs work is easiest to grasp when we consider a tree with <span class="math inline">\(n\)</span> species at the tips. If we know the pairwise divergence times for all species, then we can <em>transform</em> the data so that observations are independent by looking at all <em>differences</em> of traits. Not all differences are equally informative; if species have diverged a long time ago, there has been more time for differences to build up. PCMs account for this by specifying how the distribution of trait differences between species <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> depends on the time that has elapsed since these species diverged, In particular, the larger the divergence time, the greater the variance in <span class="math inline">\(Y_i-Y_j\)</span>, the difference in trait values between species <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>. A simple way to do this is to write <span class="math inline">\(\sigma_{ij} = \sigma^2/T_{ij}\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</section>
+<section id="random-effects" class="level3" data-number="11.4.3">
+<h3 data-number="11.4.3" class="anchored" data-anchor-id="random-effects"><span class="header-section-number">11.4.3</span> Random effects!</h3>
+<p>Another way one can account for dependent data is by including <em>random effects</em>. Random effects are often used to control for the fact that observations are clustered (e.g., trait data for species belonging to a higher taxonomic unit, measurements of plant biomass from plots of land).</p>
+<section id="structure-and-assumptions" class="level4" data-number="11.4.3.1">
+<h4 data-number="11.4.3.1" class="anchored" data-anchor-id="structure-and-assumptions"><span class="header-section-number">11.4.3.1</span> Structure and assumptions</h4>
+<p>A common way models with random effects are formulated is as follows:</p>
+<p><span class="math display">\[Y_{ij} \sim \text{Normal}(\beta_0 + \beta_1 x_{1ij} + \cdots + \beta_{p} x_{pij} + b_{0i} + b_{1i} z_{1ij} + \cdots + b_{qi} z_{qij}, \sigma_{ij}^2),\]</span></p>
+<p>where <span class="math inline">\(ij\)</span> is the <span class="math inline">\(i\)</span>th observation from the <span class="math inline">\(j\)</span>th cluster and</p>
+<p><span class="math display">\[b_{ki} \sim \text{Normal}(0,\tau_k^2).\]</span></p>
+<p>This gives rise to a distribution for <span class="math inline">\(Y\)</span> which depends on the values of the random effects <span class="math inline">\(b_0,\dots,b_q\)</span>. Under the hood, methods that fit models of this form numerically maximize a version of the likelihood function that results from these assumptions.</p>
+</section>
+<section id="challenge-5" class="level4" data-number="11.4.3.2">
+<h4 data-number="11.4.3.2" class="anchored" data-anchor-id="challenge-5"><span class="header-section-number">11.4.3.2</span> Challenge</h4>
+<p>In each of the following examples, which effects might be reasonably treated as fixed vs.&nbsp;random? Justify your answer.</p>
+<ol type="1">
+<li><p>Suppose we are working with rodents that have been infected with an evolved strain of the parasite that causes malaria. Some rodents have been treated with a prospective vaccine and others sham-vaccinated. We are interested if a proxy for virulence (e.g., density of infected red blood cells) depends on vaccination status.</p></li>
+<li><p>Suppose we conduct the same experiment, except rodents are caged are sets of four.</p></li>
+<li><p>Suppose we measure the time between sightings of raccoon in a Toronto neighborhood using six camera traps (strategically placed in the neighborhood). We do this for year, and want to ask if mean daily temperature predicts the frequency of raccoon occurrence.</p></li>
+<li><p>Suppose that, every year, we go to the Amazon and measure the number of bird calls that come from <span class="math inline">\(n=30\)</span> trees. Assume that the trees are far enough apart we can treat them as independent. We measure the number of birds in a tree, characteristics of the tree (cover, height, width, age), the year in which a measurement was done, and the mean temperature that year. We want to know if tree cover affects the frequency of bird calls, and if it interacts with temperature.</p></li>
+</ol>
+<p>For more on the difference between fixed and random effects, check out the following resources</p>
+<ul>
+<li><a href="https://stats.stackexchange.com/questions/4700/what-is-the-difference-between-fixed-effect-random-effect-in-mixed-effect-model">this Cross Validated post</a></li>
+<li><a href="https://dynamicecology.wordpress.com/2015/11/04/is-it-a-fixed-or-random-effect/">this Dynamic Ecology post</a></li>
+<li><a href="https://bookdown.org/steve_midway/DAR/random-effects.html">this book chapter</a></li>
+</ul>
+</section>
+<section id="using-lme4-to-fit-random-and-mixed-effect-models" class="level4" data-number="11.4.3.3">
+<h4 data-number="11.4.3.3" class="anchored" data-anchor-id="using-lme4-to-fit-random-and-mixed-effect-models"><span class="header-section-number">11.4.3.3</span> Using <code>lme4</code> to fit random and mixed effect models</h4>
+<p>We will start by fitting a model of log body size on log length where the intercept is random depending on the Order. Based on a quick visualization of the data, such a model may be appropriate.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mammal_long, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(mass), </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">x =</span> <span class="fu">log</span>(length)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                               )</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span> </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> Order), <span class="at">size =</span> <span class="dv">3</span>) <span class="ot">-&gt;</span> p</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>p </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-linear-models-2_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To fit regress the response on a set of fixed effects with random <em>intercepts</em> that depends the values assumed by a random effect <code>x</code>, we call <code>lmer</code> and write a linear model with <code>(1|x)</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">## random intercept for Order</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">formula =</span> <span class="fu">log</span>(mass) <span class="sc">~</span> <span class="fu">log</span>(length) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Order), <span class="at">data =</span> mammal_long)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: log(mass) ~ log(length) + (1 | Order)
+   Data: mammal_long
+
+REML criterion at convergence: 1473
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.4725 -0.6209 -0.0859  0.5464  4.5351 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Order    (Intercept) 4.256    2.0630  
+ Residual             0.847    0.9203  
+Number of obs: 528, groups:  Order, 15
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)  2.72062    0.59488   4.573
+log(length)  1.12363    0.07116  15.789
+
+Correlation of Fixed Effects:
+            (Intr)
+log(length) -0.412</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) log(length) 
+   2.720625    1.123628 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Order
+                (Intercept)
+Artiodactyla      2.9590568
+Carnivora        -0.4243736
+Chiroptera       -1.7590786
+Cingulata         1.9715210
+Dasyuromorphia    2.1671133
+Didelphimorphia  -1.4045738
+Diprotodontia     1.2066571
+Eulipotyphla     -2.4045055
+Lagomorpha        2.1519392
+Macroscelidea    -4.0757058
+Peramelemorphia   1.5377333
+Pilosa           -0.1832817
+Primates          0.8008374
+Rodentia         -1.5015008
+Scandentia       -1.0418383
+
+with conditional variances for "Order" </code></pre>
+</div>
+</div>
+<p>From top to bottom, the output is telling us that the model was fit using a method called REML (restricted maximum likelihood). It returns information about the residuals, random effects, and fixed effects. The output also tells us about the <strong>estimated variance for the random effects</strong> in the model. Here, the variance associated with Order is 4.256. The variance explained by Order is 4.256/(4.256+0.847) <em>after controlling for the fixed effects</em>. Note the denominator here is the total variance, including from the residuals. As usual, we also have information about the fixed effects.</p>
+<p>To visualize the model, we can predict the overall and Order-specific relationship of log mass on log length for all of the Orders represented in the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="sc">|&gt;</span> <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(mass, length, Order) <span class="sc">|&gt;</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fit.m =</span> <span class="fu">predict</span>(model, <span class="at">re.form =</span> <span class="cn">NA</span>), <span class="co"># does not include random effects</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">fit.c =</span> <span class="fu">predict</span>(model, <span class="at">re.form =</span> <span class="cn">NULL</span>) <span class="co"># includes random effects</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>         ) <span class="ot">-&gt;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  predicted_values</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>predicted_values <span class="sc">|&gt;</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> <span class="fu">log</span>(mass), <span class="at">color =</span> Order)) <span class="sc">+</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> fit.c, <span class="at">color =</span> Order), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> fit.m), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-linear-models-2_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The thick black line corresponds to the fitted values associated with the fixed-effect component of the model. The colored lines correspond to the fitted values estimated for each Order.</p>
+<p>Perhaps a model with Order-specific random intercepts AND slopes would be better. We fit this model using the code below. The key difference in syntax is that we write <code>(1+fixed effect|random effect)</code> to indicate that the random effect has an effect on both the intercept <em>and</em> slope of the response on the fixed effect.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="do">## random intercept and slope for Order</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">formula =</span> <span class="fu">log</span>(mass) <span class="sc">~</span> <span class="fu">log</span>(length) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">+</span><span class="fu">log</span>(length)<span class="sc">|</span>Order), <span class="at">data =</span> mammal_long)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: log(mass) ~ log(length) + (1 + log(length) | Order)
+   Data: mammal_long
+
+REML criterion at convergence: 1362.7
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.8608 -0.5198 -0.0610  0.4402  5.7352 
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr 
+ Order    (Intercept) 19.7590  4.4451        
+          log(length)  1.3434  1.1591   -0.96
+ Residual              0.6581  0.8112        
+Number of obs: 528, groups:  Order, 15
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   3.6222     1.2800   2.830
+log(length)   0.9398     0.3392   2.771
+
+Correlation of Fixed Effects:
+            (Intr)
+log(length) -0.954</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) log(length) 
+  3.6222206   0.9397814 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Order
+                (Intercept) log(length)
+Artiodactyla      -5.086433   1.5697087
+Carnivora          3.517003  -0.7993673
+Chiroptera        -3.227380   0.5425373
+Cingulata         -2.437867   0.9014589
+Dasyuromorphia     3.494122  -0.7550221
+Didelphimorphia   -2.096031   0.1145380
+Diprotodontia      3.737120  -0.7974711
+Eulipotyphla      -6.677306   1.7068614
+Lagomorpha         3.168664  -0.5891273
+Macroscelidea      4.576435  -1.8088720
+Peramelemorphia    2.085998  -0.4541549
+Pilosa             4.823089  -0.9632143
+Primates           1.578103  -0.2317300
+Rodentia          -4.478792   0.9991504
+Scandentia        -2.976726   0.5647040
+
+with conditional variances for "Order" </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="sc">|&gt;</span> <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(mass, length, Order) <span class="sc">|&gt;</span> </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fit.m =</span> <span class="fu">predict</span>(model2, <span class="at">re.form =</span> <span class="cn">NA</span>),</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">fit.c =</span> <span class="fu">predict</span>(model2, <span class="at">re.form =</span> <span class="cn">NULL</span>)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>         ) <span class="ot">-&gt;</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  predicted_values</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>predicted_values <span class="sc">|&gt;</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> <span class="fu">log</span>(mass), <span class="at">color =</span> Order)) <span class="sc">+</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> fit.c, <span class="at">color =</span> Order), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> fit.m), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-linear-models-2_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="challenge-6" class="level4" data-number="11.4.3.4">
+<h4 data-number="11.4.3.4" class="anchored" data-anchor-id="challenge-6"><span class="header-section-number">11.4.3.4</span> Challenge</h4>
+<p>Regress log body size on sex with Order as a random effect that affects the intercept AND slope of the sex-size relationship.</p>
+
+
+</section>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Note: this gives rise to a likelihood function that is functionally VERY similar to the one for the linear model with constant error variance.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../lectures/lec10-linear-models-1.html" class="pagination-link" aria-label="Linear models I">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear models I</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
+        <span class="nav-page-text">Assignment00: individual interest description</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

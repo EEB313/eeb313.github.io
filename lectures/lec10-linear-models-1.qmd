@@ -119,11 +119,11 @@ We can regress $Y$ on discrete, as well as continuous, predictor variables. To s
 
 ### Interactions, higher order terms
 
-Finally, linear models can accommodate non-linear interactions between explanatory variables. If $x_2 = x_1^2$, one can estimate an effect for $x_2$. This effect has to be interpreted carefully -- it is the expected change in the response, all else constant, if $x_2 = x_1^2$ increases by one unit -- but does not pose a difficulty to forming the likelihood nor maximizing it.
+Finally, linear models can accommodate non-linear interactions between explanatory variables. If $x_2 = x_1^2$, one can estimate an effect for $x_2$ (and do the same for all higher order terms for $x_1$ and the other covariates). This effect sizes that are estimated have to be interpreted carefully but does not pose a difficulty to forming the likelihood nor maximizing it.
 
 Other interactions can also be modeled. For example, suppose we were interested in the combined effects of changing salinity and temperature on the number of species in an ecosystem because we suspect that changing salinity has little effect on the effect on the number of species if temperature in high (e.g., there are no species left). Then, letting $x_1$ be salinity and $x_2$ temperature, their interaction would be included as a covariate $x_3 = x_1 x_2$ and the associated effect estimated from the data.
 
-**When there are interactions, coefficients of must be interpreted very carefully. We can say that $\beta_1$ is the expected change in the response, all else constant, if we increase $x_1$ by one unit and set all covariates with which it interacts equal to zero.** For example, if $\beta_3$ is the effect of a salinity-temperature interaction, the coefficient for temperature is the expected change in the response, all else constant, if temperature increases by one unit and salinity is equal to zero. Likewise, $\beta_3$ is the expected change in the response upon increasing $x_1$ and $x_2$ by one unit each _in addition to the effects of each variable in isolation_.
+**When there are interactions, coefficients are interpreted as follows. We can say that $\beta_1$ is the expected change in the response if we increase $x_1$ by one unit and set all covariates with which it interacts equal to zero. The effect size for the interaction between $x_1$ and $x_2$ measures the change in the the expected response if $x_1$ and $x_2$ were to BOTH increase by one unit that is on top of or _in addition to_ the change due each variable in isolation.**
 
 ## Using `lm` to fit a multivariate regression model
 
@@ -269,7 +269,7 @@ Notice differences in sample size (i.e., number of sampled species per order).
 
 ### Challenge
 
-Regress log male body size on log length, visualize the effect, and interpret the coefficient for length. Then do the same but including sex and its interaction with length as an effect.
+Regress log body size on log length, visualize the effect, and interpret the coefficient for length. Then do the same but including sex and its interaction with length as an effect.
 
 _Hint: when interpreting the coefficient for length, recall that it has been log-transformed and, in the interaction, everything is measured relative to a baseline (in this example, males relative or the other way around). A per unit increase in the covariate does not imply a per unit increase in length._
 

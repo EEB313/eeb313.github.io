@@ -124,7 +124,7 @@ LLs <- data.frame(LogLik, p = p_values_to_test)
 LLs |> ggplot(aes(x = p, y = LogLik)) + geom_line()
 ```
 
-Values of $p$ where $\ln L(p) - -\infty$ are _very_ unlikely to explain the data. Since we are interested in the value of $p$ which gives rise to the largest $\ln L$, and these values are infinitely _negative_, they are not candidates for our estimator of $p$. As a result, they are suppressed in the plot.
+Values of $p$ where $\ln L(p)= -\infty$ are _very_ unlikely to explain the data. Since we are interested in the value of $p$ which gives rise to the largest $\ln L$, and these values are infinitely _negative_, they are not candidates for our estimator of $p$. As a result, they are suppressed in the plot.
 
 Another thing to notice is the curvature of the likelihood function around the value where it assumes a maximum. This tells us something about how confident we should be about our "best guess" for the parameter, or the maximum likelihood estimate of that parameter. More on this in a couple minutes...
 

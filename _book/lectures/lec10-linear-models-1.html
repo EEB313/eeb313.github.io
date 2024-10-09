@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-00.html" rel="next">
+<link href="../lectures/lec11-linear-models-2.html" rel="next">
 <link href="../lectures/lec09-intro-inference-2.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -257,6 +257,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec10-linear-models-1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear models I</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec11-linear-models-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Linear models II</span></span></a>
   </div>
 </li>
       </ul>
@@ -536,9 +542,9 @@ dbl (12): massM, SDmassM, massF, SDmassF, lengthM, SDlengthM, lengthF, SDlen...
 </section>
 <section id="interactions-higher-order-terms" class="level3" data-number="10.4.4">
 <h3 data-number="10.4.4" class="anchored" data-anchor-id="interactions-higher-order-terms"><span class="header-section-number">10.4.4</span> Interactions, higher order terms</h3>
-<p>Finally, linear models can accommodate non-linear interactions between explanatory variables. If <span class="math inline">\(x_2 = x_1^2\)</span>, one can estimate an effect for <span class="math inline">\(x_2\)</span>. This effect has to be interpreted carefully – it is the expected change in the response, all else constant, if <span class="math inline">\(x_2 = x_1^2\)</span> increases by one unit – but does not pose a difficulty to forming the likelihood nor maximizing it.</p>
+<p>Finally, linear models can accommodate non-linear interactions between explanatory variables. If <span class="math inline">\(x_2 = x_1^2\)</span>, one can estimate an effect for <span class="math inline">\(x_2\)</span> (and do the same for all higher order terms for <span class="math inline">\(x_1\)</span> and the other covariates). This effect sizes that are estimated have to be interpreted carefully but does not pose a difficulty to forming the likelihood nor maximizing it.</p>
 <p>Other interactions can also be modeled. For example, suppose we were interested in the combined effects of changing salinity and temperature on the number of species in an ecosystem because we suspect that changing salinity has little effect on the effect on the number of species if temperature in high (e.g., there are no species left). Then, letting <span class="math inline">\(x_1\)</span> be salinity and <span class="math inline">\(x_2\)</span> temperature, their interaction would be included as a covariate <span class="math inline">\(x_3 = x_1 x_2\)</span> and the associated effect estimated from the data.</p>
-<p><strong>When there are interactions, coefficients of must be interpreted very carefully. We can say that <span class="math inline">\(\beta_1\)</span> is the expected change in the response, all else constant, if we increase <span class="math inline">\(x_1\)</span> by one unit and set all covariates with which it interacts equal to zero.</strong> For example, if <span class="math inline">\(\beta_3\)</span> is the effect of a salinity-temperature interaction, the coefficient for temperature is the expected change in the response, all else constant, if temperature increases by one unit and salinity is equal to zero. Likewise, <span class="math inline">\(\beta_3\)</span> is the expected change in the response upon increasing <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> by one unit each <em>in addition to the effects of each variable in isolation</em>.</p>
+<p><strong>When there are interactions, coefficients are interpreted as follows. We can say that <span class="math inline">\(\beta_1\)</span> is the expected change in the response if we increase <span class="math inline">\(x_1\)</span> by one unit and set all covariates with which it interacts equal to zero. The effect size for the interaction between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> measures the change in the the expected response if <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> were to BOTH increase by one unit that is on top of or <em>in addition to</em> the change due each variable in isolation.</strong></p>
 </section>
 </section>
 <section id="using-lm-to-fit-a-multivariate-regression-model" class="level2" data-number="10.5">
@@ -847,7 +853,7 @@ F-statistic: 113.3 on 33 and 1248 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="challenge-6" class="level3" data-number="10.7.5">
 <h3 data-number="10.7.5" class="anchored" data-anchor-id="challenge-6"><span class="header-section-number">10.7.5</span> Challenge</h3>
-<p>Regress log male body size on log length, visualize the effect, and interpret the coefficient for length. Then do the same but including sex and its interaction with length as an effect.</p>
+<p>Regress log body size on log length, visualize the effect, and interpret the coefficient for length. Then do the same but including sex and its interaction with length as an effect.</p>
 <p><em>Hint: when interpreting the coefficient for length, recall that it has been log-transformed and, in the interaction, everything is measured relative to a baseline (in this example, males relative or the other way around). A per unit increase in the covariate does not imply a per unit increase in length.</em></p>
 <p><strong>CAUTION: do not fit your models using ggplot. Use <code>lm()</code>. Visualizing the model should be, well, a visualization exercise. It is quite dangerous to draw conclusions when you are not 100 percent sure what model (with or without interaction, by factor, etc.) was fit and then plotted. To avoid these issues, many folks visualize models fitted in <code>lm()</code> using base R.</strong></p>
 
@@ -1298,8 +1304,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
-        <span class="nav-page-text">Assignment00: individual interest description</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/lec11-linear-models-2.html" class="pagination-link" aria-label="Linear models II">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Linear models II</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
