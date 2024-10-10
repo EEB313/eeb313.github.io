@@ -662,20 +662,20 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--2.1190  -1.3088   0.6927   0.9288   1.0810  
+-2.0274  -1.2809   0.6417   0.8682   1.0620  
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   1.1121     0.2771   4.014 5.97e-05 ***
-scale(age)    1.1211     0.4889   2.293   0.0218 *  
+(Intercept)   1.2754     0.2857   4.464 8.06e-06 ***
+scale(age)    1.1068     0.4570   2.422   0.0154 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 120.43  on 99  degrees of freedom
-Residual deviance: 111.57  on 98  degrees of freedom
-AIC: 115.57
+    Null deviance: 114.61  on 99  degrees of freedom
+Residual deviance: 105.55  on 98  degrees of freedom
+AIC: 109.55
 
 Number of Fisher Scoring iterations: 5</code></pre>
 </div>
@@ -715,27 +715,27 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.895</td>
+<td style="text-align: right;">0.890</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.902</td>
+<td style="text-align: right;">0.926</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.943</td>
+<td style="text-align: right;">0.938</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.954</td>
+<td style="text-align: right;">0.956</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">190</td>
-<td style="text-align: right;">0.967</td>
+<td style="text-align: right;">0.978</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">200</td>
-<td style="text-align: right;">0.982</td>
+<td style="text-align: right;">0.976</td>
 </tr>
 </tbody>
 </table>
@@ -853,35 +853,6 @@ $ length          &lt;dbl&gt; 93.400, 100.000, 89.200, 92.300, 159.450, 149.190,
 <section id="challenge-2" class="level4" data-number="11.4.1.1">
 <h4 data-number="11.4.1.1" class="anchored" data-anchor-id="challenge-2"><span class="header-section-number">11.4.1.1</span> Challenge</h4>
 <p>How would you adjust the previous plot to show the estimated intercepts AND the effects of sex?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Order_specific_models <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>() <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># subset(term == "sexM") |&gt;</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Order) <span class="sc">|&gt;</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> Order, <span class="at">x =</span> estimate, </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">xmin =</span> conf.low,</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">xmax =</span> conf.high,</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> term</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>             )</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">+</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>() <span class="sc">+</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: `cols` is now required when using `unnest()`.
-ℹ Please use `cols = c(model)`.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 6 rows containing missing values or values outside the scale range
-(`geom_segment()`).</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec11-linear-models-2_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
 </section>
 <section id="challenge-3" class="level4" data-number="11.4.1.2">
 <h4 data-number="11.4.1.2" class="anchored" data-anchor-id="challenge-3"><span class="header-section-number">11.4.1.2</span> Challenge</h4>
@@ -921,9 +892,9 @@ $ length          &lt;dbl&gt; 93.400, 100.000, 89.200, 92.300, 159.450, 149.190,
 <section id="structure-and-assumptions" class="level4" data-number="11.4.3.1">
 <h4 data-number="11.4.3.1" class="anchored" data-anchor-id="structure-and-assumptions"><span class="header-section-number">11.4.3.1</span> Structure and assumptions</h4>
 <p>A common way models with random effects are formulated is as follows:</p>
-<p><span class="math display">\[Y_{ij} \sim \text{Normal}(\beta_0 + \beta_1 x_{1ij} + \cdots + \beta_{p} x_{pij} + b_{0i} + b_{1i} z_{1ij} + \cdots + b_{qi} z_{qij}, \sigma_{ij}^2),\]</span></p>
-<p>where <span class="math inline">\(ij\)</span> is the <span class="math inline">\(i\)</span>th observation from the <span class="math inline">\(j\)</span>th cluster and</p>
-<p><span class="math display">\[b_{ki} \sim \text{Normal}(0,\tau_k^2).\]</span></p>
+<p><span class="math display">\[Y_{ij} \sim \text{Normal}(\beta_0 + \beta_1 x_{1ij} + \cdots + \beta_p x_{pij} + b_{0i} + b_{1i} z_{1ij} + \cdots + b_{qj} z_{qij}, \sigma_{ij}^2),\]</span></p>
+<p>where <span class="math inline">\(i\)</span> corresponds to the cluster and <span class="math inline">\(j\)</span> to the observation, and</p>
+<p><span class="math display">\[b_{01},\dots,b_{qi} \sim \text{Normal}(0,\tau_i^2).\]</span></p>
 <p>This gives rise to a distribution for <span class="math inline">\(Y\)</span> which depends on the values of the random effects <span class="math inline">\(b_0,\dots,b_q\)</span>. Under the hood, methods that fit models of this form numerically maximize a version of the likelihood function that results from these assumptions.</p>
 </section>
 <section id="challenge-5" class="level4" data-number="11.4.3.2">
@@ -946,13 +917,13 @@ $ length          &lt;dbl&gt; 93.400, 100.000, 89.200, 92.300, 159.450, 149.190,
 <h4 data-number="11.4.3.3" class="anchored" data-anchor-id="using-lme4-to-fit-random-and-mixed-effect-models"><span class="header-section-number">11.4.3.3</span> Using <code>lme4</code> to fit random and mixed effect models</h4>
 <p>We will start by fitting a model of log body size on log length where the intercept is random depending on the Order. Based on a quick visualization of the data, such a model may be appropriate.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mammal_long, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(mass), </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">x =</span> <span class="fu">log</span>(length)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                               )</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span> </span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> Order), <span class="at">size =</span> <span class="dv">3</span>) <span class="ot">-&gt;</span> p</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>p </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mammal_long, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(mass), </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">x =</span> <span class="fu">log</span>(length)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                               )</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> Order), <span class="at">size =</span> <span class="dv">3</span>) <span class="ot">-&gt;</span> p</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>p </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -963,10 +934,10 @@ $ length          &lt;dbl&gt; 93.400, 100.000, 89.200, 92.300, 159.450, 149.190,
 </div>
 <p>To fit regress the response on a set of fixed effects with random <em>intercepts</em> that depends the values assumed by a random effect <code>x</code>, we call <code>lmer</code> and write a linear model with <code>(1|x)</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="do">## random intercept for Order</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">formula =</span> <span class="fu">log</span>(mass) <span class="sc">~</span> <span class="fu">log</span>(length) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Order), <span class="at">data =</span> mammal_long)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## random intercept for Order</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">formula =</span> <span class="fu">log</span>(mass) <span class="sc">~</span> <span class="fu">log</span>(length) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Order), <span class="at">data =</span> mammal_long)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: log(mass) ~ log(length) + (1 | Order)
@@ -993,12 +964,12 @@ Correlation of Fixed Effects:
             (Intr)
 log(length) -0.412</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept) log(length) 
    2.720625    1.123628 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$Order
                 (Intercept)
@@ -1024,17 +995,17 @@ with conditional variances for "Order" </code></pre>
 <p>From top to bottom, the output is telling us that the model was fit using a method called REML (restricted maximum likelihood). It returns information about the residuals, random effects, and fixed effects. The output also tells us about the <strong>estimated variance for the random effects</strong> in the model. Here, the variance associated with Order is 4.256. The variance explained by Order is 4.256/(4.256+0.847) <em>after controlling for the fixed effects</em>. Note the denominator here is the total variance, including from the residuals. As usual, we also have information about the fixed effects.</p>
 <p>To visualize the model, we can predict the overall and Order-specific relationship of log mass on log length for all of the Orders represented in the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="sc">|&gt;</span> <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(mass, length, Order) <span class="sc">|&gt;</span> </span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fit.m =</span> <span class="fu">predict</span>(model, <span class="at">re.form =</span> <span class="cn">NA</span>), <span class="co"># does not include random effects</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">fit.c =</span> <span class="fu">predict</span>(model, <span class="at">re.form =</span> <span class="cn">NULL</span>) <span class="co"># includes random effects</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>         ) <span class="ot">-&gt;</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  predicted_values</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>predicted_values <span class="sc">|&gt;</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> <span class="fu">log</span>(mass), <span class="at">color =</span> Order)) <span class="sc">+</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> fit.c, <span class="at">color =</span> Order), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> fit.m), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="sc">|&gt;</span> <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(mass, length, Order) <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fit.m =</span> <span class="fu">predict</span>(model, <span class="at">re.form =</span> <span class="cn">NA</span>), <span class="co"># does not include random effects</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">fit.c =</span> <span class="fu">predict</span>(model, <span class="at">re.form =</span> <span class="cn">NULL</span>) <span class="co"># includes random effects</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>         ) <span class="ot">-&gt;</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  predicted_values</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>predicted_values <span class="sc">|&gt;</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> <span class="fu">log</span>(mass), <span class="at">color =</span> Order)) <span class="sc">+</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> fit.c, <span class="at">color =</span> Order), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> fit.m), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 ℹ Please use `linewidth` instead.</code></pre>
@@ -1050,10 +1021,10 @@ with conditional variances for "Order" </code></pre>
 <p>The thick black line corresponds to the fitted values associated with the fixed-effect component of the model. The colored lines correspond to the fitted values estimated for each Order.</p>
 <p>Perhaps a model with Order-specific random intercepts AND slopes would be better. We fit this model using the code below. The key difference in syntax is that we write <code>(1+fixed effect|random effect)</code> to indicate that the random effect has an effect on both the intercept <em>and</em> slope of the response on the fixed effect.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="do">## random intercept and slope for Order</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">formula =</span> <span class="fu">log</span>(mass) <span class="sc">~</span> <span class="fu">log</span>(length) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">+</span><span class="fu">log</span>(length)<span class="sc">|</span>Order), <span class="at">data =</span> mammal_long)</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">## random intercept and slope for Order</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">formula =</span> <span class="fu">log</span>(mass) <span class="sc">~</span> <span class="fu">log</span>(length) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">+</span><span class="fu">log</span>(length)<span class="sc">|</span>Order), <span class="at">data =</span> mammal_long)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: log(mass) ~ log(length) + (1 + log(length) | Order)
@@ -1081,12 +1052,12 @@ Correlation of Fixed Effects:
             (Intr)
 log(length) -0.954</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept) log(length) 
   3.6222206   0.9397814 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$Order
                 (Intercept) log(length)
@@ -1110,17 +1081,17 @@ with conditional variances for "Order" </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="sc">|&gt;</span> <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(mass, length, Order) <span class="sc">|&gt;</span> </span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fit.m =</span> <span class="fu">predict</span>(model2, <span class="at">re.form =</span> <span class="cn">NA</span>),</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">fit.c =</span> <span class="fu">predict</span>(model2, <span class="at">re.form =</span> <span class="cn">NULL</span>)</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>         ) <span class="ot">-&gt;</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  predicted_values</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>predicted_values <span class="sc">|&gt;</span></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> <span class="fu">log</span>(mass), <span class="at">color =</span> Order)) <span class="sc">+</span></span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> fit.c, <span class="at">color =</span> Order), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> fit.m), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="sc">|&gt;</span> <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(mass, length, Order) <span class="sc">|&gt;</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fit.m =</span> <span class="fu">predict</span>(model2, <span class="at">re.form =</span> <span class="cn">NA</span>),</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">fit.c =</span> <span class="fu">predict</span>(model2, <span class="at">re.form =</span> <span class="cn">NULL</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>         ) <span class="ot">-&gt;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  predicted_values</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>predicted_values <span class="sc">|&gt;</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> <span class="fu">log</span>(mass), <span class="at">color =</span> Order)) <span class="sc">+</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> fit.c, <span class="at">color =</span> Order), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">inherit.aes =</span> F, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> fit.m), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
