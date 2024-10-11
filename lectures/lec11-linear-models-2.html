@@ -440,9 +440,8 @@ window.Quarto = {
 <blockquote class="blockquote">
 <h3 id="learning-objectives" data-number="11.1.1" class="anchored"><span class="header-section-number">11.1.1</span> Learning objectives</h3>
 <ul>
-<li>Learn how dependent data can be modeled, and the sitations in which one may encounter such data.</li>
 <li>Understand the structure, assumptions, and implementation of GLMs.</li>
-<li>Understand the structure, assumptions, and implementation of LLMs.</li>
+<li>Learn how dependent data can be modeled, and the situations in which one may encounter such data. Understand the structure, assumptions, and implementation of LLMs.</li>
 <li>Learn how to use simulation to inform what data that should be collected, and how.</li>
 </ul>
 <h3 id="lesson-outline" data-number="11.1.2" class="anchored"><span class="header-section-number">11.1.2</span> Lesson outline</h3>
@@ -662,22 +661,22 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--2.0274  -1.2809   0.6417   0.8682   1.0620  
+-1.8197  -1.2914   0.7449   1.0212   1.1365  
 
 Coefficients:
-            Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   1.2754     0.2857   4.464 8.06e-06 ***
-scale(age)    1.1068     0.4570   2.422   0.0154 *  
+            Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)   0.6166     0.2172   2.840  0.00452 **
+scale(age)    0.5004     0.2571   1.946  0.05163 . 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 114.61  on 99  degrees of freedom
-Residual deviance: 105.55  on 98  degrees of freedom
-AIC: 109.55
+    Null deviance: 130.68  on 99  degrees of freedom
+Residual deviance: 126.21  on 98  degrees of freedom
+AIC: 130.21
 
-Number of Fisher Scoring iterations: 5</code></pre>
+Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
 <p>Next, we will write a function that performs a <strong>power analysis</strong>. We will use this function determine the sample size that is required so that simulating the age-disease data repeatedly we identify a significant effect of age on disease status (i.e., reject the null hypothesis) at level <span class="math inline">\(\alpha = 0.01\)</span> <em>at least <span class="math inline">\(95\%\)</span> of the time</em>.</p>
@@ -715,27 +714,27 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.890</td>
+<td style="text-align: right;">0.891</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.926</td>
+<td style="text-align: right;">0.927</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.938</td>
+<td style="text-align: right;">0.942</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.956</td>
+<td style="text-align: right;">0.954</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">190</td>
-<td style="text-align: right;">0.978</td>
+<td style="text-align: right;">0.966</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">200</td>
-<td style="text-align: right;">0.976</td>
+<td style="text-align: right;">0.978</td>
 </tr>
 </tbody>
 </table>
@@ -888,13 +887,13 @@ $ length          &lt;dbl&gt; 93.400, 100.000, 89.200, 92.300, 159.450, 149.190,
 </section>
 <section id="random-effects" class="level3" data-number="11.4.3">
 <h3 data-number="11.4.3" class="anchored" data-anchor-id="random-effects"><span class="header-section-number">11.4.3</span> Random effects!</h3>
-<p>Another way one can account for dependent data is by including <em>random effects</em>. Random effects are often used to control for the fact that observations are clustered (e.g., trait data for species belonging to a higher taxonomic unit, measurements of plant biomass from plots of land).</p>
+<p>Another way one can account for dependent data is by including <em>random effects</em>. Random effects are often used to control for the fact that observations are clustered (e.g., trait data for species belonging to a higher taxonomic unit, measurements of plant biomass from plots of land). Random effects are used to account for dependencies in hierarchical, longitudinal, and other dependent data.</p>
 <section id="structure-and-assumptions" class="level4" data-number="11.4.3.1">
 <h4 data-number="11.4.3.1" class="anchored" data-anchor-id="structure-and-assumptions"><span class="header-section-number">11.4.3.1</span> Structure and assumptions</h4>
 <p>A common way models with random effects are formulated is as follows:</p>
-<p><span class="math display">\[Y_{ij} \sim \text{Normal}(\beta_0 + \beta_1 x_{1ij} + \cdots + \beta_p x_{pij} + b_{0i} + b_{1i} z_{1ij} + \cdots + b_{qj} z_{qij}, \sigma_{ij}^2),\]</span></p>
-<p>where <span class="math inline">\(i\)</span> corresponds to the cluster and <span class="math inline">\(j\)</span> to the observation, and</p>
-<p><span class="math display">\[b_{01},\dots,b_{qi} \sim \text{Normal}(0,\tau_i^2).\]</span></p>
+<p><span class="math display">\[Y_{ij} \sim \text{Normal}(\beta_0 + \beta_1 x_{1ij} + \cdots + \beta_p x_{pij} + b_{0i} + b_{1i} z_{1ij} + \cdots + b_{qi} z_{qij}, \sigma_{ij}^2),\]</span></p>
+<p>where <span class="math inline">\(Y_{ij}\)</span> is the value of the response for the <span class="math inline">\(j\)</span>th in <span class="math inline">\(n_i\)</span> observations in the <span class="math inline">\(i\)</span>th of <span class="math inline">\(m\)</span> clusters, and</p>
+<p><span class="math display">\[b_{0i},\dots,b_{qi} \sim \text{Normal}(0,\tau_i^2).\]</span></p>
 <p>This gives rise to a distribution for <span class="math inline">\(Y\)</span> which depends on the values of the random effects <span class="math inline">\(b_0,\dots,b_q\)</span>. Under the hood, methods that fit models of this form numerically maximize a version of the likelihood function that results from these assumptions.</p>
 </section>
 <section id="challenge-5" class="level4" data-number="11.4.3.2">
@@ -904,7 +903,6 @@ $ length          &lt;dbl&gt; 93.400, 100.000, 89.200, 92.300, 159.450, 149.190,
 <li><p>Suppose we are working with rodents that have been infected with an evolved strain of the parasite that causes malaria. Some rodents have been treated with a prospective vaccine and others sham-vaccinated. We are interested if a proxy for virulence (e.g., density of infected red blood cells) depends on vaccination status.</p></li>
 <li><p>Suppose we conduct the same experiment, except rodents are caged are sets of four.</p></li>
 <li><p>Suppose we measure the time between sightings of a raccoon in a Toronto neighborhood using six camera traps (strategically placed in the neighborhood). We do this for year, and want to ask if mean daily temperature predicts the frequency of raccoon occurrence.</p></li>
-<li><p>Suppose that, every year, we go to the Amazon and measure the number of bird calls that come from <span class="math inline">\(n=30\)</span> trees. Assume that the trees are far enough apart we can treat them as independent. We measure the number of birds in a tree, characteristics of the tree (cover, height, width, age), the year in which a measurement was done, and the mean temperature that year. We want to know if tree cover affects the frequency of bird calls, and if it interacts with temperature.</p></li>
 </ol>
 <p>For more on the difference between fixed and random effects, check out the following resources</p>
 <ul>
