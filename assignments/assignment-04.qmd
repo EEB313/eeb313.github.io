@@ -42,7 +42,7 @@ b. Simulate $n = 1000$ realizations (i.e., draws) of a Geometric random variable
 
 c. Extract the first element of `x`, i.e., the first realization of the Geometric($p = 0.01$) distribution. How likely is it that this observation arose from a Geometric distribution with probability $p = 0.9$? How likely is it that the observation arose from a Geometric distribution with probability $p = 0.1$? _Hint: evaluate the Geometric(p) probability mass function at these values of the parameter._
 
-d. What is the probability that _each_ element of `x` arose due to a Geometric distribution with $p = 0.9$? Store these probabilities in a vector, apply `log` to each element of the vector, and print the sum the elements of the vector of log-transformed probabilities. This is the log-likelihood of the data --- i.e., the realizations of the Geometric distribution you simulated in (a) --- at $p=0.1$.
+d. What is the probability that _each_ element of `x` arose due to a Geometric distribution with $p = 0.9$? Store these probabilities in a vector, apply `log` to each element of the vector, and print the sum the elements of the vector of log-transformed probabilities. This is the log-likelihood of the data --- i.e., the realizations of the Geometric distribution you simulated in (a) --- at $p=0.9$.
 
 ## 3. Maximum likelihood for Binomial probabilities (3 marks)
 
@@ -52,13 +52,7 @@ a. Download the Farrell and Davies dataset which we analyzed in class from Querc
 
 b. Use the `unique()` function to determine all unique elements of the Host and ParaFamily columns. Then, use the `expand.grid()` function to generate a data frame with all combinations of hosts and parasite families. Store the data frame of host and parasite family combinations in an object called `Combinations`. _Hint: look at the documentation for `expand.grid()`._
 
-```{r, eval=F}
-Combinations <- 
-  expand.grid(host = unique(disease_distance$Host),
-              para_family = unique(disease_distance$ParaFamily))
-```
-
-d. **Write a function that returns, for a host and parasite family (i.e., a specific row of the `Combination` data frame you have just made), the maximum likelihood estimate for the probability of death, given infection, of that host with members of the parasite family.** Like we did in class, assume deaths are Binomial with a host-specific number of cases and probability of death, and those in different countries and years are independent. If there are no observations for a specific host and parasite family combination, your function should return `NA`; else, the function should return the value of $p$ which maximizes the likelihood function formed from the data specific to the host and parasite family supplied as arguments to the function. You may also run into issues where the log-likelihood is negative infinity at all $p$; in this case, the function should return `NA`. 
+c. **Write a function that returns, for a host and parasite family (i.e., a specific row of the `Combination` data frame you have just made), the maximum likelihood estimate for the probability of death, given infection, of that host with members of the parasite family.** Like we did in class, assume deaths are Binomial with a host-specific number of cases and probability of death, and those in different countries and years are independent. If there are no observations for a specific host and parasite family combination, your function should return `NA`; else, the function should return the value of $p$ which maximizes the likelihood function formed from the data specific to the host and parasite family supplied as arguments to the function. You may also run into issues where the log-likelihood is negative infinity at all $p$; in this case, the function should return `NA`. 
 
 The skeleton of the function is provided below. The arguments that specify the host species and the parasite family. The cases where an `NA` should be returned are addressed using nested `if {} else {}` statements.
 
@@ -117,11 +111,11 @@ ProbDeathEstimator <- function(host = "Capra_hircus", para_family = "Bacillaceae
 }
 ```
 
-e. Test the function on the host and parasite family from class. Does it return the same maximum likelihood estimate for $p$? If not, the function needs to be de-bugged. If so, excellent -- you are probably in a good position to finish the problem!
+d. Test the function on the host and parasite family from class. Does it return the same maximum likelihood estimate for $p$? If not, the function needs to be de-bugged. If so, excellent -- you are probably in a good position to finish the problem!
 
-f. Loop over all rows of the `Combinations` data frame you made in (b). For each row, apply the function you made in (d) to the host and parasite family in that row. Store the values returned by the function, for each row, in a vector `ProbabilitiesDeath`. At the end of the loop, this vector should have length equal to the number of rows in `Combinations` (i.e., one estimate for host-parasite family pair).
+e. Loop over all rows of the `Combinations` data frame you made in (b). For each row, apply the function you made in (d) to the host and parasite family in that row. Store the values returned by the function, for each row, in a vector `ProbabilitiesDeath`. At the end of the loop, this vector should have length equal to the number of rows in `Combinations` (i.e., one estimate for host-parasite family pair).
 
-g. View `data.frame(p = ProbabilitiesDeath, Combinations)`. Each row includes a host, parasite family, and the estimate probability of death for the host when infected with a member of the parasite family. Using this data frame, visualize the distribution of estimates using a histogram. Then, visualize the distribution for each host (i.e., faceted by host).
+f. View `data.frame(p = ProbabilitiesDeath, Combinations)`. Each row includes a host, parasite family, and the estimate probability of death for the host when infected with a member of the parasite family. Using this data frame, visualize the distribution of estimates using a histogram. Then, visualize the distribution for each host (i.e., faceted by host).
 
 What do you notice about the distribution(s) of death probabilities?
 
