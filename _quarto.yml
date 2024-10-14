@@ -22,6 +22,7 @@ book:
       - lectures/lec09-intro-inference-2.qmd
       - lectures/lec10-linear-models-1.qmd
       - lectures/lec11-linear-models-2.qmd
+      - lectures/lec12-model-selection.qmd
     - part: "Assignments"
       chapters:
       - assignments/assignment-00.qmd
@@ -45,6 +46,10 @@ book:
           href: lectures/data/disease_distance.csv
         - text: "SSDinMammals.csv"
           href: lectures/data/SSDinMammals.csv
+        - text: "medicago.csv"
+          href: lectures/data/medicago.csv
+        - text: "bmr.csv"
+          href: lectures/data/bmr.csv
         - text: "meas.csv"
           href: lectures/data/meas.csv
     - part: "Miscellaneous notes"
@@ -79,4 +84,6 @@ extra_files:
   - pseudoMol_Kdist.txt
   - SSDinMammals.csv
   - disease_distance.csv
+  - medicago.csv
+  - bmr.csv
   - meas.csv

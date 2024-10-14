@@ -160,5 +160,8 @@
   },
   "lectures/lec11-linear-models-2.qmd": {
     "lec11-linear-models-2.html": "d32619c3"
+  },
+  "lectures/lec12-model-selection.qmd": {
+    "lec12-model-selection.html": "ab976dbb"
   }
 }
