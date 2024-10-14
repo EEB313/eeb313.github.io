@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-00.html" rel="next">
+<link href="../lectures/lec12-model-selection.html" rel="next">
 <link href="../lectures/lec10-linear-models-1.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -265,6 +265,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Linear models II</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec12-model-selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -368,6 +374,18 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../lectures/data/SSDinMammals.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SSDinMammals.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/medicago.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">medicago.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/bmr.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">bmr.csv</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -615,7 +633,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <ul>
 <li>the minimum sample size required to reliably estimate an effect of a certain size</li>
 <li>the minimum sample size required to detect an effect of a certain size at a fixed significance level</li>
-<li>the minimum effect size that can be detected at a fixed significance level and sample size</li>
+<li>the maximum effect size that can be detected at a fixed significance level and sample size</li>
 </ul>
 <section id="example" class="level3" data-number="11.3.1">
 <h3 data-number="11.3.1" class="anchored" data-anchor-id="example"><span class="header-section-number">11.3.1</span> Example</h3>
@@ -661,22 +679,22 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--1.8197  -1.2914   0.7449   1.0212   1.1365  
+-1.8736  -0.9918   0.3752   0.9496   1.4785  
 
 Coefficients:
-            Estimate Std. Error z value Pr(&gt;|z|)   
-(Intercept)   0.6166     0.2172   2.840  0.00452 **
-scale(age)    0.5004     0.2571   1.946  0.05163 . 
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)   1.0487     0.3071   3.415 0.000638 ***
+scale(age)    1.7249     0.4988   3.458 0.000545 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 130.68  on 99  degrees of freedom
-Residual deviance: 126.21  on 98  degrees of freedom
-AIC: 130.21
+    Null deviance: 129.49  on 99  degrees of freedom
+Residual deviance: 107.27  on 98  degrees of freedom
+AIC: 111.27
 
-Number of Fisher Scoring iterations: 4</code></pre>
+Number of Fisher Scoring iterations: 5</code></pre>
 </div>
 </div>
 <p>Next, we will write a function that performs a <strong>power analysis</strong>. We will use this function determine the sample size that is required so that simulating the age-disease data repeatedly we identify a significant effect of age on disease status (i.e., reject the null hypothesis) at level <span class="math inline">\(\alpha = 0.01\)</span> <em>at least <span class="math inline">\(95\%\)</span> of the time</em>.</p>
@@ -714,27 +732,27 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.891</td>
+<td style="text-align: right;">0.892</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.927</td>
+<td style="text-align: right;">0.910</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.942</td>
+<td style="text-align: right;">0.954</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.954</td>
+<td style="text-align: right;">0.956</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">190</td>
-<td style="text-align: right;">0.966</td>
+<td style="text-align: right;">0.969</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">200</td>
-<td style="text-align: right;">0.978</td>
+<td style="text-align: right;">0.967</td>
 </tr>
 </tbody>
 </table>
@@ -1532,8 +1550,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
-        <span class="nav-page-text">Assignment00: individual interest description</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/lec12-model-selection.html" class="pagination-link" aria-label="Model selection">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
