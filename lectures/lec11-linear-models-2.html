@@ -390,6 +390,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lectures/data/influenza_cities.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">influenza_cities.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lectures/data/meas.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">meas.csv</span></a>
   </div>
@@ -679,20 +685,20 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--2.3074   0.3308   0.6587   0.7611   0.8551  
+-2.7167   0.1646   0.5453   0.7778   1.0862  
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   1.4271     0.2721   5.245 1.56e-07 ***
-scale(age)    0.6223     0.3508   1.774    0.076 .  
+(Intercept)   1.4797     0.3062   4.832 1.35e-06 ***
+scale(age)    1.0757     0.3942   2.729  0.00635 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 102.791  on 99  degrees of freedom
-Residual deviance:  98.672  on 98  degrees of freedom
-AIC: 102.67
+    Null deviance: 107.855  on 99  degrees of freedom
+Residual deviance:  96.846  on 98  degrees of freedom
+AIC: 100.85
 
 Number of Fisher Scoring iterations: 5</code></pre>
 </div>
@@ -732,15 +738,15 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.871</td>
+<td style="text-align: right;">0.892</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.912</td>
+<td style="text-align: right;">0.902</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.937</td>
+<td style="text-align: right;">0.940</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">180</td>
@@ -752,7 +758,7 @@ Number of Fisher Scoring iterations: 5</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: right;">200</td>
-<td style="text-align: right;">0.975</td>
+<td style="text-align: right;">0.971</td>
 </tr>
 </tbody>
 </table>

@@ -390,6 +390,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../lectures/data/influenza_cities.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">influenza_cities.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../lectures/data/meas.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">meas.csv</span></a>
   </div>
@@ -838,7 +844,7 @@ model2  7 4589.116</code></pre>
 <h2 data-number="12.8" class="anchored" data-anchor-id="model-selection-for-lmms"><span class="header-section-number">12.8</span> Model selection for LMMs</h2>
 <p>Model selection for mixed models is even more complicated, due to the addition of random effects. A procedure that is commonly used to preform selection of LMMs is as follows:</p>
 <ol type="1">
-<li><p>Create a <em>saturated model</em> that includes all fixed effects (and their interactions[^interaction]) and random effects you wish to test.</p></li>
+<li><p>Create a <em>saturated model</em> that includes all fixed effects (and their interactions) and random effects you wish to test.</p></li>
 <li><p>Optimize the random-effect structure by comparing models with the same saturated fixed effects structure but differing random effect structures. These models should be fitted using Restricted Maximum Likelihood (i.e., <code>REML = TRUE</code>), since varience component estimation will be biased otherwise. The <em>optimal</em> random effect structure is the one that provides the lowest AIC. Do <strong>not</strong> remove random effects if they are included to account for non-independence in your data. Skip this step if random effects must be included given the hierarchical structure (i.e., nestedness) in the data.</p></li>
 <li><p>Optimize the fixed-effect structure by comparing models with the same optimized (or necessary) random effects but with differing fixed effect structures. These models should be fitted with Maximum Likelihood (i.e., <code>REML = FALSE</code>) to prevent biased fixed-effect parameter estimates. Models can be selected on the basis of AIC (the lower the better), by comparing nested models using a likelihood ratio test (LRT), or both.</p></li>
 <li><p>Fit the final model with optimized fixed and random effects using REML and interpret your results.</p></li>
