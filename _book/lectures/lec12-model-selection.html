@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-00.html" rel="next">
+<link href="../lectures/lec13-intro-to-multivariate-stats.html" rel="next">
 <link href="../lectures/lec11-linear-models-2.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -271,6 +271,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec13-intro-to-multivariate-stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Multivariate statistics</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -384,8 +390,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/data/bmr.csv" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/data/Pigot2020.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">bmr.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/bmr.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pigot2020.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/influenza_cities.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">influenza_cities.csv</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -416,15 +434,14 @@ window.Quarto = {
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">12.2.1</span> Examples</a></li>
   </ul></li>
   <li><a href="#stepwise-regressionand-why-you-should-not-use-it." id="toc-stepwise-regressionand-why-you-should-not-use-it." class="nav-link" data-scroll-target="#stepwise-regressionand-why-you-should-not-use-it."><span class="header-section-number">12.3</span> Stepwise regression…and why you should not use it.</a></li>
-  <li><a href="#the-akaike-information-criterion-aic" id="toc-the-akaike-information-criterion-aic" class="nav-link" data-scroll-target="#the-akaike-information-criterion-aic"><span class="header-section-number">12.4</span> The Akaike information criterion (AIC)</a>
+  <li><a href="#the-akaike-information-criterion" id="toc-the-akaike-information-criterion" class="nav-link" data-scroll-target="#the-akaike-information-criterion"><span class="header-section-number">12.4</span> The Akaike information criterion</a>
   <ul class="collapse">
   <li><a href="#textaic_c-for-small-sample-sizes" id="toc-textaic_c-for-small-sample-sizes" class="nav-link" data-scroll-target="#textaic_c-for-small-sample-sizes"><span class="header-section-number">12.4.1</span> <span class="math inline">\(\text{AIC}_c\)</span> for small sample sizes</a></li>
   </ul></li>
   <li><a href="#example-with-a-linear-model" id="toc-example-with-a-linear-model" class="nav-link" data-scroll-target="#example-with-a-linear-model"><span class="header-section-number">12.5</span> Example with a linear model</a></li>
   <li><a href="#another-example" id="toc-another-example" class="nav-link" data-scroll-target="#another-example"><span class="header-section-number">12.6</span> Another example</a></li>
-  <li><a href="#example-with-a-generalized-linear-model-glm" id="toc-example-with-a-generalized-linear-model-glm" class="nav-link" data-scroll-target="#example-with-a-generalized-linear-model-glm"><span class="header-section-number">12.7</span> Example with a Generalized Linear Model (GLM)</a></li>
-  <li><a href="#model-selection-for-linear-mixed-models" id="toc-model-selection-for-linear-mixed-models" class="nav-link" data-scroll-target="#model-selection-for-linear-mixed-models"><span class="header-section-number">12.8</span> Model selection for linear mixed models</a></li>
-  <li><a href="#references-and-additional-reading" id="toc-references-and-additional-reading" class="nav-link" data-scroll-target="#references-and-additional-reading"><span class="header-section-number">12.9</span> References and additional reading</a></li>
+  <li><a href="#example-with-a-glm" id="toc-example-with-a-glm" class="nav-link" data-scroll-target="#example-with-a-glm"><span class="header-section-number">12.7</span> Example with a GLM</a></li>
+  <li><a href="#additional-reading" id="toc-additional-reading" class="nav-link" data-scroll-target="#additional-reading"><span class="header-section-number">12.8</span> Additional reading</a></li>
   </ul>
 </nav>
     </div>
@@ -488,18 +505,12 @@ window.Quarto = {
 </section>
 <section id="stepwise-regressionand-why-you-should-not-use-it." class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="stepwise-regressionand-why-you-should-not-use-it."><span class="header-section-number">12.3</span> Stepwise regression…and why you should not use it.</h2>
-<p>Suppose you want to model the effects of multiple predictors and their interactions on a particular response variable of interest. It may be tempting, then, to test all possible combinations of predictors and see which set fits the data the <em>best</em> (though this really sounds like p-hacking…). Stepwise selection involves iteratively adding and removing predictors according to some criterion (e.g., variance explained). The steps for forward stepwise regression are as follows:</p>
-<ol type="1">
-<li>Let <span class="math inline">\(\mathcal{M}_0\)</span> be a null model, i.e., one with no predictors.</li>
-<li>For <span class="math inline">\(k=0,1,\dots,p-1\)</span>, fit all models which add one predictor to those in model <span class="math inline">\(\mathcal{M}_k\)</span>.</li>
-<li>Choose the best among the <span class="math inline">\(p-k\)</span> models in step (2) and call it model <span class="math inline">\(\mathcal{M}_{k+1}\)</span>. This is done according to some criterion. We might, e.g., choose the model with the greatest <span class="math inline">\(R^2\)</span>.</li>
-<li>Select from models <span class="math inline">\(\mathcal{M}_0,\dots,\mathcal{M}_p\)</span> using, for example, AIC (which we dive into later in this lecture).</li>
-</ol>
-<p><strong>We, however, urge you to AVOID stepwise selection and to be critical of analyses which use it. No statistics can be a substitute for good theory which is informative about the predictors which have predictive power <em>because</em> they are biologically meaningful. When choosing between models, careful consideration of the what predictors are informative and <em>why</em> is key.</strong></p>
+<p>Suppose you want to model the effects of multiple predictors and their interactions on a particular response variable of interest. It may be tempting, then, to test all possible combinations of predictors and see which set fits the data the <em>best</em>. Stepwise selection involves iteratively adding and removing predictors according to some criterion (e.g., variance explained, AIC). This can be down by adding predictors to a null model or by removing predictors from one which is saturated (i.e., where all predictors and their interactions are included.)</p>
+<p><strong>In general, we urge you to AVOID stepwise selection and to be critical of analyses which use it. No statistics can be a substitute for the inclusion of predictors which are biologically meaningful.</strong> Stupid models can fit the data well, even when accounting for the number of parameters, and good models can fit the data (relatively) poorly. When choosing between models, careful consideration of the what predictors are informative and <em>why</em> is key.</p>
 <p>For more on the problems with automated stepwise selection methods, see <a href="https://stats.stackexchange.com/questions/20836/algorithms-for-automatic-model-selection?noredirect=1&amp;lq=1">here</a>.</p>
 </section>
-<section id="the-akaike-information-criterion-aic" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="the-akaike-information-criterion-aic"><span class="header-section-number">12.4</span> The Akaike information criterion (AIC)</h2>
+<section id="the-akaike-information-criterion" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="the-akaike-information-criterion"><span class="header-section-number">12.4</span> The Akaike information criterion</h2>
 <p>Rather than (mindlessly) adding and removing predictors, it is important to build models that are based in evidence from good theory and the literature. We can then weigh how much the data supports each model using the <em>Aikake information criterion (AIC)</em></p>
 <p>Suppose we have data <span class="math inline">\(y_1,\dots,y_n\)</span> that are drawn from a distribution <span class="math inline">\(p\)</span> and a set of candidate models</p>
 <p><span class="math display">\[\mathcal{M}_j = \{p_j(y|\theta_j)\}.\]</span></p>
@@ -769,8 +780,8 @@ mod2  2 57.56350</code></pre>
 </div>
 <p>By this criterion, which model is the best?</p>
 </section>
-<section id="example-with-a-generalized-linear-model-glm" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="example-with-a-generalized-linear-model-glm"><span class="header-section-number">12.7</span> Example with a Generalized Linear Model (GLM)</h2>
+<section id="example-with-a-glm" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="example-with-a-glm"><span class="header-section-number">12.7</span> Example with a GLM</h2>
 <p>Last lecture, we tried to see if we could recapture the findings of <a href="https://www.pnas.org/doi/full/10.1073/pnas.1817323116">Farrell and Davies (2019)</a> using a simple GLM to see if the mean evolutionary isolation affected the probability of death. Recall that the data is distributed according to a Bernoulli distribution, so we needed to conduct a logistic regression.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>disease_distance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/disease_distance.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -834,18 +845,8 @@ model2  7 4589.116</code></pre>
 </div>
 <p>Note that the we could continue to add terms to the model that would make it a better fit to the data. But this veers towards p-hacking territory! This section is to show you that AIC works the same for GLM. <strong>In practice, you should first build your models based on good theory and then compare them.</strong></p>
 </section>
-<section id="model-selection-for-linear-mixed-models" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="model-selection-for-linear-mixed-models"><span class="header-section-number">12.8</span> Model selection for linear mixed models</h2>
-<p>Model selection for mixed models is even more complicated, due to the addition of random effects. A procedure that is commonly used to preform selection of LMMs is as follows:</p>
-<ol type="1">
-<li><p>Create a <em>saturated model</em> that includes all fixed effects (and their interactions[^interaction]) and random effects you wish to test.</p></li>
-<li><p>Optimize the random-effect structure by comparing models with the same saturated fixed effects structure but differing random effect structures. These models should be fitted using Restricted Maximum Likelihood (i.e., <code>REML = TRUE</code>), since varience component estimation will be biased otherwise. The <em>optimal</em> random effect structure is the one that provides the lowest AIC. Do <strong>not</strong> remove random effects if they are included to account for non-independence in your data. Skip this step if random effects must be included given the hierarchical structure (i.e., nestedness) in the data.</p></li>
-<li><p>Optimize the fixed-effect structure by comparing models with the same optimized (or necessary) random effects but with differing fixed effect structures. These models should be fitted with Maximum Likelihood (i.e., <code>REML = FALSE</code>) to prevent biased fixed-effect parameter estimates. Models can be selected on the basis of AIC (the lower the better), by comparing nested models using a likelihood ratio test (LRT), or both.</p></li>
-<li><p>Fit the final model with optimized fixed and random effects using REML and interpret your results.</p></li>
-</ol>
-</section>
-<section id="references-and-additional-reading" class="level2" data-number="12.9">
-<h2 data-number="12.9" class="anchored" data-anchor-id="references-and-additional-reading"><span class="header-section-number">12.9</span> References and additional reading</h2>
+<section id="additional-reading" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="additional-reading"><span class="header-section-number">12.8</span> Additional reading</h2>
 <ol type="1">
 <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0169534703003458">Johnson &amp; Omland 2004. Model selection in ecology and evolution. <em>Trends in Ecology and Evolution</em>.</a></li>
 <li>Burnham &amp; Anderson 2002. <em>Model Selection and Multimodel Inference</em> (2nd ed.).</li>
@@ -1273,8 +1274,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
-        <span class="nav-page-text">Assignment00: individual interest description</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/lec13-intro-to-multivariate-stats.html" class="pagination-link" aria-label="Multivariate statistics">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Multivariate statistics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

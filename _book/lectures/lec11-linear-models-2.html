@@ -271,6 +271,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec13-intro-to-multivariate-stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Multivariate statistics</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -384,8 +390,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/data/bmr.csv" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/data/Pigot2020.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">bmr.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/bmr.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pigot2020.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/influenza_cities.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">influenza_cities.csv</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -679,20 +697,20 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--2.0274  -1.1947   0.5564   0.8993   1.1680  
+-2.1107  -1.1736   0.5535   0.8955   1.1729  
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   1.0581     0.2648   3.996 6.45e-05 ***
-scale(age)    1.0716     0.3739   2.866  0.00416 ** 
+(Intercept)   1.3366     0.3104   4.306 1.66e-05 ***
+scale(age)    1.3303     0.4481   2.969  0.00299 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 122.17  on 99  degrees of freedom
-Residual deviance: 110.33  on 98  degrees of freedom
-AIC: 114.33
+    Null deviance: 116.65  on 99  degrees of freedom
+Residual deviance: 102.15  on 98  degrees of freedom
+AIC: 106.15
 
 Number of Fisher Scoring iterations: 5</code></pre>
 </div>
@@ -732,27 +750,27 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.877</td>
+<td style="text-align: right;">0.875</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.934</td>
+<td style="text-align: right;">0.904</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.943</td>
+<td style="text-align: right;">0.926</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.947</td>
+<td style="text-align: right;">0.956</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">190</td>
-<td style="text-align: right;">0.969</td>
+<td style="text-align: right;">0.966</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">200</td>
-<td style="text-align: right;">0.980</td>
+<td style="text-align: right;">0.972</td>
 </tr>
 </tbody>
 </table>

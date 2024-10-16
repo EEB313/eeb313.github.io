@@ -163,5 +163,8 @@
   },
   "lectures/lec12-model-selection.qmd": {
     "lec12-model-selection.html": "ab976dbb"
+  },
+  "lectures/lec13-intro-to-multivariate-stats.qmd": {
+    "lec13-intro-to-multivariate-stats.html": "e979adff"
   }
 }

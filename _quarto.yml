@@ -23,6 +23,7 @@ book:
       - lectures/lec10-linear-models-1.qmd
       - lectures/lec11-linear-models-2.qmd
       - lectures/lec12-model-selection.qmd
+      - lectures/lec13-intro-to-multivariate-stats.qmd
     - part: "Assignments"
       chapters:
       - assignments/assignment-00.qmd
@@ -49,7 +50,11 @@ book:
         - text: "medicago.csv"
           href: lectures/data/medicago.csv
         - text: "bmr.csv"
+          href: lectures/data/Pigot2020.csv
+        - text: "Pigot2020.csv"
           href: lectures/data/bmr.csv
+        - text: "influenza_cities.csv"
+          href: lectures/data/influenza_cities.csv
         - text: "meas.csv"
           href: lectures/data/meas.csv
     - part: "Miscellaneous notes"
@@ -86,4 +91,6 @@ extra_files:
   - disease_distance.csv
   - medicago.csv
   - bmr.csv
+  - Pigot2020.csv
+  - influenza_cities.csv
   - meas.csv
