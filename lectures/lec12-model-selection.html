@@ -429,8 +429,7 @@ window.Quarto = {
   <li><a href="#example-with-a-linear-model" id="toc-example-with-a-linear-model" class="nav-link" data-scroll-target="#example-with-a-linear-model"><span class="header-section-number">12.5</span> Example with a linear model</a></li>
   <li><a href="#another-example" id="toc-another-example" class="nav-link" data-scroll-target="#another-example"><span class="header-section-number">12.6</span> Another example</a></li>
   <li><a href="#example-with-a-glm" id="toc-example-with-a-glm" class="nav-link" data-scroll-target="#example-with-a-glm"><span class="header-section-number">12.7</span> Example with a GLM</a></li>
-  <li><a href="#model-selection-for-lmms" id="toc-model-selection-for-lmms" class="nav-link" data-scroll-target="#model-selection-for-lmms"><span class="header-section-number">12.8</span> Model selection for LMMs</a></li>
-  <li><a href="#additional-reading" id="toc-additional-reading" class="nav-link" data-scroll-target="#additional-reading"><span class="header-section-number">12.9</span> Additional reading</a></li>
+  <li><a href="#additional-reading" id="toc-additional-reading" class="nav-link" data-scroll-target="#additional-reading"><span class="header-section-number">12.8</span> Additional reading</a></li>
   </ul>
 </nav>
     </div>
@@ -494,14 +493,8 @@ window.Quarto = {
 </section>
 <section id="stepwise-regressionand-why-you-should-not-use-it." class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="stepwise-regressionand-why-you-should-not-use-it."><span class="header-section-number">12.3</span> Stepwise regression…and why you should not use it.</h2>
-<p>Suppose you want to model the effects of multiple predictors and their interactions on a particular response variable of interest. It may be tempting, then, to test all possible combinations of predictors and see which set fits the data the <em>best</em> (though this really sounds like p-hacking…). Stepwise selection involves iteratively adding and removing predictors according to some criterion (e.g., variance explained). The steps for forward stepwise regression are as follows:</p>
-<ol type="1">
-<li>Let <span class="math inline">\(\mathcal{M}_0\)</span> be a null model, i.e., one with no predictors.</li>
-<li>For <span class="math inline">\(k=0,1,\dots,p-1\)</span>, fit all models which add one predictor to those in model <span class="math inline">\(\mathcal{M}_k\)</span>.</li>
-<li>Choose the best among the <span class="math inline">\(p-k\)</span> models in step (2) and call it model <span class="math inline">\(\mathcal{M}_{k+1}\)</span>. This is done according to some criterion. We might, e.g., choose the model with the greatest <span class="math inline">\(R^2\)</span>.</li>
-<li>Select from models <span class="math inline">\(\mathcal{M}_0,\dots,\mathcal{M}_p\)</span> using, for example, AIC (which we dive into later in this lecture).</li>
-</ol>
-<p><strong>We, however, urge you to AVOID stepwise selection and to be critical of analyses which use it. No statistics can be a substitute for good theory which is informative about the predictors which have predictive power <em>because</em> they are biologically meaningful. When choosing between models, careful consideration of the what predictors are informative and <em>why</em> is key.</strong></p>
+<p>Suppose you want to model the effects of multiple predictors and their interactions on a particular response variable of interest. It may be tempting, then, to test all possible combinations of predictors and see which set fits the data the <em>best</em>. Stepwise selection involves iteratively adding and removing predictors according to some criterion (e.g., variance explained, AIC). This can be down by adding predictors to a null model or by removing predictors from one which is saturated (i.e., where all predictors and their interactions are included.)</p>
+<p><strong>In general, we urge you to AVOID stepwise selection and to be critical of analyses which use it. No statistics can be a substitute for the inclusion of predictors which are biologically meaningful.</strong> Stupid models can fit the data well, even when accounting for the number of parameters, and good models can fit the data (relatively) poorly. When choosing between models, careful consideration of the what predictors are informative and <em>why</em> is key.</p>
 <p>For more on the problems with automated stepwise selection methods, see <a href="https://stats.stackexchange.com/questions/20836/algorithms-for-automatic-model-selection?noredirect=1&amp;lq=1">here</a>.</p>
 </section>
 <section id="the-akaike-information-criterion" class="level2" data-number="12.4">
@@ -840,18 +833,8 @@ model2  7 4589.116</code></pre>
 </div>
 <p>Note that the we could continue to add terms to the model that would make it a better fit to the data. But this veers towards p-hacking territory! This section is to show you that AIC works the same for GLM. <strong>In practice, you should first build your models based on good theory and then compare them.</strong></p>
 </section>
-<section id="model-selection-for-lmms" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="model-selection-for-lmms"><span class="header-section-number">12.8</span> Model selection for LMMs</h2>
-<p>Model selection for mixed models is even more complicated, due to the addition of random effects. A procedure that is commonly used to preform selection of LMMs is as follows:</p>
-<ol type="1">
-<li><p>Create a <em>saturated model</em> that includes all fixed effects (and their interactions) and random effects you wish to test.</p></li>
-<li><p>Optimize the random-effect structure by comparing models with the same saturated fixed effects structure but differing random effect structures. These models should be fitted using Restricted Maximum Likelihood (i.e., <code>REML = TRUE</code>), since varience component estimation will be biased otherwise. The <em>optimal</em> random effect structure is the one that provides the lowest AIC. Do <strong>not</strong> remove random effects if they are included to account for non-independence in your data. Skip this step if random effects must be included given the hierarchical structure (i.e., nestedness) in the data.</p></li>
-<li><p>Optimize the fixed-effect structure by comparing models with the same optimized (or necessary) random effects but with differing fixed effect structures. These models should be fitted with Maximum Likelihood (i.e., <code>REML = FALSE</code>) to prevent biased fixed-effect parameter estimates. Models can be selected on the basis of AIC (the lower the better), by comparing nested models using a likelihood ratio test (LRT), or both.</p></li>
-<li><p>Fit the final model with optimized fixed and random effects using REML and interpret your results.</p></li>
-</ol>
-</section>
-<section id="additional-reading" class="level2" data-number="12.9">
-<h2 data-number="12.9" class="anchored" data-anchor-id="additional-reading"><span class="header-section-number">12.9</span> Additional reading</h2>
+<section id="additional-reading" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="additional-reading"><span class="header-section-number">12.8</span> Additional reading</h2>
 <ol type="1">
 <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0169534703003458">Johnson &amp; Omland 2004. Model selection in ecology and evolution. <em>Trends in Ecology and Evolution</em>.</a></li>
 <li>Burnham &amp; Anderson 2002. <em>Model Selection and Multimodel Inference</em> (2nd ed.).</li>
