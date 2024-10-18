@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - Assignment 01: base R, command line, &amp; Git(Hub)</title>
+<title>EEB313: Quantitative Methods in R for Biology - 15&nbsp; Mathematical models II</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-02.html" rel="next">
-<link href="../assignments/assignment-00.html" rel="prev">
+<link href="../assignments/assignment-00.html" rel="next">
+<link href="../lectures/lec14-mathematical-models-1.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -115,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignment 01: base R, command line, &amp; Git(Hub)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec15-mathematical-models-2.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mathematical models II</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -256,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec15-mathematical-models-2.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec15-mathematical-models-2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mathematical models II</span></span></a>
   </div>
 </li>
@@ -279,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link active">
+  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 01: base R, command line, &amp; Git(Hub)</span></a>
   </div>
 </li>
@@ -417,21 +446,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#variable-assignment-1-mark" id="toc-variable-assignment-1-mark" class="nav-link active" data-scroll-target="#variable-assignment-1-mark">1. Variable assignment (1 mark)</a></li>
-  <li><a href="#vectors-2.5-marks" id="toc-vectors-2.5-marks" class="nav-link" data-scroll-target="#vectors-2.5-marks">2. Vectors (2.5 marks)</a></li>
-  <li><a href="#data-frames-1.5-marks" id="toc-data-frames-1.5-marks" class="nav-link" data-scroll-target="#data-frames-1.5-marks">3. Data frames (1.5 marks)</a></li>
-  <li><a href="#command-line-1-mark" id="toc-command-line-1-mark" class="nav-link" data-scroll-target="#command-line-1-mark">4. Command line (1 mark)</a></li>
-  <li><a href="#understanding-command-line-software-1-mark" id="toc-understanding-command-line-software-1-mark" class="nav-link" data-scroll-target="#understanding-command-line-software-1-mark">5. Understanding command line software (1 mark)</a></li>
-  <li><a href="#github-1-mark" id="toc-github-1-mark" class="nav-link" data-scroll-target="#github-1-mark">6. GitHub (1 mark)</a></li>
+  <li><a href="#lesson-preamble" id="toc-lesson-preamble" class="nav-link active" data-scroll-target="#lesson-preamble"><span class="header-section-number">15.1</span> Lesson preamble</a></li>
+  <li><a href="#using-desolve-to-solve-systems-of-differential-equations" id="toc-using-desolve-to-solve-systems-of-differential-equations" class="nav-link" data-scroll-target="#using-desolve-to-solve-systems-of-differential-equations"><span class="header-section-number">15.2</span> Using deSolve to solve systems of differential equations</a>
+  <ul class="collapse">
+  <li><a href="#challenge" id="toc-challenge" class="nav-link" data-scroll-target="#challenge"><span class="header-section-number">15.2.1</span> Challenge</a></li>
+  <li><a href="#challenge-1" id="toc-challenge-1" class="nav-link" data-scroll-target="#challenge-1"><span class="header-section-number">15.2.2</span> Challenge</a></li>
+  </ul></li>
+  <li><a href="#fitting-the-sir-model-to-data" id="toc-fitting-the-sir-model-to-data" class="nav-link" data-scroll-target="#fitting-the-sir-model-to-data"><span class="header-section-number">15.3</span> Fitting the SIR model to data</a>
+  <ul class="collapse">
+  <li><a href="#step-1-determine-the-distribution-of-the-data" id="toc-step-1-determine-the-distribution-of-the-data" class="nav-link" data-scroll-target="#step-1-determine-the-distribution-of-the-data"><span class="header-section-number">15.3.1</span> Step 1: determine the distribution of the data</a></li>
+  <li><a href="#step-2-maximize-the-likelihood-function" id="toc-step-2-maximize-the-likelihood-function" class="nav-link" data-scroll-target="#step-2-maximize-the-likelihood-function"><span class="header-section-number">15.3.2</span> Step 2: maximize the likelihood function</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignment 01: base R, command line, &amp; Git(Hub)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec15-mathematical-models-2.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mathematical models II</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignment 01: base R, command line, &amp; Git(Hub)</h1>
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mathematical models II</span></h1>
 </div>
 
 
@@ -448,83 +482,216 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Download the .Rmd file <a href="assignment-01.Rmd">here</a>.</p>
-<p><em>To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>. Please ensure the text on your .pdf does not continue past the end of the page. If you use code chunks to write your answers to the command line questions, check that the code chunk headers say <code>eval=FALSE</code> so RStudio doesn’t try to run them when knitting (the example code chunks provided for questions 4 and 5 include this).</em></p>
-<section id="variable-assignment-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="variable-assignment-1-mark">1. Variable assignment (1 mark)</h2>
-<ol type="a">
-<li>Assign the value <code>5</code> to the variable/object <code>a</code>. Display <code>a</code>. (0.25 marks)</li>
-</ol>
-<ol start="2" type="a">
-<li>Assign the result of <code>10/3</code> to the variable <code>b</code>. Display <code>b</code>. (0.25 marks)</li>
-</ol>
-<ol start="3" type="a">
-<li>Write a function that adds two numbers and returns their sum. Use it to assign the sum of <code>a</code> and <code>b</code> to <code>result</code>. Display <code>result</code>. (In practice, there is already a more sophisticated built-in function for this: <code>result &lt;- sum(a, b)</code>) (0.25 marks)</li>
-</ol>
-<ol start="4" type="a">
-<li>Write a function that multiplies two numbers and returns their product. Use it to assign the product of <code>a</code> and <code>b</code> to <code>product</code>. Display <code>product</code>. (In practice, there is already a more sophisticated built-in function for this: <code>product &lt;- prod(a, b)</code>) (0.25 marks)</li>
-</ol>
-</section>
-<section id="vectors-2.5-marks" class="level2">
-<h2 class="anchored" data-anchor-id="vectors-2.5-marks">2. Vectors (2.5 marks)</h2>
-<ol type="a">
-<li>Create a vector <code>v</code> with all integers 0-30, and a vector <code>w</code> with every third integer in the same range. (0.25 marks)</li>
-</ol>
-<ol start="2" type="a">
-<li>What is the difference in lengths of the vectors <code>v</code> and <code>w</code>? (0.25 marks)</li>
-</ol>
-<ol start="3" type="a">
-<li>Create a new vector, <code>v_square</code>, with the square of elements at indices 3, 6, 7, 10, 15, 22, 23, 24, and 30 from the variable <code>v</code>. <em>Hint: Use indexing rather than a for loop.</em> (0.25 marks)</li>
-</ol>
-<ol start="4" type="a">
-<li>Calculate the mean and median of the first five values from <code>v_square</code>. (0.25 marks)</li>
-</ol>
-<ol start="5" type="a">
-<li>Create a boolean vector <code>v_bool</code>, indicating which vector <code>v</code> elements are bigger than 20. How many values are over 20? <em>Hint: In R, TRUE = 1, and FALSE = 0, so you can use simple arithmetic to find this out.</em> (0.5 marks)</li>
-</ol>
-<ol start="6" type="a">
-<li>Write a function that calculates the median of the last two elements of any numeric vector. Test this function with the <code>v</code> and <code>v_square</code> vectors. (1 marks)</li>
-</ol>
-</section>
-<section id="data-frames-1.5-marks" class="level2">
-<h2 class="anchored" data-anchor-id="data-frames-1.5-marks">3. Data frames (1.5 marks)</h2>
-<ol type="a">
-<li>There are many built-in data frames in R, which you can find <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html">more details about online</a>. What are the column names of the built-in dataframe <code>beaver1</code>? How many observations (rows) and variables (columns) are there? (0.5 marks)</li>
-</ol>
-<ol start="2" type="a">
-<li>Display both the first 6 and last 6 rows of this data frame. Show how to do so with both indexing as well as specialized functions. (0.5 marks)</li>
-</ol>
+<section id="lesson-preamble" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="lesson-preamble"><span class="header-section-number">15.1</span> Lesson preamble</h2>
+<blockquote class="blockquote">
+<h3 id="lesson-objectives" data-number="15.1.1" class="anchored"><span class="header-section-number">15.1.1</span> Lesson objectives</h3>
+<ul>
+<li>Develop familiarity with important mathematical models in EEB</li>
+<li>Develop familiarity with how to fit mathematical models to data</li>
+<li>Understand how to numerically solve systems of differential equations in R</li>
+<li>Practice solving systems of ODEs</li>
+</ul>
+</blockquote>
+<blockquote class="blockquote">
+<h3 id="lesson-outline" data-number="15.1.2" class="anchored"><span class="header-section-number">15.1.2</span> Lesson outline</h3>
+<ul>
+<li>Using deSolve to solve systems of differential equations</li>
+<li>Fitting models to data: a case study in the SIR model</li>
+</ul>
+</blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With indexing</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># With functions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(pbmcapply)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(deSolve)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="3" type="a">
-<li>What is the min, mean, and max body temperature for beavers inside and outside of the retreat? <em>Hint: You can use <code>?</code> on the beaver1 data set to get more information about it. Remember that each column in a data frame is a vector and you can use the same functions.</em> (0.5 marks)</li>
-</ol>
 </section>
-<section id="command-line-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="command-line-1-mark">4. Command line (1 mark)</h2>
-<p>What commands would you run to create a directory named “mydir”, check mydir’s permissions, add <em>w</em>rite permissions for <em>u</em>sers, copy mydir to “mydir2” , and then remove mydir? <em>Hint: try running each step in your terminal to check if the output is what you expect</em> (1 mark)</p>
+<section id="using-desolve-to-solve-systems-of-differential-equations" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="using-desolve-to-solve-systems-of-differential-equations"><span class="header-section-number">15.2</span> Using deSolve to solve systems of differential equations</h2>
+<p>Last class we discussed how to formulate and analyze (by finding equilibria and determining their stability properties) systems of differential equations of the form</p>
+<p><span class="math display">\[\frac{d x_i}{dt} = f_i(x_1,\dots,x_n|\boldsymbol{\theta}),\]</span> </p>
+<p>where <span class="math inline">\(x_1,\dots,x_n\)</span> are variables of interest (e.g., the number of susceptible and infected individuals in a population) and <span class="math inline">\(\boldsymbol{\theta}\)</span> is the set of all parameters (e.g., the transmission and recovery rates) which shape the dynamics and long-run behavior of the system (e.g., if the disease successfully spreads in the population).</p>
+<p>In this class we will discuss how to numerically solve systems differential equations using the package <a href="https://desolve.r-forge.r-project.org"><code>deSolve</code></a>. Numerical analysis of differential equations is a big, active area of research in mathematics but we will not concern ourselves with the details of how these methods ensure convergence to the true solution to a given system of differential equations. (It is enough to recognize that approximating each derivative with a difference quotient will provide a means to iteratively update variables through time.)</p>
+<p>To illustrate how to solve differential equations using <code>deSolve</code>, we will consider the following system, which describes how a pathogen spreads in a population of hosts that are born and die at per-capita rate <span class="math inline">\(\mu\)</span>; this ensures that the population size is constant. We assume that all individuals are born susceptible to the disease, and that immunity is life-long. Transmission occurs at rate <span class="math inline">\(\beta\)</span> and recovery at rate <span class="math inline">\(\gamma\)</span>. Finally, we include a term to capture disease-induced mortality (i.e., virulence).</p>
+<p>The model is as follows:</p>
+<p><span class="math display">\[\frac{dS}{dt} = \mu N - \beta S I - \mu S\]</span> <span class="math display">\[\frac{dI}{dt} = \beta S I - (\mu+\gamma+v) I\]</span> <span class="math display">\[\frac{dR}{dt} = \gamma I - \mu R\]</span></p>
+<p>Since <span class="math inline">\(dN/dt = 0\)</span>, the population size is constant and we can (as we did last class) ignore the <span class="math inline">\(R\)</span> equation (since <span class="math inline">\(R = N - S - I\)</span>). Setting the previous equations to zero and solving, one has that there are two equilibria: the <em>disease-free</em> equilibrium <span class="math inline">\((S^*, I^*) = (N,0)\)</span>, and the <em>endemic</em> equilibrium</p>
+<p><span class="math display">\[(S^*,I^*) = (\frac{\mu+\gamma+v}{\beta}, \frac{\mu N}{\mu+\gamma + v}-\frac{\mu}{\beta}).\]</span> </p>
+<p>The endemic equilibrium is stable (and the disease-free equilibrium is unstable) whenever the basic reproductive number of the disease agent</p>
+<p><span class="math display">\[R_0 = \frac{\beta N}{\mu+\gamma+v}\]</span></p>
+<p>is <span class="math inline">\(&gt;1\)</span>, i.e., in an otherwise susceptible population a single infectious individual infects more than one individual on average. Notice how demography, recovery, and virulence all reduce the reproductive value of the pathogen; intuitively, this is because an infected individual can die or recover before transmitting.</p>
+<p>Below we solve the system and plot the dynamics for a specific set of parameter values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># population size</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># define parameters</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>gamma <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">14</span>  <span class="co"># mean infectious period = 14 days</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">14</span>  <span class="co"># mean time before individual dies to due disease = 14 days</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.01</span>  <span class="co"># transmission rate</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">200</span> <span class="co"># average life time of individual = 200 days</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>R0 <span class="ot">&lt;-</span> beta<span class="sc">*</span>N<span class="sc">/</span>(mu<span class="sc">+</span>gamma<span class="sc">+</span>v); R0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.763285</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># put parameter values into vector params</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">mu =</span> mu, <span class="at">gamma =</span> gamma, <span class="at">beta =</span> beta, <span class="at">v =</span> v)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>initialI <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>state <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">S=</span>N<span class="sc">-</span>initialI, <span class="at">I=</span>initialI) <span class="co"># define initial conditions</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># define times to save</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">500</span>, <span class="fl">0.01</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># define the model!</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>sir <span class="ot">&lt;-</span> <span class="cf">function</span>(time, state, params){</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">as.list</span>(<span class="fu">c</span>(state,params)),{</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    dS <span class="ot">&lt;-</span> mu<span class="sc">*</span>N <span class="sc">-</span> beta<span class="sc">*</span>S<span class="sc">*</span>I <span class="sc">-</span> mu<span class="sc">*</span>S</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    dI <span class="ot">&lt;-</span> beta<span class="sc">*</span>S<span class="sc">*</span>I <span class="sc">-</span> gamma<span class="sc">*</span>I <span class="sc">-</span> v<span class="sc">*</span>I <span class="sc">-</span> mu<span class="sc">*</span>I</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dS, dI)))</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># numerically integrate equations!</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(state, times, sir, params))</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>out <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="sc">!</span> time) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span> </span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec15-mathematical-models-2_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="challenge" class="level3" data-number="15.2.1">
+<h3 data-number="15.2.1" class="anchored" data-anchor-id="challenge"><span class="header-section-number">15.2.1</span> Challenge</h3>
+<p>Determine at what time does the number of infected individuals peaks.</p>
 </section>
-<section id="understanding-command-line-software-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-command-line-software-1-mark">5. Understanding command line software (1 mark)</h2>
-<p>Open the documentation for <a href="https://github.com/TobyBaril/EarlGrey">Earl Grey</a>, a software programme that identifies transposable elements in genomes. There may be a lot of unfamilliar terms on this web page, but we’ll just be skimming this page to practice identifying the kind of information command line software might require and how to provide that.</p>
-<ol type="a">
-<li><p>What three arguments (files/information) are required input for this software? (0.3 marks)</p></li>
-<li><p>What would you type into the command line to provide Earl Grey with those minimum command options? You don’t need to make up example text for this, just ensure you have the three <code>-</code> arguments written out. <em>Hint: search for “minimum command options” on the GitHub page and use the next line</em> (0.3 marks)</p></li>
-<li><p>Based on the visual overview of the software (or the “Example Outputs” section) on the GitHub page, what does this software output? (0.2 marks)</p></li>
-<li><p>What optional parameter (i.e.&nbsp;the <code>-</code> argument) does Earl Grey offer to display help information? Is this kind of help parameter common? <em>Hint: you can search for “help documentation” in your lecture notes</em> (0.2 marks)</p></li>
-</ol>
+<section id="challenge-1" class="level3" data-number="15.2.2">
+<h3 data-number="15.2.2" class="anchored" data-anchor-id="challenge-1"><span class="header-section-number">15.2.2</span> Challenge</h3>
+<p>A common way to visualize the behavior of a mathematical model is to plot the variables (in the previous case, <span class="math inline">\(S\)</span> and <span class="math inline">\(I\)</span>) against each other in <em>phase space</em>. Doing this, one can determine how the variables jointly influence each other through time, and if/how they enter an equilibrium or limit cycle.</p>
+<p>Based on the phase portrait of the system, the number of susceptible and infected individuals spiral into the endemic equilibrium.</p>
 </section>
-<section id="github-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="github-1-mark">6. GitHub (1 mark)</h2>
-<ol type="a">
-<li>Make a Github account. You can do this at <a href="github.com">github.com</a>. What is your GitHub username? (1 mark)</li>
-</ol>
+</section>
+<section id="fitting-the-sir-model-to-data" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="fitting-the-sir-model-to-data"><span class="header-section-number">15.3</span> Fitting the SIR model to data</h2>
+<p>We will now try to fit the above SIR model to (crudely) simulated case count data. We will assume <span class="math inline">\(\mu = v = 0\)</span>, i.e., no births or deaths occur over the sampling period.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"data/meas.csv"</span>) <span class="ot">-&gt;</span> meas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 103 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (2): time, reports
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(meas, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> reports)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"day"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec15-mathematical-models-2_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To fit the model to the data using ML, we will follow the steps outlined in the previous lecture.</p>
+<section id="step-1-determine-the-distribution-of-the-data" class="level3" data-number="15.3.1">
+<h3 data-number="15.3.1" class="anchored" data-anchor-id="step-1-determine-the-distribution-of-the-data"><span class="header-section-number">15.3.1</span> Step 1: determine the distribution of the data</h3>
+<p>We will assume the case count data are an imperfect and random sample of the true incidence. There are a couple ways to do this, but we will <strong>suppose the cases have a binomial distribution</strong>: <span class="math inline">\(\text{reports}_i \sim \text{Binomial}(\kappa I(t_i),p)\)</span>. In other words, a fraction <span class="math inline">\(\kappa\)</span> of infected individuals at an observation time are tested and the test comes up positive with probability <span class="math inline">\(p\)</span>. (Keep in mind there are other ways to specify the distribution of the data around the solution of the model!)</p>
+</section>
+<section id="step-2-maximize-the-likelihood-function" class="level3" data-number="15.3.2">
+<h3 data-number="15.3.2" class="anchored" data-anchor-id="step-2-maximize-the-likelihood-function"><span class="header-section-number">15.3.2</span> Step 2: maximize the likelihood function</h3>
+<p>We will now write a function to solve the differential equation above for a fixed set of parameter values and evaluate the likelihood of the case count data for a set of parameters. Finally, looping over combinations of parameters we will determine where the likelihood assumes a maximum (i.e., the MLE).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>initialI <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>state <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">S=</span>N<span class="sc">-</span>initialI, <span class="at">I=</span>initialI) <span class="co"># define initial conditions</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">75</span>, <span class="fl">0.1</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">mu =</span> <span class="dv">0</span>, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gamma =</span> <span class="fu">seq</span>(<span class="fl">0.06</span>,<span class="fl">0.08</span>,<span class="fl">0.005</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">beta =</span> <span class="fu">seq</span>(<span class="fl">0.003</span>,<span class="fl">0.006</span>,<span class="fl">0.001</span>),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">v =</span> <span class="dv">0</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">p =</span> <span class="fu">seq</span>(<span class="fl">0.5</span>,<span class="fl">0.9</span>,<span class="fl">0.1</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">kappa =</span> <span class="fu">seq</span>(<span class="fl">0.4</span>,<span class="dv">1</span>,<span class="fl">0.1</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                     )</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># many parameters fixed for convenience, but in general could / often should be fitted!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>return_LL_at_specific_combo_params <span class="ot">&lt;-</span> <span class="cf">function</span>(params_to_use){</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  reporting_times <span class="ot">&lt;-</span> meas<span class="sc">$</span>time</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(state, times, sir, params_to_use)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">subset</span>(time <span class="sc">%in%</span> reporting_times) </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># solve model for particular set of parameters</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># keep variables only at observation times</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  LL <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(reporting_times)){</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    LL[i] <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(meas<span class="sc">$</span>reports[i], <span class="at">size =</span> <span class="fu">round</span>(params_to_use<span class="sc">$</span>kappa<span class="sc">*</span>out<span class="sc">$</span>I[i]), </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prob =</span> params_to_use<span class="sc">$</span>p)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate likelihood of data at observation times</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># based on assumption data are Normal around the solution at a given time</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  LogLik <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">log</span>(LL))</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate log-likelihood of parameters given ALL data</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(params_to_use, <span class="at">LogLik =</span> LogLik))</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>LogLikihoods <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>outALL <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(params)){</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  LogLikihoods <span class="ot">&lt;-</span> <span class="fu">rbind</span>(LogLikihoods, </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">return_LL_at_specific_combo_params</span>(params[i,])</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                        )</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  outALL[[i]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">ode</span>(state, times, sir, params[i,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]), <span class="at">index =</span> i)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>MLE <span class="ot">&lt;-</span> LogLikihoods <span class="sc">%&gt;%</span> <span class="fu">subset</span>(<span class="fu">is.finite</span>(LogLik)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(LogLik <span class="sc">==</span> <span class="fu">max</span>(LogLik)); MLE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    mu gamma  beta v   p kappa  LogLik
+573  0  0.07 0.005 0 0.8   0.9 -199.63</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>outALL <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, outALL)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># what does the solution at the MLE look like compared to the data?</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>best_solution <span class="ot">&lt;-</span> outALL <span class="sc">%&gt;%</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(index <span class="sc">==</span> <span class="fu">which</span>(LogLikihoods<span class="sc">$</span>LogLik <span class="sc">==</span> <span class="fu">max</span>(LogLikihoods<span class="sc">$</span>LogLik))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expected_measurement =</span> MLE<span class="sc">$</span>kappa<span class="sc">*</span>MLE<span class="sc">$</span>p<span class="sc">*</span>I)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>best_solution <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> expected_measurement), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> meas, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> reports), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> I), <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec15-mathematical-models-2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>That’s a great fit to the data. It is rare to have sampling as frequent in this example, but the underlying methodology is still quite powerful in cases where there are such constraints!</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -939,13 +1106,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment00: individual interest description</span>
+      <a href="../lectures/lec14-mathematical-models-1.html" class="pagination-link" aria-label="Mathematical models I">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mathematical models I</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-02.html" class="pagination-link" aria-label="Assignment 02: data wrangling">
-        <span class="nav-page-text">Assignment 02: data wrangling</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
+        <span class="nav-page-text">Assignment00: individual interest description</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -166,5 +166,14 @@
   },
   "lectures/lec13-intro-to-multivariate-stats.qmd": {
     "lec13-intro-to-multivariate-stats.html": "e979adff"
+  },
+  "lectures/lec14-mathematical-models-1.qmd": {
+    "lec14-mathematical-models-1.html": "caecc00c"
+  },
+  "lectures/lec15-mathematical-models-2.qmd": {
+    "lec15-mathematical-models-2.html": "35fa5d28"
+  },
+  "assignments/assignment-05.qmd": {
+    "assignment-05.html": "8fad4690"
   }
 }

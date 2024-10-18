@@ -24,6 +24,8 @@ book:
       - lectures/lec11-linear-models-2.qmd
       - lectures/lec12-model-selection.qmd
       - lectures/lec13-intro-to-multivariate-stats.qmd
+      - lectures/lec14-mathematical-models-1.qmd
+      - lectures/lec15-mathematical-models-2.qmd
     - part: "Assignments"
       chapters:
       - assignments/assignment-00.qmd
@@ -31,6 +33,7 @@ book:
       - assignments/assignment-02.qmd
       - assignments/assignment-03.qmd
       - assignments/assignment-04.qmd
+      - assignments/assignment-05.qmd
     - part: "Project"
       chapters:
       - projects.qmd
@@ -50,9 +53,9 @@ book:
         - text: "medicago.csv"
           href: lectures/data/medicago.csv
         - text: "bmr.csv"
-          href: lectures/data/Pigot2020.csv
-        - text: "Pigot2020.csv"
           href: lectures/data/bmr.csv
+        - text: "Pigot2020.csv"
+          href: lectures/data/Pigot2020.csv
         - text: "influenza_cities.csv"
           href: lectures/data/influenza_cities.csv
         - text: "meas.csv"
@@ -77,11 +80,13 @@ extra_files:
   - assignment-02.Rmd
   - assignment-03.Rmd
   - assignment-04.Rmd
+  - assignment-05.Rmd
   - assignment-00.qmd
   - assignment-01.qmd
   - assignment-02.qmd
   - assignment-03.qmd
   - assignment-04.qmd
+  - assignment-05.qmd
   - lec07-eself-directed-analysis.Rmd
   - portal_data.csv
   - pseudo.ara.busco

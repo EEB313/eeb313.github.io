@@ -1,0 +1,206 @@
+# Mathematical models II
+
+## Lesson preamble
+
+> ### Lesson objectives
+> - Develop familiarity with important mathematical models in EEB
+> - Develop familiarity with how to fit mathematical models to data
+> - Understand how to numerically solve systems of differential equations in R
+> - Practice solving systems of ODEs
+
+> ### Lesson outline
+> - Using deSolve to solve systems of differential equations
+> - Fitting models to data: a case study in the SIR model
+
+```{r eval=TRUE, message=FALSE, warning=FALSE}
+require(tidyverse)
+require(pbmcapply)
+require(deSolve)
+theme_set(theme_bw())
+```
+
+## Using deSolve to solve systems of differential equations
+
+Last class we discussed how to formulate and analyze (by finding equilibria and determining their stability properties) systems of differential equations of the form
+
+$$\frac{d x_i}{dt} = f_i(x_1,\dots,x_n|\boldsymbol{\theta}),$$
+\vspace{1.5pt}
+
+where $x_1,\dots,x_n$ are variables of interest (e.g., the number of susceptible and infected individuals in a population) and $\boldsymbol{\theta}$ is the set of all parameters (e.g., the transmission and recovery rates) which shape the dynamics and long-run behavior of the system (e.g., if the disease successfully spreads in the population).
+
+In this class we will discuss how to numerically solve systems differential equations using the package [`deSolve`](https://desolve.r-forge.r-project.org). Numerical analysis of differential equations is a big, active area of research in mathematics but we will not concern ourselves with the details of how these methods ensure convergence to the true solution to a given system of differential equations. (It is enough to recognize that approximating each derivative with a difference quotient will provide a means to iteratively update variables through time.)
+
+To illustrate how to solve differential equations using `deSolve`, we will consider the following system, which describes how a pathogen spreads in a population of hosts that are born and die at per-capita rate $\mu$; this ensures that the population size is constant. We assume that all individuals are born susceptible to the disease, and that immunity is life-long. Transmission occurs at rate $\beta$ and recovery at rate $\gamma$. Finally, we include a term to capture disease-induced mortality (i.e., virulence).
+
+The model is as follows:
+
+$$\frac{dS}{dt} = \mu N - \beta S I - \mu S$$
+$$\frac{dI}{dt} = \beta S I - (\mu+\gamma+v) I$$
+$$\frac{dR}{dt} = \gamma I - \mu R$$
+
+\vspace{3pt}
+
+Since $dN/dt = 0$, the population size is constant and we can (as we did last class) ignore the $R$ equation (since $R = N - S - I$). Setting the previous equations to zero and solving, one has that there are two equilibria: the _disease-free_ equilibrium $(S^*, I^*) = (N,0)$, and the _endemic_ equilibrium
+
+$$(S^*,I^*) = (\frac{\mu+\gamma+v}{\beta}, \frac{\mu N}{\mu+\gamma + v}-\frac{\mu}{\beta}).$$
+\vspace{3pt}
+
+The endemic equilibrium is stable (and the disease-free equilibrium is unstable) whenever the basic reproductive number of the disease agent
+
+$$R_0 = \frac{\beta N}{\mu+\gamma+v}$$
+
+\vspace{3pt}
+
+is $>1$, i.e., in an otherwise susceptible population a single infectious individual infects more than one individual on average. Notice how demography, recovery, and virulence all reduce the reproductive value of the pathogen; intuitively, this is because an infected individual can die or recover before transmitting.
+
+Below we solve the system and plot the dynamics for a specific set of parameter values.
+
+```{r}
+N <- 100 # population size
+
+# define parameters
+gamma <- 1/14  # mean infectious period = 14 days
+v <- 1/14  # mean time before individual dies to due disease = 14 days
+beta <- 0.01  # transmission rate
+mu <- 1/200 # average life time of individual = 200 days
+
+R0 <- beta*N/(mu+gamma+v); R0
+
+# put parameter values into vector params
+params <- c(mu = mu, gamma = gamma, beta = beta, v = v)
+
+initialI <- 10
+
+state <- c(S=N-initialI, I=initialI) # define initial conditions
+
+# define times to save
+times <- seq(0, 500, 0.01)
+
+# define the model!
+sir <- function(time, state, params){
+  with(as.list(c(state,params)),{
+    
+    dS <- mu*N - beta*S*I - mu*S
+    dI <- beta*S*I - gamma*I - v*I - mu*I
+    
+    return(list(c(dS, dI)))
+  })
+}
+
+# numerically integrate equations!
+out <- as.data.frame(ode(state, times, sir, params))
+
+out %>% pivot_longer(! time) %>% 
+  ggplot(aes(x = time, y = value, color = name)) + 
+  geom_line()
+```
+
+### Challenge
+
+Determine at what time does the number of infected individuals peaks.
+
+```{r, include=F}
+out[which.max(out$I),]
+```
+
+### Challenge
+
+A common way to visualize the behavior of a mathematical model is to plot the variables (in the previous case, $S$ and $I$) against each other in _phase space_. Doing this, one can determine how the variables jointly influence each other through time, and if/how they enter an equilibrium or limit cycle.
+
+```{r, include=F}
+## plot phase plane
+plot(I~S, out, type="l")
+```
+
+Based on the phase portrait of the system, the number of susceptible and infected individuals spiral into the endemic equilibrium.
+
+## Fitting the SIR model to data
+
+We will now try to fit the above SIR model to (crudely) simulated case count data. We will assume $\mu = v = 0$, i.e., no births or deaths occur over the sampling period.
+
+```{r}
+read_csv("data/meas.csv") -> meas
+ggplot(meas, aes(x = time, y = reports)) + geom_line() + xlab("day")
+```
+
+To fit the model to the data using ML, we will follow the steps outlined in the previous lecture.
+
+### Step 1: determine the distribution of the data
+
+We will assume the case count data are an imperfect and random sample of the true incidence. There are a couple ways to do this, but we will **suppose the cases have a binomial distribution**: $\text{reports}_i \sim \text{Binomial}(\kappa I(t_i),p)$. In other words, a fraction $\kappa$ of infected individuals at an observation time are tested and  the test comes up positive with probability $p$. (Keep in mind there are other ways to specify the distribution of the data around the solution of the model!)
+
+### Step 2: maximize the likelihood function
+
+We will now write a function to solve the differential equation above for a fixed set of parameter values and evaluate the likelihood of the case count data for a set of parameters. Finally, looping over combinations of parameters we will determine where the likelihood assumes a maximum (i.e., the MLE).
+
+```{r}
+initialI <- 10
+state <- c(S=N-initialI, I=initialI) # define initial conditions
+times <- seq(0, 75, 0.1)
+
+params <- expand.grid(mu = 0, 
+                     gamma = seq(0.06,0.08,0.005),
+                     beta = seq(0.003,0.006,0.001),
+                     v = 0,
+                     p = seq(0.5,0.9,0.1),
+                     kappa = seq(0.4,1,0.1)
+                     )
+# many parameters fixed for convenience, but in general could / often should be fitted!
+```
+
+```{r}
+return_LL_at_specific_combo_params <- function(params_to_use){
+  
+  reporting_times <- meas$time
+  
+  out <- 
+    as.data.frame(ode(state, times, sir, params_to_use)) %>%
+    subset(time %in% reporting_times) 
+  # solve model for particular set of parameters
+  # keep variables only at observation times
+  
+  LL <- c()
+  
+  for (i in 1:length(reporting_times)){
+    LL[i] <- dbinom(meas$reports[i], size = round(params_to_use$kappa*out$I[i]), 
+                    prob = params_to_use$p)
+  }
+  # calculate likelihood of data at observation times
+  # based on assumption data are Normal around the solution at a given time
+  
+  LogLik <- sum(log(LL))
+  # calculate log-likelihood of parameters given ALL data
+  
+  return(data.frame(params_to_use, LogLik = LogLik))
+}
+```
+
+```{r}
+LogLikihoods <- NULL
+outALL <- NULL
+
+for (i in 1:nrow(params)){
+  LogLikihoods <- rbind(LogLikihoods, 
+                        return_LL_at_specific_combo_params(params[i,])
+                        )
+  outALL[[i]] <- data.frame(ode(state, times, sir, params[i,1:4]), index = i)
+}
+
+MLE <- LogLikihoods %>% subset(is.finite(LogLik)) %>% 
+  subset(LogLik == max(LogLik)); MLE
+
+outALL <- do.call(rbind, outALL)
+
+# what does the solution at the MLE look like compared to the data?
+best_solution <- outALL %>% 
+  subset(index == which(LogLikihoods$LogLik == max(LogLikihoods$LogLik))) %>%
+  group_by(time) %>%
+  mutate(expected_measurement = MLE$kappa*MLE$p*I)
+
+best_solution %>% ggplot() + 
+  geom_line(aes(x = time, y = expected_measurement), color = "black") +
+  geom_point(data = meas, aes(x = time, y = reports), size = 2) +
+  geom_line(aes(x = time, y = I), color = "red")
+```
+
+That's a great fit to the data. It is rare to have sampling as frequent in this example, but the underlying methodology is still quite powerful in cases where there are such constraints!

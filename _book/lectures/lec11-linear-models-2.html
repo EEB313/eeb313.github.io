@@ -277,6 +277,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Multivariate statistics</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec14-mathematical-models-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mathematical models I</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec15-mathematical-models-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mathematical models II</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -316,6 +328,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../assignments/assignment-04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 04: inference!</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 05: linear models, model selection, and multivariate statistics</span></a>
   </div>
 </li>
       </ul>
@@ -390,13 +408,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/data/Pigot2020.csv" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/data/bmr.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">bmr.csv</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/data/bmr.csv" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/data/Pigot2020.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pigot2020.csv</span></a>
   </div>
 </li>
@@ -697,20 +715,20 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--2.1107  -1.1736   0.5535   0.8955   1.1729  
+-2.2420  -0.1888   0.6420   0.8545   1.0405  
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   1.3366     0.3104   4.306 1.66e-05 ***
-scale(age)    1.3303     0.4481   2.969  0.00299 ** 
+(Intercept)   1.2875     0.2771   4.646 3.39e-06 ***
+scale(age)    0.9039     0.3589   2.518   0.0118 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 116.65  on 99  degrees of freedom
-Residual deviance: 102.15  on 98  degrees of freedom
-AIC: 106.15
+    Null deviance: 112.47  on 99  degrees of freedom
+Residual deviance: 103.49  on 98  degrees of freedom
+AIC: 107.49
 
 Number of Fisher Scoring iterations: 5</code></pre>
 </div>
@@ -750,19 +768,19 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.875</td>
+<td style="text-align: right;">0.892</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.904</td>
+<td style="text-align: right;">0.917</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.926</td>
+<td style="text-align: right;">0.921</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.956</td>
+<td style="text-align: right;">0.950</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">190</td>
@@ -770,7 +788,7 @@ Number of Fisher Scoring iterations: 5</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: right;">200</td>
-<td style="text-align: right;">0.972</td>
+<td style="text-align: right;">0.984</td>
 </tr>
 </tbody>
 </table>

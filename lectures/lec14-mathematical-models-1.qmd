@@ -1,0 +1,235 @@
+# Mathematical models I
+
+## Lesson preamble
+
+> ### Lesson objectives
+> - Develop familiarity with mathematical models and why/where they are used in EEB
+> - Develop understanding of important models in EEB, including
+>   - The (geometric) growth of a population with constant birth and death rates
+>   - Exponential growth of a population
+>   - The spread of an infectious disease in a susceptible population
+>   - Competition between types, mutation-selection balance
+> - Conceptually understand equilibria and their stability
+> - Become familiar with the ways approximation is used in modeling complex systems
+> - Become familiar with how mathematical models can be fit to data
+
+> ### Lesson outline
+> - Why model?
+> - Geometric and exponential growth
+> - Fitting models to the data
+> - SIR model: when does an epidemic grow?
+> - Equilibria and stability
+> - Back to the SIR model
+> - Mutation-selection balance
+
+## Why model?
+
+Mathematical models are descriptions of biological processes which describe idealized situations and can help us build intuition and understanding for how those processes may unfold in nature. They help us 
+
+- clarify assumptions we may have about how complex systems work
+- build understanding of how complex systems behave and why
+- _generate_ predictions and hypothesis
+- _test_ predictions and hypothesis based on analysis of the model (or fitting the model to data)
+- determine what data is needed to learn about something (of if it is possible to, given the data that is available, reliably infer parameters of interest)
+- determine in what ways certain kinds of data may be problematic or biased
+
+In this lecture, we will discuss five models: (1) a deterministic, discrete-time model of **geometric growth** of a population with constant per-capita rates of birth and death. (2) A model of **exponential growth**, the continuous-time version of the geometric growth model. (3) A **Susceptible-Infected-Recovered (SIR) model** in which _interactions_ between variables shape the transient and long-run the dynamics of the system. (4) A deterministic, continuous-time model of **competitive exclusion between individuals of two types** (e.g., different species, individuals of the same species carrying different alleles, etc.). (5) An extension of the previous model which maintains diversity via recurrent mutation between types.
+
+## Geometric growth
+
+Let $N_t$ be the number of individuals at times $t=0,1,2,3,\dots$. Suppose we know $N_0$, the initial number of individuals in the population. Assume
+
+1. From one time to the next, every individual reproduces at per-captia rate $b$
+2. From one time to the next, every individual dies at per-catpia rate $d$
+3. The population is closed: there is no immigration and no emigration
+4. There is no stochasticity: individuals do not, by chance, give birth to more/fewer offspring
+
+In this case, we can write describe the population size at generation $t+1$ in terms of the _population size at the previous generation_ by keeping track of everything that could unfold.
+
+$$N_{t+1} = N_t + b N_t - d N_t = (1+b-d)N_t, $$
+
+where $b N_t$ is the number of individuals born into the population and $d N_t$ is the number of individuals who leave the population because they die. Births and deaths modify the previous population size such that, if $b > d$, then the population will grow. If $b < d$, the population will decline in size. If $b = d$, then the population will stay constant in size. This model is unique insofar as it has a closed form solution. That is, we know the state of the system at any time in the future given knowledge of its state at time zero:
+
+$$N_{1} = (1+b-d) N_0$$
+$$N_{2} = (1+b-d) N_1 = (1+b-d)(1+b-d) N_0$$
+$$N_{3} = (1+b-d) N_{2} = (1+b-d) (1+b-d)^2 N_0 = (1+b-d)^3 N_0$$
+
+\vspace{6pt}
+
+In general, $N_{t} = (1+b-d)^t N_0$ for all $t$. 
+
+When $b>d$, the population is said to _grow geometrically_, in that the growth rate $1+b+d$ is being raised to a power equal to the number of timesteps (e.g., generations) that have passed. Moreover, it is sometimes convenient in discrete time models like this to describe the dynamics in terms of how variables change from one time to the next. In the case of the geometric growth model, we can express the dynamics in terms of change in absolute population size.
+
+$$\Delta N_t \equiv N_{t+1} - N_t = (1+b-d) N_t - N_t = (b-d) N_t.$$
+
+\vspace{6pt}
+
+In population ecology, $(b-d)$ is called the _intrinsic rate of increase or decrease_, and often denoted $r$. If positive, the population grows in a given generation. If not, it becomes smaller.
+
+## Exponential growth
+
+Continuous-time analogues of discrete-time equations are written as differential equations. If we assume time-steps are small, we can replace the difference in the previous equation with a derivative to describe the dynamics of a population changing in continuous time:
+
+$$\frac{d N}{dt} = (b-d) N = r N$$
+subject to $N(0) = N_0$. Like the geometric growth equation, we can solve this equation exactly. Diving through by $N$ and using properties of derivatives from calculus,
+
+$$\frac{1}{N} \frac{d N}{d t} = \frac{d \ln N}{d t} = r.$$
+This equation tells us that, in the continuous time version of the growth model above, the per-capita (i.e., _logarithmic_) rate of increase in the population size is constant. Integrating and applying the initial condition, one can show $N(t) = N_0 e^{r t}$. If $r > 0$, i.e., $b > d$, then the population grows exponentially; if $r < 0$, the population will decay exponentially in size to zero. The trajectory of the population is completely determined in a deterministic model like this one by the parameters (i.e., the intrinsic growth rate) and initial conditions.
+
+## Aside: fitting mathematical models to data
+
+Suppose we measure the size of a population through time, and believe that the assumptions we have made (i.e., constant birth and death rates) are reasonable for the system.
+
+The steps to fit a mathematical model to the data are as follow:
+
+1. Determine the distribution of data around the solution of the model (difference or differential equation). A common convention is that the data are normally distributed around the solution to the model for a given initial condition and set of parameter values. If $Y_i$ is the measurement at time $t_i$ and $X_i$ is the state of the system (e.g., the real population size or the true values of more variables, which influence each other and the dynamics), then this amounts to specifying the distribution of $Y_i$ given $X_i$:
+
+$$f_{Y_i|X_i}(y_i|\text{parameters})$$
+
+\vspace{6pt}
+
+2. Write down and (numerically) maximize the log-likelihood function:
+
+$$\ln L(\text{parameters } \boldsymbol{\theta} | \text{data } y_1,\dots,y_n) = \sum_{i=1}^n \ln f_{Y_i|X_i}(y_i|\boldsymbol{\theta}).$$
+
+\vspace{6pt}
+
+When the distribution of the measurements around the solution to the system (model) is normal with some variance (and mean equal to the model solution), maximizing the likelihood is equivalent to minimizing the sum of squared departures of the solution from the data.
+
+We will return to fitting mathematical models to data next lecture.
+
+## The SIR model
+
+The Susceptible-Infected-Recovered (SIR) model describes how different processes (e.g., transmission, recovery, virulence, loss of immunity, demography) shape how a pathogen spreads in a population through time and if it is able to persist in the long-run. The model tracks the number of susceptible $S$, infected $I$, and recovered $R$ individuals in continuous time.
+
+Assuming that the population size is constant ($N = S + I + R$ does not change), susceptible individuals acquire the infection at rate $\beta$, and infected individuals recover at rate $\gamma$, the model equations are given by:
+
+$$\frac{dS}{dt} = - \beta SI$$
+$$\frac{dI}{dt} = \beta SI - \gamma I$$
+$$\frac{dR}{dt} = \gamma I$$
+
+\vspace{6pt}
+
+Since the population size is constant, one of these is not actually needed. Focusing in on the $I$ equation, however, we notice that is of the same form as the geometric and exponential growth models: we simply track the flux in and out of the compartment due to, in the case of $I$, infection and recovery.
+
+### Challenge
+
+ - What are the assumptions of the model? 
+ - What terms are missing? 
+ - What is the model trying to capture? 
+ - What dynamics and long run behavior might we expect of a disease that has been introduced to a largely susceptible population?
+
+## When will the epidemic grow?
+
+To determine if an epidemic that begins from the rare introduction of a pathogen into a closed population will spread, we can use the following approximation. For the epidemic to grow, we need
+
+$$\frac{d I}{dt} = \beta S I - \gamma I > 0$$
+
+\vspace{3pt}
+
+At the beginning of the outbreak, $I \approx 1$ and so $S \approx N$ because no individuals have immunity to the disease under investigation. So the condition for the disease to spread is
+
+$$\frac{d I}{dt} = \beta N - \gamma > 0 \iff R_0 = \frac{\beta N}{\gamma} > 1.$$
+
+\vspace{3pt}
+
+The quantity $R_0$ measures the _average number of secondary infections from a single infectious individual in an otherwise susceptible population_. This measure of reproductive success or fitness is also common in population ecology. Intuitively, if the pathogen is unable to infect $>1$ individual on average when the susceptible pool has not yet been depleted (i.e., all individuals are susceptible), it will fail to spread. If $R_0 > 1$, then the disease will spread. Importantly, $R_0$ does not provide a quantitative measure of how quickly this happens, and researchers have proposed using other metrics (like the intrinsic growth rate of the pathogen) to measure the speed of pathogen spread in a susceptible population.
+
+## What happens in the long run?
+
+To understand the long-run behavior of a dynamical system (i.e., where key variables will go after enough time has passed), modelers will typically search for _equilibria_ and characterize their stability properties. Intuitively, an equilibrium (or steady-state) is a point such that if the system starts there, it stays there. The _stability_ of an equilibrium is determined by the behavior of the system (model) if perturbed.
+
+What are the equilibria of the SIR model above? They are exactly the points such that
+
+$$\frac{d S}{dt} = \frac{d I}{d t} = \frac{d R}{d t} = 0,$$
+\vspace{3pt}
+
+i.e., the variables of interest (number susceptible, infected, recovered) do not change. There are two such equillirbia, which we can find by solving for $S,I$ in
+
+$$\frac{d S}{dt} = - \beta S I = 0$$
+$$\frac{d I}{dt} = \beta S I - \gamma I = 0.$$
+\vspace{6pt}
+
+The two equilibria are $(S^*,I^*,R^*) = (N,0,0)$, which corresponds to the situation in which the disease is absent from the population (i.e., the _disease-free equilibrium_) and  
+
+$$ S^* = \frac{\gamma}{\beta} = \frac{N}{R_0}, \hspace{12pt} I^* = 0, \hspace{12pt} R^* = N - S^* = N (1- \frac{1}{R_0}).$$ 
+\vspace{3pt}
+
+The second equilibrium corresponds to the situation in which the disease has taken hold, but depleted the susceptible pool: although a fraction of individuals have experienced infection and recovered, a positive fraction of individuals did not acquire the disease. In other words, the disease burned itself out by depleting the resource pool (i.e., the number of susceptibles) such that some "resources" are still left.
+
+**But there are there are _two_ equilibria --- where will the system go?** One way to answer this question is to determine the stability of each equilibrium point. Intuitively, a _stable_ equilibrium is one such small perturbations from the equilibrium shrink the system returns to the equilibrium in question. An _unstable_ equilibrium is one such small perturbations grow, leaving the system to go somewhere else. (There is, in fact, a third case that can arise. If the perturbation does not shrink or grow, the equilibrium is said to be _neutrally stable_.) The details are beyond the scope of this course but it turns out that it is often enough to look at the linear behavior of the system about the equilibrium to characterize stability. To gauge local stability of an equilibrium $x^* = (x_1^*,\dots,x_n^*)$ for a system of differential equations 
+
+$$\frac{d x_i}{dt} = f_i(x_1,\dots,x_n)$$
+
+1. Take derivatives of of $f_i$ with respect to all $x_j$s.
+2. Put these derivatives into a matrix called the Jacobian, whose columns correspond to the derivatives $\partial f_i/\partial x_1, \dots, \partial f_n/\partial x_1$.
+3. Evaluate the Jacobian at $x^*$.
+4. Determine the eigenvalues of the Jacobian at $x^*$.
+5. If the eigenvalues have strictly negative real part, then $x^*$ is stable.
+
+### A stability analysis of the disease-free equilibrium
+
+Here is how the local stability analysis would work in the case of the SIR model with $(S^*,I^*) = (N,0)$. Remember we only need two equations to describe the dynamics of the population, since the population is of constant size. Using the notation above,
+
+$$\frac{dS}{dt} = -\beta S I = f_1(S,I)$$
+$$\frac{dI}{dt} = \beta S I - \gamma I = f_2(S,I).$$
+\vspace{3pt}
+
+The Jacobian $J$ is formed by taking partial derivatives of $f_1,f_2$ with respect to the state variables. (One follows the same procedure for systems with more variables.)
+
+$$J = \begin{pmatrix} \partial f_1/\partial S & \partial f_1/\partial I \\
+\partial f_2/\partial S & \partial f_2/\partial I \end{pmatrix}
+= \begin{pmatrix} - \beta I & - \beta S \\
+\beta I & \beta S - \gamma \end{pmatrix}$$
+
+\vspace{6pt}
+
+Evaluating $J$ at the disease-free equilibrium and solving for the eigenvalues, one can show that a necessary and sufficient condition for the disease-free equilibrium to be stable is that
+
+$$\beta N - \gamma < 0 \iff R_0 < 1.$$
+\vspace{3pt}
+
+This should make sense as, in our previous analysis, we showed that for an epidemic to grow from a small introduction (perturbation), we need $R_0 > 1$. Fewer than one secondary infection from a single infectious individual in an otherwise susceptible population will ensure the stability of the disease-free steady-state since the pathogen will be unable to sustain transmission!
+
+## A model of mutation-selection balance!
+
+Now, we go about deriving from a set of ecological equations a model for the evolution of a population which consists of individuals carrying one of two alleles at a locus. $n_i$ will denote the number of individuals carrying allele $i=1,2$. If individuals of both types are exponentially growing at rates $r_1,r_2$, a model of the population dynamics is given by
+
+$$\frac{d n_i}{dt} = r_i n_i.$$
+
+\vspace{3pt}
+
+Suppose there is also mutation which converts allele $i$ to $j$ at rate $\mu_{ij}$. The model equations would then include a second term to account for changes in each type due to mutation:
+
+$$\frac{d n_i}{dt} = r_i n_i - \mu_{ij} n_i + \mu_{ji} n_j.$$
+\vspace{3pt}
+
+Consider the _fraction_ of individuals carrying allele 1, i.e., $p = n_1/(n_1+n_2)$. An equation for this new variable can be found by using the quotient rule, substituting, and simplifying so that the equation is in terms of $p$:
+
+\begin{align*}
+\frac{dp}{dt} &= \frac{d (\frac{n_1}{n_1+n_2})}{dt} \\
+&= \frac{(n_1+n_2) \frac{d n_1}{dt} - n_1 \frac{d(n_1+n_2)}{dt}}{(n_1+n_2)^2} \\
+&= \frac{1}{n_1+n_2} (r_1 n_1 - \mu_{12} n_1 + \mu_{21} n_2) - \frac{n_1(r_1 n_1 + r_2 n_2)}{(n_1+n_2)^2} \\
+&= r_1 p - \mu_{12} p + \mu_{21} (1-p) - p(r_1 p + r_2 (1-p)) \\
+&= (r_1-r_2) p(1-p) - \mu_{12} p + \mu_{21} (1-p) \\
+\end{align*}
+
+The terms in the equation can be interpreted as follow. (1) The first term describes the change in allele 1 frequency due to selection imposed by differences in intrinsic growth. If $r_1 > r_2$, then allele 1 grows in frequency due to its competitive advantage. If $r_1 < r_2$, then allele 1 is purged from the population by purifying selection. In this case, and without mutation, individuals carrying allele 2 take over the population. (2) The second and third terms describe mutation from type 1 to type 2 and type 2 to 1, respectively. With mutation rates that are both $>0$, competitive exclusion cannot happen because individuals change type at rates $\mu_{12},\mu_{21}$. The behavior of the system and the long-run predictions will depend on the relative strengths of mutation and selection.
+
+To understand where selection and mutation take the system, we can preform an approximation. This is common in modeling: either by assuming certain parameters are small, or that certain processes unfold faster than others (e.g., a separation of ecological and evolutionary timescales), we can learn what complex systems do and disentangle the reasons why. The key takeaway is that **problems that would otherwise be difficult to solve can be addressed via approximation.**
+
+Here, we will assume $s = r_1 - r_2 < 0$ and preform an approximation when selection is strong and mutation is weak. (A similar approximation can be applied in the case mutation is strong and selection is weak.) If selection is much stronger than selection, i.e., $|s| \gg \mu_{12}, \mu_{21}$, then we expect allele 1 to be rare. Ignoring terms like the allele frequency squared, allele frequency times mutation rate, etc. (which are expected to be smaller still!), we arrive at an approximate equation for allele frequency change:
+
+$$\frac{d p}{dt} = s p - \mu_{21} + \text{small stuff}.$$
+\vspace{3pt}
+
+The approximate equilibrium allele frequency is $p^* = \mu_{21}/s$. Indeed, one can solve the model equations numerically (as we will do next class!) to see that this approximation is very good when the assumptions are met, and is decent still when the assumptions begin to break down.
+
+## Summary
+
+Modeling is an indispensable tool in EEB, and a very creative endeavor! Here we have covered _a lot_ of ground: geometric and exponential growth models in population ecology, an eco-evolutionary model of the balance between mutation and selection, the SIR model for the spread of an infectious disease, and the WF model of allele frequency change under drift. **Next class will focus on simulating these models in R, and trying to use them to learn about interesting biology!**
+
+## Resources
+
+1. Otto, S. & Day, T. (2007). _A Biologist’s Guide to Mathematical Modeling in Ecology and Evolution_.
+2. Nuismer, S. (2017) _Introduction to Coevolutionary Theory_.

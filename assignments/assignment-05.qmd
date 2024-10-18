@@ -1,0 +1,156 @@
+# Assignment 05: linear models, model selection, and multivariate statistics {-}
+
+Download the .Rmd file [here](assignment-05.Rmd).
+
+*To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`. Please ensure the text on your .pdf does not continue past the end of the page.*
+
+```{r, message=FALSE, warning=FALSE}
+require(tidyverse)
+require(lme4)
+require(broom)
+library(MuMIn)
+
+set.seed(313)
+```
+
+## 1. Conceptual understanding of linear models
+
+a. Write down the likelihood function for data that arise from the multiple linear regression model $Y_i \sim \text{Normal}(\beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i}, \sigma^2 x_{1i}).$ Notice that the variance in the observations is proportional to the square of the 1st explanatory variable.
+
+_Hint: look up the probability density function for the Normal distribution._
+
+b. The following function simulates data from the model in (a). **Explain what each line does.**
+
+```{r}
+LM_simulator <- function(beta0, beta1, beta2, sigma, n = 100){
+  x1 <- runif(n = n, max = 1000, min = 10)
+  x2 <- rnorm(n = n, mean = 10000, sd = 1000)
+  y <- rnorm(n = n, mean = beta0 + beta1*x1 + beta2*x2, sd = sigma*sqrt(x1))
+  return(cbind(x1, x2, y))
+}
+
+data <- LM_simulator(beta0 = 0, beta1 = 0.5, beta2 = 0, sigma = 1)
+data |> ggplot(aes(x = x2, y = y)) + geom_point()
+```
+
+c. **Write a function that evaluates the log-likelihood function which you wrote down in (a).** Evaluate the log-likelihood of $\beta_0 = 0, \beta_1 = 0.5, \beta_2 = 0, \sigma = 1$ using the data simulated in (b). Do the same thing, except using $\beta_0 = 0.1, \beta_1 = 0.5, \beta_2 = 0, \sigma = 1$.
+
+d. Using the data simulated in (b), regress y on x1 and x2 but not their interaction. Is there an effect of x and how similar is it to the effect specified in the previous code chunk?
+
+e. Are the assumptions of of the multiple regression framework (normality, constant error variance, independence of observations) satisfied? If not, explain how you know.
+
+## 2. Implementation of generalized linear models
+
+a. Download the "SSDinMammals.csv" file from Quercus, the course website, or [Dryad](https://datadryad.org/stash/downloads/file_stream/2921720). Read it into R as `SSDdata`.
+
+```{r, eval=F}
+SSDdata <- read_csv("~/eeb313website/lectures/data/SSDinMammals.csv")
+```
+
+The following chunk creates a new data frame, `SSDdataNew` which includes a column that indicates if the mean mass of males exceeds that of females for the species. If an entry in this column equals one, the mean male mass exceeds the mean female mass.
+
+```{r, eval=F}
+SSDdata |> mutate(AreMalesLarger = 
+                    case_when(massM > massF ~ 1, massM <= massF ~ 0)) |>
+  group_by(Order) |> mutate(n = n()) |> ungroup() -> SSDdataNew
+```
+
+b. Using `SSDdataNew`, fit a generalized linear model to test if number of observations predicts the likelihood that males are larger than females. That is, regress the binary variable indicating if males are larger than females on the number $n$ of observations for an Order. Report the regression coefficient for $n$, the value of the test statistic, and the associated $p$ value.
+
+c. Interpret the regression coefficient from (b) -- what does it mean? Think about any transformations that may have taken place!
+
+d. Visualize the fitted model.
+
+e. What would you conclude based on b-d about sexual size dimorphism in Orders that have many vs few species? Explain your answer.
+
+f. To determine if the variation in the size of males predicts if males are larger than females, add `SDmassM` as an explanatory variable to the model you fit in b. Report the regression coefficient that is estimated, as well as the $p$-value and value of the test statistic. Interpret the coefficient associated to `SDmassM` -- what does it mean?
+
+## 3. Linear mixed models, group-by-group analyses, some model selection
+
+a. Suppose you are an respiratory syncytial virus (RSV) researcher and wish to understand how the age of chimpanzees treated with a prospective vaccine affects the concentration of RSV antibodies that are found in the blood at weeks $1,2,3,\dots,10$ after vaccination. You predict that antibody concentrations will be highest for the individuals which were young when they were vaccinated. You plan to conduct an experiment where $n = 50$ chimpanzees of various ages were vaccinated, and antibody titres are measured for each individual (say, 3 times!) at _every_ week post-vaccination. 
+
+You plan to fit the following linear mixed model:
+
+$$\text{antibody titre} \sim \text{age}\text{+(1+age|individual)}+\text{(1|week)}.$$
+
+The model is written in the syntax used to specify a model using `lme4`. **What are the fixed and random effects? Explain why it makes sense to include the random effects which are specified.**
+
+b. The following function simulates data that arise from the LMM specified in the (a).
+
+```{r}
+simulator <- function(age_effect = -5, week_sd = 0.5, individual_sd = 0.2){
+  
+  age <- runif(n = 50, min = 6, max = 10) # get ages for all individuals
+  data <- NULL
+  
+  for (weeks in 1:10){ # loop over weeks in which each individual is measured 3x
+    
+    for (individual in 1:50){ # loop over individuals
+      
+      intercept_individual <- 200*exp(-weeks/100) + rnorm(n = 1, mean = 0, sd = individual_sd)
+      # determine random effect (intercept) for each individual
+      # intercept is 200*exp(-weeks/100), which is declining with weeks
+      # for each individual, baseline antibody concentrations are randomly perturbed from intercept
+      
+      intercept_week <- rnorm(1, mean = 0, sd = week_sd)
+      # determine random effect (intercept) for each week
+      
+      age_effect_individual <- age_effect + rnorm(n = 1, mean = 0, sd = 1)
+      # determine random effect (of age on antibody) for each individual
+      # mean is age_effect, but there is variation around this effect size
+      
+      antibody_titre <- rnorm(n = 3, 
+                              mean = intercept_individual + 
+                                intercept_week +
+                                age_effect_individual*age[individual],
+                              sd = 1)
+      # draw antibodies 3x for each individual in each week
+      # intercept is random and depends on individual, week
+      # effect of age changes mean antibody titre, but randomly based on the individual
+      
+      data <- rbind.data.frame(data,
+                               cbind(antibody = antibody_titre, 
+                                     week = weeks,
+                                     individual = individual,
+                                     age = age[individual]
+                                     )
+                               )
+      # adds row-wise to data frame with all response, covariates
+      
+    }
+  }
+  
+  return(data)
+}
+```
+
+*Think about what EACH LINE of this function does and how it relates to the model specified in part (a).* Comments have been added to help you understand how the data are simulated. If you have questions, talk to Mete, Zoe, Jessie, or Gavia!
+
+**Simulate data from this model using the default parameters. Plot antibody concentrations against age when vaccinated. Does there appear to be a trend?**
+
+c. How would you modify `simulator()` so that the standard deviation in the response (antibody titre) for an individual in a given week is a parameter, $\gamma$ times the age of the individual? Explain.
+
+d. Using the data which you simulated, fit the model in (a). Report estimates for the fixed effects, including the standard errors, and visualize the values predicted under the fitted model with only the fixed effects (i.e., ignore all random effects). _Hint: use the predict() function._
+
+e. Split the simulated data up by week. For the data associated to _each week_, regress antibody concentration on age at vaccination. Make a plot of the estimated effect of age on antibody concentration vs week. Include the confidence intervals for the effect of age in your plot.
+
+_Hint: use a for loop or the tidyverse function `do()`._
+
+f. Report the regression coefficient for age in week 7 (and the associated confidence interval, value of the test statistic, $p$-value). Explain what the value of the regression coefficient means in plain English. Does the confidence interval for the parameter overlap the true value of the effect, which is equal to -5?
+
+g. What are the advantages and disadvantages of fitting the full LMM (with individual and week as random effects) or performing a group-by-group analysis? What about an individual-by-individual analysis or an analysis where antibody titres are regressed on age for each individual-week combination -- would fitting models at those levels in the model make sense? Explain.
+
+h. How could you modify the model from (a) to have random intercepts dependent on the variables individual and week? What about both random slopes _and_ intercepts dependent on individual and week? Fit these models to the simulated data and compare them to original model, which you fit in (d). Which model best describes the data? Look at the output for the best-fit model -- what does it tell us about the variance associated with the random effects?
+
+##  4. Interpretation of a PCA
+
+In [Koutsidi *et al.* 2020](https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.6414), the authors use traits to define the life-history strategies of species in the Mediterranean Sea. Traits related to resource use were used to determine if species with different life-history traits occupy different niches and if these traits are related to habitat use. 
+
+*Hint: read the abstract, figure 1, figure 2, section 2.4, and section 3.1 to answer these questions.*
+
+a. In the analysis quantifying ecological niches and niche overlap, how many dimensions define this trait space? What is the one sentence definition of a MCA according to the authors? 
+
+b. Go to Figure 2:
+
+- What traits are PC1 based on? What traits are PC2 based on?
+- Characterize the traits of species *H. huso*? What traits does *D. passtinaca* have? 
