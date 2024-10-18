@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - Assignment 01: base R, command line, &amp; Git(Hub)</title>
+<title>EEB313: Quantitative Methods in R for Biology - Assignment 05: linear models, model selection, and multivariate statistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-02.html" rel="next">
-<link href="../assignments/assignment-00.html" rel="prev">
+<link href="../projects.html" rel="next">
+<link href="../assignments/assignment-04.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -115,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignment 01: base R, command line, &amp; Git(Hub)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-05.html">Assignment 05: linear models, model selection, and multivariate statistics</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -279,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link active">
+  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 01: base R, command line, &amp; Git(Hub)</span></a>
   </div>
 </li>
@@ -303,7 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/assignment-05.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/assignment-05.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Assignment 05: linear models, model selection, and multivariate statistics</span></a>
   </div>
 </li>
@@ -417,21 +446,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#variable-assignment-1-mark" id="toc-variable-assignment-1-mark" class="nav-link active" data-scroll-target="#variable-assignment-1-mark">1. Variable assignment (1 mark)</a></li>
-  <li><a href="#vectors-2.5-marks" id="toc-vectors-2.5-marks" class="nav-link" data-scroll-target="#vectors-2.5-marks">2. Vectors (2.5 marks)</a></li>
-  <li><a href="#data-frames-1.5-marks" id="toc-data-frames-1.5-marks" class="nav-link" data-scroll-target="#data-frames-1.5-marks">3. Data frames (1.5 marks)</a></li>
-  <li><a href="#command-line-1-mark" id="toc-command-line-1-mark" class="nav-link" data-scroll-target="#command-line-1-mark">4. Command line (1 mark)</a></li>
-  <li><a href="#understanding-command-line-software-1-mark" id="toc-understanding-command-line-software-1-mark" class="nav-link" data-scroll-target="#understanding-command-line-software-1-mark">5. Understanding command line software (1 mark)</a></li>
-  <li><a href="#github-1-mark" id="toc-github-1-mark" class="nav-link" data-scroll-target="#github-1-mark">6. GitHub (1 mark)</a></li>
+  <li><a href="#conceptual-understanding-of-linear-models" id="toc-conceptual-understanding-of-linear-models" class="nav-link active" data-scroll-target="#conceptual-understanding-of-linear-models">1. Conceptual understanding of linear models</a></li>
+  <li><a href="#implementation-of-generalized-linear-models" id="toc-implementation-of-generalized-linear-models" class="nav-link" data-scroll-target="#implementation-of-generalized-linear-models">2. Implementation of generalized linear models</a></li>
+  <li><a href="#linear-mixed-models-group-by-group-analyses-some-model-selection" id="toc-linear-mixed-models-group-by-group-analyses-some-model-selection" class="nav-link" data-scroll-target="#linear-mixed-models-group-by-group-analyses-some-model-selection">3. Linear mixed models, group-by-group analyses, some model selection</a></li>
+  <li><a href="#interpretation-of-a-pca" id="toc-interpretation-of-a-pca" class="nav-link" data-scroll-target="#interpretation-of-a-pca">4. Interpretation of a PCA</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignment 01: base R, command line, &amp; Git(Hub)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-05.html">Assignment 05: linear models, model selection, and multivariate statistics</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignment 01: base R, command line, &amp; Git(Hub)</h1>
+<h1 class="title">Assignment 05: linear models, model selection, and multivariate statistics</h1>
 </div>
 
 
@@ -448,81 +475,154 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Download the .Rmd file <a href="assignment-01.Rmd">here</a>.</p>
-<p><em>To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>. Please ensure the text on your .pdf does not continue past the end of the page. If you use code chunks to write your answers to the command line questions, check that the code chunk headers say <code>eval=FALSE</code> so RStudio doesn’t try to run them when knitting (the example code chunks provided for questions 4 and 5 include this).</em></p>
-<section id="variable-assignment-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="variable-assignment-1-mark">1. Variable assignment (1 mark)</h2>
+<p>Download the .Rmd file <a href="assignment-05.Rmd">here</a>.</p>
+<p><em>To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>. Please ensure the text on your .pdf does not continue past the end of the page.</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(lme4)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(broom)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MuMIn)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">313</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="conceptual-understanding-of-linear-models" class="level2">
+<h2 class="anchored" data-anchor-id="conceptual-understanding-of-linear-models">1. Conceptual understanding of linear models</h2>
 <ol type="a">
-<li>Assign the value <code>5</code> to the variable/object <code>a</code>. Display <code>a</code>. (0.25 marks)</li>
+<li>Write down the likelihood function for data that arise from the multiple linear regression model <span class="math inline">\(Y_i \sim \text{Normal}(\beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i}, \sigma^2 x_{1i}).\)</span> Notice that the variance in the observations is proportional to the square of the 1st explanatory variable.</li>
 </ol>
+<p><em>Hint: look up the probability density function for the Normal distribution.</em></p>
 <ol start="2" type="a">
-<li>Assign the result of <code>10/3</code> to the variable <code>b</code>. Display <code>b</code>. (0.25 marks)</li>
-</ol>
-<ol start="3" type="a">
-<li>Write a function that adds two numbers and returns their sum. Use it to assign the sum of <code>a</code> and <code>b</code> to <code>result</code>. Display <code>result</code>. (In practice, there is already a more sophisticated built-in function for this: <code>result &lt;- sum(a, b)</code>) (0.25 marks)</li>
-</ol>
-<ol start="4" type="a">
-<li>Write a function that multiplies two numbers and returns their product. Use it to assign the product of <code>a</code> and <code>b</code> to <code>product</code>. Display <code>product</code>. (In practice, there is already a more sophisticated built-in function for this: <code>product &lt;- prod(a, b)</code>) (0.25 marks)</li>
-</ol>
-</section>
-<section id="vectors-2.5-marks" class="level2">
-<h2 class="anchored" data-anchor-id="vectors-2.5-marks">2. Vectors (2.5 marks)</h2>
-<ol type="a">
-<li>Create a vector <code>v</code> with all integers 0-30, and a vector <code>w</code> with every third integer in the same range. (0.25 marks)</li>
-</ol>
-<ol start="2" type="a">
-<li>What is the difference in lengths of the vectors <code>v</code> and <code>w</code>? (0.25 marks)</li>
-</ol>
-<ol start="3" type="a">
-<li>Create a new vector, <code>v_square</code>, with the square of elements at indices 3, 6, 7, 10, 15, 22, 23, 24, and 30 from the variable <code>v</code>. <em>Hint: Use indexing rather than a for loop.</em> (0.25 marks)</li>
-</ol>
-<ol start="4" type="a">
-<li>Calculate the mean and median of the first five values from <code>v_square</code>. (0.25 marks)</li>
-</ol>
-<ol start="5" type="a">
-<li>Create a boolean vector <code>v_bool</code>, indicating which vector <code>v</code> elements are bigger than 20. How many values are over 20? <em>Hint: In R, TRUE = 1, and FALSE = 0, so you can use simple arithmetic to find this out.</em> (0.5 marks)</li>
-</ol>
-<ol start="6" type="a">
-<li>Write a function that calculates the median of the last two elements of any numeric vector. Test this function with the <code>v</code> and <code>v_square</code> vectors. (1 marks)</li>
-</ol>
-</section>
-<section id="data-frames-1.5-marks" class="level2">
-<h2 class="anchored" data-anchor-id="data-frames-1.5-marks">3. Data frames (1.5 marks)</h2>
-<ol type="a">
-<li>There are many built-in data frames in R, which you can find <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html">more details about online</a>. What are the column names of the built-in dataframe <code>beaver1</code>? How many observations (rows) and variables (columns) are there? (0.5 marks)</li>
-</ol>
-<ol start="2" type="a">
-<li>Display both the first 6 and last 6 rows of this data frame. Show how to do so with both indexing as well as specialized functions. (0.5 marks)</li>
+<li>The following function simulates data from the model in (a). <strong>Explain what each line does.</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With indexing</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># With functions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>LM_simulator <span class="ot">&lt;-</span> <span class="cf">function</span>(beta0, beta1, beta2, sigma, <span class="at">n =</span> <span class="dv">100</span>){</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  x1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> n, <span class="at">max =</span> <span class="dv">1000</span>, <span class="at">min =</span> <span class="dv">10</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> <span class="dv">10000</span>, <span class="at">sd =</span> <span class="dv">1000</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> beta0 <span class="sc">+</span> beta1<span class="sc">*</span>x1 <span class="sc">+</span> beta2<span class="sc">*</span>x2, <span class="at">sd =</span> sigma<span class="sc">*</span><span class="fu">sqrt</span>(x1))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">cbind</span>(x1, x2, y))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">LM_simulator</span>(<span class="at">beta0 =</span> <span class="dv">0</span>, <span class="at">beta1 =</span> <span class="fl">0.5</span>, <span class="at">beta2 =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x2, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="assignment-05_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <ol start="3" type="a">
-<li>What is the min, mean, and max body temperature for beavers inside and outside of the retreat? <em>Hint: You can use <code>?</code> on the beaver1 data set to get more information about it. Remember that each column in a data frame is a vector and you can use the same functions.</em> (0.5 marks)</li>
+<li><p><strong>Write a function that evaluates the log-likelihood function which you wrote down in (a).</strong> Evaluate the log-likelihood of <span class="math inline">\(\beta_0 = 0, \beta_1 = 0.5, \beta_2 = 0, \sigma = 1\)</span> using the data simulated in (b). Do the same thing, except using <span class="math inline">\(\beta_0 = 0.1, \beta_1 = 0.5, \beta_2 = 0, \sigma = 1\)</span>.</p></li>
+<li><p>Using the data simulated in (b), regress y on x1 and x2 but not their interaction. Is there an effect of x and how similar is it to the effect specified in the previous code chunk?</p></li>
+<li><p>Are the assumptions of of the multiple regression framework (normality, constant error variance, independence of observations) satisfied? If not, explain how you know.</p></li>
 </ol>
 </section>
-<section id="command-line-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="command-line-1-mark">4. Command line (1 mark)</h2>
-<p>What commands would you run to create a directory named “mydir”, check mydir’s permissions, add <em>w</em>rite permissions for <em>u</em>sers, copy mydir to “mydir2” , and then remove mydir? <em>Hint: try running each step in your terminal to check if the output is what you expect</em> (1 mark)</p>
-</section>
-<section id="understanding-command-line-software-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-command-line-software-1-mark">5. Understanding command line software (1 mark)</h2>
-<p>Open the documentation for <a href="https://github.com/TobyBaril/EarlGrey">Earl Grey</a>, a software programme that identifies transposable elements in genomes. There may be a lot of unfamilliar terms on this web page, but we’ll just be skimming this page to practice identifying the kind of information command line software might require and how to provide that.</p>
+<section id="implementation-of-generalized-linear-models" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-of-generalized-linear-models">2. Implementation of generalized linear models</h2>
 <ol type="a">
-<li><p>What three arguments (files/information) are required input for this software? (0.3 marks)</p></li>
-<li><p>What would you type into the command line to provide Earl Grey with those minimum command options? You don’t need to make up example text for this, just ensure you have the three <code>-</code> arguments written out. <em>Hint: search for “minimum command options” on the GitHub page and use the next line</em> (0.3 marks)</p></li>
-<li><p>Based on the visual overview of the software (or the “Example Outputs” section) on the GitHub page, what does this software output? (0.2 marks)</p></li>
-<li><p>What optional parameter (i.e.&nbsp;the <code>-</code> argument) does Earl Grey offer to display help information? Is this kind of help parameter common? <em>Hint: you can search for “help documentation” in your lecture notes</em> (0.2 marks)</p></li>
+<li>Download the “SSDinMammals.csv” file from Quercus, the course website, or <a href="https://datadryad.org/stash/downloads/file_stream/2921720">Dryad</a>. Read it into R as <code>SSDdata</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>SSDdata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"~/eeb313website/lectures/data/SSDinMammals.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The following chunk creates a new data frame, <code>SSDdataNew</code> which includes a column that indicates if the mean mass of males exceeds that of females for the species. If an entry in this column equals one, the mean male mass exceeds the mean female mass.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>SSDdata <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">AreMalesLarger =</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">case_when</span>(massM <span class="sc">&gt;</span> massF <span class="sc">~</span> <span class="dv">1</span>, massM <span class="sc">&lt;=</span> massF <span class="sc">~</span> <span class="dv">0</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Order) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> <span class="fu">ungroup</span>() <span class="ot">-&gt;</span> SSDdataNew</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li><p>Using <code>SSDdataNew</code>, fit a generalized linear model to test if number of observations predicts the likelihood that males are larger than females. That is, regress the binary variable indicating if males are larger than females on the number <span class="math inline">\(n\)</span> of observations for an Order. Report the regression coefficient for <span class="math inline">\(n\)</span>, the value of the test statistic, and the associated <span class="math inline">\(p\)</span> value.</p></li>
+<li><p>Interpret the regression coefficient from (b) – what does it mean? Think about any transformations that may have taken place!</p></li>
+<li><p>Visualize the fitted model.</p></li>
+<li><p>What would you conclude based on b-d about sexual size dimorphism in Orders that have many vs few species? Explain your answer.</p></li>
+<li><p>To determine if the variation in the size of males predicts if males are larger than females, add <code>SDmassM</code> as an explanatory variable to the model you fit in b. Report the regression coefficient that is estimated, as well as the <span class="math inline">\(p\)</span>-value and value of the test statistic. Interpret the coefficient associated to <code>SDmassM</code> – what does it mean?</p></li>
 </ol>
 </section>
-<section id="github-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="github-1-mark">6. GitHub (1 mark)</h2>
+<section id="linear-mixed-models-group-by-group-analyses-some-model-selection" class="level2">
+<h2 class="anchored" data-anchor-id="linear-mixed-models-group-by-group-analyses-some-model-selection">3. Linear mixed models, group-by-group analyses, some model selection</h2>
 <ol type="a">
-<li>Make a Github account. You can do this at <a href="github.com">github.com</a>. What is your GitHub username? (1 mark)</li>
+<li>Suppose you are an respiratory syncytial virus (RSV) researcher and wish to understand how the age of chimpanzees treated with a prospective vaccine affects the concentration of RSV antibodies that are found in the blood at weeks <span class="math inline">\(1,2,3,\dots,10\)</span> after vaccination. You predict that antibody concentrations will be highest for the individuals which were young when they were vaccinated. You plan to conduct an experiment where <span class="math inline">\(n = 50\)</span> chimpanzees of various ages were vaccinated, and antibody titres are measured for each individual (say, 3 times!) at <em>every</em> week post-vaccination.</li>
 </ol>
+<p>You plan to fit the following linear mixed model:</p>
+<p><span class="math display">\[\text{antibody titre} \sim \text{age}\text{+(1+age|individual)}+\text{(1|week)}.\]</span></p>
+<p>The model is written in the syntax used to specify a model using <code>lme4</code>. <strong>What are the fixed and random effects? Explain why it makes sense to include the random effects which are specified.</strong></p>
+<ol start="2" type="a">
+<li>The following function simulates data that arise from the LMM specified in the (a).</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>simulator <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">age_effect =</span> <span class="sc">-</span><span class="dv">5</span>, <span class="at">week_sd =</span> <span class="fl">0.5</span>, <span class="at">individual_sd =</span> <span class="fl">0.2</span>){</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  age <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">min =</span> <span class="dv">6</span>, <span class="at">max =</span> <span class="dv">10</span>) <span class="co"># get ages for all individuals</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (weeks <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){ <span class="co"># loop over weeks in which each individual is measured 3x</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (individual <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>){ <span class="co"># loop over individuals</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>      intercept_individual <span class="ot">&lt;-</span> <span class="dv">200</span><span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>weeks<span class="sc">/</span><span class="dv">100</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> individual_sd)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      <span class="co"># determine random effect (intercept) for each individual</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># intercept is 200*exp(-weeks/100), which is declining with weeks</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>      <span class="co"># for each individual, baseline antibody concentrations are randomly perturbed from intercept</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>      intercept_week <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> week_sd)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>      <span class="co"># determine random effect (intercept) for each week</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>      age_effect_individual <span class="ot">&lt;-</span> age_effect <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>      <span class="co"># determine random effect (of age on antibody) for each individual</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>      <span class="co"># mean is age_effect, but there is variation around this effect size</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>      antibody_titre <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">3</span>, </span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mean =</span> intercept_individual <span class="sc">+</span> </span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                                intercept_week <span class="sc">+</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>                                age_effect_individual<span class="sc">*</span>age[individual],</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>                              <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>      <span class="co"># draw antibodies 3x for each individual in each week</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>      <span class="co"># intercept is random and depends on individual, week</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>      <span class="co"># effect of age changes mean antibody titre, but randomly based on the individual</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>      data <span class="ot">&lt;-</span> <span class="fu">rbind.data.frame</span>(data,</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">cbind</span>(<span class="at">antibody =</span> antibody_titre, </span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">week =</span> weeks,</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">individual =</span> individual,</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">age =</span> age[individual]</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>                                     )</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>                               )</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>      <span class="co"># adds row-wise to data frame with all response, covariates</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data)</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><em>Think about what EACH LINE of this function does and how it relates to the model specified in part (a).</em> Comments have been added to help you understand how the data are simulated. If you have questions, talk to Mete, Zoe, Jessie, or Gavia!</p>
+<p><strong>Simulate data from this model using the default parameters. Plot antibody concentrations against age when vaccinated. Does there appear to be a trend?</strong></p>
+<ol start="3" type="a">
+<li><p>How would you modify <code>simulator()</code> so that the standard deviation in the response (antibody titre) for an individual in a given week is a parameter, <span class="math inline">\(\gamma\)</span> times the age of the individual? Explain.</p></li>
+<li><p>Using the data which you simulated, fit the model in (a). Report estimates for the fixed effects, including the standard errors, and visualize the values predicted under the fitted model with only the fixed effects (i.e., ignore all random effects). <em>Hint: use the predict() function.</em></p></li>
+<li><p>Split the simulated data up by week. For the data associated to <em>each week</em>, regress antibody concentration on age at vaccination. Make a plot of the estimated effect of age on antibody concentration vs week. Include the confidence intervals for the effect of age in your plot.</p></li>
+</ol>
+<p><em>Hint: use a for loop or the tidyverse function <code>do()</code>.</em></p>
+<ol start="6" type="a">
+<li><p>Report the regression coefficient for age in week 7 (and the associated confidence interval, value of the test statistic, <span class="math inline">\(p\)</span>-value). Explain what the value of the regression coefficient means in plain English. Does the confidence interval for the parameter overlap the true value of the effect, which is equal to -5?</p></li>
+<li><p>What are the advantages and disadvantages of fitting the full LMM (with individual and week as random effects) or performing a group-by-group analysis? What about an individual-by-individual analysis or an analysis where antibody titres are regressed on age for each individual-week combination – would fitting models at those levels in the model make sense? Explain.</p></li>
+<li><p>How could you modify the model from (a) to have random intercepts dependent on the variables individual and week? What about both random slopes <em>and</em> intercepts dependent on individual and week? Fit these models to the simulated data and compare them to original model, which you fit in (d). Which model best describes the data? Look at the output for the best-fit model – what does it tell us about the variance associated with the random effects?</p></li>
+</ol>
+</section>
+<section id="interpretation-of-a-pca" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-of-a-pca">4. Interpretation of a PCA</h2>
+<p>In <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.6414">Koutsidi <em>et al.</em> 2020</a>, the authors use traits to define the life-history strategies of species in the Mediterranean Sea. Traits related to resource use were used to determine if species with different life-history traits occupy different niches and if these traits are related to habitat use.</p>
+<p><em>Hint: read the abstract, figure 1, figure 2, section 2.4, and section 3.1 to answer these questions.</em></p>
+<ol type="a">
+<li><p>In the analysis quantifying ecological niches and niche overlap, how many dimensions define this trait space? What is the one sentence definition of a MCA according to the authors?</p></li>
+<li><p>Go to Figure 2:</p></li>
+</ol>
+<ul>
+<li>What traits are PC1 based on? What traits are PC2 based on?</li>
+<li>Characterize the traits of species <em>H. huso</em>? What traits does <em>D. passtinaca</em> have?</li>
+</ul>
 
 
 </section>
@@ -939,13 +1039,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment00: individual interest description</span>
+      <a href="../assignments/assignment-04.html" class="pagination-link" aria-label="Assignment 04: inference!">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment 04: inference!</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-02.html" class="pagination-link" aria-label="Assignment 02: data wrangling">
-        <span class="nav-page-text">Assignment 02: data wrangling</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../projects.html" class="pagination-link" aria-label="Project description">
+        <span class="nav-page-text">Project description</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

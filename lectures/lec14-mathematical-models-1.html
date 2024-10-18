@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - Assignment 01: base R, command line, &amp; Git(Hub)</title>
+<title>EEB313: Quantitative Methods in R for Biology - 14&nbsp; Mathematical models I</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -64,8 +30,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-02.html" rel="next">
-<link href="../assignments/assignment-00.html" rel="prev">
+<link href="../lectures/lec15-mathematical-models-2.html" rel="next">
+<link href="../lectures/lec13-intro-to-multivariate-stats.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,6 +69,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -115,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignment 01: base R, command line, &amp; Git(Hub)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec14-mathematical-models-1.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mathematical models I</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -250,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec14-mathematical-models-1.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec14-mathematical-models-1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mathematical models I</span></span></a>
   </div>
 </li>
@@ -279,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link active">
+  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 01: base R, command line, &amp; Git(Hub)</span></a>
   </div>
 </li>
@@ -417,21 +412,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#variable-assignment-1-mark" id="toc-variable-assignment-1-mark" class="nav-link active" data-scroll-target="#variable-assignment-1-mark">1. Variable assignment (1 mark)</a></li>
-  <li><a href="#vectors-2.5-marks" id="toc-vectors-2.5-marks" class="nav-link" data-scroll-target="#vectors-2.5-marks">2. Vectors (2.5 marks)</a></li>
-  <li><a href="#data-frames-1.5-marks" id="toc-data-frames-1.5-marks" class="nav-link" data-scroll-target="#data-frames-1.5-marks">3. Data frames (1.5 marks)</a></li>
-  <li><a href="#command-line-1-mark" id="toc-command-line-1-mark" class="nav-link" data-scroll-target="#command-line-1-mark">4. Command line (1 mark)</a></li>
-  <li><a href="#understanding-command-line-software-1-mark" id="toc-understanding-command-line-software-1-mark" class="nav-link" data-scroll-target="#understanding-command-line-software-1-mark">5. Understanding command line software (1 mark)</a></li>
-  <li><a href="#github-1-mark" id="toc-github-1-mark" class="nav-link" data-scroll-target="#github-1-mark">6. GitHub (1 mark)</a></li>
+  <li><a href="#lesson-preamble" id="toc-lesson-preamble" class="nav-link active" data-scroll-target="#lesson-preamble"><span class="header-section-number">14.1</span> Lesson preamble</a></li>
+  <li><a href="#why-model" id="toc-why-model" class="nav-link" data-scroll-target="#why-model"><span class="header-section-number">14.2</span> Why model?</a></li>
+  <li><a href="#geometric-growth" id="toc-geometric-growth" class="nav-link" data-scroll-target="#geometric-growth"><span class="header-section-number">14.3</span> Geometric growth</a></li>
+  <li><a href="#exponential-growth" id="toc-exponential-growth" class="nav-link" data-scroll-target="#exponential-growth"><span class="header-section-number">14.4</span> Exponential growth</a></li>
+  <li><a href="#aside-fitting-mathematical-models-to-data" id="toc-aside-fitting-mathematical-models-to-data" class="nav-link" data-scroll-target="#aside-fitting-mathematical-models-to-data"><span class="header-section-number">14.5</span> Aside: fitting mathematical models to data</a></li>
+  <li><a href="#the-sir-model" id="toc-the-sir-model" class="nav-link" data-scroll-target="#the-sir-model"><span class="header-section-number">14.6</span> The SIR model</a>
+  <ul class="collapse">
+  <li><a href="#challenge" id="toc-challenge" class="nav-link" data-scroll-target="#challenge"><span class="header-section-number">14.6.1</span> Challenge</a></li>
+  </ul></li>
+  <li><a href="#when-will-the-epidemic-grow" id="toc-when-will-the-epidemic-grow" class="nav-link" data-scroll-target="#when-will-the-epidemic-grow"><span class="header-section-number">14.7</span> When will the epidemic grow?</a></li>
+  <li><a href="#what-happens-in-the-long-run" id="toc-what-happens-in-the-long-run" class="nav-link" data-scroll-target="#what-happens-in-the-long-run"><span class="header-section-number">14.8</span> What happens in the long run?</a>
+  <ul class="collapse">
+  <li><a href="#a-stability-analysis-of-the-disease-free-equilibrium" id="toc-a-stability-analysis-of-the-disease-free-equilibrium" class="nav-link" data-scroll-target="#a-stability-analysis-of-the-disease-free-equilibrium"><span class="header-section-number">14.8.1</span> A stability analysis of the disease-free equilibrium</a></li>
+  </ul></li>
+  <li><a href="#a-model-of-mutation-selection-balance" id="toc-a-model-of-mutation-selection-balance" class="nav-link" data-scroll-target="#a-model-of-mutation-selection-balance"><span class="header-section-number">14.9</span> A model of mutation-selection balance!</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">14.10</span> Summary</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">14.11</span> Resources</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignment 01: base R, command line, &amp; Git(Hub)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec14-mathematical-models-1.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mathematical models I</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignment 01: base R, command line, &amp; Git(Hub)</h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Mathematical models I</span></h1>
 </div>
 
 
@@ -448,80 +454,175 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Download the .Rmd file <a href="assignment-01.Rmd">here</a>.</p>
-<p><em>To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>. Please ensure the text on your .pdf does not continue past the end of the page. If you use code chunks to write your answers to the command line questions, check that the code chunk headers say <code>eval=FALSE</code> so RStudio doesn’t try to run them when knitting (the example code chunks provided for questions 4 and 5 include this).</em></p>
-<section id="variable-assignment-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="variable-assignment-1-mark">1. Variable assignment (1 mark)</h2>
-<ol type="a">
-<li>Assign the value <code>5</code> to the variable/object <code>a</code>. Display <code>a</code>. (0.25 marks)</li>
-</ol>
-<ol start="2" type="a">
-<li>Assign the result of <code>10/3</code> to the variable <code>b</code>. Display <code>b</code>. (0.25 marks)</li>
-</ol>
-<ol start="3" type="a">
-<li>Write a function that adds two numbers and returns their sum. Use it to assign the sum of <code>a</code> and <code>b</code> to <code>result</code>. Display <code>result</code>. (In practice, there is already a more sophisticated built-in function for this: <code>result &lt;- sum(a, b)</code>) (0.25 marks)</li>
-</ol>
-<ol start="4" type="a">
-<li>Write a function that multiplies two numbers and returns their product. Use it to assign the product of <code>a</code> and <code>b</code> to <code>product</code>. Display <code>product</code>. (In practice, there is already a more sophisticated built-in function for this: <code>product &lt;- prod(a, b)</code>) (0.25 marks)</li>
-</ol>
+<section id="lesson-preamble" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="lesson-preamble"><span class="header-section-number">14.1</span> Lesson preamble</h2>
+<blockquote class="blockquote">
+<h3 id="lesson-objectives" data-number="14.1.1" class="anchored"><span class="header-section-number">14.1.1</span> Lesson objectives</h3>
+<ul>
+<li>Develop familiarity with mathematical models and why/where they are used in EEB</li>
+<li>Develop understanding of important models in EEB, including
+<ul>
+<li>The (geometric) growth of a population with constant birth and death rates</li>
+<li>Exponential growth of a population</li>
+<li>The spread of an infectious disease in a susceptible population</li>
+<li>Competition between types, mutation-selection balance</li>
+</ul></li>
+<li>Conceptually understand equilibria and their stability</li>
+<li>Become familiar with the ways approximation is used in modeling complex systems</li>
+<li>Become familiar with how mathematical models can be fit to data</li>
+</ul>
+</blockquote>
+<blockquote class="blockquote">
+<h3 id="lesson-outline" data-number="14.1.2" class="anchored"><span class="header-section-number">14.1.2</span> Lesson outline</h3>
+<ul>
+<li>Why model?</li>
+<li>Geometric and exponential growth</li>
+<li>Fitting models to the data</li>
+<li>SIR model: when does an epidemic grow?</li>
+<li>Equilibria and stability</li>
+<li>Back to the SIR model</li>
+<li>Mutation-selection balance</li>
+</ul>
+</blockquote>
 </section>
-<section id="vectors-2.5-marks" class="level2">
-<h2 class="anchored" data-anchor-id="vectors-2.5-marks">2. Vectors (2.5 marks)</h2>
-<ol type="a">
-<li>Create a vector <code>v</code> with all integers 0-30, and a vector <code>w</code> with every third integer in the same range. (0.25 marks)</li>
-</ol>
-<ol start="2" type="a">
-<li>What is the difference in lengths of the vectors <code>v</code> and <code>w</code>? (0.25 marks)</li>
-</ol>
-<ol start="3" type="a">
-<li>Create a new vector, <code>v_square</code>, with the square of elements at indices 3, 6, 7, 10, 15, 22, 23, 24, and 30 from the variable <code>v</code>. <em>Hint: Use indexing rather than a for loop.</em> (0.25 marks)</li>
-</ol>
-<ol start="4" type="a">
-<li>Calculate the mean and median of the first five values from <code>v_square</code>. (0.25 marks)</li>
-</ol>
-<ol start="5" type="a">
-<li>Create a boolean vector <code>v_bool</code>, indicating which vector <code>v</code> elements are bigger than 20. How many values are over 20? <em>Hint: In R, TRUE = 1, and FALSE = 0, so you can use simple arithmetic to find this out.</em> (0.5 marks)</li>
-</ol>
-<ol start="6" type="a">
-<li>Write a function that calculates the median of the last two elements of any numeric vector. Test this function with the <code>v</code> and <code>v_square</code> vectors. (1 marks)</li>
-</ol>
+<section id="why-model" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="why-model"><span class="header-section-number">14.2</span> Why model?</h2>
+<p>Mathematical models are descriptions of biological processes which describe idealized situations and can help us build intuition and understanding for how those processes may unfold in nature. They help us</p>
+<ul>
+<li>clarify assumptions we may have about how complex systems work</li>
+<li>build understanding of how complex systems behave and why</li>
+<li><em>generate</em> predictions and hypothesis</li>
+<li><em>test</em> predictions and hypothesis based on analysis of the model (or fitting the model to data)</li>
+<li>determine what data is needed to learn about something (of if it is possible to, given the data that is available, reliably infer parameters of interest)</li>
+<li>determine in what ways certain kinds of data may be problematic or biased</li>
+</ul>
+<p>In this lecture, we will discuss five models: (1) a deterministic, discrete-time model of <strong>geometric growth</strong> of a population with constant per-capita rates of birth and death. (2) A model of <strong>exponential growth</strong>, the continuous-time version of the geometric growth model. (3) A <strong>Susceptible-Infected-Recovered (SIR) model</strong> in which <em>interactions</em> between variables shape the transient and long-run the dynamics of the system. (4) A deterministic, continuous-time model of <strong>competitive exclusion between individuals of two types</strong> (e.g., different species, individuals of the same species carrying different alleles, etc.). (5) An extension of the previous model which maintains diversity via recurrent mutation between types.</p>
 </section>
-<section id="data-frames-1.5-marks" class="level2">
-<h2 class="anchored" data-anchor-id="data-frames-1.5-marks">3. Data frames (1.5 marks)</h2>
-<ol type="a">
-<li>There are many built-in data frames in R, which you can find <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html">more details about online</a>. What are the column names of the built-in dataframe <code>beaver1</code>? How many observations (rows) and variables (columns) are there? (0.5 marks)</li>
+<section id="geometric-growth" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="geometric-growth"><span class="header-section-number">14.3</span> Geometric growth</h2>
+<p>Let <span class="math inline">\(N_t\)</span> be the number of individuals at times <span class="math inline">\(t=0,1,2,3,\dots\)</span>. Suppose we know <span class="math inline">\(N_0\)</span>, the initial number of individuals in the population. Assume</p>
+<ol type="1">
+<li>From one time to the next, every individual reproduces at per-captia rate <span class="math inline">\(b\)</span></li>
+<li>From one time to the next, every individual dies at per-catpia rate <span class="math inline">\(d\)</span></li>
+<li>The population is closed: there is no immigration and no emigration</li>
+<li>There is no stochasticity: individuals do not, by chance, give birth to more/fewer offspring</li>
 </ol>
-<ol start="2" type="a">
-<li>Display both the first 6 and last 6 rows of this data frame. Show how to do so with both indexing as well as specialized functions. (0.5 marks)</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With indexing</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># With functions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="3" type="a">
-<li>What is the min, mean, and max body temperature for beavers inside and outside of the retreat? <em>Hint: You can use <code>?</code> on the beaver1 data set to get more information about it. Remember that each column in a data frame is a vector and you can use the same functions.</em> (0.5 marks)</li>
-</ol>
+<p>In this case, we can write describe the population size at generation <span class="math inline">\(t+1\)</span> in terms of the <em>population size at the previous generation</em> by keeping track of everything that could unfold.</p>
+<p><span class="math display">\[N_{t+1} = N_t + b N_t - d N_t = (1+b-d)N_t, \]</span></p>
+<p>where <span class="math inline">\(b N_t\)</span> is the number of individuals born into the population and <span class="math inline">\(d N_t\)</span> is the number of individuals who leave the population because they die. Births and deaths modify the previous population size such that, if <span class="math inline">\(b &gt; d\)</span>, then the population will grow. If <span class="math inline">\(b &lt; d\)</span>, the population will decline in size. If <span class="math inline">\(b = d\)</span>, then the population will stay constant in size. This model is unique insofar as it has a closed form solution. That is, we know the state of the system at any time in the future given knowledge of its state at time zero:</p>
+<p><span class="math display">\[N_{1} = (1+b-d) N_0\]</span> <span class="math display">\[N_{2} = (1+b-d) N_1 = (1+b-d)(1+b-d) N_0\]</span> <span class="math display">\[N_{3} = (1+b-d) N_{2} = (1+b-d) (1+b-d)^2 N_0 = (1+b-d)^3 N_0\]</span></p>
+<p>In general, <span class="math inline">\(N_{t} = (1+b-d)^t N_0\)</span> for all <span class="math inline">\(t\)</span>.</p>
+<p>When <span class="math inline">\(b&gt;d\)</span>, the population is said to <em>grow geometrically</em>, in that the growth rate <span class="math inline">\(1+b+d\)</span> is being raised to a power equal to the number of timesteps (e.g., generations) that have passed. Moreover, it is sometimes convenient in discrete time models like this to describe the dynamics in terms of how variables change from one time to the next. In the case of the geometric growth model, we can express the dynamics in terms of change in absolute population size.</p>
+<p><span class="math display">\[\Delta N_t \equiv N_{t+1} - N_t = (1+b-d) N_t - N_t = (b-d) N_t.\]</span></p>
+<p>In population ecology, <span class="math inline">\((b-d)\)</span> is called the <em>intrinsic rate of increase or decrease</em>, and often denoted <span class="math inline">\(r\)</span>. If positive, the population grows in a given generation. If not, it becomes smaller.</p>
 </section>
-<section id="command-line-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="command-line-1-mark">4. Command line (1 mark)</h2>
-<p>What commands would you run to create a directory named “mydir”, check mydir’s permissions, add <em>w</em>rite permissions for <em>u</em>sers, copy mydir to “mydir2” , and then remove mydir? <em>Hint: try running each step in your terminal to check if the output is what you expect</em> (1 mark)</p>
+<section id="exponential-growth" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="exponential-growth"><span class="header-section-number">14.4</span> Exponential growth</h2>
+<p>Continuous-time analogues of discrete-time equations are written as differential equations. If we assume time-steps are small, we can replace the difference in the previous equation with a derivative to describe the dynamics of a population changing in continuous time:</p>
+<p><span class="math display">\[\frac{d N}{dt} = (b-d) N = r N\]</span> subject to <span class="math inline">\(N(0) = N_0\)</span>. Like the geometric growth equation, we can solve this equation exactly. Diving through by <span class="math inline">\(N\)</span> and using properties of derivatives from calculus,</p>
+<p><span class="math display">\[\frac{1}{N} \frac{d N}{d t} = \frac{d \ln N}{d t} = r.\]</span> This equation tells us that, in the continuous time version of the growth model above, the per-capita (i.e., <em>logarithmic</em>) rate of increase in the population size is constant. Integrating and applying the initial condition, one can show <span class="math inline">\(N(t) = N_0 e^{r t}\)</span>. If <span class="math inline">\(r &gt; 0\)</span>, i.e., <span class="math inline">\(b &gt; d\)</span>, then the population grows exponentially; if <span class="math inline">\(r &lt; 0\)</span>, the population will decay exponentially in size to zero. The trajectory of the population is completely determined in a deterministic model like this one by the parameters (i.e., the intrinsic growth rate) and initial conditions.</p>
 </section>
-<section id="understanding-command-line-software-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-command-line-software-1-mark">5. Understanding command line software (1 mark)</h2>
-<p>Open the documentation for <a href="https://github.com/TobyBaril/EarlGrey">Earl Grey</a>, a software programme that identifies transposable elements in genomes. There may be a lot of unfamilliar terms on this web page, but we’ll just be skimming this page to practice identifying the kind of information command line software might require and how to provide that.</p>
-<ol type="a">
-<li><p>What three arguments (files/information) are required input for this software? (0.3 marks)</p></li>
-<li><p>What would you type into the command line to provide Earl Grey with those minimum command options? You don’t need to make up example text for this, just ensure you have the three <code>-</code> arguments written out. <em>Hint: search for “minimum command options” on the GitHub page and use the next line</em> (0.3 marks)</p></li>
-<li><p>Based on the visual overview of the software (or the “Example Outputs” section) on the GitHub page, what does this software output? (0.2 marks)</p></li>
-<li><p>What optional parameter (i.e.&nbsp;the <code>-</code> argument) does Earl Grey offer to display help information? Is this kind of help parameter common? <em>Hint: you can search for “help documentation” in your lecture notes</em> (0.2 marks)</p></li>
+<section id="aside-fitting-mathematical-models-to-data" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="aside-fitting-mathematical-models-to-data"><span class="header-section-number">14.5</span> Aside: fitting mathematical models to data</h2>
+<p>Suppose we measure the size of a population through time, and believe that the assumptions we have made (i.e., constant birth and death rates) are reasonable for the system.</p>
+<p>The steps to fit a mathematical model to the data are as follow:</p>
+<ol type="1">
+<li>Determine the distribution of data around the solution of the model (difference or differential equation). A common convention is that the data are normally distributed around the solution to the model for a given initial condition and set of parameter values. If <span class="math inline">\(Y_i\)</span> is the measurement at time <span class="math inline">\(t_i\)</span> and <span class="math inline">\(X_i\)</span> is the state of the system (e.g., the real population size or the true values of more variables, which influence each other and the dynamics), then this amounts to specifying the distribution of <span class="math inline">\(Y_i\)</span> given <span class="math inline">\(X_i\)</span>:</li>
 </ol>
+<p><span class="math display">\[f_{Y_i|X_i}(y_i|\text{parameters})\]</span></p>
+<ol start="2" type="1">
+<li>Write down and (numerically) maximize the log-likelihood function:</li>
+</ol>
+<p><span class="math display">\[\ln L(\text{parameters } \boldsymbol{\theta} | \text{data } y_1,\dots,y_n) = \sum_{i=1}^n \ln f_{Y_i|X_i}(y_i|\boldsymbol{\theta}).\]</span></p>
+<p>When the distribution of the measurements around the solution to the system (model) is normal with some variance (and mean equal to the model solution), maximizing the likelihood is equivalent to minimizing the sum of squared departures of the solution from the data.</p>
+<p>We will return to fitting mathematical models to data next lecture.</p>
 </section>
-<section id="github-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="github-1-mark">6. GitHub (1 mark)</h2>
-<ol type="a">
-<li>Make a Github account. You can do this at <a href="github.com">github.com</a>. What is your GitHub username? (1 mark)</li>
+<section id="the-sir-model" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="the-sir-model"><span class="header-section-number">14.6</span> The SIR model</h2>
+<p>The Susceptible-Infected-Recovered (SIR) model describes how different processes (e.g., transmission, recovery, virulence, loss of immunity, demography) shape how a pathogen spreads in a population through time and if it is able to persist in the long-run. The model tracks the number of susceptible <span class="math inline">\(S\)</span>, infected <span class="math inline">\(I\)</span>, and recovered <span class="math inline">\(R\)</span> individuals in continuous time.</p>
+<p>Assuming that the population size is constant (<span class="math inline">\(N = S + I + R\)</span> does not change), susceptible individuals acquire the infection at rate <span class="math inline">\(\beta\)</span>, and infected individuals recover at rate <span class="math inline">\(\gamma\)</span>, the model equations are given by:</p>
+<p><span class="math display">\[\frac{dS}{dt} = - \beta SI\]</span> <span class="math display">\[\frac{dI}{dt} = \beta SI - \gamma I\]</span> <span class="math display">\[\frac{dR}{dt} = \gamma I\]</span></p>
+<p>Since the population size is constant, one of these is not actually needed. Focusing in on the <span class="math inline">\(I\)</span> equation, however, we notice that is of the same form as the geometric and exponential growth models: we simply track the flux in and out of the compartment due to, in the case of <span class="math inline">\(I\)</span>, infection and recovery.</p>
+<section id="challenge" class="level3" data-number="14.6.1">
+<h3 data-number="14.6.1" class="anchored" data-anchor-id="challenge"><span class="header-section-number">14.6.1</span> Challenge</h3>
+<ul>
+<li>What are the assumptions of the model?</li>
+<li>What terms are missing?</li>
+<li>What is the model trying to capture?</li>
+<li>What dynamics and long run behavior might we expect of a disease that has been introduced to a largely susceptible population?</li>
+</ul>
+</section>
+</section>
+<section id="when-will-the-epidemic-grow" class="level2" data-number="14.7">
+<h2 data-number="14.7" class="anchored" data-anchor-id="when-will-the-epidemic-grow"><span class="header-section-number">14.7</span> When will the epidemic grow?</h2>
+<p>To determine if an epidemic that begins from the rare introduction of a pathogen into a closed population will spread, we can use the following approximation. For the epidemic to grow, we need</p>
+<p><span class="math display">\[\frac{d I}{dt} = \beta S I - \gamma I &gt; 0\]</span></p>
+<p>At the beginning of the outbreak, <span class="math inline">\(I \approx 1\)</span> and so <span class="math inline">\(S \approx N\)</span> because no individuals have immunity to the disease under investigation. So the condition for the disease to spread is</p>
+<p><span class="math display">\[\frac{d I}{dt} = \beta N - \gamma &gt; 0 \iff R_0 = \frac{\beta N}{\gamma} &gt; 1.\]</span></p>
+<p>The quantity <span class="math inline">\(R_0\)</span> measures the <em>average number of secondary infections from a single infectious individual in an otherwise susceptible population</em>. This measure of reproductive success or fitness is also common in population ecology. Intuitively, if the pathogen is unable to infect <span class="math inline">\(&gt;1\)</span> individual on average when the susceptible pool has not yet been depleted (i.e., all individuals are susceptible), it will fail to spread. If <span class="math inline">\(R_0 &gt; 1\)</span>, then the disease will spread. Importantly, <span class="math inline">\(R_0\)</span> does not provide a quantitative measure of how quickly this happens, and researchers have proposed using other metrics (like the intrinsic growth rate of the pathogen) to measure the speed of pathogen spread in a susceptible population.</p>
+</section>
+<section id="what-happens-in-the-long-run" class="level2" data-number="14.8">
+<h2 data-number="14.8" class="anchored" data-anchor-id="what-happens-in-the-long-run"><span class="header-section-number">14.8</span> What happens in the long run?</h2>
+<p>To understand the long-run behavior of a dynamical system (i.e., where key variables will go after enough time has passed), modelers will typically search for <em>equilibria</em> and characterize their stability properties. Intuitively, an equilibrium (or steady-state) is a point such that if the system starts there, it stays there. The <em>stability</em> of an equilibrium is determined by the behavior of the system (model) if perturbed.</p>
+<p>What are the equilibria of the SIR model above? They are exactly the points such that</p>
+<p><span class="math display">\[\frac{d S}{dt} = \frac{d I}{d t} = \frac{d R}{d t} = 0,\]</span> </p>
+<p>i.e., the variables of interest (number susceptible, infected, recovered) do not change. There are two such equillirbia, which we can find by solving for <span class="math inline">\(S,I\)</span> in</p>
+<p><span class="math display">\[\frac{d S}{dt} = - \beta S I = 0\]</span> <span class="math display">\[\frac{d I}{dt} = \beta S I - \gamma I = 0.\]</span> </p>
+<p>The two equilibria are <span class="math inline">\((S^*,I^*,R^*) = (N,0,0)\)</span>, which corresponds to the situation in which the disease is absent from the population (i.e., the <em>disease-free equilibrium</em>) and</p>
+<p><span class="math display">\[ S^* = \frac{\gamma}{\beta} = \frac{N}{R_0}, \hspace{12pt} I^* = 0, \hspace{12pt} R^* = N - S^* = N (1- \frac{1}{R_0}).\]</span> </p>
+<p>The second equilibrium corresponds to the situation in which the disease has taken hold, but depleted the susceptible pool: although a fraction of individuals have experienced infection and recovered, a positive fraction of individuals did not acquire the disease. In other words, the disease burned itself out by depleting the resource pool (i.e., the number of susceptibles) such that some “resources” are still left.</p>
+<p><strong>But there are there are <em>two</em> equilibria — where will the system go?</strong> One way to answer this question is to determine the stability of each equilibrium point. Intuitively, a <em>stable</em> equilibrium is one such small perturbations from the equilibrium shrink the system returns to the equilibrium in question. An <em>unstable</em> equilibrium is one such small perturbations grow, leaving the system to go somewhere else. (There is, in fact, a third case that can arise. If the perturbation does not shrink or grow, the equilibrium is said to be <em>neutrally stable</em>.) The details are beyond the scope of this course but it turns out that it is often enough to look at the linear behavior of the system about the equilibrium to characterize stability. To gauge local stability of an equilibrium <span class="math inline">\(x^* = (x_1^*,\dots,x_n^*)\)</span> for a system of differential equations</p>
+<p><span class="math display">\[\frac{d x_i}{dt} = f_i(x_1,\dots,x_n)\]</span></p>
+<ol type="1">
+<li>Take derivatives of of <span class="math inline">\(f_i\)</span> with respect to all <span class="math inline">\(x_j\)</span>s.</li>
+<li>Put these derivatives into a matrix called the Jacobian, whose columns correspond to the derivatives <span class="math inline">\(\partial f_i/\partial x_1, \dots, \partial f_n/\partial x_1\)</span>.</li>
+<li>Evaluate the Jacobian at <span class="math inline">\(x^*\)</span>.</li>
+<li>Determine the eigenvalues of the Jacobian at <span class="math inline">\(x^*\)</span>.</li>
+<li>If the eigenvalues have strictly negative real part, then <span class="math inline">\(x^*\)</span> is stable.</li>
+</ol>
+<section id="a-stability-analysis-of-the-disease-free-equilibrium" class="level3" data-number="14.8.1">
+<h3 data-number="14.8.1" class="anchored" data-anchor-id="a-stability-analysis-of-the-disease-free-equilibrium"><span class="header-section-number">14.8.1</span> A stability analysis of the disease-free equilibrium</h3>
+<p>Here is how the local stability analysis would work in the case of the SIR model with <span class="math inline">\((S^*,I^*) = (N,0)\)</span>. Remember we only need two equations to describe the dynamics of the population, since the population is of constant size. Using the notation above,</p>
+<p><span class="math display">\[\frac{dS}{dt} = -\beta S I = f_1(S,I)\]</span> <span class="math display">\[\frac{dI}{dt} = \beta S I - \gamma I = f_2(S,I).\]</span> </p>
+<p>The Jacobian <span class="math inline">\(J\)</span> is formed by taking partial derivatives of <span class="math inline">\(f_1,f_2\)</span> with respect to the state variables. (One follows the same procedure for systems with more variables.)</p>
+<p><span class="math display">\[J = \begin{pmatrix} \partial f_1/\partial S &amp; \partial f_1/\partial I \\
+\partial f_2/\partial S &amp; \partial f_2/\partial I \end{pmatrix}
+= \begin{pmatrix} - \beta I &amp; - \beta S \\
+\beta I &amp; \beta S - \gamma \end{pmatrix}\]</span></p>
+<p>Evaluating <span class="math inline">\(J\)</span> at the disease-free equilibrium and solving for the eigenvalues, one can show that a necessary and sufficient condition for the disease-free equilibrium to be stable is that</p>
+<p><span class="math display">\[\beta N - \gamma &lt; 0 \iff R_0 &lt; 1.\]</span> </p>
+<p>This should make sense as, in our previous analysis, we showed that for an epidemic to grow from a small introduction (perturbation), we need <span class="math inline">\(R_0 &gt; 1\)</span>. Fewer than one secondary infection from a single infectious individual in an otherwise susceptible population will ensure the stability of the disease-free steady-state since the pathogen will be unable to sustain transmission!</p>
+</section>
+</section>
+<section id="a-model-of-mutation-selection-balance" class="level2" data-number="14.9">
+<h2 data-number="14.9" class="anchored" data-anchor-id="a-model-of-mutation-selection-balance"><span class="header-section-number">14.9</span> A model of mutation-selection balance!</h2>
+<p>Now, we go about deriving from a set of ecological equations a model for the evolution of a population which consists of individuals carrying one of two alleles at a locus. <span class="math inline">\(n_i\)</span> will denote the number of individuals carrying allele <span class="math inline">\(i=1,2\)</span>. If individuals of both types are exponentially growing at rates <span class="math inline">\(r_1,r_2\)</span>, a model of the population dynamics is given by</p>
+<p><span class="math display">\[\frac{d n_i}{dt} = r_i n_i.\]</span></p>
+<p>Suppose there is also mutation which converts allele <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span> at rate <span class="math inline">\(\mu_{ij}\)</span>. The model equations would then include a second term to account for changes in each type due to mutation:</p>
+<p><span class="math display">\[\frac{d n_i}{dt} = r_i n_i - \mu_{ij} n_i + \mu_{ji} n_j.\]</span> </p>
+<p>Consider the <em>fraction</em> of individuals carrying allele 1, i.e., <span class="math inline">\(p = n_1/(n_1+n_2)\)</span>. An equation for this new variable can be found by using the quotient rule, substituting, and simplifying so that the equation is in terms of <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[\begin{align*}
+\frac{dp}{dt} &amp;= \frac{d (\frac{n_1}{n_1+n_2})}{dt} \\
+&amp;= \frac{(n_1+n_2) \frac{d n_1}{dt} - n_1 \frac{d(n_1+n_2)}{dt}}{(n_1+n_2)^2} \\
+&amp;= \frac{1}{n_1+n_2} (r_1 n_1 - \mu_{12} n_1 + \mu_{21} n_2) - \frac{n_1(r_1 n_1 + r_2 n_2)}{(n_1+n_2)^2} \\
+&amp;= r_1 p - \mu_{12} p + \mu_{21} (1-p) - p(r_1 p + r_2 (1-p)) \\
+&amp;= (r_1-r_2) p(1-p) - \mu_{12} p + \mu_{21} (1-p) \\
+\end{align*}\]</span></p>
+<p>The terms in the equation can be interpreted as follow. (1) The first term describes the change in allele 1 frequency due to selection imposed by differences in intrinsic growth. If <span class="math inline">\(r_1 &gt; r_2\)</span>, then allele 1 grows in frequency due to its competitive advantage. If <span class="math inline">\(r_1 &lt; r_2\)</span>, then allele 1 is purged from the population by purifying selection. In this case, and without mutation, individuals carrying allele 2 take over the population. (2) The second and third terms describe mutation from type 1 to type 2 and type 2 to 1, respectively. With mutation rates that are both <span class="math inline">\(&gt;0\)</span>, competitive exclusion cannot happen because individuals change type at rates <span class="math inline">\(\mu_{12},\mu_{21}\)</span>. The behavior of the system and the long-run predictions will depend on the relative strengths of mutation and selection.</p>
+<p>To understand where selection and mutation take the system, we can preform an approximation. This is common in modeling: either by assuming certain parameters are small, or that certain processes unfold faster than others (e.g., a separation of ecological and evolutionary timescales), we can learn what complex systems do and disentangle the reasons why. The key takeaway is that <strong>problems that would otherwise be difficult to solve can be addressed via approximation.</strong></p>
+<p>Here, we will assume <span class="math inline">\(s = r_1 - r_2 &lt; 0\)</span> and preform an approximation when selection is strong and mutation is weak. (A similar approximation can be applied in the case mutation is strong and selection is weak.) If selection is much stronger than selection, i.e., <span class="math inline">\(|s| \gg \mu_{12}, \mu_{21}\)</span>, then we expect allele 1 to be rare. Ignoring terms like the allele frequency squared, allele frequency times mutation rate, etc. (which are expected to be smaller still!), we arrive at an approximate equation for allele frequency change:</p>
+<p><span class="math display">\[\frac{d p}{dt} = s p - \mu_{21} + \text{small stuff}.\]</span> </p>
+<p>The approximate equilibrium allele frequency is <span class="math inline">\(p^* = \mu_{21}/s\)</span>. Indeed, one can solve the model equations numerically (as we will do next class!) to see that this approximation is very good when the assumptions are met, and is decent still when the assumptions begin to break down.</p>
+</section>
+<section id="summary" class="level2" data-number="14.10">
+<h2 data-number="14.10" class="anchored" data-anchor-id="summary"><span class="header-section-number">14.10</span> Summary</h2>
+<p>Modeling is an indispensable tool in EEB, and a very creative endeavor! Here we have covered <em>a lot</em> of ground: geometric and exponential growth models in population ecology, an eco-evolutionary model of the balance between mutation and selection, the SIR model for the spread of an infectious disease, and the WF model of allele frequency change under drift. <strong>Next class will focus on simulating these models in R, and trying to use them to learn about interesting biology!</strong></p>
+</section>
+<section id="resources" class="level2" data-number="14.11">
+<h2 data-number="14.11" class="anchored" data-anchor-id="resources"><span class="header-section-number">14.11</span> Resources</h2>
+<ol type="1">
+<li>Otto, S. &amp; Day, T. (2007). <em>A Biologist’s Guide to Mathematical Modeling in Ecology and Evolution</em>.</li>
+<li>Nuismer, S. (2017) <em>Introduction to Coevolutionary Theory</em>.</li>
 </ol>
 
 
@@ -939,13 +1040,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment00: individual interest description</span>
+      <a href="../lectures/lec13-intro-to-multivariate-stats.html" class="pagination-link" aria-label="Multivariate statistics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Multivariate statistics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-02.html" class="pagination-link" aria-label="Assignment 02: data wrangling">
-        <span class="nav-page-text">Assignment 02: data wrangling</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/lec15-mathematical-models-2.html" class="pagination-link" aria-label="Mathematical models II">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Mathematical models II</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

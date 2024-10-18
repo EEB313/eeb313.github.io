@@ -54,7 +54,7 @@ b. Apply this theme to your plot from 1f and add labels (a title, colour legend 
 Download the "SSDinMammals.csv" file from Quercus, the course website, or [Data Dryad](https://datadryad.org/stash/downloads/file_stream/2921720). The original study[^2] is quite interesting!
 
 ```{r 3setup}
-mammal_sizes <- read_csv("lectures/data/SSDinMammals.csv",
+mammal_sizes <- read_csv("/data/SSDinMammals.csv",
                          show_col_types = FALSE)
 print(mammal_sizes)
 ```
