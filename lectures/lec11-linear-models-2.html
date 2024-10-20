@@ -715,20 +715,20 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--2.4360   0.3063   0.6769   0.8304   0.9359  
+-1.8856  -1.3763   0.7901   0.9162   1.0265  
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   1.2517     0.2580   4.852 1.22e-06 ***
-scale(age)    0.6338     0.3267   1.940   0.0524 .  
+(Intercept)   0.8510     0.2274   3.742 0.000182 ***
+scale(age)    0.5039     0.3011   1.673 0.094280 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 110.22  on 99  degrees of freedom
-Residual deviance: 105.35  on 98  degrees of freedom
-AIC: 109.35
+    Null deviance: 123.82  on 99  degrees of freedom
+Residual deviance: 120.23  on 98  degrees of freedom
+AIC: 124.23
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
@@ -768,7 +768,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.896</td>
+<td style="text-align: right;">0.876</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">160</td>
@@ -776,19 +776,19 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.932</td>
+<td style="text-align: right;">0.948</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.956</td>
+<td style="text-align: right;">0.940</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">190</td>
-<td style="text-align: right;">0.974</td>
+<td style="text-align: right;">0.959</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">200</td>
-<td style="text-align: right;">0.974</td>
+<td style="text-align: right;">0.969</td>
 </tr>
 </tbody>
 </table>
@@ -1152,7 +1152,7 @@ with conditional variances for "Order" </code></pre>
 </div>
 </div>
 </div>
-<p>Why does this look like a mess? As stated above, <strong>mixed models do not work well when datasets are unbalanced.</strong> Indeed, the number of observations in the different Orders are quite variable.</p>
+<p>Why does this look like … a little bit of a mess? One explanation is that, as stated above, <strong>mixed models do not work well when datasets are unbalanced.</strong> Indeed, the number of observations in the different Orders are quite variable.</p>
 </section>
 <section id="challenge-6" class="level4" data-number="11.4.3.4">
 <h4 data-number="11.4.3.4" class="anchored" data-anchor-id="challenge-6"><span class="header-section-number">11.4.3.4</span> Challenge</h4>
