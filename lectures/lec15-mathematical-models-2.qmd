@@ -97,7 +97,7 @@ out %>% pivot_longer(! time) %>%
 
 ### Challenge
 
-Determine at what time does the number of infected individuals peaks.
+Determine at what time the number of infected individuals peaks.
 
 ```{r, include=F}
 out[which.max(out$I),]

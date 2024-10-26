@@ -715,22 +715,22 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--2.4360   0.3063   0.6769   0.8304   0.9359  
+-2.0771  -1.3439   0.7488   0.9301   1.0427  
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   1.2517     0.2580   4.852 1.22e-06 ***
-scale(age)    0.6338     0.3267   1.940   0.0524 .  
+(Intercept)   1.0043     0.2465   4.075  4.6e-05 ***
+scale(age)    0.7280     0.3568   2.040   0.0413 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 110.22  on 99  degrees of freedom
-Residual deviance: 105.35  on 98  degrees of freedom
-AIC: 109.35
+    Null deviance: 120.43  on 99  degrees of freedom
+Residual deviance: 114.44  on 98  degrees of freedom
+AIC: 118.44
 
-Number of Fisher Scoring iterations: 4</code></pre>
+Number of Fisher Scoring iterations: 5</code></pre>
 </div>
 </div>
 <p>Next, we will write a function that performs a <strong>power analysis</strong>. We will use this function determine the sample size that is required so that simulating the age-disease data repeatedly we identify a significant effect of age on disease status (i.e., reject the null hypothesis) at level <span class="math inline">\(\alpha = 0.01\)</span> <em>at least <span class="math inline">\(95\%\)</span> of the time</em>.</p>
@@ -768,27 +768,27 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.896</td>
+<td style="text-align: right;">0.887</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.910</td>
+<td style="text-align: right;">0.928</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.932</td>
+<td style="text-align: right;">0.944</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.956</td>
+<td style="text-align: right;">0.959</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">190</td>
-<td style="text-align: right;">0.974</td>
+<td style="text-align: right;">0.957</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">200</td>
-<td style="text-align: right;">0.974</td>
+<td style="text-align: right;">0.978</td>
 </tr>
 </tbody>
 </table>
@@ -1152,7 +1152,7 @@ with conditional variances for "Order" </code></pre>
 </div>
 </div>
 </div>
-<p>Why does this look like a mess? As stated above, <strong>mixed models do not work well when datasets are unbalanced.</strong> Indeed, the number of observations in the different Orders are quite variable.</p>
+<p>Why does this look like … a little bit of a mess? One explanation is that, as stated above, <strong>mixed models do not work well when datasets are unbalanced.</strong> Indeed, the number of observations in the different Orders are quite variable.</p>
 </section>
 <section id="challenge-6" class="level4" data-number="11.4.3.4">
 <h4 data-number="11.4.3.4" class="anchored" data-anchor-id="challenge-6"><span class="header-section-number">11.4.3.4</span> Challenge</h4>

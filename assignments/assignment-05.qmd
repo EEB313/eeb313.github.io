@@ -15,7 +15,7 @@ set.seed(313)
 
 ## 1. Conceptual understanding of linear models
 
-a. Write down the likelihood function for data that arise from the multiple linear regression model $Y_i \sim \text{Normal}(\beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i}, \sigma^2 x_{1i}).$ Notice that the variance in the observations is proportional to the square of the 1st explanatory variable.
+a. Write down the likelihood function for data that arise from the multiple linear regression model $Y_i \sim \text{Normal}(\beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i}, \sigma^2 x_{1i}).$ Notice that the variance in the observations is proportional to the 1st explanatory variable.
 
 _Hint: look up the probability density function for the Normal distribution._
 
