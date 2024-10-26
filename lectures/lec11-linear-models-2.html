@@ -715,22 +715,22 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--1.8856  -1.3763   0.7901   0.9162   1.0265  
+-2.0771  -1.3439   0.7488   0.9301   1.0427  
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   0.8510     0.2274   3.742 0.000182 ***
-scale(age)    0.5039     0.3011   1.673 0.094280 .  
+(Intercept)   1.0043     0.2465   4.075  4.6e-05 ***
+scale(age)    0.7280     0.3568   2.040   0.0413 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 123.82  on 99  degrees of freedom
-Residual deviance: 120.23  on 98  degrees of freedom
-AIC: 124.23
+    Null deviance: 120.43  on 99  degrees of freedom
+Residual deviance: 114.44  on 98  degrees of freedom
+AIC: 118.44
 
-Number of Fisher Scoring iterations: 4</code></pre>
+Number of Fisher Scoring iterations: 5</code></pre>
 </div>
 </div>
 <p>Next, we will write a function that performs a <strong>power analysis</strong>. We will use this function determine the sample size that is required so that simulating the age-disease data repeatedly we identify a significant effect of age on disease status (i.e., reject the null hypothesis) at level <span class="math inline">\(\alpha = 0.01\)</span> <em>at least <span class="math inline">\(95\%\)</span> of the time</em>.</p>
@@ -768,27 +768,27 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.876</td>
+<td style="text-align: right;">0.887</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.910</td>
+<td style="text-align: right;">0.928</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.948</td>
+<td style="text-align: right;">0.944</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.940</td>
+<td style="text-align: right;">0.959</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">190</td>
-<td style="text-align: right;">0.959</td>
+<td style="text-align: right;">0.957</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">200</td>
-<td style="text-align: right;">0.969</td>
+<td style="text-align: right;">0.978</td>
 </tr>
 </tbody>
 </table>
