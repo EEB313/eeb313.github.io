@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - 2024 teaching team</title>
+<title>EEB313: Quantitative Methods in R for Biology - Review for challenge assignment</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./downloadingR.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./lectures/data/meas.csv" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,6 +102,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -81,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./about-us.html">2024 teaching team</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./review-for-challenge.html">Miscellaneous notes</a></li><li class="breadcrumb-item"><a href="./review-for-challenge.html">Review for challenge assignment</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -117,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about-us.html" class="sidebar-item-text sidebar-link active">
+  <a href="./about-us.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2024 teaching team</span></a>
   </div>
 </li>
@@ -380,7 +442,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./review-for-challenge.html" class="sidebar-item-text sidebar-link">
+  <a href="./review-for-challenge.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Review for challenge assignment</span></a>
   </div>
 </li>
@@ -396,17 +458,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#course-instructors" id="toc-course-instructors" class="nav-link active" data-scroll-target="#course-instructors">Course instructors</a></li>
-  <li><a href="#teaching-assistants" id="toc-teaching-assistants" class="nav-link" data-scroll-target="#teaching-assistants">Teaching assistants</a></li>
+  <li><a href="#maximum-likelihood" id="toc-maximum-likelihood" class="nav-link active" data-scroll-target="#maximum-likelihood">1. Maximum likelihood!</a></li>
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">2. Multiple linear regression</a></li>
+  <li><a href="#generalized-linear-models" id="toc-generalized-linear-models" class="nav-link" data-scroll-target="#generalized-linear-models">3. Generalized linear models</a></li>
+  <li><a href="#linear-mixed-models" id="toc-linear-mixed-models" class="nav-link" data-scroll-target="#linear-mixed-models">4. Linear mixed models</a></li>
+  <li><a href="#mathematical-models" id="toc-mathematical-models" class="nav-link" data-scroll-target="#mathematical-models">5. Mathematical models</a></li>
+  <li><a href="#power-analysis" id="toc-power-analysis" class="nav-link" data-scroll-target="#power-analysis">6. Power analysis</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./review-for-challenge.html">Miscellaneous notes</a></li><li class="breadcrumb-item"><a href="./review-for-challenge.html">Review for challenge assignment</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">2024 teaching team</h1>
+<h1 class="title">Review for challenge assignment</h1>
 </div>
 
 
@@ -423,39 +489,92 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="course-instructors" class="level2">
-<h2 class="anchored" data-anchor-id="course-instructors">Course instructors</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/mete.jpeg" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption><strong>Mete Yuksel</strong> (mete.yuksel@mail.utoronto.ca)</figcaption>
-</figure>
-</div>
-<p>Mete is a 3rd year PhD student in the Dept. Ecology and Evolutionary Biology at UTSG, and is co-advised by Matt Osmond &amp; Nicole Mideo. He uses mathematical models to address questions in evolutionary genetics and ecology. He is currently developing theory to understand patterns, causes, and consequences of recombination rate variation. Mete was an undergraduate math &amp; statistics student at the University of Idaho. There, he worked on the ecology of gene drive interventions against vectored diseases, understanding how continuous spatial structure can affect species coexistence, and forecasting the dynamics of Chinook salmon in the Willamette River system. He loves R - and teaching this course! Outside of science, Mete enjoys listening to podcasts, cooking, and cycling between Toronto neighborhoods in search of coffee.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/zoe.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption><strong>Zoe Humphries</strong> (zoe.humphries@mail.utoronto.ca)</figcaption>
-</figure>
-</div>
-<p>Zoë is a PhD student in the Wright and Barrett labs at UTSG. She studies the genome of a weedy plant to better understand how transposable elements affect sex chromosome evolution. She taught herself how to use R during her honours thesis and fell in love because it was much kinder than Lisp or C++ and, most importantly, because aesthetics. Zoë makes plots from aggressively large genomic data sets and spends a lot of time literally bash-ing her data into a file small enough for her computer to load into RStudio. For Zoë, the best way to work in R is while patting her puppies.</p>
+<p>Download the .Rmd file <a href="review-for-challenge.Rmd">here</a>.</p>
+<hr>
+<section id="maximum-likelihood" class="level2">
+<h2 class="anchored" data-anchor-id="maximum-likelihood">1. Maximum likelihood!</h2>
+<p>1a. Load the “SSDinMammals.csv” dataset into R.</p>
+<p>1b. Visualize the distribution of male over female masses. What would it mean if the male over female mass assumed a value &gt;1? Explain in words.</p>
+<p>1c. Assume that observations of mass divided by female mass is distributed according to a <a href="https://en.wikipedia.org/wiki/Gamma_distribution">Gamma distribution</a> with shape parameter <span class="math inline">\(\alpha\)</span> and scale parameter <span class="math inline">\(\beta\)</span>. Write down a function <code>Gamma_eval</code> which, for specific values of these parameters, evaluates the log-likelihood of observing data.</p>
+<p>1d. Using maximum likelihood, determine the most likely values of the shape and scale parameters to have given rise to the data (i.e., all male over female masses). To do this, you must loop over combinations of the shape and scale parameters and determine the log-likelihood for each combination. Use values of the shape parameter between 1 and 3 in increments of 0.05 and of the scale parameter between 0.001 and 0.5 in increments of 0.001.</p>
+<p>1e. Plot the best-fitting Gamma distribution (i.e., the distribution associated to the maximum likelihood estimates for the shape and scale parameters you determined in the previous question) over the data.</p>
+<p>1f. Find a <span class="math inline">\(95\%\)</span> confidence interval for the shape parameter. You can do this by setting the shape parameter equal to its maximum likelihood estimate and then identifying the set of values for the shape parameter for which the log-likelihood is within 1.92 units of its maximum.</p>
+<p>1g. What is the mean and variance of the Gamma distribution which best fits the data, under the assumptions we have made? Then, from the best fitting distribution, determine the probability of observing males that are 2x larger than females (i.e., the ratio of masses is &gt;2). Then do the same thing but for the probability of observing males that are larger than females (i.e., the ratio is &gt; 1).</p>
+<p>1h. Based on 1g, would you conclude males are significantly larger than females?</p>
 </section>
-<section id="teaching-assistants" class="level2">
-<h2 class="anchored" data-anchor-id="teaching-assistants">Teaching assistants</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/gavia.JPG" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption><strong>Gavia Lertzman-Lepofsky</strong> (gavia.lertzmanlepofsky@mail.utoronto.ca)</figcaption>
-</figure>
+<section id="multiple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-regression">2. Multiple linear regression</h2>
+<p>2a. Load the “influenza_cities.csv” dataset into R. The data are from <a href="https://www.science.org/doi/10.1126/science.aat6030">this paper</a> on seasonal influenza dynamics in cities across the US. Each row corresponds a ZIP code. Information about the columns can be found <a href="https://github.com/BenjaminDalziel/InfluenzaGeometry">here</a>.</p>
+<p>2b. Regress mean epidemic intensity on the log population size. Plot the regression atop the data, interpret the regression coefficient, and check if model assumptions are satisfied.</p>
+<p>2c. Regress mean epidemic intensity on the log population size, daytime crowding (described in the paper as the expected census block-level population size experienced by a randomly selected individual within a city), and mean specific humidity. Use this model to <em>predict</em> the mean epidemic intensity in a city of population size 713,252 with a daytime crowding of 714.6 and an average specific humidity of 0.010333. Compare the value of mean epidemic potential in this hypothetical city to the median among all cities in the dataset.</p>
+<p>2d. Write a function to simulate <span class="math inline">\(n=1000\)</span> observations from the model <span class="math inline">\(Y_i \sim \text{Normal}(\beta_0 + \beta_1 x_{1i} + \beta_2 x_{1i}^2 + \beta_3 x_{1i}^3, \sigma^2/x_{1i})\)</span>. To generate values of the response, first sample values of <span class="math inline">\(x_1\)</span> from 0.1 to 10 in increments of 0.1.</p>
+<p>2e. Simulate data that arise from the model with <span class="math inline">\(\beta_0 = 100\)</span>, <span class="math inline">\(\beta_1 = 1\)</span>, <span class="math inline">\(\beta_2 = 0.2\)</span>, <span class="math inline">\(\beta_3 = 0.03\)</span>, and and <span class="math inline">\(\sigma = 10\)</span>. Visualize the data. Then, using this data, regress y on x1. Are the assumptions of the standard regression framework satisfied? No need to use diagnostic plots, as you simulated the data!</p>
+<p>2f. Using the simulated data, regress y on x1, x1 squared, and x1 cubed. <em>Hint: use the <code>poly</code> function</em>.</p>
+</section>
+<section id="generalized-linear-models" class="level2">
+<h2 class="anchored" data-anchor-id="generalized-linear-models">3. Generalized linear models</h2>
+<p>3a. Load the “influenza_cities.csv” dataset into R.</p>
+<p>3b. Regress baseline epidemic intensity on log population size <strong>assuming that the response is GAMMA distributed</strong>. Interpret the effect of population size on baseline epidemic intensity. <em>Hint: think about transformations to the response and to the explanatory variable(s). The link function for the Gamma can be found <a href="https://en.wikipedia.org/wiki/Generalized_linear_model">here</a>.</em></p>
+<p>3c. Visualize the fitted model. The “line of best fit” should be curve-linear on the data scale. (Why?)</p>
+<p>3d. Ignoring values of mean epidemic potential which are zero, fit the following Gamma GLMs:</p>
+<ul>
+<li>mean epidemic potential on log population size</li>
+<li>mean epidemic potential on baseline transmission potential</li>
+<li>mean epidemic potential on mean specific humidity</li>
+<li>mean epidemic potential on log population size, mean specific humidity, and their interaction</li>
+<li>mean epidemic potential on baseline transmission potential, mean specific humidity, and their interaction</li>
+</ul>
+<p><em>Note: these are very similar to the models fitted and compared in the original study.</em></p>
+<p>Compare these models using AIC. Which are “best” and why?</p>
+</section>
+<section id="linear-mixed-models" class="level2">
+<h2 class="anchored" data-anchor-id="linear-mixed-models">4. Linear mixed models</h2>
+<p>4a. Load the “influenza_cities.csv” dataset into R. Can you fit a linear mixed model of mean epidemic potential on log population size with ZIP code as a random effect? Does it make sense to include baseline epidemic potential as a random effect – why or why not?</p>
+<p>4b. Load the “SSDinMammals.csv” dataset into R. Fit a mixed model of log female mass on log male mass with Order as a random effect which affects the intercept but not the slope of the female mass-male mass relationship. Visualize your findings. Then do the same analysis except with Order as a random effect that affects the slope of the relationship but not the intercept.</p>
+</section>
+<section id="mathematical-models" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-models">5. Mathematical models</h2>
+<p>Approximately <span class="math inline">\(99.9\%\)</span>$ of all of eukaryotes have the ability to reproduce sexually (i.e., are facultatively sexual). Why this is the case remains an important question in evolutionary genetics. <strong>Here we will use a mathematical model of one hypothesis for the ubiquity of sex across eukaryotes: differences in extinction rates between sexual and asexual linages.</strong></p>
+<p>Let <span class="math inline">\(S(t)\)</span> be the number of sexual species and <span class="math inline">\(A(t)\)</span> be the number of asexual species at time <span class="math inline">\(t\)</span>. Both types of species spectate at per-capita rate <span class="math inline">\(b\)</span>, sexual species go extinct at rate <span class="math inline">\(d\)</span>, and asexual species go extinct at an <em>elevated</em> rate <span class="math inline">\(d+\delta\)</span>. Sexual species give rise to asexual species a fraction <span class="math inline">\(p\)</span> of the time, but asexual species never give rise to sexual species. Time is measured in thousands of years.</p>
+<p>Under these assumptions, equations we could use to model the number of sexual and asexual species are</p>
+<p><span class="math display">\[\frac{\text{d} S}{\text{d} t} = b (1-p) S - d S.\]</span> <span class="math display">\[\frac{\text{d} A}{\text{d} t} = b A + b p S - (d+\delta) A\]</span></p>
+<p>5a. Starting from ten sexual and ten asexual species, solve the model equations out to time <span class="math inline">\(t=100\)</span> and plot the fraction of species that are sexual through time. Use the following parameter values: <span class="math inline">\(b=1, d = 0.7, \delta = 0.5, p = 0.1.\)</span> What fraction of species are sexual in the long run given these parameters?</p>
+<p>5b. Suppose <span class="math inline">\(p=0.01\)</span> and <span class="math inline">\(b = d = 1\)</span>. Write a function to numerically solve the model equations for a specific value of <span class="math inline">\(\delta\)</span> and return the fraction of asexual species. Then loop over values of <span class="math inline">\(\delta\)</span> to determine the value of <span class="math inline">\(\delta\)</span> so that the long-run fraction of sexual species is <span class="math inline">\(=0.999\)</span>. In other words, determine the value of <span class="math inline">\(\delta\)</span> so that the fraction of sexual species is equal to what has been estimated empirically.</p>
+<p>5c. Explain the findings of 2b. For the chosen parameters, how much larger does the extinction rate of asexual lineages have to be to explain the fact <span class="math inline">\(99.9\%\)</span> of all eukaryotes are able to reproduce sexually?</p>
+</section>
+<section id="power-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="power-analysis">6. Power analysis</h2>
+<p>6a. Re-read the notes on power analysis <a href="https://eeb313.github.io/lectures/lec11-linear-models-2.html#power-analysis">on the website</a> VERY carefully. Make sure you understand how the data are simulated and then used to estimate power at a given sample size.</p>
+<p>6b. Define statistical power in your own words.</p>
+<p>6c. The below function simulates genome sizes (which range from 1000 to 10000 base pairs) and associated mutation rates (measured in units of number of mutations per individual per base pair) under a linear model motivated by the observation that larger genomes tend to be more robust to mutation (i.e., the per-base mutation rate is a decreasing function of genome size). In the model, the effect of increasing genome size by one unit on mutation rate is set equal to -0.0001. The function takes sample size as an input.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_generator <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">sample_size =</span> <span class="dv">100</span>){</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  genome_size <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">size =</span> sample_size, <span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">1000</span>,<span class="dv">10000</span>,<span class="dv">1</span>), <span class="at">replace =</span> T)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  mutation_rate <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(genome_size)){</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    mutation_rate[i] <span class="ot">&lt;-</span> (<span class="dv">100</span> <span class="sc">-</span><span class="fl">0.001</span><span class="sc">*</span>genome_size[i] <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">10</span>))<span class="sc">*</span><span class="fl">1e-9</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">genome_size =</span> genome_size, <span class="at">mutation_rate =</span> mutation_rate))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Gavia is a PhD candidate in the Mahler lab on the StG campus. She works with the tropical Anolis lizards to understand how macroevolution shapes local patterns of community diversity and structure. When she’s not wandering around Caribbean islands catching lizards or spraying them with paint, she is happily ensconced on her couch working in R or exploring the many bakeries and bookstores of Toronto.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/jessie.jpg" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption><strong>Jessie Wang</strong> (jae.wang@mail.utoronto.ca)</figcaption>
-</figure>
+<p>The below code chunk plots genome size and mutation rate data generated under the linear model above, and preforms a regression of mutation rate on genome size using the simulated data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data_generator</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="sc">!</span> genome_size) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> genome_size, <span class="at">y =</span> value)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"mutation rate"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"genome size"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(mutation_rate<span class="sc">~</span>genome_size, data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Jessie is a PhD student in the Frederickson lab at UTSG. She studies plant-microbe interactions using high- throughput experimentation in duckweeds. She fell in love with R during her time as an undergraduate and took EEB313 in 2020, simultaneously sharpening her coding skills while conducting research alone in the lab. Jessie loves to spend too much money on fancy coffee as she types away, making sure her code is well-annotated and her figures look beautiful. Outside of work, she enjoys caring for her many houseplants and aquariums, finding new delicious eats, and admiring other people’s pets.</p>
+<p><strong>Write a function to estimate, for a given sample size, the power at level <span class="math inline">\(\alpha = 0.01\)</span>. That is, from a large number of simulations (generated using the <code>data_generator()</code> function), determine the fraction of simulations for which fitting a linear model (of mutation rate on genome size) the coefficient associated to genome size has a <span class="math inline">\(p\)</span> value which is <span class="math inline">\(&lt; \alpha\)</span>.</strong></p>
+<p>Consider sample sizes of <span class="math inline">\(150,160,...,200\)</span>. Use the function you have written to determine the <em>minimum</em> sample size needed to detect a significant effect <span class="math inline">\(&gt;75\%\)</span> of the time.</p>
+<p>6d. Do the analysis in 6c, except vary the <em>effect</em> of genome size on mutation rate instead of the sample size. That is, fix the sample size at, say, <span class="math inline">\(n=200\)</span> and determine the power associated to effect sizes of -0.0001, -0.0005, -0.00075, -0.001. The power should be smallest for effect sizes that are close to zero.</p>
+<p><em>Hint: you need to adjust the <code>data_generator()</code> function to have an effect size argument.</em></p>
+<p>At what effect size (of the ones tested) is the power <span class="math inline">\(&gt;75\%\)</span>?</p>
 
 
 </section>
@@ -872,14 +991,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Syllabus">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Syllabus</span>
+      <a href="./lectures/data/meas.csv" class="pagination-link" aria-label="meas.csv">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">meas.csv</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./downloadingR.html" class="pagination-link" aria-label="Installing R &amp; Ubuntu">
-        <span class="nav-page-text">Installing R &amp; Ubuntu</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

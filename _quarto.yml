@@ -61,6 +61,8 @@ book:
         - text: "meas.csv"
           href: lectures/data/meas.csv
     - part: "Miscellaneous notes"
+      chapters:
+      - review-for-challenge.qmd
   repo-url: https://github.com/EEB313/eeb313.github.io
   sidebar:
     search: true

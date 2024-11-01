@@ -433,8 +433,21 @@ window.Quarto = {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Miscellaneous notes</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Miscellaneous notes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../review-for-challenge.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Review for challenge assignment</span></a>
+  </div>
+</li>
+      </ul>
   </li>
     </ul>
     </div>
@@ -715,20 +728,20 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--2.0771  -1.3439   0.7488   0.9301   1.0427  
+-1.9847  -1.2005   0.5955   0.9156   1.1835  
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   1.0043     0.2465   4.075  4.6e-05 ***
-scale(age)    0.7280     0.3568   2.040   0.0413 *  
+(Intercept)   1.2582     0.3018   4.169 3.06e-05 ***
+scale(age)    1.3009     0.4626   2.812  0.00492 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 120.43  on 99  degrees of freedom
-Residual deviance: 114.44  on 98  degrees of freedom
-AIC: 118.44
+    Null deviance: 118.59  on 99  degrees of freedom
+Residual deviance: 105.27  on 98  degrees of freedom
+AIC: 109.27
 
 Number of Fisher Scoring iterations: 5</code></pre>
 </div>
@@ -768,11 +781,11 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.887</td>
+<td style="text-align: right;">0.894</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.928</td>
+<td style="text-align: right;">0.899</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">170</td>
@@ -780,15 +793,15 @@ Number of Fisher Scoring iterations: 5</code></pre>
 </tr>
 <tr class="even">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.959</td>
+<td style="text-align: right;">0.951</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">190</td>
-<td style="text-align: right;">0.957</td>
+<td style="text-align: right;">0.970</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">200</td>
-<td style="text-align: right;">0.978</td>
+<td style="text-align: right;">0.979</td>
 </tr>
 </tbody>
 </table>

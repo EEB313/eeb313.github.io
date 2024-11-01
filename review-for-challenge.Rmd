@@ -1,0 +1,129 @@
+---
+title: "Review for challenge assignment"
+output: pdf_document
+---
+
+```{r, echo=F, warning=F, message=F}
+require(tidyverse)
+require(lme4)
+require(deSolve)
+```
+
+## 1. Maximum likelihood!
+
+1a.  Load the "SSDinMammals.csv" dataset into R.
+
+1b. Visualize the distribution of male over female masses. What would it mean if the male over female mass assumed a value >1? Explain in words.
+
+1c. Assume that observations of mass divided by female mass is distributed according to a [Gamma distribution](https://en.wikipedia.org/wiki/Gamma_distribution) with shape parameter $\alpha$ and scale parameter $\beta$. Write down a function `Gamma_eval` which, for specific values of these parameters, evaluates the log-likelihood of observing data.
+
+1d. Using maximum likelihood, determine the most likely values of the shape and scale parameters to have given rise to the data (i.e., all male over female masses). To do this, you must loop over combinations of the shape and scale parameters and determine the log-likelihood for each combination. Use values of the shape parameter between 1 and 3 in increments of 0.05 and of the scale parameter between 0.001 and 0.5 in increments of 0.001.
+
+1e. Plot the best-fitting Gamma distribution (i.e., the distribution associated to the maximum likelihood estimates for the shape and scale parameters you determined in the previous question) over the data.
+
+1f. Find a $95\%$ confidence interval for the shape parameter. You can do this by setting the shape parameter equal to its maximum likelihood estimate and then identifying the set of values for the shape parameter for which the log-likelihood is within 1.92 units of its maximum.
+
+1g. What is the mean and variance of the Gamma distribution which best fits the data, under the assumptions we have made? Then, from the best fitting distribution, determine the probability of observing males that are 2x larger than females (i.e., the ratio of masses is >2). Then do the same thing but for the probability of observing males that are larger than females (i.e., the ratio is > 1).
+
+1h. Based on 1g, would you conclude males are significantly larger than females?
+
+## 2. Multiple linear regression
+
+2a. Load the "influenza_cities.csv" dataset into R. The data are from [this paper](https://www.science.org/doi/10.1126/science.aat6030) on seasonal influenza dynamics in cities across the US. Each row corresponds a ZIP code. Information about the columns can be found [here](https://github.com/BenjaminDalziel/InfluenzaGeometry).
+
+2b. Regress mean epidemic intensity on the log population size. Plot the regression atop the data, interpret the regression coefficient, and check if model assumptions are satisfied.
+
+2c. Regress mean epidemic intensity on the log population size, daytime crowding (described in the paper as the expected census block-level population size experienced by a randomly selected individual within a city), and mean specific humidity. Use this model to _predict_ the mean epidemic intensity in a city of population size 713,252 with a daytime crowding of 714.6 and an average specific humidity of 0.010333. Compare the value of mean epidemic potential in this hypothetical city to the median among all cities in the dataset.
+
+2d. Write a function to simulate $n=1000$ observations from the model $Y_i \sim \text{Normal}(\beta_0 + \beta_1 x_{1i} + \beta_2 x_{1i}^2 + \beta_3 x_{1i}^3, \sigma^2/x_{1i})$. To generate values of the response, first sample values of $x_1$ from 0.1 to 10 in increments of 0.1.
+
+2e. Simulate data that arise from the model with $\beta_0 = 100$, $\beta_1 = 1$, $\beta_2 = 0.2$, $\beta_3 = 0.03$, and and $\sigma = 10$. Visualize the data. Then, using this data, regress y on x1. Are the assumptions of the standard regression framework satisfied? No need to use diagnostic plots, as you simulated the data!
+
+2f. Using the simulated data, regress y on x1, x1 squared, and x1 cubed. _Hint: use the `poly` function_.
+
+## 3. Generalized linear models
+
+3a. Load the "influenza_cities.csv" dataset into R.
+
+3b. Regress baseline epidemic intensity on log population size **assuming that the response is GAMMA distributed**. Interpret the effect of population size on baseline epidemic intensity. _Hint: think about transformations to the response and to the explanatory variable(s). The link function for the Gamma can be found [here](https://en.wikipedia.org/wiki/Generalized_linear_model)._
+
+3c. Visualize the fitted model. The "line of best fit" should be curve-linear on the data scale. (Why?)
+
+3d. Ignoring values of mean epidemic potential which are zero, fit the following Gamma GLMs:
+
+- mean epidemic potential on log population size
+- mean epidemic potential on baseline transmission potential
+- mean epidemic potential on mean specific humidity
+- mean epidemic potential on log population size, mean specific humidity, and their interaction
+- mean epidemic potential on baseline transmission potential, mean specific humidity, and their interaction
+
+_Note: these are very similar to the models fitted and compared in the original study._
+
+Compare these models using AIC. Which are "best" and why?
+
+## 4. Linear mixed models
+
+4a. Load the "influenza_cities.csv" dataset into R. Can you fit a linear mixed model of mean epidemic potential on log population size with ZIP code as a random effect? Does it make sense to include baseline epidemic potential as a random effect -- why or why not?
+
+4b. Load the "SSDinMammals.csv" dataset into R. Fit a mixed model of log female mass on log male mass with Order as a random effect which affects the intercept but not the slope of the female mass-male mass relationship. Visualize your findings. Then do the same analysis except with Order as a random effect that affects the slope of the relationship but not the intercept.
+
+## 5. Mathematical models
+
+Approximately $99.9\%$$ of all of eukaryotes have the ability to reproduce sexually (i.e., are facultatively sexual). Why this is the case remains an important question in evolutionary genetics. **Here we will use a mathematical model of one hypothesis for the ubiquity of sex across eukaryotes: differences in extinction rates between sexual and asexual linages.**
+
+Let $S(t)$ be the number of sexual species and $A(t)$ be the number of asexual species at time $t$. Both types of species spectate at per-capita rate $b$, sexual species go extinct at rate $d$, and asexual species go extinct at an _elevated_ rate $d+\delta$. Sexual species give rise to asexual species a fraction $p$ of the time, but asexual species never give rise to sexual species. Time is measured in thousands of years.
+
+Under these assumptions, equations we could use to model the number of sexual and asexual species are
+
+$$\frac{\text{d} S}{\text{d} t} = b (1-p) S - d S.$$
+$$\frac{\text{d} A}{\text{d} t} = b A + b p S - (d+\delta) A$$
+
+5a. Starting from ten sexual and ten asexual species, solve the model equations out to time $t=100$ and plot the fraction of species that are sexual through time. Use the following parameter values: $b=1, d = 0.7, \delta = 0.5, p = 0.1.$ What fraction of species are sexual in the long run given these parameters?
+
+5b. Suppose $p=0.01$ and $b = d = 1$. Write a function to numerically solve the model equations for a specific value of $\delta$ and return the fraction of asexual species. Then loop over values of $\delta$ to determine the value of $\delta$ so that the long-run fraction of sexual species is $=0.999$. In other words, determine the value of $\delta$ so that the fraction of sexual species is equal to what has been estimated empirically.
+
+5c. Explain the findings of 2b. For the chosen parameters, how much larger does the extinction rate of asexual lineages have to be to explain the fact $99.9\%$ of all eukaryotes are able to reproduce sexually?
+
+## 6. Power analysis
+
+6a. Re-read the notes on power analysis [on the website](https://eeb313.github.io/lectures/lec11-linear-models-2.html#power-analysis) VERY carefully. Make sure you understand how the data are simulated and then used to estimate power at a given sample size.
+
+6b. Define statistical power in your own words.
+
+6c. The below function simulates genome sizes (which range from 1000 to 10000 base pairs) and associated mutation rates (measured in units of number of mutations per individual per base pair) under a linear model motivated by the observation that larger genomes tend to be more robust to mutation (i.e., the per-base mutation rate is a decreasing function of genome size). In the model, the effect of increasing genome size by one unit on mutation rate is set equal to -0.0001. The function takes sample size as an input.
+
+```{r}
+data_generator <- function(sample_size = 100){
+  genome_size <- sample(size = sample_size, x = seq(1000,10000,1), replace = T)
+  
+  mutation_rate <- c()
+  
+  for (i in 1:length(genome_size)){
+    mutation_rate[i] <- (100 -0.001*genome_size[i] + rnorm(1, mean=0, sd = 10))*1e-9
+  }
+  
+  return(data.frame(genome_size = genome_size, mutation_rate = mutation_rate))
+}
+```
+
+The below code chunk plots genome size and mutation rate data generated under the linear model above, and preforms a regression of mutation rate on genome size using the simulated data.
+
+```{r, warning=F, message=F, eval=F}
+data <- data_generator()
+
+data %>% pivot_longer(! genome_size) %>% 
+  ggplot(aes(x = genome_size, y = value)) + geom_point() + 
+  geom_smooth(method = "lm") + ylab("mutation rate") + xlab("genome size")
+
+summary(lm(mutation_rate~genome_size, data))
+```
+
+**Write a function to estimate, for a given sample size, the power at level $\alpha = 0.01$. That is, from a large number of simulations (generated using the `data_generator()` function), determine the fraction of simulations for which fitting a linear model (of mutation rate on genome size) the coefficient associated to genome size has a $p$ value which is $< \alpha$.**
+
+Consider sample sizes of $150,160,...,200$. Use the function you have written to determine the _minimum_ sample size needed to detect a significant effect $>75\%$ of the time.
+
+6d. Do the analysis in 6c, except vary the _effect_ of genome size on mutation rate instead of the sample size. That is, fix the sample size at, say, $n=200$ and determine the power associated to effect sizes of -0.0001, -0.0005, -0.00075, -0.001. The power should be smallest for effect sizes that are close to zero.
+
+_Hint: you need to adjust the `data_generator()` function to have an effect size argument._
+
+At what effect size (of the ones tested) is the power $>75\%$?
