@@ -15,7 +15,7 @@ require(deSolve)
 
 1b. Visualize the distribution of male over female masses. What would it mean if the male over female mass assumed a value >1? Explain in words.
 
-1c. Assume that observations of mass divided by female mass is distributed according to a [Gamma distribution](https://en.wikipedia.org/wiki/Gamma_distribution) with shape parameter $\alpha$ and scale parameter $\beta$. Write down a function `Gamma_eval` which, for specific values of these parameters, evaluates the log-likelihood of observing data.
+1c. Assume that observations of mass divided by female mass are distributed according to a [Gamma distribution](https://en.wikipedia.org/wiki/Gamma_distribution) with shape parameter $\alpha$ and scale parameter $\beta$. Write down a function `Gamma_eval` which, for specific values of these parameters, evaluates the log-likelihood of observing the data.
 
 1d. Using maximum likelihood, determine the most likely values of the shape and scale parameters to have given rise to the data (i.e., all male over female masses). To do this, you must loop over combinations of the shape and scale parameters and determine the log-likelihood for each combination. Use values of the shape parameter between 1 and 3 in increments of 0.05 and of the scale parameter between 0.001 and 0.5 in increments of 0.001.
 
@@ -23,7 +23,7 @@ require(deSolve)
 
 1f. Find a $95\%$ confidence interval for the shape parameter. You can do this by setting the shape parameter equal to its maximum likelihood estimate and then identifying the set of values for the shape parameter for which the log-likelihood is within 1.92 units of its maximum.
 
-1g. What is the mean and variance of the Gamma distribution which best fits the data, under the assumptions we have made? Then, from the best fitting distribution, determine the probability of observing males that are 2x larger than females (i.e., the ratio of masses is >2). Then do the same thing but for the probability of observing males that are larger than females (i.e., the ratio is > 1).
+1g. What is the mean and variance of the Gamma distribution which best fits the data, under the assumptions we have made? Using the best-fitting distribution, determine the probability of observing males that are 2x larger than females (i.e., the ratio of masses is >2). Then do the same thing but for the probability of observing males that are larger than females (i.e., the ratio is > 1).
 
 1h. Based on 1g, would you conclude males are significantly larger than females?
 
@@ -45,7 +45,7 @@ require(deSolve)
 
 3a. Load the "influenza_cities.csv" dataset into R.
 
-3b. Regress baseline epidemic intensity on log population size **assuming that the response is GAMMA distributed**. Interpret the effect of population size on baseline epidemic intensity. _Hint: think about transformations to the response and to the explanatory variable(s). The link function for the Gamma can be found [here](https://en.wikipedia.org/wiki/Generalized_linear_model)._
+3b. Regress baseline epidemic intensity on log population size **assuming that the response is GAMMA distributed**. Interpret the effect of population size on baseline epidemic intensity. _Hint: think about transformations of the response and the explanatory variable(s). The link function for the Gamma and other common GLMs can be found [here](https://en.wikipedia.org/wiki/Generalized_linear_model)._
 
 3c. Visualize the fitted model. The "line of best fit" should be curve-linear on the data scale. (Why?)
 
@@ -118,11 +118,11 @@ data %>% pivot_longer(! genome_size) %>%
 summary(lm(mutation_rate~genome_size, data))
 ```
 
-**Write a function to estimate, for a given sample size, the power at level $\alpha = 0.01$. That is, from a large number of simulations (generated using the `data_generator()` function), determine the fraction of simulations for which fitting a linear model (of mutation rate on genome size) the coefficient associated to genome size has a $p$ value which is $< \alpha$.**
+**Write a function to estimate, for a given sample size, the power at level $\alpha = 0.01$.** That is, from a large number of simulations (generated using the `data_generator()` function), determine the fraction of simulations for which fitting a linear model (of mutation rate on genome size) the coefficient associated to genome size has a $p$ value which is $< \alpha$.
 
-Consider sample sizes of $150,160,...,200$. Use the function you have written to determine the _minimum_ sample size needed to detect a significant effect $>75\%$ of the time.
+Consider sample sizes of $150,160,\dots,200$. Use the function you have written to determine the sample size (of the ones tested) needed to detect a significant effect $>75\%$ of the time.
 
-6d. Do the analysis in 6c, except vary the _effect_ of genome size on mutation rate instead of the sample size. That is, fix the sample size at, say, $n=200$ and determine the power associated to effect sizes of -0.0001, -0.0005, -0.00075, -0.001. The power should be smallest for effect sizes that are close to zero.
+6d. Do the analysis in 6c, except vary the _effect_ of genome size on mutation rate instead of the sample size. That is, fix the sample size at, say, $n=200$ and determine the power associated to effect sizes of -0.0001, -0.0005, -0.00075, -0.001. The power should be smallest for effect sizes that are close to zero. (Why?)
 
 _Hint: you need to adjust the `data_generator()` function to have an effect size argument._
 
