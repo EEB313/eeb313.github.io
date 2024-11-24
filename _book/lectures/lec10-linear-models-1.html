@@ -336,6 +336,12 @@ window.Quarto = {
  <span class="menu-text">Assignment 05: linear models, model selection, and multivariate statistics</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/challenge-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenge assignment</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -428,6 +434,18 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../lectures/data/meas.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">meas.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/satellites.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">satellites.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/WF_inference_data.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">WF_inference_data.csv</span></a>
   </div>
 </li>
       </ul>
@@ -581,7 +599,7 @@ dbl (12): massM, SDmassM, massF, SDmassF, lengthM, SDlengthM, lengthF, SDlen...
 <section id="multiple-regression" class="level2" data-number="10.4">
 <h2 data-number="10.4" class="anchored" data-anchor-id="multiple-regression"><span class="header-section-number">10.4</span> Multiple regression</h2>
 <p>It is straightforward to extend the simple regression model to include multiple covariates/predictors. Suppose, for each realization of <span class="math inline">\(Y\)</span>, we have associated measurements <span class="math inline">\(x_1,\dots,x_p\)</span>. We can model how <span class="math inline">\(Y\)</span> changes with these predictors as follows:</p>
-<p><span class="math display">\[Y \sim \text{Normal}(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p, \sigma^2).\]</span> The likelihood that arises from data <span class="math inline">\((y_i,x_{1i},\dots,x_{pi})\)</span> where <span class="math inline">\(i=1,\dots,n\)</span> is</p>
+<p><span class="math display">\[Y \sim \text{Normal}(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p, \sigma^2).\]</span> The likelihood that arises from data <span class="math inline">\((y_i,x_{1i},\dots,x_{pi})\)</span> where <span class="math inline">\(i=1,\dots,n\)</span> is</p>
 <p><span class="math display">\[L(\beta_0,\dots,\beta_p,\sigma^2) = \prod_{i=1}^n \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(y_i-\beta_0-\beta_1 x_{1i}-\cdots-\beta_p x_{pi})^2/2\sigma^2}.\]</span></p>
 <p>Again, assumptions of this model include</p>
 <ol type="1">

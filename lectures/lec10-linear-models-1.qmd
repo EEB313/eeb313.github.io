@@ -84,7 +84,7 @@ Suppose we think $Y$ is not normally distributed (and constant variance $\sigma^
 
 It is straightforward to extend the simple regression model to include multiple covariates/predictors. Suppose, for each realization of $Y$, we have associated measurements $x_1,\dots,x_p$. We can model how $Y$ changes with these predictors as follows:
 
-$$Y \sim \text{Normal}(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p, \sigma^2).$$
+$$Y \sim \text{Normal}(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p, \sigma^2).$$
 The likelihood that arises from data $(y_i,x_{1i},\dots,x_{pi})$ where $i=1,\dots,n$ is
 
 $$L(\beta_0,\dots,\beta_p,\sigma^2) = \prod_{i=1}^n \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(y_i-\beta_0-\beta_1 x_{1i}-\cdots-\beta_p x_{pi})^2/2\sigma^2}.$$

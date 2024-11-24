@@ -22,7 +22,7 @@ require(deSolve)
 
 1e. Plot the best-fitting Gamma distribution (i.e., the distribution associated to the maximum likelihood estimates for the shape and scale parameters you determined in the previous question) over the data.
 
-1f. Find a $95\%$ confidence interval for the shape parameter. You can do this by setting the shape parameter equal to its maximum likelihood estimate and then identifying the set of values for the shape parameter for which the log-likelihood is within 1.92 units of its maximum.
+1f. Find a $95\%$ confidence interval for the shape parameter. You can do this by setting the scale parameter equal to its maximum likelihood estimate and then identifying the set of values for the shape parameter for which the log-likelihood is within 1.92 units of its maximum.
 
 1g. What is the mean and variance of the Gamma distribution which best fits the data, under the assumptions we have made? Using the best-fitting distribution, determine the probability of observing males that are 2x larger than females (i.e., the ratio of masses is >2). Then do the same thing but for the probability of observing males that are larger than females (i.e., the ratio is > 1).
 
@@ -46,7 +46,7 @@ require(deSolve)
 
 3a. Load the "influenza_cities.csv" dataset into R.
 
-3b. Regress baseline epidemic intensity on log population size **assuming that the response is GAMMA distributed**. Interpret the effect of population size on baseline epidemic intensity. _Hint: think about transformations of the response and the explanatory variable(s). The link function for the Gamma and other common GLMs can be found [here](https://en.wikipedia.org/wiki/Generalized_linear_model)._
+3b. Regress baseline transmission potential on log population size **assuming that the response is GAMMA distributed**. Interpret the effect of population size on baseline transmission potential. _Hint: think about transformations of the response and the explanatory variable(s). The link function for the Gamma and other common GLMs can be found [here](https://en.wikipedia.org/wiki/Generalized_linear_model)._
 
 3c. Visualize the fitted model. The "line of best fit" should be curve-linear on the data scale. (Why?)
 
@@ -64,7 +64,7 @@ Compare these models using AIC. Which are "best" and why?
 
 ## 4. Linear mixed models
 
-4a. Load the "influenza_cities.csv" dataset into R. Can you fit a linear mixed model of mean epidemic potential on log population size with ZIP code as a random effect? Does it make sense to include baseline epidemic potential as a random effect -- why or why not?
+4a. Load the "influenza_cities.csv" dataset into R. Can you fit a linear mixed model of mean epidemic potential on log population size with ZIP code as a random effect? Does it make sense to include baseline transmission potential as a random effect -- why or why not?
 
 4b. Load the "SSDinMammals.csv" dataset into R. Fit a mixed model of log female mass on log male mass with Order as a random effect which affects the intercept but not the slope of the female mass-male mass relationship. Visualize your findings. Then do the same analysis except with Order as a random effect that affects the slope of the relationship but not the intercept.
 
@@ -100,7 +100,7 @@ data_generator <- function(sample_size = 100){
   mutation_rate <- c()
   
   for (i in 1:length(genome_size)){
-    mutation_rate[i] <- (100 -0.001*genome_size[i] + rnorm(1, mean=0, sd = 10))*1e-9
+    mutation_rate[i] <- (100 -0.0001*genome_size[i] + rnorm(1, mean=0, sd = 10))*1e-9
   }
   
   return(data.frame(genome_size = genome_size, mutation_rate = mutation_rate))

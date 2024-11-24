@@ -336,6 +336,12 @@ window.Quarto = {
  <span class="menu-text">Assignment 05: linear models, model selection, and multivariate statistics</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/challenge-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenge assignment</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -428,6 +434,18 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../lectures/data/meas.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">meas.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/satellites.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">satellites.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/WF_inference_data.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">WF_inference_data.csv</span></a>
   </div>
 </li>
       </ul>
@@ -728,22 +746,22 @@ glm(formula = disease_status ~ scale(age), family = binomial,
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--1.8779  -1.4045   0.7660   0.9136   0.9808  
+-2.5600  -1.1393   0.3848   0.9231   1.2996  
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   0.9470     0.2317   4.087 4.37e-05 ***
-scale(age)    0.4880     0.2853   1.710   0.0872 .  
+(Intercept)   1.1361     0.3080   3.689 0.000225 ***
+scale(age)    1.6020     0.5013   3.196 0.001393 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 120.43  on 99  degrees of freedom
-Residual deviance: 116.86  on 98  degrees of freedom
-AIC: 120.86
+    Null deviance: 125.37  on 99  degrees of freedom
+Residual deviance: 107.28  on 98  degrees of freedom
+AIC: 111.28
 
-Number of Fisher Scoring iterations: 4</code></pre>
+Number of Fisher Scoring iterations: 6</code></pre>
 </div>
 </div>
 <p>Next, we will write a function that performs a <strong>power analysis</strong>. We will use this function determine the sample size that is required so that simulating the age-disease data repeatedly we identify a significant effect of age on disease status (i.e., reject the null hypothesis) at level <span class="math inline">\(\alpha = 0.01\)</span> <em>at least <span class="math inline">\(95\%\)</span> of the time</em>.</p>
@@ -781,23 +799,23 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">150</td>
-<td style="text-align: right;">0.884</td>
+<td style="text-align: right;">0.887</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">160</td>
-<td style="text-align: right;">0.919</td>
+<td style="text-align: right;">0.935</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">170</td>
-<td style="text-align: right;">0.929</td>
+<td style="text-align: right;">0.932</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">0.946</td>
+<td style="text-align: right;">0.950</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">190</td>
-<td style="text-align: right;">0.963</td>
+<td style="text-align: right;">0.982</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">200</td>

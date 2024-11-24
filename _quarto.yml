@@ -34,6 +34,7 @@ book:
       - assignments/assignment-03.qmd
       - assignments/assignment-04.qmd
       - assignments/assignment-05.qmd
+      - assignments/challenge-assignment.qmd
     - part: "Project"
       chapters:
       - projects.qmd
@@ -60,6 +61,10 @@ book:
           href: lectures/data/influenza_cities.csv
         - text: "meas.csv"
           href: lectures/data/meas.csv
+        - text: "satellites.csv"
+          href: lectures/data/satellites.csv
+        - text: "WF_inference_data.csv"
+          href: lectures/data/WF_inference_data.csv
     - part: "Miscellaneous notes"
       chapters:
       - review-for-challenge.qmd
@@ -89,7 +94,12 @@ extra_files:
   - assignment-03.qmd
   - assignment-04.qmd
   - assignment-05.qmd
-  - lec07-eself-directed-analysis.Rmd
+  - challenge-assignment.qmd
+  - challenge-assignment.Rmd
+  - lec07-self-directed-analysis.qmd
+  - lec07-self-directed-analysis.Rmd
+  - review-for-challenge.qmd
+  - review-for-challenge.Rmd
   - portal_data.csv
   - pseudo.ara.busco
   - pseudo.LTRs
@@ -101,3 +111,5 @@ extra_files:
   - Pigot2020.csv
   - influenza_cities.csv
   - meas.csv
+  - satellites.csv
+  - WF_inference_data.csv

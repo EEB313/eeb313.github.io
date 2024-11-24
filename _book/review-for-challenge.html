@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./lectures/data/meas.csv" rel="prev">
+<link href="./lectures/data/WF_inference_data.csv" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -335,6 +335,12 @@ window.Quarto = {
  <span class="menu-text">Assignment 05: linear models, model selection, and multivariate statistics</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignments/challenge-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Challenge assignment</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -429,6 +435,18 @@ window.Quarto = {
  <span class="menu-text">meas.csv</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectures/data/satellites.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">satellites.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectures/data/WF_inference_data.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">WF_inference_data.csv</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -498,7 +516,7 @@ window.Quarto = {
 <p>1c. Assume that observations of mass divided by female mass are distributed according to a <a href="https://en.wikipedia.org/wiki/Gamma_distribution">Gamma distribution</a> with shape parameter <span class="math inline">\(\alpha\)</span> and scale parameter <span class="math inline">\(\beta\)</span>. Write down a function <code>Gamma_eval</code> which, for specific values of these parameters, evaluates the log-likelihood of observing the data.</p>
 <p>1d. Using maximum likelihood, determine the most likely values of the shape and scale parameters to have given rise to the data (i.e., all male over female masses). To do this, you must loop over combinations of the shape and scale parameters and determine the log-likelihood for each combination. Use values of the shape parameter between 1 and 3 in increments of 0.05 and of the scale parameter between 0.001 and 0.5 in increments of 0.001.</p>
 <p>1e. Plot the best-fitting Gamma distribution (i.e., the distribution associated to the maximum likelihood estimates for the shape and scale parameters you determined in the previous question) over the data.</p>
-<p>1f. Find a <span class="math inline">\(95\%\)</span> confidence interval for the shape parameter. You can do this by setting the shape parameter equal to its maximum likelihood estimate and then identifying the set of values for the shape parameter for which the log-likelihood is within 1.92 units of its maximum.</p>
+<p>1f. Find a <span class="math inline">\(95\%\)</span> confidence interval for the shape parameter. You can do this by setting the scale parameter equal to its maximum likelihood estimate and then identifying the set of values for the shape parameter for which the log-likelihood is within 1.92 units of its maximum.</p>
 <p>1g. What is the mean and variance of the Gamma distribution which best fits the data, under the assumptions we have made? Using the best-fitting distribution, determine the probability of observing males that are 2x larger than females (i.e., the ratio of masses is &gt;2). Then do the same thing but for the probability of observing males that are larger than females (i.e., the ratio is &gt; 1).</p>
 <p>1h. Based on 1g, would you conclude males are significantly larger than females?</p>
 </section>
@@ -514,7 +532,7 @@ window.Quarto = {
 <section id="generalized-linear-models" class="level2">
 <h2 class="anchored" data-anchor-id="generalized-linear-models">3. Generalized linear models</h2>
 <p>3a. Load the “influenza_cities.csv” dataset into R.</p>
-<p>3b. Regress baseline epidemic intensity on log population size <strong>assuming that the response is GAMMA distributed</strong>. Interpret the effect of population size on baseline epidemic intensity. <em>Hint: think about transformations of the response and the explanatory variable(s). The link function for the Gamma and other common GLMs can be found <a href="https://en.wikipedia.org/wiki/Generalized_linear_model">here</a>.</em></p>
+<p>3b. Regress baseline transmission potential on log population size <strong>assuming that the response is GAMMA distributed</strong>. Interpret the effect of population size on baseline transmission potential. <em>Hint: think about transformations of the response and the explanatory variable(s). The link function for the Gamma and other common GLMs can be found <a href="https://en.wikipedia.org/wiki/Generalized_linear_model">here</a>.</em></p>
 <p>3c. Visualize the fitted model. The “line of best fit” should be curve-linear on the data scale. (Why?)</p>
 <p>3d. Ignoring values of mean epidemic potential which are zero, fit the following Gamma GLMs:</p>
 <ul>
@@ -529,7 +547,7 @@ window.Quarto = {
 </section>
 <section id="linear-mixed-models" class="level2">
 <h2 class="anchored" data-anchor-id="linear-mixed-models">4. Linear mixed models</h2>
-<p>4a. Load the “influenza_cities.csv” dataset into R. Can you fit a linear mixed model of mean epidemic potential on log population size with ZIP code as a random effect? Does it make sense to include baseline epidemic potential as a random effect – why or why not?</p>
+<p>4a. Load the “influenza_cities.csv” dataset into R. Can you fit a linear mixed model of mean epidemic potential on log population size with ZIP code as a random effect? Does it make sense to include baseline transmission potential as a random effect – why or why not?</p>
 <p>4b. Load the “SSDinMammals.csv” dataset into R. Fit a mixed model of log female mass on log male mass with Order as a random effect which affects the intercept but not the slope of the female mass-male mass relationship. Visualize your findings. Then do the same analysis except with Order as a random effect that affects the slope of the relationship but not the intercept.</p>
 </section>
 <section id="mathematical-models" class="level2">
@@ -554,7 +572,7 @@ window.Quarto = {
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  mutation_rate <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(genome_size)){</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    mutation_rate[i] <span class="ot">&lt;-</span> (<span class="dv">100</span> <span class="sc">-</span><span class="fl">0.001</span><span class="sc">*</span>genome_size[i] <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">10</span>))<span class="sc">*</span><span class="fl">1e-9</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    mutation_rate[i] <span class="ot">&lt;-</span> (<span class="dv">100</span> <span class="sc">-</span><span class="fl">0.0001</span><span class="sc">*</span>genome_size[i] <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">10</span>))<span class="sc">*</span><span class="fl">1e-9</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">genome_size =</span> genome_size, <span class="at">mutation_rate =</span> mutation_rate))</span>
@@ -991,8 +1009,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./lectures/data/meas.csv" class="pagination-link" aria-label="meas.csv">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">meas.csv</span>
+      <a href="./lectures/data/WF_inference_data.csv" class="pagination-link" aria-label="WF_inference_data.csv">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">WF_inference_data.csv</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

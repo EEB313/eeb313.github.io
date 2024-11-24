@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>EEB313: Quantitative Methods in R for Biology - Assignment 01: base R, command line, &amp; Git(Hub)</title>
+<title>EEB313: Quantitative Methods in R for Biology - Challenge assignment</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-02.html" rel="next">
-<link href="../assignments/assignment-00.html" rel="prev">
+<link href="../projects.html" rel="next">
+<link href="../assignments/assignment-05.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -115,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignment 01: base R, command line, &amp; Git(Hub)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/challenge-assignment.html">Challenge assignment</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -279,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link active">
+  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 01: base R, command line, &amp; Git(Hub)</span></a>
   </div>
 </li>
@@ -309,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/challenge-assignment.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/challenge-assignment.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Challenge assignment</span></a>
   </div>
 </li>
@@ -448,21 +477,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#variable-assignment-1-mark" id="toc-variable-assignment-1-mark" class="nav-link active" data-scroll-target="#variable-assignment-1-mark">1. Variable assignment (1 mark)</a></li>
-  <li><a href="#vectors-2.5-marks" id="toc-vectors-2.5-marks" class="nav-link" data-scroll-target="#vectors-2.5-marks">2. Vectors (2.5 marks)</a></li>
-  <li><a href="#data-frames-1.5-marks" id="toc-data-frames-1.5-marks" class="nav-link" data-scroll-target="#data-frames-1.5-marks">3. Data frames (1.5 marks)</a></li>
-  <li><a href="#command-line-1-mark" id="toc-command-line-1-mark" class="nav-link" data-scroll-target="#command-line-1-mark">4. Command line (1 mark)</a></li>
-  <li><a href="#understanding-command-line-software-1-mark" id="toc-understanding-command-line-software-1-mark" class="nav-link" data-scroll-target="#understanding-command-line-software-1-mark">5. Understanding command line software (1 mark)</a></li>
-  <li><a href="#github-1-mark" id="toc-github-1-mark" class="nav-link" data-scroll-target="#github-1-mark">6. GitHub (1 mark)</a></li>
+  <li><a href="#estimation-of-the-population-mutation-rate-3.5-marks" id="toc-estimation-of-the-population-mutation-rate-3.5-marks" class="nav-link active" data-scroll-target="#estimation-of-the-population-mutation-rate-3.5-marks">1. Estimation of the population mutation rate [3.5 marks]</a></li>
+  <li><a href="#inference-on-scaled-size-differences-5.5-marks" id="toc-inference-on-scaled-size-differences-5.5-marks" class="nav-link" data-scroll-target="#inference-on-scaled-size-differences-5.5-marks">2. Inference on scaled size differences [5.5 marks]</a></li>
+  <li><a href="#a-mathematical-model-of-mrnaprotein-production-3-marks" id="toc-a-mathematical-model-of-mrnaprotein-production-3-marks" class="nav-link" data-scroll-target="#a-mathematical-model-of-mrnaprotein-production-3-marks">3. A mathematical model of mRNA/protein production [3 marks]</a></li>
+  <li><a href="#take-a-break-1-mark" id="toc-take-a-break-1-mark" class="nav-link" data-scroll-target="#take-a-break-1-mark">4. Take a break [1 mark]</a></li>
+  <li><a href="#glms-power-analysis-and-fitting-7-marks" id="toc-glms-power-analysis-and-fitting-7-marks" class="nav-link" data-scroll-target="#glms-power-analysis-and-fitting-7-marks">5. GLMs: power analysis and fitting [7 marks]</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignment 01: base R, command line, &amp; Git(Hub)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-00.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/challenge-assignment.html">Challenge assignment</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignment 01: base R, command line, &amp; Git(Hub)</h1>
+<h1 class="title">Challenge assignment</h1>
 </div>
 
 
@@ -479,83 +507,145 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Download the .Rmd file <a href="assignment-01.Rmd">here</a>.</p>
-<p><em>To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>. Please ensure the text on your .pdf does not continue past the end of the page. If you use code chunks to write your answers to the command line questions, check that the code chunk headers say <code>eval=FALSE</code> so RStudio doesn’t try to run them when knitting (the example code chunks provided for questions 4 and 5 include this).</em></p>
-<section id="variable-assignment-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="variable-assignment-1-mark">1. Variable assignment (1 mark)</h2>
-<ol type="a">
-<li>Assign the value <code>5</code> to the variable/object <code>a</code>. Display <code>a</code>. (0.25 marks)</li>
-</ol>
-<ol start="2" type="a">
-<li>Assign the result of <code>10/3</code> to the variable <code>b</code>. Display <code>b</code>. (0.25 marks)</li>
-</ol>
-<ol start="3" type="a">
-<li>Write a function that adds two numbers and returns their sum. Use it to assign the sum of <code>a</code> and <code>b</code> to <code>result</code>. Display <code>result</code>. (In practice, there is already a more sophisticated built-in function for this: <code>result &lt;- sum(a, b)</code>) (0.25 marks)</li>
-</ol>
-<ol start="4" type="a">
-<li>Write a function that multiplies two numbers and returns their product. Use it to assign the product of <code>a</code> and <code>b</code> to <code>product</code>. Display <code>product</code>. (In practice, there is already a more sophisticated built-in function for this: <code>product &lt;- prod(a, b)</code>) (0.25 marks)</li>
-</ol>
-</section>
-<section id="vectors-2.5-marks" class="level2">
-<h2 class="anchored" data-anchor-id="vectors-2.5-marks">2. Vectors (2.5 marks)</h2>
-<ol type="a">
-<li>Create a vector <code>v</code> with all integers 0-30, and a vector <code>w</code> with every third integer in the same range. (0.25 marks)</li>
-</ol>
-<ol start="2" type="a">
-<li>What is the difference in lengths of the vectors <code>v</code> and <code>w</code>? (0.25 marks)</li>
-</ol>
-<ol start="3" type="a">
-<li>Create a new vector, <code>v_square</code>, with the square of elements at indices 3, 6, 7, 10, 15, 22, 23, 24, and 30 from the variable <code>v</code>. <em>Hint: Use indexing rather than a for loop.</em> (0.25 marks)</li>
-</ol>
-<ol start="4" type="a">
-<li>Calculate the mean and median of the first five values from <code>v_square</code>. (0.25 marks)</li>
-</ol>
-<ol start="5" type="a">
-<li>Create a boolean vector <code>v_bool</code>, indicating which vector <code>v</code> elements are bigger than 20. How many values are over 20? <em>Hint: In R, TRUE = 1, and FALSE = 0, so you can use simple arithmetic to find this out.</em> (0.5 marks)</li>
-</ol>
-<ol start="6" type="a">
-<li>Write a function that calculates the median of the last two elements of any numeric vector. Test this function with the <code>v</code> and <code>v_square</code> vectors. (1 marks)</li>
-</ol>
-</section>
-<section id="data-frames-1.5-marks" class="level2">
-<h2 class="anchored" data-anchor-id="data-frames-1.5-marks">3. Data frames (1.5 marks)</h2>
-<ol type="a">
-<li>There are many built-in data frames in R, which you can find <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html">more details about online</a>. What are the column names of the built-in dataframe <code>beaver1</code>? How many observations (rows) and variables (columns) are there? (0.5 marks)</li>
-</ol>
-<ol start="2" type="a">
-<li>Display both the first 6 and last 6 rows of this data frame. Show how to do so with both indexing as well as specialized functions. (0.5 marks)</li>
-</ol>
+<p>Download the .Rmd file <a href="challenge-assignment.Rmd">here</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With indexing</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># With functions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(deSolve)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="3" type="a">
-<li>What is the min, mean, and max body temperature for beavers inside and outside of the retreat? <em>Hint: You can use <code>?</code> on the beaver1 data set to get more information about it. Remember that each column in a data frame is a vector and you can use the same functions.</em> (0.5 marks)</li>
-</ol>
+<p><em>To submit this assignment, upload the full document to Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>.</em></p>
+<p>Part of being an effective scientist involves being able to solve problems you have not encountered before. This is certainly true of programming as well, where problems are typically solved by furious bouts of Googling, reading documentation, and trial-and-error of proposed solutions. In this assignment, like previous ones, you will be evaluated on your ability to perform scientific calculations (e.g., fit statistical models to data) using R. Some the problems might require more research and effort on your part. But, by now, you should all have all the tools required to work through and search for solutions to the problems below. Good luck, and let us know if you have any questions!</p>
+<section id="estimation-of-the-population-mutation-rate-3.5-marks" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-of-the-population-mutation-rate-3.5-marks">1. Estimation of the population mutation rate [3.5 marks]</h2>
+<p>The Wright-Fisher model describes how, in a haploid population of constant size <span class="math inline">\(N\)</span>, the frequency of two alleles (<span class="math inline">\(A_1\)</span> and <span class="math inline">\(A_2\)</span>) at a locus change due to random sampling of gametes and mutation. The rules of the WF model are very simple — the population size is constant, generations are discrete and non-overlapping, and children choose their parents (regardless of type) at random (i.e., uniformly among the parents). This means that the number of individuals that carry the <span class="math inline">\(A_1\)</span> allele in generation <span class="math inline">\(n+1\)</span> is Binomial(<span class="math inline">\(N\)</span>,<span class="math inline">\(p_{n}\)</span>) where <span class="math inline">\(p_n\)</span> is the frequency of <span class="math inline">\(A_1\)</span>s in the previous generation. The model is widely used in population genetics, and can be used to make inferences about the population mutation rate <span class="math inline">\(\mu = 2 N u\)</span> from present-day allele frequency data, where <span class="math inline">\(u\)</span> is the per-individual per-generation rate at which mutations are introduced in the population.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <em>The population mutation rate measures the number of mutants that enter the population per generation</em>, which means it has units of individuals per time. <strong>In this problem, you will use maximum likelihood to make inferences about this parameter!</strong></p>
+<p>To learn more about the Wright-Fisher model (including how to simulate realizations), read <a href="https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html">these</a> notes.</p>
+<p><strong>1a.</strong> Read in the “WF_inference_data.csv” dataset, which can be found on the course website. The observations are frequencies of the <span class="math inline">\(A_1\)</span> allele in 52 replicate populations. For the purpose of this exercise, we will treat the allele frequencies as independent. This is reasonable if there is no gene flow between populations sampled.</p>
+<p><strong>1b.</strong> It can be shown that, when the WF model has been run out for a long enough time and with a large enough population size, the allele frequencies follow a <em>Dirichlet distribution</em>:</p>
+<p><span class="math display">\[f(p|\mu) = \frac{\Gamma(2\mu)}{(\Gamma(\mu))^2} (p(1-p))^\mu,\]</span></p>
+<p>where <span class="math inline">\(\Gamma(\cdot)\)</span> is the Gamma function (a generalization of the factorial). <strong>Write a function <code>eval_dirichlet()</code> that evaluates the probability density at a set (vector) of allele frequencies and value of <span class="math inline">\(\mu\)</span>.</strong> To evaluate the Gamma function at a scalar value, you can use the base R function <code>gamma()</code>.</p>
+<p>Test your function on the vector of allele frequencies <code>p = c(0.81,0.9)</code> and mutation rate <code>mu = 0.0001</code>. [0.5 mark]</p>
+<p><strong>1c.</strong> Assuming the allele frequency data are independent and all follow the Dirichlet distributed, the log-likelihood function for your data is</p>
+<p><span class="math display">\[\sum_{i=1}^{52} \ln f(p_i|\mu),\]</span></p>
+<p>where <span class="math inline">\(p_i\)</span> is the allele frequency in the <span class="math inline">\(i\)</span>th population and <span class="math inline">\(\mu\)</span> is a specific value of the mutation rate. The function you wrote in <code>eval_dirichlet</code> function evaluates <span class="math inline">\(f(p|\mu)\)</span> for allele frequencies that are supplied as a vector in its first argument and a specific value of the mutation rate which is specified in its second.</p>
+<p>Calling the function you wrote in (b), <strong>write a function that calculates the log-likelihood of the allele frequency data from the 52 populations.</strong> The function should have an argument corresponding to the value of the population mutation rate <span class="math inline">\(\mu\)</span>. [0.5 mark]</p>
+<p><strong>1d.</strong> Using the function from (c), evaluate the log-likelihood across a range of values for the parameter. A suitable range to use is from 10 to 30. Plot the likelihood as a function of <span class="math inline">\(\mu\)</span> over this range. What is the maximum likelihood estimator for <span class="math inline">\(\mu\)</span>? [1.5 mark]</p>
+<p><strong>1e.</strong> Build a <span class="math inline">\(95\%\)</span> confidence interval for <span class="math inline">\(\mu\)</span> by determining what values of <span class="math inline">\(\mu\)</span> are such that the log-likelihood is within 1.92 units of its maximum value, i.e., the value assumed when the estimator for <span class="math inline">\(\mu\)</span> is equal to its MLE. (The 1.92 quantity is the cutoff based on the approximate <span class="math inline">\(\chi^2\)</span> distribution of the likelihood ratio test statistic, which we have previously used to build confidence intervals and perform hypothesis tests.) [0.75 marks]</p>
+<p><strong>1f.</strong> Based on the confidence interval constructed in the previous question, test the hypotheses <span class="math inline">\(H_0 \colon \mu = 10\)</span> vs <span class="math inline">\(H_1 \colon \mu \neq 10\)</span> at significance level <span class="math inline">\(\alpha = 0.05\)</span>. [0.25 marks]</p>
 </section>
-<section id="command-line-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="command-line-1-mark">4. Command line (1 mark)</h2>
-<p>What commands would you run to create a directory named “mydir”, check mydir’s permissions, add <em>w</em>rite permissions for <em>u</em>sers, copy mydir to “mydir2” , and then remove mydir? <em>Hint: try running each step in your terminal to check if the output is what you expect</em> (1 mark)</p>
+<section id="inference-on-scaled-size-differences-5.5-marks" class="level2">
+<h2 class="anchored" data-anchor-id="inference-on-scaled-size-differences-5.5-marks">2. Inference on scaled size differences [5.5 marks]</h2>
+<p><strong>2a.</strong> Load the “SSDinMammals.csv” dataset into R.</p>
+<p><strong>2b.</strong> Mutate the dataframe to include a column, called <code>PropMassDiff</code>, which is male mass minus female mass divided male mass. (In other words, if <span class="math inline">\(M\)</span> is male mass and <span class="math inline">\(F\)</span> female mass, <code>PropMassDiff</code> is <span class="math inline">\((M-F)/M\)</span>.)</p>
+<p>Visualize the distribution of relative size differences using a <em>rug plot</em>. (You may need to look up the geom to do this…) There should be no y axis – we will add one later. [0.25 marks]</p>
+<p>Do you think, based on the histogram, that males are larger than females?</p>
+<p>Assume that proportional mass differences are independent and Normally distributed with an unknown mean and variance. The goal of this question will be to determine the most likely mean and variance for the scaled differences (a measure of the relative difference in mass between males and females), based on the likelihood function. Conceptually, this is similar to (a) — but requires looping over <em>two</em> parameters (the mean and variance of the Normal distribution), rather than one to determine where the log-likelihood achieves a maximum. The following questions walk you through how to maximize the log-likelihood with respect to both parameters.</p>
+<p><strong>2c.</strong> Generate a data frame/grid of means and variance <em>combinations</em> for which you will calculate the log-likelihood. Use mean values that range from -1 to 1 in increments of 0.005 and variance values from 0.01 to 0.1 in increments of 0.001. [0.25 marks]</p>
+<p><strong>2d.</strong> Write a function which evalutes the log-likelihood of observing the proportional size difference data, given we have assumed the observations are Normal and independent, for specific values of the Normal distribution (i.e., the mean and the variance). Because the mean and variance are the parameters we want to estimate, your function should have two arguments – the mean and variance of the Normal – and should return the associated log-likelihood. <em>Note: <code>dnorm()</code> has the standard deviation as an input, not variance. To get the standard deviation from the variance, take the square root.</em> [0.5 marks]</p>
+<p><strong>2e.</strong> Loop over rows of the grid of values you generated in (c). Store the log-likelihood values in a vector and combine this vector with the data frame of parameter (i.e., mean and variance) combinations. [0.75 marks]</p>
+<p><strong>2f.</strong> What is the most likely <em>combination</em> of the mean and variance for the proportional sizes, assuming normality and independence of observations? [0.25 marks]</p>
+<p><strong>2g.</strong> On top of the rug plot you made in (b), plot the distribution associated to the maximum likelihood estimator which you calculated in (f). To do this, evaluate the probability density for the Normal at the mean and variance which you have just estimated and overlay the values of the density on the rug plot. [1.25 marks]</p>
+<p><strong>2h.</strong> Based on the estimates for the mean and variance in the distribution of proportional size differences that you obtained in (f), do you think males are larger than females on average? Explain what property/properties of the previous plot led you to your conclusion. [0.25 marks]</p>
+<p><strong>2i.</strong> Group dataframe you created in (b) by Family and, for each group, calculate the <em>maximum</em> proportional size differences among all species. Store these data in a column called <code>PropMassDiffMax</code>. (This column represents the greatest relative deviation in size between males and females for species in the Family.) Then visualize the distribution of maximum proportional size differences using a histogram. [0.5 marks]</p>
+<p><strong>2j.</strong> A common way extreme value statistics are modeled is using the <a href="https://en.wikipedia.org/wiki/Gumbel_distribution">Gumbel distribution</a>. Assume that the maximum proportional size differences among families are independent and Gumbel distributed.</p>
+<p><strong>Find the maximum likelihood estimator for the two parameters of the Gumbel distribution, given these data.</strong> Report the MLEs for the location and scale parameters of the Gumbel. [1.5 marks]</p>
 </section>
-<section id="understanding-command-line-software-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-command-line-software-1-mark">5. Understanding command line software (1 mark)</h2>
-<p>Open the documentation for <a href="https://github.com/TobyBaril/EarlGrey">Earl Grey</a>, a software programme that identifies transposable elements in genomes. There may be a lot of unfamilliar terms on this web page, but we’ll just be skimming this page to practice identifying the kind of information command line software might require and how to provide that.</p>
-<ol type="a">
-<li><p>What three arguments (files/information) are required input for this software? (0.3 marks)</p></li>
-<li><p>What would you type into the command line to provide Earl Grey with those minimum command options? You don’t need to make up example text for this, just ensure you have the three <code>-</code> arguments written out. <em>Hint: search for “minimum command options” on the GitHub page and use the next line</em> (0.3 marks)</p></li>
-<li><p>Based on the visual overview of the software (or the “Example Outputs” section) on the GitHub page, what does this software output? (0.2 marks)</p></li>
-<li><p>What optional parameter (i.e.&nbsp;the <code>-</code> argument) does Earl Grey offer to display help information? Is this kind of help parameter common? <em>Hint: you can search for “help documentation” in your lecture notes</em> (0.2 marks)</p></li>
-</ol>
+<section id="a-mathematical-model-of-mrnaprotein-production-3-marks" class="level2">
+<h2 class="anchored" data-anchor-id="a-mathematical-model-of-mrnaprotein-production-3-marks">3. A mathematical model of mRNA/protein production [3 marks]</h2>
+<p>Let <span class="math inline">\(M\)</span> be the number of mRNAs in a cell and <span class="math inline">\(P\)</span> be the number of proteins that are made from that mRNA. Suppose mRNAs are made at rate <span class="math inline">\(\mu\)</span>, degraded at rate <span class="math inline">\(\gamma\)</span>, and translated into protein at rate <span class="math inline">\(\beta\)</span>. Protein molecules degrade at rate <span class="math inline">\(\nu\)</span>. A model for the number of mRNA and protein molecules is as follows:</p>
+<p><span class="math display">\[\frac{d M}{d t} = \mu - \gamma M - \beta M\]</span> <span class="math display">\[\frac{d P}{d t} = \beta M - \nu P\]</span></p>
+<p><strong>3a.</strong> Numerically solve this system of equations from time <span class="math inline">\(t=0\)</span> to time <span class="math inline">\(t=100\)</span> in increments of 0.1. Use the following parameter values: <span class="math inline">\(\mu = 25, \gamma = 0.1, \beta = 0.2, \nu = 0.01, M(0) = 50, P(0) = 0\)</span>.</p>
+<p><strong>Plot <span class="math inline">\(M(t)\)</span> from <span class="math inline">\(t=0\)</span> to <span class="math inline">\(t=100\)</span>.</strong> [1.5 mark]</p>
+<p><strong>3b</strong> Write a function to determine the solution to the system in (a) at time <span class="math inline">\(t=100\)</span> for a given value of <span class="math inline">\(\nu\)</span>, and with all other parameters and initial conditions fixed at the values provided in (a). Plot the solution at time <span class="math inline">\(t=100\)</span> for values of <span class="math inline">\(\nu\)</span> (i.e., protein degradation rate) between 0 and 1 in increments of 0.01. <span class="math inline">\(\nu\)</span> should be on the x axis and the solution at time 100 on the y. <em>Hint: to check if your answer is correct, see if it matches your intuition about how protein concentrations should change as the rate of degradation increases.</em> [1.25 marks]</p>
+<p><strong>3c.</strong> Interpret the results from (a) and (b). How do mRNA concentrations behave over time and how does (qualitatively) the steady-state concentration of protein depend on the degradation rate <span class="math inline">\(\nu\)</span>. [0.25 marks]</p>
 </section>
-<section id="github-1-mark" class="level2">
-<h2 class="anchored" data-anchor-id="github-1-mark">6. GitHub (1 mark)</h2>
-<ol type="a">
-<li>Make a Github account. You can do this at <a href="github.com">github.com</a>. What is your GitHub username? (1 mark)</li>
-</ol>
+<section id="take-a-break-1-mark" class="level2">
+<h2 class="anchored" data-anchor-id="take-a-break-1-mark">4. Take a break [1 mark]</h2>
+<p>Execute the following code chunk:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(praise)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">replicate</span>(<span class="dv">100</span>, <span class="fu">praise</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="glms-power-analysis-and-fitting-7-marks" class="level2">
+<h2 class="anchored" data-anchor-id="glms-power-analysis-and-fitting-7-marks">5. GLMs: power analysis and fitting [7 marks]</h2>
+<p>The horseshoe crab <em>Limulus polyphemus</em> has two male reproductive morphs; the smaller males have a a special appendage known, which are used to attach to female crabs. When female crabs dig a nest and lay eggs on the beach, the attached male can then fertilize the eggs. Alternatively, “satellite” males can crowd around nesting pairs and then fertilize eggs laid. In this question, you will</p>
+<ul>
+<li>do a <em>power analysis</em> to determine the effect size, under a Poisson regression model<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, is determined to be significant at least 99% of the time</li>
+<li>fit a Poisson regression model to satellite crab count data to determine if female traits are associated with more satellite crabs</li>
+<li>interpret the Poisson regression coefficients (be sure to make note of the units!)</li>
+<li>perform model selection!</li>
+</ul>
+<p>The data are retrieved below. Variables include female color, spine condition, carapace width (cm), mass (kg), and number of satellite males.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>satellites_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://eeb313.github.io/lectures/data/satellites.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 173 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): color, spine
+dbl (3): width.cm, nsatellites, mass.kg
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(satellites_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  color        spine    width.cm nsatellites mass.kg
+  &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+1 medium       both.bad     28.3           8    3.05
+2 dark-medium  both.bad     22.5           0    1.55
+3 light-medium good         26             9    2.3 
+4 dark-medium  both.bad     24.8           0    2.1 
+5 dark-medium  both.bad     26             4    2.6 
+6 medium       both.bad     23.8           0    2.1 </code></pre>
+</div>
+</div>
+<p><strong>Before</strong> we analyze the data, we will determine the effect size we can reliably estimate from the data at hand at a given significance level. This is typically done before collecting data, but for the purposes of demonstration we will have you do it right before diving into fitting a GLM to the data.</p>
+<p><strong>4a.</strong> Define statistical power in the context of regression (i.e., where the null hypothesis is that an effect size is zero and the alternative hypothesis is that it is non-zero) in your own words. [0.25 marks]</p>
+<p><strong>4b.</strong> The following function draws observations from a Poisson regression model <span class="math inline">\(Y \sim \text{Poisson}(\lambda)\)</span>, where <span class="math inline">\(\log \lambda = \beta_1 x\)</span>. The parameter <span class="math inline">\(\lambda\)</span> is the expected number of satellite males, and <span class="math inline">\(\beta_1\)</span> is the size of the effect of increasing female carapace width <span class="math inline">\(x\)</span> on <span class="math inline">\(\log \lambda\)</span>. The function has one <em>scalar</em> argument, <code>beta</code>. (This means <code>beta</code> = 3 is a reasonable input but <code>beta</code> = c(3,4) is not.) The function returns a data frame of trait values <code>x</code> in the first column and associated number of satellite crabs <code>y</code> in the second.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">173</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>data_generator <span class="ot">&lt;-</span> <span class="cf">function</span>(beta){</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">size =</span> n, <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">35</span>, <span class="at">by =</span> <span class="fl">0.001</span>), <span class="at">replace =</span> T)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  obs <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    obs[i] <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1</span>, <span class="fu">exp</span>(beta<span class="sc">*</span>x[i]))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(x, <span class="at">y =</span> obs))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use this function to simulate draws from the statistical model when <span class="math inline">\(\beta=0.0001,0.001,0.01,0.1\)</span>. Bind these observations into a data frame with a column that specifies the effect size associated to a given observation. Display the head of this data frame, and make a scatter plot of <span class="math inline">\(y\)</span> against <span class="math inline">\(x\)</span>, i.e., the number of satellite crabs against carapace width, <em>faceted by effect size</em>. Allow the <span class="math inline">\(y\)</span> axis on each plot to be free. [1 mark]</p>
+<p><strong>4c.</strong> Write a function to determine, for a given effect size, the power of a Poisson regression of number of satellite males on carapace width. To do this, you will have to</p>
+<ul>
+<li>write a for loop to simulate <code>sims</code> = 1000 draws of the Poisson regression model via <code>data_generator()</code></li>
+<li>fit a Poisson regression of number of satellite males on carapace width using each simulated dataset</li>
+<li>extract the <span class="math inline">\(p\)</span>-values associated to each model</li>
+<li>calculate outside of the for loop what proportion of the <span class="math inline">\(p\)</span>-values which are <span class="math inline">\(&lt; 0.05\)</span></li>
+</ul>
+<p>The proportion of <span class="math inline">\(p\)</span> values which are <span class="math inline">\(&lt; 0.05\)</span> is your estimate of power at the effect size, sample size, and significance level specified. This is because it gives, for a large number of draws from the Poisson regression model at a given effect and for <span class="math inline">\(x\)</span> distributed according to our expectations for carapace width, the fraction of fitted models for which the effect was determined to be <span class="math inline">\(\neq 0\)</span>. [1.75 marks]</p>
+<p><strong>4d.</strong> Using the function from the previous question, estimate the power of the Poisson regression model for <span class="math inline">\(\beta = 0,0.025,0.05,0.075,0.1\)</span>. Display the effect sizes and associated power estimates in a table. At what effect size is the power for a Poisson regression with <span class="math inline">\(n = 173\)</span> observations &gt;99%? [0.75 marks]</p>
+<p><strong>4e.</strong> Using the satellites data, fit a Poisson regression of the number of satellite males on carapace width. Report the regression coefficients, associated <span class="math inline">\(p\)</span> values, and AIC. [0.5 marks]</p>
+<p><strong>4f.</strong> Recall the description of the Poisson regression model in question 4b. How should we interpret the regression coefficient associated to carapace width? <em>Hint: think about transformations applied to the response.</em> [0.5 marks]</p>
+<p><strong>4g.</strong> Plot the data and the fitted model from 4e. The regression line should be curvilinear on the data scale. [1 mark]</p>
+<p><strong>4h.</strong> Using the satellites data, fit the following Poisson regressions:</p>
+<ul>
+<li>the number of satellite males on female mass</li>
+<li>the number of satellite males on carapace width and female mass</li>
+<li>the number of satellite males on carapace width, female mass, and their interaction</li>
+</ul>
+<p>Perform model selection: report which of these models (including the one from 4e) is the best fit to the data. <strong>Report the model that is the best fit to the data and its AIC. Are there any models with AICs that are close? What does this mean?</strong> [1.25 mark]</p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>To make inference under the model tractable, it is actually an <em>approximation</em> to the discrete WF model is used, in which it is assumed the <span class="math inline">\(N\)</span> is large and the per-individual mutation rate is small.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This is a special kind of generalized linear model! The Poisson distribution models count data, like the number of satellite males at a beach.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -970,13 +1060,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../assignments/assignment-00.html" class="pagination-link" aria-label="Assignment00: individual interest description">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment00: individual interest description</span>
+      <a href="../assignments/assignment-05.html" class="pagination-link" aria-label="Assignment 05: linear models, model selection, and multivariate statistics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment 05: linear models, model selection, and multivariate statistics</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-02.html" class="pagination-link" aria-label="Assignment 02: data wrangling">
-        <span class="nav-page-text">Assignment 02: data wrangling</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../projects.html" class="pagination-link" aria-label="Project description">
+        <span class="nav-page-text">Project description</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

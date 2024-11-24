@@ -111,7 +111,7 @@ If you require accommodations for a disability, or have any accessibility concer
 | Introduction to inference                   | Individual     | Quercus           | Oct 15     | 8     |
 | Project proposal                            | Group          | GitHub            | Oct 17     | 3     |
 | LMs, model selection, and multivariate      | Individual     | Quercus           | Oct 24     | 8     |
-| Challenge assignment                        | Individual     | Quercus           | Nov 15     | 20    |
+| Challenge assignment                        | Individual     | Quercus           | Nov 17     | 20    |
 | Mid-project update                          | Group          | GitHub            | Nov 21     | 6     |
 | Presentation                                | Group          | In-class          | Dec 03     | 10    |
 | Final report                                | Group          | GitHub            | Dec 10     | 20    |
@@ -120,7 +120,7 @@ There are 100 marks in total. Your final course mark will be the sum of your ass
 
 Assignments will be distributed and submitted in the R Markdown format via Quercus. Assignments will typically be handed out on Thursdays after class and are due at 8:00 PM on the following Thursday. 
 
-The Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Nov 11, and it will be due 11:59 PM on Nov 15. Students are welcome to work in a group on this assignment, but each student must submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!
+The Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Nov 11, and it will be due 11:59 PM on Nov 17. Students are welcome to work in a group on this assignment, but each student must submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!
 
 _Per our stance on supporting student's mental health, we are happy to accommodate a 72-hour extension for *one* of the assignments, no questions asked. Otherwise, except under extenuating circumstances, there will be a penalty of 5% per day (including weekends) for all late submissions. If you foresee needing an extension, please email Zoë AND Mete as soon as possible. This policy does not apply to the Challenge Assignment, Presentation, or Final Report._
 

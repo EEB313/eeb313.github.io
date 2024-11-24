@@ -1,0 +1,165 @@
+---
+title: "Challenge assignment (20 marks)"
+output: pdf_document
+---
+
+```{r, message=F, warning=F}
+require(tidyverse)
+require(deSolve)
+```
+
+*To submit this assignment, upload the full document to Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`.*
+
+Part of being an effective scientist involves being able to solve problems you have not encountered before. This is certainly true of programming as well, where problems are typically solved by furious bouts of Googling, reading documentation, and trial-and-error of proposed solutions. In this assignment, like previous ones, you will be evaluated on your ability to perform scientific calculations (e.g., fit statistical models to data) using R. Some the problems might require more research and effort on your part. But, by now, you should all have all the tools required to work through and search for solutions to the problems below. Good luck, and let us know if you have any questions!
+
+# 1. Estimation of the population mutation rate [3.5 marks]
+
+The Wright-Fisher model describes how, in a haploid population of constant size $N$, the frequency of two alleles ($A_1$ and $A_2$) at a locus change due to random sampling of gametes and mutation. The rules of the WF model are very simple --- the population size is constant, generations are discrete and non-overlapping, and children choose their parents (regardless of type) at random (i.e., uniformly among the parents). This means that the number of individuals that carry the $A_1$ allele in generation $n+1$ is Binomial($N$,$p_{n}$) where $p_n$ is the frequency of $A_1$s in the previous generation. The model is widely used in population genetics, and can be used to make inferences about the population mutation rate $\mu = 2 N u$ from present-day allele frequency data, where $u$ is the per-individual per-generation rate at which mutations are introduced in the population.^[To make inference under the model tractable, it is actually an _approximation_ to the discrete WF model is used, in which it is assumed the $N$ is large and the per-individual mutation rate is small.] _The population mutation rate measures the number of mutants that enter the population per generation_, which means it has units of individuals per time. **In this problem, you will use maximum likelihood to make inferences about this parameter!** 
+
+To learn more about the Wright-Fisher model (including how to simulate realizations), read [these](https://stephens999.github.io/fiveMinuteStats/wright_fisher_model.html) notes.
+
+\vspace{12pt}
+
+**1a.** Read in the "WF_inference_data.csv" dataset, which can be found on the course website. The observations are frequencies of the $A_1$ allele in 52 replicate populations. For the purpose of this exercise, we will treat the allele frequencies as independent. This is reasonable if there is no gene flow between populations sampled.
+
+**1b.** It can be shown that, when the WF model has been run out for a long enough time and with a large enough population size, the allele frequencies follow a _Dirichlet distribution_:
+
+$$f(p|\mu) = \frac{\Gamma(2\mu)}{(\Gamma(\mu))^2} (p(1-p))^\mu,$$
+
+where $\Gamma(\cdot)$ is the Gamma function (a generalization of the factorial). **Write a function `eval_dirichlet()` that evaluates the probability density at a set (vector) of allele frequencies and value of $\mu$.** To evaluate the Gamma function at a scalar value, you can use the base R function `gamma()`.
+
+Test your function on the vector of allele frequencies `p = c(0.81,0.9)` and mutation rate `mu = 0.0001`. [0.5 mark]
+
+**1c.** Assuming the allele frequency data are independent and all follow the Dirichlet distributed, the log-likelihood function for your data is
+
+$$\sum_{i=1}^{52} \ln f(p_i|\mu),$$
+
+\vspace{3pt}
+
+where $p_i$ is the allele frequency in the $i$th population and $\mu$ is a specific value of the mutation rate. The function you wrote in `eval_dirichlet` function evaluates $f(p|\mu)$ for allele frequencies that are supplied as a vector in its first argument and a specific value of the mutation rate which is specified in its second.
+
+Calling the function you wrote in (b), **write a function that calculates the log-likelihood of the allele frequency data from the 52 populations.** The function should have an argument corresponding to the value of the population mutation rate $\mu$. [0.5 mark]
+
+**1d.** Using the function from (c), evaluate the log-likelihood across a range of values for the parameter. A suitable range to use is from 10 to 30. Plot the likelihood as a function of $\mu$ over this range. What is the maximum likelihood estimator for $\mu$? [1.5 mark]
+
+**1e.** Build a $95\%$ confidence interval for $\mu$ by determining what values of $\mu$ are such that the log-likelihood is within 1.92 units of its maximum value, i.e., the value assumed when the estimator for $\mu$ is equal to its MLE. (The 1.92 quantity is the cutoff based on the approximate $\chi^2$ distribution of the likelihood ratio test statistic, which we have previously used to build confidence intervals and perform hypothesis tests.) [0.75 marks]
+
+**1f.** Based on the confidence interval constructed in the previous question, test the hypotheses $H_0 \colon \mu = 10$ vs $H_1 \colon \mu \neq 10$ at significance level $\alpha = 0.05$. [0.25 marks]
+
+# 2. Inference on scaled size differences [5.5 marks]
+
+**2a.** Load the "SSDinMammals.csv" dataset into R.
+
+**2b.** Mutate the dataframe to include a column, called `PropMassDiff`, which is male mass minus female mass divided male mass. (In other words, if $M$ is male mass and $F$ female mass, `PropMassDiff` is $(M-F)/M$.)
+
+Visualize the distribution of relative size differences using a _rug plot_. (You may need to look up the geom to do this...) There should be no y axis -- we will add one later. [0.25 marks]
+
+Do you think, based on the histogram, that males are larger than females?
+
+Assume that proportional mass differences are independent and Normally distributed with an unknown mean and variance. The goal of this question will be to determine the most likely mean and variance for the scaled differences (a measure of the relative difference in mass between males and females), based on the likelihood function. Conceptually, this is similar to (a) --- but requires looping over _two_ parameters (the mean and variance of the Normal distribution), rather than one to determine where the log-likelihood achieves a maximum. The following questions walk you through how to maximize the log-likelihood with respect to both parameters.
+
+**2c.** Generate a data frame/grid of means and variance _combinations_ for which you will calculate the log-likelihood. Use mean values that range from -1 to 1 in increments of 0.005 and variance values from 0.01 to 0.1 in increments of 0.001. [0.25 marks]
+
+**2d.** Write a function which evalutes the log-likelihood of observing the proportional size difference data, given we have assumed the observations are Normal and independent, for specific values of the Normal distribution (i.e., the mean and the variance). Because the mean and variance are the parameters we want to estimate, your function should have two arguments -- the mean and variance of the Normal -- and should return the associated log-likelihood. _Note: `dnorm()` has the standard deviation as an input, not variance. To get the standard deviation from the variance, take the square root._ [0.5 marks]
+
+**2e.** Loop over rows of the grid of values you generated in (c). Store the log-likelihood values in a vector and combine this vector with the data frame of parameter (i.e., mean and variance) combinations. [0.75 marks]
+
+**2f.** What is the most likely _combination_ of the mean and variance for the proportional sizes, assuming normality and independence of observations? [0.25 marks]
+
+**2g.** On top of the rug plot you made in (b), plot the distribution associated to the maximum likelihood estimator which you calculated in (f). To do this, evaluate the probability density for the Normal at the mean and variance which you have just estimated and overlay the values of the density on the rug plot. [1.25 marks]
+
+**2h.** Based on the estimates for the mean and variance in the distribution of proportional size differences that you obtained in (f), do you think males are larger than females on average? Explain what property/properties of the previous plot led you to your conclusion. [0.25 marks]
+
+**2i.** Group dataframe you created in (b) by Family and, for each group, calculate the _maximum_ proportional size differences among all species. Store these data in a column called `PropMassDiffMax`. (This column represents the greatest relative deviation in size between males and females for species in the Family.) Then visualize the distribution of maximum proportional size differences using a histogram. [0.5 marks]
+
+**2j.** A common way extreme value statistics are modeled is using the [Gumbel distribution](https://en.wikipedia.org/wiki/Gumbel_distribution). Assume that the maximum proportional size differences among families are independent and Gumbel distributed.
+
+**Find the maximum likelihood estimator for the two parameters of the Gumbel distribution, given these data.** Report the MLEs for the location and scale parameters of the Gumbel. [1.5 marks]
+
+# 3. A mathematical model of mRNA/protein production [3 marks]
+
+Let $M$ be the number of mRNAs in a cell and $P$ be the number of proteins that are made from that mRNA. Suppose mRNAs are made at rate $\mu$, degraded at rate $\gamma$, and translated into protein at rate $\beta$. Protein molecules degrade at rate $\nu$. A model for the number of mRNA and protein molecules is as follows:
+
+$$\frac{d M}{d t} = \mu - \gamma M - \beta M$$
+$$\frac{d P}{d t} = \beta M - \nu P$$
+
+**3a.** Numerically solve this system of equations from time $t=0$ to time $t=100$ in increments of 0.1. Use the following parameter values: $\mu = 25, \gamma = 0.1, \beta = 0.2, \nu = 0.01, M(0) = 50, P(0) = 0$. 
+
+**Plot $M(t)$ from $t=0$ to $t=100$.** [1.5 mark]
+
+**3b** Write a function to determine the solution to the system in (a) at time $t=100$ for a given value of $\nu$, and with all other parameters and initial conditions fixed at the values provided in (a). Plot the solution at time $t=100$ for values of $\nu$ (i.e., protein degradation rate) between 0 and 1 in increments of 0.01. $\nu$ should be on the x axis and the solution at time 100 on the y. _Hint: to check if your answer is correct, see if it matches your intuition about how protein concentrations should change as the rate of degradation increases._ [1.25 marks]
+
+**3c.** Interpret the results from (a) and (b). How do mRNA concentrations behave over time and how does (qualitatively) the steady-state concentration of protein depend on the degradation rate $\nu$. [0.25 marks]
+
+# 4. Take a break [1 mark]
+
+Execute the following code chunk:
+
+```{r}
+library(praise)
+replicate(100, praise())
+```
+
+# 5. GLMs: power analysis and fitting [7 marks]
+
+The horseshoe crab _Limulus polyphemus_ has two male reproductive morphs; the smaller males have a a special appendage known, which are used to attach to female crabs. When female crabs dig a nest and lay eggs on the beach, the attached male can then fertilize the eggs. Alternatively, "satellite" males can crowd around nesting pairs and then fertilize eggs laid. In this question, you will
+
+- do a _power analysis_ to determine the effect size, under a Poisson regression model^[This is a special kind of generalized linear model! The Poisson distribution models count data, like the number of satellite males at a beach.], is determined to be significant at least 99% of the time
+- fit a Poisson regression model to satellite crab count data to determine if female traits are associated with more satellite crabs
+- interpret the Poisson regression coefficients (be sure to make note of the units!)
+- perform model selection!
+
+The data are retrieved below. Variables include female color, spine condition, carapace width (cm), mass (kg), and number of satellite males.
+
+```{r}
+satellites_data <- read_csv("https://eeb313.github.io/lectures/data/satellites.csv")
+head(satellites_data)
+```
+
+**Before** we analyze the data, we will determine the effect size we can reliably estimate from the data at hand at a given significance level. This is typically done before collecting data, but for the purposes of demonstration we will have you do it right before diving into fitting a GLM to the data.
+
+**4a.** Define statistical power in the context of regression (i.e., where the null hypothesis is that an effect size is zero and the alternative hypothesis is that it is non-zero) in your own words. [0.25 marks]
+
+**4b.** The following function draws observations from a Poisson regression model $Y \sim \text{Poisson}(\lambda)$, where $\log \lambda = \beta_1 x$. The parameter $\lambda$ is the expected number of satellite males, and $\beta_1$ is the size of the effect of increasing female carapace width $x$ on $\log \lambda$. The function has one _scalar_ argument, `beta`. (This means `beta` = 3 is a reasonable input but `beta` = c(3,4) is not.) The function returns a data frame of trait values `x` in the first column and associated number of satellite crabs `y` in the second.
+
+```{r}
+n <- 173
+
+data_generator <- function(beta){
+  x <- sample(size = n, seq(20, 35, by = 0.001), replace = T)
+  obs <- c()
+  
+  for (i in 1:n){
+    obs[i] <- rpois(1, exp(beta*x[i]))
+  }
+  
+  return(data.frame(x, y = obs))
+}
+```
+
+Use this function to simulate draws from the statistical model when $\beta=0.0001,0.001,0.01,0.1$. Bind these observations into a data frame with a column that specifies the effect size associated to a given observation. Display the head of this data frame, and make a scatter plot of $y$ against $x$, i.e., the number of satellite crabs against carapace width, _faceted by effect size_. Allow the $y$ axis on each plot to be free. [1 mark]
+
+**4c.** Write a function to determine, for a given effect size, the power of a Poisson regression of number of satellite males on carapace width. To do this, you will have to
+
+- write a for loop to simulate `sims` = 1000 draws of the Poisson regression model via `data_generator()`
+- fit a Poisson regression of number of satellite males on carapace width using each simulated dataset
+- extract the $p$-values associated to each model
+- calculate outside of the for loop what proportion of the $p$-values which are $< 0.05$
+
+The proportion of $p$ values which are $< 0.05$ is your estimate of power at the effect size, sample size, and significance level specified. This is because it gives, for a large number of draws from the Poisson regression model at a given effect and for $x$ distributed according to our expectations for carapace width, the fraction of fitted models for which the effect was determined to be $\neq 0$. [1.75 marks]
+
+**4d.** Using the function from the previous question, estimate the power of the Poisson regression model for $\beta = 0,0.025,0.05,0.075,0.1$. Display the effect sizes and associated power estimates in a table. At what effect size is the power for a Poisson regression with $n = 173$ observations >99%? [0.75 marks]
+
+**4e.** Using the satellites data, fit a Poisson regression of the number of satellite males on carapace width. Report the regression coefficients, associated $p$ values, and AIC. [0.5 marks]
+
+**4f.** Recall the description of the Poisson regression model in question 4b. How should we interpret the regression coefficient associated to carapace width? _Hint: think about transformations applied to the response._ [0.5 marks]
+
+**4g.** Plot the data and the fitted model from 4e. The regression line should be curvilinear on the data scale. [1 mark]
+
+**4h.** Using the satellites data, fit the following Poisson regressions:
+
+- the number of satellite males on female mass
+- the number of satellite males on carapace width and female mass
+- the number of satellite males on carapace width, female mass, and their interaction
+
+Perform model selection: report which of these models (including the one from 4e) is the best fit to the data. **Report the model that is the best fit to the data and its AIC. Are there any models with AICs that are close? What does this mean?** [1.25 mark]
