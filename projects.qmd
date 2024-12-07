@@ -192,7 +192,7 @@ Option 2: Each of the following criteria are scored out of 3: 3 == excellent, 2 
 
 Each of the following criteria are scored out of 3: 3 == excellent, 2 == adequate, 1 == needs improvement.
 
-1.  Content -- background and methods
+1.  Context -- background and methods
     -   The context for the study, along with hypotheses and predictions, are clearly set up.
     -   Data source(s), manipulations, and statistical tests used are succinctly and adequately described.
     -   If modeling, the relationship between the question/problem addressed and modeling approach is well-explained, and previous work (modeling or otherwise) is discussed.
