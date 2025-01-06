@@ -1,7 +1,7 @@
 */.quarto/
 *.quarto
 */.DS_Store
-.DS_Store
-.Rhistory
+*.DS_Store
+*.Rhistory
 
 /.quarto/
