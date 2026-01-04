@@ -5,3 +5,4 @@
 *.Rhistory
 
 /.quarto/
+.Rproj.user
