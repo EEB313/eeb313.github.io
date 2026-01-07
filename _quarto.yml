@@ -3,71 +3,71 @@ project:
 
 book:
   title: "EEB313: Quantitative Methods in R for Biology"
-  author: "Mete K. Yuksel & Zoë Humphries"
+  author: "Alison Hill"
   date: today
   chapters:
     - index.qmd
-    - about-us.qmd
+    #- about-us.qmd
     - downloadingR.qmd
     - part: "Lectures"
       chapters:
       - lectures/lec01-r_and_rstudio.qmd
       - lectures/lec02-basic-r.qmd
-      - lectures/lec03-command_git.qmd
-      - lectures/lec04-data-wrangling.qmd
-      - lectures/lec05-data-visualization.qmd
-      - lectures/lec06-exploratory-data-analysis.qmd
-      - lectures/lec07-self-directed-analysis.qmd
-      - lectures/lec08-intro-inference-1.qmd
-      - lectures/lec09-intro-inference-2.qmd
-      - lectures/lec10-linear-models-1.qmd
-      - lectures/lec11-linear-models-2.qmd
-      - lectures/lec12-model-selection.qmd
-      - lectures/lec13-intro-to-multivariate-stats.qmd
-      - lectures/lec14-mathematical-models-1.qmd
-      - lectures/lec15-mathematical-models-2.qmd
+      # - lectures/lec03-command_git.qmd
+      # - lectures/lec04-data-wrangling.qmd
+      # - lectures/lec05-data-visualization.qmd
+      # - lectures/lec06-exploratory-data-analysis.qmd
+      # - lectures/lec07-self-directed-analysis.qmd
+      # - lectures/lec08-intro-inference-1.qmd
+      # - lectures/lec09-intro-inference-2.qmd
+      # - lectures/lec10-linear-models-1.qmd
+      # - lectures/lec11-linear-models-2.qmd
+      # - lectures/lec12-model-selection.qmd
+      # - lectures/lec13-intro-to-multivariate-stats.qmd
+      # - lectures/lec14-mathematical-models-1.qmd
+      # - lectures/lec15-mathematical-models-2.qmd
     - part: "Assignments"
-      chapters:
-      - assignments/assignment-00.qmd
-      - assignments/assignment-01.qmd
-      - assignments/assignment-02.qmd
-      - assignments/assignment-03.qmd
-      - assignments/assignment-04.qmd
-      - assignments/assignment-05.qmd
-      - assignments/challenge-assignment.qmd
+      # chapters:
+      # - assignments/assignment-00.qmd
+      # - assignments/assignment-01.qmd
+      # - assignments/assignment-02.qmd
+      # - assignments/assignment-03.qmd
+      # - assignments/assignment-04.qmd
+      # - assignments/assignment-05.qmd
+      # - assignments/challenge-assignment.qmd
     - part: "Project"
-      chapters:
-      - projects.qmd
-      - projects_databases.qmd
+      # chapters:
+      # - projects.qmd
+      # - projects_databases.qmd
     - part: "Datasets"
-      chapters:
-        - text: "portal_data.csv"
-          href: lectures/data/portal_data.csv
-        - text: "pseudo.ara.busco"
-          href: lectures/data/pseudo.ara.busco
-        - text: "pseudo.LTRs"
-          href: lectures/data/pseudo.LTRs
-        - text: "disease_distance.csv"
-          href: lectures/data/disease_distance.csv
-        - text: "SSDinMammals.csv"
-          href: lectures/data/SSDinMammals.csv
-        - text: "medicago.csv"
-          href: lectures/data/medicago.csv
-        - text: "bmr.csv"
-          href: lectures/data/bmr.csv
-        - text: "Pigot2020.csv"
-          href: lectures/data/Pigot2020.csv
-        - text: "influenza_cities.csv"
-          href: lectures/data/influenza_cities.csv
-        - text: "meas.csv"
-          href: lectures/data/meas.csv
-        - text: "satellites.csv"
-          href: lectures/data/satellites.csv
-        - text: "WF_inference_data.csv"
-          href: lectures/data/WF_inference_data.csv
-    - part: "Miscellaneous notes"
-      chapters:
-      - review-for-challenge.qmd
+      # chapters:
+      #   - text: "portal_data.csv"
+      #     href: lectures/data/portal_data.csv
+      #   - text: "pseudo.ara.busco"
+      #     href: lectures/data/pseudo.ara.busco
+      #   - text: "pseudo.LTRs"
+      #     href: lectures/data/pseudo.LTRs
+      #   - text: "disease_distance.csv"
+      #     href: lectures/data/disease_distance.csv
+      #   - text: "SSDinMammals.csv"
+      #     href: lectures/data/SSDinMammals.csv
+      #   - text: "medicago.csv"
+      #     href: lectures/data/medicago.csv
+      #   - text: "bmr.csv"
+      #     href: lectures/data/bmr.csv
+      #   - text: "Pigot2020.csv"
+      #     href: lectures/data/Pigot2020.csv
+      #   - text: "influenza_cities.csv"
+      #     href: lectures/data/influenza_cities.csv
+      #   - text: "meas.csv"
+      #     href: lectures/data/meas.csv
+      #   - text: "satellites.csv"
+      #     href: lectures/data/satellites.csv
+      #   - text: "WF_inference_data.csv"
+      #     href: lectures/data/WF_inference_data.csv
+    # - part: "Miscellaneous notes"
+    #   chapters:
+    #   - review-for-challenge.qmd
   repo-url: https://github.com/EEB313/eeb313.github.io
   sidebar:
     search: true
@@ -81,35 +81,35 @@ format:
     code-fold: false
     code-overflow: wrap
 
-extra_files:
-  - assignment-00.Rmd
-  - assignment-01.Rmd
-  - assignment-02.Rmd
-  - assignment-03.Rmd
-  - assignment-04.Rmd
-  - assignment-05.Rmd
-  - assignment-00.qmd
-  - assignment-01.qmd
-  - assignment-02.qmd
-  - assignment-03.qmd
-  - assignment-04.qmd
-  - assignment-05.qmd
-  - challenge-assignment.qmd
-  - challenge-assignment.Rmd
-  - lec07-self-directed-analysis.qmd
-  - lec07-self-directed-analysis.Rmd
-  - review-for-challenge.qmd
-  - review-for-challenge.Rmd
-  - portal_data.csv
-  - pseudo.ara.busco
-  - pseudo.LTRs
-  - pseudoMol_Kdist.txt
-  - SSDinMammals.csv
-  - disease_distance.csv
-  - medicago.csv
-  - bmr.csv
-  - Pigot2020.csv
-  - influenza_cities.csv
-  - meas.csv
-  - satellites.csv
-  - WF_inference_data.csv
+# extra_files:
+#   - assignment-00.Rmd
+#   - assignment-01.Rmd
+#   - assignment-02.Rmd
+#   - assignment-03.Rmd
+#   - assignment-04.Rmd
+#   - assignment-05.Rmd
+#   - assignment-00.qmd
+#   - assignment-01.qmd
+#   - assignment-02.qmd
+#   - assignment-03.qmd
+#   - assignment-04.qmd
+#   - assignment-05.qmd
+#   - challenge-assignment.qmd
+#   - challenge-assignment.Rmd
+#   - lec07-self-directed-analysis.qmd
+#   - lec07-self-directed-analysis.Rmd
+#   - review-for-challenge.qmd
+#   - review-for-challenge.Rmd
+#   - portal_data.csv
+#   - pseudo.ara.busco
+#   - pseudo.LTRs
+#   - pseudoMol_Kdist.txt
+#   - SSDinMammals.csv
+#   - disease_distance.csv
+#   - medicago.csv
+#   - bmr.csv
+#   - Pigot2020.csv
+#   - influenza_cities.csv
+#   - meas.csv
+#   - satellites.csv
+#   - WF_inference_data.csv

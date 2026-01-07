@@ -1,8 +1,7 @@
-# Installing R & Ubuntu {-}
+# Installing R {.unnumbered}
 
 ## Introduction
-
-This course makes use of R and RStudio, as well as the command line. The goal of these notes is to help you install R and Rstudio and, if you use a Windows machine, to install Ubuntu. If you have any issues, let's resolve them in advance so that you can make the most of our time together! The goal here is to ensure that your computer is set up for the rest of the course. **If you can't complete these steps, please email Mete and Zoë as soon as possible.**
+This course makes use of R and RStudio, as well as the command line. The goal of these notes is to help you install them both. If you have any issues, let's resolve them in advance so that you can make the most of our time together! The goal here is to ensure that your computer is set up for the rest of the course.
 
 ## Installing R & RStudio
 
@@ -12,7 +11,7 @@ Note: MacBook users with an Apple Silicon chip (e.g., M1 or M2) should install t
 
 2. **Install [RStudio](https://posit.co/download/rstudio-desktop/)**, a graphical  user interface (GUI) for R. Click the link under "2: Install RStudio". RStudio comes with a text editor, so there is no immediate need to install a stand-alone editor.
 
-If R is already installed, **ensure that the R version is 4.0 or higher.** You can do this by opening RStudio, where you should see a multi-section window like below. Locate the quadrant named "Console", and put your cursor at the start of the prompt indicated by the `>` symbol. Type `sessionInfo()` - make sure that only the I at the start of Info is capitalized and you are including the round brackets. Press enter to run this command and R should return an output to you. The first line shows what version of R is installed. Ensure that the R version installed is at least 4.0.
+If R is already installed, **ensure that the R version is 4.5.2 (the latest).** You can do this by opening RStudio, where you should see a multi-section window like below. Locate the quadrant named "Console", and put your cursor at the start of the prompt indicated by the `>` symbol. Type `sessionInfo()` - make sure that only the I at the start of Info is capitalized and you are including the round brackets. Press enter to run this command and R should return an output to you. The first line shows what version of R is installed. Ensure that the R version installed is at least 4.0.
 
 ## Installing R packages {-}
 
@@ -40,17 +39,3 @@ During installation, if you ever get the below message, click "No".
 If you get the message "Do you want to install from sources the packages which need compilation? (Yes/no/cancel)" in the Console, type "Yes" and press enter.
 
 2. **Check that the tinytex and tidyverse packages have been installed correctly**. To do this, go to the bottom right pane and click the tab for "Packages". If you can search for and find the below packages, then they have been installed! They do not need to be checked off. Alternatively, go to the Console and type `library(tidyverse)` to verify that the package is installed. An error along the lines "there is no package called tidyverse" will be returned if the package is not installed.
-
-## Installing Ubuntu
-
-If you are a Windows user, you will need to install Ubuntu before the command line and GitHub lecture. (If you are a Mac user, it is safe to stop here.) The steps to install Unbuntu are as follows. Do not attempt to follow these instructions while your computer is plugged into an electrical outlet.
-
-1. Search for "Turn Windows features on or off" in the Windows search bar and ensure that "Windows Subsystem for Linux" is turned on. This will force your machine to restart.
-2. Download Ubuntu from [this link](https://apps.microsoft.com/detail/9PDXGNCFSCZV?hl=en-ca&gl=CA).
-3. Open the app once installed. The app will say it is installing and, once finished, will prompt you to make a username and password. (The password won't show up, but the keystrokes are being recognized. You will be asked to confirm the password, too.)
-
-Importantly, you can open Ubuntu via Command Prompt by typing ubuntu. Here is a picture illustrating how to do this:
-
-![](figures/command_promt.png){width=100%}
-
-After following these steps, you can check everything has been installed correctly by going to File Explorer and verifying that there is a Linux tab -- scroll all the way down and look for a penguin!

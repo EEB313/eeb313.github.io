@@ -1,143 +1,206 @@
-# Syllabus {.unnumbered}
+# Syllabus: EEB 313 Winter 2026 {.unnumbered}
 
-## Land Acknowledgement
+## Course overview
 
-Although our students come from many locations around the world, we wish to recognize the land on which the University of Toronto was built. This land has historically been and still is the home of the Huron-Wendat, the Seneca, and the Mississaugas of the Credit River.  
+This course covers foundational concepts in scientific computing and data analytics using the programming language R, with applications in ecology and evolutionary biology. Using interactive instructional sessions and group work, students will learn to program mathematical calculations and simple algorithms, to analyze and visualize complex datasets, to implement models to simulate biological population dynamics, and to document and disseminate their code. No prior programming experience is required.
 
-There is a [First Nations House](https://studentlife.utoronto.ca/department/first-nations-house/) for Indigenous Student Services on campus. Please refer to their web page for more resources and information about honouring our land and their services for students.  
+Prerequisites: BIO220H1 and one of EEB225H1, STA288H1, or STA220H1
 
-## Diversity and inclusion statement
+## Course details
 
-As students, you all have something unique and special to offer to science. It is our intent that students from all backgrounds and perspectives be well served by this course, that students’ learning needs be addressed both in and out of class, and that the diversity that students bring to this class be recognized as a resource, strength, and benefit. 
+### Course learning outcomes
 
-Diversity can refer to multiple ways that we identify ourselves, including but not limited to race, national origin, language, cultural heritage, physical ability, neurodiversity, age, sexual orientation, gender identity, religion, and socio-economic class. Each of these varied, and often intersecting, identities, along with many others not mentioned here, shape the perspectives we bring to this class, to this department, and to the greater EEB community. We will work to promote diversity, equity, and inclusion not only because diversity fuels excellence and innovation, but because we want to pursue justice. 
+-   Master the basic syntax, data types, and operations needed for basic scientific computing in R
+
+-   Manipulate, visualize, and analyze complex biological data sets programmatically
+
+-   Fit standard and customized statistical models to data
+
+-   Simulate simple stochastic and deterministic models of population dynamics
+
+-   Implement principles of reproducible computational research
+
+-   Acquire the confidence to approach scientific problems using computational methods
+
+### Time
+
+Mondays and Wednesdays 1-3pm in Carr Hall 325
+
+Both weekly meetings are mandatory instructional sessions. Students should have a laptop computer capable of running the most recent versions of R and R Studio, or able to access POSIT/RStudio Cloud from a web browser, and should bring this to each class meeting.
+
+In lieu of office hours, 2 members of the teaching team will be available after each class session to answer any questions students have.
+
+### Teaching team
+
+#### Instructor
+
+**Prof. Alison Hill** ([alison.hill\@utoronto.ca](mailto:alison.hill@utoronto.ca))
+
+Prof. Hill is a faculty member in the Department of Ecology & Evolutionary Biology. She runs a research group studying the dynamics and evolution of human infectious diseases within patients and across populations. Her team develops mathematical, statistical, and computational models to predict disease trajectories and help design interventions. Before moving to U of T, she was faculty at Johns Hopkins, and did her graduate and post-graduate training at Harvard. Coding is still her favourite part of her job, and she has used R - along with other programming languages - for many large open-source computational projects focusing on diseases such as COVID-19, HIV, RSV, and the opioid crisis.
+
+#### Teaching assistants
+
+**Jessie Wang**
+
+Jessie is a 4th year PhD student in the Frederickson lab at UTSG. She studies plant-microbe interactions using high- throughput experimentation in duckweeds. She fell in love with R during her time as an undergraduate and took EEB313 in 2020, simultaneously sharpening her coding skills while conducting research alone in the lab. Jessie loves to spend too much money on fancy coffee as she types away, making sure her code is well-annotated and her figures look beautiful. Outside of work, she enjoys caring for her many houseplants and aquariums, finding new delicious eats, and admiring other people’s pets.
+
+**Erik Curtis**
+
+Erik is a 2nd year PhD student interested in the epidemiology and population ecology of Pacific salmon, as well as the ecology of infectious diseases. In his PhD research, he is investigating the prevalence of co-infection in juvenile salmon. He's also using eDNA metabarcoding to examine the coastal marine community concurrent with juvenile salmon migration and salmon farm activity. Prior to joining the MK lab, he studied at the University of Notre Dame, majoring in Biology and Math, where he examined the fate and transport of eDNA in experimental streams. 
+
+#### Contacts
+
+For scientific/technical questions on the content of course material in lectures or on assignments, please email TAs Jessie ([jae.wang\@mail.utoronto.ca](mailto:jae.wang@mail.utoronto.ca){.email}) and Erik ([erik.curtis\@mail.utoronto.ca](mailto:erik.curtis@mail.utoronto.ca)). For questions on course policies or something the TAs were unable to answer, please email Prof. Hill ([alison.hill\@utoronto.ca](mailto:alison.hill@utoronto.ca)). Send your email through Quercus (ideal), or if that's not possible, include "EEB313" in the subject line. Responses may take a few days.
+
+### Lecture schedule
+
+This schedule is tentative
+
+| Week | Date   | Topic (tentative)                                          |
+|------|--------|------------------------------------------------------------|
+| 1    | Jan 5  | Intro to course                                            |
+| 1    | Jan 7  | Intro to R                                                 |
+| 2    | Jan 12 | Data manipulation                                          |
+| 2    | Jan 14 | Data visualization                                         |
+| 3    | Jan 19 | Exploratory data analysis                                  |
+| 4    | Jan 21 | Exploratory data analysis 2 (Activity)                     |
+| 4    | Jan 26 | Linear models I                                            |
+| 4    | Jan 28 | Linear models II                                           |
+| 5    | Feb 2  | Random variables and stochastic simulations                |
+| 5    | Feb 4  | Mathematical models in ecology and evolution I             |
+| 6    | Feb 9  | Mathematical models in ecology and evolution II (Activity) |
+| 6    | Feb 11 | Computational statistics                                   |
+|      | Feb 16 | Reading week                                               |
+|      | Feb 18 | Reading week                                               |
+| 7    | Feb 23 | Model selection                                            |
+| 7    | Feb 25 | Project work                                               |
+| 8    | Mar 2  | Optimization and model fitting                             |
+| 8    | Mar 5  | Clustering, dimensionality reduction, and machine learning |
+| 9    | Mar 9  | Project work                                               |
+| 9    | Mar 11 | Project work                                               |
+| 10   | Mar 16 | Reproducible research                                      |
+| 10   | Mar 18 | Project work                                               |
+| 11   | Mar 23 | Project work                                               |
+| 11   | Mar 25 | Project work                                               |
+| 12   | Mar 30 | Group presentations                                        |
+| 12   | Apr 1  | Group presentations                                        |
+
+### Assessment
+
+#### Grade breakdown summary
+
+-   Problem Sets  40%
+
+-   Challenge Assignment/Take-home exam \~ 20%
+
+-   Group Project 30%
+
+    -   Presentation 15%
+
+    -   Report 15%
+
+-   Other 10%
+
+    -   Participation, surveys, progress reports, etc
+
+#### Assessment schedule
+
+| Assignment           | Type       | Submitted on | Due date         | \%  |
+|----------------------|------------|--------------|------------------|-----|
+| Intro survey         | Individual | Quercus      | Jan 7 (flexible) | 1   |
+| Problem Set 1        | Individual | Quercus      | Jan 14           | 8   |
+| Problem Set 2        | Individual | Quercus      | Jan 21           | 8   |
+| Problem Set 3        | Individual | Quercus      | Jan 28           | 8   |
+| Problem Set 4        | Individual | Quercus      | Feb 4            | 8   |
+| Problem Set 5        | Individual | Quercus      | Feb 11           | 8   |
+| Project proposal     | Group      | Quercus      | Mar 5            | 3   |
+| Challenge assignment | Individual | Quercus      | Mar 11           | 20  |
+| Mid-project update   | Group      | GitHub       | Mar 18           | 6   |
+| Presentation         | Group      | In-class     | Mar 30 and Apr 1 | 15  |
+| Final report         | Group      | GitHub       | Apr 8            | 15  |
+
+There are 100 marks in total. Your final course mark will be the sum of your assignment scores, which will be translated to a letter grade according to the [official grading scale](https://www.artsci.utoronto.ca/faculty-staff/teaching/teaching-learning-resources/academic-handbook#FinalMarks) of the Faculty of Arts and Science.
+
+Assignments will be distributed and submitted in the R Markdown format via Quercus. Assignments will typically be handed out on Wed after class and are due at 11:59 PM on the following Wed. All students will be given 2 "free" late days that they can distribute across assignments if an extension is needed. Otherwise, late assignments will face a penalty of 50% per day.
+
+The Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Mar 6, and it will be due 11:59 PM on Mar 11. Students should work on their own and submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!
+
+The project will be conducted as a group and groups will receive a single grade (except in exceptional circumstances). No late assignments will be accepted for any component of the group project.
+
+**All submissions to Quercus/GitHub must be submitted as PDFs (i.e., knitted).**
+
+### Pre-requisites and preparation
+
+## Resources
+
+### Course websites
+
+-   Quercus <https://q.utoronto.ca/courses/419604> (Assignments, announcements)
+
+-   <https://eeb313.github.io/> (Detailed course info, lecture notes after class, links to code)
+
+### R resources
+
+-   Installation:
+
+    -   Install R: [https://cran.rstudio.com](https://cran.rstudio.com/)
+
+    -   Install R Studio: [https://posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/)
+
+    -   Register for a free R Studio Cloud (“POSIT”) account: [https://posit.cloud/plans/Links to an external site.freeLinks to an external site.](https://posit.cloud/plans/free)
+
+    -   Register for a Github account: [https://github.com/Links to an external site.signupLinks to an external site.](https://github.com/signup)
+
+-   The EEB R Manual : <https://rman.eeb.utoronto.ca/>
+
+-   Mathematics review: In Otto & Day, "A biologist's guide to mathematical modeling in ecology & evolution", Appendix 1 (basic math rules) and 2 (calculus). Available online via U of T libraries
+
+### Improving your writing skills
+
+Effective communication is crucial in science. The University of Toronto provides [services](http://writing.utoronto.ca/) to help you improve your writing, from general advices on effective writing to writing centers and writing courses. The Faculty of Arts & Science also offers an English Language Learning (ELL) program, which provides free individualized instruction in English skills. Take advantage of these!
+
+### FAS student engagement programs
+
+There are a few programs on campus aimed at increasing student engagement with their coursework and keeping them socially connected. [Recognized Study Groups](https://sidneysmithcommons.artsci.utoronto.ca/recognized-study-groups/) are voluntary, peer-led study groups of up to 8 students enrolled in the same course. [Meet to Complete](https://sidneysmithcommons.artsci.utoronto.ca/meet-to-complete/) are online drop-in study sessions for A&S undergrads. These are worth checking out if you are interested in participating in a study group.
+
+## Course Policies
+
+### Attendance
+
+Students are expected to attend and participate in all classes. If you are experiencing symptoms or suspect you have a communicable disease but decide to come to class, please practice hand hygiene and wear a face mask. 
+
+### Academic Integrity
+
+You should be aware of the [University of Toronto Code of Behaviour on Academic Matters](https://governingcouncil.utoronto.ca/secretariat/policies/code-behaviour-academic-matters-july-1-2019); all suspected cases of academic dishonesty will be investigated following procedures outlined in there. Also see [How Not to Plagiarize](http://advice.writing.utoronto.ca/using-sources/how-not-to-plagiarize/). Notably, it is NOT appropriate to use large sections from internet sources, and inserting a few words here and there does not make it an original piece of writing. Be careful in using internet sources -- most online material are not reviewed and there are many errors out there. Make sure you read material from many sources (published, peer-reviewed, trusted internet sources) and that you write an original text using this information. Always cite your sources. In case of doubt about plagiarism, talk to your instructors and TAs. Please make sure that what you submit for the final project does not overlap with what you submit for other classes, such as the 4^th^-year research project. If you have questions or concerns about what constitutes appropriate academic behaviour or appropriate research and citation methods, please reach out to me.
+
+### On the use of generative AI
+
+We recognize that there are emerging generative artificial intelligence tools that can not only help with syntax and errors, but can write code de novo given text prompts. While these tools can be extremely useful when used responsibly by experienced coders, we believe it is critical to understand the foundational principles and syntax of programming by generating your own code, from scratch. Thus, we do not permit students to submit work generated by chat-bot programs, and will investigate suspicions of such use according to existing procedures for academic dishonesty. Students should be prepared to discuss, justify, and recreate any of their submitted work if prompted by course instructors at any time. Towards the end of the class, we will discuss the promise and pitfalls of such tools and experiment with their use for applications discussed in the course.
+
+### Online Communication
+
+All communication regarding the course should be done through Quercus or using your mail.utoronto.ca email address. Please post questions that may be relevant to other students in the Discussions section of the course website, instead of asking the instructor by email
+
+### Accessibility needs
+
+If you require accommodations for a disability, or have any accessibility concerns about the course or course materials, please notify the course instructor, or contact [Accessibility Services](www.accessibility.utoronto.ca), as soon as possible regarding accommodations.
+
+### Diversity and inclusion statement
+
+As students, you all have something unique and special to offer to science. It is our intent that students from all backgrounds and perspectives be well served by this course, that students’ learning needs be addressed both in and out of class, and that the diversity that students bring to this class be recognized as a resource, strength, and benefit.
+
+Diversity can refer to multiple ways that we identify ourselves, including but not limited to race, national origin, language, cultural heritage, physical ability, neurodiversity, age, sexual orientation, gender identity, religion, and socio-economic class. Each of these varied, and often intersecting, identities, along with many others not mentioned here, shape the perspectives we bring to this class, to this department, and to the greater EEB community. We will work to promote diversity, equity, and inclusion not only because diversity fuels excellence and innovation, but because we want to pursue justice.
 
 We expect that everybody in this class will respect each other, and demonstrate diligence in understanding how other people's perspectives, behaviors, and worldviews may be different from their own. Racist, sexist, colonialist, homophobic, transphobic, and other abusive and discriminatory behavior and language will not be tolerated in this class and will result in disciplinary action, such as removal from class session or revocation of group working privileges. Please consult the [University of Toronto Code of Student Conduct](https://governingcouncil.utoronto.ca/secretariat/policies/code-student-conduct-december-13-2019) for details on unacceptable conduct and possible sanctions.
 
 Please let us know if something said or done in this class, by either a member of the teaching team or other students, is particularly troubling or causes discomfort or offense. While our intention may not be to cause discomfort or offense, the impact of what happens throughout the course is not to be ignored and is something that we consider to be very important and deserving of attention. If and when this occurs, there are several ways to alleviate some of the discomfort or hurt you may experience:
 
-* Discuss the situation privately with a member of the teaching team. We are always open to listening to students' experiences, and want to work with students to find acceptable ways to process and address the issue.
-* Notify us of the issue through another source such as a trusted faculty member or a peer. If for any reason you do not feel comfortable discussing the issue directly with us, we encourage you to seek out another, more comfortable avenue to address the issue.
-* Contact the [Anti-Racism and Cultural Diversity Office](https://antiracism.utoronto.ca/) to report an incident and receive complaint resolution support, which may include consultations and referrals.
+-   Discuss the situation privately with a member of the teaching team. We are always open to listening to students' experiences, and want to work with students to find acceptable ways to process and address the issue.
+-   Notify us of the issue through another source such as a trusted faculty member or a peer. If for any reason you do not feel comfortable discussing the issue directly with us, we encourage you to seek out another, more comfortable avenue to address the issue.
+-   Contact the [Anti-Racism and Cultural Diversity Office](https://antiracism.utoronto.ca/) to report an incident and receive complaint resolution support, which may include consultations and referrals.
 
-We acknowledge our imperfections while we also fully commit to the work, inside and outside of our classrooms, of building and sustaining a community that increasingly embraces these core values. Your suggestions and feedback are encouraged and appreciated. Please let us know ways to improve the effectiveness of the course for you personally or for other students or student groups. 
+We acknowledge our imperfections while we also fully commit to the work, inside and outside of our classrooms, of building and sustaining a community that increasingly embraces these core values. Your suggestions and feedback are encouraged and appreciated. Please let us know ways to improve the effectiveness of the course for you personally or for other students or student groups.
 
-## Wellness statement
+### Wellness statement
 
 We on the teaching team value your health and wellness. In order to succeed in this class, in university, and beyond, you must balance your work with rest, exercise, and attention to your mental and physical health. **Working until exhaustion is NOT a badge of honor**. If you are finding it difficult to balance your health and well-being with your work in this class, please do not hesitate to let us know. We are happy to help connect you with resources and services on campus and also to make accommodations to our course plan as needed. Our inboxes are always open, and we are also available for virtual chats by appointment. You have our support, and we believe in you.
-
-## Course Overview
-
-This course covers statistical and data analysis, reproducible quantitative methods, and scientific computing in R to answer questions in ecology and evolutionary biology. Statistical and data analysis, modeling, and computing are essential skills for all biologists. This course is designed to meet a growing demand for reproducible, openly accessible, analytically thorough, and well-documented science. Students will learn to analyze and visualize data, develop mathematical models, and document their research using the R programming language. No programming experience is required.
-
-Prerequisites: BIO220H1 and one of EEB225H1, STA288H1, or STA220H1
-
-## Time
-
-Tuesdays 2:10 - 4:00 PM and Thursdays 12:10 - 2:00 PM EST.
-
-## Class Locations
-
-All classes will be on the St. George campus. On Tuesdays, we will be in 371 Bloor, Room 36. On Thursdays, we will be in Sidney Smith Hall, Room 561.
-
-| Office hours (in EST)                 |
-|----------|----------------|-----------|
-| Mete     | Tu 12-1pm    |  ESC3044          |
-| Zoë      | Wed 2-3pm    |  ESC3044          |
-| Jessie   | Tu 4-5pm     | 371 Bloor, Room 36   |
-| Gavia    | Th 2-3pm     |  ESC3044    |
-
-## Contact protocol
-
-**If you have assignment-related questions, please email Gavia AND Jessie. If you have course-related or lecture-related questions, please email Mete AND Zoë.** Include "EEB313" in the subject line. If you do not receive a reply within 48 hours (excluding weekends), please send us a reminder.
-
-## Absence policy
-
-If you are feeling unwell, please do not come to class. Instead, take the time to recover fully. Please let us know if you are feeling sick - you will not be penalized for missing a lecture, and we will do our best to ensure that you are up-to-date with class materials when you return.
-
-## Accessibility needs
-
-If you require accommodations for a disability, or have any accessibility concerns about the course or course materials, please notify your course instructors (Mete and Zoë), or contact [Accessibility Services](www.accessibility.utoronto.ca), as soon as possible regarding accommodations.
-
-## Course learning outcomes
-
-1. Develop proficiency in the programming language R.
-2. Use R to apply appropriate statistical tools to analyze and interpret data.
-3. Develop familiarity with mathematical models used in EEB.
-4. Develop familiarity with the command line and Git.
-5. Learn and use techniques and best practices for reproducible, high-quality science.
-6. Learn how to work as part of a research team to produce a scientific product.
-
-## Lecture schedule
-
- Week  | Date   | Topic                                               | Instructor     |
-|------|--------|-----------------------------------------------------|----------------|
-| 1    | Sep 3  | Intro to course                                     | Everyone       |
-| 1    | Sep 5  | Base R: assignment, vectors, functions, strings, loops, etc.        | Zoë            |
-| 2    | Sep 10 | Intro to command line and GitHub                    | Mete          |
-| 2    | Sep 12 | Data wrangling!                                     | Zoë            |
-| 3    | Sep 17 | Data visualization in ggplot                        | Zoë            |
-| 4    | Sep 19 | Exploratory data analysis                           | Zoë            |
-| 4    | Sep 24 | Review using [Farrell & Davies (2019)](https://www.pnas.org/doi/full/10.1073/pnas.1817323116) dataset        |                |
-| 4    | Sep 26 | Project work                                        |                |
-| 5    | Oct 01 | Introduction to statistical inference I             | Mete           |
-| 5    | Oct 03 | Introduction to statistical inference II            | Mete           |
-| 6    | Oct 08 | Linear models I                                     | Mete           |
-| 6    | Oct 10 | Linear models II                                    | Mete           |
-| 7    | Oct 15 | Model selection                                     | Jessie         |
-| 7    | Oct 17 | Multivariate statistics                             | Gavia          |
-| 8    | Oct 22 | Mathematical models in ecology and evolution I      | Mete           |
-| 8    | Oct 24 | Mathematical models in ecology and evolution II     | Mete           |
-| 9    | Oct 29 | Reading break                                       | -              |
-| 9    | Oct 31 | Reading break                                       | -              |
-| 10   | Nov 05 | Project work                                        |                |
-| 10   | Nov 07 | Project work                                        |                |
-| 11   | Nov 12 | Project work                                        |                |
-| 11   | Nov 14 | Project work                                        |                |
-| 12   | Nov 19 | Project work                                        |                |
-| 12   | Nov 21 | Project work                                        |                |
-| 13   | Nov 26 | Project work                                        |                |
-| 13   | Nov 28 | Project work                                        |                |
-| 14   | Dec 03 | Group presentations                                 | Everyone       |
-
-## Assessment schedule
-
-| Assignment                                  | Type           | Submitted on      | Due date   | Marks |
-|---------------------------------------------|----------------|-------------------|------------|-------|
-| Individual interest description             | Individual     | Quercus           | Sep 12     | 1     |
-| Basic R, command line, & Git                | Individual     | Quercus           | Sep 19     | 8     |
-| Data wrangling                              | Individual     | Quercus           | Sep 26     | 8     |
-| Data visualization and exploration          | Individual     | Quercus           | Oct 03     | 8     |
-| Introduction to inference                   | Individual     | Quercus           | Oct 15     | 8     |
-| Project proposal                            | Group          | GitHub            | Oct 17     | 3     |
-| LMs, model selection, and multivariate      | Individual     | Quercus           | Oct 24     | 8     |
-| Challenge assignment                        | Individual     | Quercus           | Nov 17     | 20    |
-| Mid-project update                          | Group          | GitHub            | Nov 21     | 6     |
-| Presentation                                | Group          | In-class          | Dec 03     | 10    |
-| Final report                                | Group          | GitHub            | Dec 10     | 20    |
-
-There are 100 marks in total. Your final course mark will be the sum of your assignment scores, which will be translated to a letter grade according to the [official grading scale](https://www.artsci.utoronto.ca/faculty-staff/teaching/teaching-learning-resources/academic-handbook#FinalMarks) of the Faculty of Arts and Science.
-
-Assignments will be distributed and submitted in the R Markdown format via Quercus. Assignments will typically be handed out on Thursdays after class and are due at 8:00 PM on the following Thursday. 
-
-The Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Nov 11, and it will be due 11:59 PM on Nov 17. Students are welcome to work in a group on this assignment, but each student must submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!
-
-_Per our stance on supporting student's mental health, we are happy to accommodate a 72-hour extension for *one* of the assignments, no questions asked. Otherwise, except under extenuating circumstances, there will be a penalty of 5% per day (including weekends) for all late submissions. If you foresee needing an extension, please email Zoë AND Mete as soon as possible. This policy does not apply to the Challenge Assignment, Presentation, or Final Report._
-
-**All submissions to Quercus/GitHub must be submitted as PDFs (i.e., knitted).**
-
-## Improving your writing skills
-
-Effective communication is crucial in science. The University of Toronto provides [services](http://writing.utoronto.ca/) to help you improve your writing, from general advices on effective writing to writing centers and writing courses. The Faculty of Arts & Science also offers an English Language Learning (ELL) program, which provides free individualized instruction in English skills. Take advantage of these!
-
-## Academic integrity
-
-You should be aware of the [University of Toronto Code of Behaviour on Academic Matters](https://governingcouncil.utoronto.ca/secretariat/policies/code-behaviour-academic-matters-july-1-2019). Also see [How Not to Plagiarize](http://advice.writing.utoronto.ca/using-sources/how-not-to-plagiarize/). Notably, it is NOT appropriate to use large sections from internet sources, and inserting a few words here and there does not make it an original piece of writing. Be careful in using internet sources -- most online material are not reviewed and there are many errors out there. Make sure you read material from many sources (published, peer-reviewed, trusted internet sources) and that you write an original text using this information. Always cite your sources. In case of doubt about plagiarism, talk to your instructors and TAs. Please make sure that what you submit for the final project does not overlap with what you submit for other classes, such as the 4^th^-year research project. 
-
-### On the use of generative AI
-
-We recognize that students use generative artificial intelligence tools such as ChatGPT. If you use such tools in this course, we ask that you let us know. Given the limitations of these tools, and the fact we will be available to support your learning without the use of AI, we would recommend that you be very cautious when using generative AI. On any submissions where, e.g., ChatGPT, is used please indicate in the answer to the question how the tool was used.
-
-## FAS student engagement programs
-
-There are a few programs on campus aimed at increasing student engagement with their coursework and keeping them socially connected. [Recognized Study Groups](https://sidneysmithcommons.artsci.utoronto.ca/recognized-study-groups/) are voluntary, peer-led study groups of up to 8 students enrolled in the same course. [Meet to Complete](https://sidneysmithcommons.artsci.utoronto.ca/meet-to-complete/) are online drop-in study sessions for A&S undergrads. These are worth checking out if you are interested in participating in a study group.
