@@ -27,9 +27,9 @@ book:
       # - lectures/lec14-mathematical-models-1.qmd
       # - lectures/lec15-mathematical-models-2.qmd
     - part: "Assignments"
-      # chapters:
+      chapters:
       # - assignments/assignment-00.qmd
-      # - assignments/assignment-01.qmd
+      - assignments/assignment-01.qmd
       # - assignments/assignment-02.qmd
       # - assignments/assignment-03.qmd
       # - assignments/assignment-04.qmd
@@ -81,9 +81,9 @@ format:
     code-fold: false
     code-overflow: wrap
 
-# extra_files:
+extra_files:
 #   - assignment-00.Rmd
-#   - assignment-01.Rmd
+  - assignment-01.Rmd
 #   - assignment-02.Rmd
 #   - assignment-03.Rmd
 #   - assignment-04.Rmd
