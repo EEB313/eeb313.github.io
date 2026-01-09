@@ -287,5 +287,49 @@
       "Lectures",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction to R: assignment, vectors, functions, strings, loops</span>"
     ]
+  },
+  {
+    "objectID": "assignments/assignment-01.html",
+    "href": "assignments/assignment-01.html",
+    "title": "Assignment 01: Basic R",
+    "section": "",
+    "text": "1. Using R Markdown notebooks (1 mark)\nDownload the .Rmd file here.\n*To submit this assignment, upload the full .Rmd document, including the original questions, your code, and the output. Submit your assignment as a knitted .pdf (Question 1 walks you through this part, and more details are in course notes).",
+    "crumbs": [
+      "Assignments",
+      "Assignment 01: Basic R"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-01.html#using-r-markdown-notebooks-1-mark",
+    "href": "assignments/assignment-01.html#using-r-markdown-notebooks-1-mark",
+    "title": "Assignment 01: Basic R",
+    "section": "",
+    "text": "In RStudio, create a new R Markdown notebook. The file name should end in .Rmd.\nRead the guidelines provided in example text in that notebook\nUse the knit button to run the example notebook and generate a PDF file. You might be asked to install some R packages if it’s the first time you’ve done this - go ahead an let them install\nNext, download the assignment .Rmd file, and either a) open it in RStudio (ignoring the new file you created above) or b) copy the contents into example notebook you already have opened.\nInsert a code chunk below these bullets, write a simple mathematical expression to evaluate (e.g. 1+1), and then run the chunk (green arrow play button in top right of chunk)\nNow knit this notebook again, before proceeding with the rest of the assignment",
+    "crumbs": [
+      "Assignments",
+      "Assignment 01: Basic R"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-01.html#variable-assignment-and-basic-math-1-mark",
+    "href": "assignments/assignment-01.html#variable-assignment-and-basic-math-1-mark",
+    "title": "Assignment 01: Basic R",
+    "section": "2. Variable assignment and basic math (1 mark)",
+    "text": "2. Variable assignment and basic math (1 mark)\n\nAssign the value 5 to the variable/object a. Display a. (0.25 marks)\n\n\nAssign the result of 10/3 to the variable b. Display b. (0.25 marks)\n\n\nWrite a function that uses Pythagorean theorem to calculate the length of the longest side (hypotenuse) of a right angle triangle given the lengths of the two other sides. Use it to assign the hypotenuse of a triangle with sides a and b to the variable hypot. Display hypot. (0.5 marks)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 01: Basic R"
+    ]
+  },
+  {
+    "objectID": "assignments/assignment-01.html#vectors-3-marks",
+    "href": "assignments/assignment-01.html#vectors-3-marks",
+    "title": "Assignment 01: Basic R",
+    "section": "3. Vectors (3 marks)",
+    "text": "3. Vectors (3 marks)\n\nCreate a vector v with all integers 0-30, and a vector w with every third integer in the same range. (0.25 marks)\n\n\nWhat is the difference in lengths of the vectors v and w? (0.25 marks)\n\n\nCreate a new vector, v_square, with the square of elements at indices 3, 6, 7, 10, 15, 22, 23, 24, and 30 from the variable v. Hint: Use indexing rather than a for loop. (0.25 marks)\n\n\nCalculate the mean and median of the first five values from v_square. (0.25 marks)\n\n\nCreate a boolean vector v_bool, indicating which vector v elements are bigger than 20. How many values are over 20? Hint: In R, TRUE = 1, and FALSE = 0, so you can use simple arithmetic to find this out. (0.5 marks)\n\n\nCreate a new vector of character strings v_bool_in_words, that contains the word big if the corresponding element of v is bigger than 20 and small if not (0.5 marks)\n\n\nWrite a function that calculates the median of the any values in a numeric vector greater than “n”. Test this function with the v and v_square vectors and n = 10. (1 marks)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 01: Basic R"
+    ]
   }
 ]
