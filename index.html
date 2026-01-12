@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alison Hill">
-<meta name="dcterms.date" content="2026-01-09">
+<meta name="dcterms.date" content="2026-01-12">
 
 <title>EEB313: Quantitative Methods in R for Biology</title>
 <style>
@@ -32,7 +32,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./downloadingR.html" rel="next">
+<link href="./syllabus.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Syllabus: EEB 313 Winter 2026</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome!</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -115,13 +115,19 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Welcome!</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus: EEB 313 Winter 2026</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./downloadingR.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Installing R</span></a>
+  <a href="./about-us.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2026 teaching team</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -135,14 +141,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec01-r_and_rstudio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the course</span></span></a>
+  <a href="./lectures/lec01-downloading-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Downloading and installing R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lectures/lec02-basic-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectures/lec03-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulating and analyzing data</span></span></a>
   </div>
 </li>
       </ul>
@@ -182,35 +194,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#syllabus-eeb-313-winter-2026" id="toc-syllabus-eeb-313-winter-2026" class="nav-link active" data-scroll-target="#syllabus-eeb-313-winter-2026">Syllabus: EEB 313 Winter 2026</a>
+  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome!</a>
   <ul class="collapse">
   <li><a href="#course-overview" id="toc-course-overview" class="nav-link" data-scroll-target="#course-overview">Course overview</a></li>
-  <li><a href="#course-details" id="toc-course-details" class="nav-link" data-scroll-target="#course-details">Course details</a>
-  <ul class="collapse">
-  <li><a href="#course-learning-outcomes" id="toc-course-learning-outcomes" class="nav-link" data-scroll-target="#course-learning-outcomes">Course learning outcomes</a></li>
-  <li><a href="#time" id="toc-time" class="nav-link" data-scroll-target="#time">Time</a></li>
-  <li><a href="#teaching-team" id="toc-teaching-team" class="nav-link" data-scroll-target="#teaching-team">Teaching team</a></li>
-  <li><a href="#lecture-schedule" id="toc-lecture-schedule" class="nav-link" data-scroll-target="#lecture-schedule">Lecture schedule</a></li>
-  <li><a href="#assessment" id="toc-assessment" class="nav-link" data-scroll-target="#assessment">Assessment</a></li>
-  <li><a href="#pre-requisites-and-preparation" id="toc-pre-requisites-and-preparation" class="nav-link" data-scroll-target="#pre-requisites-and-preparation">Pre-requisites and preparation</a></li>
-  </ul></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a>
-  <ul class="collapse">
-  <li><a href="#course-websites" id="toc-course-websites" class="nav-link" data-scroll-target="#course-websites">Course websites</a></li>
-  <li><a href="#r-resources" id="toc-r-resources" class="nav-link" data-scroll-target="#r-resources">R resources</a></li>
-  <li><a href="#improving-your-writing-skills" id="toc-improving-your-writing-skills" class="nav-link" data-scroll-target="#improving-your-writing-skills">Improving your writing skills</a></li>
-  <li><a href="#fas-student-engagement-programs" id="toc-fas-student-engagement-programs" class="nav-link" data-scroll-target="#fas-student-engagement-programs">FAS student engagement programs</a></li>
-  </ul></li>
-  <li><a href="#course-policies" id="toc-course-policies" class="nav-link" data-scroll-target="#course-policies">Course Policies</a>
-  <ul class="collapse">
-  <li><a href="#attendance" id="toc-attendance" class="nav-link" data-scroll-target="#attendance">Attendance</a></li>
-  <li><a href="#academic-integrity" id="toc-academic-integrity" class="nav-link" data-scroll-target="#academic-integrity">Academic Integrity</a></li>
-  <li><a href="#on-the-use-of-generative-ai" id="toc-on-the-use-of-generative-ai" class="nav-link" data-scroll-target="#on-the-use-of-generative-ai">On the use of generative AI</a></li>
-  <li><a href="#online-communication" id="toc-online-communication" class="nav-link" data-scroll-target="#online-communication">Online Communication</a></li>
-  <li><a href="#accessibility-needs" id="toc-accessibility-needs" class="nav-link" data-scroll-target="#accessibility-needs">Accessibility needs</a></li>
-  <li><a href="#diversity-and-inclusion-statement" id="toc-diversity-and-inclusion-statement" class="nav-link" data-scroll-target="#diversity-and-inclusion-statement">Diversity and inclusion statement</a></li>
-  <li><a href="#wellness-statement" id="toc-wellness-statement" class="nav-link" data-scroll-target="#wellness-statement">Wellness statement</a></li>
-  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -237,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 9, 2026</p>
+      <p class="date">January 12, 2026</p>
     </div>
   </div>
   
@@ -249,402 +235,15 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="syllabus-eeb-313-winter-2026" class="level1 unnumbered">
-<h1 class="unnumbered">Syllabus: EEB 313 Winter 2026</h1>
+<section id="welcome" class="level1 unnumbered">
+<h1 class="unnumbered">Welcome!</h1>
+<p>Welcome to the online home of EEB 313, Winter 2026. We created this website as an easy-to-navigate resources where we can share all the <a href="syllabus">course details</a>, detailed <a href="lectures">lectures notes</a>, <a href="assignments">homework assignments</a>, and other resources. Most of the files are created as interactive R Markdown documents, which you can download and run yourself.</p>
+<p>EEB 313 was originally developed as a student-led course, and over the years many contributors have helped to develop the course material in its current form. See the <a href="about-us">About Us</a> page for more details on our current and past teaching team/course developers.</p>
 <section id="course-overview" class="level2">
 <h2 class="anchored" data-anchor-id="course-overview">Course overview</h2>
-<p>This course covers foundational concepts in scientific computing and data analytics using the programming language R, with applications in ecology and evolutionary biology. Using interactive instructional sessions and group work, students will learn to program mathematical calculations and simple algorithms, to analyze and visualize complex datasets, to implement models to simulate biological population dynamics, and to document and disseminate their code. No prior programming experience is required.</p>
-<p>Prerequisites: BIO220H1 and one of EEB225H1, STA288H1, or STA220H1</p>
-</section>
-<section id="course-details" class="level2">
-<h2 class="anchored" data-anchor-id="course-details">Course details</h2>
-<section id="course-learning-outcomes" class="level3">
-<h3 class="anchored" data-anchor-id="course-learning-outcomes">Course learning outcomes</h3>
-<ul>
-<li><p>Master the basic syntax, data types, and operations needed for basic scientific computing in R</p></li>
-<li><p>Manipulate, visualize, and analyze complex biological data sets programmatically</p></li>
-<li><p>Fit standard and customized statistical models to data</p></li>
-<li><p>Simulate simple stochastic and deterministic models of population dynamics</p></li>
-<li><p>Implement principles of reproducible computational research</p></li>
-<li><p>Acquire the confidence to approach scientific problems using computational methods</p></li>
-</ul>
-</section>
-<section id="time" class="level3">
-<h3 class="anchored" data-anchor-id="time">Time</h3>
-<p>Mondays and Wednesdays 1-3pm in Carr Hall 325</p>
-<p>Both weekly meetings are mandatory instructional sessions. Students should have a laptop computer capable of running the most recent versions of R and R Studio, or able to access POSIT/RStudio Cloud from a web browser, and should bring this to each class meeting.</p>
-<p>In lieu of office hours, 2 members of the teaching team will be available after each class session to answer any questions students have.</p>
-</section>
-<section id="teaching-team" class="level3">
-<h3 class="anchored" data-anchor-id="teaching-team">Teaching team</h3>
-<section id="instructor" class="level4">
-<h4 class="anchored" data-anchor-id="instructor">Instructor</h4>
-<p><strong>Prof.&nbsp;Alison Hill</strong> (<a href="mailto:alison.hill@utoronto.ca">alison.hill@utoronto.ca</a>)</p>
-<p>Prof.&nbsp;Hill is a faculty member in the Department of Ecology &amp; Evolutionary Biology. She runs a research group studying the dynamics and evolution of human infectious diseases within patients and across populations. Her team develops mathematical, statistical, and computational models to predict disease trajectories and help design interventions. Before moving to U of T, she was faculty at Johns Hopkins, and did her graduate and post-graduate training at Harvard. Coding is still her favourite part of her job, and she has used R - along with other programming languages - for many large open-source computational projects focusing on diseases such as COVID-19, HIV, RSV, and the opioid crisis.</p>
-</section>
-<section id="teaching-assistants" class="level4">
-<h4 class="anchored" data-anchor-id="teaching-assistants">Teaching assistants</h4>
-<p><strong>Jessie Wang</strong></p>
-<p>Jessie is a 4th year PhD student in the Frederickson lab at UTSG. She studies plant-microbe interactions using high- throughput experimentation in duckweeds. She fell in love with R during her time as an undergraduate and took EEB313 in 2020, simultaneously sharpening her coding skills while conducting research alone in the lab. Jessie loves to spend too much money on fancy coffee as she types away, making sure her code is well-annotated and her figures look beautiful. Outside of work, she enjoys caring for her many houseplants and aquariums, finding new delicious eats, and admiring other people’s pets.</p>
-<p><strong>Erik Curtis</strong></p>
-<p>Erik is a 2nd year PhD student interested in the epidemiology and population ecology of Pacific salmon, as well as the ecology of infectious diseases. In his PhD research, he is investigating the prevalence of co-infection in juvenile salmon. He’s also using eDNA metabarcoding to examine the coastal marine community concurrent with juvenile salmon migration and salmon farm activity. Prior to joining the MK lab, he studied at the University of Notre Dame, majoring in Biology and Math, where he examined the fate and transport of eDNA in experimental streams.&nbsp;</p>
-</section>
-<section id="contacts" class="level4">
-<h4 class="anchored" data-anchor-id="contacts">Contacts</h4>
-<p>For scientific/technical questions on the content of course material in lectures or on assignments, please email TAs Jessie (<a href="mailto:jae.wang@mail.utoronto.ca" class="email">jae.wang@mail.utoronto.ca</a>) and Erik (<a href="mailto:erik.curtis@mail.utoronto.ca">erik.curtis@mail.utoronto.ca</a>). For questions on course policies or something the TAs were unable to answer, please email Prof.&nbsp;Hill (<a href="mailto:alison.hill@utoronto.ca">alison.hill@utoronto.ca</a>). Send your email through Quercus (ideal), or if that’s not possible, include “EEB313” in the subject line. Responses may take a few days.</p>
-</section>
-</section>
-<section id="lecture-schedule" class="level3">
-<h3 class="anchored" data-anchor-id="lecture-schedule">Lecture schedule</h3>
-<p>This schedule is tentative</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 8%">
-<col style="width: 10%">
-<col style="width: 81%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Date</th>
-<th>Topic (tentative)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Jan 5</td>
-<td>Intro to course</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>Jan 7</td>
-<td>Intro to R</td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td>Jan 12</td>
-<td>Data manipulation</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Jan 14</td>
-<td>Data visualization</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Jan 19</td>
-<td>Exploratory data analysis</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Jan 21</td>
-<td>Exploratory data analysis 2 (Activity)</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>Jan 26</td>
-<td>Linear models I</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Jan 28</td>
-<td>Linear models II</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Feb 2</td>
-<td>Random variables and stochastic simulations</td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td>Feb 4</td>
-<td>Mathematical models in ecology and evolution I</td>
-</tr>
-<tr class="odd">
-<td>6</td>
-<td>Feb 9</td>
-<td>Mathematical models in ecology and evolution II (Activity)</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>Feb 11</td>
-<td>Computational statistics</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Feb 16</td>
-<td>Reading week</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Feb 18</td>
-<td>Reading week</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>Feb 23</td>
-<td>Model selection</td>
-</tr>
-<tr class="even">
-<td>7</td>
-<td>Feb 25</td>
-<td>Project work</td>
-</tr>
-<tr class="odd">
-<td>8</td>
-<td>Mar 2</td>
-<td>Optimization and model fitting</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td>Mar 5</td>
-<td>Clustering, dimensionality reduction, and machine learning</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>Mar 9</td>
-<td>Project work</td>
-</tr>
-<tr class="even">
-<td>9</td>
-<td>Mar 11</td>
-<td>Project work</td>
-</tr>
-<tr class="odd">
-<td>10</td>
-<td>Mar 16</td>
-<td>Reproducible research</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>Mar 18</td>
-<td>Project work</td>
-</tr>
-<tr class="odd">
-<td>11</td>
-<td>Mar 23</td>
-<td>Project work</td>
-</tr>
-<tr class="even">
-<td>11</td>
-<td>Mar 25</td>
-<td>Project work</td>
-</tr>
-<tr class="odd">
-<td>12</td>
-<td>Mar 30</td>
-<td>Group presentations</td>
-</tr>
-<tr class="even">
-<td>12</td>
-<td>Apr 1</td>
-<td>Group presentations</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="assessment" class="level3">
-<h3 class="anchored" data-anchor-id="assessment">Assessment</h3>
-<section id="grade-breakdown-summary" class="level4">
-<h4 class="anchored" data-anchor-id="grade-breakdown-summary">Grade breakdown summary</h4>
-<ul>
-<li><p>Problem Sets&nbsp; 40%</p></li>
-<li><p>Challenge Assignment/Take-home exam ~ 20%</p></li>
-<li><p>Group Project 30%</p>
-<ul>
-<li><p>Presentation 15%</p></li>
-<li><p>Report 15%</p></li>
-</ul></li>
-<li><p>Other 10%</p>
-<ul>
-<li>Participation, surveys, progress reports, etc</li>
-</ul></li>
-</ul>
-</section>
-<section id="assessment-schedule" class="level4">
-<h4 class="anchored" data-anchor-id="assessment-schedule">Assessment schedule</h4>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 30%">
-<col style="width: 16%">
-<col style="width: 19%">
-<col style="width: 25%">
-<col style="width: 7%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Assignment</th>
-<th>Type</th>
-<th>Submitted on</th>
-<th>Due date</th>
-<th>%</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Intro survey</td>
-<td>Individual</td>
-<td>Quercus</td>
-<td>Jan 7 (flexible)</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>Problem Set 1</td>
-<td>Individual</td>
-<td>Quercus</td>
-<td>Jan 14</td>
-<td>8</td>
-</tr>
-<tr class="odd">
-<td>Problem Set 2</td>
-<td>Individual</td>
-<td>Quercus</td>
-<td>Jan 21</td>
-<td>8</td>
-</tr>
-<tr class="even">
-<td>Problem Set 3</td>
-<td>Individual</td>
-<td>Quercus</td>
-<td>Jan 28</td>
-<td>8</td>
-</tr>
-<tr class="odd">
-<td>Problem Set 4</td>
-<td>Individual</td>
-<td>Quercus</td>
-<td>Feb 4</td>
-<td>8</td>
-</tr>
-<tr class="even">
-<td>Problem Set 5</td>
-<td>Individual</td>
-<td>Quercus</td>
-<td>Feb 11</td>
-<td>8</td>
-</tr>
-<tr class="odd">
-<td>Project proposal</td>
-<td>Group</td>
-<td>Quercus</td>
-<td>Mar 5</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td>Challenge assignment</td>
-<td>Individual</td>
-<td>Quercus</td>
-<td>Mar 11</td>
-<td>20</td>
-</tr>
-<tr class="odd">
-<td>Mid-project update</td>
-<td>Group</td>
-<td>GitHub</td>
-<td>Mar 18</td>
-<td>6</td>
-</tr>
-<tr class="even">
-<td>Presentation</td>
-<td>Group</td>
-<td>In-class</td>
-<td>Mar 30 and Apr 1</td>
-<td>15</td>
-</tr>
-<tr class="odd">
-<td>Final report</td>
-<td>Group</td>
-<td>GitHub</td>
-<td>Apr 8</td>
-<td>15</td>
-</tr>
-</tbody>
-</table>
-<p>There are 100 marks in total. Your final course mark will be the sum of your assignment scores, which will be translated to a letter grade according to the <a href="https://www.artsci.utoronto.ca/faculty-staff/teaching/teaching-learning-resources/academic-handbook#FinalMarks">official grading scale</a> of the Faculty of Arts and Science.</p>
-<p>Assignments will be distributed and submitted in the R Markdown format via Quercus. Assignments will typically be handed out on Wed after class and are due at 11:59 PM on the following Wed. All students will be given 2 “free” late days that they can distribute across assignments if an extension is needed. Otherwise, late assignments will face a penalty of 50% per day.</p>
-<p>The Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Mar 6, and it will be due 11:59 PM on Mar 11. Students should work on their own and submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!</p>
-<p>The project will be conducted as a group and groups will receive a single grade (except in exceptional circumstances). No late assignments will be accepted for any component of the group project.</p>
-<p><strong>All submissions to Quercus/GitHub must be submitted as PDFs (i.e., knitted).</strong></p>
-</section>
-</section>
-<section id="pre-requisites-and-preparation" class="level3">
-<h3 class="anchored" data-anchor-id="pre-requisites-and-preparation">Pre-requisites and preparation</h3>
-</section>
-</section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<section id="course-websites" class="level3">
-<h3 class="anchored" data-anchor-id="course-websites">Course websites</h3>
-<ul>
-<li><p>Quercus <a href="https://q.utoronto.ca/courses/419604" class="uri">https://q.utoronto.ca/courses/419604</a> (Assignments, announcements)</p></li>
-<li><p><a href="https://eeb313.github.io/" class="uri">https://eeb313.github.io/</a> (Detailed course info, lecture notes after class, links to code)</p></li>
-</ul>
-</section>
-<section id="r-resources" class="level3">
-<h3 class="anchored" data-anchor-id="r-resources">R resources</h3>
-<ul>
-<li><p>Installation:</p>
-<ul>
-<li><p>Install R: <a href="https://cran.rstudio.com/">https://cran.rstudio.com</a></p></li>
-<li><p>Install R Studio: <a href="https://posit.co/download/rstudio-desktop/">https://posit.co/download/rstudio-desktop</a></p></li>
-<li><p>Register for a free R Studio Cloud (“POSIT”) account: <a href="https://posit.cloud/plans/free">https://posit.cloud/plans/Links to an external site.freeLinks to an external site.</a></p></li>
-<li><p>Register for a Github account: <a href="https://github.com/signup">https://github.com/Links to an external site.signupLinks to an external site.</a></p></li>
-</ul></li>
-<li><p>The EEB R Manual : <a href="https://rman.eeb.utoronto.ca/" class="uri">https://rman.eeb.utoronto.ca/</a></p></li>
-<li><p>Mathematics review: In Otto &amp; Day, “A biologist’s guide to mathematical modeling in ecology &amp; evolution”, Appendix 1 (basic math rules) and 2 (calculus). Available online via U of T libraries</p></li>
-</ul>
-</section>
-<section id="improving-your-writing-skills" class="level3">
-<h3 class="anchored" data-anchor-id="improving-your-writing-skills">Improving your writing skills</h3>
-<p>Effective communication is crucial in science. The University of Toronto provides <a href="http://writing.utoronto.ca/">services</a> to help you improve your writing, from general advices on effective writing to writing centers and writing courses. The Faculty of Arts &amp; Science also offers an English Language Learning (ELL) program, which provides free individualized instruction in English skills. Take advantage of these!</p>
-</section>
-<section id="fas-student-engagement-programs" class="level3">
-<h3 class="anchored" data-anchor-id="fas-student-engagement-programs">FAS student engagement programs</h3>
-<p>There are a few programs on campus aimed at increasing student engagement with their coursework and keeping them socially connected. <a href="https://sidneysmithcommons.artsci.utoronto.ca/recognized-study-groups/">Recognized Study Groups</a> are voluntary, peer-led study groups of up to 8 students enrolled in the same course. <a href="https://sidneysmithcommons.artsci.utoronto.ca/meet-to-complete/">Meet to Complete</a> are online drop-in study sessions for A&amp;S undergrads. These are worth checking out if you are interested in participating in a study group.</p>
-</section>
-</section>
-<section id="course-policies" class="level2">
-<h2 class="anchored" data-anchor-id="course-policies">Course Policies</h2>
-<section id="attendance" class="level3">
-<h3 class="anchored" data-anchor-id="attendance">Attendance</h3>
-<p>Students are expected to attend and participate in all classes. If you are experiencing symptoms or suspect you have a communicable disease but decide to come to class, please practice hand hygiene and wear a face mask.&nbsp;</p>
-</section>
-<section id="academic-integrity" class="level3">
-<h3 class="anchored" data-anchor-id="academic-integrity">Academic Integrity</h3>
-<p>You should be aware of the <a href="https://governingcouncil.utoronto.ca/secretariat/policies/code-behaviour-academic-matters-july-1-2019">University of Toronto Code of Behaviour on Academic Matters</a>; all suspected cases of academic dishonesty will be investigated following procedures outlined in there. Also see <a href="http://advice.writing.utoronto.ca/using-sources/how-not-to-plagiarize/">How Not to Plagiarize</a>. Notably, it is NOT appropriate to use large sections from internet sources, and inserting a few words here and there does not make it an original piece of writing. Be careful in using internet sources – most online material are not reviewed and there are many errors out there. Make sure you read material from many sources (published, peer-reviewed, trusted internet sources) and that you write an original text using this information. Always cite your sources. In case of doubt about plagiarism, talk to your instructors and TAs. Please make sure that what you submit for the final project does not overlap with what you submit for other classes, such as the 4<sup>th</sup>-year research project. If you have questions or concerns about what constitutes appropriate academic behaviour or appropriate research and citation methods, please reach out to me.</p>
-</section>
-<section id="on-the-use-of-generative-ai" class="level3">
-<h3 class="anchored" data-anchor-id="on-the-use-of-generative-ai">On the use of generative AI</h3>
-<p>We recognize that there are emerging generative artificial intelligence tools that can not only help with syntax and errors, but can write code de novo given text prompts. While these tools can be extremely useful when used responsibly by experienced coders, we believe it is critical to understand the foundational principles and syntax of programming by generating your own code, from scratch. Thus, we do not permit students to submit work generated by chat-bot programs, and will investigate suspicions of such use according to existing procedures for academic dishonesty. Students should be prepared to discuss, justify, and recreate any of their submitted work if prompted by course instructors at any time. Towards the end of the class, we will discuss the promise and pitfalls of such tools and experiment with their use for applications discussed in the course.</p>
-</section>
-<section id="online-communication" class="level3">
-<h3 class="anchored" data-anchor-id="online-communication">Online Communication</h3>
-<p>All communication regarding the course should be done through Quercus or using your mail.utoronto.ca email address. Please post questions that may be relevant to other students in the Discussions section of the course website, instead of asking the instructor by email</p>
-</section>
-<section id="accessibility-needs" class="level3">
-<h3 class="anchored" data-anchor-id="accessibility-needs">Accessibility needs</h3>
-<p>If you require accommodations for a disability, or have any accessibility concerns about the course or course materials, please notify the course instructor, or contact <a href="www.accessibility.utoronto.ca">Accessibility Services</a>, as soon as possible regarding accommodations.</p>
-</section>
-<section id="diversity-and-inclusion-statement" class="level3">
-<h3 class="anchored" data-anchor-id="diversity-and-inclusion-statement">Diversity and inclusion statement</h3>
-<p>As students, you all have something unique and special to offer to science. It is our intent that students from all backgrounds and perspectives be well served by this course, that students’ learning needs be addressed both in and out of class, and that the diversity that students bring to this class be recognized as a resource, strength, and benefit.</p>
-<p>Diversity can refer to multiple ways that we identify ourselves, including but not limited to race, national origin, language, cultural heritage, physical ability, neurodiversity, age, sexual orientation, gender identity, religion, and socio-economic class. Each of these varied, and often intersecting, identities, along with many others not mentioned here, shape the perspectives we bring to this class, to this department, and to the greater EEB community. We will work to promote diversity, equity, and inclusion not only because diversity fuels excellence and innovation, but because we want to pursue justice.</p>
-<p>We expect that everybody in this class will respect each other, and demonstrate diligence in understanding how other people’s perspectives, behaviors, and worldviews may be different from their own. Racist, sexist, colonialist, homophobic, transphobic, and other abusive and discriminatory behavior and language will not be tolerated in this class and will result in disciplinary action, such as removal from class session or revocation of group working privileges. Please consult the <a href="https://governingcouncil.utoronto.ca/secretariat/policies/code-student-conduct-december-13-2019">University of Toronto Code of Student Conduct</a> for details on unacceptable conduct and possible sanctions.</p>
-<p>Please let us know if something said or done in this class, by either a member of the teaching team or other students, is particularly troubling or causes discomfort or offense. While our intention may not be to cause discomfort or offense, the impact of what happens throughout the course is not to be ignored and is something that we consider to be very important and deserving of attention. If and when this occurs, there are several ways to alleviate some of the discomfort or hurt you may experience:</p>
-<ul>
-<li>Discuss the situation privately with a member of the teaching team. We are always open to listening to students’ experiences, and want to work with students to find acceptable ways to process and address the issue.</li>
-<li>Notify us of the issue through another source such as a trusted faculty member or a peer. If for any reason you do not feel comfortable discussing the issue directly with us, we encourage you to seek out another, more comfortable avenue to address the issue.</li>
-<li>Contact the <a href="https://antiracism.utoronto.ca/">Anti-Racism and Cultural Diversity Office</a> to report an incident and receive complaint resolution support, which may include consultations and referrals.</li>
-</ul>
-<p>We acknowledge our imperfections while we also fully commit to the work, inside and outside of our classrooms, of building and sustaining a community that increasingly embraces these core values. Your suggestions and feedback are encouraged and appreciated. Please let us know ways to improve the effectiveness of the course for you personally or for other students or student groups.</p>
-</section>
-<section id="wellness-statement" class="level3">
-<h3 class="anchored" data-anchor-id="wellness-statement">Wellness statement</h3>
-<p>We on the teaching team value your health and wellness. In order to succeed in this class, in university, and beyond, you must balance your work with rest, exercise, and attention to your mental and physical health. <strong>Working until exhaustion is NOT a badge of honor</strong>. If you are finding it difficult to balance your health and well-being with your work in this class, please do not hesitate to let us know. We are happy to help connect you with resources and services on campus and also to make accommodations to our course plan as needed. Our inboxes are always open, and we are also available for virtual chats by appointment. You have our support, and we believe in you.</p>
+<p><a href="https://artsci.calendar.utoronto.ca/course/eeb313h1">EEB313</a> covers foundational concepts in scientific computing and data analytics using the programming language R, with applications in ecology and evolutionary biology. Using interactive instructional sessions and group work, students will learn to program mathematical calculations and simple algorithms, to analyze and visualize complex datasets, to implement models to simulate biological population dynamics, and to document and disseminate their code. No prior programming experience is required.</p>
 
 
-</section>
 </section>
 </section>
 
@@ -1053,8 +652,8 @@ ul.task-list li input[type="checkbox"] {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./downloadingR.html" class="pagination-link" aria-label="Installing R">
-        <span class="nav-page-text">Installing R</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./syllabus.html" class="pagination-link" aria-label="Syllabus: EEB 313 Winter 2026">
+        <span class="nav-page-text">Syllabus: EEB 313 Winter 2026</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

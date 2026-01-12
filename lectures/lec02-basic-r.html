@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-01.html" rel="next">
-<link href="../lectures/lec01-r_and_rstudio.html" rel="prev">
+<link href="../lectures/lec03-data-wrangling.html" rel="next">
+<link href="../lectures/lec01-downloading-r.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec02-basic-r.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec02-basic-r.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -149,13 +149,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome!</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus: EEB 313 Winter 2026</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../downloadingR.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Installing R</span></a>
+  <a href="../about-us.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2026 teaching team</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -169,14 +175,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec01-r_and_rstudio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the course</span></span></a>
+  <a href="../lectures/lec01-downloading-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Downloading and installing R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec02-basic-r.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec03-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulating and analyzing data</span></span></a>
   </div>
 </li>
       </ul>
@@ -254,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec02-basic-r.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec02-basic-r.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></h1>
 </div>
@@ -1659,13 +1671,13 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../lectures/lec01-r_and_rstudio.html" class="pagination-link" aria-label="Introduction to the course">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the course</span></span>
+      <a href="../lectures/lec01-downloading-r.html" class="pagination-link" aria-label="Downloading and installing R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Downloading and installing R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-01.html" class="pagination-link" aria-label="Assignment 01: Basic R">
-        <span class="nav-page-text">Assignment 01: Basic R</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/lec03-data-wrangling.html" class="pagination-link" aria-label="Manipulating and analyzing data">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulating and analyzing data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
