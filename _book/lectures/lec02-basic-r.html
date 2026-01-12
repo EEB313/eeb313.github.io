@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Introduction to R: assignment, vectors, functions, strings, loops – EEB313: Quantitative Methods in R for Biology</title>
+<title>1&nbsp; Introduction to R: assignment, vectors, functions, strings, loops – EEB313: Quantitative Methods in R for Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../lectures/lec01-r_and_rstudio.html" rel="prev">
+<link href="../assignments/assignment-01.html" rel="next">
+<link href="../lectures/lec01-downloading-r.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -117,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec02-basic-r.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec02-basic-r.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -148,13 +149,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Syllabus: EEB 313 Winter 2026</span></a>
+ <span class="menu-text">Welcome!</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../downloadingR.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Installing R</span></a>
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus: EEB 313 Winter 2026</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -168,21 +169,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec01-r_and_rstudio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the course</span></span></a>
+  <a href="../lectures/lec01-downloading-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Downloading and installing R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec02-basic-r.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Assignments</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 01: Basic R</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -202,47 +216,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lesson-preamble" id="toc-lesson-preamble" class="nav-link active" data-scroll-target="#lesson-preamble"><span class="header-section-number">2.1</span> Lesson Preamble</a></li>
-  <li><a href="#setting-up-the-r-notebook" id="toc-setting-up-the-r-notebook" class="nav-link" data-scroll-target="#setting-up-the-r-notebook"><span class="header-section-number">2.2</span> Setting up the R Notebook</a></li>
-  <li><a href="#creating-objects-in-r" id="toc-creating-objects-in-r" class="nav-link" data-scroll-target="#creating-objects-in-r"><span class="header-section-number">2.3</span> Creating objects in R</a>
+  <li><a href="#lesson-preamble" id="toc-lesson-preamble" class="nav-link active" data-scroll-target="#lesson-preamble"><span class="header-section-number">1.1</span> Lesson Preamble</a></li>
+  <li><a href="#setting-up-the-r-notebook" id="toc-setting-up-the-r-notebook" class="nav-link" data-scroll-target="#setting-up-the-r-notebook"><span class="header-section-number">1.2</span> Setting up the R Notebook</a></li>
+  <li><a href="#creating-objects-in-r" id="toc-creating-objects-in-r" class="nav-link" data-scroll-target="#creating-objects-in-r"><span class="header-section-number">1.3</span> Creating objects in R</a>
   <ul class="collapse">
-  <li><a href="#some-tips-on-naming-objects" id="toc-some-tips-on-naming-objects" class="nav-link" data-scroll-target="#some-tips-on-naming-objects"><span class="header-section-number">2.3.1</span> Some tips on naming objects</a></li>
-  <li><a href="#preforming-calculations" id="toc-preforming-calculations" class="nav-link" data-scroll-target="#preforming-calculations"><span class="header-section-number">2.3.2</span> Preforming calculations</a></li>
+  <li><a href="#some-tips-on-naming-objects" id="toc-some-tips-on-naming-objects" class="nav-link" data-scroll-target="#some-tips-on-naming-objects"><span class="header-section-number">1.3.1</span> Some tips on naming objects</a></li>
+  <li><a href="#preforming-calculations" id="toc-preforming-calculations" class="nav-link" data-scroll-target="#preforming-calculations"><span class="header-section-number">1.3.2</span> Preforming calculations</a></li>
   </ul></li>
-  <li><a href="#functions-and-their-arguments" id="toc-functions-and-their-arguments" class="nav-link" data-scroll-target="#functions-and-their-arguments"><span class="header-section-number">2.4</span> Functions and their arguments</a>
+  <li><a href="#functions-and-their-arguments" id="toc-functions-and-their-arguments" class="nav-link" data-scroll-target="#functions-and-their-arguments"><span class="header-section-number">1.4</span> Functions and their arguments</a>
   <ul class="collapse">
-  <li><a href="#understanding-functions" id="toc-understanding-functions" class="nav-link" data-scroll-target="#understanding-functions"><span class="header-section-number">2.4.1</span> Understanding functions</a></li>
-  <li><a href="#tab-completion" id="toc-tab-completion" class="nav-link" data-scroll-target="#tab-completion"><span class="header-section-number">2.4.2</span> Tab-completion</a></li>
-  <li><a href="#help-with-defined-functions" id="toc-help-with-defined-functions" class="nav-link" data-scroll-target="#help-with-defined-functions"><span class="header-section-number">2.4.3</span> Help with defined functions</a></li>
+  <li><a href="#understanding-functions" id="toc-understanding-functions" class="nav-link" data-scroll-target="#understanding-functions"><span class="header-section-number">1.4.1</span> Understanding functions</a></li>
+  <li><a href="#tab-completion" id="toc-tab-completion" class="nav-link" data-scroll-target="#tab-completion"><span class="header-section-number">1.4.2</span> Tab-completion</a></li>
+  <li><a href="#help-with-defined-functions" id="toc-help-with-defined-functions" class="nav-link" data-scroll-target="#help-with-defined-functions"><span class="header-section-number">1.4.3</span> Help with defined functions</a></li>
   </ul></li>
-  <li><a href="#writing-functions" id="toc-writing-functions" class="nav-link" data-scroll-target="#writing-functions"><span class="header-section-number">2.5</span> Writing functions</a></li>
-  <li><a href="#vectors-and-data-types" id="toc-vectors-and-data-types" class="nav-link" data-scroll-target="#vectors-and-data-types"><span class="header-section-number">2.6</span> Vectors and data types</a></li>
-  <li><a href="#subsetting-vectors" id="toc-subsetting-vectors" class="nav-link" data-scroll-target="#subsetting-vectors"><span class="header-section-number">2.7</span> Subsetting vectors</a>
+  <li><a href="#writing-functions" id="toc-writing-functions" class="nav-link" data-scroll-target="#writing-functions"><span class="header-section-number">1.5</span> Writing functions</a></li>
+  <li><a href="#vectors-and-data-types" id="toc-vectors-and-data-types" class="nav-link" data-scroll-target="#vectors-and-data-types"><span class="header-section-number">1.6</span> Vectors and data types</a></li>
+  <li><a href="#subsetting-vectors" id="toc-subsetting-vectors" class="nav-link" data-scroll-target="#subsetting-vectors"><span class="header-section-number">1.7</span> Subsetting vectors</a>
   <ul class="collapse">
-  <li><a href="#conditional-subsetting" id="toc-conditional-subsetting" class="nav-link" data-scroll-target="#conditional-subsetting"><span class="header-section-number">2.7.1</span> Conditional subsetting</a></li>
-  <li><a href="#strings-character-vectors" id="toc-strings-character-vectors" class="nav-link" data-scroll-target="#strings-character-vectors"><span class="header-section-number">2.7.2</span> Strings (character vectors)</a></li>
+  <li><a href="#conditional-subsetting" id="toc-conditional-subsetting" class="nav-link" data-scroll-target="#conditional-subsetting"><span class="header-section-number">1.7.1</span> Conditional subsetting</a></li>
+  <li><a href="#strings-character-vectors" id="toc-strings-character-vectors" class="nav-link" data-scroll-target="#strings-character-vectors"><span class="header-section-number">1.7.2</span> Strings (character vectors)</a></li>
   </ul></li>
-  <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data"><span class="header-section-number">2.8</span> Missing data</a></li>
-  <li><a href="#loops-and-vectorization" id="toc-loops-and-vectorization" class="nav-link" data-scroll-target="#loops-and-vectorization"><span class="header-section-number">2.9</span> Loops and vectorization</a></li>
-  <li><a href="#dataset-background" id="toc-dataset-background" class="nav-link" data-scroll-target="#dataset-background"><span class="header-section-number">2.10</span> Dataset background</a>
+  <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data"><span class="header-section-number">1.8</span> Missing data</a></li>
+  <li><a href="#loops-and-vectorization" id="toc-loops-and-vectorization" class="nav-link" data-scroll-target="#loops-and-vectorization"><span class="header-section-number">1.9</span> Loops and vectorization</a></li>
+  <li><a href="#dataset-background" id="toc-dataset-background" class="nav-link" data-scroll-target="#dataset-background"><span class="header-section-number">1.10</span> Dataset background</a>
   <ul class="collapse">
-  <li><a href="#presentation-of-the-survey-data" id="toc-presentation-of-the-survey-data" class="nav-link" data-scroll-target="#presentation-of-the-survey-data"><span class="header-section-number">2.10.1</span> Presentation of the survey data</a></li>
+  <li><a href="#presentation-of-the-survey-data" id="toc-presentation-of-the-survey-data" class="nav-link" data-scroll-target="#presentation-of-the-survey-data"><span class="header-section-number">1.10.1</span> Presentation of the survey data</a></li>
   </ul></li>
-  <li><a href="#what-are-data-frames" id="toc-what-are-data-frames" class="nav-link" data-scroll-target="#what-are-data-frames"><span class="header-section-number">2.11</span> What are data frames?</a>
+  <li><a href="#what-are-data-frames" id="toc-what-are-data-frames" class="nav-link" data-scroll-target="#what-are-data-frames"><span class="header-section-number">1.11</span> What are data frames?</a>
   <ul class="collapse">
-  <li><a href="#inspecting-data.frame-objects" id="toc-inspecting-data.frame-objects" class="nav-link" data-scroll-target="#inspecting-data.frame-objects"><span class="header-section-number">2.11.1</span> Inspecting <code>data.frame</code> objects</a></li>
-  <li><a href="#indexing-and-subsetting-data-frames" id="toc-indexing-and-subsetting-data-frames" class="nav-link" data-scroll-target="#indexing-and-subsetting-data-frames"><span class="header-section-number">2.11.2</span> Indexing and subsetting data frames</a></li>
+  <li><a href="#inspecting-data.frame-objects" id="toc-inspecting-data.frame-objects" class="nav-link" data-scroll-target="#inspecting-data.frame-objects"><span class="header-section-number">1.11.1</span> Inspecting <code>data.frame</code> objects</a></li>
+  <li><a href="#indexing-and-subsetting-data-frames" id="toc-indexing-and-subsetting-data-frames" class="nav-link" data-scroll-target="#indexing-and-subsetting-data-frames"><span class="header-section-number">1.11.2</span> Indexing and subsetting data frames</a></li>
   </ul></li>
-  <li><a href="#exporting-data" id="toc-exporting-data" class="nav-link" data-scroll-target="#exporting-data"><span class="header-section-number">2.12</span> Exporting data</a></li>
+  <li><a href="#exporting-data" id="toc-exporting-data" class="nav-link" data-scroll-target="#exporting-data"><span class="header-section-number">1.12</span> Exporting data</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-r_and_rstudio.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec02-basic-r.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec02-basic-r.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></h1>
 </div>
 
 
@@ -267,10 +281,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>This saying captures the spirit, generosity, and fun involved in being a part of these open source projects.</p>
 <hr>
-<section id="lesson-preamble" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="lesson-preamble"><span class="header-section-number">2.1</span> Lesson Preamble</h2>
+<section id="lesson-preamble" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="lesson-preamble"><span class="header-section-number">1.1</span> Lesson Preamble</h2>
 <blockquote class="blockquote">
-<h3 id="learning-objectives" data-number="2.1.1" class="anchored"><span class="header-section-number">2.1.1</span> Learning Objectives</h3>
+<h3 id="learning-objectives" data-number="1.1.1" class="anchored"><span class="header-section-number">1.1.1</span> Learning Objectives</h3>
 <ul>
 <li>Define the following terms as they relate to R: call, function, arguments, options.</li>
 <li>Use comments within code blocks.</li>
@@ -282,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Describe what a data frame is.</li>
 <li>Load external data from a .csv file into a data frame in R.</li>
 </ul>
-<h3 id="lecture-outline" data-number="2.1.2" class="anchored"><span class="header-section-number">2.1.2</span> Lecture outline</h3>
+<h3 id="lecture-outline" data-number="1.1.2" class="anchored"><span class="header-section-number">1.1.2</span> Lecture outline</h3>
 <ul>
 <li>Setting up your R Notebook (10 min)</li>
 <li>Creating objects/variables in R (10 min)</li>
@@ -297,8 +311,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <hr>
 </section>
-<section id="setting-up-the-r-notebook" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="setting-up-the-r-notebook"><span class="header-section-number">2.2</span> Setting up the R Notebook</h2>
+<section id="setting-up-the-r-notebook" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="setting-up-the-r-notebook"><span class="header-section-number">1.2</span> Setting up the R Notebook</h2>
 <p>Let’s remove the template RStudio gives us, and add a title of our own.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Introduction to R</span></span>
@@ -306,8 +320,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This header block is called the YAML header. This is where we specify whether we want to convert this file to a HTML or PDF file. This will be discussed in more detail in another class. For now, we just care about including the lecture title here. If you are interested in playing with other YAML options, check out <a href="https://bookdown.org/yihui/rmarkdown/html-document.html">this guide</a>.</p>
 <p>Under this sentence, we will insert our first code chunk. Remember that you insert a code chunk by either clicking the “Insert” button or pressing <kbd>Ctrl/Cmd</kbd> + <kbd>Alt</kbd> + <kbd>i</kbd> simultaneously. To run a code chunk, you press the green arrow, or <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>.</p>
 </section>
-<section id="creating-objects-in-r" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="creating-objects-in-r"><span class="header-section-number">2.3</span> Creating objects in R</h2>
+<section id="creating-objects-in-r" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="creating-objects-in-r"><span class="header-section-number">1.3</span> Creating objects in R</h2>
 <p>As we saw in our first class, you can get output from R simply by typing math in the console:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -335,12 +349,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 8</code></pre>
 </div>
 </div>
-<section id="challenge" class="level4" data-number="2.3.0.1">
-<h4 data-number="2.3.0.1" class="anchored" data-anchor-id="challenge"><span class="header-section-number">2.3.0.1</span> Challenge</h4>
+<section id="challenge" class="level4" data-number="1.3.0.1">
+<h4 data-number="1.3.0.1" class="anchored" data-anchor-id="challenge"><span class="header-section-number">1.3.0.1</span> Challenge</h4>
 <p>So far, we have created two variables, <code>joel</code> and <code>x</code>. What is the sum of these variables?</p>
 </section>
-<section id="some-tips-on-naming-objects" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="some-tips-on-naming-objects"><span class="header-section-number">2.3.1</span> Some tips on naming objects</h3>
+<section id="some-tips-on-naming-objects" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="some-tips-on-naming-objects"><span class="header-section-number">1.3.1</span> Some tips on naming objects</h3>
 <ul>
 <li>Objects can be given any name: <code>x</code>, <code>current_temperature</code>, <code>thing</code>, or <code>subject_id</code>.</li>
 <li>You want your object names to be explicit and not too long.</li>
@@ -351,8 +365,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>It is also recommended to use nouns for variable names, and verbs for function names. It’s important to be consistent in the styling of your code (where you put spaces, how you name variables, etc.). Using a consistent coding style<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> makes your code clearer to read for your future self and your collaborators. RStudio will format code for you if you highlight a section of code and press <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>a</kbd>.</p>
 </section>
-<section id="preforming-calculations" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="preforming-calculations"><span class="header-section-number">2.3.2</span> Preforming calculations</h3>
+<section id="preforming-calculations" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="preforming-calculations"><span class="header-section-number">1.3.2</span> Preforming calculations</h3>
 <p>When assigning a value to an object, R does not print anything. You can force R to print the value by using parentheses or by typing the object name:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="dv">55</span>    <span class="co"># doesn't print anything</span></span>
@@ -388,15 +402,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="challenge-1" class="level4" data-number="2.3.2.1">
-<h4 data-number="2.3.2.1" class="anchored" data-anchor-id="challenge-1"><span class="header-section-number">2.3.2.1</span> Challenge</h4>
+<section id="challenge-1" class="level4" data-number="1.3.2.1">
+<h4 data-number="1.3.2.1" class="anchored" data-anchor-id="challenge-1"><span class="header-section-number">1.3.2.1</span> Challenge</h4>
 <p>What do you think is the current content of the object <code>weight_lb</code>? 126.5 or 220?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>weight_lb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="challenge-2" class="level4" data-number="2.3.2.2">
-<h4 data-number="2.3.2.2" class="anchored" data-anchor-id="challenge-2"><span class="header-section-number">2.3.2.2</span> Challenge</h4>
+<section id="challenge-2" class="level4" data-number="1.3.2.2">
+<h4 data-number="1.3.2.2" class="anchored" data-anchor-id="challenge-2"><span class="header-section-number">1.3.2.2</span> Challenge</h4>
 <p>What are the values after each statement in the following?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mass <span class="ot">&lt;-</span> <span class="fl">47.5</span></span>
@@ -408,10 +422,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="functions-and-their-arguments" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="functions-and-their-arguments"><span class="header-section-number">2.4</span> Functions and their arguments</h2>
-<section id="understanding-functions" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="understanding-functions"><span class="header-section-number">2.4.1</span> Understanding functions</h3>
+<section id="functions-and-their-arguments" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="functions-and-their-arguments"><span class="header-section-number">1.4</span> Functions and their arguments</h2>
+<section id="understanding-functions" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="understanding-functions"><span class="header-section-number">1.4.1</span> Understanding functions</h3>
 <p>Functions can be thought of as recipes. You give a few ingredients as input to a function, and it will generate an output based on these ingredients. Just as with baking, both the ingredients and the actual recipe will influence what comes out of the recipe in the end: will it be a cake or a loaf of bread? In R, the inputs to a function are not called ingredients, but rather <em>arguments</em>, and the output is called the <em>return value</em> of the function. A function does not technically have to return a value, but often does so. Functions are used to automate more complicated sets of commands and many of them are already predefined in R. A typical example would be the function <code>sqrt()</code>. The input (the argument) must be a number, and the return value (in fact, the output) is the square root of that number. Executing a function (‘running it’) is called <em>calling</em> the function. An example of a function call is:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -432,8 +446,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The return ‘value’ of a function need not be numerical (like that of <code>sqrt()</code>), and it also does not need to be a single item: it can be a set of things, or even a dataset, as we will see later on.</p>
 <p>Arguments can be anything, not only numbers or filenames, but also other objects. Exactly what each argument means differs per function, and must be looked up in the documentation (see below). Some functions take arguments which may either be specified by the user, or, if left out, take on a <em>default</em> value: these are called <em>options</em>. Options are typically used to alter the way the function operates, such as whether it ignores ‘bad values’, or what symbol to use in a plot. However, if you want something specific, you can specify a value of your choice which will be used instead of the default.</p>
 </section>
-<section id="tab-completion" class="level3" data-number="2.4.2">
-<h3 data-number="2.4.2" class="anchored" data-anchor-id="tab-completion"><span class="header-section-number">2.4.2</span> Tab-completion</h3>
+<section id="tab-completion" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="tab-completion"><span class="header-section-number">1.4.2</span> Tab-completion</h3>
 <p>To access help about <code>sqrt</code>, we are first going to learn about tab-completion. Type <code>s</code> and press <kbd>Tab</kbd>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>s<span class="sc">&lt;</span>tab<span class="sc">&gt;</span>q</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -446,8 +460,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>There are many things in this list, but only one of them is marked in purple. Purple here means that this list item is a parameter we can use for the function, while yellow means that it is a variable that we defined earlier.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 </section>
-<section id="help-with-defined-functions" class="level3" data-number="2.4.3">
-<h3 data-number="2.4.3" class="anchored" data-anchor-id="help-with-defined-functions"><span class="header-section-number">2.4.3</span> Help with defined functions</h3>
+<section id="help-with-defined-functions" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="help-with-defined-functions"><span class="header-section-number">1.4.3</span> Help with defined functions</h3>
 <p>To read the full help about <code>sqrt</code>, we can use the question mark, or type it directly into the help document browser.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>?sqrt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -490,8 +504,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>It’s good practice to put the non-optional arguments (like the number you’re rounding) first in your function call, and to specify the names of all optional arguments. If you don’t, someone reading your code might have to look up the definition of a function with unfamiliar arguments to understand what you’re doing.</p>
 </section>
 </section>
-<section id="writing-functions" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="writing-functions"><span class="header-section-number">2.5</span> Writing functions</h2>
+<section id="writing-functions" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="writing-functions"><span class="header-section-number">1.5</span> Writing functions</h2>
 <p>In this class, you will be working a lot with functions, especially those that someone else has already written. When you type <code>sum</code>, <code>c()</code>, or <code>mean()</code>, you are using a function that has been made previously and built into R. To remove some of the magic around these functions, we will go through how to make a basic function of our own. Let’s start with a simple example where we add two numbers together:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>add_two_numbers <span class="ot">&lt;-</span> <span class="cf">function</span>(num1, num2) {</span>
@@ -513,13 +527,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 9</code></pre>
 </div>
 </div>
-<section id="challenge-3" class="level4" data-number="2.5.0.1">
-<h4 data-number="2.5.0.1" class="anchored" data-anchor-id="challenge-3"><span class="header-section-number">2.5.0.1</span> Challenge</h4>
+<section id="challenge-3" class="level4" data-number="1.5.0.1">
+<h4 data-number="1.5.0.1" class="anchored" data-anchor-id="challenge-3"><span class="header-section-number">1.5.0.1</span> Challenge</h4>
 <p>Can you write a function that calculates the mean of 3 numbers?</p>
 </section>
 </section>
-<section id="vectors-and-data-types" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="vectors-and-data-types"><span class="header-section-number">2.6</span> Vectors and data types</h2>
+<section id="vectors-and-data-types" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="vectors-and-data-types"><span class="header-section-number">1.6</span> Vectors and data types</h2>
 <p>A vector is the most common and basic data type in R, and is pretty much the workhorse of R. A vector is composed by a series of values, which can be either numbers or characters. We can assign a series of values to a vector using the <code>c()</code> function, which stands for “concatenate (combine/connect one after another) values into a vector” For example we can create a vector of animal weights and assign it to a new object <code>weight_g</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>weight_g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">82</span>) <span class="co"># Concatenate/Combine values into a vector</span></span>
@@ -595,8 +609,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We can do this over and over again to grow a vector, or assemble a dataset. As we program, this may be useful to add results that we are collecting or calculating.</p>
 <p>An <strong>atomic vector</strong> is the simplest R <strong>data type</strong> and it is a linear vector of a single type, e.g.&nbsp;all numbers. Above, we saw 2 of the 6 main <strong>atomic vector</strong> types that R uses: <code>"character"</code> and <code>"numeric"</code> (or <code>"double"</code>). These are the basic building blocks that all R objects are built from.</p>
 <p>Vectors are one of the many <strong>data structures</strong> that R uses. Other important ones are lists (<code>list</code>), matrices (<code>matrix</code>), data frames (<code>data.frame</code>), factors (<code>factor</code>) and arrays (<code>array</code>). In this class, we will focus on data frames, which is most commonly used one for data analyses.</p>
-<section id="challenge-4" class="level4" data-number="2.6.0.1">
-<h4 data-number="2.6.0.1" class="anchored" data-anchor-id="challenge-4"><span class="header-section-number">2.6.0.1</span> Challenge</h4>
+<section id="challenge-4" class="level4" data-number="1.6.0.1">
+<h4 data-number="1.6.0.1" class="anchored" data-anchor-id="challenge-4"><span class="header-section-number">1.6.0.1</span> Challenge</h4>
 <p>We’ve seen that atomic vectors can be of type character, numeric (or double), integer, and logical. But what happens if we try to mix these types in a single vector? Find out by using <code>class</code> to test these examples.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>num_char <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">'a'</span>)</span>
@@ -609,8 +623,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This can be important to watch for in data sets that you import.</p>
 </section>
 </section>
-<section id="subsetting-vectors" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="subsetting-vectors"><span class="header-section-number">2.7</span> Subsetting vectors</h2>
+<section id="subsetting-vectors" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="subsetting-vectors"><span class="header-section-number">1.7</span> Subsetting vectors</h2>
 <p>If we want to extract one or several values from a vector, we must provide one or several indices in square brackets. For instance:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>animals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"mouse"</span>, <span class="st">"rat"</span>, <span class="st">"dog"</span>, <span class="st">"cat"</span>)</span>
@@ -632,8 +646,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>R indices start at 1. Programming languages like Fortran, MATLAB, Julia, and R start counting at 1, because that’s what human beings typically do. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that was historically simpler for computers and can allow for more elegant code.</p>
-<section id="conditional-subsetting" class="level3" data-number="2.7.1">
-<h3 data-number="2.7.1" class="anchored" data-anchor-id="conditional-subsetting"><span class="header-section-number">2.7.1</span> Conditional subsetting</h3>
+<section id="conditional-subsetting" class="level3" data-number="1.7.1">
+<h3 data-number="1.7.1" class="anchored" data-anchor-id="conditional-subsetting"><span class="header-section-number">1.7.1</span> Conditional subsetting</h3>
 <p>Another common way of subsetting is by using a logical vector. <code>TRUE</code> will select the element with the same index, while <code>FALSE</code> will not:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>weight_g <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">34</span>, <span class="dv">39</span>, <span class="dv">54</span>, <span class="dv">55</span>)</span>
@@ -656,8 +670,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>We will consider conditions in more detail in the next few lectures.</p>
 </section>
-<section id="strings-character-vectors" class="level3" data-number="2.7.2">
-<h3 data-number="2.7.2" class="anchored" data-anchor-id="strings-character-vectors"><span class="header-section-number">2.7.2</span> Strings (character vectors)</h3>
+<section id="strings-character-vectors" class="level3" data-number="1.7.2">
+<h3 data-number="1.7.2" class="anchored" data-anchor-id="strings-character-vectors"><span class="header-section-number">1.7.2</span> Strings (character vectors)</h3>
 <p>Just a small note about character vectors, also called <code>strings</code>. There are built-in packages for subsetting them that we’ll learn about later. They can be particularly relevant for ecological and genomic data because important data can be nested in complicated strings of text (ex: extracting only the observations that occurred in wet habitats from a column of habitat descriptions or only genes with functions related to drought tolerance).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>string1 <span class="ot">&lt;-</span> <span class="st">"This is a string"</span> <span class="co"># you can include spaces between your quotes</span></span>
@@ -683,8 +697,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="missing-data" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="missing-data"><span class="header-section-number">2.8</span> Missing data</h2>
+<section id="missing-data" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="missing-data"><span class="header-section-number">1.8</span> Missing data</h2>
 <p>As R was designed to analyze datasets, it includes the concept of missing data (which is uncommon in other programming languages). Missing data are represented in vectors as <code>NA</code>.</p>
 <p>When doing operations on numbers, most functions will return <code>NA</code> if the data you are working with include missing values. This feature makes it harder to overlook the cases where you are dealing with missing data. You can add the argument <code>na.rm = TRUE</code> to calculate the result while ignoring the missing values.</p>
 <div class="cell">
@@ -728,8 +742,8 @@ attr(,"class")
 </div>
 </div>
 <p>Recall that you can use the <code>class()</code> function to find the type of your atomic vector.</p>
-<section id="challenge-5" class="level4" data-number="2.8.0.1">
-<h4 data-number="2.8.0.1" class="anchored" data-anchor-id="challenge-5"><span class="header-section-number">2.8.0.1</span> Challenge</h4>
+<section id="challenge-5" class="level4" data-number="1.8.0.1">
+<h4 data-number="1.8.0.1" class="anchored" data-anchor-id="challenge-5"><span class="header-section-number">1.8.0.1</span> Challenge</h4>
 <ol type="1">
 <li>Using this vector of length measurements, create a new vector with the NAs removed.</li>
 </ol>
@@ -741,8 +755,8 @@ attr(,"class")
 </ol>
 </section>
 </section>
-<section id="loops-and-vectorization" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="loops-and-vectorization"><span class="header-section-number">2.9</span> Loops and vectorization</h2>
+<section id="loops-and-vectorization" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="loops-and-vectorization"><span class="header-section-number">1.9</span> Loops and vectorization</h2>
 <p>Loops, specifically for-loops, are essential to programming in general. However, in R, you should avoid them as often as possible because there are more efficient ways of doing things that you should use instead. It is still important that you understand the concept of loops and you might also use them in some of your own functions if there is no vectorized way of going about what you want to do.</p>
 <p>You can think of a for-loop as: “for each number contained in a list/vector, perform this operation” and the syntax basically says the same thing:</p>
 <div class="cell">
@@ -788,11 +802,11 @@ attr(,"class")
 </div>
 <p>Although this gives us the same output as the built-in function <code>sum</code>, the built-in function has many more optimizations so it is much faster than our function. In R, it is always faster to try to find a way of doing things without writing a loop yourself. When you are reading about R, you might see suggestions that you should try to <em>vectorize</em> your code to make it faster. What people are referring to, is that you should not write for loops in R and instead use the ready-made functions that are much more efficient in working with vectors and essentially performs operations on entire vector at once instead of one number at a time. Conceptually, loops operate on one element at a time while vectorized code operates on all elements of a vector at once.</p>
 </section>
-<section id="dataset-background" class="level2" data-number="2.10">
-<h2 data-number="2.10" class="anchored" data-anchor-id="dataset-background"><span class="header-section-number">2.10</span> Dataset background</h2>
+<section id="dataset-background" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="dataset-background"><span class="header-section-number">1.10</span> Dataset background</h2>
 <p>Today, we will be working with real data from a longitudinal study of the species abundance in the Chihuahuan desert ecosystem near Portal, Arizona, USA. This study includes observations of plants, ants, and rodents from 1977 - 2002, and has been used in over 100 publications. More information is available in <a href="https://onlinelibrary.wiley.com/doi/10.1890/08-1222.1/full">the abstract of this paper from 2009</a>. There are several datasets available related to this study, and we will be working with datasets that have been preprocessed by the <a href="https://www.datacarpentry.org">Data Carpentry</a> to facilitate teaching. These are made available online as <em>The Portal Project Teaching Database</em>, both at the <a href="https://datacarpentry.org/ecology-workshop/data.html">Data Carpentry website</a>, and on <a href="https://figshare.com/articles/Portal_Project_Teaching_Database/1314459/6">Figshare</a>. Figshare is a great place to publish data, code, figures, and more openly to make them available for other researchers and to communicate findings that are not part of a longer paper.</p>
-<section id="presentation-of-the-survey-data" class="level3" data-number="2.10.1">
-<h3 data-number="2.10.1" class="anchored" data-anchor-id="presentation-of-the-survey-data"><span class="header-section-number">2.10.1</span> Presentation of the survey data</h3>
+<section id="presentation-of-the-survey-data" class="level3" data-number="1.10.1">
+<h3 data-number="1.10.1" class="anchored" data-anchor-id="presentation-of-the-survey-data"><span class="header-section-number">1.10.1</span> Presentation of the survey data</h3>
 <p>We are studying the species and weight of animals caught in plots in our study area. The dataset is stored as a comma separated value (CSV) file. Each row holds information for a single animal, and the columns represent:</p>
 <table class="caption-top table">
 <thead>
@@ -919,8 +933,8 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 </section>
 </section>
-<section id="what-are-data-frames" class="level2" data-number="2.11">
-<h2 data-number="2.11" class="anchored" data-anchor-id="what-are-data-frames"><span class="header-section-number">2.11</span> What are data frames?</h2>
+<section id="what-are-data-frames" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="what-are-data-frames"><span class="header-section-number">1.11</span> What are data frames?</h2>
 <p>Data frames are the <em>de facto</em> data structure for most tabular data, and what we use for statistics and plotting. A data frame can be created by hand, but most commonly they are generated by the function <code>read_csv()</code>; in other words, when importing spreadsheets from your hard drive (or the web).</p>
 <p>A data frame is a representation of data in the format of a table where the columns are vectors that all have the same length. Because the columns are vectors, they all contain the same type of data as we discussed in last class (e.g., characters, integers, factors). We can see this when inspecting the structure of a data frame with the function <code>str()</code>:</p>
 <div class="cell">
@@ -960,8 +974,8 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 </div>
 <p>Integer refers to a whole number, such as 1, 2, 3, 4, etc. Numbers with decimals, 1.0, 2.4, 3.333, are referred to as floats. Factors are used to represent categorical data. Factors can be ordered or unordered, and understanding them is necessary for statistical analysis and for plotting. Factors are stored as integers, and have labels (text) associated with these unique integers. While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.</p>
-<section id="inspecting-data.frame-objects" class="level3" data-number="2.11.1">
-<h3 data-number="2.11.1" class="anchored" data-anchor-id="inspecting-data.frame-objects"><span class="header-section-number">2.11.1</span> Inspecting <code>data.frame</code> objects</h3>
+<section id="inspecting-data.frame-objects" class="level3" data-number="1.11.1">
+<h3 data-number="1.11.1" class="anchored" data-anchor-id="inspecting-data.frame-objects"><span class="header-section-number">1.11.1</span> Inspecting <code>data.frame</code> objects</h3>
 <p>We already saw how the functions <code>head()</code> and <code>str()</code> can be useful to check the content and the structure of a data frame. Here is a non-exhaustive list of functions to get a sense of the content/structure of the data. Let’s try them out!</p>
 <ul>
 <li>Size:
@@ -987,8 +1001,8 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </ul></li>
 </ul>
 <p>Note: most of these functions are “generic”, they can be used on other types of objects besides <code>data.frame</code>.</p>
-<section id="challenge-6" class="level4" data-number="2.11.1.1">
-<h4 data-number="2.11.1.1" class="anchored" data-anchor-id="challenge-6"><span class="header-section-number">2.11.1.1</span> Challenge</h4>
+<section id="challenge-6" class="level4" data-number="1.11.1.1">
+<h4 data-number="1.11.1.1" class="anchored" data-anchor-id="challenge-6"><span class="header-section-number">1.11.1.1</span> Challenge</h4>
 <p>Based on the output of <code>str(surveys)</code>, can you answer the following questions?</p>
 <ul>
 <li>What is the class of the object <code>surveys</code>?</li>
@@ -997,8 +1011,8 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </ul>
 </section>
 </section>
-<section id="indexing-and-subsetting-data-frames" class="level3" data-number="2.11.2">
-<h3 data-number="2.11.2" class="anchored" data-anchor-id="indexing-and-subsetting-data-frames"><span class="header-section-number">2.11.2</span> Indexing and subsetting data frames</h3>
+<section id="indexing-and-subsetting-data-frames" class="level3" data-number="1.11.2">
+<h3 data-number="1.11.2" class="anchored" data-anchor-id="indexing-and-subsetting-data-frames"><span class="header-section-number">1.11.2</span> Indexing and subsetting data frames</h3>
 <p>Our survey data frame has rows and columns (it has 2 dimensions). If we want to extract some specific data from it, we need to specify the “coordinates” we want from it. Row numbers come first, followed by column numbers. When indexing, base R data frames return a different format depending on how we index the data (i.e.&nbsp;either a vector or a data frame), but with enhanced data frames, <code>tibbles</code>, the returned object is almost always a data frame.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span>, <span class="dv">1</span>]   <span class="co"># first element in the first column of the data frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1181,8 +1195,8 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <pre><code>[1] "NL" "NL" "NL" "NL" "NL" "NL"</code></pre>
 </div>
 </div>
-<section id="challenge-7" class="level4" data-number="2.11.2.1">
-<h4 data-number="2.11.2.1" class="anchored" data-anchor-id="challenge-7"><span class="header-section-number">2.11.2.1</span> Challenge</h4>
+<section id="challenge-7" class="level4" data-number="1.11.2.1">
+<h4 data-number="1.11.2.1" class="anchored" data-anchor-id="challenge-7"><span class="header-section-number">1.11.2.1</span> Challenge</h4>
 <ol type="1">
 <li><p>Create a <code>data.frame</code> (<code>surveys_200</code>) containing only the observations from row 200 of the <code>surveys</code> dataset.</p></li>
 <li><p>Notice how <code>nrow()</code> gave you the number of rows in a <code>data.frame</code>?</p>
@@ -1198,8 +1212,8 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </section>
 </section>
 </section>
-<section id="exporting-data" class="level2" data-number="2.12">
-<h2 data-number="2.12" class="anchored" data-anchor-id="exporting-data"><span class="header-section-number">2.12</span> Exporting data</h2>
+<section id="exporting-data" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="exporting-data"><span class="header-section-number">1.12</span> Exporting data</h2>
 <p>As you begin to play with your raw data, you may want to export these new, processed, datasets to share them with your collaborators or for archival. Similar to the <code>read_csv()</code> function used for reading CSV files into R, there is a <code>write_csv()</code> function that generates CSV files from data frames.</p>
 <p>Manually create a new folder called “data-processed” in your directory. Alternatively, get R to help you with it.</p>
 <div class="cell">
@@ -1645,11 +1659,14 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../lectures/lec01-r_and_rstudio.html" class="pagination-link" aria-label="Introduction to the course">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to the course</span></span>
+      <a href="../lectures/lec01-downloading-r.html" class="pagination-link" aria-label="Downloading and installing R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Downloading and installing R</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../assignments/assignment-01.html" class="pagination-link" aria-label="Assignment 01: Basic R">
+        <span class="nav-page-text">Assignment 01: Basic R</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

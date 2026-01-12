@@ -7,13 +7,13 @@ book:
   date: today
   chapters:
     - index.qmd
-    #- about-us.qmd
-    - downloadingR.qmd
+    - syllabus.qmd
+    - about-us.qmd
     - part: "Lectures"
       chapters:
-      - lectures/lec01-r_and_rstudio.qmd
+      - lectures/lec01-downloading-r.qmd
       - lectures/lec02-basic-r.qmd
-      # - lectures/lec03-command_git.qmd
+      - lectures/lec03-data-wrangling.qmd
       # - lectures/lec04-data-wrangling.qmd
       # - lectures/lec05-data-visualization.qmd
       # - lectures/lec06-exploratory-data-analysis.qmd
