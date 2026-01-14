@@ -182,13 +182,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec02-basic-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: Assignment, vectors, functions, strings, and loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec03-data-wrangling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulating and analyzing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec04-data-visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summarizing and visualizating data</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>&gt; 1+2</code></p>
 </blockquote>
 <p>We can similarly to a series of calculations where the current one depends on the prior. However, this method becomes inconvenient for all but the simplest calculations, since it’s more difficult to repeat a series of calculations in an automated way. For this reason, it is more common to write commands in <strong>scripts</strong>. Scripts are simply series of lines of code saved in a text file.</p>
-<p>To create a new script, go to <code>File &gt; RScript</code>, give it a name (like <code>my_test.R</code>), and save it. Once you have written the code you want, there are a few ways you can actually get it to run</p>
+<p>To create a new script, go to <code>File &gt; New File &gt; RScript</code>, give it a name (like <code>my_test.R</code>), and save it. Once you have written the code you want, there are a few ways you can actually get it to run</p>
 <ol type="1">
 <li><p>using your cursor to highlight all the code text, and then hitting the icon with the green forward arrow and the word `Run’ in the top right of the scripts panel</p></li>
 <li><p>typing <code>&gt;source('mytest.R')</code> at the prompt in the RStudio console</p></li>
@@ -328,7 +334,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Instead, individual users tend to download and install only the packages they really need for their work. While this may be efficient in terms of the space in memory taken up by the app, it can lead to some challenges when sharing code, if you’re not careful to ensure that the code is documented to specify the required packages, and to autmoatically download and install then if they’re missing.</p>
 <section id="tinytex" class="level3" data-number="1.5.1">
 <h3 data-number="1.5.1" class="anchored" data-anchor-id="tinytex"><span class="header-section-number">1.5.1</span> TinyTex</h3>
-<p>There is one package we have to install first before we can create PDF reports, which will be necessary for assignments and the project. Copy and paste into the console (where the <code>\&gt;</code> symbol is) the two lines of code below to install a package called <code>tinytex</code>.</p>
+<p>There is one package we have to install first before we can create PDF reports, which will be necessary for assignments and the project (the default is to create HTML reports, which can be opened in any web browser, and are useful to make some sorts of interactive visuals, but are not as easy to share and view as PDFs). Copy and paste into the console (where the <code>\&gt;</code> symbol is) the two lines of code below to install a package called <code>tinytex</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tinytex"</span>) </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -388,6 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  pdf_document<span class="sc">:</span> default</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>If you are interested in playing with other YAML options, check out <a href="https://bookdown.org/yihui/rmarkdown/html-document.html">this guide</a>.</p>
 <p>Next, let’s type code to perform the calculation we did above:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -821,8 +828,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lectures/lec02-basic-r.html" class="pagination-link" aria-label="Introduction to R: assignment, vectors, functions, strings, loops">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: assignment, vectors, functions, strings, loops</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/lec02-basic-r.html" class="pagination-link" aria-label="Introduction to R: Assignment, vectors, functions, strings, and loops">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: Assignment, vectors, functions, strings, and loops</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
