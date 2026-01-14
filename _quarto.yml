@@ -14,7 +14,7 @@ book:
       - lectures/lec01-downloading-r.qmd
       - lectures/lec02-basic-r.qmd
       - lectures/lec03-data-wrangling.qmd
-      # - lectures/lec04-data-wrangling.qmd
+      - lectures/lec04-data-visualization.qmd
       # - lectures/lec05-data-visualization.qmd
       # - lectures/lec06-exploratory-data-analysis.qmd
       # - lectures/lec07-self-directed-analysis.qmd

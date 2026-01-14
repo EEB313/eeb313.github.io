@@ -1,4 +1,12 @@
-# Manipulating and analyzing data
+---
+title: "Manipulating and analyzing data"
+output:
+  html_document:
+    df_print: paged
+editor_options:
+  markdown:
+    wrap: 72
+---
 
 ## Lesson preamble
 
@@ -14,16 +22,6 @@
 >     into groups of observations, apply a summary statistics for each
 >     group, and then combine the results.
 > -   Learn to switch between long and wide format
->
-> ### Lesson outline
->
-> -   Getting set up with R Markdown and R packages for data analytics
-> -   Data set background (10 min)
-> -   What are data frames? (10 min)
-> -   Split-apply-combine techniques in **`dplyr`** (25 min)
-> -   Using `group_by` and `tally` to summarize categorical data (20
->     mins)
-> -   Reshaping data (15 mins)
 
 ------------------------------------------------------------------------
 
@@ -33,7 +31,8 @@ To do this lecture, we'll need to be able to create and knit R Markdown
 documents, and analyze data using functions contained in the `tidyverse`
 package. If you haven't done either of these tasks before, navigate to
 the course notes for [Lecture 1](lec01-downloading-r.qmd) and follow the
-instructions there first.
+instructions there first. Then, open a new document
+(`File > New File > R Markdown`) to run commands during this lecture.
 
 When we make Markdown documents, we want them to be shareable and
 reproducible, so it's good practice to include code to install and load
@@ -85,7 +84,8 @@ This needs to be done once for every new R session, and so it is common
 practice to keep a list of all the packages used at the top of your
 script or notebook for convenience and load all of it at start up.
 
-That's a lot of red though! What are these warning signs and checks?
+You might notice a lot of red text printed in the console! What are
+these warning signs and checks?
 
 All the warning signs indicate are the version of R that they were built
 under. They can frequently be ignored unless your version of R is so old
@@ -95,13 +95,13 @@ frequently updated, and functions may become deprecated.
 Next, the warning shows you all the packages that were successfully
 installed.
 
-Finally, there are some conflicts! All this means is that there are
-multiple functions with the same name that may do different things. R
-prioritizes functions from certain packages over others. So, in this
-case, the `filter()` function from `dplyr` will take precedent over the
-`filter()` function from the `stats` package. If you want to use the
-latter, use double colons `::` to indicate that you are calling a
-function from a certain package:
+Finally, there are usually some conflicts reported. All this means is
+that there are multiple functions with the same name that may do
+different things. R prioritizes functions from certain packages over
+others. So, in this case, the `filter()` function from `dplyr` will take
+precedent over the `filter()` function from the `stats` package. If you
+want to use the latter, use double colons `::` to indicate that you are
+calling a function from a certain package:
 
 ## Dataset background
 
@@ -109,10 +109,13 @@ Today, we will be working with real data from a longitudinal study of
 the species abundance in the Chihuahuan desert ecosystem near Portal,
 Arizona, USA. This study includes observations of plants, ants, and
 rodents from 1977 - 2002, and has been used in over 100 publications.
+
 More information is available in [the abstract of this paper from
-2009](https://onlinelibrary.wiley.com/doi/10.1890/08-1222.1/full). There
-are several datasets available related to this study, and we will be
-working with datasets that have been preprocessed by the [Data
+2009](https://onlinelibrary.wiley.com/doi/10.1890/08-1222.1/full), in
+this [pre-print](https://www.biorxiv.org/content/10.1101/332783v3.full),
+and on the [Portal Project's website](https://portal.weecology.org/).
+There are several datasets available related to this study, and we will
+be working with datasets that have been preprocessed by the [Data
 Carpentry](https://www.datacarpentry.org) to facilitate teaching. These
 are made available online as *The Portal Project Teaching Database*,
 both at the [Data Carpentry
@@ -121,6 +124,10 @@ website](https://datacarpentry.org/ecology-workshop/data.html), and on
 Figshare is a great place to publish data, code, figures, and more
 openly to make them available for other researchers and to communicate
 findings that are not part of a longer paper.
+
+```{r portal_figure, echo=FALSE, fig.cap="The Portal Project is a long-term ecological study in the a desert ecosystem in Arizona, which includes frequent sampling over 30+ years and controlled manipulations of the ecosystem", out.width = '80%'}
+knitr::include_graphics("figures/portal_project.png")
+```
 
 ### Presentation of the survey data
 
@@ -412,8 +419,6 @@ write_csv(surveys_complete_naomit,
                     "surveys_complete_naomit.csv"))
 ```
 
-## 
-
 ## Data wrangling with dplyr
 
 Wrangling here is used in the sense of maneuvering, managing,
@@ -665,210 +670,6 @@ surveys_hindfoot_half <- surveys %>%
     mutate(hindfoot_half = hindfoot_length / 2) %>%
     filter(hindfoot_half < 30) %>%
     select(species_id, hindfoot_half)
-```
-
-## Split-apply-combine techniques in dplyr
-
-Many data analysis tasks can be approached using the
-*split-apply-combine* paradigm: split the data into groups, apply some
-analysis to each group, and then combine the results.
-
-**`dplyr`** facilitates this workflow through the use of `group_by()` to
-split data and `summarize()`, which collapses each group into a
-single-row summary of that group. The arguments to `group_by()` are the
-column names that contain the **categorical** variables for which you
-want to calculate the summary statistics. Let's view the mean `weight`
-by sex.
-
-```{r}
-surveys %>%
-    group_by(sex) %>%
-    summarize(mean_weight = mean(weight))
-```
-
-The mean weights become `NA` since there are individual observations
-that are `NA`. Let's remove those observations.
-
-```{r}
-surveys %>%
-    filter(!is.na(weight)) %>%
-    group_by(sex) %>%
-    summarize(mean_weight = mean(weight))
-```
-
-There is one row here that is neither male nor female, these are
-observations where the animal escaped before the sex could not be
-determined. Let's remove those as well.
-
-```{r}
-surveys %>%
-    filter(!is.na(weight) & !is.na(sex)) %>%
-    group_by(sex) %>%
-    summarize(mean_weight = mean(weight))
-```
-
-You can also group by multiple columns:
-
-```{r}
-surveys %>%
-    filter(!is.na(weight) & !is.na(sex)) %>%
-    group_by(genus, sex) %>%
-    summarize(mean_weight = mean(weight))
-```
-
-Since we will use the same filtered and grouped data frame in multiple
-code chunks below, we could assign this subset of the data to a new
-variable and use this variable in the subsequent code chunks instead of
-typing out the functions each time.
-
-```{r}
-filtered_surveys <- surveys %>%
-    filter(!is.na(weight) & !is.na(sex)) %>%
-    group_by(genus, sex)
-```
-
-If you want to display more data, you can use the `print()` function at
-the end of your chain with the argument `n` specifying the number of
-rows to display.
-
-```{r}
-filtered_surveys %>%
-    summarize(mean_weight = mean(weight)) %>%
-    print(n = 15) # Will change the knitted output, not the notebook
-```
-
-Once the data are grouped, you can also summarize multiple variables at
-the same time. For instance, we could add a column indicating the
-minimum weight for each species for each sex:
-
-```{r}
-filtered_surveys %>%
-    summarize(mean_weight = mean(weight),
-              min_weight = min(weight))
-```
-
-#### Challenge
-
-1.  Use `group_by()` and `summarize()` to find the mean, min, and max
-    hindfoot length for each species.
-
-2.  What was the heaviest animal measured in each year? Return the
-    columns `year`, `genus`, `species`, and `weight`.
-
-```{r, include=FALSE}
-## Answer 1
-surveys %>%
-    filter(!is.na(hindfoot_length)) %>%
-    group_by(species) %>%
-    summarize(
-        mean_hindfoot_length = mean(hindfoot_length),
-        min_hindfoot_length = min(hindfoot_length),
-        max_hindfoot_length = max(hindfoot_length)
-    ) %>%
-    print(n = 15)
-```
-
-```{r, include=FALSE}
-## Answer 2
-surveys %>%
-    filter(!is.na(weight)) %>%
-    group_by(year) %>%
-    filter(weight == max(weight)) %>% # This is going to compare to the max weight within each group
-    select(year, genus, species, weight) %>%
-    arrange(year) %>%
-    print(n = 15)
-```
-
-### Using tally to summarize categorical data
-
-When working with data, it is also common to want to know the number of
-observations found for each factor or combination of factors. For this,
-**`dplyr`** provides `tally()`. For example, if we want to group by taxa
-and find the number of observations for each taxa, we would do:
-
-```{r}
-surveys %>%
-    group_by(taxa) %>%
-    tally()
-```
-
-We can also use `tally()` when grouping on multiple variables:
-
-```{r}
-surveys %>%
-    group_by(taxa, sex) %>%
-    tally()
-```
-
-Here, `tally()` is the action applied to the groups created by
-`group_by()` and counts the total number of records for each category.
-
-If there are many groups, `tally()` is not that useful on its own. For
-example, when we want to view the five most abundant species among the
-observations:
-
-```{r}
-surveys %>%
-    group_by(species) %>%
-    tally()
-```
-
-Since there are 40 rows in this output, we would like to order the table
-to display the most abundant species first. In `dplyr`, we say that we
-want to `arrange()` the data.
-
-```{r}
-surveys %>%
-    group_by(species) %>%
-    tally() %>%
-    arrange(n)
-```
-
-Still not that useful. Since we are interested in the most abundant
-species, we want to display those with the highest count first, in other
-words, we want to arrange the column `n` in descending order:
-
-```{r}
-surveys %>%
-    group_by(species) %>%
-    tally() %>%
-    arrange(desc(n)) %>%
-    head(5)
-```
-
-If we want to include more attributes about these species, we can
-include these in the call to `group_by()`:
-
-```{r}
-surveys %>%
-    group_by(species, taxa, genus) %>%
-    tally() %>%
-    arrange(desc(n)) %>%
-    head(5)
-```
-
-Be careful not to include anything that would split the group into
-subgroups, such as `sex`, `year` etc.
-
-#### Challenge
-
-1.  How many individuals were caught in each `plot_type` surveyed?
-
-2.  You saw above how to count the number of individuals of each `sex`
-    using a combination of `group_by()` and `tally()`. How could you get
-    the same result using `group_by()` and `summarize()`? Hint: see
-    `?n`.
-
-```{r, include=FALSE}
-## Answer 1
-surveys %>%
-    group_by(plot_type) %>%
-    tally()
-
-## Answer 2
-surveys %>%
-  group_by(sex) %>%
-  summarize(n = n())
 ```
 
 ## Reshaping with pivot_wider and pivot_longer

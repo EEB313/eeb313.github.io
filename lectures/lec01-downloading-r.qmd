@@ -53,7 +53,7 @@ For short commands that we aren't likely to want to repeat, we can simply type t
 
 We can similarly to a series of calculations where the current one depends on the prior. However, this method becomes inconvenient for all but the simplest calculations, since it's more difficult to repeat a series of calculations in an automated way. For this reason, it is more common to write commands in **scripts**. Scripts are simply series of lines of code saved in a text file.
 
-To create a new script, go to `File > RScript`, give it a name (like `my_test.R`), and save it. Once you have written the code you want, there are a few ways you can actually get it to run
+To create a new script, go to `File > New File > RScript`, give it a name (like `my_test.R`), and save it. Once you have written the code you want, there are a few ways you can actually get it to run
 
 1.  using your cursor to highlight all the code text, and then hitting the icon with the green forward arrow and the word \`Run' in the top right of the scripts panel
 
@@ -73,7 +73,7 @@ Instead, individual users tend to download and install only the packages they re
 
 ### TinyTex
 
-There is one package we have to install first before we can create PDF reports, which will be necessary for assignments and the project. Copy and paste into the console (where the `\>` symbol is) the two lines of code below to install a package called `tinytex`.
+There is one package we have to install first before we can create PDF reports, which will be necessary for assignments and the project (the default is to create HTML reports, which can be opened in any web browser, and are useful to make some sorts of interactive visuals, but are not as easy to share and view as PDFs). Copy and paste into the console (where the `\>` symbol is) the two lines of code below to install a package called `tinytex`.
 
 ```{r eval = FALSE}
 install.packages("tinytex") 
@@ -82,9 +82,9 @@ tinytex::install_tinytex()
 
 ### Tidyverse
 
-[`tidyverse`](https://www.tidyverse.org/)[^downloadingr-1] is a large collection of packages with similar functions, similar to the way Microsoft Word is part of Microsoft Office. `tidyverse`, as its name may suggest, contains many packages that makes data cleaning and exploring more intuitive and effective. It is basically an entire philosophy on how to handle data and has a massive following.
+[`tidyverse`](https://www.tidyverse.org/)[^lec01-downloading-r-1] is a large collection of packages with similar functions, similar to the way Microsoft Word is part of Microsoft Office. `tidyverse`, as its name may suggest, contains many packages that makes data cleaning and exploring more intuitive and effective. It is basically an entire philosophy on how to handle data and has a massive following.
 
-[^downloadingr-1]: This course is focused on `tidyverse` functions, because that seems to be the trend these days. Although all of our teaching material is written in tidy lingo, it is mostly for the sake of consistency. In all honesty, tidy is pretty great, but some functions are more intuitive in base, so most people code in a mix of the two. If you learned base R elsewhere and prefer to use those functions instead, by all means, go ahead. The correct code is code that does what you want it to do.
+[^lec01-downloading-r-1]: This course is focused on `tidyverse` functions, because that seems to be the trend these days. Although all of our teaching material is written in tidy lingo, it is mostly for the sake of consistency. In all honesty, tidy is pretty great, but some functions are more intuitive in base, so most people code in a mix of the two. If you learned base R elsewhere and prefer to use those functions instead, by all means, go ahead. The correct code is code that does what you want it to do.
 
 The two `tidyverse` packages we will be using the most frequently in this course is `dplyr` and `ggplot2`. `dplyr` is great for data wrangling (Lecture 3) and `ggplot2` makes killer plots (Lecture 4).
 
@@ -145,6 +145,8 @@ output:
   pdf_document: default
 ---
 ```
+
+If you are interested in playing with other YAML options, check out [this guide](https://bookdown.org/yihui/rmarkdown/html-document.html).
 
 Next, let's type code to perform the calculation we did above:
 
