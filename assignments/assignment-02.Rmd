@@ -1,66 +1,97 @@
 ---
-title: 'Assignment 2: data wrangling (8 marks)'
-output: pdf_document
+title: "Assignment 2: Manipulating and plotting data (8 marks)"
+output:
+  pdf_document:
+    toc: no
+  html_document:
+    toc: no
 urlcolor: blue
 ---
 
+Download the .Rmd file [here](https://eeb313.github.io/assignments/assignment-02.Rmd).
 
-*To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`. Please ensure the text on your .pdf does not continue past the end of the page.*
+*To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted .pdf. Please ensure the text on your .pdf does not continue past the end of the page.*
 
+## 1. Analyze body temperature timeseries of beaver *Castor canadensis* (2.5 marks)
 
+a\. There are many built-in data frames in R, which you can find [more details about online](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html). What are the column names of the built-in dataframe `beaver1`? How many observations (rows) and variables (columns) are there? (0.25 marks)
 
-## 1.  Read in and pre-process plant biomass data (1.5 mark)
+*Hint: You don't have to download, import, or \`read' them like external datasets - you can just work with them as if they are in your environment already. You can learn more about a built-in dataset by searching it in the* `Help` *panel (bottom left in RStudio) or by typing* `?` *and it's name in the command line. Make sure to load the `tidyverse` package before you use any `readr`, `dplyr,` or `ggplot` functions in your notebook.*
 
-You will apply your data wrangling skills on the yearly change in biomass of plants in the [beautiful Abisko national park in northern Sweden](https://en.wikipedia.org/wiki/Abisko_National_Park). We have preprocessed this data and made [it available as a csv-file via this link](https://uoftcoders.github.io/rcourse/data/plant-biomass-preprocess.csv). You can find the original data and a short readme on [figshare](https://figshare.com/articles/Time_Series_of_plant_biomass_during_1998-2013/4149648) and [dryad](https://datadryad.org/resource/doi:10.5061/dryad.38s21). The original study[^1] is available on an open access license. Reading through the readme on figshare, and the study abstract will increase your understanding for working with the data.
+```{r 1a}
 
-a.  Read the data directly from the provided URL, into a variable called `plant_biomass` and display the first six rows. (0.25 mark)
+```
 
-b.  Convert the Latin column names into their common English names: lingonberry, bilberry, bog bilberry, dwarf birch, crowberry, and wavy hair grass. After this, display all column names. (0.25 marks)
-  _Hint: Search online to find out which Latin and English names pair up._ 
+b\. Display both the first 6 and last 6 rows of this data frame. Show how to do so with both indexing as well as specialized functions. (0.5 marks)
 
-c.  This is a wide data frame (species make up the column names). A long format is easier to analyze, so pivot the species names into one column (`species`) and the measurement values into another column (`biomass`). Assign it to the variable `plant_long`. (0.5 marks)
+```{r 1b}
 
-d.  Recreate the wide data frame (species names as columns again) by pivoting it from your `plant_long` data frame.  (0.5 marks) 
+```
 
+c\. Use the `view()` function to inspect the dataset visually in RStudio. Exactly how long was this beaver measured for? You can state this in words or numerically (0.25 points)
 
+d\. What is the minimum, mean, and maximum body temperature for beavers inside and outside of the retreat? (0.5 marks)
 
+*Hint: An indicator variable is one that has a value of 1 when the criteria (i.e., "activity outside the retreat") is true, and a value of zero when it is not.*
 
-## 2.  Wrangling plant biomass with dplyr (3.5 marks)
+```{r 1d}
 
-Now that our data is in a tidy format, we can start exploring it!
+```
 
-a.  What is the average biomass in g/m^2^ for all observations in the study? (0.25 marks)
+e\. Make a plot of body temperature vs time of day, with points coloured differently for activity inside vs outside the retreat. (1 point)
 
-b.  How does the average biomass compare between the grazed control sites and those that were protected from herbivores? (0.5 marks)
+*Hint: You might want to create a new transformed time variable for this*
 
-c.  Display a table of the average plant biomass for each year. (0.25 marks)
+```{r 1e}
 
-d.  What is the mean plant biomass per year for the `grazedcontrol` and `rodentexclosure` groups? Present the answer in a table that has these variables as column headers (use pivoting). (0.75 marks)
+```
 
-e.  Check whether there is an equal number of observations per site. (0.25 marks)
+## 2. Analyze mammal size data (5.5 marks)
 
-f.  How many biomass measurements were 0? Which species had the most measurements of 0 biomass? (0.5 marks)
+We will be working with a data set compiled to understand sexual dimorphism in size across mammals. You can download the file from [Dryad](https://datadryad.org/dataset/doi:10.5061/dryad.280gb5mx0) (note: you might have to do this manually, as the site can block R imports) or from the [course website](https://eeb313.github.io/data/SSDinMammals.csv)). The [original study](https://www.nature.com/articles/s41467-024-45739-5#Sec8)[^1] is quite interesting! The Dryad link includes a description of the study variables.
 
-g.  Create a new column that represents the square of the biomass. Display the three largest `squared_biomass` observations in descending order. Only include the columns `year`, `squared_biomass` and `species` and only observations between the years 2003 and 2008 from the forest habitat. (1 mark)
+[^1]: Tombak, K.J., Hex, S.B.S.W. & Rubenstein, D.I. New estimates indicate that males are not larger than females in most mammal species. Nat Commun 15, 1872 (2024). <https://doi.org/10.1038/s41467-024-45739-5>
 
-_Hint: Break this down into single criteria and add one at a time. It is possible to obtain the desired result with five operations_ (1 mark)
+a\. Read throught the original study abstract and introduction. In one sentence, what was the hypothesis the authors were trying to test with this study? (0.25 pts)
 
-## 3.  Read in and wrangle mammal size data (3 marks)
+b\. Download the file to your computer and read it into a variable called `mammal_sizes` and provide a preview of data. (0.25 mark)
 
-Download the "SSDinMammals.csv" file from Quercus, the course website, or [Dryad](https://datadryad.org/stash/downloads/file_stream/2921720). The original study[^2] is quite interesting! 
+*Hint: Make sure you tell `read_csv` the correct file path of your data based on where you put it. You can either specify the full directory path, or where it is relative to which directly R currently operating out of for this notebook, which you can get with the* `getwd()` *command and set with the* `setwd()` *command. (Or by navigating to the Files panel in RStudio, selecting the Settings menu (gear icon), and choosing "Set As Working Directory" or "Go To Working Directory").*
 
-a.  Download the file to your computer and read it into a variable called `mammal_sizes` and provide a glimpse into the data. (0.25 mark)
+```{r 2b}
 
-b.  Pull out the columns for "Scientific_Name", "massM', and "massF". Then pivot the mass columns into long format, using "sex" and "mass" as the new column names. To clean up the text values for the "sex" column, you can pass `names_pattern = "mass(.)"` as an argument in your call to the pivot function. Save this data frame as as `mammal_mass`. Please glimpse `mammal_mass` or print the first six rows. (0.25 marks)
+```
 
-c.  Pull out the columns for "Scientific_Name", "lengthM', and "lengthF". Then, as in the last question, pivot the length columns into long format, using "sex" and "length" as the new column names. To clean up the text values for the "sex" column, you can pass `names_pattern = "length(.)"` as an argument in your call to the pivot function. Save this data frame as as `mammal_length`. Please glimpse `mammal_length` or print the first six rows. (0.25 marks)
+c\. Pull out the 4 columns containing information on the species name along with "massM", "massF", "n_M" and "n_F" and call this dataframe `mammal_weights`. Calculate the average weight by sex for each Order of mammal, including only species where at least 10 males and 10 females were measured, and only Orders that include at least 10 species (1 mark)
 
-d.  Were any species included more than once in `mammal_mass` and `mammal_length`? If so, please remove any rows that have duplicated sex and species combinations and save the result in two new data frames, called `mass_nodup` and `length_nodup`. Please do not include any columns besides "Scientific_Name", "sex", "mass", and "length" in your final data set. Report the number of rows in your final data sets and glimpse/head your final data sets. *Hint: for each named species and sex combination, how many rows exist in the data frame? The n() function will be useful here.* (1 mark)
+```{r}
 
-e.  There is a tidyverse function called `full_join()` that enables the joining of data sets by a set of shared variables. Please read its [documentation](https://dplyr.tidyverse.org/reference/mutate-joins.html). Use `full_join()` to combine the deduplicated long mass and length data into one data frame called `mammal_long`. Please glimpse `mammal_long` or print the first six rows. *Hint: the two shared columns to join by have the same name in each data set.*  (0.5 marks)
+```
 
-f.  How many `NA` values are present in the length column? For the sex-species combos with and without recorded length values, what is the mean mass, grouped by sex? (0.75 marks)
+d\. Calculate the proportional mass difference ([massM - massF] / massM) for all the rows in the original dataset. Again including including only species where at least 10 males and 10 females were measured, and only Orders that include at least 10 species, calculate the average proportional difference in mass (1 mark).
 
+```{r 2d}
 
-[^1]: Olofsson J, te Beest M, Ericson L (2013) Complex biotic interactions drive long-term vegetation dynamics in a subarctic ecosystem. Philosophical Transactions of the Royal Society B 368(1624): 20120486. <https://dx.doi.org/10.1098/rstb.2012.0486>
-[^2]: Tombak, K.J., Hex, S.B.S.W. & Rubenstein, D.I. New estimates indicate that males are not larger than females in most mammal species. Nat Commun 15, 1872 (2024). <https://doi.org/10.1038/s41467-024-45739-5> 
+```
+
+e\. Repeat 2c and 2d but for length, and average by Family instead of by Order (1 mark)
+
+```{r 2e}
+
+```
+
+f\. Make a scatter plot of the average female body mass versus the average male body mass for each species. Color the points by Order. Add in a solid line showing the case where male and female are equal size (1 mark)
+
+*Hints: You may need to transform the x and y data to make the plot easier to read, since the mass values span multiple orders of magnitude. Search the Help documentation for the geom_abline function to learn about adding lines to plots.*
+
+```{r 4f}
+
+```
+
+g\. Make a scatter plot of the proportional difference in mass between males and females of each species versus the Order, and color by Order as well (1 mark)
+
+*Note: You can rotate x axis labels by adding the following command at the end of the set of ggplot commands :* `+ theme(axis.text.x = element_text(angle = 45,vjust=1, hjust=1))`
+
+```{r}
+
+```

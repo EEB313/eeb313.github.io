@@ -30,7 +30,7 @@ book:
       chapters:
       # - assignments/assignment-00.qmd
       - assignments/assignment-01.qmd
-      # - assignments/assignment-02.qmd
+      - assignments/assignment-02.qmd
       # - assignments/assignment-03.qmd
       # - assignments/assignment-04.qmd
       # - assignments/assignment-05.qmd
@@ -40,17 +40,17 @@ book:
       # - projects.qmd
       # - projects_databases.qmd
     - part: "Datasets"
-      # chapters:
-      #   - text: "portal_data.csv"
-      #     href: lectures/data/portal_data.csv
+      chapters:
+      - text: "portal_data.csv"
+        href: lectures/data/portal_data.csv
       #   - text: "pseudo.ara.busco"
       #     href: lectures/data/pseudo.ara.busco
       #   - text: "pseudo.LTRs"
       #     href: lectures/data/pseudo.LTRs
       #   - text: "disease_distance.csv"
       #     href: lectures/data/disease_distance.csv
-      #   - text: "SSDinMammals.csv"
-      #     href: lectures/data/SSDinMammals.csv
+      - text: "SSDinMammals.csv"
+        href: lectures/data/SSDinMammals.csv
       #   - text: "medicago.csv"
       #     href: lectures/data/medicago.csv
       #   - text: "bmr.csv"
@@ -84,7 +84,7 @@ format:
 extra_files:
 #   - assignment-00.Rmd
   - assignment-01.Rmd
-#   - assignment-02.Rmd
+  - assignment-02.Rmd
 #   - assignment-03.Rmd
 #   - assignment-04.Rmd
 #   - assignment-05.Rmd
