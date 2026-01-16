@@ -1,6 +1,6 @@
 # Assignment 02: Manipulating and plotting data (8 marks) {-}
 
-Download the .Rmd file [here](https://eeb313.github.io/assignments/assignment-02.Rmd).
+Download the .Rmd file [here](assignment-02.Rmd).
 
 *To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted .pdf. Please ensure the text on your .pdf does not continue past the end of the page.*
 

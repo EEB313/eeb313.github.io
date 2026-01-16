@@ -3,7 +3,7 @@
 */.DS_Store
 *.DS_Store
 *.Rhistory
-/_book/
+_book/
 
 /.quarto/
 .Rproj.user
