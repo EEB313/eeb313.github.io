@@ -1,0 +1,97 @@
+---
+title: "Assignment 2: Manipulating and plotting data (8 marks)"
+output:
+  pdf_document:
+    toc: no
+  html_document:
+    toc: no
+urlcolor: blue
+---
+
+Download the .Rmd file [here](https://eeb313.github.io/assignments/assignment-02.Rmd).
+
+*To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted .pdf. Please ensure the text on your .pdf does not continue past the end of the page.*
+
+## 1. Analyze body temperature timeseries of beaver *Castor canadensis* (2.5 marks)
+
+a\. There are many built-in data frames in R, which you can find [more details about online](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html). What are the column names of the built-in dataframe `beaver1`? How many observations (rows) and variables (columns) are there? (0.25 marks)
+
+*Hint: You don't have to download, import, or \`read' them like external datasets - you can just work with them as if they are in your environment already. You can learn more about a built-in dataset by searching it in the* `Help` *panel (bottom left in RStudio) or by typing* `?` *and it's name in the command line. Make sure to load the `tidyverse` package before you use any `readr`, `dplyr,` or `ggplot` functions in your notebook.*
+
+```{r 1a}
+
+```
+
+b\. Display both the first 6 and last 6 rows of this data frame. Show how to do so with both indexing as well as specialized functions. (0.5 marks)
+
+```{r 1b}
+
+```
+
+c\. Use the `view()` function to inspect the dataset visually in RStudio. Exactly how long was this beaver measured for? You can state this in words or numerically (0.25 points)
+
+d\. What is the minimum, mean, and maximum body temperature for beavers inside and outside of the retreat? (0.5 marks)
+
+*Hint: An indicator variable is one that has a value of 1 when the criteria (i.e., "activity outside the retreat") is true, and a value of zero when it is not.*
+
+```{r 1d}
+
+```
+
+e\. Make a plot of body temperature vs time of day, with points coloured differently for activity inside vs outside the retreat. (1 point)
+
+*Hint: You might want to create a new transformed time variable for this*
+
+```{r 1e}
+
+```
+
+## 2. Analyze mammal size data (5.5 marks)
+
+We will be working with a data set compiled to understand sexual dimorphism in size across mammals. You can download the file from [Dryad](https://datadryad.org/dataset/doi:10.5061/dryad.280gb5mx0) (note: you might have to do this manually, as the site can block R imports) or from the [course website](https://eeb313.github.io/data/SSDinMammals.csv)). The [original study](https://www.nature.com/articles/s41467-024-45739-5#Sec8)[^1] is quite interesting! The Dryad link includes a description of the study variables.
+
+[^1]: Tombak, K.J., Hex, S.B.S.W. & Rubenstein, D.I. New estimates indicate that males are not larger than females in most mammal species. Nat Commun 15, 1872 (2024). <https://doi.org/10.1038/s41467-024-45739-5>
+
+a\. Read throught the original study abstract and introduction. In one sentence, what was the hypothesis the authors were trying to test with this study? (0.25 pts)
+
+b\. Download the file to your computer and read it into a variable called `mammal_sizes` and provide a preview of data. (0.25 mark)
+
+*Hint: Make sure you tell `read_csv` the correct file path of your data based on where you put it. You can either specify the full directory path, or where it is relative to which directly R currently operating out of for this notebook, which you can get with the* `getwd()` *command and set with the* `setwd()` *command. (Or by navigating to the Files panel in RStudio, selecting the Settings menu (gear icon), and choosing "Set As Working Directory" or "Go To Working Directory").*
+
+```{r 2b}
+
+```
+
+c\. Pull out the 4 columns containing information on the species name along with "massM", "massF", "n_M" and "n_F" and call this dataframe `mammal_weights`. Calculate the average weight by sex for each Order of mammal, including only species where at least 10 males and 10 females were measured, and only Orders that include at least 10 species (1 mark)
+
+```{r}
+
+```
+
+d\. Calculate the proportional mass difference ([massM - massF] / massM) for all the rows in the original dataset. Again including including only species where at least 10 males and 10 females were measured, and only Orders that include at least 10 species, calculate the average proportional difference in mass (1 mark).
+
+```{r 2d}
+
+```
+
+e\. Repeat 2c and 2d but for length, and average by Family instead of by Order (1 mark)
+
+```{r 2e}
+
+```
+
+f\. Make a scatter plot of the average female body mass versus the average male body mass for each species. Color the points by Order. Add in a solid line showing the case where male and female are equal size (1 mark)
+
+*Hints: You may need to transform the x and y data to make the plot easier to read, since the mass values span multiple orders of magnitude. Search the Help documentation for the geom_abline function to learn about adding lines to plots.*
+
+```{r 4f}
+
+```
+
+g\. Make a scatter plot of the proportional difference in mass between males and females of each species versus the Order, and color by Order as well (1 mark)
+
+*Note: You can rotate x axis labels by adding the following command at the end of the set of ggplot commands :* `+ theme(axis.text.x = element_text(angle = 45,vjust=1, hjust=1))`
+
+```{r}
+
+```

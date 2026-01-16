@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Alison Hill">
-<meta name="dcterms.date" content="2026-01-16">
 
-<title>EEB313: Quantitative Methods in R for Biology</title>
+<title>Assignment 02: Manipulating and plotting data (8 marks) – EEB313: Quantitative Methods in R for Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,25 +23,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./syllabus.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9be2c12bab310ac08f4b5b8760484c76.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../lectures/data/portal_data.csv" rel="next">
+<link href="../assignments/assignment-01.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9be2c12bab310ac08f4b5b8760484c76.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-02.html">Assignment 02: Manipulating and plotting data (8 marks)</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">EEB313: Quantitative Methods in R for Biology</a> 
+      <a href="../">EEB313: Quantitative Methods in R for Biology</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/EEB313/eeb313.github.io" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
@@ -114,19 +113,19 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome!</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus: EEB 313 Winter 2026</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about-us.html" class="sidebar-item-text sidebar-link">
+  <a href="../about-us.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2026 teaching team</span></a>
   </div>
 </li>
@@ -141,25 +140,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec01-downloading-r.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec01-downloading-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Downloading and installing R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec02-basic-r.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec02-basic-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: Assignment, vectors, functions, strings, and loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec03-data-wrangling.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec03-data-wrangling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulating and analyzing data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec04-data-visualization.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec04-data-visualization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summarizing and visualizating data</span></span></a>
   </div>
 </li>
@@ -176,13 +175,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 01: Basic R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignments/assignment-02.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/assignment-02.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Assignment 02: Manipulating and plotting data (8 marks)</span></a>
   </div>
 </li>
@@ -203,13 +202,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/data/portal_data.csv" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/data/portal_data.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">portal_data.csv</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/data/SSDinMammals.csv" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/data/SSDinMammals.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SSDinMammals.csv</span></a>
   </div>
 </li>
@@ -225,38 +224,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome!</a>
-  <ul class="collapse">
-  <li><a href="#course-overview" id="toc-course-overview" class="nav-link" data-scroll-target="#course-overview">Course overview</a></li>
-  </ul></li>
+  <li><a href="#analyze-body-temperature-timeseries-of-beaver-castor-canadensis-2.5-marks" id="toc-analyze-body-temperature-timeseries-of-beaver-castor-canadensis-2.5-marks" class="nav-link active" data-scroll-target="#analyze-body-temperature-timeseries-of-beaver-castor-canadensis-2.5-marks">1. Analyze body temperature timeseries of beaver <em>Castor canadensis</em> (2.5 marks)</a></li>
+  <li><a href="#analyze-mammal-size-data-5.5-marks" id="toc-analyze-mammal-size-data-5.5-marks" class="nav-link" data-scroll-target="#analyze-mammal-size-data-5.5-marks">2. Analyze mammal size data (5.5 marks)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-02.html">Assignment 02: Manipulating and plotting data (8 marks)</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">EEB313: Quantitative Methods in R for Biology</h1>
+<h1 class="title">Assignment 02: Manipulating and plotting data (8 marks)</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Alison Hill </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 16, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -266,16 +251,40 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome" class="level1 unnumbered">
-<h1 class="unnumbered">Welcome!</h1>
-<p>Welcome to the online home of EEB 313, Winter 2026. We created this website as an easy-to-navigate resources where we can share all the <a href="syllabus">course details</a>, detailed <a href="lectures">lectures notes</a>, <a href="assignments">homework assignments</a>, and other resources. Most of the files are created as interactive R Markdown documents, which you can download and run yourself.</p>
-<p>EEB 313 was originally developed as a student-led course, and over the years many contributors have helped to develop the course material in its current form. See the <a href="about-us">About Us</a> page for more details on our current and past teaching team/course developers.</p>
-<section id="course-overview" class="level2">
-<h2 class="anchored" data-anchor-id="course-overview">Course overview</h2>
-<p><a href="https://artsci.calendar.utoronto.ca/course/eeb313h1">EEB313</a> covers foundational concepts in scientific computing and data analytics using the programming language R, with applications in ecology and evolutionary biology. Using interactive instructional sessions and group work, students will learn to program mathematical calculations and simple algorithms, to analyze and visualize complex datasets, to implement models to simulate biological population dynamics, and to document and disseminate their code. No prior programming experience is required.</p>
+<p>Download the .Rmd file <a href="assignment-02.Rmd">here</a>.</p>
+<p><em>To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted .pdf. Please ensure the text on your .pdf does not continue past the end of the page.</em></p>
+<section id="analyze-body-temperature-timeseries-of-beaver-castor-canadensis-2.5-marks" class="level2">
+<h2 class="anchored" data-anchor-id="analyze-body-temperature-timeseries-of-beaver-castor-canadensis-2.5-marks">1. Analyze body temperature timeseries of beaver <em>Castor canadensis</em> (2.5 marks)</h2>
+<p>a. There are many built-in data frames in R, which you can find <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html">more details about online</a>. What are the column names of the built-in dataframe <code>beaver1</code>? How many observations (rows) and variables (columns) are there? (0.25 marks)</p>
+<p><em>Hint: You don’t have to download, import, or `read’ them like external datasets - you can just work with them as if they are in your environment already. You can learn more about a built-in dataset by searching it in the</em> <code>Help</code> <em>panel (bottom left in RStudio) or by typing</em> <code>?</code> <em>and it’s name in the command line. Make sure to load the <code>tidyverse</code> package before you use any <code>readr</code>, <code>dplyr,</code> or <code>ggplot</code> functions in your notebook.</em></p>
+<p>b. Display both the first 6 and last 6 rows of this data frame. Show how to do so with both indexing as well as specialized functions. (0.5 marks)</p>
+<p>c. Use the <code>view()</code> function to inspect the dataset visually in RStudio. Exactly how long was this beaver measured for? You can state this in words or numerically (0.25 points)</p>
+<p>d. What is the minimum, mean, and maximum body temperature for beavers inside and outside of the retreat? (0.5 marks)</p>
+<p><em>Hint: An indicator variable is one that has a value of 1 when the criteria (i.e., “activity outside the retreat”) is true, and a value of zero when it is not.</em></p>
+<p>e. Make a plot of body temperature vs time of day, with points coloured differently for activity inside vs outside the retreat. (1 point)</p>
+<p><em>Hint: You might want to create a new transformed time variable for this</em></p>
+</section>
+<section id="analyze-mammal-size-data-5.5-marks" class="level2">
+<h2 class="anchored" data-anchor-id="analyze-mammal-size-data-5.5-marks">2. Analyze mammal size data (5.5 marks)</h2>
+<p>We will be working with a data set compiled to understand sexual dimorphism in size across mammals. You can download the file from <a href="https://datadryad.org/dataset/doi:10.5061/dryad.280gb5mx0">Dryad</a> (note: you might have to do this manually, as the site can block R imports) or from the <a href="https://eeb313.github.io/data/SSDinMammals.csv">course website</a>). The <a href="https://www.nature.com/articles/s41467-024-45739-5#Sec8">original study</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> is quite interesting! The Dryad link includes a description of the study variables.</p>
+<p>a. Read throught the original study abstract and introduction. In one sentence, what was the hypothesis the authors were trying to test with this study? (0.25 pts)</p>
+<p>b. Download the file to your computer and read it into a variable called <code>mammal_sizes</code> and provide a preview of data. (0.25 mark)</p>
+<p><em>Hint: Make sure you tell <code>read_csv</code> the correct file path of your data based on where you put it. You can either specify the full directory path, or where it is relative to which directly R currently operating out of for this notebook, which you can get with the</em> <code>getwd()</code> <em>command and set with the</em> <code>setwd()</code> <em>command. (Or by navigating to the Files panel in RStudio, selecting the Settings menu (gear icon), and choosing “Set As Working Directory” or “Go To Working Directory”).</em></p>
+<p>c. Pull out the 4 columns containing information on the species name along with “massM”, “massF”, “n_M” and “n_F” and call this dataframe <code>mammal_weights</code>. Calculate the average weight by sex for each Order of mammal, including only species where at least 10 males and 10 females were measured, and only Orders that include at least 10 species (1 mark)</p>
+<p>d. Calculate the proportional mass difference ([massM - massF] / massM) for all the rows in the original dataset. Again including including only species where at least 10 males and 10 females were measured, and only Orders that include at least 10 species, calculate the average proportional difference in mass (1 mark).</p>
+<p>e. Repeat 2c and 2d but for length, and average by Family instead of by Order (1 mark)</p>
+<p>f. Make a scatter plot of the average female body mass versus the average male body mass for each species. Color the points by Order. Add in a solid line showing the case where male and female are equal size (1 mark)</p>
+<p><em>Hints: You may need to transform the x and y data to make the plot easier to read, since the mass values span multiple orders of magnitude. Search the Help documentation for the geom_abline function to learn about adding lines to plots.</em></p>
+<p>g. Make a scatter plot of the proportional difference in mass between males and females of each species versus the Order, and color by Order as well (1 mark)</p>
+<p><em>Note: You can rotate x axis labels by adding the following command at the end of the set of ggplot commands :</em> <code>+ theme(axis.text.x = element_text(angle = 45,vjust=1, hjust=1))</code></p>
 
 
 </section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Tombak, K.J., Hex, S.B.S.W. &amp; Rubenstein, D.I. New estimates indicate that males are not larger than females in most mammal species. Nat Commun 15, 1872 (2024). <a href="https://doi.org/10.1038/s41467-024-45739-5" class="uri">https://doi.org/10.1038/s41467-024-45739-5</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -681,10 +690,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../assignments/assignment-01.html" class="pagination-link" aria-label="Assignment 01: Basic R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment 01: Basic R</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./syllabus.html" class="pagination-link" aria-label="Syllabus: EEB 313 Winter 2026">
-        <span class="nav-page-text">Syllabus: EEB 313 Winter 2026</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/data/portal_data.csv" class="pagination-link" aria-label="portal_data.csv">
+        <span class="nav-page-text">portal_data.csv</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
