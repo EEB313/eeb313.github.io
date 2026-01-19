@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-01.html" rel="next">
+<link href="../lectures/lec05-advanced-data-viz.html" rel="next">
 <link href="../lectures/lec03-data-wrangling.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -197,6 +197,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summarizing and visualizating data</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec05-advanced-data-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lecture 5:  Advanced data manipulation &amp; visualization</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -269,12 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#summarizing-data-by-group-with-simple-statistics" id="toc-summarizing-data-by-group-with-simple-statistics" class="nav-link" data-scroll-target="#summarizing-data-by-group-with-simple-statistics"><span class="header-section-number">4.3.1</span> Summarizing data by group with simple statistics</a></li>
   <li><a href="#using-tally-to-summarize-categorical-data" id="toc-using-tally-to-summarize-categorical-data" class="nav-link" data-scroll-target="#using-tally-to-summarize-categorical-data"><span class="header-section-number">4.3.2</span> Using tally to summarize categorical data</a></li>
   </ul></li>
-  <li><a href="#split-apply-combine-plot" id="toc-split-apply-combine-plot" class="nav-link" data-scroll-target="#split-apply-combine-plot"><span class="header-section-number">4.4</span> Split-apply-combine… plot!</a>
-  <ul class="collapse">
-  <li><a href="#more-plot-types" id="toc-more-plot-types" class="nav-link" data-scroll-target="#more-plot-types"><span class="header-section-number">4.4.1</span> More plot types</a></li>
-  <li><a href="#faceting" id="toc-faceting" class="nav-link" data-scroll-target="#faceting"><span class="header-section-number">4.4.2</span> Faceting</a></li>
-  <li><a href="#challenge-4" id="toc-challenge-4" class="nav-link" data-scroll-target="#challenge-4"><span class="header-section-number">4.4.3</span> Challenge</a></li>
-  </ul></li>
+  <li><a href="#split-apply-combine-plot" id="toc-split-apply-combine-plot" class="nav-link" data-scroll-target="#split-apply-combine-plot"><span class="header-section-number">4.4</span> Split-apply-combine… plot!</a></li>
   </ul>
 </nav>
     </div>
@@ -308,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Produce scatter plots, line plots, and histograms using <em>ggplot</em></li>
 <li>Alter plot settings</li>
 <li>Combine data manipulation with data visualization using split-apply-combine techniques</li>
-<li>Understand and apply faceting in ggplot</li>
+<li>Use <code>summarize</code>, <code>group_by</code>, and <code>tally</code> to split a data frame into groups of observations, apply a summary statistics for each group, and then combine the results.</li>
 </ul>
 </blockquote>
 <hr>
@@ -1076,304 +1077,10 @@ Caused by warning in `mean.default()`:
 <p>Create a scatter plot of <em>hindfoot_length</em> against <em>species</em> with the <em>weight</em> data displayed using colours. If you’re unsure of which variable to put on which axis, Y variables are generally “against” X variables. Also, continuous variables are generally plotted on the Y axis.</p>
 <p>Do you notice any potential issues with this plot given the sheer number of observations we know exist in the data?</p>
 <p>(This is further illustrating the <strong>iterative</strong> nature of constructing plots)</p>
-</section>
-<section id="more-plot-types" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="more-plot-types"><span class="header-section-number">4.4.1</span> More plot types</h3>
-<p>In this section, we’ll explore a few more types of plots we can make in <code>ggplot</code>.</p>
-<p>Let’s calculate number of counts per year for each species. First, we need to group the data and count records within each group:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, species) <span class="sc">%&gt;%</span></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="co"># Adding arrange just to compare with histogram</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 275 × 3
-# Groups:   year [26]
-    year species      n
-   &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt;
- 1  2002 baileyi    868
- 2  1985 merriami   653
- 3  1997 merriami   572
- 4  2000 baileyi    545
- 5  1982 merriami   532
- 6  2001 baileyi    522
- 7  1983 merriami   521
- 8  1996 merriami   484
- 9  1998 merriami   447
-10  1990 merriami   425
-# ℹ 265 more rows</code></pre>
-</div>
-</div>
-<p>We could assign this table to a variable, and then pass that variable to <code>ggplot()</code>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>yearly_counts <span class="ot">&lt;-</span> surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, species) <span class="sc">%&gt;%</span></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(yearly_counts, <span class="fu">aes</span>(<span class="at">x =</span> n)) <span class="sc">+</span></span>
-<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Remember that a histogram plots the number of observations based on a variable, so you only need to specify the x-axis in the <code>ggplot()</code> call. Also, that a histogram’s bin size can really change what you might understand about the data. The histogram geom has a <em>bins</em> argument that allows you to specify the number of bins and a <em>binwidth</em> argument that allows you to specify the size of the bins.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(yearly_counts, <span class="fu">aes</span>(<span class="at">x =</span> n)) <span class="sc">+</span></span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Creating an intermediate variable would be preferable for time consuming calculations, because you would not want to do that operation every time you change the plot aesthetics.</p>
-<p>If it is not a time consuming calculation or you would like the flexibility of changing the data summary and the plotting options in the same code chunk, you can pipe the output of your split-apply-combine operation to the plotting command:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, species) <span class="sc">%&gt;%</span></span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> n)) <span class="sc">+</span></span>
-<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>We can perform a quick check that the plot corresponds to the table by colouring the histogram by species:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, species) <span class="sc">%&gt;%</span></span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># We are using "fill" here instead of "colour"</span></span>
-<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">fill =</span> species)) <span class="sc">+</span> </span>
-<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><em>Note: Here we are using <code>fill</code> to assign colours to species rather than <code>colour</code>. In general <code>colour</code> refers to the outline of points/bars or whatever it is you are plotting and <code>fill</code> refers to the colour that goes inside the point or bar. If you are confused, try switching out <code>fill</code> for <code>colour</code> to see what looks best!</em></p>
-<p>Let’s explore how the number of each genus varies over time. Longitudinal data can be visualized as a line plot with years on the x axis and counts on the y axis:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, species) <span class="sc">%&gt;%</span></span>
-<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n)) <span class="sc">+</span></span>
-<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Unfortunately, this does not work because we plotted data for all the species together as one line. We need to tell <code>ggplot</code> to draw a line for each species by modifying the aesthetic function to include <code>group = species</code>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, species) <span class="sc">%&gt;%</span></span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">group =</span> species)) <span class="sc">+</span></span>
-<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>We will be able to distinguish species in the plot if we add colours (using <code>colour</code> also automatically groups the data):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, species) <span class="sc">%&gt;%</span></span>
-<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># `colour` groups automatically</span></span>
-<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">colour =</span> species)) <span class="sc">+</span></span>
-<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="faceting" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="faceting"><span class="header-section-number">4.4.2</span> Faceting</h3>
-<p><code>ggplot</code> has a special technique called <em>faceting</em> that allows the user to split one plot into multiple subplots based on a variable included in the dataset. This allows us to examine the trends associated with each grouping variable more closely. We will use it to make a time series plot for each species:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, species) <span class="sc">%&gt;%</span></span>
-<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n)) <span class="sc">+</span> </span>
-<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_wrap</span>(<span class="sc">~</span>species)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Now we would like to split the line in each plot by the sex of each individual measured. To do that we need to make counts in the data frame after grouping by <code>year</code>, <code>species</code>, and <code>sex</code>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, species, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tally</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 575 × 4
-# Groups:   year, species [275]
-    year species     sex       n
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt; &lt;int&gt;
- 1  1977 eremicus    M         2
- 2  1977 flavus      F        14
- 3  1977 flavus      M         8
- 4  1977 leucogaster F         1
- 5  1977 leucogaster &lt;NA&gt;      1
- 6  1977 megalotis   F         1
- 7  1977 megalotis   M         1
- 8  1977 merriami    F        75
- 9  1977 merriami    M       106
-10  1977 ordii       F        10
-# ℹ 565 more rows</code></pre>
-</div>
-</div>
-<p>We can reflect this grouping by sex in the faceted plot by splitting further with <code>colour</code> (within a single plot):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, species, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">colour =</span> sex)) <span class="sc">+</span></span>
-<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_wrap</span>(<span class="sc">~</span>species)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>There are several observations where sex was not recorded. Let’s filter out those values.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">%&gt;%</span></span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, species, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
-<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_wrap</span>(<span class="sc">~</span>species)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>It is possible to specify exactly which colors<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> to use and to change the thickness of the lines to make the them easier to distinguish.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">%&gt;%</span></span>
-<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, species, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">colour =</span> sex)) <span class="sc">+</span></span>
-<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"orange"</span>)) <span class="sc">+</span></span>
-<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_wrap</span>(<span class="sc">~</span>species) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Not sure what colours would look good on your plot? The R Community got you covered! Check out these awesome <a href="https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/">color palettes</a> where nice-looking color combos come predefined. We especially recommend the <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code> color palettes</a>. These palettes are not only pretty, they are specifically designed to be easier to read by those with colourblindness.</p>
-<p>Lastly, let’s change the x labels so that they don’t overlap, and remove the grey background to increase contrast with the lines. To customize the non-data components of the plot, we will pass some <em>theme</em> statements<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> to <code>ggplot</code>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">%&gt;%</span></span>
-<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, species, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
-<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_d</span>() <span class="sc">+</span></span>
-<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species) <span class="sc">+</span></span>
-<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb97-11"><a href="#cb97-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>There are other popular theme options, such as <code>theme_bw()</code>.</p>
-<p>Our plot looks pretty polished now! It would be difficult to share with other, however, given the lack of information provided on the Y axis. Let’s add some meaningful axis labels.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>surveys_abun_species <span class="sc">%&gt;%</span></span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">%&gt;%</span></span>
-<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, species, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> n, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
-<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_d</span>() <span class="sc">+</span></span>
-<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>species) <span class="sc">+</span></span>
-<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
-<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb98-12"><a href="#cb98-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Rodent abundance over time"</span>,</span>
-<span id="cb98-13"><a href="#cb98-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb98-14"><a href="#cb98-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Number observed"</span>,</span>
-<span id="cb98-15"><a href="#cb98-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"Sex"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec04-data-visualization_files/figure-html/polished-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="challenge-4" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="challenge-4"><span class="header-section-number">4.4.3</span> Challenge</h3>
-<p>Use the filtered data frame (<code>surveys_abun_species</code>) for part 2.</p>
-<p><strong>1.</strong> Remember the histogram coloured according to each species? Starting from that code, how could we separate each species into its own subplot? <em>Hint: look in the aplit-apply-comine section</em></p>
-<p><strong>2.a.</strong> Create a plot that shows the average weight over years. Which year was the average weight of all animals the highest?</p>
-<p><strong>2.b.</strong> Iterate on the plot so it shows differences among species of their average weight over time. Is the yearly trend the same for all species?</p>
+<p><em>Parts of this lesson material were taken and modified from <a href="https://datacarpentry.org">Data Carpentry</a> under their CC-BY copyright license. See their <a href="https://datacarpentry.org/R-ecology-lesson/03-dplyr.html">lesson page</a> for the original source.</em></p>
 
 
 </section>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>There are so many colors to chose from in R. Check out the <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">R Color</a> doc to find something that brings you joy.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>The amount of control over various plot elements in <code>ggplot</code> is truly astonishing. Check out the complete list of themes <a href="https://ggplot2.tidyverse.org/reference/theme.html">here</a>. Have fun!<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -1784,8 +1491,8 @@ Caused by warning in `mean.default()`:
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-01.html" class="pagination-link" aria-label="Assignment 01: Basic R">
-        <span class="nav-page-text">Assignment 01: Basic R</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/lec05-advanced-data-viz.html" class="pagination-link" aria-label="Lecture 5:  Advanced data manipulation &amp; visualization">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lecture 5: Advanced data manipulation &amp; visualization</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -197,6 +197,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summarizing and visualizating data</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec05-advanced-data-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lecture 5:  Advanced data manipulation &amp; visualization</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -277,15 +283,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#chaining-functions-together-using-pipes" id="toc-chaining-functions-together-using-pipes" class="nav-link" data-scroll-target="#chaining-functions-together-using-pipes"><span class="header-section-number">3.6.2</span> Chaining functions together using pipes</a></li>
   <li><a href="#creating-new-columns-with-mutate" id="toc-creating-new-columns-with-mutate" class="nav-link" data-scroll-target="#creating-new-columns-with-mutate"><span class="header-section-number">3.6.3</span> Creating new columns with mutate</a></li>
   </ul></li>
-  <li><a href="#reshaping-with-pivot_wider-and-pivot_longer" id="toc-reshaping-with-pivot_wider-and-pivot_longer" class="nav-link" data-scroll-target="#reshaping-with-pivot_wider-and-pivot_longer"><span class="header-section-number">3.7</span> Reshaping with pivot_wider and pivot_longer</a>
-  <ul class="collapse">
-  <li><a href="#defining-wide-vs-long-data" id="toc-defining-wide-vs-long-data" class="nav-link" data-scroll-target="#defining-wide-vs-long-data"><span class="header-section-number">3.7.1</span> Defining wide vs long data</a></li>
-  <li><a href="#summary-of-long-vs-wide-formats" id="toc-summary-of-long-vs-wide-formats" class="nav-link" data-scroll-target="#summary-of-long-vs-wide-formats"><span class="header-section-number">3.7.2</span> Summary of long vs wide formats</a></li>
-  <li><a href="#long-to-wide-with-pivot_wider" id="toc-long-to-wide-with-pivot_wider" class="nav-link" data-scroll-target="#long-to-wide-with-pivot_wider"><span class="header-section-number">3.7.3</span> Long to Wide with <code>pivot_wider</code></a></li>
-  <li><a href="#wide-to-long-with-gather-and-pivot_longer" id="toc-wide-to-long-with-gather-and-pivot_longer" class="nav-link" data-scroll-target="#wide-to-long-with-gather-and-pivot_longer"><span class="header-section-number">3.7.4</span> Wide to long with <code>gather</code> and <code>pivot_longer</code></a></li>
-  <li><a href="#challenge-4" id="toc-challenge-4" class="nav-link" data-scroll-target="#challenge-4"><span class="header-section-number">3.7.5</span> Challenge</a></li>
-  </ul></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">3.8</span> </a></li>
   </ul>
 </nav>
     </div>
@@ -322,7 +319,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Learn to use data wrangling commands <code>select</code>, <code>filter</code>, <code>%&gt;%,</code> and <code>mutate</code> from the <strong><code>dplyr</code></strong> package.</li>
 <li>Understand the split-apply-combine concept for data analysis.</li>
 <li>Use <code>summarize</code>, <code>group_by</code>, and <code>tally</code> to split a data frame into groups of observations, apply a summary statistics for each group, and then combine the results.</li>
-<li>Learn to switch between long and wide format</li>
 </ul>
 </blockquote>
 <hr>
@@ -350,8 +346,10 @@ $ dist  &lt;dbl&gt; 2, 10, 4, 22, 16, 10, 18, 26, 34, 17, 28, 14, 20, 24, 28, 26
 <p>Since we will be using this package a lot, it would be a little annoying to have to type <code>dplyr::</code> every time. We can bypass this step by loading the package into our current environment. Think of this is “opening” the package for your work session.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We could also do `library(dplyr)`, but we need the rest of the</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse packages later, so we might as well import the entire collection.</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse packages later, so we might as well import the entire collection.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.6
@@ -364,7 +362,7 @@ $ dist  &lt;dbl&gt; 2, 10, 4, 22, 16, 10, 18, 26, 34, 17, 28, 14, 20, 24, 28, 26
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(cars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(cars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 50
 Columns: 2
@@ -459,19 +457,19 @@ $ dist  &lt;dbl&gt; 2, 10, 4, 22, 16, 10, 18, 26, 34, 17, 28, 14, 20, 24, 28, 26
 </table>
 <p>To read the data into R, we are going to use a function called <code>read_csv</code>. This function is contained in an R-package called <a href="https://readr.tidyverse.org/"><code>readr</code></a>. R-packages are a bit like browser extensions; they are not essential, but can provide nifty functionality. We will go through R-packages in general and which ones are good for data analyses. One useful option that <code>read_csv</code> includes, is the ability to read a CSV file directly from a URL, without downloading it in a separate step:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://ndownloader.figshare.com/files/2292169'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://ndownloader.figshare.com/files/2292169'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>However, it is often a good idea to download the data first, so you have a copy stored locally on your computer in case you want to do some offline analyses, or the online version of the file changes or the file is taken down. You can either download the data manually or from within R:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://ndownloader.figshare.com/files/2292169"</span>,</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"data/portal_data.csv"</span>) <span class="co"># Saves to current directory with this name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://ndownloader.figshare.com/files/2292169"</span>,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"data/portal_data.csv"</span>) <span class="co"># Saves to current directory with this name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The data is read in by specifying its local path.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'data/portal_data.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'data/portal_data.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 34786 Columns: 13
 ── Column specification ────────────────────────────────────────────────────────
@@ -485,7 +483,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 <p>This statement produces some output regarding which data type it found in each column. If we want to check this in more detail, we can print the variable’s value: <code>surveys</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>surveys</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>surveys</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 34,786 × 13
    record_id month   day  year plot_id species_id sex   hindfoot_length weight
@@ -507,7 +505,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <p>This displays a nice tabular view of the data, which also includes pagination when there are many rows and we can click the arrow to view all the columns. Technically, this object is actually a <code>tibble</code> rather than a data frame, as indicated in the output. The reason for this is that <code>read_csv</code> automatically converts the data into to a <code>tibble</code> when loading it. Since a <code>tibble</code> is just a data frame with some convenient extra functionality, we will use these words interchangeably from now on.</p>
 <p>If we just want to glance at how the data frame looks, it is sufficient to display only the top (the first 6 lines) using the function <code>head()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(surveys)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(surveys)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 13
   record_id month   day  year plot_id species_id sex   hindfoot_length weight
@@ -528,7 +526,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <p>Data frames are the <em>de facto</em> data structure for most tabular data, and what we use for statistics and plotting. A data frame can be created by hand, but most commonly they are generated by the function <code>read_csv()</code>; in other words, when importing spreadsheets from your hard drive (or the web).</p>
 <p>A data frame is a representation of data in the format of a table where the columns are vectors that all have the same length. Because the columns are vectors, they all contain the same type of data as we discussed in last class (e.g., characters, integers, factors). We can see this when inspecting the structure of a data frame with the function <code>str()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(surveys)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(surveys)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>spc_tbl_ [34,786 × 13] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
  $ record_id      : num [1:34786] 1 72 224 266 349 363 435 506 588 661 ...
@@ -605,21 +603,21 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <h3 data-number="3.4.2" class="anchored" data-anchor-id="indexing-and-subsetting-data-frames"><span class="header-section-number">3.4.2</span> Indexing and subsetting data frames</h3>
 <p>Our survey data frame has rows and columns (it has 2 dimensions). If we want to extract some specific data from it, we need to specify the “coordinates” we want from it. Row numbers come first, followed by column numbers. When indexing, base R data frames return a different format depending on how we index the data (i.e.&nbsp;either a vector or a data frame), but with enhanced data frames, <code>tibbles</code>, the returned object is almost always a data frame.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span>, <span class="dv">1</span>]   <span class="co"># first element in the first column of the data frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span>, <span class="dv">1</span>]   <span class="co"># first element in the first column of the data frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   record_id
       &lt;dbl&gt;
 1         1</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span>, <span class="dv">6</span>]   <span class="co"># first element in the 6th column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span>, <span class="dv">6</span>]   <span class="co"># first element in the 6th column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   species_id
   &lt;chr&gt;     
 1 NL        </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>surveys[, <span class="dv">1</span>]    <span class="co"># first column in the data frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>surveys[, <span class="dv">1</span>]    <span class="co"># first column in the data frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 34,786 × 1
    record_id
@@ -636,7 +634,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 10       661
 # ℹ 34,776 more rows</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span>]      <span class="co"># first column in the data frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span>]      <span class="co"># first column in the data frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 34,786 × 1
    record_id
@@ -653,7 +651,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 10       661
 # ℹ 34,776 more rows</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">7</span>] <span class="co"># first three elements in the 7th column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">7</span>] <span class="co"># first three elements in the 7th column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 1
   sex  
@@ -662,7 +660,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 2 M    
 3 &lt;NA&gt; </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">3</span>, ]    <span class="co"># the 3rd element for all columns</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">3</span>, ]    <span class="co"># the 3rd element for all columns</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 13
   record_id month   day  year plot_id species_id sex   hindfoot_length weight
@@ -670,7 +668,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 1       224     9    13  1977       2 NL         &lt;NA&gt;               NA     NA
 # ℹ 4 more variables: genus &lt;chr&gt;, species &lt;chr&gt;, taxa &lt;chr&gt;, plot_type &lt;chr&gt;</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, ]  <span class="co"># equivalent to head(surveys)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, ]  <span class="co"># equivalent to head(surveys)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 13
   record_id month   day  year plot_id species_id sex   hindfoot_length weight
@@ -686,27 +684,27 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 <p><code>:</code> is a special operator that creates numeric vectors of integers in increasing or decreasing order; test <code>1:10</code> and <code>10:1</code> for instance. This works similarly to <code>seq</code>, which we looked at earlier in class:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0  1  2  3  4  5  6  7  8  9 10</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0  1  2  3  4  5  6  7  8  9 10</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can test if all elements are the same</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">==</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can test if all elements are the same</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">==</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">==</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">==</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p>You can also exclude certain parts of a data frame using the “<code>-</code>” sign:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>surveys[,<span class="sc">-</span><span class="dv">1</span>]    <span class="co"># All columns, except the first</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>surveys[,<span class="sc">-</span><span class="dv">1</span>]    <span class="co"># All columns, except the first</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 34,786 × 12
    month   day  year plot_id species_id sex   hindfoot_length weight genus  
@@ -724,7 +722,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 # ℹ 34,776 more rows
 # ℹ 3 more variables: species &lt;chr&gt;, taxa &lt;chr&gt;, plot_type &lt;chr&gt;</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">34786</span>),] <span class="co"># Equivalent to head(surveys)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">34786</span>),] <span class="co"># Equivalent to head(surveys)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 13
   record_id month   day  year plot_id species_id sex   hindfoot_length weight
@@ -740,7 +738,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 <p>As well as using numeric values to subset a <code>data.frame</code> (or <code>matrix</code>), columns can be called by name, using one of the four following notations: <!-- Not sure how important it is to learn the difference vs just teaching the preferred way with the footnote that there are other ways also. --></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="st">"species_id"</span>]       <span class="co"># Result is a data.frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>surveys[<span class="st">"species_id"</span>]       <span class="co"># Result is a data.frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 34,786 × 1
    species_id
@@ -757,7 +755,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 10 NL        
 # ℹ 34,776 more rows</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>surveys[, <span class="st">"species_id"</span>]     <span class="co"># Result is a data.frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>surveys[, <span class="st">"species_id"</span>]     <span class="co"># Result is a data.frame</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 34,786 × 1
    species_id
@@ -778,9 +776,9 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <p>For our purposes, these notations are equivalent. RStudio knows about the columns in your data frame, so you can take advantage of the autocompletion feature to get the full and correct column name.</p>
 <p>Another syntax that is often used to specify column names is <code>$</code>. In this case, the returned object is actually a vector. We will not go into detail about this, but since it is such common usage, it is good to be aware of this.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We use `head()` since the output from vectors are not automatically cut off</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and we don't want to clutter the screen with all the `species_id` values</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(surveys<span class="sc">$</span>species_id)          <span class="co"># Result is a vector</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We use `head()` since the output from vectors are not automatically cut off</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and we don't want to clutter the screen with all the `species_id` values</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(surveys<span class="sc">$</span>species_id)          <span class="co"># Result is a vector</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "NL" "NL" "NL" "NL" "NL" "NL"</code></pre>
 </div>
@@ -807,33 +805,33 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <p>As you begin to play with your raw data, you may want to export these new, processed, datasets to share them with your collaborators or for archival. Similar to the <code>read_csv()</code> function used for reading CSV files into R, there is a <code>write_csv()</code> function that generates CSV files from data frames.</p>
 <p>Manually create a new folder called “data-processed” in your directory. Alternatively, get R to help you with it.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"Processed data"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"Processed data"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We are going to prepare a cleaned up version of the data without NAs.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that this omits observations with NA in *any* column.</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># There is no way to control which columns to use.</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>surveys_complete_naomit <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(surveys)</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the dimensions of the original and the cleaned data frame</span></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(surveys)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that this omits observations with NA in *any* column.</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># There is no way to control which columns to use.</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>surveys_complete_naomit <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(surveys)</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the dimensions of the original and the cleaned data frame</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(surveys)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 34786    13</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(surveys_complete_naomit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(surveys_complete_naomit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 30676    13</code></pre>
 </div>
 </div>
 <p>Now that our dataset is ready, we can save it as a CSV file in our <code>Processed data</code> folder.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To save to current directory</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(surveys_complete_naomit, <span class="st">"surveys_complete_naomit.csv"</span>)</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To save to newly created directory</span></span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(surveys_complete_naomit, </span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">file.path</span>(<span class="st">"Processed data"</span>, </span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"surveys_complete_naomit.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To save to current directory</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(surveys_complete_naomit, <span class="st">"surveys_complete_naomit.csv"</span>)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To save to newly created directory</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(surveys_complete_naomit, </span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">file.path</span>(<span class="st">"Processed data"</span>, </span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"surveys_complete_naomit.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="data-wrangling-with-dplyr" class="level2" data-number="3.6">
@@ -885,33 +883,33 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <p>Note that to check for equality, R requires <em>two</em> equal signs (<code>==</code>). This is to prevent confusion with object assignment, since otherwise <code>year = 1995</code> might be interpreted as ‘set the <code>year</code> parameter to <code>1995</code>’, which is not what <code>filter</code> does!</p>
 <p>Basic conditionals in R are broadly similar to how they’re already expressed mathematically:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">&lt;</span> <span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">&lt;</span> <span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;</span> <span class="dv">9</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>However, there are a few idiosyncrasies to be mindful of for other conditionals:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">!=</span> <span class="dv">3</span> <span class="co"># not equal</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">!=</span> <span class="dv">3</span> <span class="co"># not equal</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">&lt;=</span> <span class="dv">3</span> <span class="co"># less than or equal to</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">&lt;=</span> <span class="dv">3</span> <span class="co"># less than or equal to</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;=</span> <span class="dv">9</span> <span class="co"># greater than or equal to</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&gt;=</span> <span class="dv">9</span> <span class="co"># greater than or equal to</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>Finally, the <code>%in%</code> operator is used to check for membership:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="co"># check whether 2 in c(2, 3, 4)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="co"># check whether 2 in c(2, 3, 4)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -942,7 +940,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 <p>You can also <em>nest functions</em> (i.e.&nbsp;one function inside of another). This is handy, but can be difficult to read if too many functions are nested as things are evaluated from the inside out. Readability can be mildly improved by enabling “rainbow parentheses” (open settings &gt; Code &gt; Display and check rainbow parentheses), but it’s still basically impossible to document and effectively convey your work with this method.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(<span class="fu">select</span>(surveys, plot_id, species_id, weight, year), year <span class="sc">==</span> <span class="dv">1995</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(<span class="fu">select</span>(surveys, plot_id, species_id, weight, year), year <span class="sc">==</span> <span class="dv">1995</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,180 × 4
    plot_id species_id weight  year
@@ -962,9 +960,9 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 <p>The last option, <em>pipes</em>, are a fairly recent addition to R. Pipes let you take the output of one function and send it directly to the next, which is useful when you need to do many things to the same dataset. Pipes in R look like <code>%&gt;%</code> and are made available via the <code>magrittr</code> package that also is included in the <code>tidyverse</code>. If you use RStudio, you can type the pipe with <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span> </span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(., plot_id, species_id, weight, year) <span class="sc">%&gt;%</span> </span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(., year <span class="sc">==</span> <span class="dv">1995</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span> </span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(., plot_id, species_id, weight, year) <span class="sc">%&gt;%</span> </span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(., year <span class="sc">==</span> <span class="dv">1995</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,180 × 4
    plot_id species_id weight  year
@@ -985,9 +983,9 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <p>The <code>.</code> refers to the object that is passed from the previous line. In this example, the data frame <code>surveys</code> is passed to the <code>.</code> in the <code>select()</code> statement. Then, the modified data frame which is the result of the <code>select()</code> operation, is passed to the <code>.</code> in the filter() statement. Put more simply: whatever was the result from the line above the current line, will be used in the current line.</p>
 <p>Since it gets a bit tedious to write out all the dots, <strong><code>dplyr</code></strong> allows for them to be omitted. By default, the pipe will pass its input to the <em>first</em> argument of the right hand side function; in <code>dplyr</code>, the first argument is always a data frame. The chunk below gives the same output as the one above:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span> </span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(plot_id, species_id, weight, year) <span class="sc">%&gt;%</span> </span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1995</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span> </span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(plot_id, species_id, weight, year) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1995</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,180 × 4
    plot_id species_id weight  year
@@ -1007,9 +1005,9 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 <p>Another example:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight <span class="sc">&lt;</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species_id, sex, weight)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight <span class="sc">&lt;</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species_id, sex, weight)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 17 × 3
    species_id sex   weight
@@ -1036,10 +1034,10 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <p>In the above code, we use the pipe to send the <code>surveys</code> dataset first through <code>filter()</code> to keep rows where <code>weight</code> is less than 5, then through <code>select()</code> to keep only the <code>species_id</code>, <code>sex</code>, and <code>weight</code> columns. Since <code>%&gt;%</code> takes the object on its left and passes it as the first argument to the function on its right, we don’t need to explicitly include it as an argument to the <code>filter()</code> and <code>select()</code> functions anymore.</p>
 <p>If this runs off your screen and you just want to see the first few rows, you can use a pipe to view the <code>head()</code> of the data. (Pipes work with non-<strong><code>dplyr</code></strong> functions, too, as long as either the <strong><code>dplyr</code></strong> or <code>magrittr</code> package is loaded).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight <span class="sc">&lt;</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species_id, sex, weight) <span class="sc">%&gt;%</span> </span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight <span class="sc">&lt;</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species_id, sex, weight) <span class="sc">%&gt;%</span> </span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   species_id sex   weight
@@ -1054,11 +1052,11 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 <p>If we wanted to create a new object with this smaller version of the data, we could do so by assigning it a new name:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>surveys_sml <span class="ot">&lt;-</span> surveys <span class="sc">%&gt;%</span></span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight <span class="sc">&lt;</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species_id, sex, weight)</span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>surveys_sml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>surveys_sml <span class="ot">&lt;-</span> surveys <span class="sc">%&gt;%</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(weight <span class="sc">&lt;</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species_id, sex, weight)</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>surveys_sml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 17 × 3
    species_id sex   weight
@@ -1085,9 +1083,9 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <p>Note that the final data frame is the leftmost part of this expression.</p>
 <p>A single expression can also be used to filter for several criteria, either matching <em>all</em> criteria (<code>&amp;</code>) or <em>any</em> criteria (<code>|</code>):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span> </span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(taxa <span class="sc">==</span> <span class="st">'Rodent'</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">'F'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(sex, taxa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span> </span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(taxa <span class="sc">==</span> <span class="st">'Rodent'</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">'F'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(sex, taxa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 15,690 × 2
    sex   taxa  
@@ -1106,9 +1104,9 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span> </span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">'clarki'</span> <span class="sc">|</span> species <span class="sc">==</span> <span class="st">'leucophrys'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(species, taxa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span> </span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">'clarki'</span> <span class="sc">|</span> species <span class="sc">==</span> <span class="st">'leucophrys'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(species, taxa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   species    taxa   
@@ -1128,8 +1126,8 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <p>Frequently, you’ll want to create new columns based on the values in existing columns. For instance, you might want to do unit conversions, or find the ratio of values in two columns. For this we’ll use <code>mutate()</code>.</p>
 <p>To create a new column of weight in kg:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">weight_kg =</span> weight <span class="sc">/</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">weight_kg =</span> weight <span class="sc">/</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 34,786 × 14
    record_id month   day  year plot_id species_id sex   hindfoot_length weight
@@ -1151,9 +1149,9 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 <p>You can also create a second new column based on the first new column within the same call of <code>mutate()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">weight_kg =</span> weight <span class="sc">/</span> <span class="dv">1000</span>,</span>
-<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">weight_kg2 =</span> weight_kg <span class="sc">*</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">weight_kg =</span> weight <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">weight_kg2 =</span> weight_kg <span class="sc">*</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 34,786 × 15
    record_id month   day  year plot_id species_id sex   hindfoot_length weight
@@ -1175,9 +1173,9 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 <p>The first few rows of the output are full of <code>NA</code>s, so if we wanted to remove those we could insert a <code>filter()</code> in the chain:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(weight)) <span class="sc">%&gt;%</span></span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">weight_kg =</span> weight <span class="sc">/</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(weight)) <span class="sc">%&gt;%</span></span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">weight_kg =</span> weight <span class="sc">/</span> <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 32,283 × 14
    record_id month   day  year plot_id species_id sex   hindfoot_length weight
@@ -1202,199 +1200,10 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 <h4 data-number="3.6.3.1" class="anchored" data-anchor-id="challenge-3"><span class="header-section-number">3.6.3.1</span> Challenge</h4>
 <p>Create a new data frame from the <code>surveys</code> data that meets the following criteria: contains only the <code>species_id</code> column and a new column called <code>hindfoot_half</code> containing values that are half the <code>hindfoot_length</code> values. In this <code>hindfoot_half</code> column, there are no <code>NA</code>s and all values are less than 30.</p>
 <p><strong>Hint</strong>: think about how the commands should be ordered to produce this data frame!</p>
-</section>
-</section>
-</section>
-<section id="reshaping-with-pivot_wider-and-pivot_longer" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="reshaping-with-pivot_wider-and-pivot_longer"><span class="header-section-number">3.7</span> Reshaping with pivot_wider and pivot_longer</h2>
-<section id="defining-wide-vs-long-data" class="level3" data-number="3.7.1">
-<h3 data-number="3.7.1" class="anchored" data-anchor-id="defining-wide-vs-long-data"><span class="header-section-number">3.7.1</span> Defining wide vs long data</h3>
-<p>The survey data presented here is almost in what we call a <em>long</em> format – every observation of every individual is its own row. This is an ideal format for data with a rich set of information per observation. It makes it difficult, however, to look at the relationships between measurements across plots/trials. For example, what is the relationship between mean weights of different genera across all plots?</p>
-<p>To answer that question, we want each plot to have its own row, with each measurements in its own column. This is called a <em>wide</em> data format. For the <code>surveys</code> data as we have it right now, this is going to be one heck of a wide data frame! However, if we were to summarize data within plots and species, we can reduce the dataset and begin to look for some relationships we’d want to examine. We need to create a new table where each row is the values for a particular variable associated with each plot. In practical terms, this means the values in genus would become the names of column variables and the cells would contain the values of the mean weight observed on each plot by genus.</p>
-<p>We can use the functions called <code>pivot_wider()</code> and <code>pivot_longer()</code> (these are newer replacements for <code>spread()</code> and <code>gather()</code>, which were the older functions). These can feel tricky to think through, but do not feel alone in this! Many others have squinted at their data, unsure exactly how to reshape it, so there are many <a href="https://libguides.princeton.edu/R-reshape">guides</a> and <a href="https://bioinformatics.ccr.cancer.gov/docs/rintro/resources/tidyr_cheatsheet.pdf">cheatsheets</a> available to help!</p>
-</section>
-<section id="summary-of-long-vs-wide-formats" class="level3" data-number="3.7.2">
-<h3 data-number="3.7.2" class="anchored" data-anchor-id="summary-of-long-vs-wide-formats"><span class="header-section-number">3.7.2</span> Summary of long vs wide formats</h3>
-<p>Long format:</p>
-<ul>
-<li>every column is a variable
-<ul>
-<li>first column(s) repeat</li>
-</ul></li>
-<li>every row is an observation</li>
-</ul>
-<p>Wide format:</p>
-<ul>
-<li>each row is a measured thing</li>
-<li>each column is an independent observation
-<ul>
-<li>first column does not repeat</li>
-</ul></li>
-</ul>
-</section>
-<section id="long-to-wide-with-pivot_wider" class="level3" data-number="3.7.3">
-<h3 data-number="3.7.3" class="anchored" data-anchor-id="long-to-wide-with-pivot_wider"><span class="header-section-number">3.7.3</span> Long to Wide with <code>pivot_wider</code></h3>
-<p>Let’s start by using <code>dplyr</code> to create a data frame with the mean body weight of each genus by plot.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>surveys_gw <span class="ot">&lt;-</span> surveys <span class="sc">%&gt;%</span></span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(weight)) <span class="sc">%&gt;%</span></span>
-<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(genus, plot_id) <span class="sc">%&gt;%</span></span>
-<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'genus'. You can override using the
-`.groups` argument.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>surveys_gw <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
-# Groups:   genus [1]
-  genus   plot_id mean_weight
-  &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt;
-1 Baiomys       1        7   
-2 Baiomys       2        6   
-3 Baiomys       3        8.61
-4 Baiomys       5        7.75
-5 Baiomys      18        9.5 
-6 Baiomys      19        9.53</code></pre>
-</div>
-</div>
-<p>Now, to make this long data wide, we use <code>pivot_wider()</code> from <code>tidyr</code> to spread out the different taxa into columns. <code>pivot_wider()</code> takes 3 arguments: the data , the <code>names_from</code> column variable that will eventually become the column names, and the <code>values_from</code> column variable that will fill in the values. We’ll use a pipe so we don’t need to explicitly supply the data argument.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>surveys_gw_wide <span class="ot">&lt;-</span> surveys_gw <span class="sc">%&gt;%</span> </span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> genus, <span class="at">values_from =</span> mean_weight)</span>
-<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(surveys_gw_wide)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 11
-  plot_id Baiomys Chaetodipus Dipodomys Neotoma Onychomys Perognathus Peromyscus
-    &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-1       1    7           22.2      60.2    156.      27.7        9.62       22.2
-2       2    6           25.1      55.7    169.      26.9        6.95       22.3
-3       3    8.61        24.6      52.0    158.      26.0        7.51       21.4
-4       5    7.75        18.0      51.1    190.      27.0        8.66       21.2
-5      18    9.5         26.8      61.4    149.      26.6        8.62       21.4
-6      19    9.53        26.4      43.3    120       23.8        8.09       20.8
-# ℹ 3 more variables: Reithrodontomys &lt;dbl&gt;, Sigmodon &lt;dbl&gt;, Spermophilus &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<p>Now we can go back to our original question: what is the relationship between mean weights of different genera across all plots? We can easily see the weights for each genus in each plot! Notice that some genera have <code>NA</code> values. That’s because some genera were not recorded in that plot.</p>
-<p>Note! If you’ve been using R for a few years in other contexts, you may have used the function <code>spread()</code>instead of pivot_wider. spread also takes three arguments: the data, the <em>key</em> column (or column with identifying information), and the <em>values</em> column (the one with the numbers/values), and can return the same `wide’ data frame. However pivot_wider is currently the recommended function to use, as it has extra features to make it more flexible and less error_prone.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>surveys_gw_wide0 <span class="ot">&lt;-</span> surveys_gw <span class="sc">%&gt;%</span></span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(<span class="at">key =</span> genus, <span class="at">value =</span> mean_weight) </span>
-<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(surveys_gw_wide0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 11
-  plot_id Baiomys Chaetodipus Dipodomys Neotoma Onychomys Perognathus Peromyscus
-    &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-1       1    7           22.2      60.2    156.      27.7        9.62       22.2
-2       2    6           25.1      55.7    169.      26.9        6.95       22.3
-3       3    8.61        24.6      52.0    158.      26.0        7.51       21.4
-4       4   NA           23.0      57.5    164.      28.1        7.82       22.6
-5       5    7.75        18.0      51.1    190.      27.0        8.66       21.2
-6       6   NA           24.9      58.6    180.      25.9        7.81       21.8
-# ℹ 3 more variables: Reithrodontomys &lt;dbl&gt;, Sigmodon &lt;dbl&gt;, Spermophilus &lt;dbl&gt;</code></pre>
-</div>
-</div>
-</section>
-<section id="wide-to-long-with-gather-and-pivot_longer" class="level3" data-number="3.7.4">
-<h3 data-number="3.7.4" class="anchored" data-anchor-id="wide-to-long-with-gather-and-pivot_longer"><span class="header-section-number">3.7.4</span> Wide to long with <code>gather</code> and <code>pivot_longer</code></h3>
-<p>What if we had the opposite problem, and wanted to go from a wide to long format? For that, we can use <code>pivot_longer()</code> to gather a set of columns into one key-value pair. To go backwards from <code>surveys_gw_wide</code>, we should exclude <em>plot_id</em>.</p>
-<p><code>pivot_longer()</code> takes 4 arguments: the data, the <code>names_to</code> column variable that comes from the column names, the <code>values_to</code> column with the values, and <code>cols</code> which specifies which columns we want to keep or drop. Again, we will pipe from the dataset so we don’t have to specify the data argument:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>surveys_gw_long2 <span class="ot">&lt;-</span> surveys_gw_wide <span class="sc">%&gt;%</span> </span>
-<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"genus"</span>, <span class="at">values_to =</span> <span class="st">"mean_weight"</span>, <span class="at">cols =</span> <span class="sc">-</span>plot_id)</span>
-<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a>surveys_gw_long2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 240 × 3
-   plot_id genus           mean_weight
-     &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;
- 1       1 Baiomys                7   
- 2       1 Chaetodipus           22.2 
- 3       1 Dipodomys             60.2 
- 4       1 Neotoma              156.  
- 5       1 Onychomys             27.7 
- 6       1 Perognathus            9.62
- 7       1 Peromyscus            22.2 
- 8       1 Reithrodontomys       11.4 
- 9       1 Sigmodon              NA   
-10       1 Spermophilus          NA   
-# ℹ 230 more rows</code></pre>
-</div>
-</div>
-<p>If the columns are directly adjacent as they are here, we don’t even need to list the all out: we can just use the : operator, as before.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>surveys_gw_wide <span class="sc">%&gt;%</span> </span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"genus"</span>, <span class="at">values_to =</span> <span class="st">"mean_weight"</span>, <span class="at">cols =</span> Baiomys<span class="sc">:</span>Sigmodon)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 216 × 4
-   plot_id Spermophilus genus           mean_weight
-     &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;
- 1       1           NA Baiomys                7   
- 2       1           NA Chaetodipus           22.2 
- 3       1           NA Dipodomys             60.2 
- 4       1           NA Neotoma              156.  
- 5       1           NA Onychomys             27.7 
- 6       1           NA Perognathus            9.62
- 7       1           NA Peromyscus            22.2 
- 8       1           NA Reithrodontomys       11.4 
- 9       1           NA Sigmodon              NA   
-10       2           NA Baiomys                6   
-# ℹ 206 more rows</code></pre>
-</div>
-</div>
-<p>Note that now the <code>NA</code> genera are included in the long format.</p>
-<p>In the past, you may have used <code>gather()</code>. We give it the arguments of a new key and value column name, and then specify which columns we either want or do not want gathered up. So, togo backwards from <code>surveys_gw_wide</code>, and exclude <code>plot_id</code> from the gathering, we would do the following:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>surveys_gw_long0 <span class="ot">&lt;-</span> surveys_gw_wide0 <span class="sc">%&gt;%</span></span>
-<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(genus, mean_weight, <span class="sc">-</span>plot_id) </span>
-<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(surveys_gw_long0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
-  plot_id genus   mean_weight
-    &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;
-1       1 Baiomys        7   
-2       2 Baiomys        6   
-3       3 Baiomys        8.61
-4       4 Baiomys       NA   
-5       5 Baiomys        7.75
-6       6 Baiomys       NA   </code></pre>
-</div>
-</div>
-</section>
-<section id="challenge-4" class="level3" data-number="3.7.5">
-<h3 data-number="3.7.5" class="anchored" data-anchor-id="challenge-4"><span class="header-section-number">3.7.5</span> Challenge</h3>
-<p>Starting with the <code>surveys_gw_wide</code> dataset, how would you display a new dataset that gathers the mean weight of all the genera (excluding NAs) except for the genus <code>Perognathus</code>?</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>surveys_gw_wide <span class="sc">%&gt;%</span></span>
-<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"genus"</span>, <span class="at">values_to =</span> <span class="st">"mean_weight"</span>,</span>
-<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> <span class="fu">c</span>(<span class="sc">-</span>plot_id, <span class="sc">-</span>Perognathus))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 216 × 4
-   plot_id Perognathus genus           mean_weight
-     &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;
- 1       1        9.62 Baiomys                 7  
- 2       1        9.62 Chaetodipus            22.2
- 3       1        9.62 Dipodomys              60.2
- 4       1        9.62 Neotoma               156. 
- 5       1        9.62 Onychomys              27.7
- 6       1        9.62 Peromyscus             22.2
- 7       1        9.62 Reithrodontomys        11.4
- 8       1        9.62 Sigmodon               NA  
- 9       1        9.62 Spermophilus           NA  
-10       2        6.95 Baiomys                 6  
-# ℹ 206 more rows</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="section" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="section"><span class="header-section-number">3.8</span> </h2>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
