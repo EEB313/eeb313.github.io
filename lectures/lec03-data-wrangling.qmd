@@ -21,7 +21,6 @@ editor_options:
 > -   Use `summarize`, `group_by`, and `tally` to split a data frame
 >     into groups of observations, apply a summary statistics for each
 >     group, and then combine the results.
-> -   Learn to switch between long and wide format
 
 ------------------------------------------------------------------------
 
@@ -75,6 +74,10 @@ package for your work session.
 ```{r}
 # We could also do `library(dplyr)`, but we need the rest of the
 # tidyverse packages later, so we might as well import the entire collection.
+```
+
+
+```{r}
 library(tidyverse)
 
 glimpse(cars)
@@ -671,154 +674,3 @@ surveys_hindfoot_half <- surveys %>%
     filter(hindfoot_half < 30) %>%
     select(species_id, hindfoot_half)
 ```
-
-## Reshaping with pivot_wider and pivot_longer
-
-### Defining wide vs long data
-
-The survey data presented here is almost in what we call a *long* format
--- every observation of every individual is its own row. This is an
-ideal format for data with a rich set of information per observation. It
-makes it difficult, however, to look at the relationships between
-measurements across plots/trials. For example, what is the relationship
-between mean weights of different genera across all plots?
-
-To answer that question, we want each plot to have its own row, with
-each measurements in its own column. This is called a *wide* data
-format. For the `surveys` data as we have it right now, this is going to
-be one heck of a wide data frame! However, if we were to summarize data
-within plots and species, we can reduce the dataset and begin to look
-for some relationships we'd want to examine. We need to create a new
-table where each row is the values for a particular variable associated
-with each plot. In practical terms, this means the values in genus would
-become the names of column variables and the cells would contain the
-values of the mean weight observed on each plot by genus.
-
-We can use the functions called `pivot_wider()` and `pivot_longer()`
-(these are newer replacements for `spread()` and `gather()`, which were
-the older functions). These can feel tricky to think through, but do not
-feel alone in this! Many others have squinted at their data, unsure
-exactly how to reshape it, so there are many
-[guides](https://libguides.princeton.edu/R-reshape) and
-[cheatsheets](https://bioinformatics.ccr.cancer.gov/docs/rintro/resources/tidyr_cheatsheet.pdf)
-available to help!
-
-### Summary of long vs wide formats
-
-Long format:
-
--   every column is a variable
-    -   first column(s) repeat
--   every row is an observation
-
-Wide format:
-
--   each row is a measured thing
--   each column is an independent observation
-    -   first column does not repeat
-
-### Long to Wide with `pivot_wider`
-
-Let's start by using `dplyr` to create a data frame with the mean body
-weight of each genus by plot.
-
-```{r}
-surveys_gw <- surveys %>%
-    filter(!is.na(weight)) %>%
-    group_by(genus, plot_id) %>%
-    summarize(mean_weight = mean(weight))
-
-surveys_gw %>% head()
-```
-
-Now, to make this long data wide, we use `pivot_wider()` from `tidyr` to
-spread out the different taxa into columns. `pivot_wider()` takes 3
-arguments: the data , the `names_from` column variable that will
-eventually become the column names, and the `values_from` column
-variable that will fill in the values. We'll use a pipe so we don't need
-to explicitly supply the data argument.
-
-```{r}
-surveys_gw_wide <- surveys_gw %>% 
-  pivot_wider(names_from = genus, values_from = mean_weight)
-
-head(surveys_gw_wide)
-```
-
-Now we can go back to our original question: what is the relationship
-between mean weights of different genera across all plots? We can easily
-see the weights for each genus in each plot! Notice that some genera
-have `NA` values. That's because some genera were not recorded in that
-plot.
-
-Note! If you've been using R for a few years in other contexts, you may
-have used the function `spread()`instead of pivot_wider. spread also
-takes three arguments: the data, the *key* column (or column with
-identifying information), and the *values* column (the one with the
-numbers/values), and can return the same \`wide' data frame. However
-pivot_wider is currently the recommended function to use, as it has
-extra features to make it more flexible and less error_prone.
-
-```{r}
-surveys_gw_wide0 <- surveys_gw %>%
-  spread(key = genus, value = mean_weight) 
-
-head(surveys_gw_wide0)
-```
-
-### Wide to long with `gather` and `pivot_longer`
-
-What if we had the opposite problem, and wanted to go from a wide to
-long format? For that, we can use `pivot_longer()` to gather a set of
-columns into one key-value pair. To go backwards from `surveys_gw_wide`,
-we should exclude *plot_id*.
-
-`pivot_longer()` takes 4 arguments: the data, the `names_to` column
-variable that comes from the column names, the `values_to` column with
-the values, and `cols` which specifies which columns we want to keep or
-drop. Again, we will pipe from the dataset so we don't have to specify
-the data argument:
-
-```{r}
-surveys_gw_long2 <- surveys_gw_wide %>% 
-  pivot_longer(names_to = "genus", values_to = "mean_weight", cols = -plot_id)
-
-surveys_gw_long2
-```
-
-If the columns are directly adjacent as they are here, we don’t even
-need to list the all out: we can just use the : operator, as before.
-
-```{r}
-surveys_gw_wide %>% 
-  pivot_longer(names_to = "genus", values_to = "mean_weight", cols = Baiomys:Sigmodon)
-```
-
-Note that now the `NA` genera are included in the long format.
-
-In the past, you may have used `gather()`. We give it the arguments of a
-new key and value column name, and then specify which columns we either
-want or do not want gathered up. So, togo backwards from
-`surveys_gw_wide`, and exclude `plot_id` from the gathering, we would do
-the following:
-
-```{r}
-surveys_gw_long0 <- surveys_gw_wide0 %>%
-  gather(genus, mean_weight, -plot_id) 
-
-head(surveys_gw_long0)
-```
-
-### Challenge
-
-Starting with the `surveys_gw_wide` dataset, how would you display a new
-dataset that gathers the mean weight of all the genera (excluding NAs)
-except for the genus `Perognathus`?
-
-```{r}
-surveys_gw_wide %>%
-  pivot_longer(names_to = "genus", values_to = "mean_weight",
-               cols = c(-plot_id, -Perognathus))
-```
-
-## 

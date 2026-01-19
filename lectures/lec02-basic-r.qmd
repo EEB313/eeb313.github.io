@@ -31,16 +31,15 @@ Us](about-us) page for more information on all the contributors to EEB
 
 > ### Learning Objectives
 >
-> -   Define the following terms as they relate to R: call, function,
->     arguments, options.
-> -   Use comments within code blocks.
 > -   Do simple arithmetic operations in R using values and objects.
 > -   Call functions and use arguments to change their default options.
 > -   Define our own functions
-> -   Inspect the content of vectors and manipulate their content.
+> -   Create, inspect, and manipulate vectors
 > -   Create for-loops
-> -   Describe what a data frame is.
-> -   Load external data from a .csv file into a data frame in R.
+> -   Use if-else statements
+> -   Define the following terms as they relate to R: variable,
+>     environment, function, arguments
+> -   Use comments within code blocks
 
 ------------------------------------------------------------------------
 
@@ -48,8 +47,10 @@ Us](about-us) page for more information on all the contributors to EEB
 
 Before starting this lecture, make sure you've completed [all the
 steps](lectures/lec01-downloading-r) to download and install R and
-RStudio, and get familiar with the layout of RStudio, including two of
-the ways we can enter commands: in the console, and in an R script file.
+RStudio (or set up a POSIT Cloud account if you will access R online
+instead of on your laptop), and get familiar with the layout of RStudio,
+including two of the ways we can enter commands: in the console, and in
+an R script file.
 
 For this lecture, we'll start off just entering commands at the
 **console**, and then move on to writing longer multi-line code in an
@@ -61,7 +62,9 @@ one of these notebooks, so whenever we want to show some code, it will
 be in a grey box - and we actually executed that code to make these
 notes, so we know all our examples work as expected!
 
-## Creating objects in R
+## Simple calculations and creating objects in R
+
+### Using R as a calculator
 
 As we saw in our first class, you can get output from R simply by typing
 math in the console:
@@ -81,6 +84,20 @@ e.g.
 ```{r}
 (1+2)^2 + (6/3)
 ```
+
+In addition to typical arithmetic operations like `+`, `-`, `*`, `/`,
+`^`, R can use *relational operators* and will return `TRUE` or `FALSE`
+statements
+
+```{r}
+5 <= 10
+```
+
+```{r}
+2 == 3
+```
+
+### Creating objects
 
 However, to do useful and interesting things, we need to assign *values*
 to *objects*.
@@ -120,7 +137,7 @@ of these variables?
 joel + x
 ```
 
-### Some tips on naming objects
+#### Some tips on naming objects
 
 -   Objects can be given any name: `x`, `current_temperature`, `thing`,
     or `subject_id`.
@@ -129,7 +146,10 @@ joel + x
     not.
 -   R is also case sensitive: `joel` is different from `Joel`.
 -   Avoid using the names of existing functions (e.g. `mean`, `df`). You
-    can check whether the name is already in use by using tab completion
+    can check whether the name is already in use by using *tab
+    completion* (when you type something in R and pause, it will make
+    auto-complete suggestions if what you're typing is already a
+    function in R (and provide snippets of related documentation)).
 -   Generally good to use underscores (`_`) to separate words in
     variable and function names
 
@@ -145,7 +165,7 @@ you highlight a section of code and press <kbd>Ctrl/Cmd</kbd> +
     guide](https://style.tidyverse.org/index.html) for which style to
     adhere to.
 
-### Preforming calculations
+### Preforming calculations on objects
 
 When assigning a value to an object, R does not print anything. You can
 force R to print the value by using parentheses or by typing the object
@@ -189,16 +209,14 @@ weight_kg <- 100
 
 #### Challenge
 
-What do you think is the current content of the object `weight_lb`?
-126.5 or 220?
+1.  What do you think is the current content of the object `weight_lb`?
+    126.5 or 220?
 
 ```{r, eval=FALSE}
 weight_lb
 ```
 
-#### Challenge
-
-What are the values after each statement in the following?
+2.  What are the values after each statement in the following?
 
 ```{r, eval=FALSE}
 mass <- 47.5
@@ -258,10 +276,112 @@ it ignores 'bad values', or what symbol to use in a plot. However, if
 you want something specific, you can specify a value of your choice
 which will be used instead of the default.
 
-### Tab-completion
+R has many many **built in functions**, especially for common tasks we
+need to do in math and science! It's one of the reasons it's such a
+popular programming language.
 
-To access help about `sqrt`, we are first going to learn about
-tab-completion. Type `s` and press <kbd>Tab</kbd>.
+Let's see some examples:
+
+```{r}
+exp(1) # calculate the exponential (Euler's number e)
+```
+
+```{r}
+log10(100) # take the log base 10
+```
+
+```{r}
+abs(-5) # get the absolute value
+```
+
+```{r}
+sign(-5) # get the sign of a number - positive, negative, or zero
+```
+
+```{r}
+sin(pi) # calcuate the sine of a number. R also has built in variables like pi
+```
+
+```{r}
+pi
+```
+
+So far we've used functions that take only a single input *argument*.
+However, many R functions can take multiple arguments. Let's try one:
+`round()`.
+
+```{r}
+round(3.14159)
+```
+
+Here, we've called `round()` with just one argument, `3.14159`, and it
+has returned the value `3`. That's because the default is to round to
+the nearest whole number, or integer. If we want more digits we can pass
+a second input argument to specify how many decimals we want to round to
+
+```{r}
+round(3.14159, 2)
+```
+
+Arguments to functions in R always correspond to names of *parameters*
+the function uses in it's calculation, and sometimes it's helpful to
+explicitly specify them when we pass our values in
+
+```{r}
+round(x = 3.14159, digits = 2)
+```
+
+Here the parameter for the argument we want to round is named `x`, and
+the parameter specifying how many places after the decimal place to keep
+is called `digits`. Knowing this nomenclature is not essential for doing
+your own data analysis, but it will be very helpful when you are reading
+through help documents online and in RStudio.
+
+If you provide the names for both the arguments, we can switch their
+order:
+
+```{r}
+round(digits = 2, x = 3.14159)
+```
+
+... which means we don't have to worry about remembering the order if
+the input parameters as long as we remember their names!
+
+It's good practice to put the non-optional arguments (like the number
+you're rounding) first in your function call, and to specify the names
+of all optional arguments. If you don't, someone reading your code might
+have to look up the definition of a function with unfamiliar arguments
+to understand what you're doing.
+
+### Help with defined R functions
+
+There a few ways to get help on functions in R.
+
+1.  You can **type the function name directly into the Help document
+    browser** (by default, in the bottom right of RStudio, near the
+    Files and Plots windows). For example, if you search for `sqrt`,
+    you'll land on the documentation page which describes the
+    mathematics underlying the function, and the required (or optional)
+    input arguments. As you can see, `sqrt()` takes only one argument,
+    `x`, which needs to be a *numerical vector*. Don't worry too much
+    about the fact that it says *vector* here; we will talk more about
+    that later. Briefly, a numerical vector is one or more numbers. In
+    R, every number is a vector, so you don't have to do anything
+    special to create a vector. More on vectors later. Note that some
+    function shave their own pages where other pages are for a set of
+    similar functions.
+
+2.  **Use a question mark in front of the name of the function**, which
+    brings up the Help browser page
+
+```{r, eval=FALSE}
+?sqrt
+```
+
+3.  Use tab-completion:
+
+For example, to access help about `sqrt`, type `s` and press
+<kbd>Tab</kbd>.
 
 ```{r, eval=FALSE}
 s<tab>q
@@ -297,71 +417,23 @@ defined earlier.[^2]
     at the end of [this post about RStudio code
     completion](https://support.rstudio.com/hc/en-us/articles/205273297-Code-Completion).
 
-### Help with defined functions
-
-To read the full help about `sqrt`, we can use the question mark, or
-type it directly into the help document browser.
+If you try this with the `round` function, you should see a list of the
+arguments and if you hover over any one, a description of that parameter
 
 ```{r, eval=FALSE}
-?sqrt
+round(<tab>
 ```
 
-As you can see, `sqrt()` takes only one argument, `x`, which needs to be
-a *numerical vector*. Don't worry too much about the fact that it says
-*vector* here; we will talk more about that later. Briefly, a numerical
-vector is one or more numbers. In R, every number is a vector, so you
-don't have to do anything special to create a vector. More on vectors
-later.
+(Screenshot of tab-complete suggestions)
 
-Let's try a function that can take multiple arguments: `round()`.
+![](images/clipboard-2021506380.png)
 
-```{r, eval=FALSE}
-round(<tab>)
-?round
-```
+If you don't already know the name or beginning of the name of the
+function you want to use, RStudio's built in help documentation search
+function is not always very helpful, and then a Google search is usually
+better!
 
-If we try round with a value:
-
-```{r}
-round(3.14159)
-```
-
-Here, we've called `round()` with just one argument, `3.14159`, and it
-has returned the value `3`. That's because the default is to round to
-the nearest whole number, or integer. If we want more digits we can pass
-an argument to the `digits` parameter, to specify how many decimals we
-want to round to.
-
-```{r}
-round(3.14159, digits = 2)
-```
-
-So, above we pass the *argument* `2`, to the *parameter* `digits`.
-Knowing this nomenclature is not essential for doing your own data
-analysis, but it will be very helpful when you are reading through help
-documents online and in RStudio.
-
-We can leave out the word `digits` since we know it comes as the second
-parameter, after `x`.
-
-```{r}
-round(3.14159, 2)
-```
-
-As you notice, we have been leaving out `x` from the beginning. If you
-provide the names for both the arguments, we can switch their order:
-
-```{r}
-round(digits = 2, x = 3.14159)
-```
-
-It's good practice to put the non-optional arguments (like the number
-you're rounding) first in your function call, and to specify the names
-of all optional arguments. If you don't, someone reading your code might
-have to look up the definition of a function with unfamiliar arguments
-to understand what you're doing.
-
-## Writing functions
+### Writing functions
 
 In this class, you will be working a lot with functions, especially
 those that someone else has already written. When you type `sum`, `c()`,
@@ -389,7 +461,50 @@ add_two_numbers <- function(num1, num2) {
 add_two_numbers(4, 5)
 ```
 
-\#### Challenge
+When you define your own function and run that section of code, the
+function becomes accessible in your environment, in the same way
+variables you define do (you should be able to see it in the Environment
+window in RStudio).
+
+However, variables defined only within a function are not accessible
+outside that function:
+
+```{r,error=TRUE}
+my_sum
+```
+
+Functions can include calculations of any complexity within them. For
+example, we can write a function that calculates a person's BMI from
+their measured weight (in lbs) and height (in inches) in a multistep
+process:
+
+```{r}
+get_bmi <- function(weight_lbs,height_inches){
+  
+  weight_kg <- weight_lbs/2.2 # convert weight from lbs to kg
+  height_cm <- height_inches * 2.54 # convert height from inches to cm
+  height_m <- height_cm/100 # convert height from cm to m
+  bmi <- weight_kg/(height_m^2)  # get BMI
+  
+  return(bmi)
+}
+
+weight_lbs <- 150
+height_inches <- 72
+
+get_bmi(weight_lbs, height_inches)
+
+```
+
+It's good practice to give the parameters of a function intuitive names
+and to document the steps with comments as much as possible, so that if
+you or someone else goes to use your function later, you'll remember
+what it does and how.
+
+Check and see that now that you've created your own function, it shows
+up when you use tab-complete with information on the input parameters!
+
+#### Challenge
 
 Can you write a function that calculates the mean of 3 numbers?
 
@@ -404,6 +519,8 @@ mean_of_three_numbers(2, 4, 6)
 
 ## Vectors and data types
 
+### Creating vectors
+
 A vector is the most common and basic data type in R, and is pretty much
 the workhorse of R. A vector is composed by a series of values, which
 can be either numbers or characters. We can assign a series of values to
@@ -417,15 +534,34 @@ weight_g <- c(50, 60, 65, 82) # Concatenate/Combine values into a vector
 weight_g
 ```
 
-You can also use the built-in command `seq`, to create a sequence of
-numbers without typing all of them in manually.
+You can also use built-in commands in R to create simple types of
+numeric vectors, for example:
+
+The semi-colon `:` creates a vector of numbers increasing by `1` each
+time
+
+```{r}
+1:10
+```
+
+The `seq` function creates a sequence of numbers increasing by a fixed
+amount
 
 ```{r}
 seq(0, 30) # This is the same as just `0:30`
 seq(0, 30, 3) # Every third number
+seq(from = 0, to = 20, by = 2.5) # from 0 to 20 with step size 2.5
 ```
 
-A vector can also contain characters:
+The rep function creates a vector with the same value repeated a
+specified number of times
+
+```{r}
+rep(0,7)
+```
+
+A vector can also contain *characters* (i.e., letters) or *strings*
+(i.e., words/phrases):
 
 ```{r}
 animals <- c('mouse', 'rat', 'dog')
@@ -536,7 +672,7 @@ coerced?
 
 This can be important to watch for in data sets that you import.
 
-## Subsetting vectors
+### Subsetting vectors
 
 If we want to extract one or several values from a vector, we must
 provide one or several indices in square brackets. For instance:
@@ -559,7 +695,7 @@ R indices start at 1. Programming languages like Fortran, MATLAB, Julia,
 and R start counting at 1, because that's what human beings typically
 do. Languages in the C family (including C++, Java, Perl, and Python)
 count from 0 because that was historically simpler for computers and can
-allow for more elegant code.
+allow for more elegant code in some situations.
 
 ### Conditional subsetting
 
@@ -583,7 +719,7 @@ weight_g[weight_g > 50]
 
 We will consider conditions in more detail in the next few lectures.
 
-### Strings (character vectors)
+### Strings and character vectors
 
 Just a small note about character vectors, also called `strings`. There
 are built-in packages for subsetting them that we'll learn about later.
@@ -605,71 +741,29 @@ string3
 "You can include \"matching quotes\" if you 'escape' them with a backslash (\\)"
 ```
 
-## Missing data
-
-As R was designed to analyze datasets, it includes the concept of
-missing data (which is uncommon in other programming languages). Missing
-data are represented in vectors as `NA`.
-
-When doing operations on numbers, most functions will return `NA` if the
-data you are working with include missing values. This feature makes it
-harder to overlook the cases where you are dealing with missing data.
-You can add the argument `na.rm = TRUE` to calculate the result while
-ignoring the missing values.
+You can combine two separate strings into a single string using the
+paste function
 
 ```{r}
-heights <- c(2, 4, 4, NA, 6)
-mean(heights)
-max(heights)
-mean(heights, na.rm = TRUE)
-max(heights, na.rm = TRUE)
+paste("Julius","Caesar")
 ```
 
 ```{r}
-## Extract those elements which are not missing values.
-heights[!is.na(heights)]
-
-## Returns the object with incomplete cases removed. The returned object is an atomic vector of type `"numeric"` (or `"double"`).
-na.omit(heights)
-
-## Extract those elements which are complete cases. The returned object is an atomic vector of type `"numeric"` (or `"double"`).
-heights[complete.cases(heights)]
+paste("pan","cake",sep="")
 ```
 
-Recall that you can use the `class()` function to find the type of your
-atomic vector.
-
-#### Challenge
-
-1.  Using this vector of length measurements, create a new vector with
-    the NAs removed.
+Which can also be used to convert a vector of strings back into a single
+string
 
 ```{r}
-lengths <- c(10, 24, NA, 18, NA, 20)
+emperor <- c("Julius","Caesar")
+paste(emperor, collapse = " ")
 ```
 
-```{r, include=FALSE}
-# Answer
-na.omit(lengths)
-```
+## Loops and if/else statements
 
-2.  Use the function `median()` to calculate the median of the `lengths`
-    vector.
-
-```{r, include=FALSE}
-# Answer
-median(lengths, na.rm = TRUE)
-```
-
-## Loops and vectorization
-
-Loops, specifically for-loops, are essential to programming in general.
-However, in R, you should avoid them as often as possible because there
-are more efficient ways of doing things that you should use instead. It
-is still important that you understand the concept of loops and you
-might also use them in some of your own functions if there is no
-vectorized way of going about what you want to do.
-
+Loops, specifically `for`-loops, are essential to programming. They
+allow us to follow a formula to do a repeated task in a systematic way.
 You can think of a for-loop as: "for each number contained in a
 list/vector, perform this operation" and the syntax basically says the
 same thing:
@@ -714,12 +808,113 @@ my_sum(v)
 
 Although this gives us the same output as the built-in function `sum`,
 the built-in function has many more optimizations so it is much faster
-than our function. In R, it is always faster to try to find a way of
-doing things without writing a loop yourself. When you are reading about
-R, you might see suggestions that you should try to *vectorize* your
-code to make it faster. What people are referring to, is that you should
-not write for loops in R and instead use the ready-made functions that
-are much more efficient in working with vectors and essentially performs
-operations on entire vector at once instead of one number at a time.
-Conceptually, loops operate on one element at a time while vectorized
-code operates on all elements of a vector at once.
+than our function.
+
+In general, in R, it is always faster to try to find a way of doing
+things without writing a loop yourself, if possible. When you are
+reading about R, you might see suggestions that you should try to
+*vectorize* your code to make it faster. What people are referring to,
+is that you should not write for loops in R and instead use the
+ready-made functions that are much more efficient in working with
+vectors and essentially performs operations on entire vector at once
+instead of one number at a time. Conceptually, loops operate on one
+element at a time while vectorized code operates on all elements of a
+vector at once. However, sometimes there is no vectorized way of going
+about what you want to do (or at least, no easy, obvious, or
+quick-to-code vectorized way!).
+
+For some calculations we can't easily avoid for-loops. For example,
+let's generate the first 25 values of the Fibonacci sequence
+
+```{r}
+fib_vec <- rep(0,25)
+fib_vec[c(1,2)] <- c(0,1)
+
+for (i in 3:25){
+  fib_vec[i] <- fib_vec[i-2]+fib_vec[i-1]
+}
+
+fib_vec
+```
+
+R also provides two other types of loops that can be helpful for
+repetitive or recursive tasks: `while`-loops (which continue iterating
+while a statement is true) and `repeat` loops (which continue repeating
+until a certain break condition is met).
+
+Another very useful programming structure we can use in R, which is
+often combined with for-loops, is `if/else` statements. We can use this
+approach to only do an operation on an object *if* a certain condition
+is met, and do an alternative operation if the condition is not met.
+
+For example, we could loop through a vector of ages and classify each
+individual as either an adult or a child
+
+```{r}
+ages <- c(67,13,45,3,7,34,90,8)
+age_cat <-rep("",length(ages)) # set up an empty character vector
+
+for (i in 1:length(ages)){
+  
+  if (ages[i] < 18){
+    age_cat[i] <- "child"
+  }else{
+    age_cat[i] <- "adult"
+  }
+  
+}
+
+print(age_cat)
+```
+
+For simple if/else statements, R provides a shorter notation
+
+```{r}
+ages <- c(67,13,45,3,7,34,90,8)
+age_cat <-rep("",length(ages)) # set up an empty character vector
+
+for (i in 1:length(ages)){
+  
+  age_cat[i] <- ifelse(ages[i] < 18,"child","adult")
+  
+}
+
+print(age_cat)
+```
+
+For more complex criteria, multiple "else" statements can be used:
+
+```{r}
+ages <- c(67,13,45,3,7,34,90,8)
+age_cat <-rep("",length(ages)) # set up an empty character vector
+
+for (i in 1:length(ages)){
+  
+  if (ages[i] < 18){
+    age_cat[i] <- "child"
+  }else if (ages[i] < 65){
+    age_cat[i] <- "adult"
+  }else{
+    age_cat[i] <- "senior"
+  }
+  
+}
+
+print(age_cat)
+```
+
+Note that this is an example of a computation that could be sped up by
+vectorization:
+
+```{r}
+ages <- c(67,13,45,3,7,34,90,8)
+age_cat <-rep("",length(ages))
+
+age_cat[ages<18] <-"child"
+age_cat[ages>18 & ages<65] <-"adult"
+age_cat[ages>65] <-"senior"
+age_cat
+
+# OR
+# age_cat <- ifelse(ages < 18, "child",ifelse(ages>65, "senior", "adult"))
+```
