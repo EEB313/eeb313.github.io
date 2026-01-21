@@ -17,7 +17,7 @@ book:
       - lectures/lec04-data-visualization.qmd
       - lectures/lec05-advanced-data-viz.qmd
       # - lectures/lec06-exploratory-data-analysis.qmd
-      # - lectures/lec07-self-directed-analysis.qmd
+      - lectures/lec06-self-directed-analysis-without-answers.qmd
       # - lectures/lec08-intro-inference-1.qmd
       # - lectures/lec09-intro-inference-2.qmd
       # - lectures/lec10-linear-models-1.qmd
@@ -47,10 +47,13 @@ book:
       #     href: lectures/data/pseudo.ara.busco
       #   - text: "pseudo.LTRs"
       #     href: lectures/data/pseudo.LTRs
-      #   - text: "disease_distance.csv"
-      #     href: lectures/data/disease_distance.csv
+      - text: "disease_distance.csv"
+        href: lectures/data/disease_distance.csv
       - text: "SSDinMammals.csv"
         href: lectures/data/SSDinMammals.csv
+        
+      - text: "plant-biomass-preprocess.csv"
+        href: lectures/data/plant-biomass-preprocess.csv
       #   - text: "medicago.csv"
       #     href: lectures/data/medicago.csv
       #   - text: "bmr.csv"
@@ -96,7 +99,7 @@ extra_files:
 #   - assignment-05.qmd
 #   - challenge-assignment.qmd
 #   - challenge-assignment.Rmd
-#   - lec07-self-directed-analysis.qmd
+  - lec06-self-directed-analysis-without-answers.Rmd
 #   - lec07-self-directed-analysis.Rmd
 #   - review-for-challenge.qmd
 #   - review-for-challenge.Rmd
