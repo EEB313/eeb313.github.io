@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Instructors – EEB313: Quantitative Methods in R for Biology</title>
+<title>Assignment 3: Advanced data wrangling and visualization (8 marks) – EEB313: Quantitative Methods in R for Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,30 +23,30 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./lectures/lec01-downloading-r.html" rel="next">
-<link href="./syllabus.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9be2c12bab310ac08f4b5b8760484c76.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-defc80ef93b31364d91645f5e1f644e2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-9be2c12bab310ac08f4b5b8760484c76.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../lectures/data/portal_data.csv" rel="next">
+<link href="../assignments/assignment-02.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9be2c12bab310ac08f4b5b8760484c76.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-defc80ef93b31364d91645f5e1f644e2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-9be2c12bab310ac08f4b5b8760484c76.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -258,7 +258,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./about-us.html">Instructors</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-03.html">Assignment 3: Advanced data wrangling and visualization (8 marks)</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -273,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">EEB313: Quantitative Methods in R for Biology</a> 
+      <a href="../">EEB313: Quantitative Methods in R for Biology</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/EEB313/eeb313.github.io" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -289,19 +289,19 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome!</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus: EEB 313 Winter 2026</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about-us.html" class="sidebar-item-text sidebar-link active">
+  <a href="../about-us.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Instructors</span></a>
   </div>
 </li>
@@ -316,37 +316,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec01-downloading-r.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec01-downloading-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Downloading and installing R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec02-basic-r.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec02-basic-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: Assignment, vectors, functions, strings, and loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec03-data-wrangling.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec03-data-wrangling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulating and analyzing data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec04-data-visualization.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec04-data-visualization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summarizing and visualizating data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec05-advanced-data-viz.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec05-advanced-data-viz.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Advanced data manipulation &amp; visualization</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/lec06-self-directed-analysis-without-answers.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/lec06-self-directed-analysis-without-answers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Self-directed data exploration: Disease mortality across species with Farrell &amp; Davies, PNAS, 2019</span></span></a>
   </div>
 </li>
@@ -363,19 +363,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 1: Basic R (8 marks)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignments/assignment-02.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/assignment-02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 2: Manipulating and plotting data (8 marks)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignments/assignment-03.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/assignment-03.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Assignment 3: Advanced data wrangling and visualization (8 marks)</span></a>
   </div>
 </li>
@@ -396,25 +396,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/data/portal_data.csv" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/data/portal_data.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">portal_data.csv</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/data/disease_distance.csv" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/data/disease_distance.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">disease_distance.csv</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/data/SSDinMammals.csv" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/data/SSDinMammals.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SSDinMammals.csv</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/data/plant-biomass-preprocess.csv" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/data/plant-biomass-preprocess.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">plant-biomass-preprocess.csv</span></a>
   </div>
 </li>
@@ -430,13 +430,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#instructor" id="toc-instructor" class="nav-link active" data-scroll-target="#instructor">Instructor</a>
-  <ul class="collapse">
-  <li><a href="#teaching-assistants" id="toc-teaching-assistants" class="nav-link" data-scroll-target="#teaching-assistants">Teaching assistants</a></li>
-  <li><a href="#prior-year-course-instructors" id="toc-prior-year-course-instructors" class="nav-link" data-scroll-target="#prior-year-course-instructors">Prior year course instructors</a></li>
-  <li><a href="#other-source-material" id="toc-other-source-material" class="nav-link" data-scroll-target="#other-source-material">Other source material</a></li>
-  <li><a href="#publications" id="toc-publications" class="nav-link" data-scroll-target="#publications">Publications</a></li>
-  </ul></li>
+  <li><a href="#read-in-and-pre-process-plant-biomass-data-1.75-marks" id="toc-read-in-and-pre-process-plant-biomass-data-1.75-marks" class="nav-link active" data-scroll-target="#read-in-and-pre-process-plant-biomass-data-1.75-marks">1. Read in and pre-process plant biomass data (1.75 marks)</a></li>
+  <li><a href="#wrangling-plant-biomass-with-dplyr-3-marks" id="toc-wrangling-plant-biomass-with-dplyr-3-marks" class="nav-link" data-scroll-target="#wrangling-plant-biomass-with-dplyr-3-marks">2. Wrangling plant biomass with dplyr (3 marks)</a></li>
+  <li><a href="#visualising-plant-biomass-3.25-marks" id="toc-visualising-plant-biomass-3.25-marks" class="nav-link" data-scroll-target="#visualising-plant-biomass-3.25-marks">3. Visualising plant biomass (3.25 marks)</a></li>
   </ul>
 </nav>
     </div>
@@ -444,9 +440,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-03.html">Assignment 3: Advanced data wrangling and visualization (8 marks)</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Instructors</h1>
+<h1 class="title">Assignment 3: Advanced data wrangling and visualization (8 marks)</h1>
 </div>
 
 
@@ -463,47 +459,48 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="instructor" class="level1">
-<h1>Instructor</h1>
-<p><strong>Prof.&nbsp;Alison Hill</strong> (<a href="mailto:alison.hill@utoronto.ca">alison.hill@utoronto.ca</a>)</p>
-<p>Prof.&nbsp;Hill is a faculty member in the Department of Ecology &amp; Evolutionary Biology. She runs a research group studying the dynamics and evolution of human infectious diseases within patients and across populations. Her team develops mathematical, statistical, and computational models to predict disease trajectories and help design interventions. Before moving to U of T, she was faculty at Johns Hopkins, and did her graduate and post-graduate training at Harvard. Coding is still her favourite part of her job, and she has used R - along with other programming languages - for many large open-source computational projects focusing on diseases such as COVID-19, HIV, RSV, and the opioid crisis.</p>
-<section id="teaching-assistants" class="level2">
-<h2 class="anchored" data-anchor-id="teaching-assistants">Teaching assistants</h2>
-<p><strong>Jessie Wang</strong> (<a href="mailto:jae.wang@mail.utoronto.ca">jae.wang@mail.utoronto.ca</a>)</p>
-<p>Jessie is a 4th year PhD student in the Frederickson lab at UTSG. She studies plant-microbe interactions using high- throughput experimentation in duckweeds. She fell in love with R during her time as an undergraduate and took EEB313 in 2020, simultaneously sharpening her coding skills while conducting research alone in the lab. Jessie loves to spend too much money on fancy coffee as she types away, making sure her code is well-annotated and her figures look beautiful. Outside of work, she enjoys caring for her many houseplants and aquariums, finding new delicious eats, and admiring other people’s pets.</p>
-<p><strong>Erik Curtis</strong> (<a href="mailto:erik.curtis@mail.utoronto.ca">erik.curtis@mail.utoronto.ca</a></p>
-<p>Erik is a 2nd year PhD student interested in the epidemiology and population ecology of Pacific salmon, as well as the ecology of infectious diseases. In his PhD research, he is investigating the prevalence of co-infection in juvenile salmon. He’s also using eDNA metabarcoding to examine the coastal marine community concurrent with juvenile salmon migration and salmon farm activity. Prior to joining the MK lab, he studied at the University of Notre Dame, majoring in Biology and Math, where he examined the fate and transport of eDNA in experimental streams.&nbsp;</p>
+<p>Download the .Rmd file <a href="assignment-03.Rmd">here</a>.</p>
+<p><em>To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>. Please ensure the text on your .pdf does not continue past the end of the page.</em></p>
+<p>Review: Before the assignment, review the data manipulation and plotting functions learned in class, such as <code>read_csv</code>, <code>filter</code>, <code>select</code>, <code>mutate</code>, <code>arrange</code>, <code>head</code>, <code>group_by</code>, <code>summarize</code>, <code>tally, pivot_longer</code>, <code>pivot_wider</code>, <code>ggplot</code>, <code>geom_line</code>, <code>geom_point</code>, <code>labs</code>, <code>theme</code></p>
+<section id="read-in-and-pre-process-plant-biomass-data-1.75-marks" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-and-pre-process-plant-biomass-data-1.75-marks">1. Read in and pre-process plant biomass data (1.75 marks)</h2>
+<p>You will apply your data wrangling skills on the yearly change in biomass of plants in the <a href="https://en.wikipedia.org/wiki/Abisko_National_Park">beautiful Abisko national park in northern Sweden</a>. We have preprocessed this data and made it available as a <a href="https://eeb313.github.io/data/plant_biomass-preprocess.csv">csv file via this link</a>. You can find the original data on <a href="https://datadryad.org/resource/doi:10.5061/dryad.38s21">Dryad</a>, and the full-text of the original study<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> in this <a href="https://eeb313.github.io/data/plant-biomass-paper.pdf">pdf</a>. Reading through the study abstract will increase your understanding for working with the data.</p>
+<p>a. Import the data directly into R from the provided URL, assign it to a variable called <code>plant_biomass</code>, and display the first six rows. (0.25 mark)</p>
+<p>b. Convert the Latin column names into their common English names: lingonberry, bilberry, bog bilberry, dwarf birch, crowberry, and wavy hair grass. After this, display all column names. (0.25 marks)</p>
+<p><em>Hint: Read the documentation on the <code>dplyr</code> function <code>rename</code>. Search online to find out which Latin and English names pair up.</em></p>
+<p>c. This is a <em>wide</em> data frame (species make up the column names). A <em>long</em> format is easier to analyze, so gather the species names into one column (<code>species</code>) and the measurement values into another column (<code>biomass</code>). Keep all other columns. Assign it to the variable <code>plant_biomass_long</code>, and show a preview of this new data frame (0.5 marks)</p>
+<p>d. Describe how the dimensions of the data frame have change between <code>plant_biomass</code> and <code>plant_biomass_long</code> . In this example, which format is more efficient in terms of the memory used to store the data? For the less efficient format, what is one potential benefit of this format that might make it worth the extra storage space required? (0.25 marks)</p>
+<p>e. Recreate the wide data frame (species names as columns again) by pivoting it from your <code>plant_biomass_long</code> data frame. Don’t overwrite your original <code>plant_biomass</code> variable! You don’t need to save this re-widened data frame, but if you do, give it a different name (0.5 marks)</p>
 </section>
-<section id="prior-year-course-instructors" class="level2">
-<h2 class="anchored" data-anchor-id="prior-year-course-instructors">Prior year course instructors</h2>
-<p>Mete Yuksel (2023 and 2024)</p>
-<p>Zoe Humphries (2024)</p>
-<p>Vicki Zhang (2022 and 2023)</p>
-<p>Emma Walker (2021 and 2022)</p>
-<p>Tia Harrison (2020 and 2021)</p>
-<p>Amber Gig Hoi (2020)</p>
-<p>Ahmed Hasan (2018 and 2019)</p>
-<p>Sara Mahallati (2018)</p>
-<p>James Santangelo (2018)</p>
-<p>Madeleine Bonsma-Fisher (2017, 2018)</p>
-<p>Lindsay Coome (2017, 2018)</p>
-<p>Joel Ostblom (2017, 2018)</p>
-<p>Luke Johnston (2017)</p>
-<p>Lina Tran (2017)</p>
-<p>Elliott Sales de Andrade (2017)</p>
+<section id="wrangling-plant-biomass-with-dplyr-3-marks" class="level2">
+<h2 class="anchored" data-anchor-id="wrangling-plant-biomass-with-dplyr-3-marks">2. Wrangling plant biomass with dplyr (3 marks)</h2>
+<p>Now that our data is in a tidy format, we can start exploring it!</p>
+<p>a. What is the average biomass in g/m<sup>2</sup> for all observations in the study? (0.25 marks)</p>
+<p>b. How does the average biomass compare between the grazed control sites and those that were protected from herbivores? (0.25 marks)</p>
+<p>c. Display a table of the average plant biomass for each year. (0.25 marks)</p>
+<p>d. What is the mean plant biomass per year for the <code>grazedcontrol</code> and <code>rodentexclosure</code> groups? Present the answer in a table that has these variables as column headers (use pivoting). (0.75 marks)</p>
+<p>e. Check whether there is an equal number of observations per site. (0.25 marks)</p>
+<p>f. How many biomass measurements were 0? Which species had the most 0 biomass measurements? (0.5 marks)</p>
+<p>g. Create a new column that represents the square of the biomass. Display the three largest <code>squared_biomass</code> observations in descending order. Only include the columns <code>year</code>, <code>squared_biomass</code> and <code>species</code> and only observations between the years 2003 and 2008 from the forest habitat. (0.75 mark)</p>
+<p><em>Hint: Break this down into single criteria and add one at a time. “Square” means taken to the power of 2. It does NOT mean square root (power of 1/2).</em></p>
 </section>
-<section id="other-source-material" class="level2">
-<h2 class="anchored" data-anchor-id="other-source-material">Other source material</h2>
-<p><strong>Data Analysis and Visualization in R for Ecologists</strong>, Data Carpentry, https://datacarpentry.github.io/R-ecology-lesson/</p>
-<p>Brian Seok, François Michonneau, Tobias Busch, Katrin Leinweber, Maneesha Sane, njlyon0, Ed Bennett, Hugo Tavares, Mike Mahoney, Paula Nieto, Susan Washko, Terry Loecke, Wasila Dahdul, xli677, Abhijna Parigi, Aleksander Jankowski, Allison Shay Theobold, Analytics Enlightened LLC, Anna K. Moeller, … vmzhang. (2024). <strong>datacarpentry/R-ecology-lesson: Data Carpentry: Data Analysis and Visualization in R for Ecologists 2024-07 (v2024.07)</strong>. Zenodo <a href="https://zenodo.org/records/12684301" class="uri">https://zenodo.org/records/12684301</a></p>
-<p>Christie Bahlai, <strong>Reproducible Quantitative Methods</strong>, <a href="https://cbahlai.github.io/rqm-template/" class="uri">https://cbahlai.github.io/rqm-template/</a></p>
-</section>
-<section id="publications" class="level2">
-<h2 class="anchored" data-anchor-id="publications">Publications</h2>
-<p>Johnston LW, Bonsma-Fisher M, Ostblom J, Hasan AR, Santangelo JS, Coome L, Tran L, Andrade ES, Mahallati S. <strong>A graduate student-led participatory live-coding quantitative methods course in R: Experiences on initiating, developing, and teaching</strong>. <em>Journal of Open Source Education</em>. 2019;2: 49. <a href="https://jose.theoj.org/papers/10.21105/jose.00049">doi:10.21105/jose.00049</a></p>
+<section id="visualising-plant-biomass-3.25-marks" class="level2">
+<h2 class="anchored" data-anchor-id="visualising-plant-biomass-3.25-marks">3. Visualising plant biomass (3.25 marks)</h2>
+<p>a. Compare the mean biomass over time for <code>grazedcontrol</code> with that of <code>rodentexclosure</code> graphically in a line plot. What could explain the big dip in biomass year 2012? (0.5 marks)</p>
+<p><em>Hint: The published study might be able to help with the second question</em></p>
+<p>b. Compare the mean biomass for each species in a lineplot. (0.5 marks)</p>
+<p>c. We’ve found that the biomass is higher in the sites with rodent exclosures (especially in recent years), and that the crowberry is the dominant species. Notice how the lines for <code>rodentexclosure</code> and <code>crowberry</code> are of similar shape. Coincidence? Let’s find out! Use a facetted line plot to explore whether all plant species are impacted equally by grazing. (0.75 mark)</p>
+<p>d. The habitat could also be affecting the biomass of different species. Explore this in a faceted line plot of the mean biomass over time. (0.5 marks)</p>
+<p>e. Explore the relationship between species, habitat, and the distribution of biomass in a box plot. (0.5 marks)</p>
+<p>f. It looks like both habitat and treatment have an effect on most of the species! Let’s dissect the data further by visualizing the effect of both the habitat and treatment on each species by faceting either a box plot or line plot accordingly. (0.5 mark)</p>
 
 
 </section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Olofsson J, te Beest M, Ericson L (2013) Complex biotic interactions drive long-term vegetation dynamics in a subarctic ecosystem. Philosophical Transactions of the Royal Society B 368(1624): 20120486. <a href="https://dx.doi.org/10.1098/rstb.2012.0486" class="uri">https://dx.doi.org/10.1098/rstb.2012.0486</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -922,13 +919,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./syllabus.html" class="pagination-link" aria-label="Syllabus: EEB 313 Winter 2026">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Syllabus: EEB 313 Winter 2026</span>
+      <a href="../assignments/assignment-02.html" class="pagination-link" aria-label="Assignment 2: Manipulating and plotting data (8 marks)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment 2: Manipulating and plotting data (8 marks)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lectures/lec01-downloading-r.html" class="pagination-link" aria-label="Downloading and installing R">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Downloading and installing R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/data/portal_data.csv" class="pagination-link" aria-label="portal_data.csv">
+        <span class="nav-page-text">portal_data.csv</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
