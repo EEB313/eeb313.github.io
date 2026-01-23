@@ -11,13 +11,18 @@ editor_options:
 
 > ### Learning Objectives
 >
-> -   Produce scatter plots, line plots, and histograms using *ggplot*
-> -   Alter plot settings
+> -   Use *ggplot* to create simple scatterplots
+> -   Vary `x`, `y`, and `colour` variables in scatterplots to
+>     understand trends in data
+> -   Use `group_by`, `summarize`, `tally,` and `arrange` to split a
+>     data frame into groups of observations, apply a summary statistics
+>     for each group, and then combine the results
+> -   Use `summarize_all` to calculate a summary statistic for an entire
+>     data frame
+> -   Remove missing data using `is.na` or `na.omit`
 > -   Combine data manipulation with data visualization using
->     split-apply-combine techniques
-> -   Use `summarize`, `group_by`, and `tally` to split a data frame
->     into groups of observations, apply a summary statistics for each
->     group, and then combine the results.
+>     split-apply-combine techniques, along with the pipe (`%>%`) and
+>     layering (`+`) operators
 
 ------------------------------------------------------------------------
 
@@ -490,7 +495,7 @@ surveys %>%
 ```
 
 Definitely mostly rodents in our data set.... Let's check again after
-making sure we only take observations where the hindfood length was
+making sure we only take observations where the hindfoot length was
 actually measured (ie, not NA)
 
 ```{r}

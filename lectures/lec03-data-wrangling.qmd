@@ -12,15 +12,18 @@ editor_options:
 
 > ### Learning objectives
 >
-> -   Describe what a data frame is.
-> -   Load external data from a .csv file into a data frame in R.
-> -   Understand the purpose of the **`dplyr`** package.
-> -   Learn to use data wrangling commands `select`, `filter`, `%>%,`
->     and `mutate` from the **`dplyr`** package.
-> -   Understand the split-apply-combine concept for data analysis.
-> -   Use `summarize`, `group_by`, and `tally` to split a data frame
->     into groups of observations, apply a summary statistics for each
->     group, and then combine the results.
+> -   Load external data from a .csv file into a data frame in R using
+>     `read_csv`
+> -   Describe what a `data frame` is
+> -   Learn multiple ways to "index" (ie., the values from) data frames
+> -   Understand the purpose of the *dplyr* package.
+> -   Use *dplyr* functions to summarize the contents of data frames
+>     (e.g., `str`, `head`, `tail`, `summary`, `dim`, `ncol`, `nrow`,
+>     `colnames`, `rownames`)
+> -   Learn to use data wrangling commands `select`, `filter`,and
+>     `mutate` from the *dplyr* package
+> -   Create multi-step data-manipulation processes using pipes (`%>%)`
+>     to chains steps together
 
 ------------------------------------------------------------------------
 
@@ -75,7 +78,6 @@ package for your work session.
 # We could also do `library(dplyr)`, but we need the rest of the
 # tidyverse packages later, so we might as well import the entire collection.
 ```
-
 
 ```{r}
 library(tidyverse)
@@ -276,14 +278,16 @@ questions?
 
 -   What is the class of the object `surveys`?
 -   How many rows and how many columns are in this object?
--   How many species have been recorded during these surveys?
+-   What range of years are included in this dataset?
+-   What is the mean hindfoot length of all observed animals?
 
 ```{r, include=FALSE}
 ## Answers
 ##
 ## * class: data frame
 ## * how many rows: 34786,  how many columns: 13
-## * how many species: 48
+## * from 1977 to 2002
+## * mean hindfoot_length 29.29
 ```
 
 ### Indexing and subsetting data frames
@@ -380,46 +384,6 @@ surveys_200 <- surveys[200, ]
 surveys_last <- surveys[nrow(surveys), ]
 surveys_middle <- surveys[nrow(surveys)/2, ]
 surveys_head <- surveys[-c(7:nrow(surveys)),]
-```
-
-## Exporting data
-
-As you begin to play with your raw data, you may want to export these
-new, processed, datasets to share them with your collaborators or for
-archival. Similar to the `read_csv()` function used for reading CSV
-files into R, there is a `write_csv()` function that generates CSV files
-from data frames.
-
-Manually create a new folder called "data-processed" in your directory.
-Alternatively, get R to help you with it.
-
-```{r, eval=FALSE}
-dir.create("Processed data")
-```
-
-We are going to prepare a cleaned up version of the data without NAs.
-
-```{r}
-# Note that this omits observations with NA in *any* column.
-# There is no way to control which columns to use.
-surveys_complete_naomit <- na.omit(surveys)
-
-# Compare the dimensions of the original and the cleaned data frame
-dim(surveys)
-dim(surveys_complete_naomit)
-```
-
-Now that our dataset is ready, we can save it as a CSV file in our
-`Processed data` folder.
-
-```{r, eval=FALSE}
-# To save to current directory
-write_csv(surveys_complete_naomit, "surveys_complete_naomit.csv")
-
-# To save to newly created directory
-write_csv(surveys_complete_naomit, 
-          file.path("Processed data", 
-                    "surveys_complete_naomit.csv"))
 ```
 
 ## Data wrangling with dplyr

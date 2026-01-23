@@ -273,9 +273,9 @@ yearly_counts_by_sex_abun %>%
         facet_wrap(~species_latin)
 ```
 
-It is possible to specify exactly which colors[^1] to use and to change the thickness of the lines to make the them easier to distinguish.
+It is possible to specify exactly which colors[^lec05-advanced-data-viz-1] to use and to change the thickness of the lines to make the them easier to distinguish.
 
-[^1]: There are so many colors to chose from in R. Check out the [R Color](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) doc to find something that brings you joy.
+[^lec05-advanced-data-viz-1]: There are so many colors to chose from in R. Check out the [R Color](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) doc to find something that brings you joy.
 
 ```{r}
 yearly_counts_by_sex_abun %>%
@@ -287,9 +287,9 @@ yearly_counts_by_sex_abun %>%
 
 Not sure what colours would look good on your plot? The R Community got you covered! Check out these awesome [color palettes](https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/) where nice-looking color combos come predefined. We especially recommend the [`viridis` color palettes](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html). These palettes are not only pretty, they are specifically designed to be easier to read by those with colourblindness.
 
-Lastly, let's change the x labels so that they don't overlap, split the subplot titles into multiple lines if they're too long, and remove the grey background to increase contrast with the lines. To customize the non-data components of the plot, we will pass some *theme* statements[^2] to `ggplot`.
+Lastly, let's change the x labels so that they don't overlap, split the subplot titles into multiple lines if they're too long, and remove the grey background to increase contrast with the lines. To customize the non-data components of the plot, we will pass some *theme* statements[^lec05-advanced-data-viz-2] to `ggplot`.
 
-[^2]: The amount of control over various plot elements in `ggplot` is truly astonishing. Check out the complete list of themes [here](https://ggplot2.tidyverse.org/reference/theme.html). Have fun!
+[^lec05-advanced-data-viz-2]: The amount of control over various plot elements in `ggplot` is truly astonishing. Check out the complete list of themes [here](https://ggplot2.tidyverse.org/reference/theme.html). Have fun!
 
 ```{r}
 yearly_counts_by_sex_abun %>%
