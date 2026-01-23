@@ -5,6 +5,7 @@
 *.Rhistory
 
 /.quarto/
+/_book/
 .Rproj.user
 
 **/*.quarto_ipynb

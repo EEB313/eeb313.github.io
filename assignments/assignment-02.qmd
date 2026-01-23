@@ -1,4 +1,4 @@
-# Assignment 02: Manipulating and plotting data (8 marks) {-}
+# Assignment 2: Manipulating and plotting data (8 marks) {-}
 
 Download the .Rmd file [here](assignment-02.Rmd).
 

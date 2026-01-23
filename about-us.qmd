@@ -1,4 +1,4 @@
-# 2026 teaching team {.unnumbered}
+# Instructors {.unnumbered}
 
 # Instructor
 
@@ -18,38 +18,44 @@ Erik is a 2nd year PhD student interested in the epidemiology and population eco
 
 ## Prior year course instructors
 
-Mete Yuksel (Instructor Fall 2023 and Fall 2024)
+Mete Yuksel (2023 and 2024)
 
-Zoe Humphries (Instructor Fall 2024)
+Zoe Humphries (2024)
 
-Vicki Zhang (Instructor Fall 2022 and Fall 2023)
+Vicki Zhang (2022 and 2023)
 
-James Santangelo (Fall 2018)
+Emma Walker (2021 and 2022)
 
-Ahmed Hasan (Fall 2018 and Fall 2019)
+Tia Harrison (2020 and 2021)
 
-Amber Hoi
+Amber Gig Hoi (2020)
 
-Luke Johnston (Fall 2017)
+Ahmed Hasan (2018 and 2019)
 
-Madeleine Bonsma-Fisher (Fall 2017, 2018)
+Sara Mahallati (2018)
 
-Lindsay Coome (Fall 2017, 2018)
+James Santangelo (2018)
 
-Elliott Sales de Andrade (Fall 2017)
+Madeleine Bonsma-Fisher (2017, 2018)
 
-Sara Mahallati (Fall 2018)
+Lindsay Coome (2017, 2018)
 
-Lina Tran (Fall 2017)
+Joel Ostblom (2017, 2018)
 
-Joel Ostblom (Fall 2017. 2018)
+Luke Johnston (2017)
+
+Lina Tran (2017)
+
+Elliott Sales de Andrade (2017)
 
 ## Other source material
 
-\`**Data Analysis and Visualization in R for Ecologists**', Data Carpentry, https://datacarpentry.github.io/R-ecology-lesson/
+**Data Analysis and Visualization in R for Ecologists**, Data Carpentry, https://datacarpentry.github.io/R-ecology-lesson/
 
-Brian Seok, François Michonneau, Tobias Busch, Katrin Leinweber, Maneesha Sane, njlyon0, Ed Bennett, Hugo Tavares, Mike Mahoney, Paula Nieto, Susan Washko, Terry Loecke, Wasila Dahdul, xli677, Abhijna Parigi, Aleksander Jankowski, Allison Shay Theobold, Analytics Enlightened LLC, Anna K. Moeller, … vmzhang. (2024). '**datacarpentry/R-ecology-lesson: Data Carpentry: Data Analysis and Visualization in R for Ecologists 2024-07 (v2024.07)'**. Zenodo https://zenodo.org/records/12684301
+Brian Seok, François Michonneau, Tobias Busch, Katrin Leinweber, Maneesha Sane, njlyon0, Ed Bennett, Hugo Tavares, Mike Mahoney, Paula Nieto, Susan Washko, Terry Loecke, Wasila Dahdul, xli677, Abhijna Parigi, Aleksander Jankowski, Allison Shay Theobold, Analytics Enlightened LLC, Anna K. Moeller, … vmzhang. (2024). **datacarpentry/R-ecology-lesson: Data Carpentry: Data Analysis and Visualization in R for Ecologists 2024-07 (v2024.07)**. Zenodo <https://zenodo.org/records/12684301>
 
-Christie Bahlai, 'Reproducible Quantitative Methods', <https://cbahlai.github.io/rqm-template/>
+Christie Bahlai, **Reproducible Quantitative Methods**, <https://cbahlai.github.io/rqm-template/>
 
-<https://jose.theoj.org/papers/10.21105/jose.00049.pdf>
+## Publications
+
+Johnston LW, Bonsma-Fisher M, Ostblom J, Hasan AR, Santangelo JS, Coome L, Tran L, Andrade ES, Mahallati S. **A graduate student-led participatory live-coding quantitative methods course in R: Experiences on initiating, developing, and teaching**. *Journal of Open Source Education*. 2019;2: 49. [doi:10.21105/jose.00049](https://jose.theoj.org/papers/10.21105/jose.00049)

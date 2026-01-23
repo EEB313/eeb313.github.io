@@ -31,7 +31,7 @@ book:
       # - assignments/assignment-00.qmd
       - assignments/assignment-01.qmd
       - assignments/assignment-02.qmd
-      # - assignments/assignment-03.qmd
+      - assignments/assignment-03.qmd
       # - assignments/assignment-04.qmd
       # - assignments/assignment-05.qmd
       # - assignments/challenge-assignment.qmd
@@ -79,16 +79,18 @@ book:
 format:
   html:
     theme:
-      light: [cosmo, format/_light.scss]
+      light: cosmo
+      dark: [cosmo, theme-dark.scss]
     code-copy: true
     code-fold: false
     code-overflow: wrap
+    respect-user-color-scheme: true
 
 extra_files:
 #   - assignment-00.Rmd
-  - assignment-01.Rmd
-  - assignment-02.Rmd
-#   - assignment-03.Rmd
+  - assignments/assignment-01.Rmd
+  - assignments/assignment-02.Rmd
+  - assignments/assignment-03.Rmd
 #   - assignment-04.Rmd
 #   - assignment-05.Rmd
 #   - assignment-00.qmd
@@ -99,7 +101,8 @@ extra_files:
 #   - assignment-05.qmd
 #   - challenge-assignment.qmd
 #   - challenge-assignment.Rmd
-  - lec06-self-directed-analysis-without-answers.Rmd
+  - lectures/lec06-self-directed-analysis.qmd
+  - lectures/lec06-self-directed-analysis.Rmd
 #   - lec07-self-directed-analysis.Rmd
 #   - review-for-challenge.qmd
 #   - review-for-challenge.Rmd

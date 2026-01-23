@@ -1,5 +1,5 @@
 ---
-title: "Lecture 5:  Advanced data manipulation & visualization"
+title: "Advanced data manipulation & visualization"
 output: html_document
 date: "2026-01-19"
 ---
@@ -12,13 +12,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 > ### Learning Objectives
 >
-> -   Learn to make histograms, line plots, and reference lines using `ggplot`
+> -   Learn to make histograms, line plots, and reference lines using `ggplot` (`geom_histogram`, `geom_line`, `geom_abline`)
 >
-> -   Understand and apply faceting in `ggplot`
+> -   Understand and apply faceting in `ggplot` (using `facet_wrap` and `facet_grid`)
 >
 > -   Learn to switch between long and wide format data using `pivot_longer` and `pivot_wider`
 >
-> -   Format plots to be more readable
+> -   Format plots to be more readable using ggplot's `theme` options and labeling (`labs`)
 
 ------------------------------------------------------------------------
 
@@ -50,19 +50,27 @@ surveys <- readr::read_csv('data/portal_data.csv')
 surveys
 ```
 
-For each animal captured, the weight and hindfoot length were measured, and we investigated the relationship between the two variables (after removing missing data) using a **scatterplot** and found strong clustering by species
+Before we go further, we're just going to add one new column to `surveys` : the full Latin name (*Genus species*) in a new column called `species_latin`
+
+```{r}
+surveys <- surveys %>% 
+  mutate(species_latin = paste(genus,species)) # new column for full Latin name
+```
+
+Usually we don't recommend altering the original data, but instead suggest saving edited forms under a new name, but because this is simply adding a new column (which is just a restatement of existing information), we'll break that rule for now!
+
+For each animal captured, the weight and hindfoot length were measured, and we previously investigated the relationship between the two variables (after removing missing data and filtering for species that weren't very rare) using a **scatterplot** and found strong clustering by species
 
 ```{r}
 surveys_abun_species <- surveys %>% 
-  filter(!is.na(hindfoot_length) & !is.na(weight)) %>%
+  filter(!is.na(hindfoot_length) & !is.na(weight)) %>% # remove rows with NA in either
   group_by(species) %>%
-  mutate(n = n()) %>% # add count value to each row
-  filter(n > 800) %>%
-  select(-n) %>%
-  mutate(genus_species = paste(genus,species))
+  mutate(n = n()) %>% # add count value (total observations of each species) to each row
+  filter(n > 800) %>% # filter for species observed >800 times total
+  select(-n) # remove the n column, don't need it anyomre
 
 surveys_abun_species %>%
-  ggplot(aes(x = weight, y = hindfoot_length, colour = genus_species)) +
+  ggplot(aes(x = weight, y = hindfoot_length, colour = species_latin)) +
   geom_point(alpha = 0.2)
 ```
 
@@ -70,76 +78,114 @@ Looking at the same variables a different way,
 
 ```{r}
 surveys_abun_species %>%
-  ggplot(aes(x = genus_species, y = hindfoot_length, colour = weight)) +
+  ggplot(aes(x = species_latin, y = hindfoot_length, colour = weight)) +
   geom_jitter(size = 0.1, height = 0, width = 0.4) + 
   theme(axis.text.x = element_text(angle = 45,vjust=1, hjust=1))
 ```
 
-## More plot types
+## Visualizing data with other plot types
 
 In this section, we'll explore a few more types of plots we can make in `ggplot`.
 
-Let's calculate number of counts per year for each species. First, we need to group the data and count records within each group:
+First, let's go back to the originally-imported data and just count the total number of times each species was observed. We need to group the data and count records within each group:
 
 ```{r}
-surveys_abun_species %>%
-    group_by(year, genus_species) %>%
-    tally() %>%
-    arrange(desc(n)) # Adding arrange just to compare with histogram
+surveys %>% 
+  group_by(species_latin) %>%
+  tally()%>%
+  arrange(desc(n)) # Adding arrange just to compare with histogram
 ```
 
-Before doing any complex analysis, it's important to understand how much data there is. Are there years where very few animals of a given species were observed? The best way to look at this sort of count data is with a **histogram**.
+Before doing any complex analysis, it's important to understand how much data there is. Are there species for which very few animals were ever observed in the study site? The best way to look at this sort of count data is with a **histogram**.
 
 To create a histogram, we can assign this table to a variable, and then pass that variable to `ggplot()`.
 
-```{r, message=FALSE, warning=FALSE}
-yearly_counts <- surveys_abun_species %>%
-    group_by(year, genus_species) %>%
-    tally() %>%
-    arrange(desc(n))
+```{r}
+species_counts <- surveys %>% 
+  group_by(species_latin) %>%
+  tally()
 
-ggplot(yearly_counts, aes(x = n)) +
+ggplot(species_counts, aes(x = n)) +
     geom_histogram()
 ```
 
-Remember that a histogram plots the number of observations based on a variable, so you only need to specify the x-axis in the `ggplot()` call. Also, that a histogram's bin size can really change what you might understand about the data. The histogram geom has a *bins* argument that allows you to specify the number of bins and a *binwidth* argument that allows you to specify the size of the bins.
+Remember that a histogram plots the number of observations based on a variable, so you only need to specify the x-axis in the `ggplot()` call.
+
+A histogram's bin size can really change what you might understand about the data. The histogram geom has a *bins* argument that allows you to specify the number of bins and a *binwidth* argument that allows you to specify the size of the bins.
+
+If we reduce the number of bins, the plot looks cleaner, but we are missing details on most of the species, which are all falling into the lowest bin.
 
 ```{r}
-ggplot(yearly_counts, aes(x = n)) +
+ggplot(species_counts, aes(x = n)) +
     geom_histogram(bins=10)
 ```
 
-Creating an intermediate variable would be preferable for time consuming calculations, because you would not want to do that operation every time you change the plot aesthetics.
+Alternatively we can specify how wide each bin should be using binwidth - let's try 100, and move the rectangular bars so that instead of being centered at the median value within them (default), they span from the lowest to highest value included in the bin
 
-If it is not a time consuming calculation or you would like the flexibility of changing the data summary and the plotting options in the same code chunk, you can pipe the output of your split-apply-combine operation to the plotting command:
-
-```{r, message=FALSE, warning=FALSE}
-surveys_abun_species %>%
-    group_by(year, genus_species) %>%
-    tally() %>%
-    ggplot(aes(x = n)) +
-        geom_histogram()
+```{r}
+ggplot(species_counts, aes(x = n)) +
+    geom_histogram(binwidth=100, boundary = 0)
 ```
 
-We can perform a quick check that the plot corresponds to the table by colouring the histogram by species:
+We can understand the distribution even better by defining custom bin widths, which allows us to get more resolution for the rarely-observed species while not having too many empty bins for the few very frequently-observed species
+
+```{r}
+ggplot(species_counts, aes(x = n)) +
+    geom_histogram(breaks = c(seq(0,1000,100),seq(2000,11000,1000)), boundary = 0)
+```
+
+From this latest version, we can see there's a huge number of species (over 30!) that were observed less than 100 times over the entire 4 decade study period. These are the ones we might want to filter out going forward, since there's probably too little data to to interpret trends. Using the value of 800 observations as a cut off for filtering (what we did previously) seems reasonable!
+
+Now, since this was a longitudinal study, let's calculate the number of counts *per year* for each species. First, we need to group the data and count records within each group:
+
+```{r}
+yearly_counts <- surveys %>%
+    group_by(year, species_latin) %>%
+    tally() %>%
+    arrange(desc(n)) # Adding arrange just to compare with histogram
+
+yearly_counts
+```
+
+Now, let's again do a histogram
 
 ```{r, message=FALSE, warning=FALSE}
-surveys_abun_species %>%
-    group_by(year, genus_species) %>%
+ggplot(yearly_counts, aes(x = n)) +
+    geom_histogram(boundary=0)
+```
+
+Note that creating an intermediate variable for the processed data ( `yearly_counts` ) is be preferable for time consuming calculations, because you would not want to do that operation every time you change the plot aesthetics. However, if it is not a time consuming calculation, or you would like the flexibility of changing the data summary and the plotting options in the same code chunk, you can pipe the output of your split-apply-combine operation to the plotting command:
+
+```{r, message=FALSE, warning=FALSE}
+surveys %>%
+    group_by(year, species_latin) %>%
     tally() %>%
-  # We are using "fill" here instead of "colour"
-    ggplot(aes(x = n, fill = genus_species)) + 
-        geom_histogram()
+    ggplot(aes(x = n)) +
+        geom_histogram(boundary = 1)
+```
+
+We can perform a quick check that the plot corresponds to the table by colouring the histogram by species. However, we first want to get rid of all those rarely observed species that we know will crowd our plot
+
+```{r, message=FALSE, warning=FALSE}
+yearly_counts_abun <- yearly_counts %>%
+  group_by(species_latin) %>%
+  mutate(n_tot_species=sum(n)) %>% # new column containing total observations per species
+  filter(n_tot_species>800) %>%
+  select(-n_tot_species)
+
+ggplot(yearly_counts_abun, aes(x = n, fill = species_latin)) + 
+        geom_histogram(boundary = 0)
+
+# We are using "fill" here instead of "colour"
+
 ```
 
 *Note: Here we are using `fill` to assign colours to species rather than `colour`. In general `colour` refers to the outline of points/bars or whatever it is you are plotting and `fill` refers to the colour that goes inside the point or bar. If you are confused, try switching out `fill` for `colour` to see what looks best!*
 
-Now let's explore how the number of each genus varies over time. Longitudinal data can be visualized as a line plot with years on the x axis and counts on the y axis:
+Now let's explore how the number of each species varies over time. Longitudinal data can be visualized as a line plot with years on the x axis and counts on the y axis:
 
 ```{r}
-surveys_abun_species %>%
-    group_by(year, genus_species) %>%
-    tally() %>%
+yearly_counts_abun  %>%
     ggplot(aes(x = year, y = n)) +
         geom_line()
 ```
@@ -147,22 +193,17 @@ surveys_abun_species %>%
 Unfortunately, this does not work because we plotted data for all the species together as one line. We need to tell `ggplot` to draw a line for each species by modifying the aesthetic function to include `group = species`:
 
 ```{r}
-surveys_abun_species %>%
-    group_by(year, genus_species) %>%
-    tally() %>%
-    ggplot(aes(x = year, y = n, group = genus_species)) +
+yearly_counts_abun  %>%
+    ggplot(aes(x = year, y = n, group = species_latin)) +
         geom_line()
 ```
 
 We will be able to distinguish species in the plot if we add colours (using `colour` also automatically groups the data):
 
 ```{r}
-annual_plot <- surveys_abun_species %>%
-    group_by(year, genus_species) %>%
-    tally() %>%
-  # `colour` groups automatically
-    ggplot(aes(x = year, y = n, colour = genus_species)) +
-        geom_line() 
+annual_plot <- yearly_counts_abun  %>%
+    ggplot(aes(x = year, y = n, color = species_latin)) + # you can say color or colour
+        geom_line()
 
 annual_plot
 ```
@@ -170,20 +211,17 @@ annual_plot
 There seem to be large fluctuations over time in the levels of many of these species! We can calculate an average
 
 ```{r}
-avg_species <- surveys_abun_species %>%
-  group_by(year,genus_species) %>%
-  tally() %>%
-  group_by(genus_species) %>%
+avg_species <- yearly_counts_abun %>%
+  group_by(species_latin) %>%
   summarize(avg_yearly_count = mean(n))
 
 avg_species
 ```
 
 ```{r}
-annual_plot <- annual_plot + 
-  geom_abline(data=avg_species, aes(slope = 0, intercept = avg_yearly_count, colour = genus_species), linetype = "dashed")
+annual_plot + 
+  geom_abline(data=avg_species, aes(slope = 0, intercept = avg_yearly_count, colour = species_latin), linetype = "dashed")
 
-annual_plot
 ```
 
 ## Creating multi-panel plots (faceting)
@@ -191,43 +229,48 @@ annual_plot
 `ggplot` has a special technique called *faceting* that allows the user to split one plot into multiple subplots based on a variable included in the dataset. This allows us to examine the trends associated with each grouping variable more closely. We will use it to make a time series plot for each species:
 
 ```{r}
-surveys_abun_species %>%
-    group_by(year, species) %>%
-    tally() %>%
+yearly_counts_abun %>%
     ggplot(aes(x = year, y = n)) + 
         geom_line() +
-        facet_wrap(~species)
+        facet_wrap(~species_latin)
 ```
 
-Now we would like to split the line in each plot by the sex of each individual measured. To do that we need to make counts in the data frame after grouping by `year`, `species`, and `sex`:
+The `facet_wrap` function creates a new subplot for each value of the variable passed to it (`~name`). You can control the number of rows and columns as well as lots of other options.
+
+Now we would like to split the line in each plot by the sex of each individual measured. To do that we need to make counts in the data frame after grouping by `year`, `species_latin`, and `sex`, so we are going to redo our earlier filtering, preserving the breakdown by sex:
 
 ```{r}
-surveys_abun_species %>%
-    group_by(year, species, sex) %>%
-    tally()
+yearly_counts_by_sex_abun <- surveys %>%
+    group_by(year, species_latin, sex) %>%
+    tally() %>% 
+    group_by(species_latin) %>%
+    mutate(n_tot_species=sum(n)) %>% # new column containing total observations per species
+    filter(n_tot_species>800) %>%
+    select(-n_tot_species)
+
+yearly_counts_by_sex_abun
 ```
 
-We can reflect this grouping by sex in the faceted plot by splitting further with `colour` (within a single plot):
+We can reflect this grouping by sex in the faceted plot by splitting further with `colour` (within a single plot).
 
 ```{r}
-surveys_abun_species %>%
-    group_by(year, species, sex) %>%
-    tally() %>%
+yearly_counts_by_sex_abun %>%
     ggplot(aes(x = year, y = n, colour = sex)) +
         geom_line() +
-        facet_wrap(~species)
+        facet_wrap(~species_latin)
 ```
 
 There are several observations where sex was not recorded. Let's filter out those values.
 
 ```{r}
-surveys_abun_species %>%
-    filter(!is.na(sex)) %>%
-    group_by(year, species, sex) %>%
-    tally() %>%
+
+yearly_counts_by_sex_abun <- yearly_counts_by_sex_abun %>% 
+  filter(!is.na(sex))
+
+yearly_counts_by_sex_abun %>%
     ggplot(aes(x = year, y = n, color = sex)) +
         geom_line() +
-        facet_wrap(~species)
+        facet_wrap(~species_latin)
 ```
 
 It is possible to specify exactly which colors[^1] to use and to change the thickness of the lines to make the them easier to distinguish.
@@ -235,33 +278,27 @@ It is possible to specify exactly which colors[^1] to use and to change the thic
 [^1]: There are so many colors to chose from in R. Check out the [R Color](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) doc to find something that brings you joy.
 
 ```{r}
-surveys_abun_species %>%
-    filter(!is.na(sex)) %>%
-    group_by(year, species, sex) %>%
-    tally() %>%
+yearly_counts_by_sex_abun %>%
     ggplot(aes(x = year, y = n, colour = sex)) +
         geom_line(size = 1) +
         scale_colour_manual(values = c("black", "orange")) +
-        facet_wrap(~species) 
+        facet_wrap(~species_latin) 
 ```
 
 Not sure what colours would look good on your plot? The R Community got you covered! Check out these awesome [color palettes](https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/) where nice-looking color combos come predefined. We especially recommend the [`viridis` color palettes](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html). These palettes are not only pretty, they are specifically designed to be easier to read by those with colourblindness.
 
-Lastly, let's change the x labels so that they don't overlap, and remove the grey background to increase contrast with the lines. To customize the non-data components of the plot, we will pass some *theme* statements[^2] to `ggplot`.
+Lastly, let's change the x labels so that they don't overlap, split the subplot titles into multiple lines if they're too long, and remove the grey background to increase contrast with the lines. To customize the non-data components of the plot, we will pass some *theme* statements[^2] to `ggplot`.
 
 [^2]: The amount of control over various plot elements in `ggplot` is truly astonishing. Check out the complete list of themes [here](https://ggplot2.tidyverse.org/reference/theme.html). Have fun!
 
 ```{r}
-surveys_abun_species %>%
-  filter(!is.na(sex)) %>%
-  group_by(year, species, sex) %>%
-  tally() %>%
+yearly_counts_by_sex_abun %>%
   ggplot(aes(x = year, y = n, color = sex)) +
   geom_line(size = 1) +
   scale_colour_viridis_d() +
-  facet_wrap(~species) +
+  facet_wrap(~species_latin, labeller = label_wrap_gen(width = 14)) +
   theme_classic() +
-  theme(text = element_text(size = 12),
+  theme(text = element_text(size = 10),
         axis.text.x = element_text(angle = 30, hjust = 1))
 ```
 
@@ -269,29 +306,47 @@ There are other popular theme options, such as `theme_bw()`.
 
 Our plot looks pretty polished now! It would be difficult to share with other, however, given the lack of information provided on the Y axis. Let's add some meaningful axis labels.
 
-```{r polished}
-surveys_abun_species %>%
-  filter(!is.na(sex)) %>%
-  group_by(year, species, sex) %>%
-  tally() %>%
+```{r}
+yearly_counts_by_sex_abun %>%
   ggplot(aes(x = year, y = n, color = sex)) +
   geom_line(size = 1) +
   scale_colour_viridis_d() +
-  facet_wrap(~species) +
+  facet_wrap(~species_latin, labeller = label_wrap_gen(width = 14)) +
   theme_classic() +
-  theme(text = element_text(size = 12),
+  theme(text = element_text(size = 10),
         axis.text.x = element_text(angle = 30, hjust = 1)) +
-  labs(title = "Rodent abundance over time",
+  labs(title = "Species abundance over time",
        x = "Year",
        y = "Number observed",
        colour = "Sex")
 ```
 
+There is a related sub-plotting function called `facet_grid`, which can instead take two variables, where one will vary along the rows of the grid and another along the columns. Here, we'll make a set of plots to examine how different genuses of animals (`genus`) respond to the different experimental manipulations applied to the plots (`plot_type`).
+
+```{r, warning = FALSE, message = FALSE,fig.dim=c(15, 5)}
+surveys %>% 
+  filter(!is.na(sex)) %>%
+  group_by(year, genus, plot_type, sex) %>%
+  tally() %>%
+  ggplot(aes(x = year, y = n, color = sex)) +
+  geom_line(size = 1) +
+  facet_grid(genus ~ plot_type, scales = "free",labeller = label_wrap_gen(width = 10))  +
+  theme(text = element_text(size = 8),
+        axis.text.x = element_text(angle = 30, hjust = 1)) +
+  labs(title = "Rodent abundance over time",
+       x = "Year",
+       y = "Number observed",
+       colour = "Sex")
+
+```
+
+It might be hard to see the plot (it'll be cramped!) if you're just viewing the Markdown notebook in the RStudio editor. You can click on the pop-out window icon in the top right corner of the plot to open a new window and expand it (the text will adjust accordingly).
+
 ### Challenge
 
 Use the filtered data frame (`surveys_abun_species`) for part 2.
 
-**1.** Remember the histogram coloured according to each species? Starting from that code, how could we separate each species into its own subplot? *Hint: look in the split-apply-combine section*
+**1.** Remember the histogram coloured according to each species? Starting from that code, how could we separate each species into its own subplot?
 
 **2.a.** Create a plot that shows the average weight over years. Which year was the average weight of all animals the highest?
 
@@ -300,15 +355,14 @@ Use the filtered data frame (`surveys_abun_species`) for part 2.
 ```{r, include=FALSE}
 # Answers
 # 1
-ggplot(yearly_counts, aes(x = n, fill = genus_species)) +
+ggplot(yearly_counts_abun, aes(x = n, fill = species_latin)) +
     geom_histogram() +
-    facet_wrap(~genus_species)
+    facet_wrap(~species_latin)
 ```
 
 ```{r, include=FALSE}
 # 2.a
 surveys_abun_species %>%
-    filter(!is.na(weight)) %>%
     group_by(year) %>%
     summarize(mean_weight = mean(weight)) %>%
     ggplot(aes(x = year, y = mean_weight)) +
@@ -318,12 +372,11 @@ surveys_abun_species %>%
 ```{r, include=FALSE}
 # 2.b
 surveys_abun_species %>%
-    filter(!is.na(weight)) %>%
-    group_by(year, species) %>%
-    summarize(mean_weight = mean(weight), .groups = "keep") %>%
-    ggplot(aes(x = year, y = mean_weight, colour = species)) +
+    group_by(year, species_latin) %>%
+    summarize(mean_weight = mean(weight)) %>%
+    ggplot(aes(x = year, y = mean_weight, colour = species_latin)) +
         geom_line() +
-        facet_wrap(~ species)
+        facet_wrap(~ species_latin)
 ```
 
 ## Reshaping with pivot_wider and pivot_longer
@@ -360,7 +413,7 @@ surveys_gw <- surveys %>%
     group_by(genus, plot_id) %>%
     summarize(mean_weight = mean(weight))
 
-surveys_gw %>% head()
+surveys_gw
 ```
 
 Now, to make this long data wide, we use `pivot_wider()` from `tidyr` to spread out the different taxa into columns. `pivot_wider()` takes 3 arguments: the data , the `names_from` column variable that will eventually become the column names, and the `values_from` column variable that will fill in the values. We'll use a pipe so we don't need to explicitly supply the data argument.
@@ -369,50 +422,32 @@ Now, to make this long data wide, we use `pivot_wider()` from `tidyr` to spread 
 surveys_gw_wide <- surveys_gw %>% 
   pivot_wider(names_from = genus, values_from = mean_weight)
 
-head(surveys_gw_wide)
+surveys_gw_wide
 ```
 
 Now we can go back to our original question: what is the relationship between mean weights of different genera across all plots? We can easily see the weights for each genus in each plot! Notice that some genera have `NA` values. That's because some genera were not recorded in that plot.
 
-Note! If you've been using R for a few years in other contexts, you may have used the function `spread()`instead of pivot_wider. spread also takes three arguments: the data, the *key* column (or column with identifying information), and the *values* column (the one with the numbers/values), and can return the same \`wide' data frame. However pivot_wider is currently the recommended function to use, as it has extra features to make it more flexible and less error_prone.
-
-```{r}
-surveys_gw_wide0 <- surveys_gw %>%
-  spread(key = genus, value = mean_weight) 
-
-head(surveys_gw_wide0)
-```
-
-### Wide to long with `gather` and `pivot_longer`
+### Wide to long with `pivot_longer`
 
 What if we had the opposite problem, and wanted to go from a wide to long format? For that, we can use `pivot_longer()` to gather a set of columns into one key-value pair. To go backwards from `surveys_gw_wide`, we should exclude *plot_id*.
 
 `pivot_longer()` takes 4 arguments: the data, the `names_to` column variable that comes from the column names, the `values_to` column with the values, and `cols` which specifies which columns we want to keep or drop. Again, we will pipe from the dataset so we don't have to specify the data argument:
 
 ```{r}
-surveys_gw_long2 <- surveys_gw_wide %>% 
+surveys_gw_long <- surveys_gw_wide %>% 
   pivot_longer(names_to = "genus", values_to = "mean_weight", cols = -plot_id)
 
-surveys_gw_long2
+surveys_gw_long
 ```
 
 If the columns are directly adjacent as they are here, we don’t even need to list the all out: we can just use the : operator, as before.
 
 ```{r}
 surveys_gw_wide %>% 
-  pivot_longer(names_to = "genus", values_to = "mean_weight", cols = Baiomys:Sigmodon)
+  pivot_longer(names_to = "genus", values_to = "mean_weight", cols = Baiomys:Spermophilus)
 ```
 
 Note that now the `NA` genera are included in the long format.
-
-In the past, you may have used `gather()`. We give it the arguments of a new key and value column name, and then specify which columns we either want or do not want gathered up. So, togo backwards from `surveys_gw_wide`, and exclude `plot_id` from the gathering, we would do the following:
-
-```{r}
-surveys_gw_long0 <- surveys_gw_wide0 %>%
-  gather(genus, mean_weight, -plot_id) 
-
-head(surveys_gw_long0)
-```
 
 ### Challenge
 
