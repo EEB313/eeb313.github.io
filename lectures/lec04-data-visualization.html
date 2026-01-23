@@ -507,10 +507,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <h3 id="learning-objectives" data-number="4.1.1" class="anchored"><span class="header-section-number">4.1.1</span> Learning Objectives</h3>
 <ul>
-<li>Produce scatter plots, line plots, and histograms using <em>ggplot</em></li>
-<li>Alter plot settings</li>
-<li>Combine data manipulation with data visualization using split-apply-combine techniques</li>
-<li>Use <code>summarize</code>, <code>group_by</code>, and <code>tally</code> to split a data frame into groups of observations, apply a summary statistics for each group, and then combine the results.</li>
+<li>Use <em>ggplot</em> to create simple scatterplots</li>
+<li>Vary <code>x</code>, <code>y</code>, and <code>colour</code> variables in scatterplots to understand trends in data</li>
+<li>Use <code>group_by</code>, <code>summarize</code>, <code>tally,</code> and <code>arrange</code> to split a data frame into groups of observations, apply a summary statistics for each group, and then combine the results</li>
+<li>Use <code>summarize_all</code> to calculate a summary statistic for an entire data frame</li>
+<li>Remove missing data using <code>is.na</code> or <code>na.omit</code></li>
+<li>Combine data manipulation with data visualization using split-apply-combine techniques, along with the pipe (<code>%&gt;%</code>) and layering (<code>+</code>) operators</li>
 </ul>
 </blockquote>
 <hr>
@@ -1136,7 +1138,7 @@ Caused by warning in `mean.default()`:
 4 Rodent  34247</code></pre>
 </div>
 </div>
-<p>Definitely mostly rodents in our data set…. Let’s check again after making sure we only take observations where the hindfood length was actually measured (ie, not NA)</p>
+<p>Definitely mostly rodents in our data set…. Let’s check again after making sure we only take observations where the hindfoot length was actually measured (ie, not NA)</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>( <span class="sc">!</span><span class="fu">is.na</span>(hindfoot_length) ) <span class="sc">%&gt;%</span> <span class="co"># control by removing `!`</span></span>
