@@ -408,14 +408,49 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/data/SSDinMammals.csv" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/data/SSDinMammals.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SSDinMammals.csv</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/data/plant-biomass-preprocess.csv" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/data/plant-biomass-preprocess.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">plant-biomass-preprocess.csv</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Papers</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/papers/portal-data-paper-2009.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">portal-data-paper-2009.pdf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/papers/portal-data-paper-2020.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">portal-data-paper-2020.pdf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/papers/plant-biomass-paper.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">plant-biomass-paper.pdf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/papers/SSDinMammals-paper.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SSDinMammals-paper.pdf</span></a>
   </div>
 </li>
       </ul>
@@ -473,7 +508,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="analyze-mammal-size-data-5.5-marks" class="level2">
 <h2 class="anchored" data-anchor-id="analyze-mammal-size-data-5.5-marks">2. Analyze mammal size data (5.5 marks)</h2>
-<p>We will be working with a data set compiled to understand sexual dimorphism in size across mammals. You can download the file from <a href="https://datadryad.org/dataset/doi:10.5061/dryad.280gb5mx0">Dryad</a> (note: you might have to do this manually, as the site can block R imports) or from the <a href="https://eeb313.github.io/data/SSDinMammals.csv">course website</a>). The <a href="https://www.nature.com/articles/s41467-024-45739-5#Sec8">original study</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> is quite interesting! The Dryad link includes a description of the study variables.</p>
+<p>We will be working with a data set compiled to understand sexual dimorphism in size across mammals. You can download the file from <a href="https://datadryad.org/dataset/doi:10.5061/dryad.280gb5mx0">Dryad</a> (note: you might have to do this manually, as the site can block R imports) or from the <a href="https://eeb313.github.io/assignments/data/SSDinMammals.csv">course website</a>). The <a href="https://www.nature.com/articles/s41467-024-45739-5">original study</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> is quite interesting! The Dryad link includes a description of the study variables.</p>
 <p>a. Read throught the original study abstract and introduction. In one sentence, what was the hypothesis the authors were trying to test with this study? (0.25 pts)</p>
 <p>b. Download the file to your computer and read it into a variable called <code>mammal_sizes</code> and provide a preview of data. (0.25 mark)</p>
 <p><em>Hint: Make sure you tell <code>read_csv</code> the correct file path of your data based on where you put it. You can either specify the full directory path, or where it is relative to which directly R currently operating out of for this notebook, which you can get with the</em> <code>getwd()</code> <em>command and set with the</em> <code>setwd()</code> <em>command. (Or by navigating to the Files panel in RStudio, selecting the Settings menu (gear icon), and choosing “Set As Working Directory” or “Go To Working Directory”).</em></p>

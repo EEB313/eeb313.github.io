@@ -408,14 +408,49 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/data/SSDinMammals.csv" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/data/SSDinMammals.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SSDinMammals.csv</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/data/plant-biomass-preprocess.csv" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/data/plant-biomass-preprocess.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">plant-biomass-preprocess.csv</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Papers</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/papers/portal-data-paper-2009.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">portal-data-paper-2009.pdf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/papers/portal-data-paper-2020.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">portal-data-paper-2020.pdf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/papers/plant-biomass-paper.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">plant-biomass-paper.pdf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/papers/SSDinMammals-paper.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SSDinMammals-paper.pdf</span></a>
   </div>
 </li>
       </ul>
@@ -509,8 +544,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Write a function that calculates the median of the any values in a numeric vector greater than “n”. Test this function with the <code>v</code> and <code>v_square</code> vectors and n = 10. (1 marks)</li>
 </ol>
 </section>
-<section id="loops-and-conditional-statements-3-marks" class="level1">
-<h1>4. Loops and conditional statements (3 marks)</h1>
+<section id="loops-and-conditional-statements-3-marks" class="level2">
+<h2 class="anchored" data-anchor-id="loops-and-conditional-statements-3-marks">4. Loops and conditional statements (3 marks)</h2>
 <p>We’re going to use some of the simple R commands we’ve used to create our first biological simulation! Imagine you are managing the cultivation of some type of organism (this could be anything from a population of cells growing in a petri dish, a crop of plants, or a colony of animals). We’ll call this organism the “crop” and assume the population is divided up into separate “plots”. The population in each plot grows over time, and when it reaches a specified size you will “harvest” it - removing most of the population - and then replant a small amount. We are going to track the population size of each plot over time.</p>
 <ol type="a">
 <li>Assume you start with 10 plots with population sizes 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Create a vector of length 10 that contains the size of each plot. (0.25 marks)</li>

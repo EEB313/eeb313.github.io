@@ -605,6 +605,17 @@
     ]
   },
   {
+    "objectID": "assignments/assignment-01.html#loops-and-conditional-statements-3-marks",
+    "href": "assignments/assignment-01.html#loops-and-conditional-statements-3-marks",
+    "title": "Assignment 1: Basic R (8 marks)",
+    "section": "4. Loops and conditional statements (3 marks)",
+    "text": "4. Loops and conditional statements (3 marks)\nWe’re going to use some of the simple R commands we’ve used to create our first biological simulation! Imagine you are managing the cultivation of some type of organism (this could be anything from a population of cells growing in a petri dish, a crop of plants, or a colony of animals). We’ll call this organism the “crop” and assume the population is divided up into separate “plots”. The population in each plot grows over time, and when it reaches a specified size you will “harvest” it - removing most of the population - and then replant a small amount. We are going to track the population size of each plot over time.\n\nAssume you start with 10 plots with population sizes 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Create a vector of length 10 that contains the size of each plot. (0.25 marks)\n\n\nIf the population size is greater than 5, harvest occurs. Using a single line of code and without defining any new variables, count how many plots will be harvested initially (0.25 marks)\n\n\nWrite a for-loop to go through the initial plots, find the ones that will be harvested, and set their population sizes to zero after harvest. Store the new population sizes in the vector v_post_harvest (0.5 mark)\n\n\nDo the same calculation as above, but use vector subsetting and boolean expressions to avoid having to do a for-loop (see lectures notes for reminders) (0.5 marks)\n\n\nEach year, the population size doubles due to growth. Update your for-loop to go through the initial plots and report their population sizes after 1 full year including harvesting and growth. Assume that after harvesting the population is “re-seeded” such that after a year it will have size 1. Make sure to make a not of any assumptions you are making. Store the new population sizes in the vector v_post_growth_harvest (1 mark)\n\n\nIs there a way to avoid using a for-loop for this last calculation? (0.5 marks)",
+    "crumbs": [
+      "Assignments",
+      "Assignment 1: Basic R (8 marks)"
+    ]
+  },
+  {
     "objectID": "assignments/assignment-02.html",
     "href": "assignments/assignment-02.html",
     "title": "Assignment 2: Manipulating and plotting data (8 marks)",
