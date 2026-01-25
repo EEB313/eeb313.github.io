@@ -8,7 +8,7 @@ Review: Before the assignment, review the data manipulation and plotting functio
 
 ## 1. Read in and pre-process plant biomass data (1.75 marks)
 
-You will apply your data wrangling skills on the yearly change in biomass of plants in the [beautiful Abisko national park in northern Sweden](https://en.wikipedia.org/wiki/Abisko_National_Park). We have preprocessed this data and made it available as a [csv file via this link](https://eeb313.github.io/data/plant_biomass-preprocess.csv). You can find the original data on [Dryad](https://datadryad.org/resource/doi:10.5061/dryad.38s21), and the full-text of the original study[^assignment-03-1] in this [pdf](https://eeb313.github.io/data/plant-biomass-paper.pdf). Reading through the study abstract will increase your understanding for working with the data.
+You will apply your data wrangling skills on the yearly change in biomass of plants in the [beautiful Abisko national park in northern Sweden](https://en.wikipedia.org/wiki/Abisko_National_Park). We have preprocessed this data and made it available as a [csv file via this link](https://eeb313.github.io/assignments/data/plant-biomass-preprocess.csv). You can find the original data on [Dryad](https://datadryad.org/resource/doi:10.5061/dryad.38s21), and the full-text of the original study[^assignment-03-1] in this [pdf](https://eeb313.github.io/assignments/papers/plant-biomass-paper.pdf). Reading through the study abstract will increase your understanding for working with the data.
 
 [^assignment-03-1]: Olofsson J, te Beest M, Ericson L (2013) Complex biotic interactions drive long-term vegetation dynamics in a subarctic ecosystem. Philosophical Transactions of the Royal Society B 368(1624): 20120486. <https://dx.doi.org/10.1098/rstb.2012.0486>
 

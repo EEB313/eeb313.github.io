@@ -40,7 +40,7 @@ e\. Make a plot of body temperature vs time of day, with points coloured differe
 
 ## 2. Analyze mammal size data (5.5 marks)
 
-We will be working with a data set compiled to understand sexual dimorphism in size across mammals. You can download the file from [Dryad](https://datadryad.org/dataset/doi:10.5061/dryad.280gb5mx0) (note: you might have to do this manually, as the site can block R imports) or from the [course website](https://eeb313.github.io/data/SSDinMammals.csv)). The [original study](https://www.nature.com/articles/s41467-024-45739-5#Sec8)[^assignment-02-1] is quite interesting! The Dryad link includes a description of the study variables.
+We will be working with a data set compiled to understand sexual dimorphism in size across mammals. You can download the file from [Dryad](https://datadryad.org/dataset/doi:10.5061/dryad.280gb5mx0) (note: you might have to do this manually, as the site can block R imports) or from the [course website](https://eeb313.github.io/assignments/data/SSDinMammals.csv)). The [original study](https://www.nature.com/articles/s41467-024-45739-5)[^assignment-02-1] is quite interesting! The Dryad link includes a description of the study variables.
 
 [^assignment-02-1]: Tombak, K.J., Hex, S.B.S.W. & Rubenstein, D.I. New estimates indicate that males are not larger than females in most mammal species. Nat Commun 15, 1872 (2024). <https://doi.org/10.1038/s41467-024-45739-5>
 

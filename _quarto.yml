@@ -50,10 +50,9 @@ book:
       - text: "disease_distance.csv"
         href: lectures/data/disease_distance.csv
       - text: "SSDinMammals.csv"
-        href: lectures/data/SSDinMammals.csv
-        
+        href: assignments/data/SSDinMammals.csv
       - text: "plant-biomass-preprocess.csv"
-        href: lectures/data/plant-biomass-preprocess.csv
+        href: assignments/data/plant-biomass-preprocess.csv
       #   - text: "medicago.csv"
       #     href: lectures/data/medicago.csv
       #   - text: "bmr.csv"
@@ -68,6 +67,16 @@ book:
       #     href: lectures/data/satellites.csv
       #   - text: "WF_inference_data.csv"
       #     href: lectures/data/WF_inference_data.csv
+    - part: "Papers"
+      chapters:
+      - text: "portal-data-paper-2009.pdf"
+        href: lectures/papers/portal-data-paper-2009.pdf
+      - text: "portal-data-paper-2020.pdf"
+        href: lectures/papers/portal-data-paper-2020.pdf
+      - text: "plant-biomass-paper.pdf"
+        href: assignments/papers/plant-biomass-paper.pdf
+      - text: "SSDinMammals-paper.pdf"
+        href: assignments/papers/SSDinMammals-paper.pdf
     # - part: "Miscellaneous notes"
     #   chapters:
     #   - review-for-challenge.qmd

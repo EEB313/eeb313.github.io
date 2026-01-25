@@ -67,7 +67,7 @@ g.  Write a function that calculates the median of the any values in a numeric v
 ```{r 2g}
 ```
 
-# 4. Loops and conditional statements (3 marks)
+## 4. Loops and conditional statements (3 marks)
 
 We're going to use some of the simple R commands we've used to create our first biological simulation! Imagine you are managing the cultivation of some type of organism (this could be anything from a population of cells growing in a petri dish, a crop of plants, or a colony of animals). We'll call this organism the "crop" and assume the population is divided up into separate "plots". The population in each plot grows over time, and when it reaches a specified size you will "harvest" it - removing most of the population - and then replant a small amount. We are going to track the population size of each plot over time.
 
