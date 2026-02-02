@@ -540,6 +540,12 @@ window.Quarto = {
  <span class="menu-text">Outbreak Investigation</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/outbreak-investigation-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Outbreak Investigation Answers</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -630,7 +636,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "heads"</code></pre>
+<pre><code>[1] "tails"</code></pre>
 </div>
 </div>
 <p>Note that in cases where we want the probability of each outcome to be the same, we can omit the <code>prob</code> argument.</p>
@@ -642,11 +648,11 @@ window.Quarto = {
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">size =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "tails"</code></pre>
+<pre><code>[1] "heads"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">size =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "heads"</code></pre>
+<pre><code>[1] "tails"</code></pre>
 </div>
 </div>
 <p>Unlike any other calculation we’ve every done in R, every time we run this we can get something different! Just like a real-life coin flip.</p>
@@ -654,7 +660,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">size =</span> <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "heads" "heads"</code></pre>
+<pre><code>[1] "tails" "tails"</code></pre>
 </div>
 </div>
 <p>Note that we’ve set <code>replace = TRUE</code>, which means that when the first sample is drawn from the set of options (“heads”, “tails”), it is not “removed” from the options available when the second number is chosen. There are other situations when we might be taking a random sample from a set and want <code>replace = FALSE</code>. For example, if we’re randomly choosing the batting order for a baseball team or if we’re choosing in which order to visit a set of locations to collect data.</p>
@@ -675,17 +681,17 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>coin_flip <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">size =</span> <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(coin_flip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] "tails" "heads" "tails" "tails" "heads" "heads" "tails" "heads" "tails"
- [10] "tails" "heads" "heads" "tails" "tails" "heads" "tails" "heads" "heads"
- [19] "tails" "heads" "heads" "heads" "tails" "heads" "tails" "tails" "heads"
- [28] "tails" "heads" "tails" "tails" "tails" "tails" "tails" "heads" "tails"
- [37] "tails" "tails" "heads" "tails" "heads" "tails" "tails" "heads" "tails"
- [46] "heads" "tails" "tails" "tails" "tails" "heads" "heads" "tails" "tails"
- [55] "tails" "tails" "heads" "heads" "heads" "tails" "heads" "tails" "tails"
- [64] "tails" "heads" "tails" "tails" "heads" "tails" "tails" "heads" "tails"
- [73] "tails" "tails" "tails" "heads" "heads" "heads" "heads" "heads" "tails"
- [82] "heads" "tails" "tails" "tails" "heads" "heads" "heads" "tails" "tails"
- [91] "heads" "tails" "tails" "heads" "tails" "tails" "tails" "tails" "heads"
+<pre><code>  [1] "tails" "heads" "heads" "tails" "heads" "tails" "heads" "tails" "tails"
+ [10] "heads" "tails" "heads" "tails" "heads" "heads" "heads" "heads" "tails"
+ [19] "heads" "tails" "tails" "heads" "tails" "tails" "tails" "heads" "heads"
+ [28] "heads" "heads" "tails" "heads" "tails" "tails" "heads" "tails" "tails"
+ [37] "heads" "heads" "tails" "tails" "tails" "tails" "heads" "tails" "heads"
+ [46] "heads" "heads" "heads" "heads" "heads" "tails" "tails" "tails" "heads"
+ [55] "tails" "tails" "tails" "tails" "tails" "heads" "tails" "tails" "heads"
+ [64] "heads" "heads" "tails" "heads" "tails" "heads" "tails" "heads" "tails"
+ [73] "tails" "heads" "heads" "tails" "tails" "heads" "tails" "heads" "heads"
+ [82] "tails" "heads" "tails" "heads" "tails" "tails" "tails" "heads" "heads"
+ [91] "tails" "tails" "tails" "heads" "heads" "heads" "heads" "tails" "heads"
 [100] "tails"</code></pre>
 </div>
 </div>
@@ -694,14 +700,14 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>coin_flip
 heads tails 
-   41    59 </code></pre>
+   49    51 </code></pre>
 </div>
 </div>
 <p>And we can calculate some statistics based on these outcomes, like “<em>what proportion of times did we get heads?</em>”</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(coin_flip <span class="sc">==</span> <span class="st">"heads"</span>)<span class="sc">/</span><span class="fu">length</span>(coin_flip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.41</code></pre>
+<pre><code>[1] 0.49</code></pre>
 </div>
 </div>
 <p>However, this is not really a very efficient or generalization way of sampling binary outcomes. We probably don’t actually care about the entire ordered sequence of {“heads”, “tails”} outcomes. Most of the time we’re probably only interested in the <strong>number of heads</strong> vs the <strong>number of tails</strong> (i.e., the proportion of one vs the other). There is actually a way we can <u>sample this result directly</u>!</p>
@@ -710,7 +716,7 @@ heads tails
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 48</code></pre>
+<pre><code>[1] 54</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># n: how many times to repeat all the trials</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># size: how many trials to do </span></span>
@@ -722,15 +728,15 @@ heads tails
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>binom_samples <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>binom_samples</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 3 3 5 4 8 8 4 5 5 5 4 3 4 5 6 6 6 5 5 5 6 0 4 7 5 6 7 2 6 7 5 6 7 2 7 7 5
- [38] 2 4 3 8 6 3 6 6 4 4 8 4 4 7 8 6 6 6 6 5 4 5 5 4 5 4 8 7 5 8 6 5 3 4 2 3 4
- [75] 5 6 5 4 6 5 4 2 3 7 5 6 5 6 5 3 6 8 5 8 6 6 8 2 7 3</code></pre>
+<pre><code>  [1] 6 2 5 4 4 7 3 2 5 4 5 4 6 2 5 3 3 5 7 4 5 6 5 5 6 5 3 4 5 3 7 6 4 5 7 5 6
+ [38] 5 3 3 5 6 3 9 3 3 4 4 8 3 5 4 5 4 3 7 4 7 6 3 5 4 6 4 5 1 5 5 4 4 4 6 7 5
+ [75] 4 6 5 3 5 5 4 4 4 2 4 6 3 5 5 5 5 5 6 5 6 5 6 4 5 5</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(binom_samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.12</code></pre>
+<pre><code>[1] 4.67</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -758,8 +764,8 @@ heads tails
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(binom_samples_more))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>binom_samples_more
-    1     2     3     4     5     6     7     8     9 
-0.014 0.050 0.127 0.195 0.241 0.200 0.127 0.044 0.002 </code></pre>
+    0     1     2     3     4     5     6     7     8     9 
+0.003 0.006 0.037 0.120 0.206 0.258 0.197 0.119 0.039 0.015 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In the above sample of 1000 repeats of 10 flips each, we see that about 6% of the time we get 8 or more heads. This is rare, but not THAT rare</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
