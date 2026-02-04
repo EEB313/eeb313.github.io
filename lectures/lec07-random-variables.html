@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-01.html" rel="next">
+<link href="../lectures/lec08-inference.html" rel="next">
 <link href="../lectures/lec06-self-directed-analysis-without-answers.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -322,7 +322,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec08-random-variables.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Random variables and computational statistics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec07-random-variables.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Random variables and computational statistics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -416,8 +416,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lec08-random-variables.html" class="sidebar-item-text sidebar-link active">
+  <a href="../lectures/lec07-random-variables.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Random variables and computational statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec08-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical inference and linear models</span></span></a>
   </div>
 </li>
       </ul>
@@ -584,7 +590,7 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec08-random-variables.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Random variables and computational statistics</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec07-random-variables.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Random variables and computational statistics</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Random variables and computational statistics</span></h1>
 </div>
@@ -660,7 +666,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">size =</span> <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "tails" "tails"</code></pre>
+<pre><code>[1] "heads" "heads"</code></pre>
 </div>
 </div>
 <p>Note that we’ve set <code>replace = TRUE</code>, which means that when the first sample is drawn from the set of options (“heads”, “tails”), it is not “removed” from the options available when the second number is chosen. There are other situations when we might be taking a random sample from a set and want <code>replace = FALSE</code>. For example, if we’re randomly choosing the batting order for a baseball team or if we’re choosing in which order to visit a set of locations to collect data.</p>
@@ -681,18 +687,18 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>coin_flip <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">size =</span> <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(coin_flip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] "tails" "heads" "heads" "tails" "heads" "tails" "heads" "tails" "tails"
- [10] "heads" "tails" "heads" "tails" "heads" "heads" "heads" "heads" "tails"
- [19] "heads" "tails" "tails" "heads" "tails" "tails" "tails" "heads" "heads"
- [28] "heads" "heads" "tails" "heads" "tails" "tails" "heads" "tails" "tails"
- [37] "heads" "heads" "tails" "tails" "tails" "tails" "heads" "tails" "heads"
- [46] "heads" "heads" "heads" "heads" "heads" "tails" "tails" "tails" "heads"
- [55] "tails" "tails" "tails" "tails" "tails" "heads" "tails" "tails" "heads"
- [64] "heads" "heads" "tails" "heads" "tails" "heads" "tails" "heads" "tails"
- [73] "tails" "heads" "heads" "tails" "tails" "heads" "tails" "heads" "heads"
- [82] "tails" "heads" "tails" "heads" "tails" "tails" "tails" "heads" "heads"
- [91] "tails" "tails" "tails" "heads" "heads" "heads" "heads" "tails" "heads"
-[100] "tails"</code></pre>
+<pre><code>  [1] "tails" "tails" "tails" "tails" "heads" "heads" "tails" "tails" "heads"
+ [10] "tails" "heads" "tails" "heads" "tails" "heads" "heads" "tails" "heads"
+ [19] "tails" "tails" "tails" "tails" "heads" "heads" "heads" "tails" "heads"
+ [28] "tails" "tails" "tails" "tails" "tails" "tails" "heads" "tails" "heads"
+ [37] "heads" "heads" "tails" "tails" "heads" "heads" "tails" "tails" "heads"
+ [46] "heads" "tails" "tails" "heads" "tails" "tails" "tails" "tails" "heads"
+ [55] "heads" "heads" "tails" "heads" "tails" "heads" "tails" "tails" "heads"
+ [64] "heads" "tails" "heads" "tails" "tails" "tails" "heads" "heads" "heads"
+ [73] "tails" "tails" "heads" "tails" "tails" "heads" "heads" "tails" "heads"
+ [82] "tails" "heads" "tails" "heads" "heads" "tails" "tails" "heads" "tails"
+ [91] "tails" "tails" "heads" "tails" "tails" "tails" "heads" "tails" "heads"
+[100] "heads"</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -700,14 +706,14 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>coin_flip
 heads tails 
-   49    51 </code></pre>
+   44    56 </code></pre>
 </div>
 </div>
 <p>And we can calculate some statistics based on these outcomes, like “<em>what proportion of times did we get heads?</em>”</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(coin_flip <span class="sc">==</span> <span class="st">"heads"</span>)<span class="sc">/</span><span class="fu">length</span>(coin_flip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.49</code></pre>
+<pre><code>[1] 0.44</code></pre>
 </div>
 </div>
 <p>However, this is not really a very efficient or generalization way of sampling binary outcomes. We probably don’t actually care about the entire ordered sequence of {“heads”, “tails”} outcomes. Most of the time we’re probably only interested in the <strong>number of heads</strong> vs the <strong>number of tails</strong> (i.e., the proportion of one vs the other). There is actually a way we can <u>sample this result directly</u>!</p>
@@ -716,7 +722,7 @@ heads tails
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 54</code></pre>
+<pre><code>[1] 50</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># n: how many times to repeat all the trials</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># size: how many trials to do </span></span>
@@ -728,15 +734,15 @@ heads tails
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>binom_samples <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>binom_samples</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 6 2 5 4 4 7 3 2 5 4 5 4 6 2 5 3 3 5 7 4 5 6 5 5 6 5 3 4 5 3 7 6 4 5 7 5 6
- [38] 5 3 3 5 6 3 9 3 3 4 4 8 3 5 4 5 4 3 7 4 7 6 3 5 4 6 4 5 1 5 5 4 4 4 6 7 5
- [75] 4 6 5 3 5 5 4 4 4 2 4 6 3 5 5 5 5 5 6 5 6 5 6 4 5 5</code></pre>
+<pre><code>  [1] 4 4 5 5 6 6 5 4 3 4 4 6 4 5 5 8 3 6 4 5 4 5 8 4 4 4 5 5 7 3 6 6 4 5 4 3 5
+ [38] 6 5 7 3 3 6 8 3 5 5 6 4 2 6 3 5 6 6 3 5 4 6 1 5 5 2 6 4 5 3 6 8 4 7 7 5 7
+ [75] 5 3 5 5 5 4 4 6 5 4 5 3 1 4 4 5 4 5 4 7 6 2 6 7 5 4</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(binom_samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.67</code></pre>
+<pre><code>[1] 4.78</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -749,7 +755,7 @@ heads tails
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec08-random-variables_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec07-random-variables_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -764,8 +770,8 @@ heads tails
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(binom_samples_more))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>binom_samples_more
-    0     1     2     3     4     5     6     7     8     9 
-0.003 0.006 0.037 0.120 0.206 0.258 0.197 0.119 0.039 0.015 </code></pre>
+    0     1     2     3     4     5     6     7     8     9    10 
+0.001 0.010 0.037 0.130 0.198 0.267 0.198 0.113 0.041 0.003 0.002 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In the above sample of 1000 repeats of 10 flips each, we see that about 6% of the time we get 8 or more heads. This is rare, but not THAT rare</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -799,7 +805,7 @@ heads tails
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec08-random-variables_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec07-random-variables_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -825,7 +831,7 @@ heads tails
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec08-random-variables_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec07-random-variables_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -869,7 +875,7 @@ heads tails
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>binom.null <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> n_trials, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(binom.null <span class="sc">&gt;=</span><span class="dv">66</span>)<span class="sc">/</span>n_trials</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9e-04</code></pre>
+<pre><code>[1] 0.00089</code></pre>
 </div>
 </div>
 <p>Now we have again have p = 0.0009!</p>
@@ -1328,8 +1334,8 @@ heads tails
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-01.html" class="pagination-link" aria-label="Assignment 1: Basic R (8 marks)">
-        <span class="nav-page-text">Assignment 1: Basic R (8 marks)</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/lec08-inference.html" class="pagination-link" aria-label="Statistical inference and linear models">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical inference and linear models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
