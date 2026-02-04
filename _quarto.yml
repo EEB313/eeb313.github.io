@@ -18,6 +18,8 @@ book:
       - lectures/lec05-advanced-data-viz.qmd
       # - lectures/lec06-exploratory-data-analysis.qmd
       - lectures/lec06-self-directed-analysis-without-answers.qmd
+      - lectures/lec07-random-variables.qmd
+      - lectures/lec08-inference.qmd
       # - lectures/lec08-intro-inference-1.qmd
       # - lectures/lec09-intro-inference-2.qmd
       # - lectures/lec10-linear-models-1.qmd
@@ -77,8 +79,10 @@ book:
         href: assignments/papers/plant-biomass-paper.pdf
       - text: "SSDinMammals-paper.pdf"
         href: assignments/papers/SSDinMammals-paper.pdf
-    # - part: "Miscellaneous notes"
-    #   chapters:
+    - part: "Miscellaneous notes"
+      chapters:
+        - lectures/outbreak-investigation.qmd
+        - lectures/outbreak-investigation-answers.qmd
     #   - review-for-challenge.qmd
   repo-url: https://github.com/EEB313/eeb313.github.io
   sidebar:
@@ -112,6 +116,7 @@ extra_files:
 #   - challenge-assignment.Rmd
   - lectures/lec06-self-directed-analysis.qmd
   - lectures/lec06-self-directed-analysis.Rmd
+  - lectures/outbreak-investigation.Rmd
 #   - lec07-self-directed-analysis.Rmd
 #   - review-for-challenge.qmd
 #   - review-for-challenge.Rmd

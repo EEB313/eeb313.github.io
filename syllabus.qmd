@@ -62,17 +62,17 @@ This schedule is tentative
 | 1    | Jan 7  | Intro to R                                                 |
 | 2    | Jan 12 | Data manipulation                                          |
 | 2    | Jan 14 | Data visualization                                         |
-| 3    | Jan 19 | Exploratory data analysis                                  |
-| 4    | Jan 21 | Exploratory data analysis 2 (Activity)                     |
-| 4    | Jan 26 | Linear models I                                            |
-| 4    | Jan 28 | Linear models II                                           |
-| 5    | Feb 2  | Random variables and stochastic simulations                |
-| 5    | Feb 4  | Mathematical models in ecology and evolution I             |
-| 6    | Feb 9  | Mathematical models in ecology and evolution II (Activity) |
-| 6    | Feb 11 | Computational statistics                                   |
+| 3    | Jan 19 | Advanced data analysis                                     |
+| 4    | Jan 21 | Exploratory data analysis (Activity)                       |
+| 4    | Jan 26 | SNOW DAY                                                   |
+| 4    | Jan 28 | Model-informed data analysis (Activity)                    |
+| 5    | Feb 2  | Random variables and computational statistics              |
+| 5    | Feb 4  | Linear Models I                                            |
+| 6    | Feb 9  | Linear Models 2                                            |
+| 6    | Feb 11 | Mathematical models in ecology and evolution I             |
 |      | Feb 16 | Reading week                                               |
 |      | Feb 18 | Reading week                                               |
-| 7    | Feb 23 | Model selection                                            |
+| 7    | Feb 23 | Mathematical models in ecology and evolution II            |
 | 7    | Feb 25 | Project work                                               |
 | 8    | Mar 2  | Optimization and model fitting                             |
 | 8    | Mar 5  | Clustering, dimensionality reduction, and machine learning |
@@ -111,8 +111,8 @@ This schedule is tentative
 | Problem Set 1        | Individual | Quercus      | Jan 14           | 8   |
 | Problem Set 2        | Individual | Quercus      | Jan 21           | 8   |
 | Problem Set 3        | Individual | Quercus      | Jan 28           | 8   |
-| Problem Set 4        | Individual | Quercus      | Feb 4            | 8   |
-| Problem Set 5        | Individual | Quercus      | Feb 11           | 8   |
+| Problem Set 4        | Individual | Quercus      | Feb 11           | 8   |
+| Problem Set 5        | Individual | Quercus      | Feb 18           | 8   |
 | Project proposal     | Group      | Quercus      | Mar 5            | 3   |
 | Challenge assignment | Individual | Quercus      | Mar 11           | 20  |
 | Mid-project update   | Group      | GitHub       | Mar 18           | 6   |
