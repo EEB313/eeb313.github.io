@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Statistical inference and linear models – EEB313: Quantitative Methods in R for Biology</title>
+<title>8&nbsp; Probability, likelihood, and statistical inference – EEB313: Quantitative Methods in R for Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -322,7 +322,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec08-inference.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical inference and linear models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec08-inference.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability, likelihood, and statistical inference</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -423,7 +423,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec08-inference.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical inference and linear models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability, likelihood, and statistical inference</span></span></a>
   </div>
 </li>
       </ul>
@@ -453,6 +453,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../assignments/assignment-03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 3: Advanced data wrangling and visualization (8 marks)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 4: Random variables, likelihood, and inference</span></a>
   </div>
 </li>
       </ul>
@@ -570,22 +576,14 @@ window.Quarto = {
   <li><a href="#discrete-random-variables" id="toc-discrete-random-variables" class="nav-link" data-scroll-target="#discrete-random-variables"><span class="header-section-number">8.2.1</span> <strong>Discrete random variables</strong></a></li>
   <li><a href="#continuous-random-variables" id="toc-continuous-random-variables" class="nav-link" data-scroll-target="#continuous-random-variables"><span class="header-section-number">8.2.2</span> <strong>Continuous random variables</strong></a></li>
   <li><a href="#challenge" id="toc-challenge" class="nav-link" data-scroll-target="#challenge"><span class="header-section-number">8.2.3</span> Challenge</a></li>
-  <li><a href="#challenge-1" id="toc-challenge-1" class="nav-link" data-scroll-target="#challenge-1"><span class="header-section-number">8.2.4</span> Challenge</a></li>
+  <li><a href="#sampling-random-numbers" id="toc-sampling-random-numbers" class="nav-link" data-scroll-target="#sampling-random-numbers"><span class="header-section-number">8.2.4</span> Sampling random numbers</a></li>
+  <li><a href="#challenge-1" id="toc-challenge-1" class="nav-link" data-scroll-target="#challenge-1"><span class="header-section-number">8.2.5</span> Challenge</a></li>
   </ul></li>
   <li><a href="#maximum-likelihood-estimation-and-hypothesis-testing-with-real-data" id="toc-maximum-likelihood-estimation-and-hypothesis-testing-with-real-data" class="nav-link" data-scroll-target="#maximum-likelihood-estimation-and-hypothesis-testing-with-real-data"><span class="header-section-number">8.3</span> Maximum likelihood estimation and hypothesis testing with real data</a>
   <ul class="collapse">
   <li><a href="#review-of-the-likelihood" id="toc-review-of-the-likelihood" class="nav-link" data-scroll-target="#review-of-the-likelihood"><span class="header-section-number">8.3.1</span> Review of the likelihood</a></li>
   <li><a href="#case-study-1-maximum-likelihood-estimation-with-disease-mortality-data" id="toc-case-study-1-maximum-likelihood-estimation-with-disease-mortality-data" class="nav-link" data-scroll-target="#case-study-1-maximum-likelihood-estimation-with-disease-mortality-data"><span class="header-section-number">8.3.2</span> Case study 1: Maximum likelihood estimation with disease mortality data</a></li>
   <li><a href="#case-study-2-comparing-sex-differences-with-permutations-tests" id="toc-case-study-2-comparing-sex-differences-with-permutations-tests" class="nav-link" data-scroll-target="#case-study-2-comparing-sex-differences-with-permutations-tests"><span class="header-section-number">8.3.3</span> Case study 2: Comparing sex differences with permutations tests</a></li>
-  </ul></li>
-  <li><a href="#introduction-to-linear-regression" id="toc-introduction-to-linear-regression" class="nav-link" data-scroll-target="#introduction-to-linear-regression"><span class="header-section-number">8.4</span> Introduction to linear regression</a>
-  <ul class="collapse">
-  <li><a href="#linear-models-why-we-care" id="toc-linear-models-why-we-care" class="nav-link" data-scroll-target="#linear-models-why-we-care"><span class="header-section-number">8.4.1</span> Linear models: why we care</a></li>
-  </ul></li>
-  <li><a href="#the-simple-linear-model" id="toc-the-simple-linear-model" class="nav-link" data-scroll-target="#the-simple-linear-model"><span class="header-section-number">8.5</span> The simple linear model</a>
-  <ul class="collapse">
-  <li><a href="#challenge-2" id="toc-challenge-2" class="nav-link" data-scroll-target="#challenge-2"><span class="header-section-number">8.5.1</span> Challenge</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">8.5.2</span> </a></li>
   </ul></li>
   </ul>
 </nav>
@@ -594,9 +592,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec08-inference.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical inference and linear models</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec08-inference.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability, likelihood, and statistical inference</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical inference and linear models</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability, likelihood, and statistical inference</span></h1>
 </div>
 
 
@@ -622,7 +620,6 @@ window.Quarto = {
 <li>Use computational methods to test hypotheses about population parameters and processes that gave rise to observed data</li>
 <li>Understand the concept of permutation tests and compare to standard statistical tests</li>
 <li>Apply simple maximum likelihood estimation to real data</li>
-<li>Understand the foundations of linear regression</li>
 </ul>
 </blockquote>
 <hr>
@@ -645,6 +642,7 @@ window.Quarto = {
 <li>The <strong>Hypergeometric</strong> distribution models the probability that, if we draw <span class="math inline">\(n\)</span> objects from a population of size <span class="math inline">\(N\)</span> where <span class="math inline">\(K\)</span> of the objects have a specific attribute <em>without replacement</em>, that we see <span class="math inline">\(k\)</span> objects in our sample with the attribute.</li>
 <li>The <strong>Geometric</strong> distribution. If we do many trials, each of which are independent and have probability of “success” <span class="math inline">\(p\)</span>, a random variable that has a <span class="math inline">\(\text{Geometric}(p)\)</span> distribution counts the number of tries until a success occurs.</li>
 <li>The <strong>Negative binomial</strong> distribution models the number of trials until <span class="math inline">\(r\)</span> successes occur, if the success probability in each trial is <span class="math inline">\(p\)</span>.</li>
+<li>The <strong>Multinomial</strong> distribution counts the number of events in each of <span class="math inline">\(K\)</span> categories after <span class="math inline">\(N\)</span> trials. It is a generalization of the binomial distribution to outcomes that can take on more than two values</li>
 </ul>
 <p><em>Note: when</em> <span class="math inline">\(N\)</span>, <span class="math inline">\(K\)</span> are large relative to <span class="math inline">\(n\)</span> and <span class="math inline">\(K/N\)</span> is not too close to 0 or 1, the Binomial and Hypergeometric distributions are similar and its often advantageous to use the former (because it has a nicer probability distribution function, fewer parameters).</p>
 </section>
@@ -656,16 +654,19 @@ window.Quarto = {
 <p><span class="math display">\[\int_{-\infty}^\infty f(y) \text{d} y = 1\]</span></p>
 <p>Examples of continuous probability distributions include:</p>
 <ul>
-<li>The <strong>Exponential</strong> distribution models the time in-between events, if the events occur at rate <span class="math inline">\(\lambda\)</span>. What is means for events to occur at rate <span class="math inline">\(\lambda\)</span> is that, over a small interval of time <span class="math inline">\(\Delta t\)</span>, an event occurs with probability approximately <span class="math inline">\(\lambda \Delta t\)</span>. The larger the <span class="math inline">\(\lambda\)</span>, the more frequently the event occurs…</li>
 <li>The <strong>Uniform</strong> distribution models outcomes where all occur with equal probability.</li>
 <li>The <strong>Normal</strong> distribution is often used to model continuous observations that are sums of a large number of small, random contributions (e.g, individual alleles to a trait).</li>
 <li>The <strong>Log-normal</strong> distribution models continuous observations such that their natural logarithm follows a Normal distribution. In other words, if <span class="math inline">\(Y \sim \text{Lognormal}(\mu,\sigma^2)\)</span>, then <span class="math inline">\(\ln Y \sim \text{Normal}(\mu,\sigma^2)\)</span> where <span class="math inline">\(\mu\)</span> is the mean.</li>
-<li>The <strong>Gamma</strong> distribution is commonly used to describe the waiting time to the <span class="math inline">\(r\)</span>th event of a particular type. It is a flexible distribution which can be used in a number of contexts, especially when it is not clear what the right probabilistic model for observations may be.</li>
+<li>The <strong>Exponential</strong> distribution models the time in-between events, if the events occur at rate <span class="math inline">\(\lambda\)</span>. What is means for events to occur at rate <span class="math inline">\(\lambda\)</span> is that, over a small interval of time <span class="math inline">\(\Delta t\)</span>, an event occurs with probability approximately <span class="math inline">\(\lambda \Delta t\)</span>. The larger the <span class="math inline">\(\lambda\)</span>, the more frequently the event occurs…</li>
+<li>The <strong>Gamma</strong> distribution is commonly used to describe the waiting time to the <span class="math inline">\(r\)</span>th event of a particular type. It is a flexible distribution which can be used in a number of contexts, especially when it is not clear what the right probabilistic model for observations may be. It is often used to model distributions that look approximately normal but are more right-skewed (long-tailed). In limiting cases, it approaches the normal distribution.</li>
 </ul>
 </section>
 <section id="challenge" class="level3" data-number="8.2.3">
 <h3 data-number="8.2.3" class="anchored" data-anchor-id="challenge"><span class="header-section-number">8.2.3</span> Challenge</h3>
 <p>For each of the distributions above, think of random variables (e.g., the number of brown bears with body sizes <span class="math inline">\(&gt;\)</span> 100 kg) with that distribution? Discuss with your neighbors.</p>
+</section>
+<section id="sampling-random-numbers" class="level3" data-number="8.2.4">
+<h3 data-number="8.2.4" class="anchored" data-anchor-id="sampling-random-numbers"><span class="header-section-number">8.2.4</span> Sampling random numbers</h3>
 <p>We can generate random numbers in R from all of these probability distributions, and more!</p>
 <p>For example, to simulate a large realizations of a uniform random variable using <code>runif()</code>.</p>
 <div class="cell">
@@ -713,11 +714,50 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="challenge-1" class="level3" data-number="8.2.4">
-<h3 data-number="8.2.4" class="anchored" data-anchor-id="challenge-1"><span class="header-section-number">8.2.4</span> Challenge</h3>
+<section id="challenge-1" class="level3" data-number="8.2.5">
+<h3 data-number="8.2.5" class="anchored" data-anchor-id="challenge-1"><span class="header-section-number">8.2.5</span> Challenge</h3>
 <ol type="1">
-<li>Make a plot of the probability density function of a Gamma distribution shape = 0.5 and scale =2 using <code>dgamma</code>. Add another curve with shape = 2 and scale = 1/2.</li>
+<li>Draw 10000 random numbers from the Gamma distribution with shape = 0.5 and scale =2</li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>realizations_N_gamma <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(<span class="at">n =</span> N, <span class="at">shape =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">2</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">value =</span> realizations_N_gamma) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec08-inference_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Make a plot of the probability density function of a Gamma distribution shape = 0.5 and scale =2 using <code>dgamma</code>. Add another curve with shape = 2 and scale = 1/2. (<em>Hint: just like most R functions, ie log, sin, dgamma can take in vectors of x values and return vectors</em> of probabilities)</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">7</span>,<span class="fl">0.01</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gamma_vec1 <span class="ot">&lt;-</span> <span class="fu">dgamma</span>(<span class="at">x =</span> x_vec, <span class="at">shape =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">2</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>gamma_vec2 <span class="ot">&lt;-</span> <span class="fu">dgamma</span>(<span class="at">x =</span> x_vec, <span class="at">shape =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>gamma_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x_vec, <span class="at">value =</span> gamma_vec1, <span class="at">params =</span> <span class="st">"1"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> x_vec, <span class="at">value =</span> gamma_vec2, <span class="at">params =</span> <span class="st">"2"</span>))</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gamma_data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> value, <span class="at">color =</span> params)) <span class="sc">+</span> </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_line</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec08-inference_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="maximum-likelihood-estimation-and-hypothesis-testing-with-real-data" class="level2" data-number="8.3">
@@ -736,7 +776,7 @@ window.Quarto = {
 <p>Now we are going to test out applying this estimation technique to some real data! We’ll revisit the dataset from a a prior lecture - the Farrell &amp; Davies 2019 dataset that measured cases and deaths for a set of infectious diseases that each infect a wide range of animal species.</p>
 <p>Our goal will be to estimate, for the host species <em>Sus scrofa</em> (the wild boar) and parasite family <em>Coronavirinae</em> (which includes SARS-CoV-1 and -2), the probability that a case results in a death. We will group the data, regardless of the year, sampling location, etc.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>disease_distance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/disease_distance.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>disease_distance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/disease_distance.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 4157 Columns: 24
 ── Column specification ────────────────────────────────────────────────────────
@@ -749,8 +789,8 @@ dbl (17): Year, Cases, Deaths, Destroyed, Slaughtered, SR, EvoIso, Taxonomic...
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> disease_distance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ParaFamily <span class="sc">==</span> <span class="st">"Coronavirinae"</span> <span class="sc">&amp;</span> Host <span class="sc">==</span> <span class="st">"Sus_scrofa"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> disease_distance <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ParaFamily <span class="sc">==</span> <span class="st">"Coronavirinae"</span> <span class="sc">&amp;</span> Host <span class="sc">==</span> <span class="st">"Sus_scrofa"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 14 × 24
     Year Country       Disease Parasite Host  Cases Deaths Destroyed Slaughtered
@@ -778,26 +818,26 @@ dbl (17): Year, Cases, Deaths, Destroyed, Slaughtered, SR, EvoIso, Taxonomic...
 </div>
 <section id="step-1-specify-the-likelihood-i.e.-the-distribution-of-the-data" class="level4" data-number="8.3.2.1">
 <h4 data-number="8.3.2.1" class="anchored" data-anchor-id="step-1-specify-the-likelihood-i.e.-the-distribution-of-the-data"><span class="header-section-number">8.3.2.1</span> Step 1: specify the likelihood (i.e., the distribution of the data)</h4>
-<p>What distribution makes sense to model the number of <em>Sus scrofa</em> deaths due to viruses in the family <em>Coronavirinae</em>? <strong>The Binomial!</strong> One can think of the number of (confirmed) cases of infection with a member of <em>Coronavirinae</em> as the “number of trials” and probability death as a “success probability” ($p$). Written out, <span class="math inline">\(\text{deaths}_{ij} \sim \text{Binomial}(\text{cases}_{ij}, p)\)</span> for each country-year <span class="math inline">\(ij\)</span>. We’re assuming that for each country + year, the number of deaths out of all the cases is is an independent draw from a binomial distribution with the same parameter <span class="math inline">\(p\)</span>.</p>
+<p>What distribution makes sense to model the number of <em>Sus scrofa</em> deaths due to viruses in the family <em>Coronavirinae</em>? <strong>The Binomial!</strong> One can think of the number of (confirmed) cases of infection with a member of <em>Coronavirinae</em> as the “number of trials” and probability death as a “success probability” (<span class="math inline">\(p\)</span>). Written out, <span class="math inline">\(\text{deaths}_{ij} \sim \text{Binomial}(\text{cases}_{ij}, p)\)</span> for each country-year <span class="math inline">\(ij\)</span>. We’re assuming that for each country + year, the number of deaths out of all the cases is is an independent draw from a binomial distribution with the same parameter <span class="math inline">\(p\)</span>.</p>
 </section>
 <section id="step-2-evaluate-the-likelihood-of-individual-observations" class="level4" data-number="8.3.2.2">
 <h4 data-number="8.3.2.2" class="anchored" data-anchor-id="step-2-evaluate-the-likelihood-of-individual-observations"><span class="header-section-number">8.3.2.2</span> Step 2: evaluate the likelihood of individual observations</h4>
 <p>Since we will need to evaluate the probability of <em>all</em> observations in order to estimate <span class="math inline">\(p\)</span>, the first thing to figure out to evaluate likelihood when we have only one observation (i.e., the first row of the previous data frame). The below function evaluate the probability there are exactly <span class="math inline">\(d\)</span> deaths when there are <span class="math inline">\(N\)</span> cases and a probability <span class="math inline">\(p\)</span> that a boar dies due to infection (somewhere, at some time) with a member of the <em>Coronavirinae</em>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's figure out the likelihood of a single observation -- the first row</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>cases <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data[<span class="dv">1</span>,<span class="st">"Cases"</span>])</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>deaths <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data[<span class="dv">1</span>,<span class="st">"Deaths"</span>])</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dbinom</span>(<span class="at">x =</span> deaths, <span class="at">size =</span> cases, <span class="at">p =</span> <span class="fl">0.1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's figure out the likelihood of a single observation -- the first row</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>cases <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data[<span class="dv">1</span>,<span class="st">"Cases"</span>])</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>deaths <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data[<span class="dv">1</span>,<span class="st">"Deaths"</span>])</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dbinom</span>(<span class="at">x =</span> deaths, <span class="at">size =</span> cases, <span class="at">p =</span> <span class="fl">0.1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4304672</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dbinom</span>(<span class="at">x =</span> deaths, <span class="at">size =</span> cases, <span class="at">p =</span> <span class="fl">0.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dbinom</span>(<span class="at">x =</span> deaths, <span class="at">size =</span> cases, <span class="at">p =</span> <span class="fl">0.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.00390625</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dbinom</span>(<span class="at">x =</span> deaths, <span class="at">size =</span> cases, <span class="at">p =</span> <span class="fl">0.9</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dbinom</span>(<span class="at">x =</span> deaths, <span class="at">size =</span> cases, <span class="at">p =</span> <span class="fl">0.9</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1e-08</code></pre>
 </div>
@@ -808,7 +848,7 @@ dbl (17): Year, Cases, Deaths, Destroyed, Slaughtered, SR, EvoIso, Taxonomic...
 <h4 data-number="8.3.2.3" class="anchored" data-anchor-id="step-3-evaluate-the-likelihood-of-all-observations"><span class="header-section-number">8.3.2.3</span> Step 3: evaluate the likelihood of <em>all</em> observations</h4>
 <p>To get a list of the likelihood at each observed combination of cases and deaths, we use the fact that <code>dbinom</code> can take vectors of parameters as inputs and return a vector of probabilities for reach corresponding element of the vectors</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="at">x =</span> data<span class="sc">$</span>Deaths, <span class="at">size =</span> data<span class="sc">$</span>Cases, <span class="at">p =</span> <span class="fl">0.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="at">x =</span> data<span class="sc">$</span>Deaths, <span class="at">size =</span> data<span class="sc">$</span>Cases, <span class="at">p =</span> <span class="fl">0.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 4.304672e-01 1.693764e-02 3.486784e-01 0.000000e+00 3.486784e-01
  [6] 1.000000e-06 7.274974e-08 5.904900e-01 9.000000e-01 1.596866e-07
@@ -820,7 +860,7 @@ dbl (17): Year, Cases, Deaths, Destroyed, Slaughtered, SR, EvoIso, Taxonomic...
 <h4 data-number="8.3.2.4" class="anchored" data-anchor-id="step-4-put-the-log-likelihoods-together"><span class="header-section-number">8.3.2.4</span> Step 4: put the (log-)likelihoods together!</h4>
 <p>We use the prod function to take the product of all the values in the vector of probabilities:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(<span class="fu">dbinom</span>(<span class="at">x =</span> data<span class="sc">$</span>Deaths, <span class="at">size =</span> data<span class="sc">$</span>Cases, <span class="at">p =</span> <span class="fl">0.2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prod</span>(<span class="fu">dbinom</span>(<span class="at">x =</span> data<span class="sc">$</span>Deaths, <span class="at">size =</span> data<span class="sc">$</span>Cases, <span class="at">p =</span> <span class="fl">0.2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -828,7 +868,7 @@ dbl (17): Year, Cases, Deaths, Destroyed, Slaughtered, SR, EvoIso, Taxonomic...
 <p>Uh oh! How can the probability of our data be zero when the probability of death in a case is 20%? Glancing at the data, it makes sense this could be an <em>unlikely</em> value, but it shouldn’t be zero.</p>
 <p>Unfortunately, numerical problems can arise when you take products of very small numbers (because there is a limit to how small of a number a computer can store in the regular format). For this reason, we often take the logarithm of the likelihood instead. Remember that the log of a value between zero and 1 will be a negative but large number. And, remember that the product of individual likelihoods (for each observation) = the sum of log-likelihoods</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dbinom</span>(<span class="at">x =</span> data<span class="sc">$</span>Deaths, <span class="at">size =</span> data<span class="sc">$</span>Cases, <span class="at">p =</span> <span class="fl">0.2</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dbinom</span>(<span class="at">x =</span> data<span class="sc">$</span>Deaths, <span class="at">size =</span> data<span class="sc">$</span>Cases, <span class="at">p =</span> <span class="fl">0.2</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1502.624</code></pre>
 </div>
@@ -839,22 +879,22 @@ dbl (17): Year, Cases, Deaths, Destroyed, Slaughtered, SR, EvoIso, Taxonomic...
 <p>So far, we have only evaluated the log-likelihood (of one and all of observations) at specific values of the parameter of interest, <span class="math inline">\(p\)</span>. To identify what value of <span class="math inline">\(p\)</span> is most likely to explain the data, we need to evaluate the log-likelihood across a RANGE of <span class="math inline">\(p\)</span> values and identify when the function is maximized.</p>
 <p>We can do this in a couple ways, but here is how using a for loop:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>p_values_to_test <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.001</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>LogLik <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(p_values_to_test))</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (p <span class="cf">in</span> p_values_to_test){</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  LogLik[index] <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dbinom</span>(<span class="at">x =</span> data<span class="sc">$</span>Deaths, <span class="at">size =</span> data<span class="sc">$</span>Cases, <span class="at">p =</span> p)))</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  index <span class="ot">&lt;-</span> index <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>LLs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(LogLik, <span class="at">p =</span> p_values_to_test)</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>LLs <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p, <span class="at">y =</span> LogLik)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>p_values_to_test <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.001</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>LogLik <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(p_values_to_test))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (p <span class="cf">in</span> p_values_to_test){</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  LogLik[index] <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dbinom</span>(<span class="at">x =</span> data<span class="sc">$</span>Deaths, <span class="at">size =</span> data<span class="sc">$</span>Cases, <span class="at">p =</span> p)))</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  index <span class="ot">&lt;-</span> index <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>LogLik <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(LogLik, <span class="at">p =</span> p_values_to_test)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>LogLik <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p, <span class="at">y =</span> LogLik)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec08-inference_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec08-inference_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -862,10 +902,10 @@ dbl (17): Year, Cases, Deaths, Destroyed, Slaughtered, SR, EvoIso, Taxonomic...
 <p>Values of <span class="math inline">\(p\)</span> where <span class="math inline">\(\ln L(p) - -\infty\)</span> are <em>very</em> unlikely to explain the data. Since we are interested in the value of <span class="math inline">\(p\)</span> which gives rise to the largest <span class="math inline">\(\ln L\)</span>, and these values are infinitely <em>negative</em>, they are not candidates for our estimator of <span class="math inline">\(p\)</span>. As a result, they are suppressed in the plot.</p>
 <p>Another thing to notice is the curvature of the likelihood function around the value where it assumes a maximum. This tells us something about how confident we should be about our “best guess” for the parameter, or the maximum likelihood estimate of that parameter. More on this later …</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>LLs <span class="sc">%&gt;%</span> <span class="fu">subset</span>(LogLik <span class="sc">==</span> <span class="fu">max</span>(LogLik))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>estimate_p <span class="ot">&lt;-</span> LogLik[LogLik<span class="sc">$</span>LogLik <span class="sc">==</span> <span class="fu">max</span>(LogLik<span class="sc">$</span>LogLik),<span class="st">"p"</span>]</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>estimate_p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       LogLik     p
-235 -1476.786 0.234</code></pre>
+<pre><code>[1] 0.234</code></pre>
 </div>
 </div>
 </section>
@@ -874,8 +914,8 @@ dbl (17): Year, Cases, Deaths, Destroyed, Slaughtered, SR, EvoIso, Taxonomic...
 <h3 data-number="8.3.3" class="anchored" data-anchor-id="case-study-2-comparing-sex-differences-with-permutations-tests"><span class="header-section-number">8.3.3</span> Case study 2: Comparing sex differences with permutations tests</h3>
 <p>In this example we are going to revisit a classic inference task that you have certainly seen in your introductory stats classes: asking if there is a significant difference between the mean of two populations. We’ll revisit our dataset from the Portal study (Lectures 3-5). We’re going to look for evidence of sex differences in weight. This study is useful because it measures the individual weights of every animals sampled.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#surveys &lt;- readr::read_csv("https://ndownloader.figshare.com/files/2292169")</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'data/portal_data.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#surveys &lt;- readr::read_csv("https://ndownloader.figshare.com/files/2292169")</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'data/portal_data.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 34786 Columns: 13
 ── Column specification ────────────────────────────────────────────────────────
@@ -889,7 +929,7 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 <p>Let’s look at which species might be a good candidate to choose for this analysis. We’ll start by filtering by species (keeping Genus information too), which suggests <em>Dipodomys merriami</em> (kangaroo rat) is most frequently observed</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(genus, species) <span class="sc">%&gt;%</span> <span class="fu">tally</span>() <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(genus, species) <span class="sc">%&gt;%</span> <span class="fu">tally</span>() <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 48 × 3
 # Groups:   genus [26]
@@ -910,12 +950,12 @@ dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
 </div>
 <p>And we can see at least some evidence of difference in weigh by sex here</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(genus, species, sex) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(weight)) <span class="sc">%&gt;%</span> <span class="co"># remove rows with NA in either</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_tot_species_sex=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># new column containing total observations per species</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_tot_species_sex<span class="sc">&gt;</span><span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(genus, species, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(genus, species, sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(weight)) <span class="sc">%&gt;%</span> <span class="co"># remove rows with NA in either</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_tot_species_sex=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># new column containing total observations per species</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_tot_species_sex<span class="sc">&gt;</span><span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(genus, species, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'genus', 'species'. You can override using
 the `.groups` argument.</code></pre>
@@ -940,28 +980,28 @@ the `.groups` argument.</code></pre>
 </div>
 <p>Let’s plot this!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>surveys_kr <span class="ot">&lt;-</span> surveys <span class="sc">%&gt;%</span> </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(genus <span class="sc">==</span> <span class="st">"Dipodomys"</span>, species <span class="sc">==</span> <span class="st">"merriami"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(weight)) <span class="co"># remove rows with NA in either</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>surveys_kr <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>weight, <span class="at">fill =</span> sex, <span class="at">y =</span> <span class="fu">after_stat</span>(density))) <span class="sc">+</span> </span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>surveys_kr <span class="ot">&lt;-</span> surveys <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(genus <span class="sc">==</span> <span class="st">"Dipodomys"</span>, species <span class="sc">==</span> <span class="st">"merriami"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(weight)) <span class="co"># remove rows with NA in either</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>surveys_kr <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>weight, <span class="at">fill =</span> sex, <span class="at">y =</span> <span class="fu">after_stat</span>(density))) <span class="sc">+</span> </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec08-inference_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec08-inference_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>And take a look at the difference in average weight by sex</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>surveys_kr <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>surveys_kr <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   sex   mean_weight     n
@@ -971,15 +1011,15 @@ the `.groups` argument.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>weight_diff <span class="ot">&lt;-</span> <span class="fu">mean</span>(surveys_kr[surveys_kr<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"M"</span>,]<span class="sc">$</span>weight) <span class="sc">-</span> <span class="fu">mean</span>(surveys_kr[surveys_kr<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"F"</span>,]<span class="sc">$</span>weight)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>weight_diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>weight_diff <span class="ot">&lt;-</span> <span class="fu">mean</span>(surveys_kr[surveys_kr<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"M"</span>,]<span class="sc">$</span>weight) <span class="sc">-</span> <span class="fu">mean</span>(surveys_kr[surveys_kr<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"F"</span>,]<span class="sc">$</span>weight)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>weight_diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.743449</code></pre>
 </div>
 </div>
 <p>Now we want to understand - is this difference more that we would expect by chance?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight <span class="sc">~</span> sex, <span class="at">data =</span> surveys_kr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight <span class="sc">~</span> sex, <span class="at">data =</span> surveys_kr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -996,128 +1036,32 @@ mean in group F mean in group M
 </div>
 <p>Another way!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>N_samples <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>test_weight_diff_samples <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,N)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N){</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  test_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> surveys_kr<span class="sc">$</span>weight) </span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  test_sample_male <span class="ot">&lt;-</span> test_sample[<span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>]</span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  test_sample_female <span class="ot">&lt;-</span> test_sample[<span class="dv">5000</span><span class="sc">:</span><span class="dv">10000</span>]</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>  test_weight_diff <span class="ot">&lt;-</span> <span class="fu">mean</span>(test_sample_male) <span class="sc">-</span> <span class="fu">mean</span>(test_sample_female)</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>  test_weight_diff_samples[i] <span class="ot">&lt;-</span> test_weight_diff</span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>N_samples <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>test_weight_diff_samples <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,N)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N){</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  test_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> surveys_kr<span class="sc">$</span>weight) </span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  test_sample_male <span class="ot">&lt;-</span> test_sample[<span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>]</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  test_sample_female <span class="ot">&lt;-</span> test_sample[<span class="dv">5000</span><span class="sc">:</span><span class="dv">10000</span>]</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  test_weight_diff <span class="ot">&lt;-</span> <span class="fu">mean</span>(test_sample_male) <span class="sc">-</span> <span class="fu">mean</span>(test_sample_female)</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  test_weight_diff_samples[i] <span class="ot">&lt;-</span> test_weight_diff</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">weight_diffs =</span> test_weight_diff_samples), <span class="fu">aes</span>(<span class="at">x =</span> weight_diffs)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> weight_diff, <span class="at">color =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">weight_diffs =</span> test_weight_diff_samples), <span class="fu">aes</span>(<span class="at">x =</span> weight_diffs)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> weight_diff, <span class="at">color =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec08-inference_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec08-inference_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="introduction-to-linear-regression" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="introduction-to-linear-regression"><span class="header-section-number">8.4</span> Introduction to linear regression</h2>
-<p>Let’s revisit our dataset on sexual size dimorphism across mammals that we first saw in Assignment 2. We want to examine the relationship between body length and body mass</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#mammal_sizes &lt;- readr::read_csv('https://eeb313.github.io/assignments/data/SSDinMammals.csv')</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>mammal_sizes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/SSDinMammals.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 691 Columns: 18
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr  (6): Order, Family, Species, Scientific_Name, Comments, Source
-dbl (12): massM, SDmassM, massF, SDmassF, lengthM, SDlengthM, lengthF, SDlen...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mammal_sizes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 18
-  Order       Family Species Scientific_Name massM SDmassM massF SDmassF lengthM
-  &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 Afrosorici… Chrys… Hotten… Amblysomus hot…  80.6    1.24  66      8.64      NA
-2 Afrosorici… Chrys… Namib … Eremitalpa gra…  28      6.7   23.1    3.6       NA
-3 Afrosorici… Tenre… Lesser… Echinops telfa… 102.    19.3   99.9   17.8       NA
-4 Afrosorici… Tenre… Large-… Geogale aurita    7.3    1.02   7      1.34      NA
-5 Afrosorici… Tenre… Highla… Hemicentetes n… 111     15.6   98      6.56      NA
-6 Afrosorici… Tenre… Lowlan… Hemicentetes s… 110.    16.7  108.    16.0       NA
-# ℹ 9 more variables: SDlengthM &lt;dbl&gt;, lengthF &lt;dbl&gt;, SDlengthF &lt;dbl&gt;,
-#   n_M &lt;dbl&gt;, n_F &lt;dbl&gt;, n_Mlength &lt;dbl&gt;, n_Flength &lt;dbl&gt;, Comments &lt;chr&gt;,
-#   Source &lt;chr&gt;</code></pre>
-</div>
-</div>
-<p>We’ll do some pre-processing to get the data ready to plot</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>mammal_length <span class="ot">&lt;-</span> mammal_sizes <span class="sc">%&gt;%</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"Order"</span>, <span class="st">"Scientific_Name"</span>, <span class="st">"lengthM"</span>, <span class="st">"lengthF"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(lengthM, lengthF), <span class="at">names_to =</span> <span class="st">"sex"</span>, <span class="at">values_to =</span> <span class="st">"length"</span>,</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span> <span class="st">"length(.)"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Scientific_Name, sex, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>mammal_mass <span class="ot">&lt;-</span> mammal_sizes <span class="sc">%&gt;%</span></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"Order"</span>, <span class="st">"Scientific_Name"</span>, <span class="st">"massM"</span>, <span class="st">"massF"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(massM, massF), <span class="at">names_to =</span> <span class="st">"sex"</span>, <span class="at">values_to =</span> <span class="st">"mass"</span>,</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span> <span class="st">"mass(.)"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Scientific_Name, sex, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="ot">&lt;-</span> <span class="fu">full_join</span>(mammal_length, mammal_mass, </span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>                         <span class="at">by =</span> <span class="fu">join_by</span>(<span class="st">"Order"</span>, <span class="st">"Scientific_Name"</span>, <span class="st">"sex"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Order <span class="sc">==</span> <span class="st">"Rodentia"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(length), <span class="at">y =</span> <span class="fu">log</span>(mass))) <span class="sc">+</span> </span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 256 rows containing missing values or values outside the scale range
-(`geom_point()`).</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="lec08-inference_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Other than a few outliers, there appears to be strong and linear trend between these variables! How can we estimate the scale of this relationships, and test whether this trend is significantly different from zero? Linear regression can help us with both!</p>
-<section id="linear-models-why-we-care" class="level3" data-number="8.4.1">
-<h3 data-number="8.4.1" class="anchored" data-anchor-id="linear-models-why-we-care"><span class="header-section-number">8.4.1</span> Linear models: why we care</h3>
-<p>Linear models are at the heart of statistical practice in the physical, life, and social sciences! Linear regression actually refers to a <em>family</em> of modeling approaches that attempt to learn how the mean and/or variance of a response variable <span class="math inline">\(\boldsymbol{y} = (y_1,\dots,y_n)\)</span> depend on (linear) combinations of variables <span class="math inline">\(\boldsymbol{x}_i = (x_{i1},\dots,x_{in})\)</span> called predictors. In this lecture and the subsequent ones, we will discuss various forms of the linear model and assumptions placed on the data to make estimation and inference of the relationships between variables tractable. Our goal will be to become familiar with how these models work – namely, how their parameters are inferred using maximum likelihood — and practice fitting them in R.</p>
-</section>
-</section>
-<section id="the-simple-linear-model" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="the-simple-linear-model"><span class="header-section-number">8.5</span> The simple linear model</h2>
-<p>The simple linear models describes how a response <span class="math inline">\(Y\)</span> depends on a contentious explanatory variable, <span class="math inline">\(x\)</span>, which is fixed. The model is</p>
-<p><span class="math display">\[Y \sim \text{Normal}(\beta_0 + \beta_1 x, \sigma^2).\]</span></p>
-<p>The notation “~” is used in statistics to mean that a random variable is drawn from a certain distribution. Below is a <em>visual</em> representation of how the data generative process for <span class="math inline">\(Y\)</span> is modeled. Here, we are saying that at each <span class="math inline">\(x\)</span>, <span class="math inline">\(Y\)</span> is Normally-distributed with a mean that depends on the explanatory variable and the model parameters ($ = _0 + _1 x$)), and fixed variance <span class="math inline">\(\sigma^2\)</span> (i.e., changing <span class="math inline">\(x\)</span> does not change the variance in the observed response). The variance could be due to measurement error or other sources of variation in the variable <span class="math inline">\(Y\)</span> that are not explained by the paired <span class="math inline">\(x\)</span> value.</p>
-<p><img src="figures/regression.jpg" class="img-fluid"></p>
-<p>In turn, this specifies what the likelihood function is for the data <span class="math inline">\((y_1,x_1),\dots,(y_n,x_n)\)</span>. (As usual, we assume the <span class="math inline">\(y\)</span>s are independent.) <strong>Fitting a linear regression model is actually just a maximum likelihood problem!</strong> The result of fitting a regression model is a maximum likelihood estimation of the parameters <span class="math inline">\(\beta_0, \beta_1\)</span> and <span class="math inline">\(\sigma\)</span> . For ordinary linear regression, it turns out that you can actually find the maximum likelihood values with pen and paper math (calculus!), instead of having to search over a range of values like we’ve been doing, but for more advanced models, numerical optimization procedures are used to efficiently search for the combination of parameters that leads to the maximum likelihood.</p>
-<section id="challenge-2" class="level3" data-number="8.5.1">
-<h3 data-number="8.5.1" class="anchored" data-anchor-id="challenge-2"><span class="header-section-number">8.5.1</span> Challenge</h3>
-<ol type="1">
-<li><p>What assumptions are we making about the data when we fit simple linear model? What must be true of the data? Discuss.</p></li>
-<li><p>Write the form of the likelihood <span class="math inline">\(L(\beta_0,\beta_1,\sigma^2|\boldsymbol{x}_i,\boldsymbol{y}_i)\)</span>. Recall that the probability distribution of the <span class="math inline">\(Normal(\mu,\sigma^2)\)</span> distribution is</p></li>
-</ol>
-<p><span class="math display">\[\frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(y-\mu)^2/2\sigma^2}.\]</span></p>
-<p><em>Hint: notice how, in the regression model, the mean value of the response is</em> <span class="math inline">\(\beta_0 + \beta_1 x.\)</span></p>
-<ol start="3" type="1">
-<li><p>Use the <code>dnorm</code> function to calculate the likelihood of observing a value Y = 10 paired with X = 5 when <span class="math inline">\(\beta_0 = 0.5\)</span> and <span class="math inline">\(\beta_0 = 2\)</span> and <span class="math inline">\(\sigma = 1\)</span></p></li>
-<li><p>Suppose we think <span class="math inline">\(Y\)</span> is not normally distributed (and constant variance <span class="math inline">\(\sigma^2\)</span>), but that it’s logarithm (or, say, square root) is. How might we adjust the model to account for this?</p></li>
-</ol>
-</section>
-<section id="section" class="level3" data-number="8.5.2">
-<h3 data-number="8.5.2" class="anchored" data-anchor-id="section"><span class="header-section-number">8.5.2</span> </h3>
 
 
 </section>

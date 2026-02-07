@@ -423,7 +423,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec08-inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical inference and linear models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability, likelihood, and statistical inference</span></span></a>
   </div>
 </li>
       </ul>
@@ -453,6 +453,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../assignments/assignment-03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 3: Advanced data wrangling and visualization (8 marks)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 4: Random variables, likelihood, and inference</span></a>
   </div>
 </li>
       </ul>
@@ -615,7 +621,7 @@ window.Quarto = {
 <h3 id="learning-objectives" data-number="7.1.1" class="anchored"><span class="header-section-number">7.1.1</span> Learning Objectives</h3>
 <ul>
 <li>Understand how the concept of random samples forms the foundation of statistical inference</li>
-<li>Draw random numbers using sample, rbinom, and other distributions</li>
+<li>Draw random numbers using <code>sample</code>, <code>rbinom</code>, and other distributions</li>
 <li>Calculate statistics on random samples</li>
 <li>Conduct simple hypothesis tests</li>
 <li>Do simple maximum likelihood estimation</li>
@@ -642,7 +648,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "tails"</code></pre>
+<pre><code>[1] "heads"</code></pre>
 </div>
 </div>
 <p>Note that in cases where we want the probability of each outcome to be the same, we can omit the <code>prob</code> argument.</p>
@@ -654,11 +660,11 @@ window.Quarto = {
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">size =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "heads"</code></pre>
+<pre><code>[1] "tails"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">size =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "tails"</code></pre>
+<pre><code>[1] "heads"</code></pre>
 </div>
 </div>
 <p>Unlike any other calculation we’ve every done in R, every time we run this we can get something different! Just like a real-life coin flip.</p>
@@ -666,7 +672,7 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">size =</span> <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "heads" "heads"</code></pre>
+<pre><code>[1] "heads" "tails"</code></pre>
 </div>
 </div>
 <p>Note that we’ve set <code>replace = TRUE</code>, which means that when the first sample is drawn from the set of options (“heads”, “tails”), it is not “removed” from the options available when the second number is chosen. There are other situations when we might be taking a random sample from a set and want <code>replace = FALSE</code>. For example, if we’re randomly choosing the batting order for a baseball team or if we’re choosing in which order to visit a set of locations to collect data.</p>
@@ -678,80 +684,100 @@ window.Quarto = {
 <li><p>choose a random order in which to visit the countries of Thailand, Cambodia, and Vietnam on your next trip</p></li>
 <li><p>the distribution of males and females in a sample of size 10, when the sex ratio in the population is known to be 1.5 males: 1 female</p></li>
 </ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 5 2 1 1 4 3 3 4 1 4</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">"Thailand"</span>,<span class="st">"Cambodia"</span>, <span class="st">"Vietnam"</span>), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cambodia" "Thailand" "Vietnam" </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">sample</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">"males"</span>,<span class="st">"females"</span>), <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.6</span>,<span class="fl">0.4</span>), <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+females   males 
+      3       7 </code></pre>
+</div>
+</div>
 </section>
 </section>
 <section id="drawing-repeated-samples-from-probability-distributions" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="drawing-repeated-samples-from-probability-distributions"><span class="header-section-number">7.4</span> Drawing repeated samples from probability distributions</h2>
 <p>Now let’s think about if we wanted to simulate even more coin flips … like 10, or 100, or 1000! We can certainly do this with the same method:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>coin_flip <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">size =</span> <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(coin_flip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>coin_flip <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"heads"</span>, <span class="st">"tails"</span>), <span class="at">size =</span> <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(coin_flip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] "tails" "tails" "tails" "tails" "heads" "heads" "tails" "tails" "heads"
- [10] "tails" "heads" "tails" "heads" "tails" "heads" "heads" "tails" "heads"
- [19] "tails" "tails" "tails" "tails" "heads" "heads" "heads" "tails" "heads"
- [28] "tails" "tails" "tails" "tails" "tails" "tails" "heads" "tails" "heads"
- [37] "heads" "heads" "tails" "tails" "heads" "heads" "tails" "tails" "heads"
- [46] "heads" "tails" "tails" "heads" "tails" "tails" "tails" "tails" "heads"
- [55] "heads" "heads" "tails" "heads" "tails" "heads" "tails" "tails" "heads"
- [64] "heads" "tails" "heads" "tails" "tails" "tails" "heads" "heads" "heads"
- [73] "tails" "tails" "heads" "tails" "tails" "heads" "heads" "tails" "heads"
- [82] "tails" "heads" "tails" "heads" "heads" "tails" "tails" "heads" "tails"
- [91] "tails" "tails" "heads" "tails" "tails" "tails" "heads" "tails" "heads"
-[100] "heads"</code></pre>
+<pre><code>  [1] "heads" "heads" "heads" "tails" "heads" "tails" "tails" "heads" "tails"
+ [10] "heads" "tails" "tails" "heads" "heads" "tails" "tails" "tails" "tails"
+ [19] "tails" "tails" "heads" "tails" "heads" "heads" "heads" "tails" "tails"
+ [28] "heads" "tails" "heads" "tails" "heads" "tails" "tails" "tails" "heads"
+ [37] "heads" "heads" "tails" "heads" "tails" "heads" "heads" "heads" "heads"
+ [46] "heads" "tails" "heads" "heads" "tails" "heads" "heads" "heads" "tails"
+ [55] "tails" "tails" "tails" "tails" "tails" "heads" "tails" "heads" "tails"
+ [64] "heads" "tails" "heads" "heads" "heads" "tails" "heads" "heads" "heads"
+ [73] "tails" "heads" "heads" "tails" "tails" "heads" "tails" "heads" "tails"
+ [82] "tails" "tails" "tails" "heads" "heads" "heads" "heads" "tails" "tails"
+ [91] "heads" "heads" "heads" "tails" "heads" "heads" "tails" "heads" "tails"
+[100] "tails"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(coin_flip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(coin_flip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>coin_flip
 heads tails 
-   44    56 </code></pre>
+   52    48 </code></pre>
 </div>
 </div>
 <p>And we can calculate some statistics based on these outcomes, like “<em>what proportion of times did we get heads?</em>”</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(coin_flip <span class="sc">==</span> <span class="st">"heads"</span>)<span class="sc">/</span><span class="fu">length</span>(coin_flip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(coin_flip <span class="sc">==</span> <span class="st">"heads"</span>)<span class="sc">/</span><span class="fu">length</span>(coin_flip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.44</code></pre>
+<pre><code>[1] 0.52</code></pre>
 </div>
 </div>
 <p>However, this is not really a very efficient or generalization way of sampling binary outcomes. We probably don’t actually care about the entire ordered sequence of {“heads”, “tails”} outcomes. Most of the time we’re probably only interested in the <strong>number of heads</strong> vs the <strong>number of tails</strong> (i.e., the proportion of one vs the other). There is actually a way we can <u>sample this result directly</u>!</p>
 <p>To do so, we need a quick refresher on the formal names statisticians give to the <strong>probability distributions</strong> that result from some of the most common random experiments that scientists like to think about. A probability distribution is simply the formal <u>mathematical description of the set of possible outcomes of a random process and each of their probabilities</u>. A coin flip is an example of a <strong>Bernoulli trial</strong> - any random experiment that asks a yes/no question or has any other binary outcome. The result of such an experiment is said to follow a <strong>Bernoulli distribution</strong>. It’s a bit more general than the coin flip, as the probability of a “yes” outcome or a “success” (e.g., a heads) doesn’t need to be 0.5 but can be any number between 0 and 1.</p>
 <p>The outcome of <em>multiple</em> Bernoulli trials (i.e., repeated coin flips) can be described by a <strong>binomial distribution</strong>, which gives the probability of getting a certain number of “successes” (i.e., heads) after doing a certain number of iterations (i.e., coin flips). So, to generate a random number describing the number of heads we land after flipping a coin 100 times, we can use the function <code>rbinom()</code> (the <em>r</em>andom number generator for the <em>binom</em>ial distribution):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 50</code></pre>
+<pre><code>[1] 46</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># n: how many times to repeat all the trials</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># size: how many trials to do </span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># prob: chance of success in each trial</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># n: how many times to repeat all the trials</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># size: how many trials to do </span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># prob: chance of success in each trial</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Run this cell a few more times, and see that you get a different answer each time.</p>
 <p>Now, let’s set up a loop to repeat this 10-flip experiment 100 times, and make a plot to see how much the outcomes vary</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>binom_samples <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>binom_samples</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>binom_samples <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>binom_samples</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 4 4 5 5 6 6 5 4 3 4 4 6 4 5 5 8 3 6 4 5 4 5 8 4 4 4 5 5 7 3 6 6 4 5 4 3 5
- [38] 6 5 7 3 3 6 8 3 5 5 6 4 2 6 3 5 6 6 3 5 4 6 1 5 5 2 6 4 5 3 6 8 4 7 7 5 7
- [75] 5 3 5 5 5 4 4 6 5 4 5 3 1 4 4 5 4 5 4 7 6 2 6 7 5 4</code></pre>
+<pre><code>  [1] 6 3 1 5 6 7 3 5 6 5 4 3 6 6 5 5 3 7 4 6 6 7 7 5 5 3 4 6 8 3 5 5 5 3 7 6 7
+ [38] 5 2 4 6 6 6 4 4 4 4 4 2 3 7 8 8 5 6 5 5 5 5 8 6 6 2 6 5 8 3 5 8 6 3 5 8 6
+ [75] 4 5 5 4 5 6 4 6 5 5 5 3 5 5 6 4 7 3 4 7 5 7 7 4 3 3</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(binom_samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(binom_samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.78</code></pre>
+<pre><code>[1] 5.08</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">value =</span> binom_samples) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span> </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">center =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> </span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="dv">5</span>),<span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">11</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">10.5</span>)) <span class="sc">+</span> </span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of heads"</span>) <span class="sc">+</span> </span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">value =</span> binom_samples) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">center =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="dv">5</span>),<span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">11</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">10.5</span>)) <span class="sc">+</span> </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of heads"</span>) <span class="sc">+</span> </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -764,16 +790,39 @@ heads tails
 <h3 data-number="7.4.1" class="anchored" data-anchor-id="challenge-question"><span class="header-section-number">7.4.1</span> Challenge question</h3>
 <ol type="1">
 <li>Regenerate this histogram but assuming 1000 trials were done. What do you notice about the change in the graph?</li>
-<li>Imagine you flipped a coin 10 times and 8 of these times you got heads. Your friend insists this result means that the coin you are using must be biased towards heads or that you are controlling the flip to preferentially land on heads. What would you say in response to this? How could you quantify this argument? (<em>Hint: How cean you quantify exactly how likely an outcome this extreme would be with an unweighted coin?</em>)</li>
+<li>Imagine you flipped a coin 10 times and 8 of these times you got heads. Your friend insists this result means that the coin you are using must be biased towards heads or that you are controlling the flip to preferentially land on heads. What would you say in response to this? How could you quantify this argument? (<em>Hint: How can you quantify exactly how likely an outcome this extreme would be with an unweighted coin?</em>)</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(binom_samples_more))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>binom_samples_more <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">value =</span> binom_samples_more) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">center =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="dv">5</span>),<span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">11</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">10.5</span>)) <span class="sc">+</span> </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of heads"</span>) <span class="sc">+</span> </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec07-random-variables_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(binom_samples_more <span class="sc">==</span> <span class="dv">8</span>)<span class="sc">/</span><span class="fu">length</span>(binom_samples_more)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.036</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In the above sample of 1000 repeats of 10 flips each, we see that about 5% of the time we get 8 heads. This is rare, but not THAT rare</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(binom_samples_more))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>binom_samples_more
-    0     1     2     3     4     5     6     7     8     9    10 
-0.001 0.010 0.037 0.130 0.198 0.267 0.198 0.113 0.041 0.003 0.002 </code></pre>
+    0     1     2     3     4     5     6     7     8     9 
+0.001 0.010 0.048 0.126 0.214 0.240 0.212 0.104 0.036 0.009 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In the above sample of 1000 repeats of 10 flips each, we see that about 6% of the time we get 8 or more heads. This is rare, but not THAT rare</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In the above sample of 1000 repeats of 10 flips each, we see that about 6% of the time we get 8 or more heads. This is rare, but not THAT rare</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -782,26 +831,26 @@ heads tails
 <p>Let’s make a plot to explicitly see how our distribution of outcomes changes as we do more and more trials:</p>
 <p>(make facet plot with different trial sizes and a few iterations of each?)</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>binom_samples_10 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>binom_samples_100 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>binom_samples_1000 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>binom_samples_10000 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">10000</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>binom.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">value =</span> binom_samples_10, <span class="at">sample_size =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">data.frame</span>(<span class="at">value =</span> binom_samples_100, <span class="at">sample_size =</span> <span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">data.frame</span>(<span class="at">value =</span> binom_samples_1000, <span class="at">sample_size =</span> <span class="dv">1000</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">data.frame</span>(<span class="at">value =</span> binom_samples_10000, <span class="at">sample_size =</span> <span class="dv">10000</span>)) </span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>plot.binom <span class="ot">&lt;-</span> binom.df <span class="sc">%&gt;%</span> </span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span> </span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">center =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>,<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density))) <span class="sc">+</span> </span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="dv">5</span>),<span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">11</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">10.5</span>)) <span class="sc">+</span> </span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of heads"</span>) <span class="sc">+</span> </span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sample_size)</span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>plot.binom</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>binom_samples_10 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>binom_samples_100 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>binom_samples_1000 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>binom_samples_10000 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">10000</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>binom.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">value =</span> binom_samples_10, <span class="at">sample_size =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">data.frame</span>(<span class="at">value =</span> binom_samples_100, <span class="at">sample_size =</span> <span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">data.frame</span>(<span class="at">value =</span> binom_samples_1000, <span class="at">sample_size =</span> <span class="dv">1000</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="fu">data.frame</span>(<span class="at">value =</span> binom_samples_10000, <span class="at">sample_size =</span> <span class="dv">10000</span>)) </span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>plot.binom <span class="ot">&lt;-</span> binom.df <span class="sc">%&gt;%</span> </span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span> </span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">center =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>,<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density))) <span class="sc">+</span> </span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="dv">5</span>),<span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">11</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">10.5</span>)) <span class="sc">+</span> </span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of heads"</span>) <span class="sc">+</span> </span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sample_size)</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>plot.binom</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -824,10 +873,10 @@ heads tails
 <p>Note that for any random/stochastic process, the PMF always exists, though it might not always have a nice mathematical representation. For random processes that generate <em>continuous random variables</em> (e.g., choosing any number between 0 and 1, or sampling from a normal distribution), the name for the probability distribution is instead the probability density function (“PDF”). We’ll get to examples of continuous random variables later.</p>
 <p>Here we can plot it along with our simulated distributions, by using the built-in R function for the binomial probability distribution (<code>dbinom</code>) :</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>binom.pmf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">freq =</span> <span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>))</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>plot.binom <span class="sc">+</span> </span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> binom.pmf, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y =</span> freq), <span class="at">color =</span> <span class="st">"blue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>binom.pmf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">freq =</span> <span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>))</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>plot.binom <span class="sc">+</span> </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> binom.pmf, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y =</span> freq), <span class="at">color =</span> <span class="st">"blue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -838,7 +887,7 @@ heads tails
 </div>
 <p>The probability distribution is useful because it allows us to directly calculate the long-term probability of a given outcome, without simulation. For example, if we were to keep repeating our experiment of flipping a coin 10 times and counting up the heads, what would be the proportion of times we landed 8 heads? Using the built-in function for the probability distribution for the binomial, <code>dbinom</code> :</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">8</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">8</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.04394531</code></pre>
 </div>
@@ -847,13 +896,13 @@ heads tails
 </section>
 <section id="hypothesis-testing" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">7.6</span> Hypothesis testing</h2>
-<p>With the simple tools we have now and using the sunoke binomial distribution, we can already show how we can do formal statistical inference just using simulations.</p>
-<p>Suppose we want to conduct an experiment to <u>test if our coin is unweighted</u> (vs biased towards one side or the other). Formally, we want to test the null hypothesis that the probability of heads is 50% (vs an alternative hypothesis that the coin is biased towards heads). To do this, we conduct an experiment where we flip our coin 100 times. Let’s imagine that the result of this experiment is that we get 66 tails. This is our <em>data</em>.</p>
+<p>With the simple tools we have now and using the binomial distribution, we can already show how we can do formal statistical inference just using simulations.</p>
+<p>Suppose we want to conduct an experiment to <u>test if our coin is unweighted</u> (vs biased towards one side or the other). Formally, we want to test the null hypothesis that the probability of heads is 50% (vs an alternative hypothesis that the coin is biased towards heads). To do this, we conduct an experiment where we flip our coin 100 times. Let’s imagine that the result of this experiment is that we get 66 heads. This is our <em>data</em>.</p>
 <p>Testing the null hypothesis means we have to ask, “<em>How likely would I be to observe an outcome like my data if the null hypothesis were true?</em>”, or more specifically, “<em>How likely would I be to observe 66 heads out of 100 coin flips for an unweighted coin”</em>?. If our observed data is very unlikely under the null hypothesis, then we would reject it, and say it doesn’t explain the data well.</p>
 <p>Before we calculate anything, we should decide what we mean by “very unlikely”. Less than 10% of the time? Less than 1%? Less than 0.00001%? This level of critical “unlikeliness” is called the <strong>significance level</strong>, and is usually referred to with the symbol <span class="math inline">\(\alpha\)</span>. For (somewhat arbitrary) historical reasons, a value of <span class="math inline">\(\alpha\)</span> = 0.05 (5%) is typically used, meaning that we reject a null hypothesis if the likelihood of generating data like ours if that hypothesis were true would be less than 5%.</p>
 <p>Now that we have our cut-off level of “unlikeliness” defined, we have to calculate <u>how likely our observed data is under the null hypothesis.</u> This will be our <strong>p value</strong>! We can do this in two ways. Since we have a probability mass function for the random process that describes how this data was generated, we can simply calculate the probability</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">66</span>, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">66</span>, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0004581053</code></pre>
 </div>
@@ -861,9 +910,9 @@ heads tails
 <p>This means that under the null hypothesis that the coin is unweighted, there’s about a 0.045% chance of getting exactly 66 heads out of 100 flips. However, note that for hypothesis testing we don’t typically want to look at just the probability of getting <em>exactly</em> our observed result. We want to look at getting a results <em>at least as extreme</em> as our observed result, since any such result would provide evidence against the null hypothesis.</p>
 <p>For the binomial distribution, we can calculate the probability of getting a value of 66 or higher by using the <strong>cumulative distribution function</strong> for the binomial. The cumulative distribution functions tell us the probability of getting the value <span class="math inline">\(X\)</span> <strong>or lower</strong>, so instead we have to find the probability of an outcome of 65 or lower and then subtract this from one to get the remainder:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pbinom(q = 66, size=100, prob=0.5) # probability of 66 or lower</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pbinom(q = 65, size=100, prob=0.5) # probability of 65 or lower</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span> <span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">65</span>, <span class="at">size=</span><span class="dv">100</span>, <span class="at">prob=</span><span class="fl">0.5</span>) <span class="co"># probability of over 65, ie prob of 66 or higher</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pbinom(q = 66, size=100, prob=0.5) # probability of 66 or lower</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pbinom(q = 65, size=100, prob=0.5) # probability of 65 or lower</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span> <span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">65</span>, <span class="at">size=</span><span class="dv">100</span>, <span class="at">prob=</span><span class="fl">0.5</span>) <span class="co"># probability of over 65, ie prob of 66 or higher</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0008949652</code></pre>
 </div>
@@ -871,11 +920,11 @@ heads tails
 <p>Under the null hypothesis that the coin is unweighted, there’s about a 0.09% chance of getting at least 66 heads out of 100 flips, so <strong>p = 0.0009</strong> for this test. Since we’ve already defined out significance level as 5%, we would say we have sufficient evidence to <strong>reject the null hypothesis</strong> that the coin is unweighted, and instead we can conclude that there is statistically-significant evidence that the coin is weighted.</p>
 <p>Note that even if we didn’t know the mathematical formula for the probability mass function, we wouldn’t be out of luck! As long as we can simulate the process, we can still estimate the p value. Let’s simulate our exact experiment, but under the null hypothesis, and lets do this many times. So, let’s flip an unweighted coin 100 times, record the results, and repeat this 100,000 times. Then let’s calculate what % of the time we got at least 66</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>n_trials <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">5</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>binom.null <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> n_trials, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(binom.null <span class="sc">&gt;=</span><span class="dv">66</span>)<span class="sc">/</span>n_trials</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>n_trials <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">5</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>binom.null <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="at">n =</span> n_trials, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(binom.null <span class="sc">&gt;=</span><span class="dv">66</span>)<span class="sc">/</span>n_trials</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.00089</code></pre>
+<pre><code>[1] 0.00108</code></pre>
 </div>
 </div>
 <p>Now we have again have p = 0.0009!</p>
@@ -883,6 +932,13 @@ heads tails
 <section id="challenge-1" class="level3" data-number="7.6.1">
 <h3 data-number="7.6.1" class="anchored" data-anchor-id="challenge-1"><span class="header-section-number">7.6.1</span> Challenge</h3>
 <p>Now that we feel confident rejecting the null hypothesis of an unweighted coin, let’s say we wanted to test a different hypothesis - for example, that instead of choosing the unweighted coin, we picked one up that had a 70% probability of giving heads. Under this new hypothesis, what is the p value? (ie, the probability of observing at least 66 heads)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span> <span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">65</span>, <span class="at">size=</span><span class="dv">100</span>, <span class="at">prob=</span><span class="fl">0.7</span>) <span class="co"># probability of over 65, ie prob of 66 or higher</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8371417</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We would say "with our observed data (66/100 heads) we fail to reject the null hypothesis that our coin is weighted 70% towards heads, with a p value of 0.83 (vs a significance level of 0.05)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 </section>
 <section id="maximum-likelihood-estimation" class="level2" data-number="7.7">
@@ -893,8 +949,47 @@ heads tails
 <h3 data-number="7.7.1" class="anchored" data-anchor-id="challenge-2"><span class="header-section-number">7.7.1</span> Challenge</h3>
 <ol type="1">
 <li>Write a function that takes in the observed number of heads (<code>heads_observed</code>) for a given number of coin flips (<code>n_flips</code>), along with a potential propensity for the coin to give heads (<code>weight</code>), and return now likely the observed data would be under that coin weight. Test it for a coin weight of 0.7</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>likelihood_vs_coin_weight <span class="ot">&lt;-</span> <span class="cf">function</span>(heads_observed, n_flips, weight){</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dbinom</span>(<span class="at">x =</span> heads_observed, <span class="at">size =</span> n_flips, <span class="at">prob =</span> weight)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">likelihood_vs_coin_weight</span>(<span class="dv">63</span>, <span class="dv">100</span>, <span class="fl">0.7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02683446</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
 <li>Use this function to consider a range of weights between 0 and 1 and generate a data frame with the columns <code>weights</code> and <code>likelihood</code>. and plot the likelihood of the data vs the true coin weight. What is the most likely coin weight?</li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>heads_observed <span class="ot">&lt;-</span> <span class="dv">63</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>n_flips <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>test_weights <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.01</span>)</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>lik.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">weight =</span> test_weights, <span class="at">likelihood =</span> <span class="fu">likelihood_vs_coin_weight</span>(heads_observed, n_flips, test_weights))</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>lik.df <span class="sc">%&gt;%</span> </span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> likelihood)) <span class="sc">+</span> </span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Coin weight (prob. of heads)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec07-random-variables_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#max</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>lik.df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(likelihood <span class="sc">==</span> <span class="fu">max</span>(likelihood))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  weight likelihood
+1   0.63 0.08240399</code></pre>
+</div>
+</div>
 <p>When you complete this, you will have just done your first maximum likelihood estimation!</p>
 <p>Let’s review the idea of likelihood! We have a set of data points &nbsp;<span class="math inline">\(x_1,x_2,\dots,x_n\)</span> that we assume were generated by a random process with probability distribution <span class="math inline">\(f(x|\theta)\)</span>, where <span class="math inline">\(\theta\)</span> is one or more parameters of that distribution. Our goal is to to estimate <span class="math inline">\(\theta\)</span>, i.e., to determine what value of the parameters were mostly likely to have given rise to the data. We do this by maximizing the likelihood function</p>
 <p><span class="math display">\[L(x_1,\dots,x_n|\theta) = f(x_1|\theta) \cdots f(x_n|\theta) = \prod_{i=1}^n f(x_i|\theta),\]</span></p>
@@ -1334,8 +1429,8 @@ heads tails
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lectures/lec08-inference.html" class="pagination-link" aria-label="Statistical inference and linear models">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical inference and linear models</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/lec08-inference.html" class="pagination-link" aria-label="Probability, likelihood, and statistical inference">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability, likelihood, and statistical inference</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Assignment 3: Advanced data wrangling and visualization (8 marks) – EEB313: Quantitative Methods in R for Biology</title>
+<title>Assignment 4: Random variables, likelihood, and inference – EEB313: Quantitative Methods in R for Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-04.html" rel="next">
-<link href="../assignments/assignment-02.html" rel="prev">
+<link href="../lectures/data/portal_data.csv" rel="next">
+<link href="../assignments/assignment-03.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -75,6 +110,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -258,7 +322,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-03.html">Assignment 3: Advanced data wrangling and visualization (8 marks)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-04.html">Assignment 4: Random variables, likelihood, and inference</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -387,13 +451,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/assignment-03.html" class="sidebar-item-text sidebar-link active">
+  <a href="../assignments/assignment-03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 3: Advanced data wrangling and visualization (8 marks)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/assignment-04.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/assignment-04.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Assignment 4: Random variables, likelihood, and inference</span></a>
   </div>
 </li>
@@ -506,9 +570,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#read-in-and-pre-process-plant-biomass-data-1.75-marks" id="toc-read-in-and-pre-process-plant-biomass-data-1.75-marks" class="nav-link active" data-scroll-target="#read-in-and-pre-process-plant-biomass-data-1.75-marks">1. Read in and pre-process plant biomass data (1.75 marks)</a></li>
-  <li><a href="#wrangling-plant-biomass-with-dplyr-3-marks" id="toc-wrangling-plant-biomass-with-dplyr-3-marks" class="nav-link" data-scroll-target="#wrangling-plant-biomass-with-dplyr-3-marks">2. Wrangling plant biomass with dplyr (3 marks)</a></li>
-  <li><a href="#visualising-plant-biomass-3.25-marks" id="toc-visualising-plant-biomass-3.25-marks" class="nav-link" data-scroll-target="#visualising-plant-biomass-3.25-marks">3. Visualising plant biomass (3.25 marks)</a></li>
+  <li><a href="#simulating-genomic-mutations-2.5-marks" id="toc-simulating-genomic-mutations-2.5-marks" class="nav-link active" data-scroll-target="#simulating-genomic-mutations-2.5-marks">1. Simulating genomic mutations (2.5 marks)</a></li>
+  <li><a href="#generating-sampling-distributions-1.5-pts" id="toc-generating-sampling-distributions-1.5-pts" class="nav-link" data-scroll-target="#generating-sampling-distributions-1.5-pts">2. Generating sampling distributions (1.5 pts)</a></li>
+  <li><a href="#probability-distributions-and-likelihood-1-mark" id="toc-probability-distributions-and-likelihood-1-mark" class="nav-link" data-scroll-target="#probability-distributions-and-likelihood-1-mark">3. Probability distributions and likelihood (1 mark)</a></li>
+  <li><a href="#maximum-likelihood-estimation-for-binomial-probabilities-3-marks" id="toc-maximum-likelihood-estimation-for-binomial-probabilities-3-marks" class="nav-link" data-scroll-target="#maximum-likelihood-estimation-for-binomial-probabilities-3-marks">4. Maximum likelihood estimation for binomial probabilities (3 marks)</a></li>
   </ul>
 </nav>
     </div>
@@ -516,9 +581,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-03.html">Assignment 3: Advanced data wrangling and visualization (8 marks)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-04.html">Assignment 4: Random variables, likelihood, and inference</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignment 3: Advanced data wrangling and visualization (8 marks)</h1>
+<h1 class="title">Assignment 4: Random variables, likelihood, and inference</h1>
 </div>
 
 
@@ -535,48 +600,116 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Download the .Rmd file <a href="assignment-03.Rmd">here</a>.</p>
+<p>Download the .Rmd file <a href="https://eeb313.github.io/assignments/assignment-03.Rmd">here</a>.</p>
 <p><em>To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>. Please ensure the text on your .pdf does not continue past the end of the page.</em></p>
-<p>Review: Before the assignment, review the data manipulation and plotting functions learned in class, such as <code>read_csv</code>, <code>filter</code>, <code>select</code>, <code>mutate</code>, <code>arrange</code>, <code>head</code>, <code>group_by</code>, <code>summarize</code>, <code>tally, pivot_longer</code>, <code>pivot_wider</code>, <code>ggplot</code>, <code>geom_line</code>, <code>geom_point</code>, <code>labs</code>, <code>theme</code></p>
-<section id="read-in-and-pre-process-plant-biomass-data-1.75-marks" class="level2">
-<h2 class="anchored" data-anchor-id="read-in-and-pre-process-plant-biomass-data-1.75-marks">1. Read in and pre-process plant biomass data (1.75 marks)</h2>
-<p>You will apply your data wrangling skills on the yearly change in biomass of plants in the <a href="https://en.wikipedia.org/wiki/Abisko_National_Park">beautiful Abisko national park in northern Sweden</a>. We have preprocessed this data and made it available as a <a href="https://eeb313.github.io/assignments/data/plant-biomass-preprocess.csv">csv file via this link</a>. You can find the original data on <a href="https://datadryad.org/resource/doi:10.5061/dryad.38s21">Dryad</a>, and the full-text of the original study<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> in this <a href="https://eeb313.github.io/assignments/papers/plant-biomass-paper.pdf">pdf</a>. Reading through the study abstract will increase your understanding for working with the data.</p>
-<p>a. Import the data directly into R from the provided URL, assign it to a variable called <code>plant_biomass</code>, and display the first six rows. (0.25 mark)</p>
-<p>b. Convert the Latin column names into their common English names: lingonberry, bilberry, bog bilberry, dwarf birch, crowberry, and wavy hair grass. After this, display all column names. (0.25 marks)</p>
-<p><em>Hint: Read the documentation on the <code>dplyr</code> function <code>rename</code>. Search online to find out which Latin and English names pair up.</em></p>
-<p>c. This is a <em>wide</em> data frame (species make up the column names). A <em>long</em> format is easier to analyze, so gather the species names into one column (<code>species</code>) and the measurement values into another column (<code>biomass</code>). Keep all other columns. Assign it to the variable <code>plant_biomass_long</code>, and show a preview of this new data frame (0.5 marks)</p>
-<p>d. Describe how the dimensions of the data frame have change between <code>plant_biomass</code> and <code>plant_biomass_long</code> . In this example, which format is more efficient in terms of the memory used to store the data? For the less efficient format, what is one potential benefit of this format that might make it worth the extra storage space required? (0.25 marks)</p>
-<p>e. Recreate the wide data frame (species names as columns again) by pivoting it from your <code>plant_biomass_long</code> data frame. Don’t overwrite your original <code>plant_biomass</code> variable! You don’t need to save this re-widened data frame, but if you do, give it a different name (0.5 marks)</p>
+<section id="simulating-genomic-mutations-2.5-marks" class="level2">
+<h2 class="anchored" data-anchor-id="simulating-genomic-mutations-2.5-marks">1. Simulating genomic mutations (2.5 marks)</h2>
+<p>a. Assume that as a strand of genomic DNA (or RNA, if we’re thinking about viruses!) is copied, mutations can be randomly introduced. There is a constant probability of mutation at each nucleotide (mutation_rate). What probability distribution best describes the distribution of the number of mutations you expect to to see in a given genome of fixed length? Why? (0.25 marks)</p>
+<p><em>Answer:</em></p>
+<p>b. What distribution best describes the distance (measured in number of nucleotides) between each subsequent mutation? Why? (0.25 marks)</p>
+<p><em>Answer:</em></p>
+<p>c. If the genome length is 1,000 and the mutation rate is 0.05, what is the average number of mutations you expect to see per genome? (Write code to answer this, creating variables <code>genome_length</code> and <code>mutation_rate</code> the input numbers, and assigning the answer to <code>avg_num_mutations</code>. (0.25)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.2
+✔ purrr     1.2.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+<p>d. Draw a random number to represent the exact number of mutations observed in a particular genome, using the genome length and mutation rate above, and assign this to <code>num_mutations</code>. (0.25)</p>
+<p>e. To choose (randomly) the precise positions in the genome where mutations will occur, create a vector containing a number for each genomic position (<code>genome_indices</code>), and then sample a random subset of size <code>num_mutations</code> from this vector. Finally, <code>sort</code> them into ascending order, and call the final answer <code>mutation_indices</code> (0.5 marks)</p>
+<p>f. Calculate the number of nucleotides <em>between</em> each mutation using the <code>diff</code> function, and call this <code>inter_mutation_distance</code> (0.25 marks)</p>
+<p>g. Write a single code chunk to complete all of these steps together and plot a histogram of inter_mutation_distance. Increase the genome length to 10^6 for your final results. Adjust your histogram so that each single nucleotide extra distance is its own bin. Describe the shape of the distribution that you see (0.75 marks)</p>
 </section>
-<section id="wrangling-plant-biomass-with-dplyr-3-marks" class="level2">
-<h2 class="anchored" data-anchor-id="wrangling-plant-biomass-with-dplyr-3-marks">2. Wrangling plant biomass with dplyr (3 marks)</h2>
-<p>Now that our data is in a tidy format, we can start exploring it!</p>
-<p>a. What is the average biomass in g/m<sup>2</sup> for all observations in the study? (0.25 marks)</p>
-<p>b. How does the average biomass compare between the grazed control sites and those that were protected from herbivores? (0.25 marks)</p>
-<p>c. Display a table of the average plant biomass for each year. (0.25 marks)</p>
-<p>d. What is the mean plant biomass per year for the <code>grazedcontrol</code> and <code>rodentexclosure</code> groups? Present the answer in a table that has these variables as column headers (use pivoting). (0.75 marks)</p>
-<p>e. Check whether there is an equal number of observations per site. (0.25 marks)</p>
-<p>f. How many biomass measurements were 0? Which species had the most 0 biomass measurements? (0.5 marks)</p>
-<p>g. Create a new column that represents the square of the biomass. Display the three largest <code>squared_biomass</code> observations in descending order. Only include the columns <code>year</code>, <code>squared_biomass</code> and <code>species</code> and only observations between the years 2003 and 2008 from the forest habitat. (0.75 mark)</p>
-<p><em>Hint: Break this down into single criteria and add one at a time. “Square” means taken to the power of 2. It does NOT mean square root (power of 1/2).</em></p>
+<section id="generating-sampling-distributions-1.5-pts" class="level2">
+<h2 class="anchored" data-anchor-id="generating-sampling-distributions-1.5-pts">2. Generating sampling distributions (1.5 pts)</h2>
+<p>We’ll continue with our mutation rate example!</p>
+<p>a. Imagine you are doing an experiment to estimate the mutation rate and understand the distribution of mutations across the genome. Sequencing and assembling the entire genome is costly and complex, so you’ll just sequencing and analyze shorter sections. Assume that with your shorter sequences, you are going to analyze the location of just 50 mutations (<code>n_muts_sample</code>). Assume that inter-mutation distances in your shorter sequences follow the same distribution as those you measured above in the full genome. Write code to draw a sample of this size from the previously-measured <code>inter_mutation_distances</code> and call this <code>sub_genomic_sample</code> (0.5 marks)</p>
+<p>b. You decide to generate and analyze 300 of these shorter sequences (<code>n_samples</code>). Write code (<em>hint : use a for-loop</em>) to generate each of these samples, calculate the average distance between mutations for each (<code>avg_subgenomic_sample</code>), and then plot a histogram of these means (0.5 marks)</p>
+<p>c. Describe the resulting distribution. Compare it’s shape to that obtained in 1g. Are you surprised by the comparison? What statistical principle is at play here? (0.5 marks)</p>
+<p><em>Answer:</em></p>
 </section>
-<section id="visualising-plant-biomass-3.25-marks" class="level2">
-<h2 class="anchored" data-anchor-id="visualising-plant-biomass-3.25-marks">3. Visualising plant biomass (3.25 marks)</h2>
-<p>a. Compare the mean biomass over time for <code>grazedcontrol</code> with that of <code>rodentexclosure</code> graphically in a line plot. What could explain the big dip in biomass year 2012? (0.5 marks)</p>
-<p><em>Hint: The published study might be able to help with the second question</em></p>
-<p>b. Compare the mean biomass for each species in a lineplot. (0.5 marks)</p>
-<p>c. We’ve found that the biomass is higher in the sites with rodent exclosures (especially in recent years), and that the crowberry is the dominant species. Notice how the lines for <code>rodentexclosure</code> and <code>crowberry</code> are of similar shape. Coincidence? Let’s find out! Use a facetted line plot to explore whether all plant species are impacted equally by grazing. (0.75 mark)</p>
-<p>d. The habitat could also be affecting the biomass of different species. Explore this in a faceted line plot of the mean biomass over time. (0.5 marks)</p>
-<p>e. Explore the relationship between species, habitat, and the distribution of biomass in a box plot. (0.5 marks)</p>
-<p>f. It looks like both habitat and treatment have an effect on most of the species! Let’s dissect the data further by visualizing the effect of both the habitat and treatment on each species by faceting either a box plot or line plot accordingly. (0.5 mark)</p>
-
-
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>Olofsson J, te Beest M, Ericson L (2013) Complex biotic interactions drive long-term vegetation dynamics in a subarctic ecosystem. Philosophical Transactions of the Royal Society B 368(1624): 20120486. <a href="https://dx.doi.org/10.1098/rstb.2012.0486" class="uri">https://dx.doi.org/10.1098/rstb.2012.0486</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<section id="probability-distributions-and-likelihood-1-mark" class="level2">
+<h2 class="anchored" data-anchor-id="probability-distributions-and-likelihood-1-mark">3. Probability distributions and likelihood (1 mark)</h2>
+<ol type="a">
+<li>When working with random numbers, it is often a good idea to use the function <code>set.seed()</code>. This function ensures that the random numbers that are generated are reproducible, including on other machines. Please read the documentation for this function and <a href="https://stackoverflow.com/questions/13605271/reasons-for-using-the-set-seed-function">this blog post</a> to learn more. (0 marks)</li>
 </ol>
+<ol start="2" type="a">
+<li>Simulate <span class="math inline">\(n = 1000\)</span> realizations (i.e., draws) of a Geometric random variable with success probability <span class="math inline">\(p = 0.1\)</span>. Put these realizations in a vector <code>x</code>. Make a histogram of these realizations, using the default number of bins (0.25 marks)</li>
+</ol>
+<ol start="3" type="a">
+<li>Extract the first element of <code>x</code>, i.e., the first realization of the Geometric(<span class="math inline">\(p = 0.1\)</span>) distribution. How likely is it that this observation arose from a Geometric distribution with probability <span class="math inline">\(p = 0.9\)</span>? How likely is it that the observation arose from a Geometric distribution with probability <span class="math inline">\(p = 0.5\)</span>? (0.25 marks)</li>
+</ol>
+<ol start="4" type="a">
+<li>What is the probability that <em>each</em> element of <code>x</code> arose due to a Geometric distribution with <span class="math inline">\(p = 0.5\)</span>? Store these probabilities in a vector, apply <code>log</code> to each element of the vector, and print the sum the elements of the vector of log-transformed probabilities. This is the log-likelihood of the data — i.e., the realizations of the Geometric distribution you simulated in (a) — at <span class="math inline">\(p=0.5\)</span>. (0.5 marks)</li>
+</ol>
+</section>
+<section id="maximum-likelihood-estimation-for-binomial-probabilities-3-marks" class="level2">
+<h2 class="anchored" data-anchor-id="maximum-likelihood-estimation-for-binomial-probabilities-3-marks">4. Maximum likelihood estimation for binomial probabilities (3 marks)</h2>
+<p>For this problem, it will be useful to carefully review the likelihood calculation we did in Lecture 8 to estimate disease mortality rate from reports of cases and deaths, using data from Farrell &amp; Davies, PNAS, 2019 that measured cases and deaths for a set of infectious diseases that each infect a wide range of animal species.</p>
+<ol type="a">
+<li>Load the Farrell &amp; Davies 2019 dataset into R and call it <code>disease_distance</code> (0 marks)</li>
+</ol>
+<ol start="2" type="a">
+<li>Use the <code>unique()</code> function to determine all unique elements of the Host and ParaFamily columns. Then, use the <code>expand.grid()</code> function to generate a data frame with all combinations of hosts and parasite families. Store the data frame of host and parasite family combinations in an object called <code>Combinations</code>. <em>Hint: look at the documentation for <code>expand.grid()</code>.</em> (0.25 marks)</li>
+</ol>
+<ol start="3" type="a">
+<li><strong>We are going to a function that takes in a host and parasite family (i.e., a specific row of the <code>Combination</code> data frame you have just made), and returns the maximum likelihood estimate for the probability of death, given infection, of that host being infected with members of the parasite family.</strong> In class, we did this just for the host species <em>Sus scrofa</em> (the wild boar) and parasite family <em>Coronavirinae</em>. Like we did in class, assume deaths are Binomial with a host-specific number of cases and probability of death, and those in different countries and years are independent. If there are no observations for a specific host and parasite family combination, your function should return <code>NA</code>; else, the function should return the value of <span class="math inline">\(p\)</span> which maximizes the likelihood function formed from the data specific to the host and parasite family supplied as arguments to the function. You may also run into issues where the log-likelihood is negative infinity at all <span class="math inline">\(p\)</span>; in this case, the function should return <code>NA</code>.</li>
+</ol>
+<p>The skeleton of the function is provided below. The input arguments specify the host species and the parasite family. The cases where an <code>NA</code> should be returned are addressed using nested <code>if {} else {}</code> statements.</p>
+<p>Fill in the rest of the function! Test the function on the host and parasite family from class. Does it return the same maximum likelihood estimate for <span class="math inline">\(p\)</span>? If not, the function needs to be de-bugged. If so, excellent – you are probably in a good position to finish the problem! (1.5 mark)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure remove eval = FALSE for submission</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## skeleton of function</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ProbDeathEstimator <span class="ot">&lt;-</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(host, para_family){</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> disease_distance <span class="sc">%&gt;%</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="co"># FILL IN)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(data) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">NA</span>) <span class="co"># return NA if there are no observations for this host + para_family</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    p_values_to_test <span class="ot">&lt;-</span> <span class="co"># FILL IN # p values to search over</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># FILL IN: Generate a vector of log likelihood values for each p value</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    LogLik <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(LogLik, <span class="at">p =</span> p_values_to_test)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">all</span>(LogLik<span class="sc">$</span>LogLik <span class="sc">==</span> <span class="sc">-</span><span class="cn">Inf</span>)){</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>      <span class="co"># FILL IN - Estimate the maximum likelihood p value</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="co"># FILL IN ) # return the maximum likelihood estimator for prob of death, given function</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="er">}</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure remove eval = FALSE for submission</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ProbDeathEstimator</span>(<span class="at">host =</span> <span class="st">"Sus_scrofa"</span>, <span class="at">para_family =</span> <span class="st">"Coronavirinae"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="4" type="a">
+<li>Loop over all rows of the <code>Combinations</code> data frame you made in (b). For each row, apply the function you made in (c) to the host and parasite family in that row. Store the values returned by the function, for each row, in a vector <code>ProbabilitiesDeath</code>. At the end of the loop, this vector should have length equal to the number of rows in <code>Combinations</code> (i.e., one estimate for host-parasite family pair). Turn in into a dataframe <code>data.frame(p = ProbabilitiesDeath, Combinations).</code> Each row should have a host, parasite family, and the estimate probability of death for the host when infected with a member of the parasite family (0.75 mark)</li>
+</ol>
+<ol start="5" type="a">
+<li>Visualize the distribution of all probability of death estimates using a histogram. Then, visualize the distribution for by host (i.e., faceted by host) and by parasite family. (0.5 marks)</li>
+</ol>
+<p>What do you notice about the distribution(s) of death probabilities?</p>
+<p><em>Answer:</em></p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -995,13 +1128,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../assignments/assignment-02.html" class="pagination-link" aria-label="Assignment 2: Manipulating and plotting data (8 marks)">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment 2: Manipulating and plotting data (8 marks)</span>
+      <a href="../assignments/assignment-03.html" class="pagination-link" aria-label="Assignment 3: Advanced data wrangling and visualization (8 marks)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment 3: Advanced data wrangling and visualization (8 marks)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-04.html" class="pagination-link" aria-label="Assignment 4: Random variables, likelihood, and inference">
-        <span class="nav-page-text">Assignment 4: Random variables, likelihood, and inference</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/data/portal_data.csv" class="pagination-link" aria-label="portal_data.csv">
+        <span class="nav-page-text">portal_data.csv</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
