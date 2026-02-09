@@ -67,14 +67,14 @@ This schedule is tentative
 | 4    | Jan 26 | SNOW DAY                                                   |
 | 4    | Jan 28 | Model-informed data analysis (Activity)                    |
 | 5    | Feb 2  | Random variables and computational statistics              |
-| 5    | Feb 4  | Linear Models I                                            |
-| 6    | Feb 9  | Linear Models 2                                            |
-| 6    | Feb 11 | Mathematical models in ecology and evolution I             |
+| 5    | Feb 4  | Probability, likelihood, and statistical inference         |
+| 6    | Feb 9  | Linear Models 1                                            |
+| 6    | Feb 11 | Linear Models II                                           |
 |      | Feb 16 | Reading week                                               |
 |      | Feb 18 | Reading week                                               |
 | 7    | Feb 23 | Mathematical models in ecology and evolution II            |
 | 7    | Feb 25 | Project work                                               |
-| 8    | Mar 2  | Optimization and model fitting                             |
+| 8    | Mar 2  | Mathematical models in ecology and evolution II            |
 | 8    | Mar 5  | Clustering, dimensionality reduction, and machine learning |
 | 9    | Mar 9  | Project work                                               |
 | 9    | Mar 11 | Project work                                               |
@@ -111,8 +111,8 @@ This schedule is tentative
 | Problem Set 1        | Individual | Quercus      | Jan 14           | 8   |
 | Problem Set 2        | Individual | Quercus      | Jan 21           | 8   |
 | Problem Set 3        | Individual | Quercus      | Jan 28           | 8   |
-| Problem Set 4        | Individual | Quercus      | Feb 11           | 8   |
-| Problem Set 5        | Individual | Quercus      | Feb 18           | 8   |
+| Problem Set 4        | Individual | Quercus      | Feb 13           | 8   |
+| Problem Set 5        | Individual | Quercus      | Feb 20           | 8   |
 | Project proposal     | Group      | Quercus      | Mar 5            | 3   |
 | Challenge assignment | Individual | Quercus      | Mar 11           | 20  |
 | Mid-project update   | Group      | GitHub       | Mar 18           | 6   |

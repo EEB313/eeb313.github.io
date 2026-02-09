@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 > ### Learning Objectives
 >
 > -   Understand how the concept of random samples forms the foundation of statistical inference
-> -   Draw random numbers using sample, rbinom, and other distributions
+> -   Draw random numbers using `sample`, `rbinom`, and other distributions
 > -   Calculate statistics on random samples
 > -   Conduct simple hypothesis tests
 > -   Do simple maximum likelihood estimation
@@ -69,15 +69,15 @@ Using the `sample` function, simulate the following:
 
 -   the distribution of males and females in a sample of size 10, when the sex ratio in the population is known to be 1.5 males: 1 female
 
-```{r, include = FALSE}
+```{r}
 sample(x = 1:6, size = 10, replace = TRUE)
 ```
 
-```{r, include = FALSE}
+```{r}
 sample(x = c("Thailand","Cambodia", "Vietnam"), size = 3, replace = FALSE)
 ```
 
-```{r, include = FALSE}
+```{r}
 table(sample(x = c("males","females"), prob = c(0.6,0.4), size = 10, replace = TRUE))
 ```
 
@@ -138,9 +138,9 @@ data.frame(value = binom_samples) %>% ggplot(aes(x = value)) +
 ### Challenge question
 
 1.  Regenerate this histogram but assuming 1000 trials were done. What do you notice about the change in the graph?
-2.  Imagine you flipped a coin 10 times and 8 of these times you got heads. Your friend insists this result means that the coin you are using must be biased towards heads or that you are controlling the flip to preferentially land on heads. What would you say in response to this? How could you quantify this argument? (*Hint: How cean you quantify exactly how likely an outcome this extreme would be with an unweighted coin?*)
+2.  Imagine you flipped a coin 10 times and 8 of these times you got heads. Your friend insists this result means that the coin you are using must be biased towards heads or that you are controlling the flip to preferentially land on heads. What would you say in response to this? How could you quantify this argument? (*Hint: How can you quantify exactly how likely an outcome this extreme would be with an unweighted coin?*)
 
-```{r, include = FALSE}
+```{r}
 binom_samples_more <- rbinom(n = 1000, size = 10, prob = 0.5)
 data.frame(value = binom_samples_more) %>% ggplot(aes(x = value)) + 
   geom_histogram(binwidth = 1, center = 0, color = "black") + 
@@ -150,7 +150,7 @@ data.frame(value = binom_samples_more) %>% ggplot(aes(x = value)) +
   theme_classic()
 ```
 
-```{r, include = FALSE}
+```{r}
 sum(binom_samples_more == 8)/length(binom_samples_more)
 # In the above sample of 1000 repeats of 10 flips each, we see that about 5% of the time we get 8 heads. This is rare, but not THAT rare
 ```
@@ -230,9 +230,9 @@ which is very similar to the value of 0.049 we estimated before from 1000 simula
 
 ## Hypothesis testing
 
-With the simple tools we have now and using the sunoke binomial distribution, we can already show how we can do formal statistical inference just using simulations.
+With the simple tools we have now and using the binomial distribution, we can already show how we can do formal statistical inference just using simulations.
 
-Suppose we want to conduct an experiment to [test if our coin is unweighted]{.underline} (vs biased towards one side or the other). Formally, we want to test the null hypothesis that the probability of heads is 50% (vs an alternative hypothesis that the coin is biased towards heads). To do this, we conduct an experiment where we flip our coin 100 times. Let's imagine that the result of this experiment is that we get 66 tails. This is our *data*.
+Suppose we want to conduct an experiment to [test if our coin is unweighted]{.underline} (vs biased towards one side or the other). Formally, we want to test the null hypothesis that the probability of heads is 50% (vs an alternative hypothesis that the coin is biased towards heads). To do this, we conduct an experiment where we flip our coin 100 times. Let's imagine that the result of this experiment is that we get 66 heads. This is our *data*.
 
 Testing the null hypothesis means we have to ask, "*How likely would I be to observe an outcome like my data if the null hypothesis were true?*", or more specifically, "*How likely would I be to observe 66 heads out of 100 coin flips for an unweighted coin"*?. If our observed data is very unlikely under the null hypothesis, then we would reject it, and say it doesn't explain the data well.
 
@@ -273,7 +273,7 @@ This process of simulating data under the null hypothesis - instead of using a k
 
 Now that we feel confident rejecting the null hypothesis of an unweighted coin, let's say we wanted to test a different hypothesis - for example, that instead of choosing the unweighted coin, we picked one up that had a 70% probability of giving heads. Under this new hypothesis, what is the p value? (ie, the probability of observing at least 66 heads)
 
-```{r, include = FALSE}
+```{r}
 1- pbinom(q = 65, size=100, prob=0.7) # probability of over 65, ie prob of 66 or higher
 
 # We would say "with our observed data (66/100 heads) we fail to reject the null hypothesis that our coin is weighted 70% towards heads, with a p value of 0.83 (vs a significance level of 0.05)"
@@ -288,16 +288,17 @@ We can use a very similar idea! For any proposed coin weight, we can calculate h
 ### Challenge
 
 1.  Write a function that takes in the observed number of heads (`heads_observed`) for a given number of coin flips (`n_flips`), along with a potential propensity for the coin to give heads (`weight`), and return now likely the observed data would be under that coin weight. Test it for a coin weight of 0.7
-2.  Use this function to consider a range of weights between 0 and 1 and generate a data frame with the columns `weights` and `likelihood`. and plot the likelihood of the data vs the true coin weight. What is the most likely coin weight?
 
-```{r, include = FALSE}
+```{r}
 likelihood_vs_coin_weight <- function(heads_observed, n_flips, weight){
   dbinom(x = heads_observed, size = n_flips, prob = weight)
 }
 likelihood_vs_coin_weight(63, 100, 0.7)
 ```
 
-```{r, include = FALSE}
+2.  Use this function to consider a range of weights between 0 and 1 and generate a data frame with the columns `weights` and `likelihood`. and plot the likelihood of the data vs the true coin weight. What is the most likely coin weight?
+
+```{r}
 
 heads_observed <- 63
 n_flips <- 100
@@ -308,11 +309,12 @@ lik.df <- data.frame(weight = test_weights, likelihood = likelihood_vs_coin_weig
 
 lik.df %>% 
   ggplot(aes(x = weight, y = likelihood)) + 
-  geom_point()
+  geom_point() + 
+  labs(x = "Coin weight (prob. of heads)")
 
 ```
 
-```{r, include = FALSE}
+```{r}
 #max
 lik.df %>% filter(likelihood == max(likelihood))
 ```

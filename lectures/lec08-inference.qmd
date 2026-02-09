@@ -1,4 +1,4 @@
-# Statistical inference and linear models
+# Probability, likelihood, and statistical inference
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -12,7 +12,6 @@ knitr::opts_chunk$set(echo = TRUE)
 > -   Use computational methods to test hypotheses about population parameters and processes that gave rise to observed data
 > -   Understand the concept of permutation tests and compare to standard statistical tests
 > -   Apply simple maximum likelihood estimation to real data
-> -   Understand the foundations of linear regression
 
 ------------------------------------------------------------------------
 
@@ -39,6 +38,7 @@ Examples of discrete probability distributions include:
 -   The **Hypergeometric** distribution models the probability that, if we draw $n$ objects from a population of size $N$ where $K$ of the objects have a specific attribute *without replacement*, that we see $k$ objects in our sample with the attribute.
 -   The **Geometric** distribution. If we do many trials, each of which are independent and have probability of "success" $p$, a random variable that has a $\text{Geometric}(p)$ distribution counts the number of tries until a success occurs.
 -   The **Negative binomial** distribution models the number of trials until $r$ successes occur, if the success probability in each trial is $p$.
+-   The **Multinomial** distribution counts the number of events in each of $K$ categories after $N$ trials. It is a generalization of the binomial distribution to outcomes that can take on more than two values
 
 *Note: when* $N$, $K$ are large relative to $n$ and $K/N$ is not too close to 0 or 1, the Binomial and Hypergeometric distributions are similar and its often advantageous to use the former (because it has a nicer probability distribution function, fewer parameters).
 
@@ -54,15 +54,17 @@ $$\int_{-\infty}^\infty f(y) \text{d} y = 1$$
 
 Examples of continuous probability distributions include:
 
--   The **Exponential** distribution models the time in-between events, if the events occur at rate $\lambda$. What is means for events to occur at rate $\lambda$ is that, over a small interval of time $\Delta t$, an event occurs with probability approximately $\lambda \Delta t$. The larger the $\lambda$, the more frequently the event occurs...
 -   The **Uniform** distribution models outcomes where all occur with equal probability.
 -   The **Normal** distribution is often used to model continuous observations that are sums of a large number of small, random contributions (e.g, individual alleles to a trait).
 -   The **Log-normal** distribution models continuous observations such that their natural logarithm follows a Normal distribution. In other words, if $Y \sim \text{Lognormal}(\mu,\sigma^2)$, then $\ln Y \sim \text{Normal}(\mu,\sigma^2)$ where $\mu$ is the mean.
--   The **Gamma** distribution is commonly used to describe the waiting time to the $r$th event of a particular type. It is a flexible distribution which can be used in a number of contexts, especially when it is not clear what the right probabilistic model for observations may be.
+-   The **Exponential** distribution models the time in-between events, if the events occur at rate $\lambda$. What is means for events to occur at rate $\lambda$ is that, over a small interval of time $\Delta t$, an event occurs with probability approximately $\lambda \Delta t$. The larger the $\lambda$, the more frequently the event occurs...
+-   The **Gamma** distribution is commonly used to describe the waiting time to the $r$th event of a particular type. It is a flexible distribution which can be used in a number of contexts, especially when it is not clear what the right probabilistic model for observations may be. It is often used to model distributions that look approximately normal but are more right-skewed (long-tailed). In limiting cases, it approaches the normal distribution.
 
 ### Challenge
 
 For each of the distributions above, think of random variables (e.g., the number of brown bears with body sizes $>$ 100 kg) with that distribution? Discuss with your neighbors.
+
+### Sampling random numbers
 
 We can generate random numbers in R from all of these probability distributions, and more!
 
@@ -98,9 +100,20 @@ data.frame(value = realizations_N_poisson) %>%
 
 ### Challenge
 
-1.  Make a plot of the probability density function of a Gamma distribution shape = 0.5 and scale =2 using `dgamma`. Add another curve with shape = 2 and scale = 1/2.
+1.  Draw 10000 random numbers from the Gamma distribution with shape = 0.5 and scale =2
 
-```{r, include = FALSE}
+```{r}
+N <- 10000
+realizations_N_gamma <- rgamma(n = N, shape = 1/2, scale = 2)
+
+data.frame(value = realizations_N_gamma) %>% 
+  ggplot(aes(x = value)) + 
+  geom_histogram(aes(y = after_stat(density)))
+```
+
+2.  Make a plot of the probability density function of a Gamma distribution shape = 0.5 and scale =2 using `dgamma`. Add another curve with shape = 2 and scale = 1/2. (*Hint: just like most R functions, ie log, sin, dgamma can take in vectors of x values and return vectors* of probabilities)
+
+```{r}
 
 x_vec <- seq(0,7,0.01)
 gamma_vec1 <- dgamma(x = x_vec, shape = 1/2, scale = 2)
@@ -146,7 +159,7 @@ data
 
 #### Step 1: specify the likelihood (i.e., the distribution of the data)
 
-What distribution makes sense to model the number of *Sus scrofa* deaths due to viruses in the family *Coronavirinae*? **The Binomial!** One can think of the number of (confirmed) cases of infection with a member of *Coronavirinae* as the "number of trials" and probability death as a "success probability" (\$p\$). Written out, $\text{deaths}_{ij} \sim \text{Binomial}(\text{cases}_{ij}, p)$ for each country-year $ij$. We're assuming that for each country + year, the number of deaths out of all the cases is is an independent draw from a binomial distribution with the same parameter $p$.
+What distribution makes sense to model the number of *Sus scrofa* deaths due to viruses in the family *Coronavirinae*? **The Binomial!** One can think of the number of (confirmed) cases of infection with a member of *Coronavirinae* as the "number of trials" and probability death as a "success probability" ($p$). Written out, $\text{deaths}_{ij} \sim \text{Binomial}(\text{cases}_{ij}, p)$ for each country-year $ij$. We're assuming that for each country + year, the number of deaths out of all the cases is is an independent draw from a binomial distribution with the same parameter $p$.
 
 #### Step 2: evaluate the likelihood of individual observations
 
@@ -207,9 +220,9 @@ for (p in p_values_to_test){
   index <- index + 1
 }
 
-LLs <- data.frame(LogLik, p = p_values_to_test)
+LogLik <- data.frame(LogLik, p = p_values_to_test)
 
-LLs %>% ggplot(aes(x = p, y = LogLik)) + geom_line()
+LogLik %>% ggplot(aes(x = p, y = LogLik)) + geom_line()
 ```
 
 Values of $p$ where $\ln L(p) - -\infty$ are *very* unlikely to explain the data. Since we are interested in the value of $p$ which gives rise to the largest $\ln L$, and these values are infinitely *negative*, they are not candidates for our estimator of $p$. As a result, they are suppressed in the plot.
@@ -218,7 +231,8 @@ Another thing to notice is the curvature of the likelihood function around the v
 
 ```{r}
 
-LLs %>% subset(LogLik == max(LogLik))
+estimate_p <- LogLik[LogLik$LogLik == max(LogLik$LogLik),"p"]
+estimate_p
 ```
 
 ### Case study 2: Comparing sex differences with permutations tests
@@ -259,7 +273,7 @@ surveys_kr %>% ggplot(aes(x=weight, fill = sex, y = after_stat(density))) +
   facet_grid(~sex)
 ```
 
-```{r, include = FALSE}
+```{r}
 dim(surveys_kr)
 ```
 
@@ -278,19 +292,35 @@ weight_diff
 
 Now we want to understand - is this difference more that we would expect by chance?
 
+We can use the popular Student's t-test that is a favourite of statistics 101 classes everywhere to test this:
+
 ```{r}
 t.test(weight ~ sex, data = surveys_kr)
 ```
 
-Another way!
+However, there is another way we can do this, without having to remember anything about t-tests! Another way of thinking about what it means to test for a significant differences in weight by sex is to say we are testing the null hypothesis that weight is the same by sex. Under that hypothesis, if we shuffled the sex labels on each animal, the distribution of weights should roughly be the same. We want to see if our data is consistent with what we'd expect if the sex labels were shuffled. We might not see NO difference - some differences between groups can arise by chance when we have small samples sizes. But, we can simulate this null hypothesis many times to understand how much sex difference we expect to see just do to chance, and then compare it to what we actually see in our data.
+
+This procedure is an example of a permutation test, which is a very powerful tool in statistics and increasingly used now that computers can very quickly simulate this sort of res-sampled data. The procedure we follow below is:
+
+-   Take the entire list of measured weights, and randomly shuffle their order
+
+-   Assign the first half of the measurements (roughly 5000/10000) to be male), and the second half to be female
+
+-   Re-calculate the difference in weights between male and female in this simulated data
+
+-   Repeat this many times (1000 here), recording the weight differences calculated each time
+
+-   Examine the distribution of weight differences from this simulated, permuted data. This represents the expected weight difference by sex under the null hypothesis of no difference.
+
+-   See where in this distribution our observed weight difference falls. Calculate what % of the null distribution is more extreme than our observed value (e.g., 2\*(1-quantile(observed, simulated)). This is the p value for our hypothesis test
 
 ```{r}
 
 N_samples <- 1000
 
-test_weight_diff_samples <- rep(0,N)
+test_weight_diff_samples <- rep(0,N_samples)
 
-for (i in 1:N){
+for (i in 1:N_samples){
   test_sample <- sample(x = surveys_kr$weight) 
   test_sample_male <- test_sample[1:5000]
   test_sample_female <- test_sample[5000:10000]
@@ -306,98 +336,8 @@ ggplot(data = data.frame(weight_diffs = test_weight_diff_samples), aes(x = weigh
   geom_vline(xintercept = weight_diff, color = "red")
 ```
 
-## Introduction to linear regression
-
-Let's revisit our dataset on sexual size dimorphism across mammals that we first saw in Assignment 2. We want to examine the relationship between body length and body mass
-
 ```{r}
+sum(test_weight_diff_samples > weight_diff)/N_samples
 
-#mammal_sizes <- readr::read_csv('https://eeb313.github.io/assignments/data/SSDinMammals.csv')
-
-mammal_sizes <- read_csv("data/SSDinMammals.csv")
-
-head(mammal_sizes)
+#max p value 1/N_samples = 0.001
 ```
-
-We'll do some pre-processing to get the data ready to plot
-
-```{r}
-mammal_length <- mammal_sizes %>%
-  select(c("Order", "Scientific_Name", "lengthM", "lengthF")) %>%
-  pivot_longer(c(lengthM, lengthF), names_to = "sex", values_to = "length",
-               names_pattern = "length(.)") %>%
-  distinct(Scientific_Name, sex, .keep_all = TRUE)
-
-mammal_mass <- mammal_sizes %>%
-  select(c("Order", "Scientific_Name", "massM", "massF")) %>%
-  pivot_longer(c(massM, massF), names_to = "sex", values_to = "mass",
-               names_pattern = "mass(.)") %>%
-  distinct(Scientific_Name, sex, .keep_all = TRUE)
-
-mammal_long <- full_join(mammal_length, mammal_mass, 
-                         by = join_by("Order", "Scientific_Name", "sex"))
-```
-
-```{r}
-mammal_long %>% filter(Order == "Rodentia") %>%
-  ggplot(aes(x = log(length), y = log(mass))) + 
-  geom_point()
-```
-
-Other than a few outliers, there appears to be strong and linear trend between these variables! How can we estimate the scale of this relationships, and test whether this trend is significantly different from zero? Linear regression can help us with both!
-
-### Linear models: why we care
-
-Linear models are at the heart of statistical practice in the physical, life, and social sciences! Linear regression actually refers to a *family* of modeling approaches that attempt to learn how the mean and/or variance of a response variable $\boldsymbol{y} = (y_1,\dots,y_n)$ depend on (linear) combinations of variables $\boldsymbol{x}_i = (x_{i1},\dots,x_{in})$ called predictors. In this lecture and the subsequent ones, we will discuss various forms of the linear model and assumptions placed on the data to make estimation and inference of the relationships between variables tractable. Our goal will be to become familiar with how these models work -- namely, how their parameters are inferred using maximum likelihood --- and practice fitting them in R.
-
-## The simple linear model
-
-The simple linear models describes how a response $Y$ depends on a contentious explanatory variable, $x$, which is fixed. The model is
-
-$$Y \sim \text{Normal}(\beta_0 + \beta_1 x, \sigma^2).$$
-
-The notation "\~" is used in statistics to mean that a random variable is drawn from a certain distribution. Below is a *visual* representation of how the data generative process for $Y$ is modeled. Here, we are saying that at each $x$, $Y$ is Normally-distributed with a mean that depends on the explanatory variable and the model parameters (\$ \mu = \beta\_0 + \beta\_1 x\$)), and fixed variance $\sigma^2$ (i.e., changing $x$ does not change the variance in the observed response). The variance could be due to measurement error or other sources of variation in the variable $Y$ that are not explained by the paired $x$ value.
-
-![](figures/regression.jpg)
-
-In turn, this specifies what the likelihood function is for the data $(y_1,x_1),\dots,(y_n,x_n)$. (As usual, we assume the $y$s are independent.) **Fitting a linear regression model is actually just a maximum likelihood problem!** The result of fitting a regression model is a maximum likelihood estimation of the parameters $\beta_0, \beta_1$ and $\sigma$ . For ordinary linear regression, it turns out that you can actually find the maximum likelihood values with pen and paper math (calculus!), instead of having to search over a range of values like we've been doing, but for more advanced models, numerical optimization procedures are used to efficiently search for the combination of parameters that leads to the maximum likelihood.
-
-### Challenge
-
-1.  What assumptions are we making about the data when we fit simple linear model? What must be true of the data? Discuss.
-
-    ```{r, include=F}
-    # normality of Y
-    # Y is continuous, cannot be discrete in this framework!
-    # The predictor, x, is a number
-    # The variance of Y at each x is constant/homogenous
-    # Y depends **linearly** on x
-    # the predictors are known with certainty (i.e., are not random)
-    # coefficients for the predictors are not random
-    # independence of observations...
-    ```
-
-2.  Write the form of the likelihood $L(\beta_0,\beta_1,\sigma^2|\boldsymbol{x}_i,\boldsymbol{y}_i)$. Recall that the probability distribution of the $Normal(\mu,\sigma^2)$ distribution is
-
-$$\frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(y-\mu)^2/2\sigma^2}.$$
-
-*Hint: notice how, in the regression model, the mean value of the response is* $\beta_0 + \beta_1 x.$
-
-```{r, include=F}
-# \prod_i \frac{1}{\sqrt{2 \pi \sigma^2}} e^{- (y-beta0-beta1*x)^2 / 2\sigma^2}
-```
-
-3.  Use the `dnorm` function to calculate the likelihood of observing a value Y = 10 paired with X = 5 when $\beta_0 = 0.5$ and $\beta_0 = 2$ and $\sigma = 1$
-
-    ```{r, include = FALSE}
-    dnorm(x = 10, mean = 0.5+5*2, sd = 1 )
-    ```
-
-4.  Suppose we think $Y$ is not normally distributed (and constant variance $\sigma^2$), but that it's logarithm (or, say, square root) is. How might we adjust the model to account for this?
-
-```{r, include=F}
-# Y ~ LogNormal(beta0 + beta1 x, sigma^2) and then use maximum liklihood OR
-# log or sqrt Y ~ Normal(beta0 + beta1 x, sigma^2)
-```
-
-### 

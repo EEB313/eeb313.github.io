@@ -20,6 +20,7 @@ book:
       - lectures/lec06-self-directed-analysis-without-answers.qmd
       - lectures/lec07-random-variables.qmd
       - lectures/lec08-inference.qmd
+      - lectures/lec09-linear-models.qmd
       # - lectures/lec08-intro-inference-1.qmd
       # - lectures/lec09-intro-inference-2.qmd
       # - lectures/lec10-linear-models-1.qmd
@@ -34,6 +35,7 @@ book:
       - assignments/assignment-01.qmd
       - assignments/assignment-02.qmd
       - assignments/assignment-03.qmd
+      - assignments/assignment-04.qmd
       # - assignments/assignment-04.qmd
       # - assignments/assignment-05.qmd
       # - assignments/challenge-assignment.qmd
@@ -104,6 +106,7 @@ extra_files:
   - assignments/assignment-01.Rmd
   - assignments/assignment-02.Rmd
   - assignments/assignment-03.Rmd
+  - assignments/assignment-04.Rmd
 #   - assignment-04.Rmd
 #   - assignment-05.Rmd
 #   - assignment-00.qmd
