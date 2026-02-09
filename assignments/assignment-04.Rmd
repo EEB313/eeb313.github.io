@@ -32,7 +32,7 @@ d\. Draw a random number to represent the exact number of mutations observed in 
 ```{r}
 ```
 
-e\. To choose (randomly) the precise positions in the genome where mutations will occur, create a vector containing a number for each genomic position (`genome_indices`), and then sample a random subset of size `num_mutations` from this vector. Finally, `sort` them into ascending order, and call the final answer `mutation_indices` (0.5 marks)
+e\. To choose (randomly) the precise positions in the genome where mutations will occur, first create a vector that containing a number indicating each genomic position (`genome_indices`). Then sample a random subset of size `num_mutations` from this vector. These will be the locations of the mutations on the genome. Finally, `sort` the positions of the mutations into ascending order, and call the final answer `mutation_indices` (0.5 marks)
 
 ```{r}
 ```
@@ -42,7 +42,7 @@ f\. Calculate the number of nucleotides *between* each mutation using the `diff`
 ```{r}
 ```
 
-g\. Write a single code chunk to complete all of these steps together and plot a histogram of inter_mutation_distance. Increase the genome length to 10\^6 for your final results. Adjust your histogram so that each single nucleotide extra distance is its own bin. Describe the shape of the distribution that you see (0.75 marks)
+g\. Write a single code chunk to complete all of these steps (c,d,e,f) together and plot a histogram of inter_mutation_distance. Increase the genome length to 10\^6 for your final results. Adjust your histogram so that each single nucleotide extra distance is its own bin. Describe the shape of the distribution that you see (0.75 marks)
 
 ```{r}
 ```

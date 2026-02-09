@@ -775,26 +775,41 @@ Y = \beta_0 + \beta_1 x + \epsilon
 <p>The notation “~” is used in statistics to mean that a random variable is drawn from a certain distribution. Below is a <em>visual</em> representation of how the data generative process for <span class="math inline">\(Y\)</span> is modeled. Here, we are saying that at each <span class="math inline">\(x\)</span>, <span class="math inline">\(Y\)</span> is Normally-distributed with a mean that depends on the explanatory variable and the model parameters ($ = _0 + _1 x$)), and fixed variance <span class="math inline">\(\sigma^2\)</span> (i.e., changing <span class="math inline">\(x\)</span> does not change the variance in the observed response). The variance could be due to measurement error or other sources of variation in the variable <span class="math inline">\(Y\)</span> that are not explained by the paired <span class="math inline">\(x\)</span> value.</p>
 <p><img src="figures/regression.jpg" class="img-fluid"></p>
 <p>In turn, this specifies what the likelihood function is for the data <span class="math inline">\((y_1,x_1),\dots,(y_n,x_n)\)</span>:</p>
-<p><span class="math display">\[ L(\beta_0,\beta_1,\sigma^2|\boldsymbol{x}_i,\boldsymbol{y}_i) = Normal(\mu = \beta_0 + \beta_1 x,\sigma^2) =\frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(y-\mu)^2/2\sigma^2}.\]</span></p>
+<p><span class="math display">\[ L(\boldsymbol{x}_i,\boldsymbol{y}_i|\beta_0,\beta_1,\sigma^2) = Normal(\mu = \beta_0 + \beta_1 x,\sigma^2) =\frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(y-\mu)^2/2\sigma^2}.\]</span></p>
 <p><strong>Fitting a linear regression model is actually just a maximum likelihood problem!</strong> The result of fitting a regression model is a maximum likelihood estimation of the parameters <span class="math inline">\(\beta_0, \beta_1\)</span> and <span class="math inline">\(\sigma\)</span> . For ordinary linear regression, it turns out that you can actually find the maximum likelihood values with pen and paper math (calculus!), instead of having to search over a range of values like we’ve been doing, but for more advanced models, numerical optimization procedures are used to efficiently search for the combination of parameters that leads to the maximum likelihood.</p>
 </section>
 <section id="challenge" class="level3" data-number="9.3.3">
 <h3 data-number="9.3.3" class="anchored" data-anchor-id="challenge"><span class="header-section-number">9.3.3</span> Challenge</h3>
 <ol type="1">
-<li><p>What assumptions are we making about the data when we fit simple linear model? What must be true of the data? Discuss.</p></li>
+<li><p>What assumptions are we making about the data when we fit simple linear model? What must be true of the data? Discuss.</p>
+<ul>
+<li><p>Each {X,Y} data point is measured independently</p></li>
+<li><p>Y is continuous (not discrete)</p></li>
+<li><p>The variance of Y at each x is constant/homogenous</p></li>
+<li><p>Y is normally distributed for each X value (only needed for hypothesis testing and generating CIs, not for just doing regression fits)</p></li>
+<li><p>The predictor, x, is a number and is measured without error (i.e., is not a random variable)</p></li>
+<li><p>Y depends <strong>linearly</strong> on x</p></li>
+</ul></li>
 <li><p>Use the <code>dnorm</code> function to calculate the likelihood of observing a value Y = 10 paired with X = 5 when <span class="math inline">\(\beta_0 = 0.5\)</span> and <span class="math inline">\(\beta_0 = 2\)</span> and <span class="math inline">\(\sigma = 1\)</span></p></li>
 </ol>
+<p><em>Hint: Don’t get confused by the naming of the argument <code>x</code> in <code>dnorm</code> … <code>x</code> is the value you want to calculate the probability (aka likelihood) of. In our case, we are calling this <code>Y</code>.</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="at">x =</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="fl">0.5</span><span class="sc">+</span><span class="dv">5</span><span class="sc">*</span><span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span> )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3520653</code></pre>
+</div>
+</div>
 </section>
 </section>
 <section id="examining-regression-output-and-checking-assumptions" class="level2" data-number="9.4">
 <h2 data-number="9.4" class="anchored" data-anchor-id="examining-regression-output-and-checking-assumptions"><span class="header-section-number">9.4</span> Examining regression output and checking assumptions</h2>
 <p>Let’s dig into our regression fits more! First, let’s fit the simple linear regression model using the <code>lm()</code> function</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lionFitOutput <span class="ot">&lt;-</span> <span class="fu">lm</span>(ageInYears <span class="sc">~</span> proportionBlack, <span class="at">data =</span> lion)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>lionFitOutput <span class="ot">&lt;-</span> <span class="fu">lm</span>(ageInYears <span class="sc">~</span> proportionBlack, <span class="at">data =</span> lion)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can get a quick look at the output of using the <code>summary()</code> function on it</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lionFitOutput)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lionFitOutput)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -825,8 +840,8 @@ F-statistic: 49.75 on 1 and 30 DF,  p-value: 7.677e-08</code></pre>
 </ul>
 <p>We can access any of these quantities in R as variables. If we first assign a variable to the output, then use <code>str()</code> or <code>View()</code> to examine it’s structure, and then extract a particular variable. You can find a full description of the output <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/summary.lm">here</a>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lionFitSummary <span class="ot">&lt;-</span> <span class="fu">summary</span>(lionFitOutput)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(lionFitSummary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lionFitSummary <span class="ot">&lt;-</span> <span class="fu">summary</span>(lionFitOutput)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(lionFitSummary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 11
  $ call         : language lm(formula = ageInYears ~ proportionBlack, data = lion)
@@ -866,14 +881,14 @@ F-statistic: 49.75 on 1 and 30 DF,  p-value: 7.677e-08</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lionFitSummary<span class="sc">$</span>coefficients)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lionFitSummary<span class="sc">$</span>coefficients)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                  Estimate Std. Error  t value     Pr(&gt;|t|)
 (Intercept)      0.8790062  0.5688171 1.545323 1.327530e-01
 proportionBlack 10.6471194  1.5095005 7.053406 7.677005e-08</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lionFitSummary<span class="sc">$</span>coefficients[<span class="st">"proportionBlack"</span>,<span class="st">"Estimate"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lionFitSummary<span class="sc">$</span>coefficients[<span class="st">"proportionBlack"</span>,<span class="st">"Estimate"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10.64712</code></pre>
 </div>
@@ -883,15 +898,28 @@ proportionBlack 10.6471194  1.5095005 7.053406 7.677005e-08</code></pre>
 <section id="challenge-1" class="level3" data-number="9.4.1">
 <h3 data-number="9.4.1" class="anchored" data-anchor-id="challenge-1"><span class="header-section-number">9.4.1</span> Challenge</h3>
 <ol type="1">
-<li><p>What is the best estimate for each parameter, including 95% confidence intervals? Can you write the equation of the best fit curve?</p></li>
-<li><p>Is there significant evidence that age varies with the proportion of the nose that is black? Describe the results of the hypothesis test in careful statistical language.</p></li>
+<li>What is the best estimate for each parameter, including 95% confidence intervals? Can you write the equation of the best fit curve?</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>B0 <span class="ot">&lt;-</span> lionFitSummary<span class="sc">$</span>coefficients[<span class="st">"(Intercept)"</span>,<span class="st">"Estimate"</span>]</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>B1 <span class="ot">&lt;-</span> lionFitSummary<span class="sc">$</span>coefficients[<span class="st">"proportionBlack"</span>,<span class="st">"Estimate"</span>]</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># predict lion age if 50% nose black</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>B0 <span class="sc">+</span> B1<span class="sc">*</span><span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.202566</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>Is there significant evidence that age varies with the proportion of the nose that is black? Describe the results of the hypothesis test in careful statistical language.</p>
+<p><em>Answer: Yes, there is significant evidence of a linear relationship between the proportion of the nose that is black and age among males lines, and we can reject the null hypothesis of no relationships (i.e., that the slope is zero, p &lt; 1e-7)</em></p></li>
 </ol>
 </section>
 <section id="diagnostic-plots" class="level3" data-number="9.4.2">
 <h3 data-number="9.4.2" class="anchored" data-anchor-id="diagnostic-plots"><span class="header-section-number">9.4.2</span> Diagnostic plots</h3>
 <p>We can do a quick check to see if the assumptions of the regression model are valid, by calling the function <code>plot()</code> on the output of the model fitting:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lionFitOutput) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lionFitOutput) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -928,8 +956,8 @@ proportionBlack 10.6471194  1.5095005 7.053406 7.677005e-08</code></pre>
 <p>Remember that one of the goals of the study was to see if we could predict a lion’s age based on the nose coloration. How good is our model at this task?</p>
 <p>There are lots of functions that can be applied to the output of <code>lm()</code>, and <code>predict()</code> is one of them we can use now (Note: for documentation, search <code>predict.lm</code>). For example, here is how to predict mean lion age corresponding to a value of 0.50 of proportion black in the nose.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> <span class="fu">predict</span>(lionFitOutput, <span class="fu">data.frame</span>(<span class="at">proportionBlack =</span> <span class="fl">0.50</span>), <span class="at">se.fit =</span> <span class="cn">TRUE</span>, <span class="at">interval =</span> <span class="st">"prediction"</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(yhat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> <span class="fu">predict</span>(lionFitOutput, <span class="fu">data.frame</span>(<span class="at">proportionBlack =</span> <span class="fl">0.50</span>), <span class="at">se.fit =</span> <span class="cn">TRUE</span>, <span class="at">interval =</span> <span class="st">"prediction"</span>, <span class="at">level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(yhat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   fit.fit  fit.lwr fit.upr    se.fit df residual.scale
 1 6.202566 2.698512 9.70662 0.3988321 30       1.668764</code></pre>
@@ -938,17 +966,17 @@ proportionBlack 10.6471194  1.5095005 7.053406 7.677005e-08</code></pre>
 <p>In the output, predicted age is indicated by <code>fit</code> , the standard error of the predicted mean age is <code>se.fit</code>, and the upper and lower 95% prediction intervals are indicated by <code>fit.lwr</code> and <code>fit.upr</code>.</p>
 <p>We can repeat this prediction for all ages and visualize the uncertainty we should expect in our predictions.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>lion_predict <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(lion, <span class="fu">predict</span>(lionFitOutput, <span class="at">interval =</span> <span class="st">"prediction"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>lion_predict <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(lion, <span class="fu">predict</span>(lionFitOutput, <span class="at">interval =</span> <span class="st">"prediction"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in predict.lm(lionFitOutput, interval = "prediction"): predictions on current data refer to _future_ responses</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lion_predict, <span class="fu">aes</span>(proportionBlack, ageInYears)) <span class="sc">+</span> </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr, <span class="at">fill=</span><span class="st">'prediction'</span>), </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fit), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> </span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#geom_smooth(method = "lm", se = FALSE, col = "blue") +</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Proportion black"</span>, <span class="at">y =</span> <span class="st">"Age (years)"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lion_predict, <span class="fu">aes</span>(proportionBlack, ageInYears)) <span class="sc">+</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr, <span class="at">fill=</span><span class="st">'prediction'</span>), </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fit), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#geom_smooth(method = "lm", se = FALSE, col = "blue") +</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Proportion black"</span>, <span class="at">y =</span> <span class="st">"Age (years)"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -962,6 +990,7 @@ proportionBlack 10.6471194  1.5095005 7.053406 7.677005e-08</code></pre>
 <section id="challenge-2" class="level3" data-number="9.4.4">
 <h3 data-number="9.4.4" class="anchored" data-anchor-id="challenge-2"><span class="header-section-number">9.4.4</span> Challenge</h3>
 <p>The authors simulations suggest that hunting only males 6 years of age and older would have minimal impact on the population sustainability. What is the range of nose colourations for which an age prediction of 6 years is within the 95% prediction interval. For what ages do these colourations correspond to the average levels?</p>
+<p><em>Answer: just looking at the graph, it seems like at a proportion black as low as 0.1 and as high as 0.8, an age of 6 years is within the 95% prediction interval. These values correspond to the mean proportions for ages 4 and 9, respectively.</em></p>
 </section>
 <section id="transforming-variables" class="level3" data-number="9.4.5">
 <h3 data-number="9.4.5" class="anchored" data-anchor-id="transforming-variables"><span class="header-section-number">9.4.5</span> Transforming variables</h3>
@@ -979,7 +1008,7 @@ proportionBlack 10.6471194  1.5095005 7.053406 7.677005e-08</code></pre>
 <h3 data-number="9.5.1" class="anchored" data-anchor-id="example-in-mammals-is-there-an-effect-of-sex-on-body-size"><span class="header-section-number">9.5.1</span> Example: In mammals, is there an effect of sex on body size?</h3>
 <p>To try this out, we’ll go back to out dataset on sexual dimorphism in mammals. After some data “cleaning” we did in Assignment 2, we’ll do a very crude <strong>test of the hypothesis that males and females differ in size</strong>. In particular, we will determine the <em>quantitative</em> effect of sex is on the size of a typical individual, regardless of their species, sampling effort, etc. Much more complicated models can be constructed, but it turns out <a href="https://www.nature.com/articles/s41467-024-45739-5">these models give rise to qualitatively-similar conclusions</a>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mammal_sizes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/SSDinMammals.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mammal_sizes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/SSDinMammals.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 691 Columns: 18
 ── Column specification ────────────────────────────────────────────────────────
@@ -990,7 +1019,7 @@ dbl (12): massM, SDmassM, massF, SDmassF, lengthM, SDlengthM, lengthF, SDlen...
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mammal_sizes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mammal_sizes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 18
   Order       Family Species Scientific_Name massM SDmassM massF SDmassF lengthM
@@ -1014,38 +1043,38 @@ dbl (12): massM, SDmassM, massF, SDmassF, lengthM, SDlengthM, lengthF, SDlen...
 <li><p>Convert the data from wide to long format, so that there is only one column each for length, weight, and n and another column for the sex (male or female)</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="ot">&lt;-</span> mammal_sizes <span class="sc">%&gt;%</span> </span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"Order"</span>,<span class="st">"Family"</span>,<span class="st">"Species"</span>,<span class="st">"Scientific_Name"</span>, <span class="st">"massM"</span>, <span class="st">"massF"</span>,<span class="st">"lengthM"</span>,<span class="st">"lengthF"</span>,<span class="st">"n_M"</span>,<span class="st">"n_F"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_M <span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">&amp;</span> n_F <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>mammal_long_mass <span class="ot">&lt;-</span> mammal_long <span class="sc">%&gt;%</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>lengthM,<span class="sc">-</span>lengthF, <span class="sc">-</span>n_M, <span class="sc">-</span>n_F) <span class="sc">%&gt;%</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(massM, massF), <span class="at">names_to =</span> <span class="st">"sex"</span>, <span class="at">values_to =</span> <span class="st">"mass"</span>,</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span> <span class="st">"mass(.)"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Scientific_Name, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Scientific_Name, sex, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>mammal_long_length <span class="ot">&lt;-</span> mammal_long <span class="sc">%&gt;%</span> </span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>massM,<span class="sc">-</span>massF, <span class="sc">-</span>n_M, <span class="sc">-</span>n_F) <span class="sc">%&gt;%</span></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(lengthM, lengthF), <span class="at">names_to =</span> <span class="st">"sex"</span>, <span class="at">values_to =</span> <span class="st">"length"</span>,<span class="at">names_pattern =</span> <span class="st">"length(.)"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Scientific_Name, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Scientific_Name, sex, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) </span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>mammal_long_number <span class="ot">&lt;-</span> mammal_long <span class="sc">%&gt;%</span>  </span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>massM,<span class="sc">-</span>massF, <span class="sc">-</span>lengthM, <span class="sc">-</span>lengthF) <span class="sc">%&gt;%</span></span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(n_M, n_F), <span class="at">names_to =</span> <span class="st">"sex"</span>, <span class="at">values_to =</span> <span class="st">"number"</span>,<span class="at">names_pattern =</span> <span class="st">"n_(.)"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Scientific_Name, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Scientific_Name, sex, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="ot">&lt;-</span> <span class="fu">full_join</span>(mammal_long_mass, mammal_long_length) <span class="sc">%&gt;%</span></span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(mammal_long_number)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="ot">&lt;-</span> mammal_sizes <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"Order"</span>,<span class="st">"Family"</span>,<span class="st">"Species"</span>,<span class="st">"Scientific_Name"</span>, <span class="st">"massM"</span>, <span class="st">"massF"</span>,<span class="st">"lengthM"</span>,<span class="st">"lengthF"</span>,<span class="st">"n_M"</span>,<span class="st">"n_F"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_M <span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">&amp;</span> n_F <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>mammal_long_mass <span class="ot">&lt;-</span> mammal_long <span class="sc">%&gt;%</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>lengthM,<span class="sc">-</span>lengthF, <span class="sc">-</span>n_M, <span class="sc">-</span>n_F) <span class="sc">%&gt;%</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(massM, massF), <span class="at">names_to =</span> <span class="st">"sex"</span>, <span class="at">values_to =</span> <span class="st">"mass"</span>,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_pattern =</span> <span class="st">"mass(.)"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Scientific_Name, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Scientific_Name, sex, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>mammal_long_length <span class="ot">&lt;-</span> mammal_long <span class="sc">%&gt;%</span> </span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>massM,<span class="sc">-</span>massF, <span class="sc">-</span>n_M, <span class="sc">-</span>n_F) <span class="sc">%&gt;%</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(lengthM, lengthF), <span class="at">names_to =</span> <span class="st">"sex"</span>, <span class="at">values_to =</span> <span class="st">"length"</span>,<span class="at">names_pattern =</span> <span class="st">"length(.)"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Scientific_Name, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Scientific_Name, sex, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>mammal_long_number <span class="ot">&lt;-</span> mammal_long <span class="sc">%&gt;%</span>  </span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>massM,<span class="sc">-</span>massF, <span class="sc">-</span>lengthM, <span class="sc">-</span>lengthF) <span class="sc">%&gt;%</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(n_M, n_F), <span class="at">names_to =</span> <span class="st">"sex"</span>, <span class="at">values_to =</span> <span class="st">"number"</span>,<span class="at">names_pattern =</span> <span class="st">"n_(.)"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Scientific_Name, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Scientific_Name, sex, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="ot">&lt;-</span> <span class="fu">full_join</span>(mammal_long_mass, mammal_long_length) <span class="sc">%&gt;%</span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(mammal_long_number)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Joining with `by = join_by(Order, Family, Species, Scientific_Name, sex)`
 Joining with `by = join_by(Order, Family, Species, Scientific_Name, sex)`</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(mammal_long_mass,mammal_long_length,mammal_long_number) <span class="co"># clear, don't need</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mammal_long)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(mammal_long_mass,mammal_long_length,mammal_long_number) <span class="co"># clear, don't need</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mammal_long)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 8
 # Groups:   Scientific_Name, sex [6]
@@ -1059,10 +1088,38 @@ Joining with `by = join_by(Order, Family, Species, Scientific_Name, sex)`</code>
 6 Afrosoricida Tenrecidae      Large-… Geogale aurita  F       7       NA     15</code></pre>
 </div>
 </div>
+<p>First, let’s quickly look at our <code>mass</code> values. Remember this study includes a huge range of mammals, all the way from the tiny 3g Pygmy shrew to the 12 metric tonne Baird’s beaked whale! If we try to visualize the distribution of masses on a regular scale, we see that the masses are very non-evenly distributed and have a massive range.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mammal_long, <span class="fu">aes</span>(<span class="at">x =</span> mass))<span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec09-linear-models_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This is the perfect situation to apply a log transform. We’ll use log base 10, since it lends to an easy interpretation (if log10(mass) = 3, the mass is 10^3 g = 1000 g = 1 kg)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mammal_long, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log10</span>(mass)))<span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec09-linear-models_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Now let’s do the regression!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mammal_size_sex_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(mass) <span class="sc">~</span> sex, <span class="at">data =</span> mammal_long)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mammal_size_sex_fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>mammal_size_sex_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(mass) <span class="sc">~</span> sex, <span class="at">data =</span> mammal_long)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mammal_size_sex_fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1087,17 +1144,17 @@ F-statistic: 0.1539 on 1 and 780 DF,  p-value: 0.695</code></pre>
 <p>Remarkably, no effect! Males are not larger than females. The <span class="math inline">\(p\)</span> value is not only <span class="math inline">\(&gt;\alpha = 0.05\)</span>, the size of the estimated effect is quite small. This is pretty suprising, given the large number of papers that <em>claim</em>, despite the lack of evidence, that there are stark differences in size between male and female individuals.</p>
 <p>It’s still important to visualize our effects, but in this case that’s a little more difficult that just plotting a line. Instead, let’s use a</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> <span class="fu">log</span>(mass))) <span class="sc">+</span> </span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>mammal_long <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> <span class="fu">log</span>(mass))) <span class="sc">+</span> </span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span> </span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group =</span> <span class="dv">1</span>), <span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec09-linear-models_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec09-linear-models_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1132,17 +1189,17 @@ F-statistic: 0.1539 on 1 and 780 DF,  p-value: 0.695</code></pre>
 </section>
 <section id="example-does-sexual-dimorphism-vary-by-order" class="level3" data-number="9.6.3">
 <h3 data-number="9.6.3" class="anchored" data-anchor-id="example-does-sexual-dimorphism-vary-by-order"><span class="header-section-number">9.6.3</span> Example: Does sexual dimorphism vary by order?</h3>
-<p>First, let’s try to extend our examination of the impact of sex on body mass by trying to see if there is a different relationship depending on the Order the species belongs to. To do this, we’ll regress on both sex and Order, and their interaction.</p>
-<p>First, we’ll filter for Orders that have at least 10 species with both male and female data, since we expect it to be difficult to identify effects otherwise. Note that we don’t need to do this : regression analyses already takes into account uncertainty due to low samples and be very unlikely to reject a null hypothesis - but it doint so will simplify our output and interpretation</p>
+<p>Why is it assumed to be common knowledge that males are larger than females, if the data seems to show no evidence of this? The authors hypothesized that this might be due to most research focusing on larger, more “charismatic” animals, like primates, felines and canines, undulates, livestock, etc. Maybe there is sexual dimorphism in some groups of mammals but not others. To examine this, let’s extend our analysis of the impact of sex on body mass by trying to see if there is a different relationship depending on the Order the species belongs to. To do this, we’ll regress on both sex and Order, and their interaction.</p>
+<p>First, we’ll filter for Orders that have at least 10 species with both male and female data, since we expect it to be difficult to identify effects otherwise. Note that we don’t need to do this : regression analyses already takes into account uncertainty due to low samples and be very unlikely to reject a null hypothesis - but it doing so will simplify our output and interpretation</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mammal_long_order10 <span class="ot">&lt;-</span> mammal_long <span class="sc">%&gt;%</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Order,sex) <span class="sc">%&gt;%</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_Order =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_Order <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>n_Order)</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>mammal_size_sex_order_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(mass) <span class="sc">~</span> sex<span class="sc">+</span>Order<span class="sc">+</span>sex<span class="sc">*</span>Order, <span class="at">data =</span> mammal_long_order10)</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mammal_size_sex_order_fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>mammal_long_order10 <span class="ot">&lt;-</span> mammal_long <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Order,sex) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_Order =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_Order <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>n_Order)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>mammal_size_sex_order_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(mass) <span class="sc">~</span> sex<span class="sc">+</span>Order<span class="sc">+</span>sex<span class="sc">*</span>Order, <span class="at">data =</span> mammal_long_order10)</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mammal_size_sex_order_fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1186,10 +1243,9 @@ F-statistic: 140.4 on 17 and 716 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h3 data-number="9.6.4" class="anchored" data-anchor-id="example-do-body-dimensions-vary-by-sex-or-order"><span class="header-section-number">9.6.4</span> Example: Do body dimensions vary by sex or Order?</h3>
 <p>In addition to body mass, our data set also contains body length. Maybe something about the distribution of body mass - i.e., the relationship between body mass and length - differs by sex. Let’s regress body size on length - but first, let’s make a plot. We’ll use the same filtered data we created above</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>mammal_long_order10 <span class="sc">%&gt;%</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> length, <span class="at">y =</span> mass)) <span class="sc">+</span> </span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#ggplot(aes(x = log(length), y = log(mass))) + </span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>mammal_long_order10 <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> length, <span class="at">y =</span> mass)) <span class="sc">+</span> </span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 400 rows containing missing values or values outside the scale range
 (`geom_point()`).</code></pre>
@@ -1197,16 +1253,16 @@ F-statistic: 140.4 on 17 and 716 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec09-linear-models_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec09-linear-models_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Length and weight both vary over enormous scales (think about comparing a mouse to an elephant) - so this is the perfect situation to do a transformation. Let’s try log</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>mammal_long_order10 <span class="sc">%&gt;%</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log10</span>(length), <span class="at">y =</span> <span class="fu">log10</span>(mass))) <span class="sc">+</span> </span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>mammal_long_order10 <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log10</span>(length), <span class="at">y =</span> <span class="fu">log10</span>(mass))) <span class="sc">+</span> </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 400 rows containing missing values or values outside the scale range
 (`geom_point()`).</code></pre>
@@ -1214,15 +1270,15 @@ F-statistic: 140.4 on 17 and 716 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec09-linear-models_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec09-linear-models_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Now let’s fit a regression</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>mass_vs_length_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(mass) <span class="sc">~</span> <span class="fu">log10</span>(length), <span class="at">data =</span> mammal_long_order10)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mass_vs_length_fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>mass_vs_length_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(mass) <span class="sc">~</span> <span class="fu">log10</span>(length), <span class="at">data =</span> mammal_long_order10)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mass_vs_length_fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1249,10 +1305,115 @@ F-statistic:  1283 on 1 and 332 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="challenge-3" class="level3" data-number="9.6.5">
 <h3 data-number="9.6.5" class="anchored" data-anchor-id="challenge-3"><span class="header-section-number">9.6.5</span> Challenge</h3>
 <ol type="1">
-<li>How would you interpret the coefficient here? Remember that the data has been log transformed</li>
-<li>List at least 2 ways this data violates the assumptions of simple linear regression with this current model fit</li>
-<li>Examine whether including sex or Order would explain this data better. Before fitting, use a visualization to motivate your choice, and after fitting, interpret the results</li>
+<li><p>How would you interpret the coefficient here? Remember that the data has been log transformed</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># log10(mass) = 1.88663*log10(length)</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="co"># mass = 10^[1.88663 log10(length)]</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># mass = 10^1.88663 * length</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># mass = 77 * length</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></li>
+<li><p>List at least 2 ways this data violates the assumptions of simple linear regression with this current model fit</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># it doesn't look like the error at any length value would be normal, since there appear to be clusters</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co"># x is also measured with error</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></li>
+<li><p>Examine whether including sex or Order would explain this data better. Before fitting, use a visualization to motivate your choice, and after fitting, interpret the results</p></li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>mammal_long_order10 <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log10</span>(length), <span class="at">y =</span> <span class="fu">log10</span>(mass), <span class="at">color =</span> sex)) <span class="sc">+</span> </span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 400 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec09-linear-models_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(mass) <span class="sc">~</span> <span class="fu">log10</span>(length) <span class="sc">*</span> sex, <span class="at">data =</span> mammal_long_order10) <span class="co"># Note that specifying interactions like this also includes the single terms by default</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_output)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log10(mass) ~ log10(length) * sex, data = mammal_long_order10)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.00099 -0.21898 -0.01495  0.25183  1.67417 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        -0.10102    0.08296  -1.218    0.224    
+log10(length)       1.83192    0.07430  24.657   &lt;2e-16 ***
+sexM               -0.07033    0.11728  -0.600    0.549    
+log10(length):sexM  0.05943    0.10423   0.570    0.569    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4517 on 330 degrees of freedom
+  (400 observations deleted due to missingness)
+Multiple R-squared:  0.7947,    Adjusted R-squared:  0.7928 
+F-statistic: 425.8 on 3 and 330 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No significant impact of sex</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>mammal_long_order10 <span class="sc">%&gt;%</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log10</span>(length), <span class="at">y =</span> <span class="fu">log10</span>(mass), <span class="at">color =</span> Order)) <span class="sc">+</span> </span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 400 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec09-linear-models_files/figure-html/unnamed-chunk-30-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log10</span>(mass) <span class="sc">~</span> <span class="fu">log10</span>(length) <span class="sc">*</span> Order, <span class="at">data =</span> mammal_long_order10) <span class="co"># Note that specifying interactions like this also includes the single terms by default</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_output)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log10(mass) ~ log10(length) * Order, data = mammal_long_order10)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.97085 -0.17460  0.01546  0.17325  1.34016 
+
+Coefficients:
+                                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                         -0.9868     0.6175  -1.598  0.11104    
+log10(length)                        2.6657     0.2631  10.134  &lt; 2e-16 ***
+OrderCarnivora                       3.6095     0.7072   5.104 5.74e-07 ***
+OrderChiroptera                      1.0152     0.6256   1.623  0.10563    
+OrderDidelphimorphia                 1.3707     0.6868   1.996  0.04682 *  
+OrderDiprotodontia                   3.5561     0.7383   4.816 2.26e-06 ***
+OrderEulipotyphla                   -0.1220     0.7206  -0.169  0.86571    
+OrderPrimates                        3.5017     0.7259   4.824 2.19e-06 ***
+OrderRodentia                        0.3811     0.6510   0.585  0.55871    
+log10(length):OrderCarnivora        -2.3097     0.3117  -7.410 1.15e-12 ***
+log10(length):OrderChiroptera       -0.9311     0.2987  -3.117  0.00200 ** 
+log10(length):OrderDidelphimorphia  -1.1856     0.3642  -3.255  0.00125 ** 
+log10(length):OrderDiprotodontia    -2.1816     0.3611  -6.042 4.25e-09 ***
+log10(length):OrderEulipotyphla     -0.2545     0.4738  -0.537  0.59145    
+log10(length):OrderPrimates         -2.0941     0.3331  -6.286 1.07e-09 ***
+log10(length):OrderRodentia         -0.5315     0.3215  -1.653  0.09926 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.3072 on 318 degrees of freedom
+  (400 observations deleted due to missingness)
+Multiple R-squared:  0.9085,    Adjusted R-squared:  0.9042 
+F-statistic: 210.5 on 15 and 318 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Significant effects for most orders</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
 </section>

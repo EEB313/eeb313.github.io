@@ -637,9 +637,9 @@ window.Quarto = {
 </div>
 </div>
 <p>d. Draw a random number to represent the exact number of mutations observed in a particular genome, using the genome length and mutation rate above, and assign this to <code>num_mutations</code>. (0.25)</p>
-<p>e. To choose (randomly) the precise positions in the genome where mutations will occur, create a vector containing a number for each genomic position (<code>genome_indices</code>), and then sample a random subset of size <code>num_mutations</code> from this vector. Finally, <code>sort</code> them into ascending order, and call the final answer <code>mutation_indices</code> (0.5 marks)</p>
+<p>e. To choose (randomly) the precise positions in the genome where mutations will occur, first create a vector that containing a number indicating each genomic position (<code>genome_indices</code>). Then sample a random subset of size <code>num_mutations</code> from this vector. These will be the locations of the mutations on the genome. Finally, <code>sort</code> the positions of the mutations into ascending order, and call the final answer <code>mutation_indices</code> (0.5 marks)</p>
 <p>f. Calculate the number of nucleotides <em>between</em> each mutation using the <code>diff</code> function, and call this <code>inter_mutation_distance</code> (0.25 marks)</p>
-<p>g. Write a single code chunk to complete all of these steps together and plot a histogram of inter_mutation_distance. Increase the genome length to 10^6 for your final results. Adjust your histogram so that each single nucleotide extra distance is its own bin. Describe the shape of the distribution that you see (0.75 marks)</p>
+<p>g. Write a single code chunk to complete all of these steps (c,d,e,f) together and plot a histogram of inter_mutation_distance. Increase the genome length to 10^6 for your final results. Adjust your histogram so that each single nucleotide extra distance is its own bin. Describe the shape of the distribution that you see (0.75 marks)</p>
 </section>
 <section id="generating-sampling-distributions-1.5-pts" class="level2">
 <h2 class="anchored" data-anchor-id="generating-sampling-distributions-1.5-pts">2. Generating sampling distributions (1.5 pts)</h2>
