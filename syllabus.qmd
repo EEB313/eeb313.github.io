@@ -112,7 +112,7 @@ This schedule is tentative
 | Problem Set 2        | Individual | Quercus      | Jan 21           | 8   |
 | Problem Set 3        | Individual | Quercus      | Jan 28           | 8   |
 | Problem Set 4        | Individual | Quercus      | Feb 13           | 8   |
-| Problem Set 5        | Individual | Quercus      | Feb 20           | 8   |
+| Problem Set 5        | Individual | Quercus      | Feb 23           | 8   |
 | Project proposal     | Group      | Quercus      | Mar 5            | 3   |
 | Challenge assignment | Individual | Quercus      | Mar 11           | 20  |
 | Mid-project update   | Group      | GitHub       | Mar 18           | 6   |

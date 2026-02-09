@@ -81,6 +81,8 @@ book:
         href: assignments/papers/plant-biomass-paper.pdf
       - text: "SSDinMammals-paper.pdf"
         href: assignments/papers/SSDinMammals-paper.pdf
+      - text: "african-lion-ages-paper.pdf"
+        href: lectures/papers/african-lion-ages-paper-2004.pdf
     - part: "Miscellaneous notes"
       chapters:
         - lectures/outbreak-investigation.qmd
@@ -101,7 +103,7 @@ format:
     code-overflow: wrap
     respect-user-color-scheme: true
 
-extra_files:
+resources:
 #   - assignment-00.Rmd
   - assignments/assignment-01.Rmd
   - assignments/assignment-02.Rmd

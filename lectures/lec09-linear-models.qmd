@@ -118,7 +118,7 @@ The notation "\~" is used in statistics to mean that a random variable is drawn 
 
 In turn, this specifies what the likelihood function is for the data $(y_1,x_1),\dots,(y_n,x_n)$:
 
-$$ L(\beta_0,\beta_1,\sigma^2|\boldsymbol{x}_i,\boldsymbol{y}_i) = Normal(\mu = \beta_0 + \beta_1 x,\sigma^2) =\frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(y-\mu)^2/2\sigma^2}.$$
+$$ L(\boldsymbol{x}_i,\boldsymbol{y}_i|\beta_0,\beta_1,\sigma^2) = Normal(\mu = \beta_0 + \beta_1 x,\sigma^2) =\frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(y-\mu)^2/2\sigma^2}.$$
 
 **Fitting a linear regression model is actually just a maximum likelihood problem!** The result of fitting a regression model is a maximum likelihood estimation of the parameters $\beta_0, \beta_1$ and $\sigma$ . For ordinary linear regression, it turns out that you can actually find the maximum likelihood values with pen and paper math (calculus!), instead of having to search over a range of values like we've been doing, but for more advanced models, numerical optimization procedures are used to efficiently search for the combination of parameters that leads to the maximum likelihood.
 
@@ -126,18 +126,32 @@ $$ L(\beta_0,\beta_1,\sigma^2|\boldsymbol{x}_i,\boldsymbol{y}_i) = Normal(\mu = 
 
 1.  What assumptions are we making about the data when we fit simple linear model? What must be true of the data? Discuss.
 
-    ```{r, include=F}
-    # Each {X,Y} data point is measured independently
-    # Y is continuous (not discrete)
-    # The variance of Y at each x is constant/homogenous
-    # Y is normally distributed for each X value (*only needed for hypothesis testing and generating CIs, not for just doing regression fits)
-    # The predictor, x, is a number and is measured without error (i.e., is not a random variable)
-    # Y depends **linearly** on x
-    ```
+    -   Each {X,Y} data point is measured independently
+
+    -   Y is continuous (not discrete)
+
+    -   The variance of Y at each x is constant/homogenous
+
+    -   Y is normally distributed for each X value (only needed for hypothesis testing and generating CIs, not for just doing regression fits)
+
+    -   The predictor, x, is a number and is measured without error (i.e., is not a random variable)
+
+    -   Y depends **linearly** on x
+
+        ```{r, include=F}
+        # Each {X,Y} data point is measured independently
+        # Y is continuous (not discrete)
+        # The variance of Y at each x is constant/homogenous
+        # Y is normally distributed for each X value (*only needed for hypothesis testing and generating CIs, not for just doing regression fits)
+        # The predictor, x, is a number and is measured without error (i.e., is not a random variable)
+        # Y depends **linearly** on x
+        ```
 
 2.  Use the `dnorm` function to calculate the likelihood of observing a value Y = 10 paired with X = 5 when $\beta_0 = 0.5$ and $\beta_0 = 2$ and $\sigma = 1$
 
-```{r, include = FALSE}
+*Hint: Don't get confused by the naming of the argument `x` in `dnorm` ... `x` is the value you want to calculate the probability (aka likelihood) of. In our case, we are calling this `Y`.*
+
+```{r}
 dnorm(x = 10, mean = 0.5+5*2, sd = 1 )
 ```
 
@@ -183,11 +197,17 @@ Let's interpret the output here!
 
 1.  What is the best estimate for each parameter, including 95% confidence intervals? Can you write the equation of the best fit curve?
 
-```{r, include = FALSE}
+```{r}
+B0 <- lionFitOutputSummary$coefficients["(Intercept)","Estimate"]
+B1 <- lionFitOutputSummary$coefficients["proportionBlack","Estimate"]
 
+# predict lion age if 50% nose black
+B0 + B1*0.5
 ```
 
 2.  Is there significant evidence that age varies with the proportion of the nose that is black? Describe the results of the hypothesis test in careful statistical language.
+
+    *Answer: Yes, there is significant evidence of a linear relationship between the proportion of the nose that is black and age among males lines, and we can reject the null hypothesis of no relationships (i.e., that the slope is zero, p \< 1e-7)*
 
 ```{r, include = FALSE}
 
@@ -235,6 +255,8 @@ Note that prediction interval is wider than the confidence bands because predict
 ### Challenge
 
 The authors simulations suggest that hunting only males 6 years of age and older would have minimal impact on the population sustainability. What is the range of nose colourations for which an age prediction of 6 years is within the 95% prediction interval. For what ages do these colourations correspond to the average levels?
+
+*Answer: just looking at the graph, it seems like at a proportion black as low as 0.1 and as high as 0.8, an age of 6 years is within the 95% prediction interval. These values correspond to the mean proportions for ages 4 and 9, respectively.*
 
 ```{r, include = FALSE}
 
@@ -308,6 +330,18 @@ rm(mammal_long_mass,mammal_long_length,mammal_long_number) # clear, don't need
 
 head(mammal_long)
 
+```
+
+First, let's quickly look at our `mass` values. Remember this study includes a huge range of mammals, all the way from the tiny 3g Pygmy shrew to the 12 metric tonne Baird's beaked whale! If we try to visualize the distribution of masses on a regular scale, we see that the masses are very non-evenly distributed and have a massive range.
+
+```{r}
+ggplot(mammal_long, aes(x = mass))+ geom_histogram()
+```
+
+This is the perfect situation to apply a log transform. We'll use log base 10, since it lends to an easy interpretation (if log10(mass) = 3, the mass is 10\^3 g = 1000 g = 1 kg)
+
+```{r}
+ggplot(mammal_long, aes(x = log10(mass)))+ geom_histogram()
 ```
 
 Now let's do the regression!
@@ -386,9 +420,9 @@ Other interactions can also be modeled. For example, suppose we were interested 
 
 ### Example: Does sexual dimorphism vary by order?
 
-First, let's try to extend our examination of the impact of sex on body mass by trying to see if there is a different relationship depending on the Order the species belongs to. To do this, we'll regress on both sex and Order, and their interaction.
+Why is it assumed to be common knowledge that males are larger than females, if the data seems to show no evidence of this? The authors hypothesized that this might be due to most research focusing on larger, more "charismatic" animals, like primates, felines and canines, undulates, livestock, etc. Maybe there is sexual dimorphism in some groups of mammals but not others. To examine this, let's extend our analysis of the impact of sex on body mass by trying to see if there is a different relationship depending on the Order the species belongs to. To do this, we'll regress on both sex and Order, and their interaction.
 
-First, we'll filter for Orders that have at least 10 species with both male and female data, since we expect it to be difficult to identify effects otherwise. Note that we don't need to do this : regression analyses already takes into account uncertainty due to low samples and be very unlikely to reject a null hypothesis - but it doint so will simplify our output and interpretation
+First, we'll filter for Orders that have at least 10 species with both male and female data, since we expect it to be difficult to identify effects otherwise. Note that we don't need to do this : regression analyses already takes into account uncertainty due to low samples and be very unlikely to reject a null hypothesis - but it doing so will simplify our output and interpretation
 
 ```{r}
 
@@ -411,7 +445,6 @@ In addition to body mass, our data set also contains body length. Maybe somethin
 ```{r}
 mammal_long_order10 %>%
   ggplot(aes(x = length, y = mass)) + 
-  #ggplot(aes(x = log(length), y = log(mass))) + 
   geom_point()
 ```
 
@@ -433,22 +466,24 @@ summary(mass_vs_length_fit)
 ### Challenge
 
 1.  How would you interpret the coefficient here? Remember that the data has been log transformed
+
+    ```{r}
+    # log10(mass) = 1.88663*log10(length)
+    # mass = 10^[1.88663 log10(length)]
+    # mass = 10^1.88663 * length
+    # mass = 77 * length
+    ```
+
 2.  List at least 2 ways this data violates the assumptions of simple linear regression with this current model fit
+
+    ```{r}
+    # it doesn't look like the error at any length value would be normal, since there appear to be clusters
+    # x is also measured with error
+    ```
+
 3.  Examine whether including sex or Order would explain this data better. Before fitting, use a visualization to motivate your choice, and after fitting, interpret the results
 
-```{r, include = FALSE}
-# log10(mass) = 1.88663*log10(length)
-# mass = 10^[1.88663 log10(length)]
-# mass = 10^1.88663 * length
-# mass = 77 * length
-```
-
-```{r, include = FALSE}
-# it doesn't look like the error at any length value would be normal, since there appear to be clusters
-# x is also measured with error
-```
-
-```{r, include = FALSE}
+```{r}
 
 mammal_long_order10 %>%
   ggplot(aes(x = log10(length), y = log10(mass), color = sex)) + 
