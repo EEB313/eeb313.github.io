@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-01.html" rel="next">
+<link href="../lectures/lec09-linear-models.html" rel="next">
 <link href="../lectures/lec07-random-variables.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -424,6 +424,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec08-inference.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability, likelihood, and statistical inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec09-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to linear regression models</span></span></a>
   </div>
 </li>
       </ul>
@@ -998,10 +1004,16 @@ the `.groups` argument.</code></pre>
 </div>
 </div>
 </div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(surveys_kr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10248    13</code></pre>
+</div>
+</div>
 <p>And take a look at the difference in average weight by sex</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>surveys_kr <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>surveys_kr <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight =</span> <span class="fu">mean</span>(weight), <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   sex   mean_weight     n
@@ -1011,15 +1023,16 @@ the `.groups` argument.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>weight_diff <span class="ot">&lt;-</span> <span class="fu">mean</span>(surveys_kr[surveys_kr<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"M"</span>,]<span class="sc">$</span>weight) <span class="sc">-</span> <span class="fu">mean</span>(surveys_kr[surveys_kr<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"F"</span>,]<span class="sc">$</span>weight)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>weight_diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>weight_diff <span class="ot">&lt;-</span> <span class="fu">mean</span>(surveys_kr[surveys_kr<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"M"</span>,]<span class="sc">$</span>weight) <span class="sc">-</span> <span class="fu">mean</span>(surveys_kr[surveys_kr<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">"F"</span>,]<span class="sc">$</span>weight)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>weight_diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.743449</code></pre>
 </div>
 </div>
 <p>Now we want to understand - is this difference more that we would expect by chance?</p>
+<p>We can use the popular Student’s t-test that is a favourite of statistics 101 classes everywhere to test this:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight <span class="sc">~</span> sex, <span class="at">data =</span> surveys_kr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight <span class="sc">~</span> sex, <span class="at">data =</span> surveys_kr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -1034,23 +1047,32 @@ mean in group F mean in group M
        41.60968        44.35313 </code></pre>
 </div>
 </div>
-<p>Another way!</p>
+<p>However, there is another way we can do this, without having to remember anything about t-tests! Another way of thinking about what it means to test for a significant differences in weight by sex is to say we are testing the null hypothesis that weight is the same by sex. Under that hypothesis, if we shuffled the sex labels on each animal, the distribution of weights should roughly be the same. We want to see if our data is consistent with what we’d expect if the sex labels were shuffled. We might not see NO difference - some differences between groups can arise by chance when we have small samples sizes. But, we can simulate this null hypothesis many times to understand how much sex difference we expect to see just do to chance, and then compare it to what we actually see in our data.</p>
+<p>This procedure is an example of a permutation test, which is a very powerful tool in statistics and increasingly used now that computers can very quickly simulate this sort of res-sampled data. The procedure we follow below is:</p>
+<ul>
+<li><p>Take the entire list of measured weights, and randomly shuffle their order</p></li>
+<li><p>Assign the first half of the measurements (roughly 5000/10000) to be male), and the second half to be female</p></li>
+<li><p>Re-calculate the difference in weights between male and female in this simulated data</p></li>
+<li><p>Repeat this many times (1000 here), recording the weight differences calculated each time</p></li>
+<li><p>Examine the distribution of weight differences from this simulated, permuted data. This represents the expected weight difference by sex under the null hypothesis of no difference.</p></li>
+<li><p>See where in this distribution our observed weight difference falls. Calculate what % of the null distribution is more extreme than our observed value (e.g., 2*(1-quantile(observed, simulated)). This is the p value for our hypothesis test</p></li>
+</ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>N_samples <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>test_weight_diff_samples <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,N)</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N){</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  test_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> surveys_kr<span class="sc">$</span>weight) </span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  test_sample_male <span class="ot">&lt;-</span> test_sample[<span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>]</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  test_sample_female <span class="ot">&lt;-</span> test_sample[<span class="dv">5000</span><span class="sc">:</span><span class="dv">10000</span>]</span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  test_weight_diff <span class="ot">&lt;-</span> <span class="fu">mean</span>(test_sample_male) <span class="sc">-</span> <span class="fu">mean</span>(test_sample_female)</span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  test_weight_diff_samples[i] <span class="ot">&lt;-</span> test_weight_diff</span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>N_samples <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>test_weight_diff_samples <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,N_samples)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_samples){</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  test_sample <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> surveys_kr<span class="sc">$</span>weight) </span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  test_sample_male <span class="ot">&lt;-</span> test_sample[<span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>]</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  test_sample_female <span class="ot">&lt;-</span> test_sample[<span class="dv">5000</span><span class="sc">:</span><span class="dv">10000</span>]</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  test_weight_diff <span class="ot">&lt;-</span> <span class="fu">mean</span>(test_sample_male) <span class="sc">-</span> <span class="fu">mean</span>(test_sample_female)</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>  test_weight_diff_samples[i] <span class="ot">&lt;-</span> test_weight_diff</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">weight_diffs =</span> test_weight_diff_samples), <span class="fu">aes</span>(<span class="at">x =</span> weight_diffs)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> weight_diff, <span class="at">color =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">weight_diffs =</span> test_weight_diff_samples), <span class="fu">aes</span>(<span class="at">x =</span> weight_diffs)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> weight_diff, <span class="at">color =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
 </div>
@@ -1061,6 +1083,13 @@ mean in group F mean in group M
 </figure>
 </div>
 </div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(test_weight_diff_samples <span class="sc">&gt;</span> weight_diff)<span class="sc">/</span>N_samples</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#max p value 1/N_samples = 0.001</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -1494,8 +1523,8 @@ mean in group F mean in group M
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-01.html" class="pagination-link" aria-label="Assignment 1: Basic R (8 marks)">
-        <span class="nav-page-text">Assignment 1: Basic R (8 marks)</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/lec09-linear-models.html" class="pagination-link" aria-label="Introduction to linear regression models">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to linear regression models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
