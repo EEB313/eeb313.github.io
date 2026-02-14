@@ -21,6 +21,7 @@ book:
       - lectures/lec07-random-variables.qmd
       - lectures/lec08-inference.qmd
       - lectures/lec09-linear-models.qmd
+      - lectures/lec10-advanced-linear-models.qmd
       # - lectures/lec08-intro-inference-1.qmd
       # - lectures/lec09-intro-inference-2.qmd
       # - lectures/lec10-linear-models-1.qmd
@@ -36,6 +37,7 @@ book:
       - assignments/assignment-02.qmd
       - assignments/assignment-03.qmd
       - assignments/assignment-04.qmd
+      - assignments/assignment-05.qmd
       # - assignments/assignment-04.qmd
       # - assignments/assignment-05.qmd
       # - assignments/challenge-assignment.qmd
@@ -63,8 +65,10 @@ book:
       #     href: lectures/data/bmr.csv
       #   - text: "Pigot2020.csv"
       #     href: lectures/data/Pigot2020.csv
-      #   - text: "influenza_cities.csv"
-      #     href: lectures/data/influenza_cities.csv
+      - text: "influenza_cities.csv"
+        href: assignments/data/influenza_cities.csv
+      - text: "fruit_trees.csv"
+        href: assignments/data/fruit_trees.csv
       #   - text: "meas.csv"
       #     href: lectures/data/meas.csv
       #   - text: "satellites.csv"
@@ -109,6 +113,7 @@ resources:
   - assignments/assignment-02.Rmd
   - assignments/assignment-03.Rmd
   - assignments/assignment-04.Rmd
+  - assignments/assignment-05.Rmd
 #   - assignment-04.Rmd
 #   - assignment-05.Rmd
 #   - assignment-00.qmd

@@ -1,0 +1,671 @@
+# Lecture 10: Advanced linear models - generalized and multilevel
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Lesson preamble
+
+> ### Learning Objectives
+>
+> -   Review the major assumptions of simple linear regression and examples of data it's not appropriate for
+>
+> -   Understand the purpose, structure, and assumptions of generalized linear models (GLMs)
+>
+> -   Implement GLMs using the `glm` package and analyze the output
+>
+> -   Understand the concept of nested or grouped data and limitations to handling it with simple linear regression
+>
+> -   Understand the purpose, structure, and assumptions of mixed-effects models (also known as multi-level or hierarchical)
+>
+> -   Practice fitting mixed-effects models to data using the `lme4` package and evaluating the output
+
+## Generalized linear models (GLMs)
+
+```{r packages, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+### Motivating example
+
+We're going to look at data from a [study](https://www.zoology.ubc.ca/~schluter/reprints/schluter%20&%20smith%201986%20evolution%20natural%20selection%20in%20song%20sparrow.pdf) where the authors tried to directly measure natural selection. They examined the survival of the bird song sparrows (Melospiza melodia) through multiple years and wanted to relate this to measurements of body parts on the birds, hypothesizing that these physical traits affected the bird's abilities to procure food.
+
+This dataset specifically looks at survival over the winter in juvenile females. The data contains an entry for each bird, with measurements of beak and body dimensions: body mass (g), wing length, tarsus length, beak length, beak depth, beak width (all in mm), year of birth, and also indicates whether or not they survived (0 = died, 1 = survived). The goal of the study was to understand which physical traits are associated with survival.
+
+Let's load in the data
+
+```{r}
+sparrow <- read_csv("https://www.zoology.ubc.ca/~bio501/R/data/songsparrow.csv")
+sparrow
+```
+
+```{r}
+sparrow %>% ggplot(aes(x = tarsus, y = survival)) + 
+  geom_point(position = position_jitter(width = 0.05, height = 0.05)) + 
+  geom_smooth(method = lm, se = TRUE) +
+  scale_y_continuous(breaks = seq(0,1,0.2), limits =c(-0.1,1.1))
+```
+
+We can see a few problems right away! The Y data is clearly not normally distributed conditional on x: it's binary. And, the prediction curve suggests that for tarsus lengths over \~21mm survival could be less than zero, and for tarsus less than \~18cm, that it could be greater than 1!
+
+Let's run the regression just to see more issues
+
+```{r}
+sparrowOutput <- lm(survival ~ tarsus, data = sparrow)
+summary(sparrowOutput)
+```
+
+Despite there being a highly-significant relationship between survival and taurus length, it looks like a very small $R^2$ value. Let's look at our diagnostic plots:
+
+```{r}
+plot(sparrowOutput)
+```
+
+There are some serious violations here!
+
+All of this suggest that this is NOT a case we should be using simple linear regression. We need to find a different type of model that allows for this sort of outcome variable.
+
+### Introduction to GLMs
+
+In the last lecture, we saw how linear models can be used to describe relationships between a response variable and predictors when the data is continuous and normally distributed, or can be transformed so that this assumption is not violated.
+
+However, often in biology, we are interested in predicting or explaining variables that violate these assumptions. For example, we might be interested in a *binary* response (e.g., survival after infection) and how it changes with a continuous predictor (e.g., host age). Or, we might be interested in a *count* outcome, like how the (integar) number of times a rare event occurs depends on the environment. In these cases we can use a more general form of simple linear regression, called a **generalized linear model** (GLMs)
+
+You might have heard of *logistic regression* or *Poisson regression* before; they are actually just special cases of the more broad framework called generalized linear models.
+
+There are many example types of data we need these models for, such as
+
+-   Count of the number of individuals or the number of occurrances of an event
+
+-   Proportions of individuals (or events) with one trait or outcome vs another
+
+-   Presence/absence of a trait or outcome
+
+-   Highly-overdispersed quantities (large variance, skewed distributions), such as number of sexual partners
+
+### GLMs: structure and assumptions
+
+Similar to simple linear models, GLMs describe how the mean of a response variable changes as a function of the predictors. However, they allow us to work with data that [do not satisfy the assumptions]{.underline} required for simple linear regression, including data where
+
+-   $Y$ values may not be continuous
+
+-   Errors are not normally distributed (conditional on predictors $x$)
+
+-   Error variance depends on $x$ or on the mean $Y$ value
+
+A GLM models the transformed mean of a response variable $Y_i$ as a linear combination of the predictors $x_1,\dots,x_p$. The goal of using a GLM is often to estimate how the predictors (e.g., sex and previous exposure to the disease) affect the response (e.g., infection status). The transformation of the response is done using a "link" function $g(\cdot)$ that is specific to the distribution which used to model the data. Written out, a GLM is of the form
+
+$$g(\mu_i) = \beta_0 + \beta_1 x_{1i} + \cdots \beta_p x_{pi}.$$
+
+The link functions for the Normal, Gamma, Binomial, Poisson, and a few other distributions are known. In general, GLMs apply when the data are modeled using a member of the [exponential family](https://en.wikipedia.org/wiki/Exponential_family). The distributions will have a mean parameter $\mu$ and, sometimes, a parameter $\tau$ which characterizes the dispersion around the mean. *GLMs are fitted using by maximizing the likelihood function that results from assuming the data arise from a distribution in the exponential family (with a mean and dispersion that depend on the predictors), using using numerical optimization methods.*
+
+### Interpretation of the effects
+
+Notice that, in a GLM, because the mean of the response been transformed in a particular way, the coefficients must be interpreted carefully. In particular, $\beta_{j}$ is how a per-unit change in $x_{j}$ increases or decreases the *transformed* mean $g(\mu_i)$.
+
+### Challenge
+
+-   Think of two example types of biological data that would not satisfy the assumptions of simple linear regression
+
+### Example 1: Predicting forest fires (logistic regression)
+
+We're going to examine a data set on the occurrence of forest fires in Algeria. This data was originally organized and [published](https://link.springer.com/chapter/10.1007/978-3-030-36674-2_37#Tab1) by Algerian researchers Abid and Izeboudjen, using government data, and was used as with more advanced machine learning models. However, we can do a lot just with linear models! More details on the data, and in particular the code names of the variables, can be found in the original study or on the open-source site for the [data](https://archive.ics.uci.edu/dataset/547/algerian+forest+fires+dataset).
+
+```{r}
+forest_fires <- read_csv(
+  "https://raw.githubusercontent.com/das-amlan/Forest-Fire-Prediction/refs/heads/main/forest_fires.csv",
+)
+forest_fires
+```
+
+We need to do a little bit of pre-processing on the data first to make our work easier: we'll select just a few columns we think are most important for fire prediction, and we'll rename them to more intuitive names
+
+Note that you can actually do renaming as a part of the select function (you don't need to separately call rename).
+
+```{r}
+forest_fires <- forest_fires %>%
+  select(
+    HasFire = Classes,
+    Temperature,
+    RelativeHumidity = RH,
+    WindSpeed = Ws,
+    Rainfall = Rain
+  )
+```
+
+First, we'll just use some plots to see if any of these variables seem to differ on days/locations where fires occurred. For example, with temperature:
+
+```{r}
+ggplot(forest_fires, aes(x = Temperature, fill = as.factor(HasFire))) +
+  geom_density(alpha = 0.7)
+  #scale_fill_manual(values = c("No Fire" = "skyblue", "Fire" = "firebrick")) 
+```
+
+We want to build a predictive model here for the relationship between temperature, relative humidity, wind speed, and rain fall on fire risk. However, like our sparrow data, the **outcome here is binary**. We CANNOT use a regarul linear model, as this assumes the data are Normal.
+
+In fact, these data are distributed according to a Bernoulli($p$) distribution. This is a member of the exponential family and the type of generalized linear model when the data are distributed in this way (i.e., are binary) is called **logistic regression**. The idea is that we want to modify our linear regression to instead say - something like - the probability ($p$) of a fire is a linear function of the predictors.
+
+The mean of Bernoulli($p$) data is just $p$, so can we instead just say
+
+$$ p =  \beta_0 + \beta_1 x_{1} + \cdots + \beta_p x_{p}?$$
+
+That's not very helpful, because this would still allow $p$ to be less than 0 or greater than 1.
+
+Instead, we us different "link" function for $p$, which is
+
+$$ \text{logit}(p) = \log\frac{p}{1-p}.$$
+
+$\text{logit}(p)$ is called the *log-odds*, which can be thought of as a likelihood the response takes on the value one. The great thing about the log-odds is it can vary between $-\infty$ and $\infty$ while $p$ stays between 0 and 1!
+
+In logistic regression, the log-odds ratio is modeled as a linear combination in the predictors:
+
+$$ \text{logit}(p) =  \beta_0 + \beta_1 x_{1} + \cdots + \beta_p x_{p}$$
+
+Notice that increasing $x_j$ by one unit results in change $\beta_j$ to the link-transformed response. This is how the effect sizes are interpreted for GLMs such as this one.
+
+How let's re-fit our data using a GLM!
+
+```{r}
+model_ws <- glm(HasFire ~ WindSpeed,
+  data = forest_fires,
+  family = binomial(link = "logit")
+)
+summary(model_ws)
+```
+
+Let’s examine the key components of the model summary:
+
+-   **Coefficients**:\
+    – The intercept (1.03997) represents the log-odds of a fire when wind speed is zero\
+    – The WindSpeed coefficient (-0.05049) indicates that for each unit increase in wind speed, the log-odds of a fire decrease by 0.05049\
+    – The p-values (Pr(\>\|z\|)) suggest neither coefficient is statistically significant at the α=0.05 level
+
+-   **Null vs. Residual Deviance**:\
+    – Null deviance (332.90) represents model fit with just an intercept\
+    – Residual deviance (331.71) represents fit after adding WindSpeed\
+    – The small difference suggests WindSpeed adds little predictive power
+
+-   **AIC (335.71)**:\
+    – Used for model comparison, lower values indicate better models\
+    – By itself, this number isn’t meaningful, but we’ll use it to compare with more complex models
+
+This fit suggests that this is not a good model; wind speed is not a useful predictor of fire!!
+
+Remember, since the coefficients are log odds, we can convert them to just odds by exponentiating:
+
+$$
+\textrm{odds}=e^{β0+β1x}
+$$
+
+```{r}
+exp(cbind(OddsRatio = coef(model_ws), confint(model_ws)))
+
+```
+
+We can see that the odds of a fire occurring are 0.95. In other words, for every unit increase in wind speed, the odds of a fire remain relatively constant (95% of the previous odds).
+
+Let's make a plot to try to visualize our results
+
+```{r}
+ws_range <- seq(min(forest_fires$WindSpeed), max(forest_fires$WindSpeed), length.out = 100)
+predicted_probs <- predict(model_ws, newdata = data.frame(WindSpeed = ws_range), type = "response")
+predicted_data <- data.frame(WindSpeed = ws_range, probability = predicted_probs)
+```
+
+```{r}
+
+# Convert Classes back to 0/1 for plotting the raw data points
+#forest_fires$class_numeric <- as.numeric(forest_fires$HasFire) - 1
+ 
+ggplot(predicted_data, aes(x = WindSpeed, y = probability)) +
+  geom_line(color = "blue", linewidth = 1.5) +
+  geom_point(
+    data = forest_fires,
+    aes(x = WindSpeed, y = HasFire, color = as.factor(HasFire)),
+    position = position_jitter(width = 0.1, height = 0.1),
+    alpha = 0.7
+  ) +
+  #scale_color_manual(values = c("No Fire" = "skyblue", "Fire" = "firebrick")) +
+  labs(
+    title = "Logistic Regression Curve for Wind Speed",
+    x = "Wind Speed (km/h)",
+    y = "Probability of Fire"
+  ) 
+```
+
+Now, let's try to improve our model by incorporating temperature, relative humidity, and rainfall
+
+```{r}
+model_2 <- glm(HasFire ~ Rainfall + RelativeHumidity + Temperature,
+  data = forest_fires,
+  family = binomial(link = "logit")
+)
+summary(model_2)
+```
+
+The improved model shows several key features:
+
+-   **Temperature Effect**:\
+    – Positive coefficient indicates higher temperatures increase fire probability\
+    – For each 1°C increase in temperature, the log odds of fire increase\
+    – This relationship makes ecological sense as higher temperatures tend to create conditions conducive to fires
+
+-   **Relative Humidity Effect**:\
+    – Negative coefficient shows higher humidity reduces fire probability\
+    – Each 1% increase in humidity decreases the log odds of fire\
+    – This aligns with our understanding that moist conditions inhibit fire spread
+
+-   **Rainfall Effect**:\
+    – Strong negative relationship with fire probability\
+    – Even small amounts of rainfall significantly reduce fire odds\
+    – This direct measure of precipitation complements the humidity effect
+
+Looking at the odds ratios, we can interpret the effects of each predictor:
+
+-   **Temperature**: For each 1°C increase in temperature, the odds of fire increase by 32% (OR = 1.32, 95% CI: 1.14-1.56)
+
+-   **Relative Humidity**: Each 1% increase in humidity reduces the odds of fire by about 4% (OR = 0.96, 95% CI: 0.93-0.99)
+
+-   **Rainfall**: The odds ratio of 0.087 indicates that each mm of rainfall reduces the odds of fire by about 91% (1 – 0.087 = 0.913). This strong negative effect makes ecological sense as wet conditions significantly inhibit fire occurrence
+
+Visualizing the effects of multiple predictors in logistic regression can be challenging because the relationship between each predictor and the response depends on the values of other predictors. The plots below, generated using the ggeffects package, show the marginal effects of each predictor while holding other variables at their mean or reference values:
+
+```{r}
+library(ggeffects)
+```
+
+```{r}
+ggeffects::ggeffect(model_2) %>%
+  plot() 
+```
+
+To demonstrate the practical application of our model, we can create an example environmental condition and evaluate the risk of fire
+
+```{r}
+scenarios <- data.frame(
+  Rainfall = 10,
+  Temperature = 20,
+  RelativeHumidity = 50
+)
+ 
+# Predict probabilities
+scenarios$Fire_Probability <- predict(model_2, newdata = scenarios, type = "response")
+ 
+# Display the scenarios and their predicted probabilities
+scenarios %>%
+  mutate(Fire_Probability = scales::percent(Fire_Probability, accuracy = 0.1))
+```
+
+### Challenge
+
+Can you update your analysis of the sparrow survival data to use a logistic regression instead?
+
+```{r}
+
+```
+
+## More examples:
+
+There are many great tutorials on fitting GLMs in R for different sorts of datasets that require different types of link functions. We suggest you go through some of these examples on your own to gain more experience with fitting these models. Here are a few we suggest
+
+-   The [EEB R Manual](https://rman.eeb.utoronto.ca/statistics-in-r/generalized-linear-models-glms/) has an example fitting species richness (e.g., number of species, a positive, skewed variable) in grasslands to environments characteristics (data originally published in [Crawley, 2005](https://www.journals.uchicago.edu/doi/10.1086/427270)) using Poisson link functions
+
+-   The e-book "Statistical Modeling in R" by Valletta and McKinley has an [nice example](https://exeter-data-analytics.github.io/StatModelling/generalised-linear-models.html) related to the begging rate of cuckoo bird chicks which also uses a Poisson regression
+
+-   The textbooks suggested in the [Further Reading] section also have lots of examples
+
+# Mixed-Effects Models
+
+(Also known as **multi-level models** or hierarchical **models**)
+
+We're going to switch gears now to discuss another common situation we find ourselves in with data in the biological sciences which makes regular linear regression not ideal. We'll learn that we can handle this kind of data with another extension to regular linear regression.
+
+### Hierarchical Data Structures
+
+In biological research, data often exhibit natural *hierarchical* structures. For example:
+
+-   Students within Classes within Schools within Districts
+
+-   Individuals within Populations within Species
+
+-   Repeated Measurements within Individuals within Populations
+
+-   Patients treated by Physicians with Hospitals within Provinces
+
+These hierarchical structures can be either nested or crossed:
+
+![](figures/clipboard-643467275.png)
+
+In nested structures (right), each lower-level unit belongs to only one higher-level unit. For example, each student belongs to only one class, and each class belongs to only one school. In crossed structures (left), lower-level units can belong to multiple higher-level units. For example, a student might take multiple classes, and a teacher might teach multiple classes.
+
+### Motivating example: Simpson’s Paradox
+
+Simpson’s Paradox is a statistical phenomenon where a trend appears in different groups of data but disappears or reverses when the groups are combined. This is particularly relevant in ecological studies where data are often nested or grouped. Consider the following example using the Palmer Penguins dataset:
+
+```{r}
+#install(palmerpenguins)
+library(palmerpenguins)
+
+# Plot
+model_penguins <- lm(bill_depth_mm ~ bill_length_mm, data = penguins %>% drop_na())
+ 
+penguins %>%
+  drop_na() %>%
+  mutate(
+    predicted = predict(model_penguins)
+  ) %>%
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_abline(
+    intercept = coef(model_penguins)[1],
+    slope = coef(model_penguins)[2],
+    color = "black" ) +
+  labs(
+    title = "Demonstration of Simpson's Paradox",
+    x = "Bill Length (mm)",
+    y = "Bill Depth (mm)",
+    color = "Species"
+  )
+```
+
+In this example, when we fit a simple linear regression to all penguins (black line), we see a positive relationship between bill length and bill depth. However, when we look at each species separately (colored lines), we see negative relationships. This apparent contradiction is Simpson’s Paradox, and it occurs because species is a confounding variable that affects both bill length and bill depth.
+
+Whereas traditional linear models will overlook the underlying trends within data hierarchy, linear mixed effects models are designed to incorporate them.
+
+### Model Structure
+
+A traditional linear model can be written as:
+
+$$yi=β_0+β_1 x_i+ϵ_ i$$
+
+where:
+
+-   $y_i$ is the response variable for observation i
+
+-   $β_0$ is the intercept
+
+-   $β_1$ is the slope coefficient
+
+-   $x_i$ is the predictor variable
+
+-   $ϵ_i$ is the residual error
+
+A linear mixed effects model extends this by adding group (or "random") effects:
+
+$$       
+y_{ij}=β_0+β_1 x_{ij}+u_j+ϵ_{ij}
+$$
+
+where:
+
+-   $y_{ij}$ is the response variable for observation i in group j
+
+-   $x_{ij}$ is the predictor variable for observation i in group j
+
+-   $u_j$ is the group/random effect for group j
+
+-   $ϵ_{ij}$ is the residual error for observation i in group j
+
+There are two ways to think about the key difference here vs regular linear regresion.
+
+-   One way to think about it is that the error term is now split into two components: the group/random effect $u_j$ and the residual error $ϵ_{ij}$. This decomposition allows us to model both systematic variation (through group/random effects) and residual variation separately. Just like we assume a (normal) distribution of the individual residual variation \$\epsilon \$, we also assume that the group/random effects for each group come from a larger distribution, and that the particular groups we aobserve are simply random samples of all possible groups we could have observed. This way of thinking about it is why many people call these **random effects**
+
+-   Another way to think about it is that the mean response now varies across individuals due to two types of predictors: there group membership $j$, which increases the mean by $u_j$, and their individual predictors $x_i$, which increase the mean by $β_1 x_{ij}$. This way of thinking about it is why many people call these **group effects**
+
+### Advantages of Linear Mixed Effects Models
+
+LME models offer several advantages over traditional linear models:
+
+-   **Handling Nested Data**: LME models naturally account for hierarchical structures in data, such as multiple measurements within individuals or sites within regions.
+
+-   **Relaxed Independence Assumption**: Traditional linear models assume all observations are independent. LME models allow for correlation within groups through random effects.
+
+-   **Partial Pooling**: LME models balance between complete pooling (treating all data as one group) and no pooling (treating each group separately). This is particularly useful when some groups have few observations.
+
+-   **Flexible Error Structures**: LME models can accommodate various types of correlation structures within groups, making them suitable for repeated measures and longitudinal data.
+
+### Remaining Assumptions and Limitations
+
+While LME models are more flexible than traditional linear models, they still have important assumptions:
+
+-   **Normality**: Both random effects and residuals are assumed to follow normal distributions.
+
+-   **Linear Relationships**: The relationship between predictors and the response variable should be linear.
+
+-   **Homogeneity of Variance**: While LME models can handle some heteroscedasticity through random effects, they still assume constant variance within groups.
+
+-   **Random Effects Structure**: The random effects structure must be correctly specified. This requires careful consideration of the hierarchical structure in your data.
+
+Limitations include:
+
+-   **Computational Complexity**: LME models can be computationally intensive, especially with many random effects or complex correlation structures.
+
+-   **Sample Size Requirements**: While LME models can handle unbalanced designs, they still require sufficient observations at each level of the hierarchy. If this requirement is not met, we will encounter overfitting, or the model will be unable to converge on a solution.
+
+-   **Interpretation Challenges**: The presence of both fixed and random effects can make model interpretation more complex than traditional linear models.
+
+## Example: Species Richness in Intertidal Areas
+
+We’ll explore LME models using the RIKZ dataset, which examines species richness in intertidal areas. This original study is [here](https://www.iopan.gda.pl/oceanologia/472janss.pdf). The data structure is hierarchical: multiple sites within each beach, with abiotic variables measured at each site.
+
+The RIKZ dataset contains the following variables:
+
+-   **Richness**: The number of species found at each site
+
+-   **NAP**: Normal Amsterdams Peil, a measure of height relative to mean sea level
+
+-   **Beach**: A factor identifying each beach (1-9)
+
+-   **Site**: A factor identifying each site within a beach (1-5)
+
+### Data Preparation
+
+First, let’s load and prepare our data:
+
+```{r}
+library(lme4) # for linear mixed effects models
+library(lmerTest) # load in to get p-values in linear mixed effects models
+library(broom.mixed) # for tidy output from linear mixed effects models
+ 
+# Load the RIKZ dataset
+rikz <- read_tsv("https://uoftcoders.github.io/rcourse/data/rikz_data.txt")
+ 
+# Site and Beach are factors
+rikz <- rikz %>%
+  mutate(
+    Site = factor(Site),
+    Beach = factor(Beach)
+  )
+str(rikz)
+```
+
+The data contains 45 observations across 9 beaches, with 5 sites per beach. We’ve encoded ‘Beach’ as a factor to facilitate its use as a group/random effect.
+
+![](images/clipboard-4248431774.png)
+
+### Initial Linear Regression
+
+Let’s start with a simple linear regression to examine the relationship between species richness and NAP, pooling data across all beaches:
+
+```{r}
+lm_base <- lm(Richness ~ NAP, data = rikz)
+summary(lm_base)
+```
+
+Okay, we observe a general linear decrease.
+
+```{r}
+ggplot(rikz, aes(x = NAP, y = Richness)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    theme_classic()
+```
+
+Let's look at our diagnostic plots!
+
+```{r}
+plot(lm_base)
+```
+
+Overall, things don't look terrible, but they're not ideal, and our $R^2$ wasn't that great either. Is it possible to get a better model? What if there are different trends across beaches? And, doesn't the fact that the data are clustered into these beaches violate one of our main assumptions about independence of the samples? (In addition to liokely to contributing to non-normally-distributed errors)
+
+We *could* try to solve this by just fitting separately for each beach (like we tried last lecture with our sexual dimorphism dataset and the Order)
+
+```{r}
+# We could account for non-independence by running a separate analysis 
+# for each beach
+ggplot(rikz, aes(x = NAP, y = Richness)) +
+    geom_point() +
+    geom_smooth(method = "lm") +
+    facet_wrap(~ Beach)
+```
+
+We could examine the coefficients by running each of these regressions and examining the output. Similarly, we could consider just adding Beach as a predictor variable in our regular linear regression, and examine the interaction of NAP with Beach.
+
+### Challenge
+
+Include the beach site as an additional predictor in a regular linear regression model and interpret the output
+
+```{r}
+
+```
+
+HOWEVER, there are a few major limitations with these approaches
+
+-   We would find that each analysis would now only have around 5 points (a really low sample size!), leading to a lot of uncertainty in our estimates
+
+-    We would have to run multiple significance tests. As such, we run the risk of obtaining spuriously significant results purely by chance.
+
+-   We probably don't really care about the differences between beaches! We are most interested in the effect of NAP. These beaches were a random subset of all beaches that could have been chosen, so their individual effects aren't so interesting, but we still need to account for the non-independence of observations within beaches.
+
+For all these reasons, a mixed-effect/multi-level model is most useful!
+
+### Group-specific intercept model
+
+Let's formally use a mixed-effect model to allow for every beach to have its own intercept in the model. We could call this a "group effect" on intercept, or a "random" intercept.
+
+In R’s formula notation, this is specified as:
+
+```{r}
+library(lme4)
+library(lmerTest)
+
+# Random intercept model with NAP as fixed effect and Beach 
+# as random effect
+mixed_model_IntOnly <- lmer(Richness ~ NAP + (1|Beach), 
+                            data = rikz, REML = FALSE)
+```
+
+The model formula includes:
+
+-   **Fixed Effects**: **`NAP`** (the main predictor)
+
+<!-- -->
+
+-   **Random Effects**: **`(1 | Beach)`** specifies random intercepts for each beach
+
+    -   **`Beach`** is our grouping variable
+
+    -   The **`|`** separates the random effects from the grouping variable.
+
+    -   The **`1`** indicates we’re only modeling random intercepts
+
+Let’s examine the model summary output
+
+```{r}
+summary(mixed_model_IntOnly)
+```
+
+-   **Fixed Effects**: Shows the estimated coefficients for NAP and the intercept, along with their standard errors and p-values
+
+-   **Random Effects**: Shows the variance and standard deviation of the random intercepts for Beach and the residual variance
+
+-   **Number of Observations**: Shows the total number of observations and the number of groups (beaches)
+
+Let’s visualize the model’s predictions amid the current data:
+
+```{r}
+# Let's predict values based on our model and add these to our dataframe
+# These are the fitted values for each beach, which are modelled separately.
+rikz$fit_InterceptOnly <- predict(mixed_model_IntOnly)
+
+# Let's plot the 
+ggplot(rikz, aes(x = NAP, y = Richness, colour = Beach)) +
+    # Add fixed effect regression line (i.e. NAP)
+    geom_abline(aes(intercept = `(Intercept)`, slope = NAP),
+                size = 2,
+                as.data.frame(t(fixef(mixed_model_IntOnly)))) + # extracts estimates
+    # Add fitted values (i.e. regression) for each beach
+    geom_point(size = 3) +
+    geom_line(aes(y = fit_InterceptOnly), size = 1)
+```
+
+This is a step in the right direction!
+
+However, this model still makes the assumption that the slope describing the relationship between **`Richness`** and **`NAP`** is the same for all beaches. Is this really the case? Let’s plot each beach separately to see
+
+```{r}
+ggplot(rikz, aes(x = NAP, y = Richness)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~Beach)
+```
+
+Indeed, it appears that the relationship differs drastically for certain beaches (i.e. compare Beach 1 with Beach 5). This can be solved by going one step further by introducing random slopes to our model.
+
+### **Random Intercepts and Slopes Model**
+
+We can extend our model to include random slopes, allowing the relationship between NAP and species richness to vary by beach. In R’s formula notation, this is specified as:
+
+```{r}
+mixed_model_IntSlope <- lmer(Richness ~ NAP + (1 + NAP|Beach), 
+                             data = rikz, REML = FALSE)
+```
+
+The model formula now includes:
+
+-   **Fixed Effects**: NAP (the main predictor)
+
+-   **Random Effects**: (NAP \| Beach) specifies both random intercepts and slopes for NAP by Beach
+
+    -   **`NAP`** before the **`|`** indicates we’re modeling random slopes for NAP.
+
+    -   As in regular models, the **`1`** representing the intercept is implied and not written out. **`0 + NAP`** would be necessary to specify only the random slopes without a random intercept for this grouping variable.
+
+    -   The **`|`** separates the random effects from the grouping variable
+
+    -   **`Beach`** is our grouping variable
+
+Let's look at the output
+
+```{r}
+summary(mixed_model_IntSlope)
+
+```
+
+Note the warning message: **“boundary (singular) fit: see help(‘isSingular’)”**.
+
+This occurs when the model is overfitted or when there’s not enough variation in the data to estimate all the random effects. In this case, it suggests that the random slopes & intercepts model might be too complex for our data.
+
+Despite this, let's plot the results
+
+```{r}
+rikz$fit_IntSlope <- predict(mixed_model_IntSlope)
+ggplot(rikz, aes(x = NAP, y = Richness, colour = Beach)) +
+    geom_abline(aes(intercept = `(Intercept)`, slope = NAP),
+                size = 2,
+                as.data.frame(t(fixef(mixed_model_IntSlope)))) +
+    geom_line(aes(y = fit_IntSlope), size = 1) +
+    geom_point(size = 3) 
+```
+
+## Further reading
+
+-   The [EEB R Manual](https://rman.eeb.utoronto.ca/)
+
+-   The e-book "[Statistical Modeling in R](https://exeter-data-analytics.github.io/StatModelling/generalised-linear-models.html)" by Valletta and McKinley
+
+-   [The R Book](https://librarysearch.library.utoronto.ca/permalink/01UTORONTO_INST/k9bh95/alma991106852858406196), by Michael Crawley (2nd addition available online via U of T library)
+
+-   [Linear Models in R](https://librarysearch.library.utoronto.ca/permalink/01UTORONTO_INST/k9bh95/alma991106823142706196), by Julian James Faraway (Chapman & Hall, 2025), and the follow-up [Extending the linear model with R : generalized linear, mixed effects and nonparametric regression models](https://librarysearch.library.utoronto.ca/permalink/01UTORONTO_INST/k9bh95/alma991106786777406196) (1st additions available online via U of T library, datasets and other resources available [here](https://julianfaraway.github.io/faraway/LMR/))

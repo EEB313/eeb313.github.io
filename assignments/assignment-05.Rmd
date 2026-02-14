@@ -1,0 +1,171 @@
+# Assignment 5: Linear regression (8 marks)
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(lme4) # for linear mixed effects models
+library(lmerTest) # load in to get p-values in linear mixed effects models
+
+```
+
+## 1. Examining sexual size dimorphism with generalized linear models (3 marks)
+
+a.  For this question we'll revisit the dataset on on sexual size dimorphism that we used in Assignment 2 and Lecture 9. Load in the "SSDinMammals.csv" file from your local saved files, or download it again from the [course website](https://eeb313.github.io/assignments/data/SSDinMammals.csv) or from [Dryad](https://datadryad.org/dataset/doi:10.5061/dryad.280gb5mx0) (note: you might have to do this manually, as the site can block R imports). Read it into R as `SSDdata`. (0 marks)
+
+*Note: You can glance again at the [original study](https://www.nature.com/articles/s41467-024-45739-5)^[1](https://eeb313.github.io/assignments/assignment-02.html#fn1)^ to refresh your memory. The Dryad link includes a description of the study variables.*
+
+```{r}
+
+```
+
+b\. Create two new columns in your data frame. One should be called `n_Order` and count the number of species in each Order. We also created this variable the previous times we worked with this dataset. The other column should be called `AreMalesLarger`, and should indicate if the mean mass of males exceeds that of females for the species. If an entry in this column equals one, the mean male mass exceeds the mean female mass. It should have value zero otherwise. (0.5 marks)
+
+Hint: If you use `group_by`, make sure to `ungroup` afterwards
+
+```{r}
+
+```
+
+c\. Using `SSDdataNew`, fit a generalized linear model to test if number of observations per Order predicts the probability that males are larger than females. That is, regress the binary variable indicating if males are larger than females on the number of species in each Order. Report the regression coefficient for `n_Order`, the associated $p$ value (*Hint: think about what type of probability distribution would make sense for `AreMalesLarger`. You can treat `n_Order` as continuous for this purpose!*) (0.5 marks)
+
+```{r}
+
+```
+
+d.  Interpret the intercept and the regression coefficient from (c) -- what does it mean? Think about any transformations that may have taken place! (0.25 marks)
+
+```{r}
+
+```
+
+e.  Visualize the fitted model along with the raw data. Use jitter or transparency or both to make it easier to resolve when multiple data points are on top of each other (0.25 marks).
+
+*Hint: Look at the documentation for `geom_smooth()` to see how to use it to plot fits using generalized linear models, or, search `predict.glm` to see how to use the `predict()` function with output from `glm`.*
+
+```{r}
+
+```
+
+f.  What would you conclude based on c-e about sexual size dimorphism in Orders that have many vs few species? Explain your answer. (0.25 marks)
+
+g.  To determine if the *variation* in the size of males predicts if males are larger than females, create a new variable called `CVmassM`, which is the coefficient of variation of male mass (coefficient of variation = standard deviation over mean). Add `CVmassM` as an explanatory variable to the model you fit in c. Report the regression coefficient that is estimated, as well as the $p$-value. Interpret the coefficient associated to `CVmassM` -- what does it mean? (0.5)
+
+```{r}
+
+```
+
+h\. Are larger mammals more likely to display sexual size dimorphism? Use a linear model of your choice to examine this hypothesis. Visualize your results. Justify your method and interpret your result in words. Based on what you see here and what you observed in the prior questions, why do you think the public widely perceives sexual size dimorphism to be the norm in mammals? (0.75 mark).
+
+```{r}
+
+```
+
+## 2. Examining determinants of influenza epidemic intensity (3 marks)
+
+1.  We will examine data characterizing seasonal influenza dynamics in cities across the US from [this paper](https://www.science.org/doi/10.1126/science.aat6030). Each row corresponds to a city. The columns are described below. Find the "influenza_cities.csv" dataset on the course website and load it into R (0 marks)
+
+| **Column name** | **Description** |
+|----------------------|--------------------------------------------------|
+| zip | City identifier (first three digits of zip code |
+| population_size | Population size of city |
+| kappa | "Base transmission potential" - the component of overall transmissibility that is not strongly modulated by climate measure |
+| nu | "Mean epidemic intensity" - a normalized measure of how peaked (vs flat) an epidemic curve, averaged over 6 years |
+| avgsh | Mean specific humidity - averaged daily over 6 years |
+| sdsh | Std dev. in specific humidity - taken daily over 6 years |
+| lon | Longitude |
+| lat | Latitude |
+| h_crowding | "Residential crowding'' - average population size per census block |
+| w_crowding | "Daytime crowding" - average population size per census block during the day |
+
+```{r}
+
+```
+
+b\. Use simple linear regression to relate epidemic intensity on the log population size. Plot the regression atop the data, interpret the regression coefficient, and check if model assumptions are satisfied. Give your answers in words (0.5 marks)
+
+```{r}
+
+```
+
+c\. Use simple linear regression to relate the mean epidemic intensity to the log population size, daytime crowding, and mean specific humidity. Then use this model to *predict* the mean epidemic intensity in a city of population size 713,252 with a daytime crowding of 714.6 and an average specific humidity of 0.010333. Compare the value of mean epidemic potential in this hypothetical city to the median among all cities in the dataset (0.75 marks).
+
+```{r}
+
+```
+
+d\. Regress *baseline* epidemic intensity on log population size **assuming that the response is GAMMA distributed**. Interpret the effect of population size on baseline epidemic intensity. *Hint: think about transformations to the response and to the explanatory variable(s). The link function for the Gamma can be found [here](https://en.wikipedia.org/wiki/Generalized_linear_model).* (0.5 marks)
+
+```{r}
+
+```
+
+e\. Visualize the fitted model. The "line of best fit" should be curve-linear on the data scale. (Why?) (0.25 marks)
+
+```{r}
+
+```
+
+f\. Ignoring values of mean epidemic potential which are zero, fit the following Gamma GLMs:
+
+-   mean epidemic intensity on log population size
+-   mean epidemic intensity on baseline transmission potential
+-   mean epidemic intensity on mean specific humidity
+-   mean epidemic intensity on log population size, mean specific humidity, and their interaction
+-   mean epidemic intensity on baseline transmission potential, mean specific humidity, and their interaction
+
+Compare these models using the Akaike information criterion (`AIC`). Which are "best" and why? (1 mark)
+
+*Hint: The Akaike information criterion (AIC) is a metric we can use to assess model quality and compare among different candidate models. Smaller AICs mean better models. AIC discounts the score of models if they use more predictors. Search `AIC` in the Help menu for more information. We'll gain more experience with this in a future lecture.*
+
+*Note: these are very similar to the models fitted and compared in the original study.*
+
+```{r}
+
+```
+
+## 3. Implementing mixed-effect models using fruiting data (2 marks)
+
+a\. We'll examine a data set that tracked the fruit production of trees. Read in `fruit_trees.csv` from the class website and examine the data frame. We have four columns of data: `tag` is the unique tag number of the tree; `diameter` is the diameter at breast height of the tree (mm); `fruit` is the number of fruit counted in each tree; and `year` is the year. We are interested in understanding how tree size (measured by diameter) affects the number of fruits that tree produces. However, we want to make sure we take into account any grouping or nesting that occurs in the data which could skew our results, modify our effects size estimates, or violate the assumptions of independence or normality (1 mark)
+
+Before we run our model, do some preliminary analysis to understand the structure of our data
+
+-   Calculate the number of unique years and the number of unique tag numbers
+
+-   Make a histogram of the distribution of fruits produced. Do you notice anything about the scale of this variable that could make doing regression difficult? What transformation could correct this?
+
+-   Make a scatterplot of number of fruits vs tree diameter (using any transformation you decided on above), and with a different color for each year. Do you notice any potential problem with how year is coded that might make including it in a regression problematic? How can we correct this? (*Hint: think about using `as.factor` on this column*)
+
+-   Make a table of the number of trees measured per year, and the average fruit production per year (with any transformation you decided on above).
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+b\. Based on your results above, propose and provide your justification for a model structure to examine the relationship between fruiting and tree diameter. What variables - if any - will you treat as group (random) effects? What variables - if any - will you treat as additional predictors?
+
+Run your proposed model and interpret the output. Remember that for regular predictors, you can look at p values to judge significance, while for group (random) effects, you can you look for non-zero variance as a measure of importance of this factor for separating effects.
+
+If you get an error that your model is unidentifiable or unstable, simplify it and try again (1 mark)
+
+```{r}
+
+```

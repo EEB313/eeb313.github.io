@@ -198,8 +198,8 @@ Let's interpret the output here!
 1.  What is the best estimate for each parameter, including 95% confidence intervals? Can you write the equation of the best fit curve?
 
 ```{r}
-B0 <- lionFitOutputSummary$coefficients["(Intercept)","Estimate"]
-B1 <- lionFitOutputSummary$coefficients["proportionBlack","Estimate"]
+B0 <- lionFitSummary$coefficients["(Intercept)","Estimate"]
+B1 <- lionFitSummary$coefficients["proportionBlack","Estimate"]
 
 # predict lion age if 50% nose black
 B0 + B1*0.5
