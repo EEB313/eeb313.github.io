@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>11&nbsp; Model selection – EEB313: Quantitative Methods in R for Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assignments/assignment-01.html" rel="next">
+<link href="../lectures/lec10-advanced-linear-models.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9be2c12bab310ac08f4b5b8760484c76.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-defc80ef93b31364d91645f5e1f644e2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-9be2c12bab310ac08f4b5b8760484c76.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec11-model-selection.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Model selection</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">EEB313: Quantitative Methods in R for Biology</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/EEB313/eeb313.github.io" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome!</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus: EEB 313 Winter 2026</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about-us.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructors</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lectures</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec01-downloading-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Downloading and installing R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec02-basic-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to R: Assignment, vectors, functions, strings, and loops</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec03-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulating and analyzing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec04-data-visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summarizing and visualizating data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec05-advanced-data-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Advanced data manipulation &amp; visualization</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec06-self-directed-analysis-without-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Self-directed data exploration: Disease mortality across species with Farrell &amp; Davies, PNAS, 2019</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec07-random-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Random variables and computational statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec08-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability, likelihood, and statistical inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec09-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to linear regression models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec10-advanced-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Advanced linear models - generalized and multilevel</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec11-model-selection.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 1: Basic R (8 marks)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 2: Manipulating and plotting data (8 marks)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 3: Advanced data wrangling and visualization (8 marks)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 4: Random variables, likelihood, and inference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/assignment-05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignment 5: Linear regression (8 marks)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Project</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datasets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/portal_data.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">portal_data.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/disease_distance.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">disease_distance.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/data/SSDinMammals.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SSDinMammals.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/data/plant-biomass-preprocess.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">plant-biomass-preprocess.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/medicago.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">medicago.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/data/influenza_cities.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">influenza_cities.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/data/fruit_trees.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">fruit_trees.csv</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Papers</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/papers/portal-data-paper-2009.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">portal-data-paper-2009.pdf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/papers/portal-data-paper-2020.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">portal-data-paper-2020.pdf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/papers/plant-biomass-paper.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">plant-biomass-paper.pdf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/papers/SSDinMammals-paper.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SSDinMammals-paper.pdf</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/papers/african-lion-ages-paper-2004.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">african-lion-ages-paper.pdf</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Miscellaneous notes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/outbreak-investigation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Outbreak Investigation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/outbreak-investigation-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Outbreak Investigation Answers</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lesson-preamble" id="toc-lesson-preamble" class="nav-link active" data-scroll-target="#lesson-preamble"><span class="header-section-number">11.1</span> Lesson preamble</a></li>
+  <li><a href="#what-is-model-selection" id="toc-what-is-model-selection" class="nav-link" data-scroll-target="#what-is-model-selection"><span class="header-section-number">11.2</span> What is model selection?</a>
+  <ul class="collapse">
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">11.2.1</span> Examples</a></li>
+  </ul></li>
+  <li><a href="#the-akaike-information-criterion-aic" id="toc-the-akaike-information-criterion-aic" class="nav-link" data-scroll-target="#the-akaike-information-criterion-aic"><span class="header-section-number">11.3</span> The Akaike information criterion (AIC)</a>
+  <ul class="collapse">
+  <li><a href="#textaic_c-for-small-sample-sizes" id="toc-textaic_c-for-small-sample-sizes" class="nav-link" data-scroll-target="#textaic_c-for-small-sample-sizes"><span class="header-section-number">11.3.1</span> <span class="math inline">\(\text{AIC}_c\)</span> for small sample sizes</a></li>
+  </ul></li>
+  <li><a href="#model-selection-for-simple-linear-models" id="toc-model-selection-for-simple-linear-models" class="nav-link" data-scroll-target="#model-selection-for-simple-linear-models"><span class="header-section-number">11.4</span> Model selection for simple linear models</a>
+  <ul class="collapse">
+  <li><a href="#example-1-microbial-mutualists" id="toc-example-1-microbial-mutualists" class="nav-link" data-scroll-target="#example-1-microbial-mutualists"><span class="header-section-number">11.4.1</span> Example 1: Microbial mutualists</a></li>
+  <li><a href="#example-2-allometric-scaling-of-metabolism" id="toc-example-2-allometric-scaling-of-metabolism" class="nav-link" data-scroll-target="#example-2-allometric-scaling-of-metabolism"><span class="header-section-number">11.4.2</span> Example 2: Allometric scaling of metabolism</a></li>
+  </ul></li>
+  <li><a href="#model-selection-with-generalized-linear-models-glms" id="toc-model-selection-with-generalized-linear-models-glms" class="nav-link" data-scroll-target="#model-selection-with-generalized-linear-models-glms"><span class="header-section-number">11.5</span> Model selection with Generalized Linear Models (GLMs)</a>
+  <ul class="collapse">
+  <li><a href="#example-3-forest-fire-risk" id="toc-example-3-forest-fire-risk" class="nav-link" data-scroll-target="#example-3-forest-fire-risk"><span class="header-section-number">11.5.1</span> Example 3: Forest fire risk</a></li>
+  <li><a href="#example-4-disease-virulence" id="toc-example-4-disease-virulence" class="nav-link" data-scroll-target="#example-4-disease-virulence"><span class="header-section-number">11.5.2</span> Example 4: Disease virulence</a></li>
+  </ul></li>
+  <li><a href="#model-selection-for-linear-mixed-effects-models-lmes" id="toc-model-selection-for-linear-mixed-effects-models-lmes" class="nav-link" data-scroll-target="#model-selection-for-linear-mixed-effects-models-lmes"><span class="header-section-number">11.6</span> Model selection for Linear Mixed Effects Models (LMEs)</a>
+  <ul class="collapse">
+  <li><a href="#example-5-species-richness" id="toc-example-5-species-richness" class="nav-link" data-scroll-target="#example-5-species-richness"><span class="header-section-number">11.6.1</span> Example 5: Species richness</a></li>
+  </ul></li>
+  <li><a href="#references-and-additional-reading" id="toc-references-and-additional-reading" class="nav-link" data-scroll-target="#references-and-additional-reading"><span class="header-section-number">11.7</span> References and additional reading</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec11-model-selection.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Model selection</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Model selection</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># you may need to install this package</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(MuMIn) <span class="co"># to use AICc()</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) <span class="co"># for LMEs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="lesson-preamble" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="lesson-preamble"><span class="header-section-number">11.1</span> Lesson preamble</h2>
+<p><em>Learning objectives</em></p>
+<ul>
+<li>Understand the difference between likelihood estimation/inference and model <em>selection</em></li>
+<li>Understand intuition for and the use of AIC for model selection</li>
+<li>Perform model selection on simple linear models, generalized linear models, and mixed-effect models</li>
+</ul>
+</section>
+<section id="what-is-model-selection" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="what-is-model-selection"><span class="header-section-number">11.2</span> What is model selection?</h2>
+<p>So far in class, we have covered two of the basic approaches to statistics: <em>descriptive statistics</em>, where we describe the properties of the data we observe, and <em>inferential statistics</em>, where we try to understand the properties of an underlying population and process that gave rise to our observed data. Our approach to <em>inferential statistics</em> involved proposing a potential “model” of the data (i.e., it came from a normal distribution, or a binomial process), then <em>estimating</em> the most likely parameters of that model that gave rise to our data (e.g.&nbsp;via maximum likelihood estimation done by hand or within a regression framework). Often, we augmented this approach by conducting a <em>hypothesis tes</em>t to deciding if a particular set of parameter values could have plausibly given rise to the data. Hypothesis testing is just one form of decision-making in statistics. More generally, we are often interested in deciding if the models we build are appropriate descriptions of how the world works (given the data we have and use to fit those models), or what among a set of candidate models is the “best”. This practice is called <em>model selection</em> and is the focus of this lecture.</p>
+<section id="examples" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="examples"><span class="header-section-number">11.2.1</span> Examples</h3>
+<ul>
+<li><p>Hypothesis testing is a kind of model selection. For example, for data <span class="math inline">\(x_1,\dots,x_n \sim f(x|\theta)\)</span>, testing <span class="math inline">\(H_0 \colon \theta = \theta_0\)</span> vs <span class="math inline">\(H_1 \colon \theta \neq \theta_0\)</span> is equivalent to choosing between models <span class="math inline">\(M_0 \colon f(x|\theta)\)</span> and <span class="math inline">\(M_1 \colon f(x|\theta_0)\)</span>.</p></li>
+<li><p>Suppose we regress <span class="math inline">\(y\)</span> on the 1st, 2nd, <span class="math inline">\(\dots\)</span>, <span class="math inline">\(p\)</span>th powers of a covariate <span class="math inline">\(x\)</span>:</p></li>
+</ul>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x + \beta_2 x^2 + \cdots + \beta_p x^p.\]</span></p>
+<p>This gives rise to a sequence of models <span class="math inline">\(M_1,M_2,\dots,M_p\)</span> of the data generative process. Which model is the best description of the data? Although the full model is more flexible in that it has more parameters than, say, the model in which all second and higher order terms are <span class="math inline">\(=0\)</span>, it is more prone to overfitting. Choosing between a sequence of nested linear models like this is a classic model selection problem.</p>
+<ul>
+<li>Suppose we would like to model the relationship between the expression of <em>each</em> coding gene in the human genome (i.e., the number of transcripts produced, <span class="math inline">\(x_i\)</span>) and, say, an individual’s height. If there are <span class="math inline">\(p\)</span> genes for which we have measurements and only <span class="math inline">\(n \ll p\)</span> observations, it is not possible to fit a linear model of the form</li>
+</ul>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x_{1} + \dots + \beta_p x_{p}.\]</span></p>
+<p>(The reason is that there are infinitely many solutions to the likelihood maximization problem.) In this case, we might want to select a subset of the covariates which best explain the available data. Of <span class="math inline">\(x_1,\dots,x_p\)</span>, which are most informative? This too is a kind of model selection problem.</p>
+</section>
+</section>
+<section id="the-akaike-information-criterion-aic" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="the-akaike-information-criterion-aic"><span class="header-section-number">11.3</span> The Akaike information criterion (AIC)</h2>
+<p>Rather than (mindlessly) adding and removing predictors, it is important to build models that are based in evidence from good theory and the literature. We can then weigh how much the data supports each model using the <em>Aikake information criterion (AIC)</em></p>
+<p>Suppose we have data <span class="math inline">\(y_1,\dots,y_n\)</span> that are drawn from a distribution <span class="math inline">\(f\)</span> and a set of candidate models</p>
+<p><span class="math display">\[M_j = \{p_j(y|\theta_j)\}.\]</span></p>
+<p>It is possible under this setup to find the maximum likelihood estimators for each of the candidate models; it is, however, difficult to compare these models in that the parameters underlying each model might not match (i.e., the models may not be nested). The <em>AIC</em> overcomes this issue, and despite having a lengthy and complicated derivation, is a metric which balances two things: 1) the goodness-of-fit of the model and 2) the number of parameters fitted. There are other methods for model selection that are similar to AIC (such as BIC, <span class="math inline">\(C_p\)</span>) that follow similar principles but use different penalties.</p>
+<p>The intuition and formula for the AIC is as follows. If <span class="math inline">\(\hat{\theta}_{j,\text{MLE}}\)</span> is the MLE for <span class="math inline">\(\theta\)</span> under model <span class="math inline">\(M_j\)</span>, then we can measure the distance between the ground truth (i.e., distribution <span class="math inline">\(f\)</span> of the data) and fitted model <span class="math inline">\(\hat{p}_j = p_j(y|\hat{\theta}_{j,\text{MLE}})\)</span> using a metric called the Kullback-Leibler divergence:</p>
+<p><span class="math display">\[D_{KL}(p, \hat{p}_j) = \int p(y) \log p(y) \text{d} y - \int p(y) \log \hat{p_j}(y) \text{d} y. \]</span></p>
+<p><strong>Minimizing the Kullback-Leibler divergence (distance) between the ground truth and density</strong> <span class="math inline">\(j\)</span> is a principled way to preform model selection, and forms the basis for the AIC. Note that minimizing only involves the second integral, and we can estimate the integral with an average</p>
+<p><span class="math display">\[\frac{1}{n} \log L(\hat{\theta}_{j,\text{MLE}}) = \frac{1}{n} \sum_{i=1}^n \log p(y_i|\hat{\theta}_{j,\text{MLE}})\]</span></p>
+<p>Importantly, AIC corrects for the fact this is an unbiased estimator of the divergence by adding <span class="math inline">\(d_j/n\)</span>, where <span class="math inline">\(d_j = \text{dim}(M_j)\)</span>. This term is what penalizes models with a large number of parameters. So,</p>
+<p><span class="math display">\[\text{AIC} = - 2 \log L(\hat{\theta}_{j,\text{MLE}}) + 2 d_j.\]</span></p>
+<p>Notice we have multiplied the preceding quantities by <span class="math inline">\(-2n\)</span> to get the above expression; this does not change anything, and is largely for historical reasons. Based on the AIC expression, it is clear 1) the higher the likelihood, the lower the AIC; 2) introducing more parameters into the model without changing the likelihood results in a greater value for the AIC. The balance between goodness-of-fit (likelihood) and the number of parameters (the potential to overfit) is what AIC tries to optimize in choosing between candidate models. As we have shown here, that balance is struck by minimizing the distance between candidate models and the ground truth while correcting for bias introduced by having models of different dimensions.</p>
+<p>It is important to remember that AIC only tells us the quality of a model <em>relative</em> to other models and should be used after making an informed decision on candidate models.</p>
+<section id="textaic_c-for-small-sample-sizes" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="textaic_c-for-small-sample-sizes"><span class="header-section-number">11.3.1</span> <span class="math inline">\(\text{AIC}_c\)</span> for small sample sizes</h3>
+<p>When the sample size is small, AIC may select models with too many parameters (i.e., AIC will overfit). It is sometimes convenient to, when sample sizes are small (<span class="math inline">\(\frac{n}{K} &lt; 40\)</span> is a commonly used rule-of-thumb, where <span class="math inline">\(K\)</span> is the total number of parameters) use the following metric to choose between candidate models:</p>
+<p><span class="math display">\[\text{AIC}_c = \text{AIC} + \frac{2d_j(d_j+1)}{n-d_j-1}\]</span></p>
+<p><span class="math inline">\(\text{AIC}_c\)</span> is like AIC, but with an extra penalty term for the number of parameters. As <em>n</em> increases, this penalty term converges to 0 and so <span class="math inline">\(\text{AIC}_c\)</span> converges to AIC and the results will be similar.</p>
+</section>
+</section>
+<section id="model-selection-for-simple-linear-models" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="model-selection-for-simple-linear-models"><span class="header-section-number">11.4</span> Model selection for simple linear models</h2>
+<section id="example-1-microbial-mutualists" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="example-1-microbial-mutualists"><span class="header-section-number">11.4.1</span> Example 1: Microbial mutualists</h3>
+<p>In 2016, <a href="https://doi.org/10.1111/mec.13809">Afkhami and Stinchcombe</a> investigated the effects of multiple microbial mutualists on the performance of the model legume, <em>Medicago truncatula</em>. These microbial mutualists offer different rewards to their plant host; rhizobia bacteria provide fixed nitrogen; arbuscular mycorrhizal fungi (AMF) help transfer other nutrients like phosphorus. Rhizobia form structures called “nodules” on the roots of their legume hosts, where they reside and exchange fixed nitrogen for carbon from the plant.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/https___www.frontiersin.org_files_Articles_583954_xml-images_fgene-11-583954-g001.webp" class="img-fluid figure-img"></p>
+<figcaption>A schematic drawing representing the impacts of symbioses with arbuscular mycorrhizal fungi (AMF) and rhizobia on plant growth and nutrient uptake [From Liu et al., 2020 (https://doi.org/10.3389/fgene.2020.583954)]</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In this experiment, plants were inoculated with either both microbial partners, one microbial partner, or none. Measures of plant performance such as above-ground and below-ground biomass, and mutualist performance (nodule count and biomass) were collected.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>medicago<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"data/medicago.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to factor</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>cols<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Block"</span>,<span class="st">"Plant_ID"</span>,<span class="st">"Myco_fungi"</span>,<span class="st">"Rhizobia"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>medicago[cols]<span class="ot">&lt;-</span><span class="fu">lapply</span>(medicago[cols],factor)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(medicago)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   120 obs. of  8 variables:
+ $ Block       : Factor w/ 5 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ Plant_ID    : Factor w/ 120 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ Myco_fungi  : Factor w/ 2 levels "-","+": 2 1 1 2 1 1 1 2 2 1 ...
+ $ Rhizobia    : Factor w/ 2 levels "-","+": 2 1 2 2 2 2 1 1 1 1 ...
+ $ Shoot_mass  : num  18 14.5 23 25.3 17.8 ...
+ $ Root_mass   : num  NA NA NA 28.1 NA ...
+ $ Nodule_count: int  NA NA 40 39 NA 53 0 0 NA NA ...
+ $ Nodule_mass : num  NA NA 0.463 0.726 0.33 NA NA NA NA NA ...</code></pre>
+</div>
+</div>
+<p>Both rhizobia and mycorrhizal fungi interact with the root structures of their plant host. Rhizobia are housed in nodules, specialized root structures, while mycorrhizal fungi can make filamentous branches, hyphae, on and inside plant roots. Therefore, we could be interested in testing the effects of both microbial partners on belowground (root) biomass. Let’s plot the data!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Myco_fungi,<span class="at">y=</span>Root_mass,<span class="at">colour=</span>Rhizobia), <span class="at">data=</span>medicago)<span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 67 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-model-selection_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It looks like plants inoculated with rhizobia and fungi had higher root biomass. Let’s look at the model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># main effects + interaction</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>root1<span class="ot">&lt;-</span><span class="fu">lm</span>(Root_mass<span class="sc">~</span>Myco_fungi<span class="sc">+</span>Rhizobia<span class="sc">+</span>Myco_fungi<span class="sc">:</span>Rhizobia, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>medicago)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># or simplify to Myco_fungi*Rhizobia</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(root1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Root_mass ~ Myco_fungi + Rhizobia + Myco_fungi:Rhizobia, 
+    data = medicago)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-28.032  -8.557  -1.709   4.909  36.523 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)            31.9963     3.5188   9.093 4.29e-12 ***
+Myco_fungi+            -2.8121     5.0711  -0.555    0.582    
+Rhizobia+              -0.4129     5.1795  -0.080    0.937    
+Myco_fungi+:Rhizobia+   5.0162     7.2487   0.692    0.492    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.17 on 49 degrees of freedom
+  (67 observations deleted due to missingness)
+Multiple R-squared:  0.01675,   Adjusted R-squared:  -0.04345 
+F-statistic: 0.2782 on 3 and 49 DF,  p-value: 0.8409</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no significant interaction! perhaps a model with just the main effects?</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># main effects only</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>root2<span class="ot">&lt;-</span><span class="fu">lm</span>(Root_mass<span class="sc">~</span>Myco_fungi<span class="sc">+</span>Rhizobia, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>medicago)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(root2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Root_mass ~ Myco_fungi + Rhizobia, data = medicago)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-29.305  -7.941  -2.612   5.790  37.705 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  30.8142     3.0603  10.069 1.27e-13 ***
+Myco_fungi+  -0.3571     3.6046  -0.099    0.921    
+Rhizobia+     2.1483     3.6046   0.596    0.554    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.1 on 50 degrees of freedom
+  (67 observations deleted due to missingness)
+Multiple R-squared:  0.007138,  Adjusted R-squared:  -0.03258 
+F-statistic: 0.1797 on 2 and 50 DF,  p-value: 0.836</code></pre>
+</div>
+</div>
+<p>Unfortunately, the models do not show significant differences between inoculation treatments. But let’s compare these models using AIC. In this case, <span class="math inline">\(\frac{n/K}\)</span> is at the suggested threshold, so we can use the function AIC() in the <code>stats</code> package or AICc() from the <code>MuMin</code> package.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(root1,root2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      df      AIC
+root1  5 429.4784
+root2  4 427.9939</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AICc</span>(root1,root2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      df     AICc
+root1  5 430.7550
+root2  4 428.8273</code></pre>
+</div>
+</div>
+<p>We can see that both AIC and <span class="math inline">\(\text{AIC}_c\)</span> yield similar results. Based on the above, the model without the interaction term is a better fit to the data (lower score). However, the scores for both models are really close! How do we decide which model(s) to interpret? Statisticians have thought about this problem and it turns out that models with delta AIC (or other criterion) less than 2 are considered to be just as good as the top model and thus we shouldn’t just discount them.</p>
+<p>Plant investment to the roots is important for microbial mutualist association, but what about aboveground biomass? Could this be impacted by microbial associations?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Myco_fungi,<span class="at">y=</span>Shoot_mass,<span class="at">colour=</span>Rhizobia), <span class="at">data=</span>medicago)<span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1 row containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-model-selection_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># main effects + interaction</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>shoot1<span class="ot">&lt;-</span><span class="fu">lm</span>(Shoot_mass<span class="sc">~</span>Myco_fungi<span class="sc">+</span>Rhizobia<span class="sc">+</span>Myco_fungi<span class="sc">:</span>Rhizobia, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">data=</span>medicago)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(shoot1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Shoot_mass ~ Myco_fungi + Rhizobia + Myco_fungi:Rhizobia, 
+    data = medicago)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-14.9064  -4.9520   0.5606   3.9902  23.7974 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)             20.114      1.289  15.610   &lt;2e-16 ***
+Myco_fungi+             -0.252      1.838  -0.137   0.8912    
+Rhizobia+               -1.157      1.822  -0.635   0.5268    
+Myco_fungi+:Rhizobia+    5.807      2.588   2.244   0.0268 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7.058 on 115 degrees of freedom
+  (1 observation deleted due to missingness)
+Multiple R-squared:  0.08824,   Adjusted R-squared:  0.06446 
+F-statistic:  3.71 on 3 and 115 DF,  p-value: 0.01366</code></pre>
+</div>
+</div>
+<p>Although there are similar trends to the data as with root biomass, it looks like shoot biomass is significantly different between treatments.</p>
+</section>
+<section id="example-2-allometric-scaling-of-metabolism" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="example-2-allometric-scaling-of-metabolism"><span class="header-section-number">11.4.2</span> Example 2: Allometric scaling of metabolism</h3>
+<p><em>This example comes from Dolph Schluter’s <a href="https://www.zoology.ubc.ca/~bio501/R/workshops/modelselection.html#Scaling_of_BMR_in_mammals">“Model Selection” R workshop</a></em></p>
+<p><a href="https://doi.org/10.1111/j.0269-8463.2004.00856.x">Savage et al.&nbsp;(2004)</a> investigated competing claims for the value of the scaling parameter, <span class="math display">\[\beta\]</span>, in mammalian basal metabolic rate (BMR):</p>
+<p><span class="math display">\[B M R = \alpha \text{M}^\beta\]</span></p>
+<p>where <span class="math display">\[B M R\]</span> is basal metabolic rate, <span class="math display">\[M\]</span> is body mass, and <span class="math display">\[\alpha\]</span> is constant.</p>
+<p>On a log scale, this can be written as:</p>
+<p><span class="math display">\[\log B M R = \log(\alpha) + \beta\log(M)\]</span> where <span class="math display">\[\beta\]</span> is now a slope parameter of a linear model. Theory based on optimization of hydrodynamic flows through the circulation system predicts that the exponent should be <span class="math display">\[\beta = \frac{3}{4}\]</span> but we would expect <span class="math display">\[\beta = \frac{2}{3}\]</span> if metabolic rate scales with heat dissipation and therefore body surface area. These alternative scaling relationships represent distinct hypotheses. We will use them as candidate models and apply model selection procedures to compare their fits to data.</p>
+<p>Savage et al.&nbsp;compiled data from 626 species of mammals. To simplify, and reduce possible effects of non-independence of species data points, they took the average of <span class="math display">\[\log(B M R)\]</span> among species in small intervals of <span class="math display">\[\log(M)\]</span>. Body mass is in grams, whereas basal metabolic rate is in watts.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download dataset - note the number of rows</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>bmr<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="fu">url</span>(<span class="st">"https://www.zoology.ubc.ca/~bio501/R/data/bmr.csv"</span>),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>bmr<span class="sc">$</span>logmass<span class="ot">&lt;-</span><span class="fu">log</span>(bmr<span class="sc">$</span>mass.g)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>bmr<span class="sc">$</span>logbmr<span class="ot">&lt;-</span><span class="fu">log</span>(bmr<span class="sc">$</span>bmr.w)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bmr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  mass.g bmr.w   logmass    logbmr
+1    2.4 0.063 0.8754687 -2.764621
+2    3.7 0.027 1.3083328 -3.611918
+3    4.6 0.067 1.5260563 -2.703063
+4    5.6 0.108 1.7227666 -2.225624
+5    7.3 0.103 1.9878743 -2.273026
+6    8.9 0.102 2.1860513 -2.282782</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the data on a log scale</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>logmass,<span class="at">y=</span>logbmr), <span class="at">data=</span>bmr)<span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-model-selection_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s fit a linear model on this data!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(logbmr<span class="sc">~</span>logmass, <span class="at">data=</span>bmr)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod) <span class="co"># notice the estimate of the slope</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = logbmr ~ logmass, data = bmr)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.18771 -0.13741  0.01169  0.17836  0.62592 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -4.00329    0.09858  -40.61   &lt;2e-16 ***
+logmass      0.73654    0.01261   58.42   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.3243 on 50 degrees of freedom
+Multiple R-squared:  0.9856,    Adjusted R-squared:  0.9853 
+F-statistic:  3413 on 1 and 50 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Let’s fit the two candidate models, where <span class="math display">\[\beta = \frac{3}{4}\]</span> or <span class="math display">\[\beta = \frac{2}{3}\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit models</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>mod1<span class="ot">&lt;-</span><span class="fu">lm</span>(logbmr<span class="sc">~</span><span class="dv">1</span><span class="sc">+</span><span class="fu">offset</span>((<span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>)<span class="sc">*</span>logmass), <span class="at">data=</span>bmr)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>mod2<span class="ot">&lt;-</span><span class="fu">lm</span>(logbmr<span class="sc">~</span><span class="dv">1</span><span class="sc">+</span><span class="fu">offset</span>((<span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>)<span class="sc">*</span>logmass), <span class="at">data=</span>bmr)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>logmass,<span class="at">y=</span>logbmr), <span class="at">data=</span>bmr)<span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept=</span><span class="fu">coef</span>(mod1),<span class="at">slope=</span><span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>,<span class="at">colour=</span><span class="st">"blue"</span>)<span class="sc">+</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept=</span><span class="fu">coef</span>(mod2),<span class="at">slope=</span><span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>,<span class="at">colour=</span><span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec11-model-selection_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now let’s compare the AIC scores of the two models.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AICc</span>(mod1,mod2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     df     AICc
+mod1  2 33.82759
+mod2  2 57.56350</code></pre>
+</div>
+</div>
+<p>By this criterion, which model is the best?</p>
+</section>
+</section>
+<section id="model-selection-with-generalized-linear-models-glms" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="model-selection-with-generalized-linear-models-glms"><span class="header-section-number">11.5</span> Model selection with Generalized Linear Models (GLMs)</h2>
+<section id="example-3-forest-fire-risk" class="level3" data-number="11.5.1">
+<h3 data-number="11.5.1" class="anchored" data-anchor-id="example-3-forest-fire-risk"><span class="header-section-number">11.5.1</span> Example 3: Forest fire risk</h3>
+<p>Last class, we used logistic regression to fit a dataset from <a href="https://link.springer.com/chapter/10.1007/978-3-030-36674-2_37#Tab1">Abid and Izeboudjen 2020</a> to predict forest fire occurrence based on environmental conditions in Algeria. We created several predictive models for the relationship between temperature, relative humidity, wind speed, and rain fall on fire risk. You may recall that in the summary of each GLM, the model AIC score was also included. This provides the same score as using <code>AIC()</code> on the model. Importantly, <code>summary()</code> on a GLM will always return AIC and not <span class="math inline">\(\text{AIC}_c\)</span>, so you may need to run <span class="math inline">\(\text{AIC}_c\)</span> separately, if appropriate for your model.</p>
+<p>Let’s re-create the models. First, we’ll do the same pre-processing to rename columns to more intuitive names.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>forest_fires <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/das-amlan/Forest-Fire-Prediction/refs/heads/main/forest_fires.csv"</span>,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 243 Columns: 15
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (15): day, month, year, Temperature, RH, Ws, Rain, FFMC, DMC, DC, ISI, B...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>forest_fires <span class="ot">&lt;-</span> forest_fires <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">HasFire =</span> Classes,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    Temperature,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">RelativeHumidity =</span> RH,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">WindSpeed =</span> Ws,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Rainfall =</span> Rain</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now, let’s fit the data using a GLM:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model_ws <span class="ot">&lt;-</span> <span class="fu">glm</span>(HasFire <span class="sc">~</span> WindSpeed,</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> forest_fires,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_ws)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = HasFire ~ WindSpeed, family = binomial(link = "logit"), 
+    data = forest_fires)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)  1.03997    0.73404   1.417    0.157
+WindSpeed   -0.05049    0.04650  -1.086    0.278
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 332.90  on 242  degrees of freedom
+Residual deviance: 331.71  on 241  degrees of freedom
+AIC: 335.71
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+<p>And the improved model incorporating temperature, relative humidity, and rainfall:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>model_2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(HasFire <span class="sc">~</span> Rainfall <span class="sc">+</span> RelativeHumidity <span class="sc">+</span> Temperature,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> forest_fires,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = HasFire ~ Rainfall + RelativeHumidity + Temperature, 
+    family = binomial(link = "logit"), data = forest_fires)
+
+Coefficients:
+                 Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)      -5.49046    2.87716  -1.908   0.0564 .  
+Rainfall         -2.45730    0.54778  -4.486 7.26e-06 ***
+RelativeHumidity -0.04126    0.01604  -2.573   0.0101 *  
+Temperature       0.28463    0.07146   3.983 6.81e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 332.90  on 242  degrees of freedom
+Residual deviance: 196.53  on 239  degrees of freedom
+AIC: 204.53
+
+Number of Fisher Scoring iterations: 7</code></pre>
+</div>
+</div>
+<p>Notice anything about the AIC scores? What happens if we try using <span class="math inline">\(\text{AIC}_c\)</span>?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model_ws, model_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         df      AIC
+model_ws  2 335.7131
+model_2   4 204.5304</code></pre>
+</div>
+</div>
+</section>
+<section id="example-4-disease-virulence" class="level3" data-number="11.5.2">
+<h3 data-number="11.5.2" class="anchored" data-anchor-id="example-4-disease-virulence"><span class="header-section-number">11.5.2</span> Example 4: Disease virulence</h3>
+<p>Previously, we explored the dataset from <a href="https://www.pnas.org/doi/full/10.1073/pnas.1817323116">Farrell and Davies (2019)</a>. Let’s try a simple GLM to see if host evolutionary isolation (<em>EvoIso</em>) affected the probability of death. Recall that the data is binomial and distributed according to a Bernoulli distribution. For the response, we’ll use the number of reported deaths due to disease (<em>Deaths</em>) out of the total number of reported cases (<em>Cases</em>). Luckily for us, <code>glm()</code> has a handy trick to specify binomial links using <code>cbind()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>disease_distance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://eeb313.github.io/lectures/data/disease_distance.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 4157 Columns: 24
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (7): Country, Disease, Parasite, Host, HostOrder, ParaType, ParaFamily
+dbl (17): Year, Cases, Deaths, Destroyed, Slaughtered, SR, EvoIso, Taxonomic...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(Deaths,Cases<span class="sc">-</span>Deaths) <span class="sc">~</span> EvoIso, </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> disease_distance)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = cbind(Deaths, Cases - Deaths) ~ EvoIso, family = "binomial", 
+    data = disease_distance)
+
+Coefficients:
+              Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -2.763e+00  4.878e-03 -566.43   &lt;2e-16 ***
+EvoIso       1.340e-03  4.611e-05   29.06   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1220530  on 4156  degrees of freedom
+Residual deviance: 1219677  on 4155  degrees of freedom
+AIC: 1225780
+
+Number of Fisher Scoring iterations: 6</code></pre>
+</div>
+</div>
+<p>Suppose we want to see if other factors affect the probability of death, in addition to or outside of evolutionary isolation. What factors could we test?</p>
+<p>Perhaps the type of parasite also affects the probability of death. Let’s compare the models.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(Deaths,Cases<span class="sc">-</span>Deaths) <span class="sc">~</span> EvoIso <span class="sc">+</span> ParaType, </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> disease_distance)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="fu">AICc</span>(model,model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       df      AICc
+model   2 1225779.7
+model2  7  792182.4</code></pre>
+</div>
+</div>
+<p><em>Note that we could continue to add terms to the model that would make it a better fit to the data. This veers towards p-hacking territory which we want to avoid!! This section is to show you that AIC works the same for GLM. In practice, you should first build your models based on good theory and then compare them.</em></p>
+</section>
+</section>
+<section id="model-selection-for-linear-mixed-effects-models-lmes" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="model-selection-for-linear-mixed-effects-models-lmes"><span class="header-section-number">11.6</span> Model selection for Linear Mixed Effects Models (LMEs)</h2>
+<p><em>The general principles of model selection are the same for LMEs.</em></p>
+<p>Model selection for mixed models is even more complicated, due to the addition of group/random effects. A procedure that is commonly used to perform selection of LMEs is as follows:</p>
+<ol type="1">
+<li><p>Create a <em>saturated model</em> that includes all fixed effects (and their interactions[^interaction]) and group effects you wish to test.</p></li>
+<li><p>Optimize the structure of group effects by comparing models with the same saturated fixed effects structure but differing group effect structures. These models should be fitted using Restricted Maximum Likelihood (i.e., <code>REML = TRUE</code>), since variance component estimation will be biased otherwise. The <em>optimal</em> group effect structure is the one that provides the lowest AIC. Do <strong>not</strong> remove group effects if they are included to account for non-independence in your data. Skip this step if group effects must be included given the hierarchical structure (i.e., nestedness) in the data.</p></li>
+<li><p>Optimize the fixed-effect structure by comparing models with the same optimized (or necessary) group effects but with differing fixed effect structures. These models should be fitted with Maximum Likelihood (i.e., <code>REML = FALSE</code>) to prevent biased fixed-effect parameter estimates. Models can be selected on the basis of AIC (the lower the better), by comparing nested models using a likelihood ratio test (LRT), or both.</p></li>
+<li><p>Fit the final model with optimized fixed and group effects using REML and interpret your results.</p></li>
+</ol>
+<section id="example-5-species-richness" class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="example-5-species-richness"><span class="header-section-number">11.6.1</span> Example 5: Species richness</h3>
+<p>Let’s try this using the <a href="https://www.iopan.gda.pl/oceanologia/472janss.pdf">RIKZ dataset</a> we used in the previous lecture. Recall that this dataset examines species richness in intertidal areas.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>rikz <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"https://uoftcoders.github.io/rcourse/data/rikz_data.txt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 45 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+dbl (5): Richness, Exposure, NAP, Beach, Site
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Site and Beach are factors</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>rikz <span class="ot">&lt;-</span> rikz <span class="sc">%&gt;%</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Site =</span> <span class="fu">factor</span>(Site),</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Beach =</span> <span class="fu">factor</span>(Beach)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(rikz)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [45 × 5] (S3: tbl_df/tbl/data.frame)
+ $ Richness: num [1:45] 11 10 13 11 10 8 9 8 19 17 ...
+ $ Exposure: num [1:45] 10 10 10 10 10 8 8 8 8 8 ...
+ $ NAP     : num [1:45] 0.045 -1.036 -1.336 0.616 -0.684 ...
+ $ Beach   : Factor w/ 9 levels "1","2","3","4",..: 1 1 1 1 1 2 2 2 2 2 ...
+ $ Site    : Factor w/ 5 levels "1","2","3","4",..: 1 2 3 4 5 1 2 3 4 5 ...</code></pre>
+</div>
+</div>
+<p>We used a mixed-effect model with a group effect on Beach to view different trends in species richness and NAP across beaches. In this model, we are including group effects for intercepts only. Like with GLMs, AIC is included in the summary of LMEs.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>mixed_model_IntOnly_orig <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness <span class="sc">~</span> NAP <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Beach), </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> rikz, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mixed_model_IntOnly_orig)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: Richness ~ NAP + (1 | Beach)
+   Data: rikz
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+    249.8     257.1    -120.9     241.8        41 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-1.4258 -0.5010 -0.1791  0.2452  4.0452 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Beach    (Intercept) 7.507    2.740   
+ Residual             9.111    3.018   
+Number of obs: 45, groups:  Beach, 9
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   6.5844     1.0321   6.380
+NAP          -2.5757     0.4873  -5.285
+
+Correlation of Fixed Effects:
+    (Intr)
+NAP -0.164</code></pre>
+</div>
+</div>
+<p>In this model selection example, we want to compare group effect structure so we will set <code>REML = TRUE</code>. Notice that the model summary no longer includes AIC.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>mixed_model_IntOnly <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness <span class="sc">~</span> NAP <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Beach), </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> rikz, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mixed_model_IntOnly)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear mixed model fit by REML ['lmerMod']
+Formula: Richness ~ NAP + (1 | Beach)
+   Data: rikz
+
+REML criterion at convergence: 239.5
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-1.4227 -0.4848 -0.1576  0.2519  3.9794 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ Beach    (Intercept) 8.668    2.944   
+ Residual             9.362    3.060   
+Number of obs: 45, groups:  Beach, 9
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept)   6.5819     1.0958   6.007
+NAP          -2.5684     0.4947  -5.192
+
+Correlation of Fixed Effects:
+    (Intr)
+NAP -0.157</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(mixed_model_IntOnly)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 247.4802</code></pre>
+</div>
+</div>
+<p>We then extended this model to include random slopes to allow the relationship between NAP and species richness to vary by beach. However, the random slopes &amp; intercepts model might have been too complex for our data. What about only including group effects on slopes, without intercepts?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>mixed_model_SlopeOnly <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Richness <span class="sc">~</span> NAP <span class="sc">+</span> (<span class="dv">0</span> <span class="sc">+</span> NAP<span class="sc">|</span>Beach), </span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> rikz, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>boundary (singular) fit: see help('isSingular')</code></pre>
+</div>
+</div>
+<p>Let’s compare these models using AIC:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(mixed_model_IntOnly, mixed_model_SlopeOnly)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      df      AIC
+mixed_model_IntOnly    4 247.4802
+mixed_model_SlopeOnly  4 260.2010</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="references-and-additional-reading" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="references-and-additional-reading"><span class="header-section-number">11.7</span> References and additional reading</h2>
+<ol type="1">
+<li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0169534703003458">Johnson &amp; Omland 2004. Model selection in ecology and evolution. <em>Trends in Ecology and Evolution</em>.</a></li>
+<li>Burnham &amp; Anderson 2002. <em>Model Selection and Multimodel Inference</em> (2nd ed.).</li>
+<li>Zuur et al.&nbsp;2009. <em>Mixed Effects Models and Extensions in Ecology with R</em>.</li>
+<li><a href="https://doi.org/10.1002/ecy.3336">Tredennick et al.&nbsp;2021. A practical guide to selecting models for exploration, inference, and prediction in ecology. <em>Ecology</em>.</a></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../lectures/lec10-advanced-linear-models.html" class="pagination-link" aria-label="Advanced linear models - generalized and multilevel">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Advanced linear models - generalized and multilevel</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../assignments/assignment-01.html" class="pagination-link" aria-label="Assignment 1: Basic R (8 marks)">
+        <span class="nav-page-text">Assignment 1: Basic R (8 marks)</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

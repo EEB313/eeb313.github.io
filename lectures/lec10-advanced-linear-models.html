@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>10&nbsp; Lecture 10: Advanced linear models - generalized and multilevel – EEB313: Quantitative Methods in R for Biology</title>
+<title>10&nbsp; Advanced linear models - generalized and multilevel – EEB313: Quantitative Methods in R for Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-01.html" rel="next">
+<link href="../lectures/lec11-model-selection.html" rel="next">
 <link href="../lectures/lec09-linear-models.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -322,7 +322,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec10-advanced-linear-models.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lecture 10: Advanced linear models - generalized and multilevel</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec10-advanced-linear-models.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Advanced linear models - generalized and multilevel</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -435,7 +435,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/lec10-advanced-linear-models.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lecture 10: Advanced linear models - generalized and multilevel</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Advanced linear models - generalized and multilevel</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/lec11-model-selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
       </ul>
@@ -516,6 +522,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../assignments/data/plant-biomass-preprocess.csv" class="sidebar-item-text sidebar-link">
  <span class="menu-text">plant-biomass-preprocess.csv</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/data/medicago.csv" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">medicago.csv</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -642,9 +654,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec10-advanced-linear-models.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lecture 10: Advanced linear models - generalized and multilevel</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/lec01-downloading-r.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/lec10-advanced-linear-models.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Advanced linear models - generalized and multilevel</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lecture 10: Advanced linear models - generalized and multilevel</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Advanced linear models - generalized and multilevel</span></h1>
 </div>
 
 
@@ -2049,8 +2061,8 @@ boundary (singular) fit: see help('isSingular')</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-01.html" class="pagination-link" aria-label="Assignment 1: Basic R (8 marks)">
-        <span class="nav-page-text">Assignment 1: Basic R (8 marks)</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../lectures/lec11-model-selection.html" class="pagination-link" aria-label="Model selection">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Model selection</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
