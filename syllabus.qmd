@@ -72,15 +72,15 @@ This schedule is tentative
 | 6    | Feb 11 | Linear Models II                                           |
 |      | Feb 16 | Reading week                                               |
 |      | Feb 18 | Reading week                                               |
-| 7    | Feb 23 | Mathematical models in ecology and evolution II            |
+| 7    | Feb 23 | Model selection                                            |
 | 7    | Feb 25 | Project work                                               |
-| 8    | Mar 2  | Mathematical models in ecology and evolution II            |
-| 8    | Mar 5  | Clustering, dimensionality reduction, and machine learning |
-| 9    | Mar 9  | Project work                                               |
+| 8    | Mar 2  | Mathematical models in ecology and evolution I             |
+| 8    | Mar 4  | Project work                                               |
+| 9    | Mar 9  | Mathematical models in ecology and evolution II            |
 | 9    | Mar 11 | Project work                                               |
-| 10   | Mar 16 | Reproducible research                                      |
+| 10   | Mar 16 | Clustering, dimensionality reduction, & multivariate statistics |
 | 10   | Mar 18 | Project work                                               |
-| 11   | Mar 23 | Project work                                               |
+| 11   | Mar 23 | Reproducible research                                      |
 | 11   | Mar 25 | Project work                                               |
 | 12   | Mar 30 | Group presentations                                        |
 | 12   | Apr 1  | Group presentations                                        |

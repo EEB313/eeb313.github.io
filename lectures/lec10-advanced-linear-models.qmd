@@ -1,4 +1,4 @@
-# Lecture 10: Advanced linear models - generalized and multilevel
+# Advanced linear models - generalized and multilevel
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

@@ -22,6 +22,7 @@ book:
       - lectures/lec08-inference.qmd
       - lectures/lec09-linear-models.qmd
       - lectures/lec10-advanced-linear-models.qmd
+      - lectures/lec11-model-selection.qmd
       # - lectures/lec08-intro-inference-1.qmd
       # - lectures/lec09-intro-inference-2.qmd
       # - lectures/lec10-linear-models-1.qmd
@@ -59,8 +60,8 @@ book:
         href: assignments/data/SSDinMammals.csv
       - text: "plant-biomass-preprocess.csv"
         href: assignments/data/plant-biomass-preprocess.csv
-      #   - text: "medicago.csv"
-      #     href: lectures/data/medicago.csv
+      - text: "medicago.csv"
+        href: lectures/data/medicago.csv
       #   - text: "bmr.csv"
       #     href: lectures/data/bmr.csv
       #   - text: "Pigot2020.csv"
