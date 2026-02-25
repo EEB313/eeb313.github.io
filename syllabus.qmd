@@ -114,8 +114,8 @@ This schedule is tentative
 | Problem Set 4        | Individual | Quercus      | Feb 13           | 8   |
 | Problem Set 5        | Individual | Quercus      | Feb 23           | 8   |
 | Project proposal     | Group      | Quercus      | Mar 5            | 3   |
-| Challenge assignment | Individual | Quercus      | Mar 11           | 20  |
-| Mid-project update   | Group      | GitHub       | Mar 18           | 6   |
+| Challenge assignment | Individual | Quercus      | Mar 12           | 20  |
+| Mid-project update   | Group      | GitHub       | Mar 19           | 6   |
 | Presentation         | Group      | In-class     | Mar 30 and Apr 1 | 15  |
 | Final report         | Group      | GitHub       | Apr 8            | 15  |
 
@@ -123,7 +123,7 @@ There are 100 marks in total. Your final course mark will be the sum of your ass
 
 Assignments will be distributed and submitted in the R Markdown format via Quercus. Assignments will typically be handed out on Wed after class and are due at 11:59 PM on the following Wed. All students will be given 2 "free" late days that they can distribute across assignments if an extension is needed. Otherwise, late assignments will face a penalty of 50% per day.
 
-The Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Mar 6, and it will be due 11:59 PM on Mar 11. Students should work on their own and submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!
+The Challenge Assignment is equivalent to a take home exam. The format will be the same as the other assignments, but this assignment is designed challenge you to go a little beyond what was taught in class. It will be distributed on 9:00 AM on Mar 6, and it will be due 11:59 PM on Mar 12. Students should work on their own and submit their own original work. No extensions will be granted on this assignment except under the same extra-ordinary circumstances akin to those under which an exam might be deferred. We only expect you to do your best!
 
 The project will be conducted as a group and groups will receive a single grade (except in exceptional circumstances). No late assignments will be accepted for any component of the group project.
 

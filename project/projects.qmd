@@ -1,0 +1,55 @@
+# Group project {.unnumbered}
+
+## Project description
+
+The course project is a self-directed group project where students can demonstrate their ability to use, adapt, and expand upon the computational skills gained in the course. Groups are free to do their projects on any topic within biology that they find exciting. There are two options for the form of the study:
+
+1.  Analysis of a biological dataset, using visualization and statistical analysis
+2.  Simulation of a biological process using a mathematical/computational model
+
+Both approaches should be hypothesis-driven.
+
+#### What is a hypothesis? What is a prediction?
+
+A **hypothesis** is a testable and falsifiable statement that offers a possible explanation of a phenomenon based on background knowledge, preliminary observations, or logic.
+
+*E.g., Primary productivity is an important driver of mammal species richness.*
+
+A **prediction** is based on a hypothesis. It is meant to describe what will happen in a specific situation, such as during an experiment, if the hypothesis is correct.
+
+*E.g., If primary productivity is an important driver of mammal species richness, then more mammalian species would be found in sites with more plant biomass (proxy for primary productivity) compared with sites with less plant growth.*
+
+### Option 1: Data analysis
+
+Groups will formulate their own hypotheses based on their interests within biology, and then use a (publicly-available) available dataset to test predictions borne out of their hypotheses with reproducible and quantitative analysis techniques. The analysis can use statistical/computational techniques that were covered in the class or ones you've learned elsewhere or independently. The work must be original; while you can repurpose data, you cannot simply redo the same analysis described in a published paper or other resource. The project should include, at minimum, data cleaning/pre-processing, visualization, description statistics, inferential statistics, and careful interpretation.
+
+With this option, a good amount of time should be spent upfront finding the right match between a biologically-motivated hypothesis and an available dataset that could be used to test it.
+
+Check out our continually-updated [list](projects_databases.html) of ideas for open-source datasets
+
+### Option 2: Model simulation
+
+Groups will develop a mathematical/computational model to answer a question in biology they find interesting. There are many reasons to develop models: they help clarify assumptions, generate predictions, nullify hypotheses, provide mechanistic explanations for observed data, and help us know *what kinds of data* to look for. New model are often build on existing and well-studied ones (e.g., the Lotka-Volterra model of species interactions, the SIR model of disease transmission, the Moran process for genetic drift and selection, Michaelis-Menton model of enzyme-substrate reactions, or reaction-diffusion model of developmental patterning). The fact models are simplifying representations of the real world is by design! The goal of building a model is to identify the key features that make a process interesting, represent the process mathematically (and, in doing so, clarify what assumptions are being made!), characterize the behaviour of the model, and from this characterization draw conclusions about how the process being modelled works. Characterization of a model can involve mathematical analysis, simulation, and confrontation with data.
+
+The key steps in this project are to 1) identify an interesting question in biology, 2) develop (and likely revise) a simple model to address that question, 3) characterize the behaviour of the model, and 4) draw biological conclusions from the model and its characterization.
+
+## Project timeline and deliverables
+
+-   Project proposal (3 marks) - approx 1 page - due Thurs March 5th
+-   Mid-project update (6 marks) - due Thurs March 19th
+-   In-class Presentation (15 marks) - due Mar 30
+-   Final report (15 marks) - due Apr 8
+
+A single group document should be submitted for each project deliverable (NOT one per student).
+
+Late submissions are not accepted for group project deadlines.
+
+## Miscellaneous
+
+### Working in groups
+
+All group members are expected to contribute equally to the conception and execution of the project. Each group member must be present for each class session (barring illness/emergency), available to convene outside of class, and responsive to communication with group members between meetings in a timely manner.
+
+If you are having trouble working with your group, e.g., because you feel like the work is not being equitably divided, please let us know as soon as possible. We will work with you and your group to identify a solution that works for everyone. Do not wait until the last minute to let us know that your group has been having trouble -- at that point, there is little we can do to fix the situation. Moreover, we expect group members to communicate with each other and to try to work out their concerns before we become involved.
+
+If an individual is unable to effectively work with a group, they will be removed and asked to complete the project alone.

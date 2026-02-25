@@ -43,9 +43,9 @@ book:
       # - assignments/assignment-05.qmd
       # - assignments/challenge-assignment.qmd
     - part: "Project"
-      # chapters:
-      # - projects.qmd
-      # - projects_databases.qmd
+      chapters:
+        - project/projects.qmd
+        - project/projects_databases.qmd
     - part: "Datasets"
       chapters:
       - text: "portal_data.csv"
