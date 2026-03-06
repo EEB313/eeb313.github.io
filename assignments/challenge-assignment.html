@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Assignment 2: Manipulating and plotting data (8 marks) – EEB313: Quantitative Methods in R for Biology</title>
+<title>Challenge assignment – EEB313: Quantitative Methods in R for Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../assignments/assignment-03.html" rel="next">
-<link href="../assignments/assignment-01.html" rel="prev">
+<link href="../project/projects.html" rel="next">
+<link href="../assignments/assignment-05.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -75,6 +75,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -258,7 +287,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-02.html">Assignment 2: Manipulating and plotting data (8 marks)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/challenge-assignment.html">Challenge assignment</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -405,7 +434,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/assignment-02.html" class="sidebar-item-text sidebar-link active">
+  <a href="../assignments/assignment-02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignment 2: Manipulating and plotting data (8 marks)</span></a>
   </div>
 </li>
@@ -429,7 +458,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignments/challenge-assignment.html" class="sidebar-item-text sidebar-link">
+  <a href="../assignments/challenge-assignment.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Challenge assignment</span></a>
   </div>
 </li>
@@ -591,8 +620,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#analyze-body-temperature-timeseries-of-beaver-castor-canadensis-2.5-marks" id="toc-analyze-body-temperature-timeseries-of-beaver-castor-canadensis-2.5-marks" class="nav-link active" data-scroll-target="#analyze-body-temperature-timeseries-of-beaver-castor-canadensis-2.5-marks">1. Analyze body temperature timeseries of beaver <em>Castor canadensis</em> (2.5 marks)</a></li>
-  <li><a href="#analyze-mammal-size-data-5.5-marks" id="toc-analyze-mammal-size-data-5.5-marks" class="nav-link" data-scroll-target="#analyze-mammal-size-data-5.5-marks">2. Analyze mammal size data (5.5 marks)</a></li>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#exploring-long-term-ecological-dynamics-of-desert-rodents-6-marks" id="toc-exploring-long-term-ecological-dynamics-of-desert-rodents-6-marks" class="nav-link" data-scroll-target="#exploring-long-term-ecological-dynamics-of-desert-rodents-6-marks">1. Exploring long-term ecological dynamics of desert rodents [6 marks]</a></li>
+  <li><a href="#inference-on-scaled-size-differences-between-sexes-6-marks" id="toc-inference-on-scaled-size-differences-between-sexes-6-marks" class="nav-link" data-scroll-target="#inference-on-scaled-size-differences-between-sexes-6-marks">2. Inference on scaled size differences between sexes [6 marks]</a></li>
+  <li><a href="#aggregation-of-satellite-male-horseshoe-crabs-3.5-marks" id="toc-aggregation-of-satellite-male-horseshoe-crabs-3.5-marks" class="nav-link" data-scroll-target="#aggregation-of-satellite-male-horseshoe-crabs-3.5-marks">3. Aggregation of satellite male horseshoe crabs [3.5 marks]</a></li>
+  <li><a href="#simulating-early-outbreak-dynamics-4.5-marks" id="toc-simulating-early-outbreak-dynamics-4.5-marks" class="nav-link" data-scroll-target="#simulating-early-outbreak-dynamics-4.5-marks">4. Simulating early outbreak dynamics [4.5 marks]</a></li>
   </ul>
 </nav>
     </div>
@@ -600,9 +632,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/assignment-02.html">Assignment 2: Manipulating and plotting data (8 marks)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/assignment-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/challenge-assignment.html">Challenge assignment</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignment 2: Manipulating and plotting data (8 marks)</h1>
+<h1 class="title">Challenge assignment</h1>
 </div>
 
 
@@ -619,40 +651,64 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Download the .Rmd file <a href="assignment-02.Rmd">here</a>.</p>
-<p><em>To submit this assignment, upload the full document, including the original questions, your code, and the output. Submit your assignment as a knitted .pdf. Please ensure the text on your .pdf does not continue past the end of the page.</em></p>
-<section id="analyze-body-temperature-timeseries-of-beaver-castor-canadensis-2.5-marks" class="level2">
-<h2 class="anchored" data-anchor-id="analyze-body-temperature-timeseries-of-beaver-castor-canadensis-2.5-marks">1. Analyze body temperature timeseries of beaver <em>Castor canadensis</em> (2.5 marks)</h2>
-<p>a. There are many built-in data frames in R, which you can find <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html">more details about online</a>. What are the column names of the built-in dataframe <code>beaver1</code>? How many observations (rows) and variables (columns) are there? (0.25 marks)</p>
-<p><em>Hint: You don’t have to download, import, or `read’ them like external datasets - you can just work with them as if they are in your environment already. You can learn more about a built-in dataset by searching it in the</em> <code>Help</code> <em>panel (bottom left in RStudio) or by typing</em> <code>?</code> <em>and it’s name in the command line. Make sure to load the <code>tidyverse</code> package before you use any <code>readr</code>, <code>dplyr,</code> or <code>ggplot</code> functions in your notebook.</em></p>
-<p>b. Display both the first 6 and last 6 rows of this data frame. Show how to do so with both indexing as well as specialized functions. (0.5 marks)</p>
-<p>c. Use the <code>view()</code> function to inspect the dataset visually in RStudio. Exactly how long was this beaver measured for? You can state this in words or numerically (0.25 points)</p>
-<p>d. What is the minimum, mean, and maximum body temperature for beavers inside and outside of the retreat? (0.5 marks)</p>
-<p><em>Hint: An indicator variable is one that has a value of 1 when the criteria (i.e., “activity outside the retreat”) is true, and a value of zero when it is not.</em></p>
-<p>e. Make a plot of body temperature vs time of day, with points coloured differently for activity inside vs outside the retreat. (1 point)</p>
-<p><em>Hint: You might want to create a new transformed time variable for this</em></p>
+<p>Download the .Rmd file: <a href="https://eeb313.github.io/assignments/challenge-assignment.Rmd" class="uri">https://eeb313.github.io/assignments/challenge-assignment.Rmd</a>.</p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<p>This assignment should treated as an open book examination: work should be completed yourself, without discussions with other classmates or the use of internet searches or AI-assistance. The methods needed to complete each question can be found in the course notes (or prior assignments), or in the R help pages.</p>
+<p><em>To submit this assignment, upload the full document to Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted <code>.pdf</code>.</em></p>
 </section>
-<section id="analyze-mammal-size-data-5.5-marks" class="level2">
-<h2 class="anchored" data-anchor-id="analyze-mammal-size-data-5.5-marks">2. Analyze mammal size data (5.5 marks)</h2>
-<p>We will be working with a data set compiled to understand sexual dimorphism in size across mammals. You can download the file from <a href="https://datadryad.org/dataset/doi:10.5061/dryad.280gb5mx0">Dryad</a> (note: you might have to do this manually, as the site can block R imports) or from the <a href="https://eeb313.github.io/assignments/data/SSDinMammals.csv">course website</a>). The <a href="https://www.nature.com/articles/s41467-024-45739-5">original study</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> is quite interesting! The Dryad link includes a description of the study variables.</p>
-<p>a. Read throught the original study abstract and introduction. In one sentence, what was the hypothesis the authors were trying to test with this study? (0.25 pts)</p>
-<p>b. Download the file to your computer and read it into a variable called <code>mammal_sizes</code> and provide a preview of data. (0.25 mark)</p>
-<p><em>Hint: Make sure you tell <code>read_csv</code> the correct file path of your data based on where you put it. You can either specify the full directory path, or where it is relative to which directly R currently operating out of for this notebook, which you can get with the</em> <code>getwd()</code> <em>command and set with the</em> <code>setwd()</code> <em>command. (Or by navigating to the Files panel in RStudio, selecting the Settings menu (gear icon), and choosing “Set As Working Directory” or “Go To Working Directory”).</em></p>
-<p>c. Pull out the 4 columns containing information on the species name along with “massM”, “massF”, “n_M” and “n_F” and call this dataframe <code>mammal_weights</code>. Calculate the average weight by sex for each Order of mammal, including only species where at least 10 males and 10 females were measured, and only Orders that include at least 10 species (1 mark)</p>
-<p>d. Calculate the proportional mass difference ([massM - massF] / massM) for all the rows in the original dataset. Again including including only species where at least 10 males and 10 females were measured, and only Orders that include at least 10 species, calculate the average proportional difference in mass (1 mark).</p>
-<p>e. Repeat 2c and 2d but for length, and average by Family instead of by Order (1 mark)</p>
-<p>f. Make a scatter plot of the average female body mass versus the average male body mass for each species. Color the points by Order. Add in a solid line showing the case where male and female are equal size (1 mark)</p>
-<p><em>Hints: You may need to transform the x and y data to make the plot easier to read, since the mass values span multiple orders of magnitude. Search the Help documentation for the geom_abline function to learn about adding lines to plots.</em></p>
-<p>g. Make a scatter plot of the proportional difference in mass between males and females of each species versus the Order, and color by Order as well (1 mark)</p>
-<p><em>Note: You can rotate x axis labels by adding the following command at the end of the set of ggplot commands :</em> <code>+ theme(axis.text.x = element_text(angle = 45,vjust=1, hjust=1))</code></p>
+<section id="exploring-long-term-ecological-dynamics-of-desert-rodents-6-marks" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-long-term-ecological-dynamics-of-desert-rodents-6-marks">1. Exploring long-term ecological dynamics of desert rodents [6 marks]</h2>
+<p>We will return to the Portal Project, a multi-decade study of a desert ecosystem. Look through the class notes to refresh your memory about this data. You can read in the data from the course website: <a href="https://eeb313.github.io/lectures/data/portal_data.csv" class="uri">https://eeb313.github.io/lectures/data/portal_data.csv</a>. Researchers have used this dataset to understand the fundamental rules that govern the structure of ecosystems. Here, we’ll focus on understanding the interactions between the multiple grain-eating rodent species that live in the study site, including the “keystone species”, the Kangaroo rats (<em>Dipodomys</em>).</p>
+<p><strong>1a</strong>. How many unique rodent species were captured in this study? How often were each of them observed? (<em>The former can be answered with a statement, and the later with a table</em>) Going forward, we’ll restrict out analysis to rodents with at least 100 measurements over the course of the study. [0.5 marks]</p>
+<p><strong>1b</strong>. Create a plot of the abundance (# of observations) of each rodent species, summed over all control plots, in each year of the study. The plot should have a separate panel for each species, and they should be labeled with the full name of the species. Make sure your x axis range is the same for all plots, but the y axis can vary since species abundance is quite different between different species. Describe some of the trends that you see. What sorts of dynamics over time are observed ? Do you see any evidence of competition? [1.5 marks]</p>
+<p><strong>1c</strong>. Instead of abundance, examine trends in the average mass of individuals in each species over the study years. Do you see any interesting trends, or do masses seem to be roughly constant? (<em>Hint: to force the y axis to always go down to zero, you can add <code>geom_blank(aes(y = 0), alpha = 0) +</code> to your list of plotting commands</em>) [1 mark]</p>
+<p><strong>1d</strong>. Examine how the distribution of individual masses - pooling all rodent species - changed between 1977 and 2002. What do you notice? Can you explain any of these trends with the data from your time series plots above? [1 marks]</p>
+<p><strong>1e</strong>. Because these rodent species mainly consume the same resource (seeds), ecological theory suggests there should be strong competition between them and constraints on the total resource that can be used. If the number of individuals in the population increases over time, then the consumption rate of each individual will have to go down over time since the resource is limited. Across many systems, prior research as shown that metabolic rate (which should be determined by consumption) scales with mass (<span class="math inline">\(M\)</span>) as <span class="math inline">\(M^{3/4}\)</span>. Thus, the resource competition theory suggests that average of <span class="math inline">\(N\)</span> and the of <span class="math inline">\(M_{3/4}\)</span> should be constant. Put mathematically ,</p>
+<p><span class="math display">\[\langle N \rangle \langle M^{3/4}\rangle = c\]</span> or</p>
+<p><span class="math display">\[ \langle N \rangle  = c \langle M^{-3/4} \rangle\]</span></p>
+<p>Plot the time trends in <span class="math inline">\(\langle N \rangle\)</span> and <span class="math inline">\(\langle M^{-3/4} \rangle\)</span>, including all rodents. Aggregate the data into monthly intervals to plot. [1 marks]</p>
+<p><strong>1f</strong>. Test the resource competition theory with the rodent data from the Portal study. Interpret your result: Is there evidence for resource constraints among these rodents? How much of the variation between mass and abundance is explained by this theory? What are the limitations to your analysis (<em>Hint: take the log of each side of the scaling equation above to see the simple form it takes and then fit a simple regression</em>). [1 marks]</p>
+</section>
+<section id="inference-on-scaled-size-differences-between-sexes-6-marks" class="level2">
+<h2 class="anchored" data-anchor-id="inference-on-scaled-size-differences-between-sexes-6-marks">2. Inference on scaled size differences between sexes [6 marks]</h2>
+<p>For this question we’ll revisit the dataset on on sexual size dimorphism that we used in Assignment 2 and 5, and in Lecture 9. The data is available on the course website: <a href="https://eeb313.github.io/assignments/data/SSDinMammals.csv" class="uri">https://eeb313.github.io/assignments/data/SSDinMammals.csv</a></p>
+<p><strong>2a.</strong> After loading in the data, create a column for a new variable called <code>PropMassDiff</code>, which is male mass minus female mass divided male mass, i.e., <span class="math inline">\((M-F)/M\)</span>). Visualize the distribution of relative size differences using a histogram or density plot, and then overlay a <em>rug plot</em> (using <code>geom_rug</code>, which you might have to look at the documentation for). Do you think, based on the these plots, that males are larger than females? [1 mark]</p>
+<p><strong>2b.</strong> Assume that proportional mass differences are independent and Normally distributed with an unknown mean and variance. The goal of this question will be to determine the most likely mean and variance for the scaled mass differences between males and females, based on the likelihood function. This is conceptually similar to maximum likelihood estimations we did in prior lectures and assignments, except it requires looping over <em>two</em> parameters (the mean and variance of the Normal distribution), rather than one, to determine where the log-likelihood achieves a maximum. The following questions walk you through how to maximize the log-likelihood with respect to both parameters.</p>
+<p>First, calculate the log likelihood that your proportional size distribution data came from a Normal distribution with mean 0.2 and variance 0.1. (<em>Note: <code>dnorm()</code> has the standard deviation as an input, not variance)</em> [0.5 marks]</p>
+<p><strong>2c.</strong> Next, write a function takes in user-specified values of mean and variance values to test, and then evaluates the log-likelihood of observing the real proportional size difference data. Test it on the same values used above [1 mark]</p>
+<p><strong>2d.</strong> Now, we want to estimate the maximum likelihood values of the mean and variance that best explain the proportional size difference data (again, assuming normality and independence of observations). First, generate a data frame/grid that contains all combinations of the means and variance that you want to test. Use mean values that range from -1 to 1 in increments of 0.005 and variance values from 0.01 to 0.1 in increments of 0.001. Then, loop over each row of this dataframe/grid, calculate the log likelihood using your function above, and store the log-likelihood values in a new column of the dataframe. Display the first few rows of these results. [1.5 marks]</p>
+<p><strong>2e.</strong> Make a heat map, using <code>geom_raster()</code>, to visualize the likelihood (not log likelihood) as a function of the possible mean and variance. Then, calculatate what is the most likely <em>combination</em> of the mean and variance for the proportional sizes? [1 mark]</p>
+<p><strong>2f.</strong> Repeat the figure you made in 2a, but leave out the histogram, and instead, on top of the rug plot, plot the distribution associated to the maximum likelihood parameter estimates which you calculated in (e). To do this, evaluate the probability density for the Normal at the mean and variance which you have just estimated and overlay the values of the density on the rug plot.[0.5 marks]</p>
+<p><strong>2g.</strong> Based on the estimates for the mean and variance in the distribution of proportional size differences that you obtained in (f), do you think males are larger than females on average? Explain what property/properties of the previous plot led you to your conclusion. [0.5 marks]</p>
+</section>
+<section id="aggregation-of-satellite-male-horseshoe-crabs-3.5-marks" class="level2">
+<h2 class="anchored" data-anchor-id="aggregation-of-satellite-male-horseshoe-crabs-3.5-marks">3. Aggregation of satellite male horseshoe crabs [3.5 marks]</h2>
+<p>The horseshoe crab <em>Limulus polyphemus</em> has two male reproductive morphs; the smaller males have a a special appendage known, which are used to attach to female crabs. When female crabs dig a nest and lay eggs on the beach, the attached male can then fertilize the eggs. Alternatively, “satellite” males can crowd around nesting pairs and then fertilize eggs laid.</p>
+<p>The data are available on the course website: <a href="https://eeb313.github.io/lectures/data/satellites.csv" class="uri">https://eeb313.github.io/</a><a href="https://eeb313.github.io/assignments/data/crab_satellites.csv" class="uri">lectures</a><a href="https://eeb313.github.io/lectures/data/satellites.csv" class="uri">/data/satellites.csv</a>. Each row is a female, and the variables include female color, spine condition, carapace width (cm), mass (kg), and number of satellite males attached to the female.</p>
+<p><strong>3a.</strong> Examine the distribution of satellite males attached to each female. Describe what you see? Does it look like the choice by a male of what female to attach to is just random? [0.5 marks]</p>
+<p><strong>3b</strong>. Fit a regression to determine if a female’s carapace width is a good predictor of the number of satellite males attached. Determine the appropriate regression model based on the properties of the outcome variable, and justify your choice. Report the regression coefficients, associated <span class="math inline">\(p\)</span> values, and AIC. [1 mark]</p>
+<p><strong>3c</strong>. How should we interpret the regression coefficient associated to carapace width? <em>Hint: think about transformations applied to the response.</em> [0.5 marks]</p>
+<p><strong>3d</strong>. Plot the data and the fitted model [0.5 marks]</p>
+<p><strong>3e</strong>. Using the satellites data, fit the following Poisson regressions:</p>
+<ul>
+<li>the number of satellite males on female mass</li>
+<li>the number of satellite males on carapace width and female mass</li>
+<li>the number of satellite males on carapace width, female mass, and their interaction</li>
+</ul>
+<p>Perform model selection: report which of these models (including the one from 3b) is the best fit to the data. Report the model that is the best fit to the data and its AIC. Are there any models with AICs that are close? What does this mean? [1 mark]</p>
+</section>
+<section id="simulating-early-outbreak-dynamics-4.5-marks" class="level2">
+<h2 class="anchored" data-anchor-id="simulating-early-outbreak-dynamics-4.5-marks">4. Simulating early outbreak dynamics [4.5 marks]</h2>
+<p>In lecture 12, we simulated population growth from one generation to the next, assuming that there are discrete generations and that the distribution of offspring of each individual was random and followed a Poisson distribution. This model is also very useful for simulating disease outbreaks! If we assume each individual has a fixed duration of infection and a constant rate per time of infecting others, the number of secondary infections is Poisson distributed with mean value called <span class="math inline">\(R_0\)</span>, the basic reproduction number for the infection.</p>
+<p><strong>4a</strong>. Assume new outbreaks are always seeded by single infected individuals into large populations that are otherwise totally susceptible. With the model described above, what proportion of outbreaks will go extinct after one generation, when <span class="math inline">\(R_0\)</span> = 0.8, 1.5, and 3? [0.5 marks]</p>
+<p><strong>4b</strong>. Using <span class="math inline">\(R_0 = 1.5\)</span>, write a function to simulate 10 generations of disease spread starting from one infected individual. Return the number of infected individuals at the end of the simulation. Set up a loop to run this function 1000 times. What proportion of outbreaks go extinct after 10 generations? Of the outbreaks that don’t go extinct, plot the distribution of final outbreak sizes (<em>Hint: make sure to plot the frequency, as opposed to counts, since not all outbreaks will be included</em>) [1 mark]</p>
+<p><strong>4c.</strong> The Poisson model for the distribution of secondary infections only holds under some strong assumptions: everyone is infectious for the exact same amount of time, and everyone has the same probability per time of infecting susceptible individuals. In reality, the duration of the infectious period varies across individuals, and individuals may also vary in their individual propensity to infect others. More generally, we can describe the distribution of secondary infections using a <strong>negative binomial distribution</strong> with mean <span class="math inline">\(R_0\)</span> and dispersion parameter <span class="math inline">\(k\)</span> &gt;0.</p>
+<p>Plot the distribution of secondary infections after a single generation using the binomial distribution for R0 = 1.5 and the values k = 0.1, k=1, and k = 100. Use the R function <code>rnbinom</code> function, setting the parameters for <code>mu</code> (mean) and <code>size</code> (k). On the same graphs, add the same curves for the Poisson distribution.&nbsp;Make sure you extend your x axis far enough to see most of the distribution.&nbsp;For what <span class="math inline">\(k\)</span> value does this distribution match the Poisson distribution? You have probably heard of the idea of <strong>superspreading</strong> in epidemiology - the idea that some individuals may infect a very large number of others, while others may infect very few. If you wanted to use the negative binomial distribution above to model superspreading, what sort of <span class="math inline">\(k\)</span> value would you use, and why? (<em>Note: We aren’t asking for a specific k value, just something qualitative, like “very large” or “less than 1”, etc</em>) [1.5 marks]</p>
+<p><strong>4d</strong>. What proportion of outbreaks go extinct after a single generation, after starting from a single infected individual, for <span class="math inline">\(R_0\)</span> = 1.5 and <span class="math inline">\(k\)</span> = 0.1, <span class="math inline">\(k\)</span>=1, and <span class="math inline">\(k\)</span> = 100? Of the individuals who infect at least 1 other individuals, what proportion of individuals cause at least 5 secondary infections? [1 mark]</p>
+<p><strong>4e</strong>. While hanging out with some classmates, you hear them discussing why they think COVID-19 was so hard to control. “It’s because of superspreading!” one classmate exclaims. What do you think? Does superspreading necessarily make infections harder to control? What do your results above suggest about the implications of higher variation in secondary infections? [0.5 mark]</p>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>Tombak, K.J., Hex, S.B.S.W. &amp; Rubenstein, D.I. New estimates indicate that males are not larger than females in most mammal species. Nat Commun 15, 1872 (2024). <a href="https://doi.org/10.1038/s41467-024-45739-5" class="uri">https://doi.org/10.1038/s41467-024-45739-5</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -1071,13 +1127,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../assignments/assignment-01.html" class="pagination-link" aria-label="Assignment 1: Basic R (8 marks)">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment 1: Basic R (8 marks)</span>
+      <a href="../assignments/assignment-05.html" class="pagination-link" aria-label="Assignment 5: Linear regression (8 marks)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assignment 5: Linear regression (8 marks)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../assignments/assignment-03.html" class="pagination-link" aria-label="Assignment 3: Advanced data wrangling and visualization (8 marks)">
-        <span class="nav-page-text">Assignment 3: Advanced data wrangling and visualization (8 marks)</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../project/projects.html" class="pagination-link" aria-label="Group project">
+        <span class="nav-page-text">Group project</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
