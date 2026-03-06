@@ -1,0 +1,99 @@
+# Challenge assignment {.unnumbered}
+
+Download the .Rmd file: <https://eeb313.github.io/assignments/challenge-assignment.Rmd>.
+
+## Instructions
+
+This assignment should treated as an open book examination: work should be completed yourself, without discussions with other classmates or the use of internet searches or AI-assistance. The methods needed to complete each question can be found in the course notes (or prior assignments), or in the R help pages.
+
+*To submit this assignment, upload the full document to Quercus, including the original questions, your code, and the output. Submit your assignment as a knitted `.pdf`.*
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+library(lme4) # for linear mixed effects models
+library(lmerTest) # load in to get p-values in linear mixed effects models
+```
+
+## 1. Exploring long-term ecological dynamics of desert rodents [6 marks]
+
+We will return to the Portal Project, a multi-decade study of a desert ecosystem. Look through the class notes to refresh your memory about this data. You can read in the data from the course website: <https://eeb313.github.io/lectures/data/portal_data.csv>. Researchers have used this dataset to understand the fundamental rules that govern the structure of ecosystems. Here, we'll focus on understanding the interactions between the multiple grain-eating rodent species that live in the study site, including the "keystone species", the Kangaroo rats (*Dipodomys*).
+
+**1a**. How many unique rodent species were captured in this study? How often were each of them observed? (*The former can be answered with a statement, and the later with a table*) Going forward, we'll restrict out analysis to rodents with at least 100 measurements over the course of the study. [0.5 marks]
+
+**1b**. Create a plot of the abundance (\# of observations) of each rodent species, summed over all control plots, in each year of the study. The plot should have a separate panel for each species, and they should be labeled with the full name of the species. Make sure your x axis range is the same for all plots, but the y axis can vary since species abundance is quite different between different species. Describe some of the trends that you see. What sorts of dynamics over time are observed ? Do you see any evidence of competition? [1.5 marks]
+
+**1c**. Instead of abundance, examine trends in the average mass of individuals in each species over the study years. Do you see any interesting trends, or do masses seem to be roughly constant? (*Hint: to force the y axis to always go down to zero, you can add `geom_blank(aes(y = 0), alpha = 0) +` to your list of plotting commands*) [1 mark]
+
+**1d**. Examine how the distribution of individual masses - pooling all rodent species - changed between 1977 and 2002. What do you notice? Can you explain any of these trends with the data from your time series plots above? [1 marks]
+
+**1e**. Because these rodent species mainly consume the same resource (seeds), ecological theory suggests there should be strong competition between them and constraints on the total resource that can be used. If the number of individuals in the population increases over time, then the consumption rate of each individual will have to go down over time since the resource is limited. Across many systems, prior research as shown that metabolic rate (which should be determined by consumption) scales with mass ($M$) as $M^{3/4}$. Thus, the resource competition theory suggests that average of $N$ and the of $M_{3/4}$ should be constant. Put mathematically ,
+
+$$\langle N \rangle \langle M^{3/4}\rangle = c$$ or
+
+$$ \langle N \rangle  = c \langle M^{-3/4} \rangle$$
+
+Plot the time trends in $\langle N \rangle$ and $\langle M^{-3/4} \rangle$, including all rodents. Aggregate the data into monthly intervals to plot. [1 marks]
+
+**1f**. Test the resource competition theory with the rodent data from the Portal study. Interpret your result: Is there evidence for resource constraints among these rodents? How much of the variation between mass and abundance is explained by this theory? What are the limitations to your analysis (*Hint: take the log of each side of the scaling equation above to see the simple form it takes and then fit a simple regression*). [1 marks]
+
+## 2. Inference on scaled size differences between sexes [6 marks]
+
+For this question we'll revisit the dataset on on sexual size dimorphism that we used in Assignment 2 and 5, and in Lecture 9. The data is available on the course website: <https://eeb313.github.io/assignments/data/SSDinMammals.csv>
+
+**2a.** After loading in the data, create a column for a new variable called `PropMassDiff`, which is male mass minus female mass divided male mass, i.e., $(M-F)/M$). Visualize the distribution of relative size differences using a histogram or density plot, and then overlay a *rug plot* (using `geom_rug`, which you might have to look at the documentation for). Do you think, based on the these plots, that males are larger than females? [1 mark]
+
+**2b.** Assume that proportional mass differences are independent and Normally distributed with an unknown mean and variance. The goal of this question will be to determine the most likely mean and variance for the scaled mass differences between males and females, based on the likelihood function. This is conceptually similar to maximum likelihood estimations we did in prior lectures and assignments, except it requires looping over *two* parameters (the mean and variance of the Normal distribution), rather than one, to determine where the log-likelihood achieves a maximum. The following questions walk you through how to maximize the log-likelihood with respect to both parameters.
+
+First, calculate the log likelihood that your proportional size distribution data came from a Normal distribution with mean 0.2 and variance 0.1. (*Note: `dnorm()` has the standard deviation as an input, not variance)* [0.5 marks]
+
+**2c.** Next, write a function takes in user-specified values of mean and variance values to test, and then evaluates the log-likelihood of observing the real proportional size difference data. Test it on the same values used above [1 mark]
+
+**2d.** Now, we want to estimate the maximum likelihood values of the mean and variance that best explain the proportional size difference data (again, assuming normality and independence of observations). First, generate a data frame/grid that contains all combinations of the means and variance that you want to test. Use mean values that range from -1 to 1 in increments of 0.005 and variance values from 0.01 to 0.1 in increments of 0.001. Then, loop over each row of this dataframe/grid, calculate the log likelihood using your function above, and store the log-likelihood values in a new column of the dataframe. Display the first few rows of these results. [1.5 marks]
+
+**2e.** Make a heat map, using `geom_raster()`, to visualize the likelihood (not log likelihood) as a function of the possible mean and variance. Then, calculatate what is the most likely *combination* of the mean and variance for the proportional sizes? [1 mark]
+
+**2f.** Repeat the figure you made in 2a, but leave out the histogram, and instead, on top of the rug plot, plot the distribution associated to the maximum likelihood parameter estimates which you calculated in (e). To do this, evaluate the probability density for the Normal at the mean and variance which you have just estimated and overlay the values of the density on the rug plot.[0.5 marks]
+
+**2g.** Based on the estimates for the mean and variance in the distribution of proportional size differences that you obtained in (f), do you think males are larger than females on average? Explain what property/properties of the previous plot led you to your conclusion. [0.5 marks]
+
+## 3. Aggregation of satellite male horseshoe crabs [3.5 marks]
+
+The horseshoe crab *Limulus polyphemus* has two male reproductive morphs; the smaller males have a a special appendage known, which are used to attach to female crabs. When female crabs dig a nest and lay eggs on the beach, the attached male can then fertilize the eggs. Alternatively, "satellite" males can crowd around nesting pairs and then fertilize eggs laid.
+
+The data are available on the course website: [https://eeb313.github.io/](https://eeb313.github.io/lectures/data/satellites.csv){.uri}[lectures](https://eeb313.github.io/assignments/data/crab_satellites.csv){.uri}[/data/satellites.csv](https://eeb313.github.io/lectures/data/satellites.csv){.uri}. Each row is a female, and the variables include female color, spine condition, carapace width (cm), mass (kg), and number of satellite males attached to the female.
+
+**3a.** Examine the distribution of satellite males attached to each female. Describe what you see? Does it look like the choice by a male of what female to attach to is just random? [0.5 marks]
+
+**3b**. Fit a regression to determine if a female's carapace width is a good predictor of the number of satellite males attached. Determine the appropriate regression model based on the properties of the outcome variable, and justify your choice. Report the regression coefficients, associated $p$ values, and AIC. [1 mark]
+
+**3c**. How should we interpret the regression coefficient associated to carapace width? *Hint: think about transformations applied to the response.* [0.5 marks]
+
+**3d**. Plot the data and the fitted model [0.5 marks]
+
+**3e**. Using the satellites data, fit the following Poisson regressions:
+
+-   the number of satellite males on female mass
+-   the number of satellite males on carapace width and female mass
+-   the number of satellite males on carapace width, female mass, and their interaction
+
+Perform model selection: report which of these models (including the one from 3b) is the best fit to the data. Report the model that is the best fit to the data and its AIC. Are there any models with AICs that are close? What does this mean? [1 mark]
+
+## 4. Simulating early outbreak dynamics [4.5 marks]
+
+In lecture 12, we simulated population growth from one generation to the next, assuming that there are discrete generations and that the distribution of offspring of each individual was random and followed a Poisson distribution. This model is also very useful for simulating disease outbreaks! If we assume each individual has a fixed duration of infection and a constant rate per time of infecting others, the number of secondary infections is Poisson distributed with mean value called $R_0$, the basic reproduction number for the infection.
+
+**4a**. Assume new outbreaks are always seeded by single infected individuals into large populations that are otherwise totally susceptible. With the model described above, what proportion of outbreaks will go extinct after one generation, when $R_0$ = 0.8, 1.5, and 3? [0.5 marks]
+
+**4b**. Using $R_0 = 1.5$, write a function to simulate 10 generations of disease spread starting from one infected individual. Return the number of infected individuals at the end of the simulation. Set up a loop to run this function 1000 times. What proportion of outbreaks go extinct after 10 generations? Of the outbreaks that don't go extinct, plot the distribution of final outbreak sizes (*Hint: make sure to plot the frequency, as opposed to counts, since not all outbreaks will be included*) [1 mark]
+
+**4c.** The Poisson model for the distribution of secondary infections only holds under some strong assumptions: everyone is infectious for the exact same amount of time, and everyone has the same probability per time of infecting susceptible individuals. In reality, the duration of the infectious period varies across individuals, and individuals may also vary in their individual propensity to infect others. More generally, we can describe the distribution of secondary infections using a **negative binomial distribution** with mean $R_0$ and dispersion parameter $k$ \>0.
+
+Plot the distribution of secondary infections after a single generation using the binomial distribution for R0 = 1.5 and the values k = 0.1, k=1, and k = 100. Use the R function `rnbinom` function, setting the parameters for `mu` (mean) and `size` (k). On the same graphs, add the same curves for the Poisson distribution. Make sure you extend your x axis far enough to see most of the distribution. For what $k$ value does this distribution match the Poisson distribution? You have probably heard of the idea of **superspreading** in epidemiology - the idea that some individuals may infect a very large number of others, while others may infect very few. If you wanted to use the negative binomial distribution above to model superspreading, what sort of $k$ value would you use, and why? (*Note: We aren’t asking for a specific k value, just something qualitative, like “very large” or “less than 1”, etc*) [1.5 marks]
+
+**4d**. What proportion of outbreaks go extinct after a single generation, after starting from a single infected individual, for $R_0$ = 1.5 and $k$ = 0.1, $k$=1, and $k$ = 100? Of the individuals who infect at least 1 other individuals, what proportion of individuals cause at least 5 secondary infections? [1 mark]
+
+**4e**. While hanging out with some classmates, you hear them discussing why they think COVID-19 was so hard to control. “It’s because of superspreading!” one classmate exclaims. What do you think? Does superspreading necessarily make infections harder to control? What do your results above suggest about the implications of higher variation in secondary infections? [0.5 mark]

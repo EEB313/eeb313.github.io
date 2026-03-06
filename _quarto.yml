@@ -23,6 +23,7 @@ book:
       - lectures/lec09-linear-models.qmd
       - lectures/lec10-advanced-linear-models.qmd
       - lectures/lec11-model-selection.qmd
+      - lectures/lec12-math-models.qmd
       # - lectures/lec08-intro-inference-1.qmd
       # - lectures/lec09-intro-inference-2.qmd
       # - lectures/lec10-linear-models-1.qmd
@@ -39,6 +40,7 @@ book:
       - assignments/assignment-03.qmd
       - assignments/assignment-04.qmd
       - assignments/assignment-05.qmd
+      - assignments/challenge-assignment.qmd
       # - assignments/assignment-04.qmd
       # - assignments/assignment-05.qmd
       # - assignments/challenge-assignment.qmd
@@ -72,8 +74,8 @@ book:
         href: assignments/data/fruit_trees.csv
       #   - text: "meas.csv"
       #     href: lectures/data/meas.csv
-      #   - text: "satellites.csv"
-      #     href: lectures/data/satellites.csv
+      - text: "crab_satellites.csv"
+        href: assignments/data/crab_satellites.csv
       #   - text: "WF_inference_data.csv"
       #     href: lectures/data/WF_inference_data.csv
     - part: "Papers"
@@ -115,6 +117,7 @@ resources:
   - assignments/assignment-03.Rmd
   - assignments/assignment-04.Rmd
   - assignments/assignment-05.Rmd
+  - assignments/challenge-assignment.Rmd
 #   - assignment-04.Rmd
 #   - assignment-05.Rmd
 #   - assignment-00.qmd

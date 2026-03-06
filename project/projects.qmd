@@ -9,6 +9,8 @@ The course project is a self-directed group project where students can demonstra
 
 Both approaches should be hypothesis-driven.
 
+Since this is a class project, not a formal research project, we encourage you to **think outside the box, and be creative and ambitious**! You won't be accessed on the real life impact of your work, but on the use of skills learned in the class.
+
 #### What is a hypothesis? What is a prediction?
 
 A **hypothesis** is a testable and falsifiable statement that offers a possible explanation of a phenomenon based on background knowledge, preliminary observations, or logic.
@@ -43,6 +45,18 @@ The key steps in this project are to 1) identify an interesting question in biol
 A single group document should be submitted for each project deliverable (NOT one per student).
 
 Late submissions are not accepted for group project deadlines.
+
+### Project proposal details
+
+The project proposal should be 1 page max (plus citations, if appropriate), with formatting flexible (e.g., headings, bullet points, tables allowed). The proposal should cover the following three sections, with example content described below
+
+-   [Research question]{.underline}: Describe the question, hypothesis, or goal you plan to address with your project. Give a little background and motivation for your choice of this question. Why do you think this is an interesting or important question? Were there any prior scientific studies that informed your choice of this question (not required, but if so, please cite)? Are there follow-up questions or alternative hypotheses that go along with your main question?
+
+-   [Data source]{.underline}: Explain the dataset that you plan to analyze. How was this data collected? What is the unit being measured (ie, individuals, species, locations, etc)? What sorts of variables are recorded? How many observations are there? How are you accessing this data? What additional datasets could you use or seek out to supplement/validate your main analysis? Are there any major limitations of your data in relation to your research question? (Note: If you are doing a modeling project, this section can be shorter and might relate either to data you'll use to figure out input values for the parameters of your model, or data you will fit your model output to).
+
+-   [Analysis plan]{.underline}: Outline what sorts of techniques you plan to use to analyze your data or simulate your model. Your analysis can include visualization and descriptive statistics but must go beyond that, to apply formal statistical inference (either something learned in class or a more advanced technique you teach yourself) or create a new model/simulation, or a combination of both.
+
+The main goal of the proposal is mainly for the course instructors to ensure your team has a feasible analysis plan and reasonable scope, and for us to provide feedback on your idea as soon as possible.
 
 ## Miscellaneous
 
