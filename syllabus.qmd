@@ -56,34 +56,34 @@ For scientific/technical questions on the content of course material in lectures
 
 This schedule is tentative
 
-| Week | Date   | Topic (tentative)                                          |
-|------|--------|------------------------------------------------------------|
-| 1    | Jan 5  | Intro to course                                            |
-| 1    | Jan 7  | Intro to R                                                 |
-| 2    | Jan 12 | Data manipulation                                          |
-| 2    | Jan 14 | Data visualization                                         |
-| 3    | Jan 19 | Advanced data analysis                                     |
-| 4    | Jan 21 | Exploratory data analysis (Activity)                       |
-| 4    | Jan 26 | SNOW DAY                                                   |
-| 4    | Jan 28 | Model-informed data analysis (Activity)                    |
-| 5    | Feb 2  | Random variables and computational statistics              |
-| 5    | Feb 4  | Probability, likelihood, and statistical inference         |
-| 6    | Feb 9  | Linear Models 1                                            |
-| 6    | Feb 11 | Linear Models II                                           |
-|      | Feb 16 | Reading week                                               |
-|      | Feb 18 | Reading week                                               |
-| 7    | Feb 23 | Model selection                                            |
-| 7    | Feb 25 | Project work                                               |
-| 8    | Mar 2  | Mathematical models in ecology and evolution I             |
-| 8    | Mar 4  | Project work                                               |
-| 9    | Mar 9  | Mathematical models in ecology and evolution II            |
-| 9    | Mar 11 | Project work                                               |
-| 10   | Mar 16 | Clustering, dimensionality reduction, & multivariate statistics |
-| 10   | Mar 18 | Project work                                               |
-| 11   | Mar 23 | Reproducible research                                      |
-| 11   | Mar 25 | Project work                                               |
-| 12   | Mar 30 | Group presentations                                        |
-| 12   | Apr 1  | Group presentations                                        |
+| Week | Date   | Topic (tentative)                                  |
+|------|--------|----------------------------------------------------|
+| 1    | Jan 5  | Intro to course                                    |
+| 1    | Jan 7  | Intro to R                                         |
+| 2    | Jan 12 | Data manipulation                                  |
+| 2    | Jan 14 | Data visualization                                 |
+| 3    | Jan 19 | Advanced data analysis                             |
+| 4    | Jan 21 | Exploratory data analysis (Activity)               |
+| 4    | Jan 26 | SNOW DAY                                           |
+| 4    | Jan 28 | Model-informed data analysis (Activity)            |
+| 5    | Feb 2  | Random variables and computational statistics      |
+| 5    | Feb 4  | Probability, likelihood, and statistical inference |
+| 6    | Feb 9  | Linear Models 1                                    |
+| 6    | Feb 11 | Linear Models II                                   |
+|      | Feb 16 | Reading week                                       |
+|      | Feb 18 | Reading week                                       |
+| 7    | Feb 23 | Model selection                                    |
+| 7    | Feb 25 | Project work                                       |
+| 8    | Mar 2  | Math models in biology I + Project work            |
+| 8     | Mar 4 | Math models in biology II + Project work |
+| 9     | Mar 9 | Project work |
+| 9     | Mar 11 | Math models in biology III + Project work |
+| 10 | Mar 16 | Clustering, dimensionality reduction, & multivariate statistics |
+| 10 | Mar 18 | Project work |
+| 11 | Mar 23 | Reproducible research + Project work|
+| 11 | Mar 25 | Project work |
+| 12 | Mar 30 | Group presentations |
+| 12 | Apr 1 | Group presentations |
 
 ### Assessment
 

@@ -64,7 +64,7 @@ First, calculate the log likelihood that your proportional size distribution dat
 
 The horseshoe crab *Limulus polyphemus* has two male reproductive morphs; the smaller males have a a special appendage known, which are used to attach to female crabs. When female crabs dig a nest and lay eggs on the beach, the attached male can then fertilize the eggs. Alternatively, "satellite" males can crowd around nesting pairs and then fertilize eggs laid.
 
-The data are available on the course website: [https://eeb313.github.io/](https://eeb313.github.io/lectures/data/satellites.csv){.uri}[lectures](https://eeb313.github.io/assignments/data/crab_satellites.csv){.uri}[/data/satellites.csv](https://eeb313.github.io/lectures/data/satellites.csv){.uri}. Each row is a female, and the variables include female color, spine condition, carapace width (cm), mass (kg), and number of satellite males attached to the female.
+The data are available on the course website: [https://eeb313.github.io/](https://eeb313.github.io/lectures/data/satellites.csv){.uri}[lectures](https://eeb313.github.io/assignments/data/crab_satellites.csv){.uri}[/data/crab_satellites.csv](https://eeb313.github.io/lectures/data/satellites.csv){.uri}. Each row is a female, and the variables include female color, spine condition, carapace width (cm), mass (kg), and number of satellite males attached to the female.
 
 **3a.** Examine the distribution of satellite males attached to each female. Describe what you see? Does it look like the choice by a male of what female to attach to is just random? [0.5 marks]
 

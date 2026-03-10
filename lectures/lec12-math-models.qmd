@@ -6,14 +6,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Lesson preamble
 
-> ### Reminders
->
-> -   No assignment this week - all done for the term!
->
-> -   Challenge Assignment ("take-home exam") distributed Fri March 6th and due Thurs March 12th
->
-> -   Project proposal (1 page, non-binding) due Thurs March 5th
-
 > ### Learning Objectives
 >
 > -   Understand the utility of mathematical models in biology
@@ -102,6 +94,8 @@ Let's start by considering the simplest possible model of population growth. We'
 
 -   there is no stochasticity: individuals do not, by chance, give birth to more/fewer offspring
 
+![](figures/birth_model.png)
+
 While this model could perhaps apply to bacterial cells growing in a petri dish or a plant growing in an isolated, optimized greenhouse, there is obviously no real system that satisfies all these very strong assumptions. However, when modeling, it's helpful to first understand the simplest models before moving on to more complicated ones.
 
 Let $N_t$ be the number of individuals at times $t=0,1,2,3,\dots$. Let $N_0$ be the initial number of individuals in the population. Then, we can write down a rule - or recursive equation - for the population size at generation $t+1$ in terms of the *population size at the previous generation*
@@ -114,11 +108,11 @@ We can write a simple algorithm to calculate $N_t$
 
 N_0 <- 1
 b <- 2
-t <- 1
+t_max <- 1
   
 N <- N_0
 
-for (t in 1:t){
+for (t in 1:t_max){
   N <- N + b*N
 }
 
@@ -156,14 +150,27 @@ model_output <- data.frame(time = t_vec, N = N_vec)
 
 model_output %>% ggplot(aes(x = time, y = N)) + 
   geom_line() +
-  geom_point() 
+  geom_point()  + 
+  scale_y_log10(name = "Population size N(t)")+
+  scale_x_continuous(name = "Time (t)", breaks = 0:max(model_output$time))
 ```
 
 What does this graph look like?
 
+Let's plot on a log scale to confirm
+
+```{r}
+model_output %>% ggplot(aes(x = time, y = N)) + 
+  geom_line() +
+  geom_point() +
+  
+  scale_y_log10(name = "Population size N(t)")+
+  scale_x_continuous(name = "Time (t)", breaks = 0:max(model_output$time))
+```
+
 Let's try to generalize this model a little bit more:
 
--   Instead of thinking of each timestep $t$ as a synchronized generation where everyone reproduces, we could alternatively think of it as a shorter timeframe (like an hour, day, or week)
+-   Instead of thinking of each timestep $t$ as a synchronized generation where everyone reproduces, we could alternatively think of it as a shorter timeframe (like an hour, day, or week) where only a subset of individuals reproduce
 
 -   Instead of thinking about $b$ as the total number of offspring each individual prouces each generation, we can reframe it as the average number of offspring produced in that time period for a population where reproduction is NOT synchronized. For example, if on average individuals have 2 offspring every year, but, like humans, reproduction can occur anytime during the year, and we instead want to model the population size each month, we could use $b = 2/12 \sim 0.17$.
 
@@ -177,9 +184,9 @@ Let's update our simulation, turning it into a function so that we can easily si
 
 ```{r}
 N_0 <- 1
-b <- 2/12
-d <- 1/12
-t_max <- 100
+b <- 2/12 # per month
+d <- 1/12 # per month
+t_max <- 100 # months
 
 sim_birth_death <- function(N_0, b, d, t_max){
   
@@ -197,28 +204,35 @@ sim_birth_death <- function(N_0, b, d, t_max){
 }
 
 model_output <- as.data.frame(sim_birth_death(N_0, b, d, t_max)) %>%
-  mutate(params = "b = 2, d=1") %>%
+  mutate(params = "b = 2, d = 1 /yr") %>%
   rbind(as.data.frame(sim_birth_death(N_0, 1.5/12, d, t_max)) 
-        %>% mutate(params = "b = 1.5, d=1")) %>%
+        %>% mutate(params = "b = 1.5, d = 1 /yr")) %>%
   rbind(as.data.frame(sim_birth_death(N_0, 2/12, 0.7/12, t_max)) 
-        %>% mutate(params = "b = 1, d=0.7"))
+        %>% mutate(params = "b = 1, d = 0.7/yr"))
 
 
-model_output %>% ggplot(aes(x = time, y = N, color = params)) + 
+model_output %>% ggplot(aes(x = time/12, y = N, color = params)) + 
   geom_line() +
-  geom_point() 
+  geom_point() +
+  scale_y_continuous(name = "Population size N(t)") + 
+  scale_x_continuous(name = "Time(t), years", breaks = 0:max(model_output$time)) + 
+  scale_color_discrete((name = "Parameters"))
 ```
 
 Alternatively, we can plot this on a log scale
 
 ```{r}
 
-model_output %>% ggplot(aes(x = time, y = N, color = params)) + 
+model_output %>% ggplot(aes(x = time/12, y = N, color = params)) + 
   geom_line() +
-  geom_point() + 
-  scale_y_log10()
+  geom_point() +
+  scale_y_log10(name = "Population size N(t)") + 
+  scale_x_continuous(name = "Time(t), years", breaks = 0:max(model_output$time)) + 
+  scale_color_discrete((name = "Parameters"))
 
 ```
+
+Note that when we have changed our parameters ($b,d$) into rates per time instead of integer values, our population size $N$ is no longer restricted to integer values either. Therefore in this case, $N$ is better thought of as the average population size or a measure of population density.
 
 Did we really need to write a for-loop for this sort of model? Let's try to work out what we expect to see at each generation in this model
 
@@ -240,17 +254,43 @@ This model is an example of a [deterministic, discrete time, dynamic model]{.und
 
 ### Exponential growth
 
-Continuous-time analogues of discrete-time equations are written as differential equations. We'll get to this more in the next class, but for now, we can see the conneciton. If we assume time-steps are small, we can replace the difference in the previous equation with a derivative to describe the dynamics of a population changing in continuous time:
+Continuous-time analogues of discrete-time equations are written as differential equations. We'll get to this more in the next class, but for now, we can see the connection. When we used a timestep of size one, we wrote
 
-$$\frac{d N}{dt} = (b-d) N = r N$$ subject to $N(0) = N_0$. Like the geometric growth equation, we can solve this equation exactly. Diving through by $N$ and using properties of derivatives from calculus,
+$$
+\Delta N_t = (b-d) N_t
+$$
 
-$$\frac{1}{N} \frac{d N}{d t} = \frac{d \ln N}{d t} = r.$$ This equation tells us that, in the continuous time version of the growth model above, the per-capita (i.e., *logarithmic*) rate of increase in the population size is constant. Integrating and applying the initial condition, one can show $N(t) = N_0 e^{r t}$. If $r > 0$, i.e., $b > d$, then the population grows exponentially; if $r < 0$, the population will decay exponentially in size to zero. The trajectory of the population is completely determined in a deterministic model like this one by the parameters (i.e., the intrinsic growth rate) and initial conditions.
+If we want to re-scale the equation to use a smaller, fractional, timestep (like we did above when changing from years to months), we re-write things as
+
+$$
+N_{t+\Delta t} - N_t = (b-d) \Delta t  N_t
+$$
+
+Or as
+
+$$
+N_{t+\Delta t} - N_t = (b \Delta t -d \Delta t )  N_t
+$$
+
+which is why we scaled our rate parameters down to $b' = b \Delta t$ in the previous example. Finally, we can re-arrange this to
+
+$$
+ \frac{\Delta N_t}{\Delta t}  =  (b -d) N_t
+$$
+
+If we assume time-steps are small, we can replace the differences ($\Delta N, \Delta t$) in the previous equation with an *infinitesimal* differences ($d N, dt$), and then use the derivative to describe the dynamics of a population changing in continuous time as a *differential equation*:
+
+$$\frac{d N}{dt} = (b-d) N = r N$$subject to $N(0) = N_0$.
+
+Like the geometric growth equation, we can solve this equation exactly. Diving through by $N$ and using properties of derivatives from calculus,
+
+$$\frac{1}{N} \frac{d N}{d t} = \frac{d \ln N}{d t} = r.$$ This equation tells us that, in the continuous time version of the growth model above, the per-capita (i.e., *logarithmic*) rate of increase in the population size is constant. Integrating and applying the initial condition, one can show that the solution to this equation is $N(t) = N_0 e^{r t}$. If $r > 0$, i.e., $b > d$, then the population grows exponentially; if $r < 0$, the population will decay exponentially in size to zero. The trajectory of the population is completely determined in a deterministic model like this one by the parameters (i.e., the intrinsic growth rate) and initial conditions.
 
 ## Simulating stochastic population dynamics
 
 So far the models we've examined are *deterministic*, meaning that they prescribe exactly how many individuals we'll have at each timestep, and each time we run the model with the same initial conditions and parameters, we'll get the same output value. However, in the real world, random events, or *stochasticity*, can lead to variability in population sizes even when the expectation is the same.
 
-Stochastic events are extremely important in biology - they are responsible for processes like mutation, genetic drift, and extinction, for example.
+Stochastic events are extremely important in biology - they are responsible for processes like **mutation**, **genetic drift**, and **extinction**, for example.
 
 Since we know how to draw random numbers ([Lecture 7](lec07-random-variables) and [Lecture 8](lec08-inference)), we can simulate stochastic models!
 
@@ -258,7 +298,7 @@ Let's return to our simple discrete-generation model of population growth:
 
 $N_{t+1} = r N_t$
 
-We'll assume that in each generation (timestep), the original individuals produce $r$ offspring then die. However, let's assume there is some variability in the number of offspring each individual produced. If we think about it as there being a constant rate of reproduction during their life with each birth being independent, then we could think of it as a Poisson process (i.e., the number of offspring is Poisson distributed):
+We'll assume that in each generation (timestep), the original individuals produce $r$ offspring and then die. However, let's assume there is some variability in the number of offspring each individual produced. If we think about it as there being a constant rate of reproduction during their life with each birth being independent, then we could think of it as a Poisson process (i.e., the number of offspring is Poisson distributed):
 
 $$
 N_{t+1} = \sum_{N_t} \textrm{Poiss}(r) = \textrm{Poiss}(r N_t) 
@@ -282,9 +322,9 @@ for(r in r_values){
 }
 
 ggplot(df, aes(offspring, fill = factor(r))) +
-  geom_histogram() +
+  geom_histogram(binwidth = 1) +
   facet_wrap(~r) +
-  #theme_bw(base_size = 20) +
+  theme_bw() +
   labs(x = "Number of Offspring in 2nd Generation", fill = "r")
 ```
 
@@ -319,7 +359,9 @@ model_output <- data.frame(time = t_vec, N = N_vec)
 
 model_output %>% ggplot(aes(x = time, y = N)) + 
   geom_line() +
-  geom_point() 
+  geom_point() +
+  scale_y_continuous(name = "Population size N(t)") + 
+  scale_x_continuous(name = "Time(t)", breaks = 0:max(model_output$time)) 
 ```
 
 Let's turn this into a function, and return more example trajectories
@@ -352,14 +394,18 @@ for(i in 1:10){
 
 model_output %>% ggplot(aes(x = time, y = N, color = as.factor(i))) + 
   geom_line() +
-  geom_point() 
+  geom_point() +
+  scale_y_continuous(name = "Population size N(t)") + 
+  scale_x_continuous(name = "Time(t)", breaks = 0:max(model_output$time)) +
+  scale_color_discrete(name = "Iteration")
 ```
 
 Instead, let's look at the distribution of the population sizes at the end of the time period (10 generations here).
 
 ```{r}
 model_output %>% filter(time == t_max) %>% ggplot(aes(x = N)) + 
-  geom_histogram()
+  geom_histogram(binwidth = 1) +
+  theme_bw()
 ```
 
 Let's increase the number of independent populations we seed, and try a few different $r$ values
@@ -384,3 +430,7 @@ model_output %>% filter(time == t_max) %>% ggplot(aes(x = N, fill = factor(r))) 
 ```
 
 Note that this same simple stochastic model can be used for lots of processes other than simple growth! In fact, it's a commonly used way to model the spread of infectious diseases during the early phase of an outbreak, where $r$ is the basic reproduction number (often called $R_0$) of the outbreak, describing the average number of secondary infections before recovery (or death).
+
+## Further reading
+
+A great introductory textbook on mathematical modeling is : Sarah Otto & Troy Day, "**A Biologists Guide to Mathematical Modeling in Ecology & Evolution**". 2007. Princeton University Press. It's available online for free from the U of T Library
