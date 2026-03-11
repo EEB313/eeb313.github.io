@@ -1,0 +1,515 @@
+# Influential models in biology: Infection, competition, and protein production
+
+## Lesson preamble
+
+> ### Learning Objectives
+>
+> -   Become familiar with popular mathematical models across biology
+>
+> -   Move from single variable to multi-variable models
+>
+> -   Understand the connection between discrete time and continuous time models
+>
+> -   Gain familiarity with interpreting and creating ordinary differential equations
+>
+> -   Use the `ode` function in `deSolve` to numerically integrate differential equations
+>
+> -   Understand the range of processes that regulate population size from the molecular to species scales
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, message=FALSE, warning=FALSE}
+library(tidyverse)
+require(deSolve)
+```
+
+## Introduction
+
+In Lecture 12, we saw how we could create simple mathematical models for population growth and simulate those models computationally. In this class, we'll expand on that modeling approach, in two directions
+
+-   we'll move from models where population changes only happen at discrete intervals or "generations", to models where changes happen continuously
+
+-   we'll move from models considering the dynamics of only a single type of organisms to those including multiple types or multiple species
+
+When constructing models, our first step is always to think about the biology and our research questions, and use that to inform the model design. Our second step is then figuring out how to actually encode the model mathematically and - usually - simulate it computationally. Our approach here depends on some key features of the system. We've provided a table below to guide you in this process
+
+### Determining the approach to model simulation
+
+|  |  |  |
+|----------------------|------------------------|---------------------------|
+|  | **Discrete time**: Population size only changes at specific times | **Continuous time**: Population size can change continuously |
+| **Deterministic:** Changes either occur in completely predictable ways OR occur rapidly and in large populations OR we are only interested in the average population size | Use discrete time recursive equation | Use an ordinary differential equation |
+| **Stochastic**: Changes occur probabalistically AND either population size is small or rates are low AND we are interested in variation from average sizes | Use discrete-time stochastic simulation | Use a continuous time stochastic simulation (e.g., Gillespie algorithm/first reaction method, Gibson next reaction method) |
+
+: In the last class, we covered the left columns: Discrete time recursive equations and stochastic simulations. In this class, we'll cover the top right: ordinary differential equations.
+
+## Example 1: "SIR" model of infectious disease transmission
+
+The Susceptible-Infected-Recovered (SIR) model describes how an immunizing infection spreads through a closed population of hosts. Variants of this model can be used to study almost an infectious disease of any organism. In our Outbreak Investigation exercise, we introduced one of the simplest possible SIR models (in the slide deck) and then saw an example of how this model was adapted to COVID-19. Here we'll go back to this very simple version to go over how we generated the model output
+
+![](images/clipboard-2371660568.png){width="455"}
+
+The model tracks the number of susceptible $S$, infected $I$, and recovered $R$ individuals in continuous time. Each susceptible individual contacts infected individuals and acquires the infection via transmission at rate $\beta$. Infected indivduals recover from infection, and gain immunity at rate $\gamma$. In this version of the model, we assume immunity is not life-long, but wanes at a rate $\omega$, leading individuals to become susceptible again.
+
+*Note: This version is often called the "SIRS" model, as opposed to the "SIR" model with* $\omega = 0$*.*
+
+The model is as follows:
+
+$$\frac{dS}{dt} = \omega R - \beta S I $$ $$\frac{dI}{dt} = \beta S I - \gamma I$$ $$\frac{dR}{dt} = \gamma I - \omega R$$
+
+Remember that the derivative term (e.g., $dI/dt$) is the instantaneous rate of change of the number of individuals in that compartment (e.g., exactly 72 hours after the outbreak starts, the number of infected individuals is increasing at a rate of 0.2 per hour).
+
+*Note: The total population size is* $N = S + I + R$*. Since no individuals enter or leave the population (we've ignored birth or death here)* $dN/dt = 0$*, and the population size is constant. So, if we wanted to, we could actually simplify our system and ignore the* $R$ *equation (since* $R = N - S - I$*).*
+
+Below we solve the system and plot the dynamics for a specific set of parameter values.
+
+```{r}
+N <- 1000 # population size
+t_max <- 365 # time to simulate for
+
+# define parameters
+gamma <- 1/14  # mean infectious period = 14 days
+beta <- 0.0002  # transmission rate
+omega <- 1/90  # average duration of immunity is 90 days
+
+# put parameter values into vector test_params
+test_params <- c(beta = beta, gamma = gamma, omega = omega)
+
+initialI <- 1
+
+ic <- c(S=N-initialI, I=initialI, R = 0) # define initial conditions
+
+# define times to save
+t_vec <- seq(0, t_max, 0.01)
+
+# define the model!
+sir <- function(t, y, parms){
+  with(as.list(c(y,parms)),{
+    
+    dS <- omega*R - beta*S*I
+    dI <- beta*S*I - gamma*I
+    dR <- gamma*I - omega*R
+    
+    return(list(c(dS, dI, dR)))
+  })
+}
+
+# numerically integrate equations!
+model_output <- as.data.frame(ode(y = ic, times = t_vec, func = sir, parms = test_params))
+
+head(model_output)
+```
+
+```{r}
+model_output <- model_output %>% 
+  mutate(N = S + I + R) %>%
+  pivot_longer(! time) %>% # take all the columns other than time and put in long format
+  mutate(name = factor(name, levels = c("S","I","R","N"))) # want them to plot in this order
+
+head(model_output)
+```
+
+```{r}
+
+model_output %>% 
+  ggplot(aes(x = time, y = value, color = name)) + 
+  geom_line()
+```
+
+If we want to determine the peak epidemic size, and time at which the peak occurs:
+
+```{r, include=F}
+
+model_output %>% 
+  group_by(name) %>%
+  summarize(maxValue = max(value),
+            timeMax = time[which.max(value)]
+            )
+```
+
+#### Challenge
+
+Use a value of $\beta$ that is half the size of the above example. Describe 3 properties of the epidemic that change
+
+```{r, include = F}
+
+```
+
+Infectious disease models are almost always associated with an important "meta-parameter" $R_0$ (a function of other parameters), that determines many of the properties of the outcomes.
+
+The quantity $R_0$ describes the *average number of secondary infections from a single infectious individual in an otherwise susceptible population*. Intuitively, if the pathogen is unable to infect $>1$ individual on average when the susceptible pool has not yet been depleted (i.e., all individuals are susceptible), it will fail to spread. If $R_0 > 1$, then the disease will spread.
+
+There are formal mathematical methods to derive $R_0$ from the differential equations for any infection model, which we won't cover here. $R_0$ also has several nice mathematical properties (e.g., determines both the existence and stability of the infected equilibrium, and therefore describes a *transcritical bifurcation*). For now, we can simply state the value of $R_0$ for this simple SIR model
+
+$$R_0 = \frac{\beta N}{\gamma}$$
+
+Notice how the rate of recovery (i.e. loss of infectiousness) *reduces* the reproductive value of the pathogen; intuitively, this is because the faster an infected individual recovers the fewer people they can transmit.
+
+We can calculate $R_0$ for the last parameter values we used
+
+```{r}
+R0 <- beta*N/gamma; R0
+```
+
+### Challenge
+
+Run a version of the simulation with $R_0 <1$. Confirm that even if you start with a high portion of the population infected, the disease always goes extinct quickly
+
+```{r, include = F}
+
+```
+
+## Example 2: Models of density-dependent growth and interactions between species
+
+In our prior modeling lecture, we considered the simplest possible model of population growth: constant per capita rates of birth and death, which results in exponential growth (or decay) at a net rate $r$
+
+In reality, there's very few situations where populations can really grow exponentially, uninhibited, for very long. Instead, we tend to see density-dependent growth: as the population size increases, the effective growth rate decreases. This is typically modeled using a simple logistic equation,
+
+$$
+\frac{dN}{dt} = r N (1 - \frac{N}{K})
+$$
+
+here the the growth decreases linearly with population size, reaching a minimum value of 0 at the population carrying capacity, $N$.
+
+Density-dependent growth is seen in biological systems across multiple scales, from protein concentrations in a cell, to levels of red and white blood cells in the body, to the growth of microorganisms, plants, and large animals in lab and wild environments.
+
+There are multiple proposed explanations for density-dependent growth, with different mechanisms, or a combination of them, at play in any particular system
+
+-   resource limitation
+
+-   self-regulation
+
+-   spatial constraints
+
+-   competition
+
+-   predators
+
+-   disease
+
+```{r}
+
+N0 <- 1 # initial population size
+t_max <- 365 # time to simulate for
+
+# define parameters
+r <- 0.2
+K <- 200
+
+# put parameter values into vector test_params
+test_params <- c(r = r, K = K)
+
+# define times to save
+t_vec <- seq(0, t_max, 0.01)
+
+ic <- c(N = N0)
+
+# define the model!
+growth_dd <- function(t, y, parms){
+  with(as.list(c(y,parms)),{
+    
+    dN <- r*N*(1-N/K)
+    
+    return(list(c(dN)))
+  })
+}
+
+# numerically integrate equations!
+model_output <- as.data.frame(ode(y = ic, times = t_vec, func = growth_dd, parms = test_params))
+
+model_output %>% 
+  ggplot(aes(x = time, y = N)) + 
+  geom_line()
+```
+
+### Inter-species competition
+
+Single species rarely exist in isolation, and one component of growth regulation in many species is interactions with other species.
+
+One type of interaction is competition, whereby the growth rate of species A is regulated not only by the density of species A but also by the density of species B. One of the simplest and yet most powerful model of inter-species competition, which has been used to interpret biological data for nearly 100 years, is a Lotka-Volterra model
+
+$$
+\frac{d N_1}{dt} = r_1 \frac{N_1}{K_1} (K_1 - N_1 - \alpha_{12} N_2)
+$$
+
+$$
+\frac{d N_2}{dt} = r_2 \frac{N_2}{K_2} (K_2 - N_2 - \alpha_{21} N_1)
+$$
+
+where $K_i$ is the carrying capacity of species $i$ in the absence of species $j$, and $\alpha_{ij}$ gives the relative effect of species $j$ on the population growth of species $i$, compared to the effect of species $i$ on its own population growth.
+
+#### Challenge
+
+What is the effective new carrying capacity of species 1 in this model? That is, what is the value of $N_1$ at which species 1 stops growing?
+
+```{r, include = F}
+
+```
+
+This model has been used to explore fundamental questions in ecology, such as
+
+-   Can we predict - or understand - how much th equilibrium level of each species would be reduced by the other?
+
+-   When will both species co-exist?
+
+-   When will one species eliminate the other?
+
+```{r}
+
+N0_1 <- 1 # initial population size
+N0_2 <-1
+t_max <- 100 # time to simulate for
+
+# define parameters
+r1 <- 0.9
+r2 <- 0.5
+a12 <- 0.6
+a21<-0.7
+K1 <- 500
+K2 <- 500
+
+# put parameter values into vector test_params
+test_params <- c(r1 = r1, K1 = K1, a12 = a12, r2 = r2, K2 = K2, a21 = a21)
+
+# define times to save
+t_vec <- seq(0, t_max, 0.01)
+
+ic <- c(N1 = N0_1, N2 = N0_2)
+
+# define the model!
+lv_comp <- function(t, y, parms){
+  with(as.list(c(y,parms)),{
+    
+    dN1 <- r1*(N1/K1)*(K1-N1-a12*N2)
+    dN2 <- r2*(N2/K2)*(K2-N2-a21*N1)
+    
+    return(list(c(dN1,dN2)))
+  })
+}
+
+# numerically integrate equations!
+model_output <- as.data.frame(ode(y = ic, times = t_vec, func = lv_comp, parms = test_params))
+
+model_output <- model_output %>%
+  pivot_longer(! time)# take all the columns other than time and put in long format
+
+model_output %>% 
+  ggplot(aes(x = time, y = value, color = name)) + 
+  geom_line()
+```
+
+#### Challenge
+
+Plot this for a different set of parameters (change $\alpha_{21}$ to 1.1). What changes about the outcome?
+
+Now try for $\alpha_{12} = 1.2$ and $\alpha_{21} = 1.1$. Test once with the current(equal) initial conditions, and another where you start species 2 at a higher level. Notice any differences?
+
+### Predator-prey interactions
+
+In the example above, both species had negative effects on the other species' growth. However, there are many other sorts of inter-species interactions. Another interesting example which was the subject of early mathematical models in biology is **predator-prey interactions**, in which on species (predator) benefits from increasing levels of the other, while the other (prey) is harmed by the presence of the other. We can create a simple model of predator-prey interactions under the following simplifying assumptions:
+
+-   In the absence of predator, the prey grows exponentially
+
+-   In the absence of prey, the predator dies of exponentially
+
+-   The "per predator" rate at which prey are killed is a linear function of the number of prey
+
+-   Each prey death contributes identically to the growth of the predator population
+
+Let $P$ be the predator population and $H$ be the prey population:
+
+$$
+\frac{dH}{dt} = r H - b H P
+$$
+
+$$
+\frac{dP}{dt} = c H P - k P
+$$
+
+Somewhat confusingly, this model is also called a Lotka Volterra model (in fact, we can create more general models that consider all possible modes of competition)
+
+Let's create a simple simulation!
+
+#### Challenge
+
+Fill in the missing parts of the code to create a simulation where you can clearly see a few cycles of oscillations
+
+```{r, include = F}
+P0 <- 0.5 # initial population size
+H0 <-0.5
+t_max <- 50 # time to simulate for
+
+# define parameters
+r <- 1
+b <- 0.1
+c <- 0.03
+k <- 1
+
+# put parameter values into vector test_params
+test_params <- c(r = r, b = b, c = c, k = k)
+
+# define times to save
+t_vec <- seq(0, t_max, 0.01)
+
+ic <- c(H = H0, P=P0)
+
+# define the model!
+lv_pred_prey <- function(t, y, parms){
+  with(as.list(c(y,parms)),{
+    
+    dH <- r*H - b*H*P
+    dP <- c*H*P - k*P
+    
+    return(list(c(dH,dP)))
+  })
+}
+
+# numerically integrate equations!
+model_output <- as.data.frame(ode(y = ic, times = t_vec, func = lv_pred_prey, parms = test_params))
+
+model_output <- model_output %>%
+  pivot_longer(! time)# take all the columns other than time and put in long format
+
+model_output %>% 
+  ggplot(aes(x = time, y = value, color = name)) + 
+  geom_line()
+```
+
+```{r, include = F, eval = F}
+P0 <- 0.5 # initial population size
+H0 <-0.5
+t_max <- #FILL IN # time to simulate for
+
+# define parameters
+r <- 1
+b <- 0.1
+c <- 0.03
+k <- 1
+
+# put parameter values into vector test_params
+test_params <- c(r = r, b = b, c = c, k = k)
+
+# define times to save
+t_vec <- seq(0, t_max, 0.01)
+
+ic <- c(H = H0, P=P0)
+
+# define the model!
+lv_pred_prey <- function(t, y, parms){
+  with(as.list(c(y,parms)),{
+    
+    dH <- #FILL IN
+    dP <- # FILL IN
+    
+    return(list(c(dH,dP)))
+  })
+}
+
+# numerically integrate equations!
+model_output <- as.data.frame(ode(y = ic, times = t_vec, func = lv_pred_prey, parms = test_params))
+
+model_output <- model_output %>%
+  pivot_longer(! time)# take all the columns other than time and put in long format
+
+model_output %>% 
+  ggplot(aes(x = time, y = value, color = name)) + 
+  geom_line()
+```
+
+## Example 3: mRNA and protein production
+
+Let $M$ be the number of mRNAs in a cell and $P$ be the number of proteins that are made from that mRNA. The following model describes the process of gene expression:
+
+$$\frac{d M}{d t} = \mu - \gamma M - \beta M$$ $$\frac{d P}{d t} = \beta M - \nu P$$
+
+#### Challenge
+
+Match the description of the biological parameter in the table below with the symbol from the model equations (e.g., $\mu, \gamma, \beta, \nu$)
+
+| Parameter description    | Parameter name |
+|--------------------------|----------------|
+| mRNA production rate     |                |
+| mRNA degradation rate    |                |
+| Translation rate         |                |
+| Protein degradation rate |                |
+
+#### Challenge
+
+Numerically solve this system of equations from time $t=0$ to time $t=100$ in increments of 0.1. Use the following parameter values: $\mu = 25, \gamma = 0.1, \beta = 0.2, \nu = 0.01, M(0) = 50, P(0) = 0$.
+
+Plot $M(t)$ from $t=0$ to $t=100$.
+
+```{r, include = F}
+
+t_max <- 100
+t_vec <- seq(0,t_max,by=0.1)
+
+model <- function(time, state, parameters){
+  with(as.list(c(state, parameters)),
+       {
+         dM <- mu - gamma*M - beta*M
+         dP <- beta*M - nu*P
+         
+         return(list(c(dM, dP)))
+         }
+       )
+}
+
+test_params <- c(mu = 25, gamma = 0.1, beta = 0.2, nu = 0.01)
+ic <- c(M = 50, P = 0)
+
+model_output <- ode(y = ic, times = t_vec, func = model, parms = test_params)
+
+model_output <- as.data.frame(model_output)
+
+head(model_output)
+```
+
+```{r}
+
+model_output %>% pivot_longer(!time) %>%
+  ggplot(aes(x = time, y = value, color = name)) + 
+  geom_line()
+
+```
+
+When we want to visualize the full time course of the population dynamics for all variables, viewing all the output of the differential equation is a great strategy. However, we are limited to viewing the results for a single parameter set (or maybe, a few sets, if we want to add multiples sets of lines to the same graph, but things get messy fast!). Sometimes we might only be interested in the outcome at a particular time, and we might be more interested in how that value depends on the model parameters.
+
+For example, if we wanted to examine the eventual amount of protein (at time $t=100$) as a function of the protein degradation rate $\nu$, keeping the initial conditions and all other parameters constant, we can write code for that:
+
+```{r, message=F}
+
+# function to calculate model output for a given nu value
+get_protein_level <- function(nu){
+  test_params <- c(mu = 25, gamma = 0.1, beta = 0.2, nu = nu)
+  ic <- c(M = 50, P = 0)
+  model_output <- as.data.frame(ode(y = ic, times = t_vec, func = model, parms = test_params))
+  return(tail(model_output$P, 1))
+}
+
+# code to loop over nu values
+
+nu_vec <- seq(0,1,0.01)
+protein_levels <- rep(0,length(nu_vec))
+
+i <- 1
+
+for (nu in nu_vec){
+  protein_levels[i] <- get_protein_level(nu)
+  i <- i+1
+}
+
+protein.df <- data.frame(nu = nu_vec,P = protein_levels)
+
+head(protein.df)
+```
+
+```{r}
+protein.df %>%
+  ggplot(aes(x = nu, y = P)) + 
+  geom_line()
+```
+
+*Hint: to check if your answer is correct, see if it matches your intuition about how protein concentrations should change as the rate of degradation increases.*
