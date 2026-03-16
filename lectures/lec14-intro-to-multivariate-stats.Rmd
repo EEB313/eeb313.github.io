@@ -55,7 +55,7 @@ Common biological questions that multivariate statistics can be used to answer:
 
 Today we will be introducing the world of multivariate statistics by working with a published data set from Pigot et al, "[Macroevolutionary convergence connects morphological form to ecological function in birds]{.underline}*", Nature Ecology & Evolution*, 2020 ([here](https://www.nature.com/articles/s41559-019-1070-4)). In this paper, the authors ask if **morphology is linked to ecological function in birds**. We might expect this to be true if species have evolved traits (in this case morphological traits) to optimize their fitness in a specific abiotic environment. In this way, traits can be used to link species to theories of community assembly, niche partitioning, and local adaptation. A nice general interest summary of the paper is provided [here](https://www.nature.com/articles/s41559-019-1078-9).
 
-![](images/clipboard-2097013969.png)
+![](figures//clipboard-2097013969.png)
 
 We might expect that birds that have evolved to occupy specialized niches--say the pollinators or the deep sea divers--might have also evolved specialized morphologies in order to exploit these niches. If this is true, we might also see that species that occupy similar niches might have evolved similar traits despite being phylogenetically unrelated. This would give rise to convergent evolution.
 
@@ -140,7 +140,7 @@ Now let's expand this visualization to three dimensions--we still can't capture 
 
 Generally 3D plots are frowned upon as a data visualizing tool--they are complicated to interpret and there are usually simpler and clearer ways to show relationships between your variables in a manuscript, presentation, or project. In this case, these 3D plots are a useful tool for illustrating the idea of higher dimensional data and the concepts of multivariate statistics.
 
-```{r 3D plots simple, eval=FALSE}
+```{r 3D plots simple}
 # lets pick 3 dimensions or traits to visualize, beak.Width, Wing.Length and Mass
 # rotate plot to see how each variable are related to eachother
 plot3d(birds$Mass, birds$Beak.Width, birds$Wing.Length, col=alpha("grey80", .01))
@@ -152,7 +152,7 @@ plot3d(birds$Mass, birds$Beak.Width, birds$Wing.Length, col=alpha("grey80", .01)
 
 Lets now add our 3 exemplar species to see how they fall in this morphospace.
 
-```{r 3D plot with example species, eval=FALSE}
+```{r 3D plot with example species}
 plot3d(birds$Mass, birds$Beak.Width, birds$Wing.Length, col=alpha("grey80", .01))
 points3d(subset(birds, Binomial=="Anthracothorax_mango" | Binomial=="Harpia_harpyja" |Binomial=="Junco_vulcani")$Mass, 
          subset(birds, Binomial=="Anthracothorax_mango" | Binomial=="Harpia_harpyja" |Binomial=="Junco_vulcani")$Beak.Width, 
@@ -185,13 +185,13 @@ Imagine your data contains *n* objects and *p* variables. The *n* objects can be
 
 1.  Imagine a 9-dimensional object with each of our trait measurements as an axis (k=9). We've already visualized this in 3 dimensions.
 
-```{r plot empty, eval=FALSE}
+```{r plot empty}
 plot3d(birds$Mass, birds$Beak.Width, birds$Wing.Length, type="n")
 ```
 
 2.  Plot our species (n=3566) in this 9D space such that we are representing our data as cloud in high dimension space. Identify the centre of trait space using euclidean distances.
 
-```{r plot basic, eval=FALSE}
+```{r plot basic}
 mean_xyz <- apply(birds[, c(23, 17, 20)], 2, mean)
 plot3d(birds$Mass, birds$Beak.Width, birds$Wing.Length, col=alpha("grey80", .001), size=1)
 points3d(mean_xyz, col="darkred", size=12)
@@ -201,7 +201,7 @@ points3d(mean_xyz, col="darkred", size=12)
 
 Recall, in our 3D toy example, the major axis of variation is between mass and wing length. To actually calculate the math to add this line to the 3D figure, we would have to do the math behind a PCA or simply run the PCA and plot the resultant line... let's do that now in order to visualize the process.
 
-```{r PC1, eval=FALSE}
+```{r PC1}
 mean_xyz <- apply(birds[, c(23, 17, 20)], 2, mean)
 xyz_pca   <- prcomp(birds[,c(23, 17, 20)], scale.=F)
 dirVector1 <- xyz_pca$rotation[, 1]  # PC1
@@ -217,7 +217,7 @@ lines3d(c(1,9),
 
 Because we are visualizing this output in a knitted document, we can't add the lines for the other dimensions and have the 3D figure render properly. Instead, I've evald the code for how to plot it on your own computer.
 
-```{r PC2, PC3, eval=FALSE}
+```{r PC2, PC3}
 options(rgl.useNULL = FALSE)
 dirVector2 <- xyz_pca$rotation[, 2]  # PC2
 dirVector3 <- xyz_pca$rotation[, 3]  # PC3
@@ -331,7 +331,7 @@ plot(pca.out)
 
 Each bar is a PC axis, starting from PC 1. In a scree plot, what you want to look for is a big jump between subsequent axes. It's subjective, but based on this scree plot I would probably be inclined to keep the first 2 PC axes. As well, we can look at the cumulative proportion of explained variance:
 
-```{r eval=FALSE}
+```{r }
 summary(pca.out)$importance[,1:6]
 ```
 
@@ -378,9 +378,9 @@ PCAs are really common across lots of disciplines and they are very common to en
 
 *What can we conclude from this Figure 6?*
 
-![](images/clipboard-1328042916.png){width="642"}
+![](figures//clipboard-1328042916.png){width="642"}
 
-Figure 6: Clustered points along each principal coordinate axis (PCoA) show the relative morphological similarity between trophic niches from different ecological theatres (biogeographical realms) based on the average pairwise distance between species (*n* = 9,963 species) in nine-dimensional morphospace (see Methods). Individual trophic niches are omitted where they are absent or rare (\<6 species) within particular biogeographic realms (Na, Nearctic; Ne, Neotropic; Pa, Palaearctic; Af, Afrotropic; Ma, Madagascar; In, Indo-Malaya; Oc, Oceania; Au, Australasia; An, Antarctic). Bird images reproduced with permission from HBW, Lynx Edicions
+Figure 6: Clustered points along each principal coordinate axis (PCoA) show the relative morphological similarity between trophic niches from different ecological theatres (biogeographical realms) based on the average pairwise distance between species (*n* = 9,963 species) in nine-dimensional morphospace (see Methods). Individual trophic niches are omitted where they are absent or rare (\<6 species) within particular biogeographic realms (Na, Nearctic; Ne, Neotropic; Pa, Palaearctic; Af, Afrotropic; Ma, Madagascar; In, Indo-Malaya; Oc, Oceania; Au, Australasia; An, Antarctic). Bird figures/ reproduced with permission from HBW, Lynx Edicions
 
 ### Microplastics example
 
@@ -394,7 +394,7 @@ In [this paper](https://doi.org/10.1016/j.marpolbul.2021.112685), the authors se
 
 *Focusing on the bottom left panel of Figure 7, what do you think of the authors grouping the data into these 3 categories?*
 
-![](images/clipboard-444607300.png)
+![](figures//clipboard-444607300.png)
 
 ### Population genetics example
 
@@ -402,4 +402,4 @@ The authors in this paper, "[Getting genetic ancestry right for science and soci
 
 *Based on this figure, do you think that imposing these categories on this data is reasonable? Why or why not? What does this suggest about what types of data it might be inappropriate seek classifications of via a PCA?*
 
-![](images/clipboard-2283833149.png)
+![](figures//clipboard-2283833149.png)
