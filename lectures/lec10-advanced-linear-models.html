@@ -798,7 +798,7 @@ lgl (1): sex
 </div>
 </div>
 </div>
-<p>We can see a few problems right away! The Y data is clearly not normally distributed conditional on x: it’s binary. And, the prediction curve suggests that for tarsus lengths over ~21mm survival could be less than zero, and for tarsus less than ~18cm, that it could be greater than 1!</p>
+<p>We can see a few problems right away! The <span class="math inline">\(Y\)</span> data is clearly not normally distributed conditional on x: it’s binary. And, the prediction curve suggests that for tarsus lengths over ~21mm survival could be less than zero, and for tarsus less than ~18cm, that it could be greater than 1!</p>
 <p>Let’s run the regression just to see more issues</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sparrowOutput <span class="ot">&lt;-</span> <span class="fu">lm</span>(survival <span class="sc">~</span> tarsus, <span class="at">data =</span> sparrow)</span>
@@ -824,7 +824,7 @@ Multiple R-squared:  0.1032,    Adjusted R-squared:  0.09691
 F-statistic: 16.45 on 1 and 143 DF,  p-value: 8.17e-05</code></pre>
 </div>
 </div>
-<p>Despite there being a highly-significant relationship between survival and taurus length, it looks like a very small <span class="math inline">\(R^2\)</span> value. Let’s look at our diagnostic plots:</p>
+<p>Despite there being a highly-significant relationship between survival and tarsus length, it looks like a very small <span class="math inline">\(R^2\)</span> value. Let’s look at our diagnostic plots:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sparrowOutput)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -866,7 +866,7 @@ F-statistic: 16.45 on 1 and 143 DF,  p-value: 8.17e-05</code></pre>
 <p>You might have heard of <em>logistic regression</em> or <em>Poisson regression</em> before; they are actually just special cases of the more broad framework called generalized linear models.</p>
 <p>There are many example types of data we need these models for, such as</p>
 <ul>
-<li><p>Count of the number of individuals or the number of occurrances of an event</p></li>
+<li><p>Count of the number of individuals or the number of occurrences of an event</p></li>
 <li><p>Proportions of individuals (or events) with one trait or outcome vs another</p></li>
 <li><p>Presence/absence of a trait or outcome</p></li>
 <li><p>Highly-overdispersed quantities (large variance, skewed distributions), such as number of sexual partners</p></li>
@@ -890,8 +890,12 @@ F-statistic: 16.45 on 1 and 143 DF,  p-value: 8.17e-05</code></pre>
 </section>
 <section id="challenge" class="level3" data-number="10.2.5">
 <h3 data-number="10.2.5" class="anchored" data-anchor-id="challenge"><span class="header-section-number">10.2.5</span> Challenge</h3>
+<p>Think of some example types of biological data that would not satisfy the assumptions of simple linear regression</p>
 <ul>
-<li>Think of two example types of biological data that would not satisfy the assumptions of simple linear regression</li>
+<li><p>Ex. 1 : Number of offspring per individual (expect to be discrete, non-normal, skewed, larger variance at larger mean values)</p></li>
+<li><p>Ex. 2 : Life stage (could be categorical life stage - junevile vs adult, or integer age, discrete + ordinal)</p></li>
+<li><p>Ex. 3: Herbivory damage on leaves (presence/absence, or categorical + ordinal degree of damage, or % damaged)</p></li>
+<li><p>Ex. 4: Grades in a class (could be non-normal, left or right skewed, categorical/ordinal or numeric, bounded by 0 - 100%)</p></li>
 </ul>
 </section>
 <section id="example-1-predicting-forest-fires-logistic-regression" class="level3" data-number="10.2.6">
@@ -1198,7 +1202,7 @@ $Temperature</code></pre>
 <li><p>Patients treated by Physicians with Hospitals within Provinces</p></li>
 </ul>
 <p>These hierarchical structures can be either nested or crossed:</p>
-<p><img src="figures/clipboard-643467275.png" class="img-fluid"></p>
+<p><img src="figures/heirarchical_data.png" class="img-fluid"></p>
 <p>In nested structures (right), each lower-level unit belongs to only one higher-level unit. For example, each student belongs to only one class, and each class belongs to only one school. In crossed structures (left), lower-level units can belong to multiple higher-level units. For example, a student might take multiple classes, and a teacher might teach multiple classes.</p>
 </section>
 <section id="motivating-example-simpsons-paradox" class="level3" data-number="11.0.2">
@@ -1380,7 +1384,7 @@ dbl (5): Richness, Exposure, NAP, Beach, Site
 </div>
 </div>
 <p>The data contains 45 observations across 9 beaches, with 5 sites per beach. We’ve encoded ‘Beach’ as a factor to facilitate its use as a group/random effect.</p>
-<p><img src="images/clipboard-4248431774.png" class="img-fluid"></p>
+<p><img src="figures/rikz_beaches.png" class="img-fluid"></p>
 </section>
 <section id="initial-linear-regression" class="level3" data-number="11.1.2">
 <h3 data-number="11.1.2" class="anchored" data-anchor-id="initial-linear-regression"><span class="header-section-number">11.1.2</span> Initial Linear Regression</h3>

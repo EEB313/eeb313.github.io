@@ -678,16 +678,14 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#determining-the-approach-to-model-simulation" id="toc-determining-the-approach-to-model-simulation" class="nav-link" data-scroll-target="#determining-the-approach-to-model-simulation"><span class="header-section-number">13.2.1</span> Determining the approach to model simulation</a></li>
   </ul></li>
-  <li><a href="#example-1-sir-model-of-infectious-disease-transmission" id="toc-example-1-sir-model-of-infectious-disease-transmission" class="nav-link" data-scroll-target="#example-1-sir-model-of-infectious-disease-transmission"><span class="header-section-number">13.3</span> Example 1: “SIR” model of infectious disease transmission</a>
-  <ul class="collapse">
-  <li><a href="#challenge-1" id="toc-challenge-1" class="nav-link" data-scroll-target="#challenge-1"><span class="header-section-number">13.3.1</span> Challenge</a></li>
-  </ul></li>
+  <li><a href="#example-1-sir-model-of-infectious-disease-transmission" id="toc-example-1-sir-model-of-infectious-disease-transmission" class="nav-link" data-scroll-target="#example-1-sir-model-of-infectious-disease-transmission"><span class="header-section-number">13.3</span> Example 1: “SIR” model of infectious disease transmission</a></li>
   <li><a href="#example-2-models-of-density-dependent-growth-and-interactions-between-species" id="toc-example-2-models-of-density-dependent-growth-and-interactions-between-species" class="nav-link" data-scroll-target="#example-2-models-of-density-dependent-growth-and-interactions-between-species"><span class="header-section-number">13.4</span> Example 2: Models of density-dependent growth and interactions between species</a>
   <ul class="collapse">
   <li><a href="#inter-species-competition" id="toc-inter-species-competition" class="nav-link" data-scroll-target="#inter-species-competition"><span class="header-section-number">13.4.1</span> Inter-species competition</a></li>
   <li><a href="#predator-prey-interactions" id="toc-predator-prey-interactions" class="nav-link" data-scroll-target="#predator-prey-interactions"><span class="header-section-number">13.4.2</span> Predator-prey interactions</a></li>
   </ul></li>
   <li><a href="#example-3-mrna-and-protein-production" id="toc-example-3-mrna-and-protein-production" class="nav-link" data-scroll-target="#example-3-mrna-and-protein-production"><span class="header-section-number">13.5</span> Example 3: mRNA and protein production</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">13.6</span> Further reading</a></li>
   </ul>
 </nav>
     </div>
@@ -727,7 +725,6 @@ window.Quarto = {
 <li><p>Understand the range of processes that regulate population size from the molecular to species scales</p></li>
 </ul>
 </blockquote>
-<p>You can download the .Rmd file for this lecture <a href="lec13-more-math-models.Rmd">here</a></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(deSolve)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -773,7 +770,7 @@ window.Quarto = {
 <section id="example-1-sir-model-of-infectious-disease-transmission" class="level2" data-number="13.3">
 <h2 data-number="13.3" class="anchored" data-anchor-id="example-1-sir-model-of-infectious-disease-transmission"><span class="header-section-number">13.3</span> Example 1: “SIR” model of infectious disease transmission</h2>
 <p>The Susceptible-Infected-Recovered (SIR) model describes how an immunizing infection spreads through a closed population of hosts. Variants of this model can be used to study almost an infectious disease of any organism. In our Outbreak Investigation exercise, we introduced one of the simplest possible SIR models (in the slide deck) and then saw an example of how this model was adapted to COVID-19. Here we’ll go back to this very simple version to go over how we generated the model output</p>
-<p><img src="images/clipboard-2371660568.png" class="img-fluid" width="455"></p>
+<p><img src="figures/sir.png" class="img-fluid" width="455"></p>
 <p>The model tracks the number of susceptible <span class="math inline">\(S\)</span>, infected <span class="math inline">\(I\)</span>, and recovered <span class="math inline">\(R\)</span> individuals in continuous time. Each susceptible individual contacts infected individuals and acquires the infection via transmission at rate <span class="math inline">\(\beta\)</span>. Infected indivduals recover from infection, and gain immunity at rate <span class="math inline">\(\gamma\)</span>. In this version of the model, we assume immunity is not life-long, but wanes at a rate <span class="math inline">\(\omega\)</span>, leading individuals to become susceptible again.</p>
 <p><em>Note: This version is often called the “SIRS” model, as opposed to the “SIR” model with</em> <span class="math inline">\(\omega = 0\)</span><em>.</em></p>
 <p>The model is as follows:</p>
@@ -858,9 +855,51 @@ window.Quarto = {
 </div>
 </div>
 <p>If we want to determine the peak epidemic size, and time at which the peak occurs:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>model_output <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">maxValue =</span> <span class="fu">max</span>(value),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">timeMax =</span> time[<span class="fu">which.max</span>(value)]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  name  maxValue timeMax
+  &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+1 S         999      0  
+2 I         291.    59.9
+3 R         666.   101. 
+4 N        1000.   365. </code></pre>
+</div>
+</div>
 <section id="challenge" class="level4" data-number="13.3.0.1">
 <h4 data-number="13.3.0.1" class="anchored" data-anchor-id="challenge"><span class="header-section-number">13.3.0.1</span> Challenge</h4>
 <p>Use a value of <span class="math inline">\(\beta\)</span> that is half the size of the above example. Describe 3 properties of the epidemic that change</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># peak occurs later</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># peak is lower</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># less reduction in susceptible individuals</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># lower final endemic size</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>beta2 <span class="ot">&lt;-</span> <span class="fl">0.0001</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>test_params2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">beta =</span> beta2, <span class="at">gamma =</span> gamma, <span class="at">omega =</span> omega)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>model_output2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> ic, <span class="at">times =</span> t_vec, <span class="at">func =</span> sir, <span class="at">parms =</span> test_params2)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">N =</span> S <span class="sc">+</span> I <span class="sc">+</span> R) <span class="sc">%&gt;%</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span> time) <span class="sc">%&gt;%</span> <span class="co"># take all the columns other than time and put in long format</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">factor</span>(name, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"S"</span>,<span class="st">"I"</span>,<span class="st">"R"</span>,<span class="st">"N"</span>))) <span class="co"># want them to plot in this order</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>model_output2<span class="sc">%&gt;%</span>  </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span> </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Infectious disease models are almost always associated with an important “meta-parameter” <span class="math inline">\(R_0\)</span> (a function of other parameters), that determines many of the properties of the outcomes.</p>
 <p>The quantity <span class="math inline">\(R_0\)</span> describes the <em>average number of secondary infections from a single infectious individual in an otherwise susceptible population</em>. Intuitively, if the pathogen is unable to infect <span class="math inline">\(&gt;1\)</span> individual on average when the susceptible pool has not yet been depleted (i.e., all individuals are susceptible), it will fail to spread. If <span class="math inline">\(R_0 &gt; 1\)</span>, then the disease will spread.</p>
 <p>There are formal mathematical methods to derive <span class="math inline">\(R_0\)</span> from the differential equations for any infection model, which we won’t cover here. <span class="math inline">\(R_0\)</span> also has several nice mathematical properties (e.g., determines both the existence and stability of the infected equilibrium, and therefore describes a <em>transcritical bifurcation</em>). For now, we can simply state the value of <span class="math inline">\(R_0\)</span> for this simple SIR model</p>
@@ -868,15 +907,47 @@ window.Quarto = {
 <p>Notice how the rate of recovery (i.e.&nbsp;loss of infectiousness) <em>reduces</em> the reproductive value of the pathogen; intuitively, this is because the faster an infected individual recovers the fewer people they can transmit.</p>
 <p>We can calculate <span class="math inline">\(R_0\)</span> for the last parameter values we used</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>R0 <span class="ot">&lt;-</span> beta<span class="sc">*</span>N<span class="sc">/</span>gamma; R0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>R0 <span class="ot">&lt;-</span> beta<span class="sc">*</span>N<span class="sc">/</span>gamma; R0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.8</code></pre>
 </div>
 </div>
 </section>
-<section id="challenge-1" class="level3" data-number="13.3.1">
-<h3 data-number="13.3.1" class="anchored" data-anchor-id="challenge-1"><span class="header-section-number">13.3.1</span> Challenge</h3>
+<section id="challenge-1" class="level4" data-number="13.3.0.2">
+<h4 data-number="13.3.0.2" class="anchored" data-anchor-id="challenge-1"><span class="header-section-number">13.3.0.2</span> Challenge</h4>
 <p>Run a version of the simulation with <span class="math inline">\(R_0 &lt;1\)</span>. Confirm that even if you start with a high portion of the population infected, the disease always goes extinct quickly</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>beta3 <span class="ot">&lt;-</span> <span class="fl">0.00005</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>R0 <span class="ot">&lt;-</span> beta3<span class="sc">*</span>N<span class="sc">/</span>gamma; </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(R0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>test_params3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">beta =</span> beta3, <span class="at">gamma =</span> gamma, <span class="at">omega =</span> omega)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>initialI3 <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>ic3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">S=</span>N<span class="sc">-</span>initialI3, <span class="at">I=</span>initialI3, <span class="at">R =</span> <span class="dv">0</span>) <span class="co"># define initial conditions</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>model_output3 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> ic3, <span class="at">times =</span> t_vec, <span class="at">func =</span> sir, <span class="at">parms =</span> test_params3)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">N =</span> S <span class="sc">+</span> I <span class="sc">+</span> R) <span class="sc">%&gt;%</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span> time) <span class="sc">%&gt;%</span> <span class="co"># take all the columns other than time and put in long format</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">factor</span>(name, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"S"</span>,<span class="st">"I"</span>,<span class="st">"R"</span>,<span class="st">"N"</span>))) <span class="co"># want them to plot in this order</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>model_output3<span class="sc">%&gt;%</span>  </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span> </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="example-2-models-of-density-dependent-growth-and-interactions-between-species" class="level2" data-number="13.4">
@@ -898,41 +969,41 @@ window.Quarto = {
 <li><p>disease</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>N0 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># initial population size</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>t_max <span class="ot">&lt;-</span> <span class="dv">365</span> <span class="co"># time to simulate for</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># define parameters</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># put parameter values into vector test_params</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>test_params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">r =</span> r, <span class="at">K =</span> K)</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># define times to save</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>t_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, t_max, <span class="fl">0.01</span>)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">N =</span> N0)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># define the model!</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>growth_dd <span class="ot">&lt;-</span> <span class="cf">function</span>(t, y, parms){</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">as.list</span>(<span class="fu">c</span>(y,parms)),{</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    dN <span class="ot">&lt;-</span> r<span class="sc">*</span>N<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>N<span class="sc">/</span>K)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dN)))</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co"># numerically integrate equations!</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> ic, <span class="at">times =</span> t_vec, <span class="at">func =</span> growth_dd, <span class="at">parms =</span> test_params))</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>model_output <span class="sc">%&gt;%</span> </span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> N)) <span class="sc">+</span> </span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>N0 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># initial population size</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>t_max <span class="ot">&lt;-</span> <span class="dv">365</span> <span class="co"># time to simulate for</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># define parameters</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># put parameter values into vector test_params</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>test_params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">r =</span> r, <span class="at">K =</span> K)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># define times to save</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>t_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, t_max, <span class="fl">0.01</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">N =</span> N0)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># define the model!</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>growth_dd <span class="ot">&lt;-</span> <span class="cf">function</span>(t, y, parms){</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">as.list</span>(<span class="fu">c</span>(y,parms)),{</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    dN <span class="ot">&lt;-</span> r<span class="sc">*</span>N<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>N<span class="sc">/</span>K)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dN)))</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co"># numerically integrate equations!</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> ic, <span class="at">times =</span> t_vec, <span class="at">func =</span> growth_dd, <span class="at">parms =</span> test_params))</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>model_output <span class="sc">%&gt;%</span> </span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> N)) <span class="sc">+</span> </span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -951,6 +1022,17 @@ window.Quarto = {
 <section id="challenge-2" class="level4" data-number="13.4.1.1">
 <h4 data-number="13.4.1.1" class="anchored" data-anchor-id="challenge-2"><span class="header-section-number">13.4.1.1</span> Challenge</h4>
 <p>What is the effective new carrying capacity of species 1 in this model? That is, what is the value of <span class="math inline">\(N_1\)</span> at which species 1 stops growing?</p>
+<blockquote class="blockquote">
+<p>Answer</p>
+<p>The rate of change is zero ( <span class="math inline">\(\frac{d N_1}{dt} = 0\)</span> ) when the terms in the brackets are zero:</p>
+<p><span class="math display">\[
+K_1 - N_1 - \alpha_{12} N_2 = 0
+\]</span></p>
+<p>which implies the population size at carrying capacity is</p>
+<p><span class="math display">\[
+N_1 = K_1  - \alpha_{12} N_2
+\]</span></p>
+</blockquote>
 <p>This model has been used to explore fundamental questions in ecology, such as</p>
 <ul>
 <li><p>Can we predict - or understand - how much th equilibrium level of each species would be reduced by the other?</p></li>
@@ -958,46 +1040,46 @@ window.Quarto = {
 <li><p>When will one species eliminate the other?</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>N0_1 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># initial population size</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>N0_2 <span class="ot">&lt;-</span><span class="dv">1</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>t_max <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># time to simulate for</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># define parameters</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>r1 <span class="ot">&lt;-</span> <span class="fl">0.9</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>a12 <span class="ot">&lt;-</span> <span class="fl">0.6</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>a21<span class="ot">&lt;-</span><span class="fl">0.7</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>K1 <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>K2 <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># put parameter values into vector test_params</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>test_params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">r1 =</span> r1, <span class="at">K1 =</span> K1, <span class="at">a12 =</span> a12, <span class="at">r2 =</span> r2, <span class="at">K2 =</span> K2, <span class="at">a21 =</span> a21)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># define times to save</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>t_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, t_max, <span class="fl">0.01</span>)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">N1 =</span> N0_1, <span class="at">N2 =</span> N0_2)</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># define the model!</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>lv_comp <span class="ot">&lt;-</span> <span class="cf">function</span>(t, y, parms){</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">as.list</span>(<span class="fu">c</span>(y,parms)),{</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    dN1 <span class="ot">&lt;-</span> r1<span class="sc">*</span>(N1<span class="sc">/</span>K1)<span class="sc">*</span>(K1<span class="sc">-</span>N1<span class="sc">-</span>a12<span class="sc">*</span>N2)</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    dN2 <span class="ot">&lt;-</span> r2<span class="sc">*</span>(N2<span class="sc">/</span>K2)<span class="sc">*</span>(K2<span class="sc">-</span>N2<span class="sc">-</span>a21<span class="sc">*</span>N1)</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dN1,dN2)))</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="co"># numerically integrate equations!</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> ic, <span class="at">times =</span> t_vec, <span class="at">func =</span> lv_comp, <span class="at">parms =</span> test_params))</span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> model_output <span class="sc">%&gt;%</span></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span> time)<span class="co"># take all the columns other than time and put in long format</span></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>model_output <span class="sc">%&gt;%</span> </span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span> </span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>N0_1 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># initial population size</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>N0_2 <span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>t_max <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># time to simulate for</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># define parameters</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>r1 <span class="ot">&lt;-</span> <span class="fl">0.9</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>a12 <span class="ot">&lt;-</span> <span class="fl">0.6</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>a21<span class="ot">&lt;-</span><span class="fl">0.7</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>K1 <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>K2 <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># put parameter values into vector test_params</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>test_params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">r1 =</span> r1, <span class="at">K1 =</span> K1, <span class="at">a12 =</span> a12, <span class="at">r2 =</span> r2, <span class="at">K2 =</span> K2, <span class="at">a21 =</span> a21)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># define times to save</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>t_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, t_max, <span class="fl">0.01</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">N1 =</span> N0_1, <span class="at">N2 =</span> N0_2)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># define the model!</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>lv_comp <span class="ot">&lt;-</span> <span class="cf">function</span>(t, y, parms){</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">as.list</span>(<span class="fu">c</span>(y,parms)),{</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    dN1 <span class="ot">&lt;-</span> r1<span class="sc">*</span>(N1<span class="sc">/</span>K1)<span class="sc">*</span>(K1<span class="sc">-</span>N1<span class="sc">-</span>a12<span class="sc">*</span>N2)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    dN2 <span class="ot">&lt;-</span> r2<span class="sc">*</span>(N2<span class="sc">/</span>K2)<span class="sc">*</span>(K2<span class="sc">-</span>N2<span class="sc">-</span>a21<span class="sc">*</span>N1)</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dN1,dN2)))</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co"># numerically integrate equations!</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> ic, <span class="at">times =</span> t_vec, <span class="at">func =</span> lv_comp, <span class="at">parms =</span> test_params))</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> model_output <span class="sc">%&gt;%</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span> time)<span class="co"># take all the columns other than time and put in long format</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>model_output <span class="sc">%&gt;%</span> </span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span> </span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1010,12 +1092,103 @@ window.Quarto = {
 <section id="challenge-3" class="level4" data-number="13.4.1.2">
 <h4 data-number="13.4.1.2" class="anchored" data-anchor-id="challenge-3"><span class="header-section-number">13.4.1.2</span> Challenge</h4>
 <p>Plot this for a different set of parameters (change <span class="math inline">\(\alpha_{21}\)</span> to 1.1). What changes about the outcome?</p>
-<p>Now try for <span class="math inline">\(\alpha_{12} = 1.2\)</span> and <span class="math inline">\(\alpha_{21} = 1.1\)</span>. Test once with the current(equal) initial conditions, and another where you start species 2 at a higher level. Notice any differences?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a21<span class="ot">&lt;-</span><span class="fl">1.1</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>test_params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">r1 =</span> r1, <span class="at">K1 =</span> K1, <span class="at">a12 =</span> a12, <span class="at">r2 =</span> r2, <span class="at">K2 =</span> K2, <span class="at">a21 =</span> a21)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> ic, <span class="at">times =</span> t_vec, <span class="at">func =</span> lv_comp, <span class="at">parms =</span> test_params))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> model_output <span class="sc">%&gt;%</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span> time)<span class="co"># take all the columns other than time and put in long format</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>model_output <span class="sc">%&gt;%</span> </span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span> </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is an example of competetive exclusion!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now try for <span class="math inline">\(\alpha_{12} = 1.2\)</span> and <span class="math inline">\(\alpha_{21} = 1.1\)</span>. Test once with the current(equal) initial conditions, and another where you start species 2 at 10x higher level. Notice any differences?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>a12<span class="ot">&lt;-</span><span class="fl">1.2</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>a21<span class="ot">&lt;-</span><span class="fl">1.1</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>test_params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">r1 =</span> r1, <span class="at">K1 =</span> K1, <span class="at">a12 =</span> a12, <span class="at">r2 =</span> r2, <span class="at">K2 =</span> K2, <span class="at">a21 =</span> a21)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> ic, <span class="at">times =</span> t_vec, <span class="at">func =</span> lv_comp, <span class="at">parms =</span> test_params))</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> model_output <span class="sc">%&gt;%</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span> time)<span class="co"># take all the columns other than time and put in long format</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>model_output <span class="sc">%&gt;%</span> </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span> </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>N0_1 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># initial population size</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>N0_2 <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">N1 =</span> N0_1, <span class="at">N2 =</span> N0_2)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> ic, <span class="at">times =</span> t_vec, <span class="at">func =</span> lv_comp, <span class="at">parms =</span> test_params))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> model_output <span class="sc">%&gt;%</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span> time)<span class="co"># take all the columns other than time and put in long format</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>model_output <span class="sc">%&gt;%</span> </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span> </span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="predator-prey-interactions" class="level3" data-number="13.4.2">
 <h3 data-number="13.4.2" class="anchored" data-anchor-id="predator-prey-interactions"><span class="header-section-number">13.4.2</span> Predator-prey interactions</h3>
-<p>In the example above, both species had negative effects on the other species’ growth. However, there are many other sorts of inter-species interactions. Another interesting example which was the subject of early mathematical models in biology is <strong>predator-prey interactions</strong>, in which on species (predator) benefits from increasing levels of the other, while the other (prey) is harmed by the presence of the other. We can create a simple model of predator-prey interactions under the following simplifying assumptions:</p>
+<p>In the example above, both species had negative effects on the other species’ growth. However, there are many other sorts of inter-species interactions. Another interesting example which was the subject of early mathematical models in biology is <strong>predator-prey interactions</strong>, in which on species (predator) benefits from increasing levels of the other, while the other (prey) is harmed by the presence of the other.</p>
+<p>The classic example of predator-prey interactions that inspired some of the earliest use of these models is observed in a longitudinal dataset on the abundance of snowshoe hare and Canadian lynx in the Hudson Bay watershed. It had long been observed that hare showed extreme fluctuations from year to year and apparent periodic cycles in abudence, and in 1937 D. MacLulich from U of T biology published a comprehensive <a href="https://librarysearch.library.utoronto.ca/permalink/01UTORONTO_INST/1no0b6e/alma991106930381606196">book</a> on this topic. He compiled records of hare and lynx abundance from records of pelts exported by the Hudson Bay Company as well as surveys by hunters and land users around the country. The timeseries were digitized by Prof.&nbsp;Douglas Hundley at Whitman College <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and shown is below</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hare_lynx <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"http://people.whitman.edu/~hundledr/courses/M250F03/LynxHare.txt"</span>, <span class="at">delim =</span> <span class="st">" "</span>, <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"hare"</span>, <span class="st">"lynx"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 91 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: " "
+dbl (3): year, hare, lynx
+lgl (1): X4
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>hare_lynx <span class="ot">&lt;-</span> hare_lynx <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span>year, <span class="at">names_to =</span> <span class="st">"animal"</span>, <span class="at">values_to =</span> <span class="st">"abundance"</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>hare_lynx <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> abundance, <span class="at">color =</span> animal)) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Abundance (thousands)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see several interesting trends here: both hare and lynx levels fluctuate dramatically, and appear to oscillate with a period somewhere around 10 years. Increases in hare levels are usually followed by increases in lynx levels, which in turn are followed by decreases in hare levels and later decreases in lynx.</p>
+<p>We can create a simple model of predator-prey interactions to understand these dynamics, under the following simplifying assumptions:</p>
 <ul>
 <li><p>In the absence of predator, the prey grows exponentially</p></li>
 <li><p>In the absence of prey, the predator dies of exponentially</p></li>
@@ -1029,11 +1202,59 @@ window.Quarto = {
 <p><span class="math display">\[
 \frac{dP}{dt} = c H P - k P
 \]</span></p>
-<p>Somewhat confusingly, this model is also called a Lotka Volterra model (in fact, we can create more general models that consider all possible modes of competition)</p>
+<p>Somewhat confusingly, this model is also called a Lotka-Volterra model (in fact, we can create more general models that consider all possible modes of competition)</p>
 <p>Let’s create a simple simulation!</p>
 <section id="challenge-4" class="level4" data-number="13.4.2.1">
 <h4 data-number="13.4.2.1" class="anchored" data-anchor-id="challenge-4"><span class="header-section-number">13.4.2.1</span> Challenge</h4>
 <p>Fill in the missing parts of the code to create a simulation where you can clearly see a few cycles of oscillations</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>H0 <span class="ot">&lt;-</span><span class="dv">30</span> <span class="co"># initial population size</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>P0 <span class="ot">&lt;-</span> <span class="dv">5</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>t_max <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># time to simulate for</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># define parameters</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fl">0.02</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fl">0.02</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co"># put parameter values into vector test_params</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>test_params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">r =</span> r, <span class="at">b =</span> b, <span class="at">c =</span> c, <span class="at">k =</span> k)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co"># define times to save</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>t_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, t_max, <span class="fl">0.01</span>)</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">H =</span> H0, <span class="at">P=</span>P0)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="co"># define the model!</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>lv_pred_prey <span class="ot">&lt;-</span> <span class="cf">function</span>(t, y, parms){</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">as.list</span>(<span class="fu">c</span>(y,parms)),{</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>    dH <span class="ot">&lt;-</span> r<span class="sc">*</span>H <span class="sc">-</span> b<span class="sc">*</span>H<span class="sc">*</span>P</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    dP <span class="ot">&lt;-</span> c<span class="sc">*</span>H<span class="sc">*</span>P <span class="sc">-</span> k<span class="sc">*</span>P</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dH,dP)))</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="co"># numerically integrate equations!</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> ic, <span class="at">times =</span> t_vec, <span class="at">func =</span> lv_pred_prey, <span class="at">parms =</span> test_params))</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> model_output <span class="sc">%&gt;%</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span> time)<span class="co"># take all the columns other than time and put in long format</span></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>model_output <span class="sc">%&gt;%</span> </span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span> </span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
@@ -1076,13 +1297,46 @@ window.Quarto = {
 <p>Numerically solve this system of equations from time <span class="math inline">\(t=0\)</span> to time <span class="math inline">\(t=100\)</span> in increments of 0.1. Use the following parameter values: <span class="math inline">\(\mu = 25, \gamma = 0.1, \beta = 0.2, \nu = 0.01, M(0) = 50, P(0) = 0\)</span>.</p>
 <p>Plot <span class="math inline">\(M(t)\)</span> from <span class="math inline">\(t=0\)</span> to <span class="math inline">\(t=100\)</span>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model_output <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="sc">!</span>time) <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span> </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>t_max <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>t_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,t_max,<span class="at">by=</span><span class="fl">0.1</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="cf">function</span>(time, state, parameters){</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with</span>(<span class="fu">as.list</span>(<span class="fu">c</span>(state, parameters)),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>       {</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>         dM <span class="ot">&lt;-</span> mu <span class="sc">-</span> gamma<span class="sc">*</span>M <span class="sc">-</span> beta<span class="sc">*</span>M</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>         dP <span class="ot">&lt;-</span> beta<span class="sc">*</span>M <span class="sc">-</span> nu<span class="sc">*</span>P</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>         <span class="fu">return</span>(<span class="fu">list</span>(<span class="fu">c</span>(dM, dP)))</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>         }</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>test_params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">mu =</span> <span class="dv">25</span>, <span class="at">gamma =</span> <span class="fl">0.1</span>, <span class="at">beta =</span> <span class="fl">0.2</span>, <span class="at">nu =</span> <span class="fl">0.01</span>)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">M =</span> <span class="dv">50</span>, <span class="at">P =</span> <span class="dv">0</span>)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">ode</span>(<span class="at">y =</span> ic, <span class="at">times =</span> t_vec, <span class="at">func =</span> model, <span class="at">parms =</span> test_params)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>model_output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(model_output)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(model_output)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  time        M        P
+1  0.0 50.00000 0.000000
+2  0.1 50.98515 1.009398
+3  0.2 51.94118 2.037190
+4  0.3 52.86896 3.082779
+5  0.4 53.76931 4.145595
+6  0.5 54.64306 5.225078</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>model_output <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="sc">!</span>time) <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value, <span class="at">color =</span> name)) <span class="sc">+</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1090,29 +1344,29 @@ window.Quarto = {
 <p>When we want to visualize the full time course of the population dynamics for all variables, viewing all the output of the differential equation is a great strategy. However, we are limited to viewing the results for a single parameter set (or maybe, a few sets, if we want to add multiples sets of lines to the same graph, but things get messy fast!). Sometimes we might only be interested in the outcome at a particular time, and we might be more interested in how that value depends on the model parameters.</p>
 <p>For example, if we wanted to examine the eventual amount of protein (at time <span class="math inline">\(t=100\)</span>) as a function of the protein degradation rate <span class="math inline">\(\nu\)</span>, keeping the initial conditions and all other parameters constant, we can write code for that:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># function to calculate model output for a given nu value</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>get_protein_level <span class="ot">&lt;-</span> <span class="cf">function</span>(nu){</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  test_params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">mu =</span> <span class="dv">25</span>, <span class="at">gamma =</span> <span class="fl">0.1</span>, <span class="at">beta =</span> <span class="fl">0.2</span>, <span class="at">nu =</span> nu)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  ic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">M =</span> <span class="dv">50</span>, <span class="at">P =</span> <span class="dv">0</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  model_output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> ic, <span class="at">times =</span> t_vec, <span class="at">func =</span> model, <span class="at">parms =</span> test_params))</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">tail</span>(model_output<span class="sc">$</span>P, <span class="dv">1</span>))</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># code to loop over nu values</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>nu_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.01</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>protein_levels <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">length</span>(nu_vec))</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (nu <span class="cf">in</span> nu_vec){</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  protein_levels[i] <span class="ot">&lt;-</span> <span class="fu">get_protein_level</span>(nu)</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i<span class="sc">+</span><span class="dv">1</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>protein.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">nu =</span> nu_vec,<span class="at">P =</span> protein_levels)</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(protein.df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># function to calculate model output for a given nu value</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>get_protein_level <span class="ot">&lt;-</span> <span class="cf">function</span>(nu){</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  test_params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">mu =</span> <span class="dv">25</span>, <span class="at">gamma =</span> <span class="fl">0.1</span>, <span class="at">beta =</span> <span class="fl">0.2</span>, <span class="at">nu =</span> nu)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  ic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">M =</span> <span class="dv">50</span>, <span class="at">P =</span> <span class="dv">0</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  model_output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">ode</span>(<span class="at">y =</span> ic, <span class="at">times =</span> t_vec, <span class="at">func =</span> model, <span class="at">parms =</span> test_params))</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">tail</span>(model_output<span class="sc">$</span>P, <span class="dv">1</span>))</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># code to loop over nu values</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>nu_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.01</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>protein_levels <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">length</span>(nu_vec))</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (nu <span class="cf">in</span> nu_vec){</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  protein_levels[i] <span class="ot">&lt;-</span> <span class="fu">get_protein_level</span>(nu)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>protein.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">nu =</span> nu_vec,<span class="at">P =</span> protein_levels)</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(protein.df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    nu         P
 1 0.00 1644.4444
@@ -1124,21 +1378,33 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>protein.df <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> nu, <span class="at">y =</span> P)) <span class="sc">+</span> </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>protein.df <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> nu, <span class="at">y =</span> P)) <span class="sc">+</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="lec13-more-math-models_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><em>Hint: to check if your answer is correct, see if it matches your intuition about how protein concentrations should change as the rate of degradation increases.</em></p>
+</section>
+</section>
+<section id="further-reading" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">13.6</span> Further reading</h2>
+<p>Sarah Otto &amp; Troy Day, “<strong>A Biologists Guide to Mathematical Modeling in Ecology &amp; Evolution</strong>”. 2007. Princeton University Pre<em>ss (A comprehensive treatment of many types of mathematical models in biology)</em></p>
+<p>Alan Hastings, “<strong>Population Biology: Concepts &amp; Methods</strong>”. 1997. Springer Nature (<em>A short and easy to read book that is the source of some of the examples here and goes into more math detail if interested</em>)</p>
+<p>Roy Anderson &amp; Robert May, “<strong>Infectious Diseases of Humans: Dynamics &amp; Control”</strong>. 1991. Oxford University Press</p>
 
 
 </section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><a href="http://people.whitman.edu/~hundledr/courses/M250F03/M250.html" class="uri">http://people.whitman.edu/~hundledr/courses/M250F03/M250.html</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

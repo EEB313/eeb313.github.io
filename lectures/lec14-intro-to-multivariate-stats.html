@@ -699,21 +699,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in rgl.init(initValue, onlyNULL): RGL: unable to open X11 display</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: 'rgl.init' failed, will use the null device.
-See '?rgl.useNULL' for ways to avoid this warning.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">rgl.useNULL =</span> <span class="cn">TRUE</span>) </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>rgl<span class="sc">::</span><span class="fu">setupKnitr</span>(<span class="at">autoprint =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 <section id="lesson-preamble" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="lesson-preamble"><span class="header-section-number">14.1</span> Lesson preamble:</h2>
 <blockquote class="blockquote">
@@ -751,7 +736,8 @@ See '?rgl.useNULL' for ways to avoid this warning.</code></pre>
 <section id="bird-morphology-data" class="level2" data-number="14.3">
 <h2 data-number="14.3" class="anchored" data-anchor-id="bird-morphology-data"><span class="header-section-number">14.3</span> Bird morphology data</h2>
 <p>Today we will be introducing the world of multivariate statistics by working with a published data set from Pigot et al, “<u>Macroevolutionary convergence connects morphological form to ecological function in birds</u><em>“, Nature Ecology &amp; Evolution</em>, 2020 (<a href="https://www.nature.com/articles/s41559-019-1070-4">here</a>). In this paper, the authors ask if <strong>morphology is linked to ecological function in birds</strong>. We might expect this to be true if species have evolved traits (in this case morphological traits) to optimize their fitness in a specific abiotic environment. In this way, traits can be used to link species to theories of community assembly, niche partitioning, and local adaptation. A nice general interest summary of the paper is provided <a href="https://www.nature.com/articles/s41559-019-1078-9">here</a>.</p>
-<p><img src="figures/clipboard-2097013969.png" class="img-fluid"></p>
+<p><img src="figures/pigot_figED1.png" class="img-fluid"></p>
+<p><img src="figures/pigot_fig1.png" class="img-fluid"></p>
 <p>We might expect that birds that have evolved to occupy specialized niches–say the pollinators or the deep sea divers–might have also evolved specialized morphologies in order to exploit these niches. If this is true, we might also see that species that occupy similar niches might have evolved similar traits despite being phylogenetically unrelated. This would give rise to convergent evolution.</p>
 <p>Today, we will be simplifying the Pigot <em>et al.</em> (2020) analysis and to ask two questions among birds of the neotropics:</p>
 <ol type="A">
@@ -761,6 +747,21 @@ See '?rgl.useNULL' for ways to avoid this warning.</code></pre>
 <p>We will be using the morphology data from Pigot <em>et al.</em> (2020), who measured 9 traits (8 morphology + mass) on museum specimens. These traits are previously known to be important determinants of bird ecomorphology.</p>
 <p>The values that these species take for each trait form the data that we will use in our multivariate analysis. To answer the our questions of interest, we want to know if species group together with similar traits based on order or trophic niche. To do this, we will perform a <strong>principle component analysis (PCA)</strong>, a common multivariate technique to summarize multiple dimensions of correlated data into with fewer dimensions.</p>
 <p>But first, let’s read in and take a look at the data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgl) <span class="co">#package to make interactive 3D plots</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in rgl.init(initValue, onlyNULL): RGL: unable to open X11 display</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 'rgl.init' failed, will use the null device.
+See '?rgl.useNULL' for ways to avoid this warning.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify) <span class="co">#package to make plots from output of PCA and other stats packages</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">rgl.useNULL =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>rgl<span class="sc">::</span><span class="fu">setupKnitr</span>(<span class="at">autoprint =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in bird data</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>birds <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/bird_traits.csv"</span>) <span class="co"># if you've already downloaded it</span></span>
@@ -1142,6 +1143,12 @@ Mass               0.3680056  0.11983129  0.128885207 -0.17294488</code></pre>
 <p>Each bar is a PC axis, starting from PC 1. In a scree plot, what you want to look for is a big jump between subsequent axes. It’s subjective, but based on this scree plot I would probably be inclined to keep the first 2 PC axes. As well, we can look at the cumulative proportion of explained variance:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca.out)<span class="sc">$</span>importance[,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            PC1      PC2      PC3       PC4       PC5       PC6
+Standard deviation     2.579503 1.055004 0.682726 0.6261508 0.4660172 0.2643707
+Proportion of Variance 0.739310 0.123670 0.051790 0.0435600 0.0241300 0.0077700
+Cumulative Proportion  0.739310 0.862990 0.914780 0.9583400 0.9824700 0.9902300</code></pre>
+</div>
 </div>
 <p>We can see that by PC2 we have explained 86% of the variation in the data, which is pretty good. By the time we get to PC4, each individual axis is explaining less than 10% of variation in the data, so adding them, and conversely excluding them, isn’t going to have a large effect.</p>
 </section>
@@ -1154,12 +1161,12 @@ Mass               0.3680056  0.11983129  0.128885207 -0.17294488</code></pre>
 </ol>
 <p>To answer these questions let’s return to our autoplot and add some convex hulls that define different groupings of our data. First, we will group the species by their higher level taxonomic structure (order) and then by ecology (trophic niche).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># answers first question</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pca.out, <span class="at">x=</span><span class="dv">1</span>,<span class="at">y=</span><span class="dv">2</span>,</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>birds, </span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">colour=</span><span class="st">"Order"</span>,</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">frame=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># answers first question</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pca.out, <span class="at">x=</span><span class="dv">1</span>,<span class="at">y=</span><span class="dv">2</span>,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>birds, </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">colour=</span><span class="st">"Order"</span>,</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">frame=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1167,12 +1174,12 @@ Mass               0.3680056  0.11983129  0.128885207 -0.17294488</code></pre>
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># answers second question</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pca.out, <span class="at">x=</span><span class="dv">1</span>,<span class="at">y=</span><span class="dv">2</span>,</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>birds, </span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">colour=</span><span class="st">"TrophicNiche"</span>,</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">frame=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># answers second question</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pca.out, <span class="at">x=</span><span class="dv">1</span>,<span class="at">y=</span><span class="dv">2</span>,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>birds, </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">colour=</span><span class="st">"TrophicNiche"</span>,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">frame=</span><span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1194,7 +1201,7 @@ Mass               0.3680056  0.11983129  0.128885207 -0.17294488</code></pre>
 <section id="example-from-pigot-et-al-macroevolutionary-convergence-connects-morphological-form-to-ecological-function-in-birds-nature-ecology-evolution-2020" class="level3" data-number="14.6.1">
 <h3 data-number="14.6.1" class="anchored" data-anchor-id="example-from-pigot-et-al-macroevolutionary-convergence-connects-morphological-form-to-ecological-function-in-birds-nature-ecology-evolution-2020"><span class="header-section-number">14.6.1</span> Example from Pigot et al, “<strong>Macroevolutionary convergence connects morphological form to ecological function in birds”, Nature Ecology &amp; Evolution, 2020</strong></h3>
 <p><em>What can we conclude from this Figure 6?</em></p>
-<p><img src="figures/clipboard-1328042916.png" class="img-fluid" width="642"></p>
+<p><img src="figures/pigot_fig6.png" class="img-fluid" width="642"></p>
 <p>Figure 6: Clustered points along each principal coordinate axis (PCoA) show the relative morphological similarity between trophic niches from different ecological theatres (biogeographical realms) based on the average pairwise distance between species (<em>n</em> = 9,963 species) in nine-dimensional morphospace (see Methods). Individual trophic niches are omitted where they are absent or rare (&lt;6 species) within particular biogeographic realms (Na, Nearctic; Ne, Neotropic; Pa, Palaearctic; Af, Afrotropic; Ma, Madagascar; In, Indo-Malaya; Oc, Oceania; Au, Australasia; An, Antarctic). Bird images reproduced with permission from HBW, Lynx Edicions</p>
 </section>
 <section id="microplastics-example" class="level3" data-number="14.6.2">
@@ -1206,13 +1213,13 @@ Mass               0.3680056  0.11983129  0.128885207 -0.17294488</code></pre>
 <li><p>Group C - beaches in extremely bad conditions due to “high” and “very high” MPs densities</p></li>
 </ul>
 <p><em>Focusing on the bottom left panel of Figure 7, what do you think of the authors grouping the data into these 3 categories?</em></p>
-<p><img src="figures/clipboard-444607300.png" class="img-fluid"></p>
+<p><img src="figures/microplastics_fig7.png" class="img-fluid"></p>
 </section>
 <section id="population-genetics-example" class="level3" data-number="14.6.3">
 <h3 data-number="14.6.3" class="anchored" data-anchor-id="population-genetics-example"><span class="header-section-number">14.6.3</span> Population genetics example</h3>
 <p>The authors in this paper, “<a href="10.1126/science.abm7530">Getting genetic ancestry right for science and society</a>”, argue that in a human genetic context, PCAs can do more harm than good when artificial categories are applied to continuous data with no discrete breaks. For example, they show a PCA plot of human genetic ancestry–defined by migration and high mixing–and attempt to impost discrete clusters of continental origin on the PC space.</p>
 <p><em>Based on this figure, do you think that imposing these categories on this data is reasonable? Why or why not? What does this suggest about what types of data it might be inappropriate seek classifications of via a PCA?</em></p>
-<p><img src="figures/clipboard-2283833149.png" class="img-fluid"></p>
+<p><img src="figures/ancestry_pca.png" class="img-fluid"></p>
 
 
 </section>

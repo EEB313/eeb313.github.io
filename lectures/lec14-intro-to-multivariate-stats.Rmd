@@ -7,15 +7,6 @@ output:
   pdf_document: default
 ---
 
-```{r packages, message=FALSE}
-library(tidyverse)
-library(rgl)
-library(ggfortify)
-
-options(rgl.useNULL = TRUE) 
-rgl::setupKnitr(autoprint = TRUE)
-```
-
 ## Lesson preamble:
 
 > ### Lesson objectives
@@ -55,7 +46,9 @@ Common biological questions that multivariate statistics can be used to answer:
 
 Today we will be introducing the world of multivariate statistics by working with a published data set from Pigot et al, "[Macroevolutionary convergence connects morphological form to ecological function in birds]{.underline}*", Nature Ecology & Evolution*, 2020 ([here](https://www.nature.com/articles/s41559-019-1070-4)). In this paper, the authors ask if **morphology is linked to ecological function in birds**. We might expect this to be true if species have evolved traits (in this case morphological traits) to optimize their fitness in a specific abiotic environment. In this way, traits can be used to link species to theories of community assembly, niche partitioning, and local adaptation. A nice general interest summary of the paper is provided [here](https://www.nature.com/articles/s41559-019-1078-9).
 
-![](figures//clipboard-2097013969.png)
+![](figures/pigot_figED1.png)
+
+![](figures/pigot_fig1.png)
 
 We might expect that birds that have evolved to occupy specialized niches--say the pollinators or the deep sea divers--might have also evolved specialized morphologies in order to exploit these niches. If this is true, we might also see that species that occupy similar niches might have evolved similar traits despite being phylogenetically unrelated. This would give rise to convergent evolution.
 
@@ -70,6 +63,16 @@ We will be using the morphology data from Pigot *et al.* (2020), who measured 9 
 The values that these species take for each trait form the data that we will use in our multivariate analysis. To answer the our questions of interest, we want to know if species group together with similar traits based on order or trophic niche. To do this, we will perform a **principle component analysis (PCA)**, a common multivariate technique to summarize multiple dimensions of correlated data into with fewer dimensions.
 
 But first, let's read in and take a look at the data.
+
+```{r packages, message=FALSE}
+library(tidyverse)
+library(rgl) #package to make interactive 3D plots
+library(ggfortify) #package to make plots from output of PCA and other stats packages
+
+options(rgl.useNULL = TRUE) 
+rgl::setupKnitr(autoprint = TRUE)
+```
+
 
 ```{r read in data}
 # read in bird data
@@ -331,7 +334,7 @@ plot(pca.out)
 
 Each bar is a PC axis, starting from PC 1. In a scree plot, what you want to look for is a big jump between subsequent axes. It's subjective, but based on this scree plot I would probably be inclined to keep the first 2 PC axes. As well, we can look at the cumulative proportion of explained variance:
 
-```{r }
+```{r}
 summary(pca.out)$importance[,1:6]
 ```
 
@@ -378,9 +381,9 @@ PCAs are really common across lots of disciplines and they are very common to en
 
 *What can we conclude from this Figure 6?*
 
-![](figures//clipboard-1328042916.png){width="642"}
+![](figures/pigot_fig6.png){width="642"}
 
-Figure 6: Clustered points along each principal coordinate axis (PCoA) show the relative morphological similarity between trophic niches from different ecological theatres (biogeographical realms) based on the average pairwise distance between species (*n* = 9,963 species) in nine-dimensional morphospace (see Methods). Individual trophic niches are omitted where they are absent or rare (\<6 species) within particular biogeographic realms (Na, Nearctic; Ne, Neotropic; Pa, Palaearctic; Af, Afrotropic; Ma, Madagascar; In, Indo-Malaya; Oc, Oceania; Au, Australasia; An, Antarctic). Bird figures/ reproduced with permission from HBW, Lynx Edicions
+Figure 6: Clustered points along each principal coordinate axis (PCoA) show the relative morphological similarity between trophic niches from different ecological theatres (biogeographical realms) based on the average pairwise distance between species (*n* = 9,963 species) in nine-dimensional morphospace (see Methods). Individual trophic niches are omitted where they are absent or rare (\<6 species) within particular biogeographic realms (Na, Nearctic; Ne, Neotropic; Pa, Palaearctic; Af, Afrotropic; Ma, Madagascar; In, Indo-Malaya; Oc, Oceania; Au, Australasia; An, Antarctic). Bird images reproduced with permission from HBW, Lynx Edicions
 
 ### Microplastics example
 
@@ -394,7 +397,7 @@ In [this paper](https://doi.org/10.1016/j.marpolbul.2021.112685), the authors se
 
 *Focusing on the bottom left panel of Figure 7, what do you think of the authors grouping the data into these 3 categories?*
 
-![](figures//clipboard-444607300.png)
+![](figures/microplastics_fig7.png)
 
 ### Population genetics example
 
@@ -402,4 +405,4 @@ The authors in this paper, "[Getting genetic ancestry right for science and soci
 
 *Based on this figure, do you think that imposing these categories on this data is reasonable? Why or why not? What does this suggest about what types of data it might be inappropriate seek classifications of via a PCA?*
 
-![](figures//clipboard-2283833149.png)
+![](figures/ancestry_pca.png)
