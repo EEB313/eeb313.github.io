@@ -46,7 +46,7 @@ sparrow %>% ggplot(aes(x = tarsus, y = survival)) +
   scale_y_continuous(breaks = seq(0,1,0.2), limits =c(-0.1,1.1))
 ```
 
-We can see a few problems right away! The Y data is clearly not normally distributed conditional on x: it's binary. And, the prediction curve suggests that for tarsus lengths over \~21mm survival could be less than zero, and for tarsus less than \~18cm, that it could be greater than 1!
+We can see a few problems right away! The $Y$ data is clearly not normally distributed conditional on x: it's binary. And, the prediction curve suggests that for tarsus lengths over \~21mm survival could be less than zero, and for tarsus less than \~18cm, that it could be greater than 1!
 
 Let's run the regression just to see more issues
 
@@ -55,7 +55,7 @@ sparrowOutput <- lm(survival ~ tarsus, data = sparrow)
 summary(sparrowOutput)
 ```
 
-Despite there being a highly-significant relationship between survival and taurus length, it looks like a very small $R^2$ value. Let's look at our diagnostic plots:
+Despite there being a highly-significant relationship between survival and tarsus length, it looks like a very small $R^2$ value. Let's look at our diagnostic plots:
 
 ```{r}
 plot(sparrowOutput)
@@ -75,7 +75,7 @@ You might have heard of *logistic regression* or *Poisson regression* before; th
 
 There are many example types of data we need these models for, such as
 
--   Count of the number of individuals or the number of occurrances of an event
+-   Count of the number of individuals or the number of occurrences of an event
 
 -   Proportions of individuals (or events) with one trait or outcome vs another
 
@@ -105,7 +105,15 @@ Notice that, in a GLM, because the mean of the response been transformed in a pa
 
 ### Challenge
 
--   Think of two example types of biological data that would not satisfy the assumptions of simple linear regression
+Think of some example types of biological data that would not satisfy the assumptions of simple linear regression
+
+-   Ex. 1 : Number of offspring per individual (expect to be discrete, non-normal, skewed, larger variance at larger mean values)
+
+-   Ex. 2 : Life stage (could be categorical life stage - junevile vs adult, or integer age, discrete + ordinal)
+
+-   Ex. 3: Herbivory damage on leaves (presence/absence, or categorical + ordinal degree of damage, or % damaged)
+
+-   Ex. 4: Grades in a class (could be non-normal, left or right skewed, categorical/ordinal or numeric, bounded by 0 - 100%)
 
 ### Example 1: Predicting forest fires (logistic regression)
 
@@ -334,7 +342,7 @@ In biological research, data often exhibit natural *hierarchical* structures. Fo
 
 These hierarchical structures can be either nested or crossed:
 
-![](figures/clipboard-643467275.png)
+![](figures/heirarchical_data.png)
 
 In nested structures (right), each lower-level unit belongs to only one higher-level unit. For example, each student belongs to only one class, and each class belongs to only one school. In crossed structures (left), lower-level units can belong to multiple higher-level units. For example, a student might take multiple classes, and a teacher might teach multiple classes.
 
@@ -482,7 +490,7 @@ str(rikz)
 
 The data contains 45 observations across 9 beaches, with 5 sites per beach. We’ve encoded ‘Beach’ as a factor to facilitate its use as a group/random effect.
 
-![](images/clipboard-4248431774.png)
+![](figures/rikz_beaches.png)
 
 ### Initial Linear Regression
 
@@ -535,7 +543,7 @@ HOWEVER, there are a few major limitations with these approaches
 
 -   We would find that each analysis would now only have around 5 points (a really low sample size!), leading to a lot of uncertainty in our estimates
 
--    We would have to run multiple significance tests. As such, we run the risk of obtaining spuriously significant results purely by chance.
+-   We would have to run multiple significance tests. As such, we run the risk of obtaining spuriously significant results purely by chance.
 
 -   We probably don't really care about the differences between beaches! We are most interested in the effect of NAP. These beaches were a random subset of all beaches that could have been chosen, so their individual effects aren't so interesting, but we still need to account for the non-independence of observations within beaches.
 

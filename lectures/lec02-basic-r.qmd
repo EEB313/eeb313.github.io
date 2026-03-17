@@ -1,13 +1,5 @@
----
-title: 'Introduction to R: Assignment, vectors, functions, strings, and loops'
-output:
-  html_document:
-    df_print: paged
-  pdf_document: default
-editor_options: 
-  markdown: 
-    wrap: 72
----
+# Introduction to R: Assignment, vectors, functions, strings, and loops
+
 
 *Note: Components of this lecture (and some others in the course!) were
 originally created by voluntary contributions to [Data
@@ -426,7 +418,7 @@ round(<tab>
 
 (Screenshot of tab-complete suggestions)
 
-![](images/clipboard-2021506380.png)
+![](figures/tab_complete.png)
 
 If you don't already know the name or beginning of the name of the
 function you want to use, RStudio's built in help documentation search
@@ -469,7 +461,7 @@ window in RStudio).
 However, variables defined only within a function are not accessible
 outside that function:
 
-```{r,error=TRUE}
+```{r, error=TRUE}
 my_sum
 ```
 

@@ -58,6 +58,26 @@ The project proposal should be 1 page max (plus citations, if appropriate), with
 
 The main goal of the proposal is mainly for the course instructors to ensure your team has a feasible analysis plan and reasonable scope, and for us to provide feedback on your idea as soon as possible.
 
+### Mid-project update details
+
+This update will have two components:
+
+-   An individual component - a brief survey to be individually completed (1 pt)
+
+-   A group component - described below, one submission per group (5 pts)
+
+This progress report should be anywhere between 2-5 pages and should be created as an R markdown document and then submitted as a knitted PDF. The update should include the following sections and content
+
+-   [Research question]{.underline}: Roughly, follow the same instructions above as for the original proposal, but update your text to reflect any changes you have made since then. Start with a short paragraph of background information on the topic, including important prior studies (include references), to motivate your approach. Then, describe the question, hypothesis, or goal you plan to address with your project. Are there follow-up questions or alternative hypotheses that go along with your main question?
+
+-   [Data]{.underline}: Summarize in words the dataset that you plan to analyze. How was this data collected? What is the unit being measured (ie, individuals, species, locations, etc)? What sorts of variables are recorded? How many observations are there? How are you accessing this data? If you are using multiple datasets, describe each and then explain how they'll be linked. Are there any major limitations of your data in relation to your research question?
+
+-   [Analysis]{.underline}:
+
+    -   [Analysis Plan:]{.underline} Summarize in words what techniques you plan to use to address your research question. If there are a series of steps or multiple independent approaches, you can use a numbered or bulleted list to organize them. Make sure there is a clear and justified connection between your research questions and the approach you plan to use.
+
+    -   [Preliminary results]{.underline}: Using a combination of text and well-annotated code, show some of your results to date. At minimum, this should include reading in and showing a sample of your data and then using some descriptive plots and summary statistics, as appropriate, to summarize your data. If you have begun any of your more formal analysis, you can show this here. Make sure to explain all your data manipulations, tables, and figures clearly and format them in a reader-friendly way.
+
 ## Miscellaneous
 
 ### Working in groups

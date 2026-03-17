@@ -24,6 +24,8 @@ book:
       - lectures/lec10-advanced-linear-models.qmd
       - lectures/lec11-model-selection.qmd
       - lectures/lec12-math-models.qmd
+      - lectures/lec13-more-math-models.qmd
+      - lectures/lec14-intro-to-multivariate-stats.qmd
       # - lectures/lec08-intro-inference-1.qmd
       # - lectures/lec09-intro-inference-2.qmd
       # - lectures/lec10-linear-models-1.qmd
@@ -66,8 +68,8 @@ book:
         href: lectures/data/medicago.csv
       #   - text: "bmr.csv"
       #     href: lectures/data/bmr.csv
-      #   - text: "Pigot2020.csv"
-      #     href: lectures/data/Pigot2020.csv
+      - text: "bird_traits.csv"
+        href: lectures/data/bird_traits.csv
       - text: "influenza_cities.csv"
         href: assignments/data/influenza_cities.csv
       - text: "fruit_trees.csv"
@@ -131,6 +133,8 @@ resources:
   - lectures/lec06-self-directed-analysis.qmd
   - lectures/lec06-self-directed-analysis.Rmd
   - lectures/outbreak-investigation.Rmd
+  - lectures/lec13-more-math-models.Rmd
+  - lectures/lec14-intro-to-multivariate-stats.Rmd
 #   - lec07-self-directed-analysis.Rmd
 #   - review-for-challenge.qmd
 #   - review-for-challenge.Rmd
