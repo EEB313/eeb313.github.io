@@ -78,6 +78,24 @@ This progress report should be anywhere between 2-5 pages and should be created 
 
     -   [Preliminary results]{.underline}: Using a combination of text and well-annotated code, show some of your results to date. At minimum, this should include reading in and showing a sample of your data and then using some descriptive plots and summary statistics, as appropriate, to summarize your data. If you have begun any of your more formal analysis, you can show this here. Make sure to explain all your data manipulations, tables, and figures clearly and format them in a reader-friendly way.
 
+### Final Report \[15 marks\]
+
+The final report should be written in an `.Rmd` file where you include [headings]{.underline} to create sections (and subsections), [text]{.underline} to write the report text, [code chunks]{.underline} to write and run your code and generate your figures, and (if needed) the equation editing function (`Insert -> Latex Math`) to write equations.
+
+The report should follow what you presented in class. We don't expect significant extra analysis, unless there was something specifically mentioned in your feedback or you identified an obvious and straighforward step that must be done to complete your original goal.
+
+The report outline and constraints, which are similar in style to a scientific paper, are:
+
+-   **Introduction** \[500 words max\]: Describe relevant prior background research or theoretical foundations informing your work, and your specific research question or hypothesis. Make sure you avoid using jargon and introduce all relevant concepts and terminology needed to explain your work. Don't assume anyone has any specific biological knowledge outside the class pre-reqs (ie BIO 220 and intro statistics/biostatistics). Include any images (not code-generated figures but pasted photos, diagrams, charts etc) that help explain the system you are working on, and your question.
+
+-   **Methods** \[as needed but suggested 700 words max\]: Should include, at minimum, to subsections - *Data*, and *Analysis*. For the *Data* subsection, follow the same instructions provided for the interim reports, and a similar approach to used in the presentation, to describe your dataset. For the *Analysis* subsection, describe in a systematic way the specific methods that you use to analyze your data. If you tried out a method and didn't end up using the results from it you don't need to mention it here. Any statistical/regression models you fit should be stated here. State which R packages you used for specific model fits (and if it's a new package we didn't use in class, summarize what it does). Note that this section should not yet contain any code or results. If you need an image to help explain your data or your methods, you can include that, but you don't need any data-generated output.
+
+-   **Results** \[as needed but suggested 1000 words max\]: This can be divided up into subsections of your choosing. It should be a mix of text and code, similar to our assignments. Summarize in words what you did and what you found, then include the code and figure/table output that shows the results. Try to make things as compact as possible - write your code efficiently, output your figures at a reasonable size, and only output things you really need to show, etc. Don't show output that you wouldn't have shown in your presentation. Don't include code that is not necessary for your main analysis and results (if you don't want to delete things, move them to a separate "code dump" file that you don't submit). Don't force the reader to search through code or code output for an important result ... summarize it in the text. The code/output is just to backup and reproduce your point, not to make the point. Make sure your figures are labeled and everything is legible. Make sure to walk the reader through WHY you are doing an analysis, what the results of the analysis are, and what the interpretation is.
+
+-   **Discussion** \[500 words max\]: Summarize your findings, interpreted in the context of your original question. If appropriate, put your work in the context of prior related research. Discuss any limitations to your data or analysis. Suggest future work (in terms of data collection, other analysis, or related questions). End with a conclusion. Don't include any new results in this section. You don't need any figures here unless they provide a summary of previously discussed results.
+
+Note that word counts are *maximum*, not targets. If you can say what you need to say in significantly less words that the max, please do so!
+
 ## Miscellaneous
 
 ### Working in groups
